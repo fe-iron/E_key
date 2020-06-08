@@ -29,15 +29,11 @@ incremental==17.5.0
 itsdangerous==1.1.0
 Jinja2==2.11.1
 joblib==0.14.1
-mkl-service==2.3.0
-msgpack==0.6.2
 plyer==1.4.2
 post==2019.4.13
 protobuf==3.10.0
 psycopg2==2.8.5
 public==2019.4.13
-pyasn1==0.4.8
-pyasn1-modules==0.2.8
 pycparser==2.20
 PyHamcrest==2.0.2
 pyOpenSSL==19.1.0
