@@ -29,7 +29,6 @@ incremental==17.5.0
 itsdangerous==1.1.0
 Jinja2==2.11.1
 joblib==0.14.1
-mkl-service==2.3.0
 msgpack==0.6.2
 plyer==1.4.2
 post==2019.4.13
