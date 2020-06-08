@@ -1,1 +1,1 @@
-web: gunicorn awesomeblog.wsgi --log-file -
+web: gunicorn E_key.wsgi --log-file -
