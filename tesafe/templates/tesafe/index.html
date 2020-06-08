@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+	<!-- fontawesome cdn -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/style.css' %}">
+	<style>
+		.background-images-1{
+	background-image: url({% static 'tesafe/images/banner-8.jpg' %});
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+	</style>
+</head>
+<body>
+
+	<section class="background-images-1">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-4">
+					<div class="padding">
+						<div class="card">
+							<h3 class="text-center pt-3">LOGIN</h3>
+							<div class="card-body">
+								<form method="post">
+									{% csrf_token %}
+									<div class="form-group mb-4">
+										<label class="font-weight-bold">Account Type</label>
+										<select class="form-control" name="accType">
+											<option value="admin">Admin</option>
+											<option value="seller">Seller</option>
+											<option value="tester">Tester</option>
+											<option value="user">User</option>
+										</select>
+									</div>
+
+									<div class="form-group mb-4">
+										<input type="email" class="form-control" id="formGroupExampleInput" name="email" placeholder="Enter Your Mail">
+									</div>
+									<div class="form-group mb-4">
+
+										<input type="password" class="form-control" id="formGroupExampleInput2" name="paasword" placeholder="Enter Your Password">
+									</div>
+									<div class="form-group">
+										<button type="submit" class="btn btn-primary btn-block">Login</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>
