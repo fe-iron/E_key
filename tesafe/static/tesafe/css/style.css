@@ -6,11 +6,19 @@
 
 
 
+.background-images-1{
+	background-image: url("images/banner-8.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
 
 .padding{
 	padding:11.15rem 0rem;
 }
 
+
+.main
 
 .card{
 	border-radius: 20px;
@@ -41,4 +49,17 @@ label{
 
 .btn-primary{
 	border-radius: 0rem;
+}
+
+
+
+
+
+
+
+
+/*registratioin page css start here*/
+
+.padding-register{
+    padding:5rem 0rem;
 }

@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-
+#AUTH_USER_MODEL = 'tesafe.User'
 # Application definition
 
 INSTALLED_APPS = [
@@ -78,8 +78,11 @@ WSGI_APPLICATION = 'E_key.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'tesafe_E_key',
+        'USER': 'postgres',
+        'PASSWORD': '12345',
+        'HOST': 'localhost'
     }
 }
 
