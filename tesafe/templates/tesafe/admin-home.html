@@ -1,26 +1,46 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Admin | Home</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap.min.css' %}">
 
-	<!-- jQuery library -->
-	<script src="{% static 'tesafe/bootstrap4/js/jquery.min.js' %}"></script>
+
+
 
 	<!-- Popper JS -->
-	<script src="{% static 'tesafe/bootstrap4/bootstrap.min.js' %}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
 	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap.css' %}">
+	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-grid.css' %}">
+	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-grid.min.css' %}">
+	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-reboot.css' %}">
+	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-reboot.min.cs' %}">
+
+
 
 	<!-- fontawesome cdn -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/admin-home.css' %}">
+
+	<!-- Latest compiled JavaScript -->
+	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.bundle.js' %}"></script>
+	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.bundle.min.js' %}"></script>
+	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.js' %}"></script>
+	<script src="{% static 'tesafe/bootstrap4/js/popper.min.js' %}"></script>
+
 </head>
 <body>
 
@@ -48,6 +68,7 @@
 						<li class="nav-item pl-3">
 							<a class="nav-link" href="admin-info-server">PWG Server</a>
 						</li>
+
 					</ul>
 					
 				</div>
@@ -57,44 +78,37 @@
 
 	<section class="bg-detail">
 		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-3 bg-user">
-					<div class="row">
-						<ul class="nav py-2">
-							
-							<li class="nav-item display-block">
-								<a class="nav-link font-weight-bold text-success" href="#">Unread Messages ( 4 )</a>
-							</li>
-						</ul>
-					</div>
+			<div class="row justify-content-center ">
 
-					<div class="row" style="overflow:scroll; height:520px;">
-						<div class="col-md ">
-							{% for i in num %}
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom border-top pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="{% static 'tesafe/images/naqui.jpg' %}" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
+				<div class="col-md-10 py-5 px-5">
 
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="{% static 'tesafe/images/faiz.png' %}" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Faiz Elahi</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-						{% endfor %}
+					<div class="row justify-content-center bg-button-1 p-4 my-3" id="change-passwrd">
+						
+						<div class="col-md mb-2">
+							<h5 class="mb-0"><a href="" style="color: green; font-size: 20px; position: relative;"><i class="fas fa-bell fa-2x"></i><span class="badge badge-danger" style="position: absolute; top: -20px; font-size: 12px; left: 8px; ">New Message (1)</span></a></h5>
+
 						</div>
+
+						<div class="col-md">
+							<div class="dropdown  dropleft float-xl-right mb-0" >
+								<button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+									More Menu Here
+								</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="#">Broadcast</a>
+									<a class="dropdown-item" href="#login-history">Login History</a>
+									<a class="dropdown-item" href="#password-history">Password History</a>
+									<a class="dropdown-item" href="#change-passwrd">Change Password</a>
+									<a class="dropdown-item" href="#">Exit</a>
+								</div>
+							</div>
+
+						</div>
+
 					</div>
-				</div>
-				<div class="col-md-9  py-5 px-5" style="overflow:scroll; height:570px;">
-					<div class="row justify-content-center bg-button-1 p-4">
-						<div class="col-md text-center">
+
+					<!-- <div class="row justify-content-center bg-button-1 p-4">
+						<div class="col-md text-center mb-2">
 							<div class="card">
 								<div class="box">
 									<div class="percent">
@@ -112,7 +126,7 @@
 							</div>
 						</div>
 
-						<div class="col-md text-center">
+						<div class="col-md text-center mb-2">
 							<div class="card">
 								<div class="box">
 									<div class="percent">
@@ -130,7 +144,7 @@
 							</div>
 						</div>
 
-						<div class="col-md text-center">
+						<div class="col-md text-center mb-2">
 							<div class="card">
 								<div class="box">
 									<div class="percent">
@@ -142,20 +156,20 @@
 											<h5>20</h5>
 										</div>
 									</div>
-									<p>PWG Server</p>
+									<p>Information</p>
 								</div>
 								
 							</div>
 						</div>
 
 
-					</div>
+					</div> -->
 
 					<div class="row justify-content-center bg-button-1 p-4 mt-3">
 						
 						<div class="col-md">
 							<h4 class="">STATISTICS</h4>
-							<div class="row">
+							<!-- <div class="row">
 								<div class="col-md py-3"><h5 class="font-weight-bold">1. Seller</h5></div>
 							</div>
 							<div class="row">
@@ -184,29 +198,79 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md py-3"><h5 class="font-weight-bold">3. PWG Server</h5></div>
+								<div class="col-md py-3"><h5 class="font-weight-bold">3. Information Server</h5></div>
 							</div>
 							<div class="row">
 								<div class="col-md ">
-									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Total Number Of PWG Server </h6>
+									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Total Number Of Information Server </h6>
 									<p>20 </p>
 								</div>
 
 								<div class="col-md ">
-									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Total Number Of PWG Server Online</h6>
+									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Total Number Of Information Server Online</h6>
 									<p>4</p>
+								</div>
+							</div> -->
+
+							<div class="row">
+								<div class="col-md">
+									<div class="table-responsive">
+										<table class="table">
+											<thead>
+												<tr>
+													<th scope="col">Account Name</th>
+													<th scope="col">Total Number</th>
+													<th scope="col">Online Number</th>
+													<th scope="col">Offline Number</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th scope="row">Seller</th>
+													<td>20</td>
+													<td>15</td>
+													<td>5</td>
+
+												</tr>
+
+												<tr>
+													<th scope="row">Tester</th>
+													<td>20</td>
+													<td>15</td>
+													<td>5</td>
+
+												</tr>
+
+												<tr>
+													<th scope="row">PWGs</th>
+													<td>20</td>
+													<td>15</td>
+													<td>5</td>
+
+												</tr>
+
+												<tr>
+													<th scope="row">User</th>
+													<td>20</td>
+													<td>15</td>
+													<td>5</td>
+
+												</tr>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 
-
+							
 						</div>
 
 					</div>
 
-					<div class="row justify-content-center bg-button-1 p-4 mt-3">
+					<div class="row justify-content-center bg-button-1 p-4 mt-3" id="login-history">
 						
 						<div class="col-md">
-							<h4 class="">Admin Login Detail</h4>
+							<h4 class="">Login History</h4>
 							<div class="row">
 								<div class="col-md-6 py-3">
 									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Number Of Admin Been Logged in </h6>
@@ -217,31 +281,31 @@
 							<div class="row">
 								<div class="col-md">
 									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Login History</h6>
-									<table class="table">
-										<thead>
-											<tr>
-												<th scope="col">SL No</th>
-												<th scope="col">Date</th>
-												<th scope="col">TIme</th>
-												<th scope="col">Device Name</th>
-												<th scope="col">Login IP Address</th>
-												<th scope="col">duration Of Online</th>
-												
-											</tr>
-										</thead>
-										<tbody>
-										{% for i in num %}
-											<tr>
-												<th scope="row">{{forloop.counter}}</th>
-												<td>20/06/5</td>
-												<td>5:30pm</td>
-												<td>Samsung</td>
-												<td>10.2.0.10:8090</td>
-												<td>{{i}} minutes</td>
-											</tr>
-										{% endfor %}
-										</tbody>
-									</table>
+									<div class="table-responsive">
+										<table class="table">
+											<thead>
+												<tr>
+													<th scope="col">SL No</th>
+													<th scope="col">Date</th>
+													<th scope="col">Time</th>
+													<th scope="col">Device Name</th>
+													<th scope="col">Login IP Address</th>
+													<th scope="col">Duration Of Online</th>
+
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th scope="row">1</th>
+													<td>20/06/5</td>
+													<td>5:30pm</td>
+													<td>Samsung</td>
+													<td>10.2.0.10:8090</td>
+													<td>30 minutes</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -249,25 +313,34 @@
 					</div>
 
 
-					<div class="row justify-content-center bg-button-1 p-4 mt-3">
+					<div class="row justify-content-center bg-button-1 p-4 mt-3" id="change-passwrd">
 						
 						<div class="col-md">
-							<h4 class="">Password Details</h4>
+							<h4 class="">Change Password</h4>
 							<div class="row">
 								<div class="col-md py-3">
-									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change Password</h6>
+									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change Your Current Password </h6>
 									<form>
-									  <div class="row">
-									    <div class="col">
-									      <input type="Password" class="form-control" placeholder="New Password">
-									    </div>
-									    <div class="col">
-									       <input type="Password" class="form-control" placeholder=" Confirm New Password">
-									    </div>
-									    <div class="col">
-									      <button  type="submit" class="btn btn-danger">Submit</button>
-									    </div>
-									  </div>
+										<div class="row">
+											<div class="col-md mb-2">
+												<div class="form-group">
+													<select class="form-control" id="exampleFormControlSelect1">
+														<option selected="selected">Select</option>
+														<option>Seller</option>
+														<option>Tester</option>
+														<option>PWGs</option>
+														<option>User</option>
+													</select>
+
+												</div>
+											</div>
+											<div class="col-md mb-2">
+												<input type="Password" class="form-control" placeholder=" Enter Old Password">
+											</div>
+											<div class="col-md mb-2">
+												<button  type="submit" class="btn btn-danger">Proceed</button>
+											</div>
+										</div>
 									</form>
 								</div>
 							</div>
@@ -275,7 +348,29 @@
 
 					</div>
 
+					<!-- <div class="row justify-content-center py-3 bg-button-1 m-4">
+						<div class="col-md">
+							<button type="button" class="btn btn-primary"> Admin Login Detail</button>
+							<div class="">
+								<h5>Number Of times Admin Been Logged in  <span>5 Times</span></h5>
+								<h5>Admin Login History</h5>
+								<ol>
+									 <li>	
+									 	20/01/20 <span> 50:30 Pm</span>
+								     </li>
 
+								</ul>
+							</div>
+						</div>
+						
+					</div> -->
+
+					<!-- <div class="row justify-content-center py-3 bg-button-1 m-4">
+						<div class="col-md">
+							<button type="button" class="btn btn-primary"> Admin Login Detail</button>
+						</div>
+								
+					</div> -->
 				</div>
 			</div>
 
