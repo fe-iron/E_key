@@ -49,12 +49,12 @@
 	<section class="bg-light">
 		<div class="container-fluid">
 			<nav class="navbar navbar-expand-lg navbar-light ">
-				<a class="navbar-brand" href="#">LOGO</a>
+
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 
-				<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+				<div class="collapse navbar-collapse justify-content" id="navbarSupportedContent">
 					<ul class="navbar-nav">
 						<li class="nav-item pl-3">
 							<a class="nav-link active"  href="admin-home">Home <span class="sr-only">(current)</span></a>
@@ -69,9 +69,29 @@
 							<a class="nav-link" href="admin-info-server">PWG Server</a>
 						</li>
 
+						<!-- <li class="nav-item pl-3">
+							<a class="nav-link" href="admin-info-server.html">Unread Messages <span><i class="fas fa-bell"></i></span></a>
+						</li> -->
 					</ul>
-					
+
 				</div>
+
+				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 20px; position: relative;"><i class="fas fa-bell fa-2x"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
+
+				<div class="dropdown  dropleft float-xl-right mb-0" >
+					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+						...
+					</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="" onclick="myfun()">Broadcast</a>
+						<a class="dropdown-item" href="#login-history" onclick="myfun1()">Login History</a>
+						<a class="dropdown-item" href="#password-history" onclick="myfun2()">Password History</a>
+						<a class="dropdown-item" href="#change-passward" onclick="myfun3()">Change Password</a>
+						<a class="dropdown-item" href="" >Exit</a>
+					</div>
+				</div>
+
+
 			</nav>
 		</div>
 	</section>
@@ -79,33 +99,120 @@
 	<section class="bg-detail">
 		<div class="container-fluid">
 			<div class="row justify-content-center ">
+			<!-- 	<div class="col-md-3 bg-user">
+					<div class="row">
+						<ul class="nav py-2">
 
-				<div class="col-md-10 py-5 px-5">
+							<li class="nav-item display-block">
+								<a class="nav-link font-weight-bold text-success" href="#">Unread Messages ( 4 )</a>
+							</li>
+						</ul>
+					</div>
 
-					<div class="row justify-content-center bg-button-1 p-4 my-3" id="change-passwrd">
-						
-						<div class="col-md mb-2">
-							<h5 class="mb-0"><a href="" style="color: green; font-size: 20px; position: relative;"><i class="fas fa-bell fa-2x"></i><span class="badge badge-danger" style="position: absolute; top: -20px; font-size: 12px; left: 8px; ">New Message (1)</span></a></h5>
+					<div class="row" style="overflow:scroll; height:520px;">
+						<div class="col-md ">
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom border-top pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
 
-						</div>
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
 
-						<div class="col-md">
-							<div class="dropdown  dropleft float-xl-right mb-0" >
-								<button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-									More Menu Here
-								</button>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="#">Broadcast</a>
-									<a class="dropdown-item" href="#login-history">Login History</a>
-									<a class="dropdown-item" href="#password-history">Password History</a>
-									<a class="dropdown-item" href="#change-passwrd">Change Password</a>
-									<a class="dropdown-item" href="#">Exit</a>
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<div class="d-flex bd-highlight border-bottom pt-2">
+								<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+								<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+									<p><i class="fas fa-circle fa-1x"></i> Online</p>
 								</div>
 							</div>
-
 						</div>
-
 					</div>
+				</div> -->
+				<div class="col-md-10 py-2 px-5">
+
+
 
 					<!-- <div class="row justify-content-center bg-button-1 p-4">
 						<div class="col-md text-center mb-2">
@@ -136,7 +243,7 @@
 										</svg>
 										<div class="text">
 											<h5>10</h5>
-										</div>	
+										</div>
 									</div>
 									<p>Tester</p>
 								</div>
@@ -158,7 +265,7 @@
 									</div>
 									<p>Information</p>
 								</div>
-								
+
 							</div>
 						</div>
 
@@ -166,7 +273,7 @@
 					</div> -->
 
 					<div class="row justify-content-center bg-button-1 p-4 mt-3">
-						
+
 						<div class="col-md">
 							<h4 class="">STATISTICS</h4>
 							<!-- <div class="row">
@@ -262,13 +369,13 @@
 								</div>
 							</div>
 
-							
+
 						</div>
 
 					</div>
 
-					<div class="row justify-content-center bg-button-1 p-4 mt-3" id="login-history">
-						
+					<div class="row justify-content-center bg-button-1 p-4 mt-3" id="login-history" style="display: none;">
+
 						<div class="col-md">
 							<h4 class="">Login History</h4>
 							<div class="row">
@@ -285,7 +392,7 @@
 										<table class="table">
 											<thead>
 												<tr>
-													<th scope="col">SL No</th>
+													<th scope="col">Sr No</th>
 													<th scope="col">Date</th>
 													<th scope="col">Time</th>
 													<th scope="col">Device Name</th>
@@ -313,36 +420,71 @@
 					</div>
 
 
-					<div class="row justify-content-center bg-button-1 p-4 mt-3" id="change-passwrd">
-						
+					<div class="row justify-content-center bg-button-1 p-4 mt-3" id="change-passward" style="display: none;">
+
 						<div class="col-md">
 							<h4 class="">Change Password</h4>
-							<div class="row">
-								<div class="col-md py-3">
+							<div class="row ">
+								<div class="col-md-6 py-3">
 									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change Your Current Password </h6>
 									<form>
-										<div class="row">
-											<div class="col-md mb-2">
-												<div class="form-group">
-													<select class="form-control" id="exampleFormControlSelect1">
-														<option selected="selected">Select</option>
-														<option>Seller</option>
-														<option>Tester</option>
-														<option>PWGs</option>
-														<option>User</option>
-													</select>
 
+											<div class="form-row">
+												<div class="col-md mb-2">
+													<div class="form-group">
+
+														<input type="Password" class="form-control" placeholder=" Enter Old Password">
+													</div>
 												</div>
 											</div>
-											<div class="col-md mb-2">
-												<input type="Password" class="form-control" placeholder=" Enter Old Password">
+											<div class="form-row">
+												<div class="col-md mb-2">
+													<input type="Password" class="form-control" placeholder=" Enter New Password">
+												</div>
 											</div>
-											<div class="col-md mb-2">
-												<button  type="submit" class="btn btn-danger">Proceed</button>
+											<div class="form-row">
+												<div class="col-md mb-2">
+													<input type="Password" class="form-control" placeholder="Confirm Password">
+												</div>
 											</div>
-										</div>
+											<div class="form-row">
+												<div class="col-md mb-2">
+												<button  type="submit" class="btn btn-danger btn-block">Proceed</button>
+											    </div>
+											</div>
+
 									</form>
 								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="row justify-content-center bg-button-1 p-4 mt-3" id="password-history" style="display: none;">
+
+						<div class="col-md">
+							<h4 class=""> Password HISTORY</h4>
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+
+											<th scope="col">No Of times Admin Been Login</th>
+											<th scope="col">Last Change</th>
+											<th scope="col">Device Name</th>
+											<th scope="col">Last Password</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">1</th>
+											<td>02//5/20</td>
+											<td>Samsung</td>
+											<td>abc@12345678</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 
@@ -355,21 +497,21 @@
 								<h5>Number Of times Admin Been Logged in  <span>5 Times</span></h5>
 								<h5>Admin Login History</h5>
 								<ol>
-									 <li>	
+									 <li>
 									 	20/01/20 <span> 50:30 Pm</span>
 								     </li>
 
 								</ul>
 							</div>
 						</div>
-						
+
 					</div> -->
 
 					<!-- <div class="row justify-content-center py-3 bg-button-1 m-4">
 						<div class="col-md">
 							<button type="button" class="btn btn-primary"> Admin Login Detail</button>
 						</div>
-								
+
 					</div> -->
 				</div>
 			</div>
@@ -377,6 +519,30 @@
 
 		</div>
 	</section>
+
+
+	<script type="text/javascript">
+		function myfun1(){
+			document.getElementById("login-history").style.display="block";
+			document.getElementById("change-passward").style.display="none";
+			// document.getElementById("login-history").style.display="block";
+		}
+
+		function myfun3(){
+			document.getElementById("login-history").style.display="none";
+			document.getElementById("change-passward").style.display="block";
+			// document.getElementById("login-history").style.display="block";
+		}
+
+		function myfun2(){
+			document.getElementById("password-history").style.display="block";
+			document.getElementById("change-passward").style.display="none";
+			document.getElementById("login-history").style.display="none";
+			// document.getElementById("login-history").style.display="block";
+		}
+	</script>
+
+
 
 
 </body>

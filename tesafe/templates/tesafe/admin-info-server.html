@@ -40,19 +40,18 @@
 <body>
 
 
-
 	<section class="bg-light">
 		<div class="container-fluid">
 			<nav class="navbar navbar-expand-lg navbar-light ">
-				<a class="navbar-brand" href="#">LOGO</a>
+
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 
-				<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+				<div class="collapse navbar-collapse justify-content" id="navbarSupportedContent">
 					<ul class="navbar-nav">
 						<li class="nav-item pl-3">
-							<a class="nav-link active"  href="admin-home">Home <span class="sr-only">(current)</span></a>
+							<a class="nav-link "  href="admin-home">Home <span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item pl-3">
 							<a class="nav-link " href="admin-seller">Seller</a>
@@ -61,23 +60,40 @@
 							<a class="nav-link" href="admin-tester">Tester</a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link" href="admin-info-server">PWG Server</a>
+							<a class="nav-link active" href="admin-info-server">PWG Server</a>
 						</li>
 
+						<!-- <li class="nav-item pl-3">
+							<a class="nav-link" href="admin-info-server.html">Unread Messages <span><i class="fas fa-bell"></i></span></a>
+						</li> -->
 					</ul>
-					
+
 				</div>
+
+				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
+
+					<div class="dropdown  dropleft float-xl-right mb-0" >
+								<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+									...
+								</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="" onclick="myfun()">Broadcaste</a>
+									<a class="dropdown-item" href="" >Exit</a>
+								</div>
+							</div>
+
+
 			</nav>
 		</div>
 	</section>
 
 	<section class="bg-detail">
 		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-3 bg-user">
+			<div class="row justify-content-center">
+			<!-- 	<div class="col-md-3 bg-user">
 					<div class="row">
 						<ul class="nav py-2">
-							
+
 							<li class="nav-item display-block">
 								<a class="nav-link font-weight-bold text-success" href="#">Unread Messages ( 4 )</a>
 							</li>
@@ -184,10 +200,10 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-9  py-5 px-5" style="overflow:scroll; height:570px;">
+				</div> -->
+				<div class="col-md-10 py-5 px-5">
 					<div class="row bg-button-2 p-4">
-						
+
 						<div class="col-md mb-2" >
 							<div class="card" onclick="myfun()">
 								<div class="card-body">
@@ -221,7 +237,7 @@
 					</div>
 
 					<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-1" >
-						
+
 							<div class="col-md">
 								<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Seller Account list</h5>
 								<table class="table">
@@ -240,18 +256,18 @@
 											<th scope="row">1</th>
 											<td>Faiz Elahi</td>
 											<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
-											<td><!-- <p class="pop" style="">More</p> --> 
+											<td><!-- <p class="pop" style="">More</p> -->
 												<a href="" class="btn-danger btn btn-sm text-white">Delete</a>
 												<a  class="btn-success btn btn-sm text-white pop" data-toggle="modal" data-target="#exampleModal1">Login Record</a>
 
 												<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 											              <div class="modal-dialog">
-											                <div class="modal-content">  
+											                <div class="modal-content">
 											                    <div class="modal-header">
 											                        <h5 class="modal-title">Modal title</h5>
 											                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-											                  
-											                </div>            
+
+											                </div>
 											                <div class="modal-body">
 
 											                	<table class="table">
@@ -280,13 +296,13 @@
 																	</tbody>
 
 																</table>
-											                   
+
 											                </div>
 											            </div>
 											        </div>
 											    </div>
 											</td>
-											
+
 
 											<!-- Modal -->
 											<div id="myModal" class="modal">
@@ -303,19 +319,19 @@
 											<th scope="row">2</th>
 											<td>Faiz Elahi</td>
 											<td><a href=""><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></a></td>
-											
-											<td><!-- <p class="pop" style="">More</p> --> 
+
+											<td><!-- <p class="pop" style="">More</p> -->
 												<a href="" class="btn-danger btn btn-sm text-white">Delete</a>
 												<a  class="btn-success btn btn-sm text-white pop" data-toggle="modal" data-target="#exampleModal1">Login Record</a>
 
 												<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 											              <div class="modal-dialog">
-											                <div class="modal-content">  
+											                <div class="modal-content">
 											                    <div class="modal-header">
 											                        <h5 class="modal-title">Modal title</h5>
 											                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-											                  
-											                </div>            
+
+											                </div>
 											                <div class="modal-body">
 
 											                	<table class="table">
@@ -344,7 +360,7 @@
 																	</tbody>
 
 																</table>
-											                   
+
 											                </div>
 											            </div>
 											        </div>
@@ -353,19 +369,19 @@
 										</tr>
 									</tbody>
 
-									
+
 								</table>
 							</div>
 
-							
+
 
 					</div>
 
 
 					<div class="row  bg-button-2 p-4 mt-3" id="div-5">
-						
+
 						<div class="col-md-6">
-							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Summary Information</h5>
+							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Summary PWG</h5>
 							<table class="table">
 								<tbody>
 									<tr>
@@ -393,24 +409,38 @@
 					</div>
 
 					<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-4">
-						
+
 						<div class="col-md">
-								<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change PWG Account Password</h5>
-							<div class="row">
-								<div class="col-md py-3">
-								
+								<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change PWGs Account Password</h5>
+							<div class="row ">
+								<div class="col-md-6 py-3">
+
 									<form>
-									  <div class="row">
-									    <div class="col">
-									      <input type="Password" class="form-control" placeholder="New Password">
-									    </div>
-									    <div class="col">
-									       <input type="Password" class="form-control" placeholder=" Confirm New Password">
-									    </div>
-									    <div class="col">
-									      <button  type="submit" class="btn btn-danger">Submit</button>
-									    </div>
-									  </div>
+
+											<div class="form-row">
+												<div class="col-md mb-2">
+													<div class="form-group">
+														<input type="Password" class="form-control" placeholder=" Enter Old Password">
+													</div>
+												</div>
+											</div>
+											<div class="form-row">
+												<div class="col-md mb-2">
+													<input type="Password" class="form-control" placeholder=" Enter New Password">
+												</div>
+											</div>
+
+											<div class="form-row">
+												<div class="col-md mb-2">
+													<input type="Password" class="form-control" placeholder="Confirm Password">
+												</div>
+											</div>
+											<div class="form-row">
+												<div class="col-md mb-2">
+												<button  type="submit" class="btn btn-danger btn-block">Proceed</button>
+											    </div>
+											</div>
+
 									</form>
 								</div>
 							</div>
@@ -577,7 +607,7 @@
 									<tr>
 										<th scope="col">SL No</th>
 										<th scope="col">Name</th>
-										
+
 
 
 
@@ -587,7 +617,7 @@
 									<tr>
 										<th scope="row">1</th>
 										<td><a href="">PWG-1</a></td>
-										
+
 
 
 									</tr>
@@ -595,12 +625,12 @@
 									<tr>
 										<th scope="row">2</th>
 										<td>PWG-2</td>
-										
+
 									</tr>
 								</tbody>
 
 
-							</table>	
+							</table>
 
 							<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Assign New PWG to Tester for Testing</button>
 							<!-- Modal -->
@@ -619,7 +649,7 @@
 													<tr>
 														<th scope="col">SL No</th>
 														<th scope="col">Name</th>
-														
+
 														<th scope="col">Select</th>
 
 
@@ -631,7 +661,7 @@
 													<tr>
 														<th scope="row">1</th>
 														<td><a href="">PWG-1</a></td>
-													
+
 														<td>
 															<div class="form-check">
 																<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
@@ -644,7 +674,7 @@
 													<tr>
 														<th scope="row">2</th>
 														<td>PWG-2</td>
-														
+
 														<td>
 															<div class="form-check">
 																<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
@@ -656,7 +686,7 @@
 													<tr>
 														<th scope="row">3</th>
 														<td>PWG-2</td>
-														
+
 														<td>
 															<div class="form-check">
 																<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
@@ -675,19 +705,19 @@
 										</div>
 									</div>
 								</div>
-							</div>						
+							</div>
 
 
 						</div>
 
 
-						
+
 
 					</div>
 
 				</div>
 
-				
+
 
 
 
@@ -741,10 +771,11 @@
  $(function() {
             $('.pop').on('click', function() {
                 $('.imagepreview').attr('src', $(this).find('img').attr('src'));
-                $('#imagemodal').modal('show');   
-            });     
+                $('#imagemodal').modal('show');
+            });
         });
 
 </script>
+
 </body>
 </html>
