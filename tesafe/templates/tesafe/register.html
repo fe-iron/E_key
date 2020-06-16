@@ -45,7 +45,7 @@
 						<div class="card">
 							<h3 class="text-center pt-3">Registration</h3>
 							<div class="card-body">
-								<form action="admin-home">
+								<form action="" method="post">
 									{% csrf_token %}
 
 									<div class="form-group mb-4">
@@ -82,7 +82,7 @@
 										<input type="password" class="form-control"  name="password2" placeholder="Confirm Password" required>
 									</div>
 									<div class="form-group">
-										<button class="btn btn-primary btn-block">Submit</button>
+										<button type="submit" class="btn btn-primary btn-block">Submit</button>
 									</div>
 									<div class="form-group">
 										<p class="text-center">Already Register?? <a href="/">  Login Here!!</a></p>

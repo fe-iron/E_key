@@ -1,0 +1,521 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Seller | Users</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Popper JS -->
+<!--	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>-->
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap.css' %}">
+	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-grid.css' %}">
+	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-grid.min.css' %}">
+	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-reboot.css' %}">
+	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-reboot.min.cs' %}">
+
+
+
+	<!-- fontawesome cdn -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'seller/css/seller-home.css' %}">
+
+	<!-- Latest compiled JavaScript -->
+	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.bundle.js' %}"></script>
+	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.bundle.min.js' %}"></script>
+	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.js' %}"></script>
+	<script src="{% static 'tesafe/bootstrap4/js/popper.min.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'seller/css/seller-user.css' %}">
+</head>
+<body>
+
+
+	<section class="bg-light">
+		<div class="container-fluid">
+			<nav class="navbar navbar-expand-lg navbar-light ">
+
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse justify-content" id="navbarSupportedContent">
+					<ul class="navbar-nav">
+						<li class="nav-item pl-3">
+							<a class="nav-link active"  href="seller-home">Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item pl-3">
+							<a class="nav-link " href="seller-user">User</a>
+						</li>
+						<li class="nav-item pl-3">
+							<a class="nav-link" href="seller-pwg">PWG</a>
+						</li>
+
+					</ul>
+
+				</div>
+
+				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
+				
+				<div class="dropdown  dropleft float-xl-right mb-0" >
+					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+						...
+					</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="">Broadcaste</a>
+						<a class="dropdown-item" href="#div-1" onclick="myfun()">User Account List</a>
+						<a class="dropdown-item" href="#div-3" onclick="myfun2()">PWG List</a>
+						<a class="dropdown-item" href="#div-3" onclick="myfun3()">Transfer PWG List</a>
+						<a class="dropdown-item" href="#div-3" onclick="myfun4()">Shared PWG List</a>
+						<a class="dropdown-item" href="#div-3" onclick="myfun5()">Authorized PWG List</a>
+						<a class="dropdown-item" href="" >Exit</a>
+					</div>
+				</div>
+
+			</nav>
+		</div>
+	</section>
+
+	<section class="bg-detail">
+		<div class="container-fluid">
+			<div class="row justify-content-center">
+
+				<div class="col-md-10  py-5 px-5">
+
+					<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-1" >
+						
+						<div class="col-md">
+							<h4 class="font-weight-bold">User Account list<span onclick="myfun1()" class="float-right"><i class="fas fa-plus-circle"></i></span></h4>
+
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col">Sr. No.</th>
+											<th scope="col">Name</th>
+											<th scope="col">Online/Offline</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+									{% for i in num %}
+										<tr>
+											<th scope="row">{{forloop.counter}}</th>
+											<td><span><img src="{% static 'tesafe/images/faiz.png' %}" height="50" width="50" class="rounded-circle"></span> Faiz Elahi</td>
+											<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
+											<td><a href="" class="btn-primary text-white btn btn-sm mb-1">Delete</a> 
+												<a href="" class="btn-danger btn btn-sm text-white mb-1">Freeze</a>
+											</td>
+										</tr>
+									{% endfor %}
+
+									</tbody>
+
+									
+								</table>
+							</div>
+						</div>
+
+					</div>
+
+
+					<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-2" style="display: none;">
+
+						<div class="col-md">
+							<h4 class="font-weight-bold"> Add User Account</h4>
+							<div class="row">
+								<div class="col-md py-3">
+									<form>
+										<div class="row">
+											<div class="col-md mb-2">
+												<input type="text" class="form-control" placeholder="Enter Name">
+											</div>
+											<div class="col-md mb-2">
+												<input type="email" class="form-control" placeholder="Enter Email">
+											</div>
+
+											<div class="col-md mb-2">
+												<input type="password" class="form-control" placeholder="Enter Password">
+											</div>
+
+											<div class="col-md mb-2">
+												<button class="btn btn-primary" type="submit">Sumbit</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+
+
+						</div>
+
+					</div>
+
+
+					<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-3" style="display: none;">
+
+						<div class="col-md">
+							<h4 class="font-weight-bold">List Of PWG</h4>
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">Sr. No.</th>
+										<th scope="col">Name</th>
+										<th scope="col">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% for i in num %}
+									<tr>
+										<th scope="row">{{forloop.counter}}</th>
+										<td>PWG-{{forloop.counter}}</td>
+										<td><a href="" class="btn btn-sm btn-danger mb-1 ml-1 text-white" data-toggle="modal" data-target="#exampleModal">Transfer</a> <a href="" class="btn btn-sm btn-success  mb-1 ml-1 text-white" data-toggle="modal" data-target="#exampleModal1" >Share</a> <a href="" class="btn btn-sm btn-danger  mb-1 ml-1 text-white" data-toggle="modal" data-target="#exampleModal2">Authorized</a></td>
+									</tr>
+								{% endfor %}
+									
+								</tbody>
+
+
+							</table>
+							
+							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Transfer PWG to User</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<div class="table-responsive">
+												<table class="table">
+													<thead>
+														<tr>
+															<th scope="col">Sr. No.</th>
+															<th scope="col">Name</th>
+															<th scope="col">Online/Offline</th>
+															<th scope="col">select</th>
+														</tr>
+													</thead>
+													<tbody>
+													{% for i in num %}
+														<tr>
+															<th scope="row">{{forloop.counter}}</th>
+															<td>Faiz Elahi</td>
+															<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
+															<td><div class="form-check">
+																<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+															</div>
+														</td>
+													</tr>
+													{% endfor %}
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+										<button type="button" class="btn btn-primary">Transfer</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Shared PWG to User</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<div class="table-responsive">
+											<table class="table">
+												<thead>
+													<tr>
+														<th scope="col">Sr. No.</th>
+														<th scope="col">Name</th>
+														<th scope="col">Online/Offline</th>
+														<th scope="col">select</th>
+													</tr>
+												</thead>
+												<tbody>
+												{% for i in num %}
+													<tr>
+														<th scope="row">{{forloop.counter}}</th>
+														<td>Faiz Elahi</td>
+														<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
+														<td><div class="form-check">
+															<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+														</div>
+													</td>
+												</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Shared</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Authorized PWG to User</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<div class="table-responsive">
+											<table class="table">
+												<thead>
+													<tr>
+														<th scope="col">Sr. No.</th>
+														<th scope="col">Name</th>
+														<th scope="col">Online/Offline</th>
+														<th scope="col">select</th>
+													</tr>
+												</thead>
+												<tbody>
+												{% for i in num %}
+													<tr>
+														<th scope="row">{{forloop.counter}}</th>
+														<td>Faiz Elahi</td>
+														<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
+														<td><div class="form-check">
+															<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+														</div>
+													</td>
+												</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Shared</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+			<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-4" style="display: none;">
+
+				<div class="col-md">
+					<h4 class="font-weight-bold">Transferred PWG List</h4>
+
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Sr. No.</th>
+									<th scope="col">User Name</th>
+									<th scope="col">Transferred PWG</th>
+									<th scope="col">Online/Offline</th>
+									<th scope="col">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+							{% for i in num %}
+								<tr>
+									<th scope="row">{{forloop.counter}}</th>
+									<td>Faiz Elahi</td>
+									<td>PWG-{{forloop.counter}}</td>
+									<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
+									
+									<td><a href="" class="btn-secondary btn btn-sm text-white mb-1">Disabled</a>
+									</td>
+								</tr>
+							{% endfor %}
+
+							</tbody>
+
+
+						</table>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-5" style="display: none;">
+
+				<div class="col-md">
+					<h4 class="font-weight-bold">Shared PWG List</h4>
+
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Sr. No</th>
+									<th scope="col">User Name</th>
+									<th scope="col">Shared PWG</th>
+									<th scope="col">Online/Offline</th>
+									<th scope="col">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+							{% for i in num %}
+								<tr>
+									<th scope="row">{{forloop.counter}}</th>
+									<td>Faiz Elahi</td>
+									<td>PWG-{{forloop.counter}}</td>
+									<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
+									<td><a href="" class="btn-primary text-white btn btn-sm mb-1">Call Back PWG</a>
+									</td>
+								</tr>
+							{% endfor %}
+							</tbody>
+
+
+						</table>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-6" style="display: none;">
+
+				<div class="col-md">
+					<h4 class="font-weight-bold">Authorized PWG List</h4>
+
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Sr. No.</th>
+									<th scope="col">User Name</th>
+									<th scope="col">Authorized PWG</th>
+									<th scope="col">Online/Offline</th>
+									<th scope="col">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+							{% for i in num %}
+								<tr>
+									<th scope="row">{{forloop.counter}}</th>
+									<td>Faiz Elahi</td>
+									<td>PWG-{{forloop.counter}}</td>
+									<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
+									
+									<td><a href="" class="btn-primary text-white btn btn-sm mb-1">Get Back PWG</a>
+									</td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+
+</div>
+</section>
+
+
+
+
+
+<script type="text/javascript">
+
+	function myfun(){
+
+		document.getElementById("div-1").style.display = "block";
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-3").style.display = "none";
+		document.getElementById("div-4").style.display = "none";
+		document.getElementById("div-5").style.display = "none";
+		document.getElementById("div-6").style.display = "none";
+
+	}
+
+	function myfun1(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-2").style.display = "block";
+		document.getElementById("div-3").style.display = "none";
+		document.getElementById("div-4").style.display = "none";
+		document.getElementById("div-5").style.display = "none";
+		document.getElementById("div-6").style.display = "none";
+
+
+	}
+
+
+	function myfun2(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-3").style.display = "block";
+		document.getElementById("div-4").style.display = "none";
+		document.getElementById("div-5").style.display = "none";
+		document.getElementById("div-6").style.display = "none";
+
+
+	}
+
+	function myfun3(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-3").style.display = "none";
+		document.getElementById("div-4").style.display = "block";
+		document.getElementById("div-5").style.display = "none";
+		document.getElementById("div-6").style.display = "none";
+
+
+	}
+
+	function myfun4(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-3").style.display = "none";
+		document.getElementById("div-4").style.display = "none";
+		document.getElementById("div-5").style.display = "block";
+		document.getElementById("div-6").style.display = "none";
+
+
+	}
+
+	function myfun5(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-3").style.display = "none";
+		document.getElementById("div-4").style.display = "none";
+		document.getElementById("div-5").style.display = "none";
+		document.getElementById("div-6").style.display = "block";
+
+
+	}
+
+</script>
+</body>
+</html>

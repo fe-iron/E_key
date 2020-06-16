@@ -11,16 +11,19 @@ def index(request):
         accType = request.POST['accType']
         password = request.POST['password']
         email = request.POST['email']
-
+        print(accType)
         if accType == 'admin':
-            pass
+            return render(request, 'tesafe/admin-home.html', {'num': [11,23,33,42,35,67,78,49,10]})
         elif accType == 'seller':
-            pass
+            return render(request, 'seller/seller-home.html', {'num': [11,23,33,42,35,67,78,49,10]})
         elif accType == 'Tester':
-            pass
+            return render(request, 'tesafe/admin-home.html', {'num': [11,23,33,42,35,67,78,49,10]})
         elif accType == 'user':
-            pass
-    return render(request, 'tesafe/index.html')
+            return render(request, 'tesafe/admin-home.html', {'num': [11,23,33,42,35,67,78,49,10]})
+        else:
+            return render(request, 'tesafe/admin-home.html', {'num': [11,23,33,42,35,67,78,49,10]})
+    else:
+        return render(request, 'tesafe/index.html')
 
 
 def register(request):
@@ -106,3 +109,14 @@ def register_next(request):
                 return render(request, 'tesafe/admin-page.html', {'msg': msg})
 
     return render(request, 'tesafe/admin-seller.html', {})
+
+def seller_home(request):
+    return render(request, 'seller/seller-home.html', {'num': [11,23,33,42,35,67,78,49,10]})
+
+
+def seller_user(request):
+    return render(request, 'seller/seller-user.html', {'num': [11,23,33,42,35,67,78,49,10]})
+
+
+def seller_pwg(request):
+    return render(request, 'seller/seller-pwg.html', {'num': [11,23,33,42,35,67,78,49,10]})
