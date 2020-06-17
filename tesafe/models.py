@@ -25,3 +25,6 @@ getUser = get_user_model()
 #     name = models.ForeignKey(getUser, related_name='first_name', on_delete=models.CASCADE)
 #     email = models.CharField(max_length=150)
 #     phone = models.CharField(max_length=12)
+
+class Names(models.Model):
+    name = models.CharField(max_length=100)

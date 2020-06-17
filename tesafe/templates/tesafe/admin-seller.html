@@ -1,49 +1,59 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html>
 <head>
-
 	<title>Admin | Seller</title>
 
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- jQuery library -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap.min.css' %}">
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap' %}">
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-grid' %}">
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-grid.min' %}">
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-reboot' %}">
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-reboot.min' %}">
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
 	<!-- Latest compiled JavaScript -->
-	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.min.js' %}"></script>
-	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.bundle' %}"></script>
-	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.bundle.min' %}"></script>
-	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.js' %}"></script>
-	<script src="{% static 'tesafe/bootstrap4/js/popper.min.js' %}"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
+	<!-- Latest compiled and minified CSS -->
+	<!-- <link rel="stylesheet" href="bootstrap4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bootstrap4/css/bootstrap">
+	<link rel="stylesheet" href="bootstrap4/css/bootstrap-grid">
+	<link rel="stylesheet" href="bootstrap4/css/bootstrap-grid.min">
+	<link rel="stylesheet" href="bootstrap4/css/bootstrap-reboot">
+	<link rel="stylesheet" href="bootstrap4/css/bootstrap-reboot.min"> -->
+
+	<!-- Latest compiled JavaScript -->
+	<!-- s -->
+
+	
+
+
+	<!-- Popper JS -->
+	<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
+
+	
+	<!-- jQuery library -->
+	<!-- <script src="bootstrap4/js/jquery.min.js"></script> -->
 
 	<!-- fontawesome cdn -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/admin-seller.css' %}">
-
-	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/admin-seller.css' %}">
 </head>
 <body>
+
 
 
 	<section class="bg-light">
 		<div class="container-fluid">
 			<nav class="navbar navbar-expand-lg navbar-light ">
-
+				
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -62,62 +72,250 @@
 						<li class="nav-item pl-3">
 							<a class="nav-link" href="admin-info-server">PWG Server</a>
 						</li>
-
 					</ul>
-
+					
 				</div>
 
 				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
-
-					<div class="dropdown  dropleft float-xl-right mb-0" >
-								<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-									...
-								</button>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="">Broadcast</a>
-									<a class="dropdown-item" href="#div-1" onclick="myfun()">Seller Account List</a>
-									<a class="dropdown-item" href="#div-3" onclick="myfun2()">Tested PWG List</a>
-									<a class="dropdown-item" href="" >Exit</a>
-								</div>
+				
+				<div class="dropdown  dropleft float-xl-right mb-0" >
+					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+					<i class="fas fa-ellipsis-v"></i>
+					</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="">Broadcast</a>
+						<a class="dropdown-item" href="#div-1" onclick="myfun()">Seller Account List</a>
+						<a class="dropdown-item" href="#div-3" onclick="myfun2()">Tested PWG List</a>
+						<a class="dropdown-item" href="admin-home" >Exit</a>
 					</div>
+				</div>
+				
 
 			</nav>
 		</div>
 	</section>
 
-
 	<section class="bg-detail">
 		<div class="container-fluid">
 			<div class="row justify-content-center">
-				<div class="col-md-10  py-5 px-5">
+				<!-- <div class="col-md-3 bg-user">
+					<div class="row">
+						<ul class="nav py-2">
+							
+							<li class="nav-item display-block">
+								<a class="nav-link font-weight-bold text-success" href="#">Unread Messages ( 4 )</a>
+							</li>
+						</ul>
+					</div>
 
+					<div class="row" style="overflow:scroll; height:520px;">
+						<div class="col-md ">
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom border-top pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<div class="d-flex bd-highlight border-bottom pt-2">
+								<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+								<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+									<p><i class="fas fa-circle fa-1x"></i> Online</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+				<div class="col-md-10  py-5 px-5">
+					<!-- <div class="row bg-button-2 p-4">
+						
+						<div class="col-md mb-2" >
+							<div class="card" onclick="myfun()">
+								<div class="card-body">
+									<div class="card-title">
+										SELLER ACCOUNT LIST
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md mb-2" >
+							<div class="card" onclick="myfun1()">
+								<div class="card-body">
+									<div class="card-title">
+										ADD SELLER ACCOUNT
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md mb-2" >
+							<div class="card px-3" onclick="myfun2()">
+								<div class="card-body">
+									<div class="card-title">
+										TESTED PWG LIST
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div> -->
 
 					<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-1" >
+						
+						<div class="col-md">
 
-							<div class="col-md">
-								<h4 class="font-weight-bold">Seller Account list<span onclick="myfun1()" class="float-right"><i class="fas fa-plus-circle"></i></span></h4>
+							<header>
+								<nav class="navbar navbar-light  venue-registration">
+									<a class="h4 text-dark font-weight-bold pt-2">Seller Account list</a>
+									<form class="form-inline">
+										<div class="input-group-prepend mb-1 mr-2">
+											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
+											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" onkeyup="showResult(this.value)">
+											<div id="livesearch"></div>
+										</div>
 
-								<div class="table-responsive">
-									<table class="table">
+										<div class="dropdown mb-1" >
+											<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+												<i class="fas fa-ellipsis-v"></i>
+											</button>
+											<div class="dropdown-menu dropdown-menu-right">
+												<a class="dropdown-item" href="" onclick="myfun1()">Add New</a>
+												<a class="dropdown-item" href="">Delete</a>
+												<a class="dropdown-item" href=""> Freeze </a>
+												<a class="dropdown-item" href="" >Chat</a>
+												<a class="dropdown-item" href="" >Broadcast</a>
+												<a class="dropdown-item" href="admin-home" >Exit</a>
+											</div>
+										</div>
+										
+										<!-- <a class="btn btn-success  ml-xl-3  ml-sm-2 text-white" style="font-size: 14px; ">...</a> -->
+									</form>
+								</nav>
+							</header>
+
+
+							<!-- <h4 class="font-weight-bold">Seller Account list<span onclick="myfun1()" class="float-right"><i class="fas fa-plus-circle"></i></span></h4> -->
+
+							<div class="table-responsive">
+								<table class="table">
 									<thead>
 										<tr>
+											<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll"> <i class="fas fa-sort-down"></i></th>
 											<th scope="col">Sr. No.</th>
 											<th scope="col">Name</th>
-											<th scope="col">Online/Offline</th>
 											<th scope="col">Action</th>
+
+
 										</tr>
 									</thead>
 									<tbody>
 									{% for i in num %}
 										<tr>
+											
+											<th><input type="checkbox" name="book" id="book_1" value="book1"></th>
 											<th scope="row">{{forloop.counter}}</th>
 											<td><span><img src="{% static 'tesafe/images/faiz.png' %}" height="50" width="50" class="rounded-circle"></span> Faiz Elahi</td>
-											<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
-											<td><a href="" class="btn-primary text-white btn btn-sm mb-1">Delete</a>
+											<td>Transfer <div class="dropdown  mb-0 ml-xl-3  ml-sm-2" >
+											<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+												<i class="fas fa-ellipsis-v"></i>
+											</button>
+											<div class="dropdown-menu">
+												<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
+												<a class="dropdown-item" href="">Delete</a>
+												<a class="dropdown-item" href=""> Freeze </a>
+												<a class="dropdown-item" href="" >Chat</a>
+												<a class="dropdown-item" href="" >Broadcast</a>
+												<a class="dropdown-item" href="admin-home" >Exit</a>
+											</div>
+										</div></td><!-- <a href="" class="btn-primary text-white btn btn-sm mb-1">Delete</a> 
 												<a href="" class="btn-danger btn btn-sm text-white mb-1">Freeze</a>
-												<a href="" class="btn-success btn btn-sm text-white mb-1" data-toggle="modal" data-target="#exampleModal1">Login History</a>
+												<a href="" class="btn-success btn btn-sm text-white mb-1" data-toggle="modal" data-target="#exampleModal1">Login History</a> -->
 												<!-- Modal -->
-													<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+													<!-- <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 													  <div class="modal-dialog" role="document">
 													    <div class="modal-content">
 													      <div class="modal-header">
@@ -130,22 +328,28 @@
 													       <table class="table">
 																<thead>
 																	<tr>
-																		<th scope="col">Sr. No.</th>
+																		<th scope="col">SL No</th>
 																		<th scope="col">Name</th>
 																		<th scope="col">Date</th>
 																		<th scope="col">Time</th>
 																	</tr>
 																</thead>
 																<tbody>
-																{% for i in num %}
 																	<tr>
-																		<th scope="row">{{forloop.counter}}</th>
+																		<th scope="row">1</th>
 																		<td><a href="">Faiz Elahi</a></td>
-																		<td>05/06/2020</td>
+																		<td>05//06/2020</td>
 																		<td>04:30 pm</td>
 																	</tr>
-																{% endfor %}
+
+																	<tr>
+																		<th scope="row">1</th>
+																		<td><a href="">Naqui Hasan</a></td>
+																		<td>07//06/2020</td>
+																		<td>04:00 pm</td>
+																	</tr>
 																</tbody>
+
 															</table>
 													      </div>
 													      <div class="modal-footer">
@@ -154,213 +358,300 @@
 													      </div>
 													    </div>
 													  </div>
-													</div>
+													</div> -->
+												</tr>
+											{% endfor %}
 
-											</td>
-										</tr>
-									{% endfor %}
-
-<!--										<tr>-->
-<!--											<th scope="row">1</th>-->
-<!--											<td><span><img src="{% static 'tesafe/images/faiz.png' %}" height="50" width="50" class="rounded-circle"></span> Faiz Elahi</td>-->
-
-<!--											<td><p class="pl-4"><i class="fas fa-circle fa-2x"></i></p></td>-->
-<!--											<td><a href="" class="btn-primary text-white btn btn-sm mb-1">Delete</a>-->
-<!--												<a href="" class="btn-danger btn btn-sm text-white mb-1">Freeze</a>-->
-<!--												<a href="" class="btn-success btn btn-sm text-white mb-1">Login History</a>-->
-
-<!--											</td>-->
-<!--										</tr>-->
-									</tbody>
-								</table>
-								</div>
-							</div>
-
-					</div>
-
-
-					<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-2" style="display: none;">
-
-						<div class="col-md">
-							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Add Seller Account</h5>
-							<div class="row">
-								<div class="col-md py-3">
-									<form>
-										<div class="row">
-											<div class="col-md mb-2">
-												<input type="text" class="form-control" placeholder="Enter Name">
-											</div>
-											<div class="col-md mb-2">
-												<input type="email" class="form-control" placeholder="Enter Email">
-											</div>
-
-											<div class="col-md mb-2">
-												<input type="password" class="form-control" placeholder="Enter Password">
-											</div>
-
-											<div class="col-md mb-2">
-												<button class="btn btn-primary" type="submit">Submit</button>
-											</div>
-										</div>
-									</form>
-								</div>
-							</div>
-
-
-						</div>
-
-					</div>
-
-
-					<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-3" style="display: none;">
-
-						<div class="col-md">
-							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> List Of Tested PWG</h5>
-							<table class="table">
-								<thead>
-									<tr>
-										<th scope="col">SL No</th>
-										<th scope="col">Name</th>
-										<th scope="col">TESTED</th>
-									</tr>
-								</thead>
-								<tbody>
-								{% for i in num %}
-									<tr>
-										<th scope="row">{{forloop.counter}}</th>
-										<td><a href="">PWG-{{forloop.counter}}</a></td>
-										<td><i class="fas fa-check pl-4"></i></td>
-									</tr>
-								{% endfor %}
-
-<!--									<tr>-->
-<!--										<th scope="row">2</th>-->
-<!--										<td>PWG-2</td>-->
-<!--										<td><i class="fas fa-check pl-4"></i></td>-->
-
-<!--									</tr>-->
-								</tbody>
-
-
-							</table>
-
-							<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Transfer Tested PWG to Seller</button>
-							<!-- Modal -->
-							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLabel">Transfer Tested PWG to Seller</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body">
-											<table class="table">
-								<thead>
-									<tr>
-										<th scope="col">Sr. No.</th>
-										<th scope="col">Name</th>
-										<th scope="col">TESTED</th>
-										<th scope="col">Select</th>
-									</tr>
-								</thead>
-								<tbody>
-								{% for item in num %}
-									<tr>
-										<th scope="row">{{forloop.counter}}</th>
-										<td><a href="">PWG-1</a></td>
-										<td><i class="fas fa-check pl-4"></i></td>
-										<td>
-											<div class="form-check">
-											  <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-											</div>
-										</td>
-									</tr>
-								{% endfor %}
-<!--									<tr>-->
-<!--										<th scope="row">2</th>-->
-<!--										<td>PWG-2</td>-->
-<!--										<td><i class="fas fa-check pl-4"></i></td>-->
-<!--										<td>-->
-<!--											<div class="form-check">-->
-<!--											  <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">-->
+<!--												<tr>-->
+<!--													<th><input type="checkbox" name="book" id="book_2" value="book2"></th>-->
+<!--													<th scope="row">2</th>-->
+<!--													<td><span><img src="images/naqui.jpg" height="40" width="40" class="rounded-circle"></span> Faiz Elahi</td>-->
+<!--													<td>Transfer <div class="dropdown  mb-0 ml-xl-3  ml-sm-2" >-->
+<!--											<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">-->
+<!--												<i class="fas fa-ellipsis-v"></i>-->
+<!--											</button>-->
+<!--											<div class="dropdown-menu">-->
+<!--												<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>-->
+<!--												<a class="dropdown-item" href="">Chat</a>-->
+<!--												<a class="dropdown-item" href=""> Payment</a>-->
+<!--												<a class="dropdown-item" href="" >Login History</a>-->
+<!--												<a class="dropdown-item" href="" >Chat History</a>-->
+<!--												<a class="dropdown-item" href="" >Delete</a>-->
+<!--												<a class="dropdown-item" href="" >Freeze</a>-->
 <!--											</div>-->
-<!--										</td>-->
+<!--										</div></td>-->
+<!--												</tr>-->
 
-<!--									</tr>-->
-
-<!--									<tr>-->
-<!--										<th scope="row">3</th>-->
-<!--										<td>PWG-2</td>-->
-<!--										<td><i class="fas fa-check pl-4"></i></td>-->
-<!--										<td>-->
-<!--											<div class="form-check">-->
-<!--											  <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">-->
+<!--												<tr>-->
+<!--													<th><input type="checkbox" name="book" id="book_3" value="book3"></th>-->
+<!--													<th scope="row">3</th>-->
+<!--													<td><span><img src="images/naqui.jpg" height="40" width="40" class="rounded-circle"></span> Faiz Elahi</td>-->
+<!--													<td>Transfer <div class="dropdown  mb-0 ml-xl-3  ml-sm-2" >-->
+<!--											<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">-->
+<!--												<i class="fas fa-ellipsis-v"></i>-->
+<!--											</button>-->
+<!--											<div class="dropdown-menu">-->
+<!--												<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>-->
+<!--												<a class="dropdown-item" href="">Delete</a>-->
+<!--												<a class="dropdown-item" href=""> Freeze </a>-->
+<!--												<a class="dropdown-item" href="" >Chat</a>-->
+<!--												<a class="dropdown-item" href="" >Broadcast</a>-->
+<!--												<a class="dropdown-item" href="admin-home.html" >Exit</a>-->
 <!--											</div>-->
-<!--										</td>-->
+<!--										</div></td>-->
+<!--												</tr>-->
+											</tbody>
 
-<!--									</tr>-->
-								</tbody>
 
-
-							</table>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-primary">Transfer</button>
-										</div>
+										</table>
 									</div>
 								</div>
+
 							</div>
 
 
+							<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-2" style="display: none;">
+
+								<div class="col-md">
+									<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Add Seller Account</h5>
+									<div class="row">
+										<div class="col-md py-3">
+											<form>
+												<div class="row">
+													<div class="col-md mb-2">
+														<input type="text" class="form-control" placeholder="Enter Name">
+													</div>
+													<div class="col-md mb-2">
+														<input type="email" class="form-control" placeholder="Enter Email">
+													</div>
+
+													<div class="col-md mb-2">
+														<input type="password" class="form-control" placeholder="Enter Password">
+													</div>
+
+													<div class="col-md mb-2">
+														<button class="btn btn-primary" type="submit">Sumbit</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+
+
+								</div>
+
+							</div>
+
+
+							<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-3" style="display: none;">
+
+								<div class="col-md">
+									<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> List Of Tested PWG</h5>
+									<table class="table">
+										<thead>
+											<tr>
+												<th scope="col">Sr. No.</th>
+												<th scope="col">Name</th>
+												<th scope="col">TESTED</th>
+
+
+
+											</tr>
+										</thead>
+										<tbody>
+										{% for i in num %}
+											<tr>
+												<th scope="row">{{forloop.counter}}</th>
+												<td><a href="">PWG-{{forloop.counter}}</a></td>
+												<td><i class="fas fa-check pl-4"></i></td>
+											</tr>
+										{% endfor %}
+										</tbody>
+
+
+									</table>
+
+									<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Transfer Tested PWG to Seller</button>
+									<!-- Modal -->
+									<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Transfer Tested PWG to Seller</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<table class="table">
+														<thead>
+															<tr>
+																<th scope="col">Sr. No.</th>
+																<th scope="col">Name</th>
+																<th scope="col">TESTED</th>
+																<th scope="col">Select</th>
+															</tr>
+														</thead>
+														<tbody>
+														{% for i in num %}
+															<tr>
+																<th scope="row">{{forloop.counter}}</th>
+																<td><a href="">PWG-{{forloop.counter}}</a></td>
+																<td><i class="fas fa-check pl-4"></i></td>
+																<td>
+																	<div class="form-check">
+																		<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+																	</div>
+																</td>
+
+
+															</tr>
+														{% endfor %}
+
+<!--															<tr>-->
+<!--																<th scope="row">2</th>-->
+<!--																<td>PWG-2</td>-->
+<!--																<td><i class="fas fa-check pl-4"></i></td>-->
+<!--																<td>-->
+<!--																	<div class="form-check">-->
+<!--																		<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">-->
+<!--																	</div>-->
+<!--																</td>-->
+
+<!--															</tr>-->
+
+<!--															<tr>-->
+<!--																<th scope="row">3</th>-->
+<!--																<td>PWG-2</td>-->
+<!--																<td><i class="fas fa-check pl-4"></i></td>-->
+<!--																<td>-->
+<!--																	<div class="form-check">-->
+<!--																		<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">-->
+<!--																	</div>-->
+<!--																</td>-->
+
+<!--															</tr>-->
+														</tbody>
+
+
+													</table>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+													<button type="button" class="btn btn-primary">Transfer</button>
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+								</div>
+
+							</div>
+
 						</div>
 
+
+
+
+
+
+
 					</div>
-
 				</div>
-			</div>
-		</div>
-
-	</div>
-</section>
 
 
 
-
-
-<script type="text/javascript">
-
-	function myfun(){
-
-		document.getElementById("div-1").style.display = "block";
-		document.getElementById("div-2").style.display = "none";
-		document.getElementById("div-3").style.display = "none";
-
-	}
-
-	function myfun1(){
-		document.getElementById("div-1").style.display = "none";
-		document.getElementById("div-2").style.display = "block";
-		document.getElementById("div-3").style.display = "none";
-
-
-	}
-
-
-	function myfun2(){
-		document.getElementById("div-1").style.display = "none";
-		document.getElementById("div-3").style.display = "block";
-		document.getElementById("div-2").style.display = "none";
-
-
-	}
+		</section>
 
 
 
 
 
-</script>
+
+<!-- <table>
+    <tr>
+        <td>
+        <input type="checkbox" name="checkAll" id="checkAll">全選 (ALL)
+        <input type="checkbox" name="book" id="book_1" value="book1">book1
+        <input type="checkbox" name="book" id="book_2" value="book2">book2
+        <input type="checkbox" name="book" id="book_3" value="book3">book3
+        <input type="checkbox" name="book" id="book_4" value="book4">book4
+        <input type="checkbox" name="book" id="book_5" value="book5">book5
+        </td>
+     </tr>
+ </table> -->
+
+
+
+
+
+ <script type="text/javascript">
+
+
+ 	$(document).ready(function() {
+
+ 		$('#checkAll').click(function () {
+ 			$('input:checkbox').not(this).prop('checked', this.checked);
+ 		});
+
+ 		$("[id*=book_]").change(function () {
+ 			if ($('input[id*=book_][type=checkbox]:checked').length == $('input[id*=book_][type=checkbox]').length) {
+ 				$('#checkAll').prop('checked', true);
+ 			} else {
+ 				$('#checkAll').prop('checked', false);
+ 			}
+ 		});
+
+ 	});
+
+ 	function myfun(){
+
+ 		document.getElementById("div-1").style.display = "block";
+ 		document.getElementById("div-2").style.display = "none";
+ 		document.getElementById("div-3").style.display = "none";
+
+ 	}
+
+ 	function myfun1(){
+ 		document.getElementById("div-1").style.display = "none";
+ 		document.getElementById("div-2").style.display = "block";
+ 		document.getElementById("div-3").style.display = "none";
+
+
+ 	}
+
+
+ 	function myfun2(){
+ 		document.getElementById("div-1").style.display = "none";
+ 		document.getElementById("div-3").style.display = "block";
+ 		document.getElementById("div-2").style.display = "none";
+
+
+ 	}
+
+
+ 	function showResult(str) {
+  if (str.length==0) {
+    document.getElementById("livesearch").innerHTML="";
+    document.getElementById("livesearch").style.border="0px";
+    return;
+  }
+  var xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      document.getElementById("livesearch").innerHTML=this.responseText;
+      document.getElementById("livesearch").style.border="1px solid #A5ACB2";
+    }
+  }
+  xmlhttp.open("GET","livesearch.php?q="+str,true);
+  xmlhttp.send();
+}
+
+
+
+
+
+ </script>
 </body>
 </html>

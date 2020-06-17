@@ -5,8 +5,14 @@
 }
 
 
-h6{
-    color: grey;
+
+
+
+.fa-plus-circle:before {
+    content: "\f055";
+    color: #fd1111;
+    cursor: pointer;
+    /* font-size: 29px; */
 }
 /*
 .bg-light {
@@ -269,4 +275,116 @@ svg circle:nth-child(2)
      border-bottom:0px!important; 
     border-top-left-radius: calc(.3rem - 1px);
     border-top-right-radius: calc(.3rem - 1px);
+}
+
+
+
+.dropdown-item:hover, .dropdown-item:focus {
+    color: #fcfdff;
+    text-decoration: none;
+    background-color: #1e7e34;
+}
+
+
+
+
+.dropleft .dropdown-toggle::before {
+    vertical-align: 0;
+    display: none;
+}
+
+
+.fa-sort-down:before {
+    content: "\f0dd";
+    position: absolute;
+    top: 11px;
+    left: 30px;
+}
+
+
+.input-group-text {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: .375rem .75rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #fefeff;
+    border: 1px solid #ced4da;
+    border-radius: 0rem;
+    border-right: 0px;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+     border-radius: 0rem; 
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    border-left: 0px;
+}
+
+
+
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #d8d8dc;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0);
+}
+
+
+.fa-ellipsis-v{
+    font-size: 20px;
+}
+
+
+.dropdown, .dropleft, .dropright, .dropup {
+    position: relative;
+    display: inline;
+}
+
+.table .dropdown-toggle::after {
+    display: none!important;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+
+
+header .dropdown-toggle::after {
+    display: none;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+
+@media(max-width: 570px){
+    h4{
+        font-size: 1rem;
+    }
 }

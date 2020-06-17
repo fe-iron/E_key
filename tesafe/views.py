@@ -120,3 +120,5 @@ def seller_user(request):
 
 def seller_pwg(request):
     return render(request, 'seller/seller-pwg.html', {'num': [11,23,33,42,35,67,78,49,10]})
+
+
