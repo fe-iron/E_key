@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.views.generic import CreateView
 # from .form import WebAdminSignUpForn, SellerSignUpForm
-# from .models import WebAdmin, Seller, User
+from .models import Names
 from django.contrib.auth.models import auth
 from django.contrib import messages
+from django.template.loader import render_to_string
+from django.http import JsonResponse
 # Create your views here.
 
 def index(request):
@@ -121,4 +123,25 @@ def seller_user(request):
 def seller_pwg(request):
     return render(request, 'seller/seller-pwg.html', {'num': [11,23,33,42,35,67,78,49,10]})
 
+
+
+def names_view(request):
+    ctx = {}
+    url_parameter = request.GET.get("q")
+
+    if url_parameter:
+        name = Names.objects.filter(name__icontains=url_parameter)
+    else:
+        name = Names.objects.all()
+
+    ctx["Name"] = name
+    if request.is_ajax():
+
+        html = render_to_string(
+            template_name="artists-results-partial.html", context={"name": name}
+        )
+        data_dict = {"html_from_view": html}
+        return JsonResponse(data=data_dict, safe=False)
+
+    return render(request, "tesafe/admin-home.html", context=ctx)
 

@@ -14,6 +14,7 @@ urlpatterns = [
     path("seller-home", views.seller_home, name="seller-home"),
     path("seller-user", views.seller_user, name="seller-user"),
     path("seller-pwg", views.seller_pwg, name="seller-pwg"),
+    path("names_view", views.names_view, name="names-view"),
     # path("webAdmin_register", views.webAdmin_register.as_view(), name="webAdmin_register"),
 
 ]

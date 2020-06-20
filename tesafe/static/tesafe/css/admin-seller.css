@@ -1,12 +1,24 @@
 *{
     margin: 0;
     padding: 0;
+    
+}
+
+
+.navbar .nav-link{
     font-family: 'sen' ,sans-serif;
 }
 
 
+h1,h2,h3,h4,h5,h6,p,a,.table, .table td{
+    font-family: 'Lato', sans-serif;
+    font-weight: 560;
+}
 
 
+.pop:hover{
+    color: white;
+}
 
 .fa-plus-circle:before {
     content: "\f055";
@@ -302,7 +314,7 @@ svg circle:nth-child(2)
 }
 
 
-.input-group-text {
+header .input-group-text {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
@@ -321,7 +333,7 @@ svg circle:nth-child(2)
     border-right: 0px;
 }
 
-.form-control {
+header .form-control {
     display: block;
     width: 100%;
     height: calc(1.5em + .75rem + 2px);
@@ -361,7 +373,7 @@ svg circle:nth-child(2)
 }
 
 .table .dropdown-toggle::after {
-    display: none!important;
+    display: none;
     margin-left: .255em;
     vertical-align: .255em;
     content: "";
@@ -387,4 +399,20 @@ header .dropdown-toggle::after {
     h4{
         font-size: 1rem;
     }
+
+    .table {
+    width: 100%;
+    margin-bottom: 0rem!important;
+    color: #212529;
+    font-size: 13px;
+}
+
+.rounded-circle {
+    border-radius: 50%!important;
+    width: 28px;
+    height: 28px;
+}
+.fa-ellipsis-v {
+    font-size: 10px;
+}
 }
