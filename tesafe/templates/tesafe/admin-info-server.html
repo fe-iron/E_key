@@ -7,37 +7,54 @@
 	<title>Admin | PWG</title>
 
 
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap.min.css' %}">
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap' %}">
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-grid' %}">
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-grid.min' %}">
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-reboot' %}">
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-reboot.min' %}">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
-	<!-- Latest compiled JavaScript -->
-	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.min.js' %}"></script>
-	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.bundle' %}"></script>
-	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.bundle.min' %}"></script>
-	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.js' %}"></script>
-	<script src="{% static 'tesafe/bootstrap4/js/popper.min.js' %}"></script>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<!-- <link rel="stylesheet" href="bootstrap4/css/bootstrap.min.css">
+<link rel="stylesheet" href="bootstrap4/css/bootstrap">
+<link rel="stylesheet" href="bootstrap4/css/bootstrap-grid">
+<link rel="stylesheet" href="bootstrap4/css/bootstrap-grid.min">
+<link rel="stylesheet" href="bootstrap4/css/bootstrap-reboot">
+<link rel="stylesheet" href="bootstrap4/css/bootstrap-reboot.min"> -->
+
+<!-- Latest compiled JavaScript -->
+<!-- <script src="bootstrap4/js/bootstrap.min.js"></script>
+<script src="bootstrap4/js/bootstrap.bundle"></script>
+<script src="bootstrap4/js/bootstrap.bundle.min"></script>
+<script src="bootstrap4/js/bootstrap.js"></script>
+<script src="bootstrap4/js/popper.min.js"></script> -->
 
 
-	<!-- fontawesome cdn -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+
+
+<!-- Popper JS -->
+<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
+
+
+<!-- jQuery library -->
+<!-- <script src="bootstrap4/js/jquery.min.js"></script> -->
+
+<!-- fontawesome cdn -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/admin-seller.css' %}">
-
-	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/admin-info-server.css' %}">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/admin-info-server.css' %}">
 </head>
 <body>
+
 
 
 	<section class="bg-light">
@@ -70,21 +87,24 @@
 
 				</div>
 
-								<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
+				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
 
 				<div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-						...
+						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="">Broadcast</a>
-						<a class="dropdown-item" href="#div-1" onclick="myfun()">PWG Server Account list</a>
+						<a class="dropdown-item" href="#div-4" onclick="myfun5()">Add New</a>
+					<!-- 	<a class="dropdown-item" href="#div-1" onclick="myfun()">PWG Server Account list</a> -->
 						<a class="dropdown-item" href="#div-3" onclick="myfun2()">Change Password</a>
 						<a class="dropdown-item" href="#div-5" onclick="myfun3()">Tested PWG List</a>
 						<a class="dropdown-item" href="#div-2" onclick="myfun4()">Summary PWG</a>
-						<a class="dropdown-item" href="" >Exit</a>
+						<a class="dropdown-item" href="admin-home" >Exit</a>
 					</div>
 				</div>
+
+
 			</nav>
 		</div>
 	</section>
@@ -93,81 +113,252 @@
 	<section class="bg-detail">
 		<div class="container-fluid">
 			<div class="row justify-content-center">
+			<!-- 	<div class="col-md-3 bg-user">
+					<div class="row">
+						<ul class="nav py-2">
+
+							<li class="nav-item display-block">
+								<a class="nav-link font-weight-bold text-success" href="#">Unread Messages ( 4 )</a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="row" style="overflow:scroll; height:520px;">
+						<div class="col-md ">
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom border-top pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<div class="d-flex bd-highlight border-bottom pt-2">
+								<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+								<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+									<p><i class="fas fa-circle fa-1x"></i> Online</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
 				<div class="col-md-10 py-5 px-5">
+						<!-- <div class="row bg-button-2 p-4">
 
-						<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-1" >
-
-							<div class="col-md">
-								<h4>PWG Account List <span onclick="myfun5()" class="float-right"><i class="fas fa-plus-circle"></i></span></h4>
-
-								<div class="table-responsive">
-									<table class="table">
-										<thead>
-											<tr>
-												<th scope="col">Sr. No.</th>
-												<th scope="col">Name</th>
-												<th scope="col">Online/Offline</th>
-												<th scope="col">Action</th>
-											</tr>
-										</thead>
-										<tbody>
-										{% for i in num %}
-											<tr>
-												<th scope="row">{{forloop.counter}}</th>
-												<td><span><img src="{% static 'tesafe/images/faiz.png' %}" height="50" width="50" class="rounded-circle"></span> Faiz Elahi</td>
-												<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
-												<td>Faiz Elahi</td>
-												<td><a href=""><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></a></td>
-
-												<td>
-													<a href="" class="btn-danger btn btn-sm text-white mb-1">Delete</a>
-													<a  class="btn-success btn btn-sm text-white pop mb-1" data-toggle="modal" data-target="#exampleModal1">Login Record</a>
-
-													<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-														<div class="modal-dialog">
-															<div class="modal-content">
-																<div class="modal-header">
-																	<h5 class="modal-title">Faiz Elahi</h5>
-																	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-
-																</div>
-																<div class="modal-body">
-
-																	<table class="table">
-																		<thead>
-																			<tr>
-																				<th scope="col">Sr. No.</th>
-																				<th scope="col">Date</th>
-																				<th scope="col">Time</th>
-																			</tr>
-																		</thead>
-																		<tbody>
-																		{% for i in num %}
-																			<tr>
-																				<th scope="row">{{forloop.counter}}</th>
-																				<td>05/06/2020</td>
-																				<td>04:30 pm</td>
-																			</tr>
-																		{% endfor %}
-																		</tbody>
-
-																	</table>
-
-																</div>
-															</div>
-														</div>
-													</div>
-												</td>
-											</tr>
-										{% endfor %}
-										</tbody>
-
-
-									</table>
+							<div class="col-md mb-2" >
+								<div class="card" onclick="myfun()">
+									<div class="card-body">
+										<div class="card-title">
+											PWG SERVER ACCOUNT LIST
+										</div>
+									</div>
 								</div>
 							</div>
 
+							<div class="col-md mb-2" >
+								<div class="card" onclick="myfun1()">
+									<div class="card-body">
+										<div class="card-title">
+											ADD PWGS SERVER SELLER ACCOUNT
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md mb-2" >
+								<div class="card px-3" onclick="myfun2()">
+									<div class="card-body">
+										<div class="card-title">
+											PWG INFO SERVER
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div> -->
+
+						<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-1" >
+
+						<div class="col-md">
+
+							<header>
+								<nav class="navbar navbar-light  venue-registration">
+									<a class="h4 text-dark font-weight-bold pt-2">PWG ACCOUNT LIST</a>
+									<form class="form-inline">
+										<div class="input-group-prepend mb-1 mr-2">
+											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
+											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
+										</div>
+
+									</form>
+								</nav>
+							</header>
+
+
+
+
+							<div class="table-responsive">
+
+
+								<br>
+								<table class="table">
+									<thead>
+										<tr>
+
+											<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll"> <i class="fas fa-sort-down"></i></th>
+											<th scope="col">Name</th>
+											<th scope="col">Action</th>
+
+
+										</tr>
+									</thead>
+									<tbody id="myTable">
+									{% for i in num %}
+										<tr>
+
+											<th><input type="checkbox" name="book"></th>
+											<td><span><img src="{% static 'tesafe/images/faiz.png' %}" height="40" width="40" class="rounded-circle"></span> Faiz Elahi</td>
+											<td>Transfer <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+													<i class="fas fa-ellipsis-v"></i>
+												</button>
+												<div class="dropdown-menu">
+													<!-- <a class="dropdown-item" href="#">Chat</a>
+													<a class="dropdown-item" href="">Payment</a> -->
+													<a class="dropdown-item pop" href="#" > Login Record </a>
+													<!-- <a class="dropdown-item" href="" >Chat History</a> -->
+													<a class="dropdown-item" href="" >Delete</a>
+												<!-- 	<a class="dropdown-item" href="" >Freeze</a> -->
+												</div>
+											</div></td>
+										</tr>
+										<tr>
+
+											<th><input type="checkbox" name="book"></th>
+											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"></span> Naqui</td>
+											<td>Transfer <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+													<i class="fas fa-ellipsis-v"></i>
+												</button>
+												<div class="dropdown-menu">
+													<!-- <a class="dropdown-item" href="#">Chat</a>
+													<a class="dropdown-item" href="">Payment</a> -->
+													<a class="dropdown-item pop" href="#" > Login Record </a>
+													<!-- <a class="dropdown-item" href="" >Chat History</a> -->
+													<a class="dropdown-item" href="" >Delete</a>
+												<!-- 	<a class="dropdown-item" href="" >Freeze</a> -->
+												</div>
+											</div></td>
+										</tr>
+
+										<tr>
+											<th><input type="checkbox" name="book"></th>
+											<td><span><img src="{% static 'tesafe/images/tesafe.jpg' %}" height="40" width="40" class="rounded-circle"> </span>Frank</td>
+											<td>Transfer <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+													<i class="fas fa-ellipsis-v"></i>
+												</button>
+												<div class="dropdown-menu">
+													<!-- <a class="dropdown-item" href="#">Chat</a>
+													<a class="dropdown-item" href="">Payment</a> -->
+													<a class="dropdown-item pop" href="#" > Login Record </a>
+													<!-- <a class="dropdown-item" href="" >Chat History</a> -->
+													<a class="dropdown-item" href="" >Delete</a>
+												<!-- 	<a class="dropdown-item" href="" >Freeze</a> -->
+												</div>
+											</div></td>
+										</tr>
+									{% endfor %}
+
+
+									</tbody>
+								</table>
+							</div>
 						</div>
+
+					</div>
 
 
 						<div class="row  bg-button-2 p-4 mt-3" id="div-2" style="display: none;">
@@ -178,19 +369,20 @@
 									<table class="table">
 										<tbody>
 											<tr>
-												<th scope="row">Total Number of PWG Server Online</th>
+												<th scope="row">Total Number PWG Server is Online</th>
 												<td>12</td>
 
 											</tr>
 											<tr>
-												<th scope="row">Total Number of PWG Server Offline</th>
+												<th scope="row">Total Number PWG Server is Offline</th>
 												<td>15</td>
 
 											</tr>
 
 											<tr>
-												<th scope="row">Total Number of PWG Server</th>
-												<td>27</td>
+												<th scope="row">Total Number PWG Server</th>
+												<td>15</td>
+
 											</tr>
 										</tbody>
 									</table>
@@ -213,21 +405,23 @@
 												</div>
 											</div>
 
-
 											<div class="form-row">
+
 												<div class="col-md mb-2">
 													<input type="Password" class="form-control" placeholder=" Enter New Password">
 												</div>
+
 												<div class="col-md mb-2">
 													<input type="Password" class="form-control" placeholder=" Confirm Password">
 												</div>
 											</div>
 
 											<div class="form-row">
-												<div class="col-md mb-2">
+												<div class="col-md-4 mb-2">
 													<button  type="submit" class="btn btn-danger btn-block">Proceed</button>
 												</div>
 											</div>
+
 										</form>
 									</div>
 								</div>
@@ -293,7 +487,6 @@
 											<td><i class="fas fa-check pl-4"></i></td>
 										</tr>
 									{% endfor %}
-
 									</tbody>
 
 
@@ -325,17 +518,19 @@
 													{% for i in num %}
 														<tr>
 															<th scope="row">{{forloop.counter}}</th>
-															<td><a href="">PWG-{{forloop.counter}}</a></td>
+															<td><a href="">PWG-{{forloop.counter}</a></td>
 															<td><i class="fas fa-check pl-4"></i></td>
 															<td>
 																<div class="form-check">
 																	<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
 																</div>
 															</td>
+
+
 														</tr>
 													{% endfor %}
-													</tbody>
-												</table>
+
+													</tbody>												</table>
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -352,7 +547,7 @@
 						<div class="row bg-button-2 p-4 mt-3" style="display: none;" id="div-6">
 
 							<div class="col-md">
-								<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Untested PWG  ( 9 )</h5>
+								<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Untested PWG  ( 20 )</h5>
 								<div class="table-responsive">
 									<table class="table">
 									<thead>
@@ -369,6 +564,8 @@
 										</tr>
 									{% endfor %}
 									</tbody>
+
+
 								</table>
 								</div>
 
@@ -390,14 +587,16 @@
 															<tr>
 																<th scope="col">Sr. No.</th>
 																<th scope="col">Name</th>
+
 																<th scope="col">Select</th>
 															</tr>
 														</thead>
 														<tbody>
-														{% for i in num %}
+													{% for i in num %}
+
 															<tr>
-																<th scope="row">{{forloop.counter}}</th>
-																<td><a href="">PWG-{{forloop.counter}}</a></td>
+																<th scope="row">1</th>
+																<td><a href="">PWG-1</a></td>
 
 																<td>
 																	<div class="form-check">
@@ -407,7 +606,10 @@
 															</tr>
 														{% endfor %}
 
+
 														</tbody>
+
+
 													</table>
 												</div>
 											</div>
@@ -418,15 +620,128 @@
 										</div>
 									</div>
 								</div>
+
+
 							</div>
+
+
+
+
 						</div>
+
 					</div>
+
+
+
+
+
+
+
 				</div>
 			</div>
+
+
 		</div>
 	</section>
 
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title font-weight-bold">Login History</h5>
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			</div>
+			<div class="modal-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Sr. No.</th>
+							<th scope="col">Name</th>
+							<th scope="col">Date</th>
+							<th scope="col">Time</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for i in num %}
+						<tr>
+							<th scope="row">{{forloop.counter}}</th>
+							<td><a href="">Faiz Elahi</a></td>
+							<td>05/06/2020</td>
+							<td>04:30 pm</td>
+						</tr>
+					{% endfor %}
+
+					</tbody>
+
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 	<script type="text/javascript">
+
+
+
+		// search filter table
+	$(document).ready(function(){
+		$("#myInput").on("keyup", function() {
+			var value = $(this).val().toLowerCase();
+			$("#myTable tr").filter(function() {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
+	});
+
+
+
+// modal popup
+	$(function() {
+		$('.pop').on('click', function() {
+			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+			$('#imagemodal').modal('show');
+		});
+	});
+
+
+	// check all checkbox in one click
+
+	$(document).ready(function() {
+
+		$('#checkAll').click(function () {
+			$('input:checkbox').not(this).prop('checked', this.checked);
+		});
+
+		$("[id*=book_]").change(function () {
+			if ($('input[type=checkbox]:checked').length == $('input[type=checkbox]').length) {
+				$('#checkAll').prop('checked', true);
+			} else {
+				$('#checkAll').prop('checked', false);
+			}
+		});
+
+	});
 
 		function myfun(){
 
@@ -493,6 +808,9 @@
 
 
 		}
+
+
+
 
 		$(function() {
 			$('.pop').on('click', function() {

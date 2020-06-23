@@ -5,45 +5,19 @@
 	<title>Admin | Seller</title>
 
 
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-
-	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-	<!-- Popper JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-	<!-- Latest compiled and minified CSS -->
-	<!-- <link rel="stylesheet" href="bootstrap4/css/bootstrap.min.css">
-	<link rel="stylesheet" href="bootstrap4/css/bootstrap">
-	<link rel="stylesheet" href="bootstrap4/css/bootstrap-grid">
-	<link rel="stylesheet" href="bootstrap4/css/bootstrap-grid.min">
-	<link rel="stylesheet" href="bootstrap4/css/bootstrap-reboot">
-	<link rel="stylesheet" href="bootstrap4/css/bootstrap-reboot.min"> -->
-
-	<!-- Latest compiled JavaScript -->
-	<!-- s -->
-
-	
-
-
-	<!-- Popper JS -->
-	<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
-
-	
-	<!-- jQuery library -->
-	<!-- <script src="bootstrap4/js/jquery.min.js"></script> -->
 
 	<!-- fontawesome cdn -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/admin-seller.css' %}">
 </head>
 <body>
@@ -53,7 +27,7 @@
 	<section class="bg-light">
 		<div class="container-fluid">
 			<nav class="navbar navbar-expand-lg navbar-light ">
-				
+
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -72,11 +46,15 @@
 						<li class="nav-item pl-3">
 							<a class="nav-link" href="admin-info-server">PWG Server</a>
 						</li>
+
+						<!-- <li class="nav-item pl-3">
+							<a class="nav-link" href="admin-info-server.html">Unread Messages <span><i class="fas fa-bell"></i></span></a>
+						</li> -->
 					</ul>
-					
+
 				</div>
 
-				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
+							<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
 
 				<div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -87,9 +65,7 @@
 						<a class="dropdown-item" href="">Delete</a>
 						<a class="dropdown-item" href=""> Freeze </a>
 						<a class="dropdown-item" href="" >Chat</a>
-						<a class="dropdown-item" href="" >Payment</a>
 						<a class="dropdown-item" href="">Broadcast</a>
-						<a class="dropdown-item" href="#div-1" onclick="myfun()">Seller Account List</a>
 						<a class="dropdown-item" href="#div-3" onclick="myfun2()">Tested PWG List</a>
 						<a class="dropdown-item" href="admin-home" >Exit</a>
 					</div>
@@ -113,7 +89,7 @@
 
 							<header>
 								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">Seller Account list</a>
+									<a class="h4 text-dark font-weight-bold pt-2">SELLER ACCOUNT LIST</a>
 									<form class="form-inline">
 										<div class="input-group-prepend mb-1 mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
@@ -145,7 +121,6 @@
 									<tbody id="myTable">
 									{% for i in num %}
 										<tr>
-
 											<th><input type="checkbox" name="book"></th>
 											<td><span><img src="{% static 'tesafe/images/faiz.png' %}" height="40" width="40" class="rounded-circle"></span> Faiz Elahi</td>
 											<td>Transfer <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
@@ -159,33 +134,32 @@
 													<a class="dropdown-item" href="" >Chat History</a>
 													<a class="dropdown-item" href="" >Delete</a>
 													<a class="dropdown-item" href="" >Freeze</a>
-													<a class="dropdown-item" href="admin-home" >Exit</a>
 												</div>
 											</div></td>
 										</tr>
 										<tr>
 
 											<th><input type="checkbox" name="book"></th>
-											<td><span><img src="{% static 'tesafe/images/tesafe.jpg' %}" height="40" width="40" class="rounded-circle"></span> Frank</td>
+											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"></span> Naqui</td>
 											<td>Transfer <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
 												<div class="dropdown-menu">
+													<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
 													<a class="dropdown-item" href="">Chat</a>
 													<a class="dropdown-item" href=""> Payment</a>
 													<a class="dropdown-item pop" href="#" >Login History</a>
 													<a class="dropdown-item" href="" >Chat History</a>
 													<a class="dropdown-item" href="" >Delete</a>
 													<a class="dropdown-item" href="" >Freeze</a>
-													<a class="dropdown-item" href="admin-home" >Exit</a>
 												</div>
 											</div></td>
 										</tr>
-										<tr>
 
+										<tr>
 											<th><input type="checkbox" name="book"></th>
-											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Naqui</td>
+											<td><span><img src="{% static 'tesafe/images/tesafe.jpg' %}" height="40" width="40" class="rounded-circle"> </span>Frank</td>
 											<td>Transfer <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
@@ -197,12 +171,10 @@
 													<a class="dropdown-item" href="" >Chat History</a>
 													<a class="dropdown-item" href="" >Delete</a>
 													<a class="dropdown-item" href="" >Freeze</a>
-													<a class="dropdown-item" href="admin-home" >Exit</a>
 												</div>
 											</div></td>
 										</tr>
 									{% endfor %}
-
 									</tbody>
 								</table>
 							</div>
@@ -217,7 +189,7 @@
 							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Add Seller Account</h5>
 							<div class="row">
 								<div class="col-md py-3">
-									<form action="admin-home">
+									<form>
 										<div class="row">
 											<div class="col-md mb-2">
 												<input type="text" class="form-control" placeholder="Enter Name">
@@ -237,7 +209,10 @@
 									</form>
 								</div>
 							</div>
+
+
 						</div>
+
 					</div>
 
 
@@ -261,7 +236,6 @@
 										<td><i class="fas fa-check pl-4"></i></td>
 									</tr>
 								{% endfor %}
-
 								</tbody>
 
 
@@ -302,6 +276,8 @@
 													</tr>
 												{% endfor %}
 												</tbody>
+
+
 											</table>
 										</div>
 										<div class="modal-footer">
@@ -311,13 +287,13 @@
 									</div>
 								</div>
 							</div>
+
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-
 	</div>
 </section>
 
@@ -349,13 +325,6 @@
 							<td>05/06/2020</td>
 							<td>04:30 pm</td>
 						</tr>
-
-						<tr>
-							<th scope="row">{{forloop.counter}}.1</th>
-							<td><a href="">Naqui Hasan</a></td>
-							<td>07/06/2020</td>
-							<td>04:00 pm</td>
-						</tr>
 					{% endfor %}
 					</tbody>
 
@@ -365,9 +334,10 @@
 	</div>
 </div>
 
+
 <script type="text/javascript">
 
-
+// search filter table
 	$(document).ready(function(){
 		$("#myInput").on("keyup", function() {
 			var value = $(this).val().toLowerCase();
@@ -379,7 +349,7 @@
 
 
 
-
+// modal popup
 	$(function() {
 		$('.pop').on('click', function() {
 			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
@@ -387,6 +357,11 @@
 		});
 	});
 
+
+
+
+
+	// check all checkbox in one click
 
 	$(document).ready(function() {
 
@@ -404,16 +379,25 @@
 
 	});
 
+
+
+
+	// division hide/show js
+
 	function myfun(){
+
 		document.getElementById("div-1").style.display = "block";
 		document.getElementById("div-2").style.display = "none";
 		document.getElementById("div-3").style.display = "none";
+
 	}
 
 	function myfun1(){
 		document.getElementById("div-1").style.display = "none";
 		document.getElementById("div-2").style.display = "block";
 		document.getElementById("div-3").style.display = "none";
+
+
 	}
 
 
@@ -421,6 +405,8 @@
 		document.getElementById("div-1").style.display = "none";
 		document.getElementById("div-3").style.display = "block";
 		document.getElementById("div-2").style.display = "none";
+
+
 	}
 </script>
 </body>

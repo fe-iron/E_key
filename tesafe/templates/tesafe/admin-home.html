@@ -4,10 +4,18 @@
 <html>
 <head>
 	<title>Admin | Home</title>
+
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
-
-
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 	<!-- Popper JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -15,32 +23,30 @@
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap.min.css' %}">
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap.css' %}">
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-grid.css' %}">
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-grid.min.css' %}">
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-reboot.css' %}">
-	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap-reboot.min.cs' %}">
+	<!-- <link rel="stylesheet" href="bootstrap4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bootstrap4/css/bootstrap.css">
+	<link rel="stylesheet" href="bootstrap4/css/bootstrap-grid.css">
+	<link rel="stylesheet" href="bootstrap4/css/bootstrap-grid.min.css">
+	<link rel="stylesheet" href="bootstrap4/css/bootstrap-reboot.css">
+	<link rel="stylesheet" href="bootstrap4/css/bootstrap-reboot.min.cs"> -->
 
 
 
 	<!-- fontawesome cdn -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/admin-home.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
+
 
 	<!-- Latest compiled JavaScript -->
-	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.min.js' %}"></script>
-	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.bundle.js' %}"></script>
-	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.bundle.min.js' %}"></script>
-	<script src="{% static 'tesafe/bootstrap4/js/bootstrap.js' %}"></script>
-	<script src="{% static 'tesafe/bootstrap4/js/popper.min.js' %}"></script>
-
+	<!-- <script src="bootstrap4/js/bootstrap.min.js"></script>
+	<script src="bootstrap4/js/bootstrap.bundle.js"></script>
+	<script src="bootstrap4/js/bootstrap.bundle.min.js"></script>
+	<script src="bootstrap4/js/bootstrap.js"></script>
+	<script src="bootstrap4/js/popper.min.js"></script> -->
+	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/admin-home.css' %}">
 </head>
 <body>
 
@@ -69,6 +75,9 @@
 							<a class="nav-link" href="admin-info-server">PWG Server</a>
 						</li>
 
+						<!-- <li class="nav-item pl-3">
+							<a class="nav-link" href="admin-info-server.html">Unread Messages <span><i class="fas fa-bell"></i></span></a>
+						</li> -->
 					</ul>
 
 				</div>
@@ -77,7 +86,7 @@
 
 				<div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-						<b>...</b>
+					<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="" onclick="myfun()">Broadcast</a>
@@ -85,7 +94,7 @@
 						<a class="dropdown-item" href="#login-history" onclick="myfun1()">Login History</a>
 						<a class="dropdown-item" href="#password-history" onclick="myfun2()">Password History</a>
 						<a class="dropdown-item" href="#change-passward" onclick="myfun3()">Change Password</a>
-						<a class="dropdown-item" href="" >Exit</a>
+
 					</div>
 				</div>
 
@@ -177,7 +186,7 @@
 										<table class="table">
 											<thead>
 												<tr>
-													<th scope="col">SL No</th>
+													<th scope="col">Sr. No.</th>
 													<th scope="col">Date</th>
 													<th scope="col">Time</th>
 													<th scope="col">Device Name</th>
@@ -231,7 +240,7 @@
 											</div>
 										</div>
 										<div class="form-row">
-											<div class="col-md mb-2">
+											<div class="col-md-4 mb-2">
 												<button  type="submit" class="btn btn-danger btn-block">Proceed</button>
 											</div>
 										</div>
@@ -247,13 +256,13 @@
 
 						<div class="col-md">
 
-							<h4 class=""> Password HISTORY</h4>
+							<h4 class=""> Password HistoryY</h4>
 							<div class="table-responsive">
 								<table class="table">
 									<thead>
 										<tr>
 
-											<th scope="col">SL No.</th>
+											<th scope="col">Sr. No.</th>
 											<th scope="col">Last Change</th>
 											<th scope="col">Device Name</th>
 											<th scope="col">Last Password</th>
