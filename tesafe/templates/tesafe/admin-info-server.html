@@ -87,7 +87,7 @@
 
 				</div>
 
-				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
+					<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
 
 				<div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -96,7 +96,7 @@
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="">Broadcast</a>
 						<a class="dropdown-item" href="#div-4" onclick="myfun5()">Add New</a>
-					<!-- 	<a class="dropdown-item" href="#div-1" onclick="myfun()">PWG Server Account list</a> -->
+						<a class="dropdown-item" href="#">Delete</a>
 						<a class="dropdown-item" href="#div-3" onclick="myfun2()">Change Password</a>
 						<a class="dropdown-item" href="#div-5" onclick="myfun3()">Tested PWG List</a>
 						<a class="dropdown-item" href="#div-2" onclick="myfun4()">Summary PWG</a>
@@ -108,6 +108,7 @@
 			</nav>
 		</div>
 	</section>
+
 
 
 	<section class="bg-detail">
@@ -296,36 +297,36 @@
 									</thead>
 									<tbody id="myTable">
 									{% for i in num %}
-										<tr>
+										<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
 
 											<th><input type="checkbox" name="book"></th>
-											<td><span><img src="{% static 'tesafe/images/faiz.png' %}" height="40" width="40" class="rounded-circle"></span> Faiz Elahi</td>
-											<td>Transfer <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+											<td class="pop" style="cursor:pointer;"><span><img src="{% static 'tesafe/images/faiz.png' %}" height="40" width="40" class="rounded-circle"></span> Faiz Elahi</td>
+											<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
 												<div class="dropdown-menu">
 													<!-- <a class="dropdown-item" href="#">Chat</a>
 													<a class="dropdown-item" href="">Payment</a> -->
-													<a class="dropdown-item pop" href="#" > Login Record </a>
+													<a class="dropdown-item pop1" href="#" > Login Record </a>
 													<!-- <a class="dropdown-item" href="" >Chat History</a> -->
 													<a class="dropdown-item" href="" >Delete</a>
 												<!-- 	<a class="dropdown-item" href="" >Freeze</a> -->
 												</div>
 											</div></td>
 										</tr>
-										<tr>
+										<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
 
 											<th><input type="checkbox" name="book"></th>
-											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"></span> Naqui</td>
-											<td>Transfer <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+											<td class="pop" style="cursor:pointer;"><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"></span> Naqui</td>
+											<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
 												<div class="dropdown-menu">
 													<!-- <a class="dropdown-item" href="#">Chat</a>
 													<a class="dropdown-item" href="">Payment</a> -->
-													<a class="dropdown-item pop" href="#" > Login Record </a>
+													<a class="dropdown-item pop1" href="#" > Login Record </a>
 													<!-- <a class="dropdown-item" href="" >Chat History</a> -->
 													<a class="dropdown-item" href="" >Delete</a>
 												<!-- 	<a class="dropdown-item" href="" >Freeze</a> -->
@@ -333,17 +334,35 @@
 											</div></td>
 										</tr>
 
-										<tr>
+										<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
 											<th><input type="checkbox" name="book"></th>
-											<td><span><img src="{% static 'tesafe/images/tesafe.jpg' %}" height="40" width="40" class="rounded-circle"> </span>Frank</td>
-											<td>Transfer <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+											<td class="pop" style="cursor:pointer;"><span><img src="{% static 'tesafe/images/tesafe.jpg' %}" height="40" width="40" class="rounded-circle"> </span>Frank</td>
+											<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
 												<div class="dropdown-menu">
 													<!-- <a class="dropdown-item" href="#">Chat</a>
 													<a class="dropdown-item" href="">Payment</a> -->
-													<a class="dropdown-item pop" href="#" > Login Record </a>
+													<a class="dropdown-item pop1" href="#" > Login Record </a>
+													<!-- <a class="dropdown-item" href="" >Chat History</a> -->
+													<a class="dropdown-item" href="" >Delete</a>
+												<!-- 	<a class="dropdown-item" href="" >Freeze</a> -->
+												</div>
+											</div></td>
+										</tr>
+
+										<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
+											<th><input type="checkbox" name="book"></th>
+											<td class="pop" style="cursor:pointer;"><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span>Jennifer</td>
+											<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+													<i class="fas fa-ellipsis-v"></i>
+												</button>
+												<div class="dropdown-menu">
+													<!-- <a class="dropdown-item" href="#">Chat</a>
+													<a class="dropdown-item" href="">Payment</a> -->
+													<a class="dropdown-item pop1" href="#" > Login Record </a>
 													<!-- <a class="dropdown-item" href="" >Chat History</a> -->
 													<a class="dropdown-item" href="" >Delete</a>
 												<!-- 	<a class="dropdown-item" href="" >Freeze</a> -->
@@ -351,7 +370,6 @@
 											</div></td>
 										</tr>
 									{% endfor %}
-
 
 									</tbody>
 								</table>
@@ -410,7 +428,6 @@
 												<div class="col-md mb-2">
 													<input type="Password" class="form-control" placeholder=" Enter New Password">
 												</div>
-
 												<div class="col-md mb-2">
 													<input type="Password" class="form-control" placeholder=" Confirm Password">
 												</div>
@@ -418,8 +435,11 @@
 
 											<div class="form-row">
 												<div class="col-md-4 mb-2">
-													<button  type="submit" class="btn btn-danger btn-block">Proceed</button>
+													<button  type="submit" class="btn btn-success btn-block">Proceed</button>
 												</div>
+												<div class="col-md-4">
+												<a href="" class="btn-danger btn text-white">Cancel</a>
+													</div>
 											</div>
 
 										</form>
@@ -451,6 +471,7 @@
 
 												<div class="col-md mb-2">
 													<button class="btn btn-primary" type="submit">Submit</button>
+													<a href="" class="btn-danger btn text-white">Cancel</a>
 												</div>
 											</div>
 										</form>
@@ -485,6 +506,8 @@
 											<th scope="row">{{forloop.counter}}</th>
 											<td><a href="">PWG-{{forloop.counter}}</a></td>
 											<td><i class="fas fa-check pl-4"></i></td>
+
+
 										</tr>
 									{% endfor %}
 									</tbody>
@@ -494,6 +517,8 @@
 
 								</div>
 								<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Transfer Tested PWG to Seller</button>
+								<a href="admin-info-server" class="btn btn-danger text-white">Cancel</a>
+
 								<!-- Modal -->
 								<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 									<div class="modal-dialog" role="document">
@@ -505,20 +530,28 @@
 												</button>
 											</div>
 											<div class="modal-body">
-												<table class="table">
+												<div class="text-center" style="display: none;" id="successfully-transfer">
+													<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
+													<p class="pt-2 font-weight-bold "  >Your PWG has been successfully transferred to tester</p>
+												</div>
+												<table class="table" id="transfer-hide">
 													<thead>
 														<tr>
 															<th scope="col">Sr. No.</th>
 															<th scope="col">Name</th>
 															<th scope="col">TESTED</th>
 															<th scope="col">Select</th>
+
+
+
+
 														</tr>
 													</thead>
 													<tbody>
 													{% for i in num %}
 														<tr>
 															<th scope="row">{{forloop.counter}}</th>
-															<td><a href="">PWG-{{forloop.counter}</a></td>
+															<td><a href="">PWG-{{forloop.counter}}</a></td>
 															<td><i class="fas fa-check pl-4"></i></td>
 															<td>
 																<div class="form-check">
@@ -530,15 +563,20 @@
 														</tr>
 													{% endfor %}
 
-													</tbody>												</table>
+													</tbody>
+
+
+												</table>
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary">Transfer</button>
+
+												<button type="button" class="btn btn-primary" onclick="transfer()">Transfer</button>
 											</div>
 										</div>
 									</div>
 								</div>
+
+
 							</div>
 
 						</div>
@@ -547,14 +585,13 @@
 						<div class="row bg-button-2 p-4 mt-3" style="display: none;" id="div-6">
 
 							<div class="col-md">
-								<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Untested PWG  ( 20 )</h5>
+								<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Untested PWG  ( 09 )</h5>
 								<div class="table-responsive">
 									<table class="table">
 									<thead>
 										<tr>
 											<th scope="col">Sr. No.</th>
-											<th scope="col">Name</th>
-										</tr>
+											<th scope="col">Name</th></tr>
 									</thead>
 									<tbody>
 									{% for i in num %}
@@ -569,9 +606,10 @@
 								</table>
 								</div>
 
-								<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Assign New PWG to Tester for Testing</button>
+								<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">Assign New PWG to Tester for Testing</button>
+								<a href="admin-info-server" class="btn btn-danger text-white">Cancel</a>
 								<!-- Modal -->
-								<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
@@ -581,7 +619,11 @@
 												</button>
 											</div>
 											<div class="modal-body">
-												<div class="tabl-responsive">
+												<div class="text-center" style="display: none;" id="successfully">
+													<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
+													<p class="pt-2 font-weight-bold "  >Your PWG has been successfully Assigned to Tester</p>
+												</div>
+												<div class="table-responsive" id="assign-hide">
 													<table class="table">
 														<thead>
 															<tr>
@@ -589,24 +631,27 @@
 																<th scope="col">Name</th>
 
 																<th scope="col">Select</th>
+
+
+
+
 															</tr>
 														</thead>
 														<tbody>
-													{% for i in num %}
-
+														{% for i in num %}
 															<tr>
-																<th scope="row">1</th>
-																<td><a href="">PWG-1</a></td>
+																<th scope="row">{{forloop.counter}}</th>
+																<td><a href="">PWG-{{forloop.counter}}</a></td>
 
 																<td>
 																	<div class="form-check">
 																		<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
 																	</div>
 																</td>
+
+
 															</tr>
 														{% endfor %}
-
-
 														</tbody>
 
 
@@ -614,8 +659,8 @@
 												</div>
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary">Assign</button>
+
+												<button type="button" class="btn btn-primary" onclick="assign()">Assign</button>
 											</div>
 										</div>
 									</div>
@@ -658,10 +703,24 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title font-weight-bold">Login History</h5>
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body text-center">
+				<p>This PWG is Assign to Faiz Elahi</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="imagemodal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5>Login Record</h5>
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			</div>
+			<div class="modal-body text-center">
 				<table class="table">
 					<thead>
 						<tr>
@@ -671,8 +730,7 @@
 							<th scope="col">Time</th>
 						</tr>
 					</thead>
-					<tbody>
-						{% for i in num %}
+					<tbody>{% for i in num %}
 						<tr>
 							<th scope="row">{{forloop.counter}}</th>
 							<td><a href="">Faiz Elahi</a></td>
@@ -680,7 +738,6 @@
 							<td>04:30 pm</td>
 						</tr>
 					{% endfor %}
-
 					</tbody>
 
 				</table>
@@ -721,6 +778,14 @@
 		$('.pop').on('click', function() {
 			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
 			$('#imagemodal').modal('show');
+		});
+	});
+
+
+	$(function() {
+		$('.pop1').on('click', function() {
+			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+			$('#imagemodal1').modal('show');
 		});
 	});
 
@@ -808,6 +873,17 @@
 
 
 		}
+
+		function assign(){
+		document.getElementById("assign-hide").style.display = "none";
+		document.getElementById("successfully").style.display = "block";
+	}
+
+
+	function transfer(){
+		document.getElementById("transfer-hide").style.display = "none";
+		document.getElementById("successfully-transfer").style.display = "block";
+	}
 
 
 

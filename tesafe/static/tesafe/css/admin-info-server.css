@@ -405,6 +405,32 @@ header .dropdown-toggle::after {
     border-left: .3em solid transparent;
 }
 
+
+
+
+
+
+.imagemodal .modal-content {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 67%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: .3rem;
+    outline: 0;
+}
+
+
+
+
+
+
+
 @media(max-width: 570px){
     h4{
         font-size: 1rem;

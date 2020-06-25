@@ -125,6 +125,16 @@ def seller_pwg(request):
 
 
 
+
+def transfer(request):
+    return render(request, 'tesafe/transfer.html', {'num': [11,23,33,42,35,67,78,49,10]})
+
+
+def tester_getback(request):
+    return render(request, 'tesafe/tester-getback.html', {'num': [11,23,33,42,35,67,78,49,10]})
+
+
+
 def names_view(request):
     ctx = {}
     url_parameter = request.GET.get("q")

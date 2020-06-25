@@ -93,23 +93,29 @@
 					</ul>
 
 				</div>
+<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
 
-				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
+				<div class="dropdown  dropleft float-xl-right mb-0" >
+					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+						<i class="fas fa-ellipsis-v"></i>
+					</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
+						<a class="dropdown-item" href="" >Broadcast</a>
+						<a class="dropdown-item" href="" >Chat</a>
+						<!-- <a class="dropdown-item" href="#div-1" onclick="myfun()">Tester Account List</a> -->
+						<a class="dropdown-item" href="">Delete</a>
+						<a class="dropdown-item" href=""> Freeze </a>
+						<a class="dropdown-item" href="#div-3" onclick="myfun2()">Tested PWG List</a>
+						<a class="dropdown-item" href="admin-home" >Exit</a>
+					</div>
+				</div>
 
-					<div class="dropdown  dropleft float-xl-right mb-0" >
-								<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-									<i class="fas fa-ellipsis-v"></i>
-								</button>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="" >Broadcast</a>
-									<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
-									<a class="dropdown-item" href="#div-3" onclick="myfun2()">Tested PWG List</a>
-									<a class="dropdown-item" href="admin-home" >Exit</a>
-								</div>
-							</div>
+
 			</nav>
 		</div>
 	</section>
+
 
 
 
@@ -263,7 +269,7 @@
 					</div> -->
 
 
-				<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-1" >
+					<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-1" >
 
 						<div class="col-md">
 
@@ -300,10 +306,11 @@
 									</thead>
 									<tbody id="myTable">
 									{% for i in num %}
-									<tr>
+										<tr>
+
 											<th><input type="checkbox" name="book"></th>
 											<td><span><img src="{% static 'tesafe/images/faiz.png' %}" height="40" width="40" class="rounded-circle"></span> Faiz Elahi</td>
-											<td>Transfer <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+											<td><!-- <a href="tester-transfer.html" class="btn btn-primary btn-light btn-sm">Transfer</a> --> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
@@ -314,6 +321,7 @@
 													<a class="dropdown-item" href="" >Chat History</a>
 													<a class="dropdown-item" href="" >Delete</a>
 													<a class="dropdown-item" href="" >Freeze</a>
+													<a class="dropdown-item" href="tester-getback" >Get Back</a>
 												</div>
 											</div></td>
 										</tr>
@@ -321,26 +329,26 @@
 
 											<th><input type="checkbox" name="book"></th>
 											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"></span> Naqui</td>
-											<td>Transfer <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+											<td><!-- <a href="tester-transfer.html" class="btn btn-primary btn-light btn-sm">Transfer</a> --><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
 												<div class="dropdown-menu">
-													<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
 													<a class="dropdown-item" href="">Chat</a>
 													<a class="dropdown-item" href=""> Payment</a>
 													<a class="dropdown-item pop" href="#" >Login History</a>
 													<a class="dropdown-item" href="" >Chat History</a>
 													<a class="dropdown-item" href="" >Delete</a>
 													<a class="dropdown-item" href="" >Freeze</a>
+													<a class="dropdown-item" href="tester-getback" >Get Back</a>
 												</div>
 											</div></td>
 										</tr>
 
 										<tr>
 											<th><input type="checkbox" name="book"></th>
-											<td><span><img src="{% static 'tesafe/images/tesafe.jpg' %}" height="40" width="40" class="rounded-circle"> </span>Frank</td>
-											<td>Transfer <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+											<td><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span>Jennifer</td>
+											<td><!-- <a href="tester-transfer.html" class="btn btn-primary btn-light btn-sm">Transfer</a> --><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
@@ -351,6 +359,26 @@
 													<a class="dropdown-item" href="" >Chat History</a>
 													<a class="dropdown-item" href="" >Delete</a>
 													<a class="dropdown-item" href="" >Freeze</a>
+													<a class="dropdown-item" href="tester-getback" >Get Back</a>
+												</div>
+											</div></td>
+										</tr>
+
+										<tr>
+											<th><input type="checkbox" name="book"></th>
+											<td><span><img src="{% static 'tesafe/images/tesafe.jpg' %}" height="40" width="40" class="rounded-circle"> </span>frank</td>
+											<td><!-- <a href="tester-transfer.html" class="btn btn-primary btn-light btn-sm">Transfer</a> --><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+													<i class="fas fa-ellipsis-v"></i>
+												</button>
+												<div class="dropdown-menu">
+													<a class="dropdown-item" href="#">Chat</a>
+													<a class="dropdown-item" href="">Payment</a>
+													<a class="dropdown-item pop" href="#"> Login History </a>
+													<a class="dropdown-item" href="" >Chat History</a>
+													<a class="dropdown-item" href="" >Delete</a>
+													<a class="dropdown-item" href="" >Freeze</a>
+													<a class="dropdown-item" href="tester-getback" >Get Back</a>
 												</div>
 											</div></td>
 										</tr>
@@ -387,7 +415,8 @@
 											</div>
 
 											<div class="col mb-2">
-												<button class="btn btn-primary" type="submit">Submit</button>
+												<button class="btn btn-primary" type="submit">Sumbit</button>
+												<a href="" class="btn btn-danger text-white" onclick="cancel()">Cancel</a>
 											</div>
 										</div>
 									</form>
@@ -403,11 +432,11 @@
 					<div class="row bg-button-2 p-4 mt-3" id="div-3" style="display: none;">
 
 						<div class="col-md">
-							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Tested PWG ( 9 )</h5>
+							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Tested PWG ( 09 )</h5>
 							<table class="table">
 								<thead>
 									<tr>
-										<th scope="col">Sr. No</th>
+										<th scope="col">SL No</th>
 										<th scope="col">Name</th>
 										<th scope="col">TESTED</th>
 
@@ -441,35 +470,37 @@
 					</div>
 
 
+
+
+
+
 					<div class="row bg-button-2 p-4 mt-3" id="div-4" style="display: none;">
 
 						<div class="col-md">
-							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Untested PWG  ( 9 )</h5>
+							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Untested PWG  ( 09 )</h5>
 							<table class="table">
 								<thead>
 									<tr>
-										<th scope="col">Sr. No</th>
+										<th scope="col">Sr. No.</th>
 										<th scope="col">Name</th>
-
-
-
-
 									</tr>
 								</thead>
 								<tbody>
 								{% for i in num %}
-
 									<tr>
 										<th scope="row">{{forloop.counter}}</th>
-										<td><a href="">PWG-{{forloop.counter}}+</a></td>
-									</tr>
+										<td><a href="">PWG-{{forloop.counter}}</a></td></tr>
+
+									<tr>
 								{% endfor %}
+
 								</tbody>
 
 
 							</table>
 
 							<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Assign New PWG to Tester for Testing</button>
+							<a href="admin-tester" class="btn-danger btn text-white">Cancel</a>
 							<!-- Modal -->
 							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<div class="modal-dialog" role="document">
@@ -481,7 +512,13 @@
 											</button>
 										</div>
 										<div class="modal-body">
-											<table class="table">
+
+											<div class="text-center" style="display: none;" id="successfully">
+												<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
+											<p class="pt-2 font-weight-bold "  >Your PWG has been successfully assigned to seller</p>
+											</div>
+
+											<table class="table" id="assign-hide">
 												<thead>
 													<tr>
 														<th scope="col">Sr. No.</th>
@@ -495,7 +532,6 @@
 													</tr>
 												</thead>
 												<tbody>
-
 												{% for i in num %}
 													<tr>
 														<th scope="row">{{forloop.counter}}</th>
@@ -506,16 +542,19 @@
 																<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
 															</div>
 														</td>
+
+
 													</tr>
 												{% endfor %}
+
 												</tbody>
 
 
 											</table>
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-primary">Assign</button>
+											<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+											<button type="button" class="btn btn-primary" onclick="assign()">Assign</button>
 										</div>
 									</div>
 								</div>
@@ -597,7 +636,7 @@
 						</tr>
 					</thead>
 					<tbody>
-					{% for i in num %}
+						{% for i in num %}
 						<tr>
 							<th scope="row">{{forloop.counter}}</th>
 							<td><a href="">Faiz Elahi</a></td>
@@ -605,7 +644,6 @@
 							<td>04:30 pm</td>
 						</tr>
 					{% endfor %}
-
 					</tbody>
 
 				</table>
@@ -626,14 +664,42 @@
 <script type="text/javascript">
 
 
+	$('input[type="checkbox"]').click(function(){
+    if($(this).attr("value")=="floatingButtonHere"){
+        $(".floatingButtonHere").show(150);
+    }
+});
+
+
+
 // search filter table
-	$(document).ready(function(){
-		$("#myInput").on("keyup", function() {
-			var value = $(this).val().toLowerCase();
-			$("#myTable tr").filter(function() {
-				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-			});
+$(document).ready(function(){
+	$("#myInput").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#myTable tr").filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 		});
+	});
+});
+
+
+
+	// check all checkbox in one click
+
+	$(document).ready(function() {
+
+		$('#checkAll').click(function () {
+			$('input:checkbox').not(this).prop('checked', this.checked);
+		});
+
+		$("[id*=book_]").change(function () {
+			if ($('input[type=checkbox]:checked').length == $('input[type=checkbox]').length) {
+				$('#checkAll').prop('checked', true);
+			} else {
+				$('#checkAll').prop('checked', false);
+			}
+		});
+
 	});
 
 
@@ -693,6 +759,20 @@
 
 
 	}
+
+
+	function cancel() {
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-1").style.display = "block";
+	}
+
+
+	function assign(){
+		document.getElementById("assign-hide").style.display = "none";
+		document.getElementById("successfully").style.display = "block";
+	}
+
+
 </script>
 </body>
 </html>
