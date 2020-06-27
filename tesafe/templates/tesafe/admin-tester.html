@@ -93,7 +93,8 @@
 					</ul>
 
 				</div>
-<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
+
+				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
 
 				<div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -106,7 +107,9 @@
 						<!-- <a class="dropdown-item" href="#div-1" onclick="myfun()">Tester Account List</a> -->
 						<a class="dropdown-item" href="">Delete</a>
 						<a class="dropdown-item" href=""> Freeze </a>
-						<a class="dropdown-item" href="#div-3" onclick="myfun2()">Tested PWG List</a>
+
+
+						<!-- <a class="dropdown-item" href="#div-3" onclick="myfun2()">Untested PWG List</a> -->
 						<a class="dropdown-item" href="admin-home" >Exit</a>
 					</div>
 				</div>
@@ -115,9 +118,6 @@
 			</nav>
 		</div>
 	</section>
-
-
-
 
 	<section class="bg-detail">
 		<div class="container-fluid">
@@ -275,7 +275,7 @@
 
 							<header>
 								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">TESTER ACCOUNT LIST</a>
+									<a class="h4 text-dark font-weight-bold pt-2">TESTER ACCOUNTS</a>
 									<form class="form-inline">
 										<div class="input-group-prepend mb-1 mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
@@ -310,7 +310,7 @@
 
 											<th><input type="checkbox" name="book"></th>
 											<td><span><img src="{% static 'tesafe/images/faiz.png' %}" height="40" width="40" class="rounded-circle"></span> Faiz Elahi</td>
-											<td><!-- <a href="tester-transfer.html" class="btn btn-primary btn-light btn-sm">Transfer</a> --> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+											<td><a href="tester-tested-pwg-list" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
@@ -328,8 +328,8 @@
 										<tr>
 
 											<th><input type="checkbox" name="book"></th>
-											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"></span> Naqui</td>
-											<td><!-- <a href="tester-transfer.html" class="btn btn-primary btn-light btn-sm">Transfer</a> --><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}"  height="40" width="40" class="rounded-circle"></span> Naqui</td>
+											<td><a href="tester-tested-pwg-list" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
@@ -347,8 +347,8 @@
 
 										<tr>
 											<th><input type="checkbox" name="book"></th>
-											<td><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span>Jennifer</td>
-											<td><!-- <a href="tester-transfer.html" class="btn btn-primary btn-light btn-sm">Transfer</a> --><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+											<td><span><img src="{% static 'tesafe/images/tesafe.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Frank</td>
+											<td><a href="tester-tested-pwg-list" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
@@ -366,8 +366,8 @@
 
 										<tr>
 											<th><input type="checkbox" name="book"></th>
-											<td><span><img src="{% static 'tesafe/images/tesafe.jpg' %}" height="40" width="40" class="rounded-circle"> </span>frank</td>
-											<td><!-- <a href="tester-transfer.html" class="btn btn-primary btn-light btn-sm">Transfer</a> --><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+											<td><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Rose</td>
+											<td><a href="tester-tested-pwg-list" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
@@ -415,7 +415,7 @@
 											</div>
 
 											<div class="col mb-2">
-												<button class="btn btn-primary" type="submit">Sumbit</button>
+												<button class="btn btn-primary" type="submit">Submit</button>
 												<a href="" class="btn btn-danger text-white" onclick="cancel()">Cancel</a>
 											</div>
 										</div>
@@ -429,10 +429,10 @@
 					</div>
 
 
-					<div class="row bg-button-2 p-4 mt-3" id="div-3" style="display: none;">
+					<!-- <div class="row bg-button-2 p-4 mt-3" id="div-3" style="display: none;">
 
 						<div class="col-md">
-							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Tested PWG ( 09 )</h5>
+							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Tested PWG ( 24 )</h5>
 							<table class="table">
 								<thead>
 									<tr>
@@ -445,15 +445,20 @@
 									</tr>
 								</thead>
 								<tbody>
-								{% for i in num %}
 									<tr>
-										<th scope="row">{{forloop.counter}}</th>
-										<td><a href="">PWG-{{forloop.counter}}</a></td>
+										<th scope="row">1</th>
+										<td><a href="">PWG-1</a></td>
 										<td><i class="fas fa-check pl-4"></i></td>
 
 
 									</tr>
-								{% endfor %}
+
+									<tr>
+										<th scope="row">2</th>
+										<td>PWG-2</td>
+										<td><i class="fas fa-check pl-4"></i></td>
+
+									</tr>
 								</tbody>
 
 
@@ -467,7 +472,7 @@
 
 
 
-					</div>
+					</div> -->
 
 
 
@@ -477,30 +482,32 @@
 					<div class="row bg-button-2 p-4 mt-3" id="div-4" style="display: none;">
 
 						<div class="col-md">
-							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Untested PWG  ( 09 )</h5>
+							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Untested PWG  ( 20 )</h5>
 							<table class="table">
 								<thead>
 									<tr>
 										<th scope="col">Sr. No.</th>
 										<th scope="col">Name</th>
+
+
+
+
 									</tr>
 								</thead>
 								<tbody>
 								{% for i in num %}
 									<tr>
 										<th scope="row">{{forloop.counter}}</th>
-										<td><a href="">PWG-{{forloop.counter}}</a></td></tr>
-
-									<tr>
+										<td><a href="">PWG-{{forloop.counter}}</a></td>
+									</tr>
 								{% endfor %}
-
 								</tbody>
 
 
 							</table>
 
 							<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Assign New PWG to Tester for Testing</button>
-							<a href="admin-tester" class="btn-danger btn text-white">Cancel</a>
+							<a href="admin-tester.html" class="btn-danger btn text-white">Cancel</a>
 							<!-- Modal -->
 							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<div class="modal-dialog" role="document">
@@ -515,7 +522,7 @@
 
 											<div class="text-center" style="display: none;" id="successfully">
 												<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-											<p class="pt-2 font-weight-bold "  >Your PWG has been successfully assigned to seller</p>
+											<p class="pt-2 font-weight-bold "  >Your PWG has been successfully transferred to seller</p>
 											</div>
 
 											<table class="table" id="assign-hide">
@@ -626,27 +633,35 @@
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 			</div>
 			<div class="modal-body">
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">Sr. No.</th>
-							<th scope="col">Name</th>
-							<th scope="col">Date</th>
-							<th scope="col">Time</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for i in num %}
-						<tr>
-							<th scope="row">{{forloop.counter}}</th>
-							<td><a href="">Faiz Elahi</a></td>
-							<td>05/06/2020</td>
-							<td>04:30 pm</td>
-						</tr>
-					{% endfor %}
-					</tbody>
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Sr. No.</th>
+								<th scope="col">Date</th>
+								<th scope="col">TIme</th>
+								<th scope="col">Device Name</th>
+								<th scope="col">Login IP Address</th>
+								<th scope="col">duration Of Online</th>
 
-				</table>
+							</tr>
+						</thead>
+						<tbody>
+
+						{% for i in num %}
+							<tr>
+								<th scope="row">{{forloop.counter}}</th>
+								<td>20/06/5</td>
+								<td>5:30pm</td>
+								<td>Samsung</td>
+								<td>10.2.0.10:8090</td>
+								<td>{{forloop.counter}} minutes</td>
+							</tr>
+						{% endfor %}
+
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -17,6 +17,8 @@ urlpatterns = [
     path("names_view", views.names_view, name="names-view"),
     path("transfer", views.transfer, name="transfer"),
     path("tester-getback", views.tester_getback, name="tester-getback"),
+    path("tester-tested-pwg-list", views.tester_tested_pwg_list, name="tester-tested-pwg-list"),
+    path("pwg-sublist", views.pwg_sublist, name="pwg-sublist"),
     # path("webAdmin_register", views.webAdmin_register.as_view(), name="webAdmin_register"),
 
 ]

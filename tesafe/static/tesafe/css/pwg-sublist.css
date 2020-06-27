@@ -1,10 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    
 }
-
-
 .navbar .nav-link{
     font-family: 'sen' ,sans-serif;
 }
@@ -12,13 +9,10 @@
 
 h1,h2,h3,h4,h5,h6,p,a,.table, .table td{
     font-family: 'Lato', sans-serif;
-    font-weight: 560;
+    font-weight: 500;
 }
 
 
-.pop:hover{
-    color: white;
-}
 
 .fa-plus-circle:before {
     content: "\f055";
@@ -182,6 +176,8 @@ svg circle:nth-child(2)
     border-radius: 5px;
 }
 
+/*
+
 .bg-button-2 h6{
 
     margin-bottom: 0rem;
@@ -190,9 +186,7 @@ svg circle:nth-child(2)
     font-size: 20px;
     font-weight: bold;
 }
-
-
-
+*/
 
 .bg-button-2 .card-title{
     margin-bottom: 0px;
@@ -305,15 +299,6 @@ svg circle:nth-child(2)
     display: none;
 }
 
-
-.fa-sort-down:before {
-    content: "\f0dd";
-    position: absolute;
-    top: 11px;
-    left: 30px;
-}
-
-
 header .input-group-text {
     display: -ms-flexbox;
     display: flex;
@@ -367,6 +352,13 @@ header .form-control {
 }
 
 
+.fa-sort-down:before {
+    content: "\f0dd";
+    position: absolute;
+    top: 11px;
+    left: 30px;
+}
+
 .dropdown, .dropleft, .dropright, .dropup {
     position: relative;
     display: inline;
@@ -404,7 +396,7 @@ header .dropdown-toggle::after {
     width: 100%;
     margin-bottom: 0rem!important;
     color: #212529;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .rounded-circle {
@@ -414,14 +406,5 @@ header .dropdown-toggle::after {
 }
 .fa-ellipsis-v {
     font-size: 10px;
-}
-}
-
-
-@media (min-width: 576px){
-
-#imagemodal  .modal-dialog{
-     max-width: 837px;
-    margin: 1.75rem auto;
 }
 }

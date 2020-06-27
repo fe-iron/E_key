@@ -18,7 +18,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/getback.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/transfer.css' %}">
 </head>
 <body>
 
@@ -93,13 +93,15 @@
 						<div class="col-md">
 							<header>
 								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">List Of Untested PWG</a>
+									<a class="h4 text-dark font-weight-bold pt-2">List Of Tested PWG</a>
 									<form class="form-inline">
 										<div class="input-group-prepend  mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
 											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
-										<a href="admin-tester" class="btn btn-danger text-white">Cancel</a>
+
+										<a href="admin-tester" class="btn btn-danger text-white">Back</a>
+
 									</form>
 								</nav>
 							</header>
@@ -114,12 +116,80 @@
 									</tr>
 								</thead>
 								<tbody id="myTable">
-								{% for i in num %}
 									<tr> 
 										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
-										<td>PWG-{{forloop.counter}}</td>
+										<td>PWG-1</td>
+										
+
+
 									</tr>
-								{% endfor %}
+
+									<tr>
+										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
+										<td>PWG-2</td>
+										
+
+									</tr>
+									<tr>
+										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
+										<td>PWG-3</td>
+										
+
+									</tr>
+									<tr>
+										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
+										<td>PWG-4</td>
+										
+
+									</tr>
+									<tr>
+										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
+										<td>PWG-5</td>
+										
+
+									</tr>
+									<tr>
+										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
+										<td>PWG-6</td>
+										
+
+									</tr>
+									<tr>
+										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
+										<td>PWG-7</td>
+										
+
+									</tr>
+									<tr>
+										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
+										<td>PWG-8</td>
+										
+
+									</tr>
+									<tr>
+										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
+										<td>PWG-9</td>
+										
+
+									</tr>
+									<tr>
+										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
+										<td>PWG-10</td>
+										
+
+									</tr>
+									<tr>
+										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
+										<td>PWG-11</td>
+										
+
+									</tr>
+									<tr>
+										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
+										<td>PWG-12</td>
+										
+
+									</tr>
 								</tbody>
 
 
@@ -137,7 +207,7 @@
 										</div>
 										<div class="modal-body text-center p-4">
 											<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-											<p class="pt-2 font-weight-bold">The PWG have been successfully taken back from the Tester</p>
+											<p class="pt-2 font-weight-bold">The PWG has been successfully transferred to Tester</p>
 
 										</div>
 										
@@ -229,7 +299,8 @@
 
 
 <section class="floatingButtonHere" style="display: none;">
-	<a href="" class=" btn btn-primary" data-toggle="modal" data-target="#exampleModal">Get Back</a>
+	<a href="" class=" btn btn-primary" data-toggle="modal" data-target="#exampleModal">Confirm</a>
+	<a href="tester-tested-pwg-list" class=" btn btn-danger">Cancel</a>
 </section>
 
 

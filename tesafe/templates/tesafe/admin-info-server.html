@@ -94,12 +94,10 @@
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="">Broadcast</a>
 						<a class="dropdown-item" href="#div-4" onclick="myfun5()">Add New</a>
+						<a class="dropdown-item" href="">Broadcast</a>
+
 						<a class="dropdown-item" href="#">Delete</a>
-						<a class="dropdown-item" href="#div-3" onclick="myfun2()">Change Password</a>
-						<a class="dropdown-item" href="#div-5" onclick="myfun3()">Tested PWG List</a>
-						<a class="dropdown-item" href="#div-2" onclick="myfun4()">Summary PWG</a>
 						<a class="dropdown-item" href="admin-home" >Exit</a>
 					</div>
 				</div>
@@ -108,8 +106,6 @@
 			</nav>
 		</div>
 	</section>
-
-
 
 	<section class="bg-detail">
 		<div class="container-fluid">
@@ -260,153 +256,166 @@
 
 						</div> -->
 
-						<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-1" >
-
-						<div class="col-md">
-
-							<header>
-								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">PWG ACCOUNT LIST</a>
-									<form class="form-inline">
-										<div class="input-group-prepend mb-1 mr-2">
-											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
-											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
-										</div>
-
-									</form>
-								</nav>
-							</header>
-
-
-
-
-							<div class="table-responsive">
-
-
-								<br>
-								<table class="table">
-									<thead>
-										<tr>
-
-											<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll"> <i class="fas fa-sort-down"></i></th>
-											<th scope="col">Name</th>
-											<th scope="col">Action</th>
-
-
-										</tr>
-									</thead>
-									<tbody id="myTable">
-									{% for i in num %}
-										<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
-
-											<th><input type="checkbox" name="book"></th>
-											<td class="pop" style="cursor:pointer;"><span><img src="{% static 'tesafe/images/faiz.png' %}" height="40" width="40" class="rounded-circle"></span> Faiz Elahi</td>
-											<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-													<i class="fas fa-ellipsis-v"></i>
-												</button>
-												<div class="dropdown-menu">
-													<!-- <a class="dropdown-item" href="#">Chat</a>
-													<a class="dropdown-item" href="">Payment</a> -->
-													<a class="dropdown-item pop1" href="#" > Login Record </a>
-													<!-- <a class="dropdown-item" href="" >Chat History</a> -->
-													<a class="dropdown-item" href="" >Delete</a>
-												<!-- 	<a class="dropdown-item" href="" >Freeze</a> -->
-												</div>
-											</div></td>
-										</tr>
-										<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
-
-											<th><input type="checkbox" name="book"></th>
-											<td class="pop" style="cursor:pointer;"><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"></span> Naqui</td>
-											<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-													<i class="fas fa-ellipsis-v"></i>
-												</button>
-												<div class="dropdown-menu">
-													<!-- <a class="dropdown-item" href="#">Chat</a>
-													<a class="dropdown-item" href="">Payment</a> -->
-													<a class="dropdown-item pop1" href="#" > Login Record </a>
-													<!-- <a class="dropdown-item" href="" >Chat History</a> -->
-													<a class="dropdown-item" href="" >Delete</a>
-												<!-- 	<a class="dropdown-item" href="" >Freeze</a> -->
-												</div>
-											</div></td>
-										</tr>
-
-										<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
-											<th><input type="checkbox" name="book"></th>
-											<td class="pop" style="cursor:pointer;"><span><img src="{% static 'tesafe/images/tesafe.jpg' %}" height="40" width="40" class="rounded-circle"> </span>Frank</td>
-											<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-													<i class="fas fa-ellipsis-v"></i>
-												</button>
-												<div class="dropdown-menu">
-													<!-- <a class="dropdown-item" href="#">Chat</a>
-													<a class="dropdown-item" href="">Payment</a> -->
-													<a class="dropdown-item pop1" href="#" > Login Record </a>
-													<!-- <a class="dropdown-item" href="" >Chat History</a> -->
-													<a class="dropdown-item" href="" >Delete</a>
-												<!-- 	<a class="dropdown-item" href="" >Freeze</a> -->
-												</div>
-											</div></td>
-										</tr>
-
-										<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
-											<th><input type="checkbox" name="book"></th>
-											<td class="pop" style="cursor:pointer;"><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span>Jennifer</td>
-											<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-													<i class="fas fa-ellipsis-v"></i>
-												</button>
-												<div class="dropdown-menu">
-													<!-- <a class="dropdown-item" href="#">Chat</a>
-													<a class="dropdown-item" href="">Payment</a> -->
-													<a class="dropdown-item pop1" href="#" > Login Record </a>
-													<!-- <a class="dropdown-item" href="" >Chat History</a> -->
-													<a class="dropdown-item" href="" >Delete</a>
-												<!-- 	<a class="dropdown-item" href="" >Freeze</a> -->
-												</div>
-											</div></td>
-										</tr>
-									{% endfor %}
-
-									</tbody>
-								</table>
-							</div>
-						</div>
-
-					</div>
-
-
-						<div class="row  bg-button-2 p-4 mt-3" id="div-2" style="display: none;">
+						<div class="row  bg-button-2 p-4 mt-3" id="div-2">
 
 							<div class="col-md-6">
 								<h4 class="font-weight-bold">Summary PWG</h4>
 								<div class="tabl-responsive">
 									<table class="table">
+										<thead>
+											<tr>
+												<th scope="col">Account Name</th>
+												<th scope="col">Total Number</th>
+												<th scope="col">Online</th>
+												<th scope="col">Ofline</th>
+											</tr>
+										</thead>
 										<tbody>
 											<tr>
-												<th scope="row">Total Number PWG Server is Online</th>
-												<td>12</td>
-
-											</tr>
-											<tr>
-												<th scope="row">Total Number PWG Server is Offline</th>
-												<td>15</td>
+												<th scope="row">PWGS</th>
+												<td>500</td>
+												<td>100</td>
+												<td>400</td>
 
 											</tr>
 
 											<tr>
-												<th scope="row">Total Number PWG Server</th>
-												<td>15</td>
+												<th scope="row">PWG</th>
+												<td>580</td>
+												<td>80</td>
+												<td>500</td>
 
 											</tr>
 										</tbody>
+
 									</table>
 								</div>
 							</div>
 						</div>
+
+						<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-1" >
+
+							<div class="col-md">
+
+								<header>
+									<nav class="navbar navbar-light  venue-registration">
+										<a class="h4 text-dark font-weight-bold pt-2">PWG SERVERS</a>
+										<form class="form-inline">
+											<div class="input-group-prepend mb-1 mr-2">
+												<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
+												<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
+											</div>
+
+										</form>
+									</nav>
+								</header>
+
+
+
+
+								<div class="table-responsive">
+
+
+									<br>
+									<table class="table">
+										<thead>
+											<tr>
+
+												<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll"> <i class="fas fa-sort-down"></i></th>
+												<th scope="col">Name</th>
+												<th scope="col">Action</th>
+
+
+											</tr>
+										</thead>
+										<tbody id="myTable">
+											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
+
+												<th><input type="checkbox" name="book"></th>
+												<td id="lblEmp"> PWGS-A</td>
+												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+													<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+														<i class="fas fa-ellipsis-v"></i>
+													</button>
+													<div class="dropdown-menu">
+														<a class="dropdown-item" href="pwg-sublist">PWG</a>
+														<a class="dropdown-item" href="#">Chat</a>
+														<!-- <a class="dropdown-item" href="">Payment</a> -->
+														<a class="dropdown-item pop1" href="#" > Login Record </a>
+														<a class="dropdown-item pop" href="#" >Password History</a>
+														<a class="dropdown-item pop2" href="#" >Change Name</a>
+														<a class="dropdown-item" href="" >Delete</a>
+														<!-- 	<a class="dropdown-item" href="" >Freeze</a> -->
+													</div>
+												</div></td>
+											</tr>
+											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
+
+												<th><input type="checkbox" name="book"></th>
+												<td>PWGS-B</td>
+												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+													<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+														<i class="fas fa-ellipsis-v"></i>
+													</button>
+													<div class="dropdown-menu">
+														<a class="dropdown-item" href="pwg-sublist">PWG</a>
+														<a class="dropdown-item" href="#">Chat</a>
+														<!-- <a class="dropdown-item" href="">Payment</a> -->
+														<a class="dropdown-item pop1" href="#" > Login Record </a>
+														<a class="dropdown-item pop" href="#" >Password History</a>
+														<a class="dropdown-item pop2" href="#" >Change Name</a>
+														<a class="dropdown-item" href="" >Delete</a>
+													</div>
+												</div></td>
+											</tr>
+
+											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
+												<th><input type="checkbox" name="book"></th>
+												<td>PWGS-C</td>
+												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+													<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+														<i class="fas fa-ellipsis-v"></i>
+													</button>
+													<div class="dropdown-menu">
+														<a class="dropdown-item" href="pwg-sublist">PWG</a>
+														<a class="dropdown-item" href="#">Chat</a>
+														<!-- <a class="dropdown-item" href="">Payment</a> -->
+														<a class="dropdown-item pop1" href="#" > Login Record </a>
+														<a class="dropdown-item pop" href="#" >Password History</a>
+														<a class="dropdown-item pop2" href="#" >Change Name</a>
+														<a class="dropdown-item" href="" >Delete</a>
+													</div>
+												</div></td>
+											</tr>
+
+											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
+												<th><input type="checkbox" name="book"></th>
+												<td>PWGS-D</td>
+												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+													<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+														<i class="fas fa-ellipsis-v"></i>
+													</button>
+													<div class="dropdown-menu">
+														<a class="dropdown-item" href="pwg-sublist">PWG</a>
+														<a class="dropdown-item" href="#">Chat</a>
+														<!-- <a class="dropdown-item" href="">Payment</a> -->
+														<a class="dropdown-item pop1" href="#" > Login Record </a>
+														<a class="dropdown-item pop" href="#" >Password History</a>
+														<a class="dropdown-item pop2" href="#" >Change Name</a>
+														<a class="dropdown-item" href="" >Delete</a>
+													</div>
+												</div></td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+						</div>
+
+
+
 
 						<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-3" style="display: none;">
 
@@ -416,15 +425,13 @@
 									<div class="col-md-8 py-3">
 
 										<form>
-
 											<div class="form-row">
-												<div class="col-md mb-2">
+												<div class="col-md-4 mb-2">
 													<input type="Password" class="form-control" placeholder=" Enter Old Password">
 												</div>
 											</div>
 
 											<div class="form-row">
-
 												<div class="col-md mb-2">
 													<input type="Password" class="form-control" placeholder=" Enter New Password">
 												</div>
@@ -434,12 +441,10 @@
 											</div>
 
 											<div class="form-row">
+
 												<div class="col-md-4 mb-2">
-													<button  type="submit" class="btn btn-success btn-block">Proceed</button>
+													<button  type="submit" class="btn btn-danger btn-block">Proceed</button>
 												</div>
-												<div class="col-md-4">
-												<a href="" class="btn-danger btn text-white">Cancel</a>
-													</div>
 											</div>
 
 										</form>
@@ -490,34 +495,32 @@
 								<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> List Of Tested PWG</h5>
 								<div class="table-responsive">
 									<table class="table">
-									<thead>
-										<tr>
-											<th scope="col">Sr. No.</th>
-											<th scope="col">Name</th>
-											<th scope="col">TESTED</th>
+										<thead>
+											<tr>
+												<th scope="col">Sr. No.</th>
+												<th scope="col">Name</th>
+												<th scope="col">TESTED</th>
 
 
 
-										</tr>
-									</thead>
-									<tbody>
-									{% for i in num %}
-										<tr>
-											<th scope="row">{{forloop.counter}}</th>
-											<td><a href="">PWG-{{forloop.counter}}</a></td>
-											<td><i class="fas fa-check pl-4"></i></td>
+											</tr>
+										</thead>
+										<tbody>
+										{% for i in num %}
+											<tr>
+												<th scope="row">{{forloop.counter}}</th>
+												<td><a href="">PWG-{{forloop.counter}}</a></td>
+												<td><i class="fas fa-check pl-4"></i></td>
+											</tr>
+										{% endfor %}
+										</tbody>
 
 
-										</tr>
-									{% endfor %}
-									</tbody>
-
-
-								</table>
+									</table>
 
 								</div>
 								<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Transfer Tested PWG to Seller</button>
-								<a href="admin-info-server" class="btn btn-danger text-white">Cancel</a>
+								<a href="admin-info-server.html" class="btn btn-danger text-white">Cancel</a>
 
 								<!-- Modal -->
 								<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -562,7 +565,6 @@
 
 														</tr>
 													{% endfor %}
-
 													</tbody>
 
 
@@ -585,29 +587,37 @@
 						<div class="row bg-button-2 p-4 mt-3" style="display: none;" id="div-6">
 
 							<div class="col-md">
-								<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Untested PWG  ( 09 )</h5>
+								<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Untested PWG  ( 20 )</h5>
 								<div class="table-responsive">
 									<table class="table">
-									<thead>
-										<tr>
-											<th scope="col">Sr. No.</th>
-											<th scope="col">Name</th></tr>
-									</thead>
-									<tbody>
-									{% for i in num %}
-										<tr>
-											<th scope="row">{{forloop.counter}}</th>
-											<td><a href="">PWG-{{forloop.counter}}</a></td>
-										</tr>
-									{% endfor %}
-									</tbody>
+										<thead>
+											<tr>
+												<th scope="col">Sr. No.</th>
+												<th scope="col">Name</th>
 
 
-								</table>
+
+
+											</tr>
+										</thead>
+										<tbody>
+										{% for i in num %}
+											<tr>
+												<th scope="row">{{forloop.counter}}</th>
+												<td><a href="">PWG-{{forloop.counter}}</a></td>
+
+
+
+											</tr>
+										{% endfor %}
+										</tbody>
+
+
+									</table>
 								</div>
 
 								<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">Assign New PWG to Tester for Testing</button>
-								<a href="admin-info-server" class="btn btn-danger text-white">Cancel</a>
+								<a href="admin-info-server.html" class="btn btn-danger text-white">Cancel</a>
 								<!-- Modal -->
 								<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 									<div class="modal-dialog" role="document">
@@ -652,6 +662,7 @@
 
 															</tr>
 														{% endfor %}
+
 														</tbody>
 
 
@@ -699,52 +710,112 @@
 
 
 
-<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			</div>
-			<div class="modal-body text-center">
-				<p>This PWG is Assign to Faiz Elahi</p>
+	<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5>Password History</h5>
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				</div>
+				<div class="modal-body text-center">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+
+									<th scope="col">Sr. No.</th>
+									<th scope="col">Last Change</th>
+									<th scope="col">Device Name</th>
+									<th scope="col">Last Password</th>
+
+								</tr>
+							</thead>
+							<tbody>
+							{% for i in num %}
+								<tr>
+									<th scope="row">{{forloop.counter}}</th>
+									<td>02/5/20</td>
+									<td>Samsung</td>
+									<td>abc@12345678</td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
 
-<div class="modal fade" id="imagemodal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5>Login Record</h5>
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			</div>
-			<div class="modal-body text-center">
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">Sr. No.</th>
-							<th scope="col">Name</th>
-							<th scope="col">Date</th>
-							<th scope="col">Time</th>
-						</tr>
-					</thead>
-					<tbody>{% for i in num %}
-						<tr>
-							<th scope="row">{{forloop.counter}}</th>
-							<td><a href="">Faiz Elahi</a></td>
-							<td>05/06/2020</td>
-							<td>04:30 pm</td>
-						</tr>
-					{% endfor %}
-					</tbody>
+	<div class="modal fade" id="imagemodal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5>Login Record</h5>
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				</div>
+				<div class="modal-body">
+					<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Number Of Admin Been Logged in </h6>
+					<p>5 times</p>
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Sr. No.</th>
+									<th scope="col">Date</th>
+									<th scope="col">TIme</th>
+									<th scope="col">Device Name</th>
+									<th scope="col">Login IP Address</th>
+									<th scope="col">duration Of Online</th>
 
-				</table>
+								</tr>
+							</thead>
+							<tbody>
+							{% for i in num %}
+							<tr>
+								<th scope="row">{{forloop.counter}}</th>
+								<td>20/06/5</td>
+								<td>5:30pm</td>
+								<td>Samsung</td>
+								<td>10.2.0.10:8090</td>
+								<td>{{forloop.counter}} minutes</td>
+							</tr>
+						{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
+
+	<div class="modal fade" id="imagemodal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5>Channge Name</h5>
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				</div>
+				<div class="modal-body" id="change-name">
+					<form>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Enter Name</label>
+							<input type="text" class="form-control" id="emp" value="">
+						</div>
+						<a  href="#" type="submit" id="bt" class="btn btn-primary" onclick="changeLabel()">Submit</a>
+					</form>
+				</div>
+
+				<div class="modal-body text-center p-4" style="display: none;" id="successfully-changed">
+					<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
+					<p class="pt-2 font-weight-bold">Your PWG has been successfully transfered to seller</p>
+
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 
@@ -760,34 +831,55 @@
 	<script type="text/javascript">
 
 
+		function changeLabel() {
+        let lbl = document.getElementById('lblEmp');
+        let empName = document.getElementById('emp').value;
+
+        lbl.innerText = empName;
+         // TREATS EVERY CONTENT AS TEXT.
+
+        document.getElementById("change-name").style.display="none";
+        document.getElementById("successfully-changed").style.display="block";
+
+    }
+
+
 
 		// search filter table
-	$(document).ready(function(){
-		$("#myInput").on("keyup", function() {
-			var value = $(this).val().toLowerCase();
-			$("#myTable tr").filter(function() {
-				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		$(document).ready(function(){
+			$("#myInput").on("keyup", function() {
+				var value = $(this).val().toLowerCase();
+				$("#myTable tr").filter(function() {
+					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+				});
 			});
 		});
-	});
 
 
 
 // modal popup
-	$(function() {
-		$('.pop').on('click', function() {
-			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-			$('#imagemodal').modal('show');
-		});
+$(function() {
+	$('.pop').on('click', function() {
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodal').modal('show');
 	});
+});
 
 
-	$(function() {
-		$('.pop1').on('click', function() {
-			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-			$('#imagemodal1').modal('show');
-		});
+$(function() {
+	$('.pop1').on('click', function() {
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodal1').modal('show');
 	});
+});
+
+
+$(function() {
+	$('.pop2').on('click', function() {
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodal2').modal('show');
+	});
+});
 
 
 	// check all checkbox in one click
@@ -808,73 +900,73 @@
 
 	});
 
-		function myfun(){
+	function myfun(){
 
-			document.getElementById("div-1").style.display = "block";
-			document.getElementById("div-3").style.display = "none";
-			document.getElementById("div-2").style.display = "none";
-			document.getElementById("div-6").style.display = "none";
-			document.getElementById("div-4").style.display = "none";
-			document.getElementById("div-5").style.display = "none";
+		document.getElementById("div-1").style.display = "block";
+		document.getElementById("div-3").style.display = "none";
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-6").style.display = "none";
+		document.getElementById("div-4").style.display = "none";
+		document.getElementById("div-5").style.display = "none";
 
-		}
+	}
 
-		function myfun1(){
-			document.getElementById("div-1").style.display = "none";
-			document.getElementById("div-2").style.display = "block";
-			document.getElementById("div-3").style.display = "none";
-			document.getElementById("div-5").style.display = "none";
-
-
-		}
+	function myfun1(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-2").style.display = "block";
+		document.getElementById("div-3").style.display = "none";
+		document.getElementById("div-5").style.display = "none";
 
 
-		function myfun2(){
-			document.getElementById("div-1").style.display = "none";
-			document.getElementById("div-3").style.display = "block";
-			document.getElementById("div-2").style.display = "none";
-			document.getElementById("div-6").style.display = "none";
-			document.getElementById("div-4").style.display = "none";
-			document.getElementById("div-5").style.display = "none";
+	}
 
 
-		}
-
-		function myfun3(){
-			document.getElementById("div-1").style.display = "none";
-			document.getElementById("div-3").style.display = "none";
-			document.getElementById("div-2").style.display = "none";
-			document.getElementById("div-6").style.display = "block";
-			document.getElementById("div-4").style.display = "none";
-			document.getElementById("div-5").style.display = "block";
+	function myfun2(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-3").style.display = "block";
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-6").style.display = "none";
+		document.getElementById("div-4").style.display = "none";
+		document.getElementById("div-5").style.display = "none";
 
 
-		}
+	}
+
+	function myfun3(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-3").style.display = "none";
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-6").style.display = "block";
+		document.getElementById("div-4").style.display = "none";
+		document.getElementById("div-5").style.display = "block";
 
 
-		function myfun4(){
-			document.getElementById("div-1").style.display = "none";
-			document.getElementById("div-3").style.display = "none";
-			document.getElementById("div-2").style.display = "block";
-			document.getElementById("div-6").style.display = "none";
-			document.getElementById("div-5").style.display = "none";
-			document.getElementById("div-4").style.display = "none";
+	}
 
 
-		}
-
-		function myfun5(){
-			document.getElementById("div-1").style.display = "none";
-			document.getElementById("div-3").style.display = "none";
-			document.getElementById("div-2").style.display = "none";
-			document.getElementById("div-6").style.display = "none";
-			document.getElementById("div-5").style.display = "none";
-			document.getElementById("div-4").style.display = "block";
+	function myfun4(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-3").style.display = "none";
+		document.getElementById("div-2").style.display = "block";
+		document.getElementById("div-6").style.display = "none";
+		document.getElementById("div-5").style.display = "none";
+		document.getElementById("div-4").style.display = "none";
 
 
-		}
+	}
 
-		function assign(){
+	function myfun5(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-3").style.display = "none";
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-6").style.display = "none";
+		document.getElementById("div-5").style.display = "none";
+		document.getElementById("div-4").style.display = "block";
+
+
+	}
+
+	function assign(){
 		document.getElementById("assign-hide").style.display = "none";
 		document.getElementById("successfully").style.display = "block";
 	}
@@ -888,13 +980,8 @@
 
 
 
-		$(function() {
-			$('.pop').on('click', function() {
-				$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-				$('#imagemodal').modal('show');
-			});
-		});
 
-	</script>
+
+</script>
 </body>
 </html>

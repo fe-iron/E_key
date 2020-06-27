@@ -135,6 +135,15 @@ def tester_getback(request):
 
 
 
+def tester_tested_pwg_list(request):
+    return render(request, 'tesafe/tester-tested-pwg-list.html', {'num': [11,23,33,42,35,67,78,49,10]})
+
+
+def pwg_sublist(request):
+    return render(request, 'tesafe/pwg-sublist.html', {'num': [11,23,33,42,35,67,78,49,10]})
+
+
+
 def names_view(request):
     ctx = {}
     url_parameter = request.GET.get("q")
