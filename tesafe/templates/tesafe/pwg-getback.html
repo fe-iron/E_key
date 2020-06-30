@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Admin | Tester</title>
+	<title>Admin | PWG</title>
 
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,14 +11,14 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-	
+
 
 	<!-- fontawesome cdn -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/transfer.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/tester-tested-pwg.css' %}">
 </head>
 <body>
 
@@ -27,7 +27,7 @@
 	<section class="bg-light">
 		<div class="container-fluid">
 			<nav class="navbar navbar-expand-lg navbar-light ">
-				
+
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -41,20 +41,20 @@
 							<a class="nav-link " href="admin-seller">Seller</a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link active" href="admin-tester">Tester</a>
+							<a class="nav-link " href="admin-tester">Tester</a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link" href="admin-info-server">PWG Server</a>
+							<a class="nav-link active" href="admin-info-server">PWG Server</a>
 						</li>
 
 						<!-- <li class="nav-item pl-3">
 							<a class="nav-link" href="admin-info-server.html">Unread Messages <span><i class="fas fa-bell"></i></span></a>
 						</li> -->
 					</ul>
-					
+
 				</div>
 
-						<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
+				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
 
 				<div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -95,7 +95,7 @@
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
 											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
-										<a href="admin-tester" class="btn btn-danger text-white">Back</a>
+										<a href="pwg-sublist.html" class="btn btn-danger text-white">Back</a>
 										<a href="#" class="btn btn-success ml-1 text-white" onclick="fun6()">Tested PWG List</a>
 									</form>
 								</nav>
@@ -113,7 +113,7 @@
 									<tbody id="myTable border-0">
 										<tr>
 
-											<td><a href="tester-pwg-sublist">PWGS-A</a><div class="dropdown">
+											<td><a href="pwg-getback-sublist.html">PWGS-A</a><div class="dropdown">
 												<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
 												</button>
@@ -134,7 +134,9 @@
 										<tr>
 
 											<td><a href="">PWGS-B</a><div class="dropdown">
-												<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+												<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+												</button>
 												<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 													<button class="dropdown-item" type="button">PWGS-B-1</button>
 													<button class="dropdown-item" type="button">PWGS-B-2</button>
@@ -259,7 +261,7 @@
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
 											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
-										<a href="admin-tester.html" class="btn btn-danger text-white">Back</a>
+										<a href="admin-tester" class="btn btn-danger text-white">Back</a>
 										<a href="#" class="btn btn-success ml-1 text-white" onclick="fun7()">Untested PWG List</a>
 									</form>
 								</nav>
@@ -276,7 +278,7 @@
 									<tbody id="myTable border-0">
 										<tr>
 
-											<td><a href="tester-pwg-sublist">PWGS-A</a><div class="dropdown">
+											<td><a href="tester-pwg-sublist.html">PWGS-A</a><div class="dropdown">
 												<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
 												</button>
@@ -454,7 +456,7 @@
 
 
 
-<!-- <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -465,7 +467,7 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th scope="col">SL No</th>
+							<th scope="col">Sr. No.</th>
 							<th scope="col">Name</th>
 							<th scope="col">Date</th>
 							<th scope="col">Time</th>
@@ -475,14 +477,14 @@
 						<tr>
 							<th scope="row">1</th>
 							<td><a href="">Faiz Elahi</a></td>
-							<td>05//06/2020</td>
+							<td>05/06/2020</td>
 							<td>04:30 pm</td>
 						</tr>
 
 						<tr>
-							<th scope="row">1</th>
+							<th scope="row">2</th>
 							<td><a href="">Naqui Hasan</a></td>
-							<td>07//06/2020</td>
+							<td>07/06/2020</td>
 							<td>04:00 pm</td>
 						</tr>
 					</tbody>
@@ -491,7 +493,7 @@
 			</div>
 		</div>
 	</div>
-</div> -->
+</div>
 
 
 
@@ -515,8 +517,8 @@
 
 
 <section class="floatingButtonHere" style="display: none;">
-	<a href="" class=" btn btn-primary" data-toggle="modal" data-target="#exampleModal">Confirm</a>
-	<a href="tester-tested-pwg-list.html" class=" btn btn-danger">Cancel</a>
+	<a href="" class=" btn btn-primary pop" data-toggle="modal" data-target="#exampleModal">Confirm</a>
+	<a href="pwg-getback" class=" btn btn-danger">Cancel</a>
 </section>
 
 

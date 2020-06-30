@@ -143,6 +143,18 @@ def pwg_sublist(request):
     return render(request, 'tesafe/pwg-sublist.html', {'num': [11,23,33,42,35,67,78,49,10]})
 
 
+def pwg_getback(request):
+    return render(request, 'tesafe/pwg-getback.html', {'num': [11,23,33,42,35,67,78,49,10]})
+
+
+def pwg_getback_sublist(request):
+    return render(request, 'tesafe/pwg-getback-sublist.html', {'num': [11,23,33,42,35,67,78,49,10]})
+
+
+def tester_pwg_sublist(request):
+    return render(request, 'tesafe/tester-pwg-sublist.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
+
+
 
 def names_view(request):
     ctx = {}

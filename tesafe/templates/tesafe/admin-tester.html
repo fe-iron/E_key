@@ -94,7 +94,7 @@
 
 				</div>
 
-				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
+						<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
 
 				<div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -103,11 +103,11 @@
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
 						<a class="dropdown-item" href="" >Broadcast</a>
-						<a class="dropdown-item" href="" >Chat</a>
+
 						<!-- <a class="dropdown-item" href="#div-1" onclick="myfun()">Tester Account List</a> -->
 						<a class="dropdown-item" href="">Delete</a>
 						<a class="dropdown-item" href=""> Freeze </a>
-
+						<a class="dropdown-item" href="" >Chat</a>
 
 						<!-- <a class="dropdown-item" href="#div-3" onclick="myfun2()">Untested PWG List</a> -->
 						<a class="dropdown-item" href="admin-home" >Exit</a>
@@ -118,6 +118,9 @@
 			</nav>
 		</div>
 	</section>
+
+
+
 
 	<section class="bg-detail">
 		<div class="container-fluid">
@@ -305,7 +308,7 @@
 										</tr>
 									</thead>
 									<tbody id="myTable">
-									{% for i in num %}
+
 										<tr>
 
 											<th><input type="checkbox" name="book"></th>
@@ -328,12 +331,13 @@
 										<tr>
 
 											<th><input type="checkbox" name="book"></th>
-											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}"  height="40" width="40" class="rounded-circle"></span> Naqui</td>
+											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"></span> Naqui</td>
 											<td><a href="tester-tested-pwg-list" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
 												<div class="dropdown-menu">
+
 													<a class="dropdown-item" href="">Chat</a>
 													<a class="dropdown-item" href=""> Payment</a>
 													<a class="dropdown-item pop" href="#" >Login History</a>
@@ -366,7 +370,7 @@
 
 										<tr>
 											<th><input type="checkbox" name="book"></th>
-											<td><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Rose</td>
+											<td><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Jennifer</td>
 											<td><a href="tester-tested-pwg-list" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
@@ -382,7 +386,6 @@
 												</div>
 											</div></td>
 										</tr>
-									{% endfor %}
 
 									</tbody>
 								</table>
@@ -499,8 +502,10 @@
 									<tr>
 										<th scope="row">{{forloop.counter}}</th>
 										<td><a href="">PWG-{{forloop.counter}}</a></td>
+
 									</tr>
 								{% endfor %}
+
 								</tbody>
 
 
@@ -553,7 +558,6 @@
 
 													</tr>
 												{% endfor %}
-
 												</tbody>
 
 
@@ -647,7 +651,6 @@
 							</tr>
 						</thead>
 						<tbody>
-
 						{% for i in num %}
 							<tr>
 								<th scope="row">{{forloop.counter}}</th>
@@ -655,10 +658,9 @@
 								<td>5:30pm</td>
 								<td>Samsung</td>
 								<td>10.2.0.10:8090</td>
-								<td>{{forloop.counter}} minutes</td>
+								<td>30 minutes</td>
 							</tr>
 						{% endfor %}
-
 						</tbody>
 					</table>
 				</div>
@@ -666,6 +668,141 @@
 		</div>
 	</div>
 </div>
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+	$('input[type="checkbox"]').click(function(){
+    if($(this).attr("value")=="floatingButtonHere"){
+        $(".floatingButtonHere").show(150);
+    }
+});
+
+
+
+// search filter table
+$(document).ready(function(){
+	$("#myInput").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#myTable tr").filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+	});
+});
+
+
+
+	// check all checkbox in one click
+
+	$(document).ready(function() {
+
+		$('#checkAll').click(function () {
+			$('input:checkbox').not(this).prop('checked', this.checked);
+		});
+
+		$("[id*=book_]").change(function () {
+			if ($('input[type=checkbox]:checked').length == $('input[type=checkbox]').length) {
+				$('#checkAll').prop('checked', true);
+			} else {
+				$('#checkAll').prop('checked', false);
+			}
+		});
+
+	});
+
+
+
+
+	// modal popup
+	$(function() {
+		$('.pop').on('click', function() {
+			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+			$('#imagemodal').modal('show');
+		});
+	});
+
+
+	// check all checkbox in one click
+
+	$(document).ready(function() {
+
+		$('#checkAll').click(function () {
+			$('input:checkbox').not(this).prop('checked', this.checked);
+		});
+
+		$("[id*=book_]").change(function () {
+			if ($('input[type=checkbox]:checked').length == $('input[type=checkbox]').length) {
+				$('#checkAll').prop('checked', true);
+			} else {
+				$('#checkAll').prop('checked', false);
+			}
+		});
+
+	});
+
+
+	function myfun(){
+		document.getElementById("div-1").style.display = "block";
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-3").style.display = "none";
+		document.getElementById("div-4").style.display = "none";
+
+	}
+
+	function myfun1(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-2").style.display = "block";
+		document.getElementById("div-3").style.display = "none";
+		document.getElementById("div-4").style.display = "none";
+
+
+	}
+
+
+	function myfun2(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-3").style.display = "block";
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-4").style.display = "block";
+
+
+	}
+
+
+	function cancel() {
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-1").style.display = "block";
+	}
+
+
+	function assign(){
+		document.getElementById("assign-hide").style.display = "none";
+		document.getElementById("successfully").style.display = "block";
+	}
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
 
 
 

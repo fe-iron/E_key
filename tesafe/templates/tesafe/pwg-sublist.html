@@ -87,6 +87,7 @@
 
 				</div>
 
+
                     <a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;">
                         <i class="fas fa-bell"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left: 15px;">1</span>
                     </a>
@@ -96,11 +97,11 @@
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="">Get Back</a>
+                            <a class="dropdown-item" href="pwg-getback">Get Back</a>
                             <a class="dropdown-item" href="#" onclick="myfun()">Transfer To Seller</a>
                             <a class="dropdown-item" href="#" onclick="myfun2()">Assign To Seller</a>
                             <a class="dropdown-item" href="#" onclick="myfun3()">Freeze </a>
-                            <a class="dropdown-item" href="admin-info-server" onclick="myfun4()">Return</a>
+                            <a class="dropdown-item" href="#" onclick="myfun4()">Return</a>
                             <a class="dropdown-item" href="admin-home">Exit</a>
                         </div>
                     </div>
@@ -115,9 +116,7 @@
                         <div class="row justify-content-center bg-button-2 p-2 mt-3" id="div-3">
                            <!--  <div > -->
                                 <div class="col-md" id="div-7">
-                                	<h4 class="font-weight-bold">PWG List Of PWGS-A <span class="float-right"><a
-                                            href="admin-info-server" class="btn btn-danger text-white btn-sm mb-1">Back</a></span></h4>
-
+                                	<h4 class="font-weight-bold">PWG List Of PWGS-A<span class="float-right"><a href="admin-info-server.html" class="btn btn-danger text-white mb-1 btn-sm">Back</a></span></h4>
                                     <h5 class="font-weight-bold  py-2">Untested PWG List <a class="btn btn-sm btn-primary float-xl-right text-white" onclick="fun6()">TESTED PWG</a></h5>
                                    <div class="table-responsive">
                                    	 <table class="table">
@@ -126,7 +125,7 @@
                                                 <th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll"> <i class="fas fa-sort-down"></i></th>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Location</th>
-                                                <th scope="col">OwnerNme</th>
+                                                <th scope="col">Owner Name</th>
                                                 <th scope="col">Action</th>
                                             </tr>
                                         </thead>
@@ -180,7 +179,7 @@
                                                 <th><input type="checkbox" name="book"></th>
                                                 <td>PWGS-A-3</td>
                                                 <td>A</td>
-                                                <td>Rose</td>
+                                                <td>Trump</td>
                                                 <td><!-- <a href="tester-transfer.html" class="btn btn-primary btn-light btn-sm">Transfer</a> --> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
@@ -341,7 +340,7 @@
 
                         <!--     <div class="" id="div-8" > -->
                                 <div class="col-md" style="display: none;" id="div-8">
-                                    <h4 class="font-weight-bold">PWG List Of PWGS-A</h4>
+                                    <h4 class="font-weight-bold">PWG List Of PWGS-A<span class="float-right"><a href="admin-info-server.html" class="btn btn-danger text-white mb-1 btn-sm">Back</a></span></h4>
                                     <h5 class="font-weight-bold  py-2">Tested PWG List <a class="btn btn-sm btn-primary float-xl-right text-white" onclick="fun7()">UNTESTED PWG</a></h5>
                                     <div class="table-responsive">
                                    	 <table class="table">
@@ -367,7 +366,7 @@
 												<div class="dropdown-menu">
 													<a class="dropdown-item pop3" href="#">Use Record</a>
 													<!-- <a class="dropdown-item" href="tester-getback.html" >Get Back</a> -->
-													<a class="dropdown-item" href="tester-getback.html" >Transfer To Seller</a>
+													<a class="dropdown-item" href="tester-getback" >Transfer To Seller</a>
 													<a class="dropdown-item" href="" >Assign To Tester</a>
 													<a class="dropdown-item" href="" >Freeze</a>
 
@@ -393,7 +392,7 @@
 												<div class="dropdown-menu">
 													<a class="dropdown-item pop3" href="#">Use Record</a>
 													<a class="dropdown-item" href="#" onclick="getBack()" >Get Back</a>
-													<a class="dropdown-item" href="tester-getback.html" >Transfer To Seller</a>
+													<a class="dropdown-item" href="tester-getback" >Transfer To Seller</a>
 													<!-- <a class="dropdown-item" href="" >Assign To Tester</a> -->
 													<a class="dropdown-item" href="" >Freeze</a>
 												</div>
@@ -417,7 +416,7 @@
 												<div class="dropdown-menu">
 													<a class="dropdown-item pop3" href="#">Use Record</a>
 													<a class="dropdown-item" href="#" >Get Back</a>
-													<a class="dropdown-item" href="tester-getback.html" >Transfer To Seller</a>
+													<a class="dropdown-item" href="tester-getback" >Transfer To Seller</a>
 													<a class="dropdown-item" href="" >Assign To Tester</a>
 													<a class="dropdown-item" href="" >Freeze</a>
 												</div>
@@ -449,7 +448,7 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body text-center">
-                        <p class="text-danger">This PWG has been Transfered</p>
+                        <p class="text-danger">This PWG has been Transferred</p>
                         <a href="" class="btn btn-secondary btn-sm">Disable??</a>
                     </div>
                     <div class="modal-footer">
@@ -469,7 +468,8 @@
         				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         			</div>
         			<div class="modal-body text-center">
-        				It is Accessed 4 times
+        				It is Accessed 4 times<br>
+                        Accessed by Tester John
         			</div>
         		</div>
         	</div>

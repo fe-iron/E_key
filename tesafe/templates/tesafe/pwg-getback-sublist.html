@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Admin | Seller</title>
+	<title>Admin | PWG</title>
 
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,14 +11,14 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-	
+
 
 	<!-- fontawesome cdn -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/transfer.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/tester-pwg-sublist.css' %}">
 </head>
 <body>
 
@@ -27,7 +27,7 @@
 	<section class="bg-light">
 		<div class="container-fluid">
 			<nav class="navbar navbar-expand-lg navbar-light ">
-				
+
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -38,23 +38,23 @@
 							<a class="nav-link "  href="admin-home">Home <span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link active" href="admin-seller">Seller</a>
+							<a class="nav-link " href="admin-seller">Seller</a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link" href="admin-tester">Tester</a>
+							<a class="nav-link " href="admin-tester">Tester</a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link" href="admin-info-server">PWG Server</a>
+							<a class="nav-link active" href="admin-info-server">PWG Server</a>
 						</li>
 
 						<!-- <li class="nav-item pl-3">
 							<a class="nav-link" href="admin-info-server.html">Unread Messages <span><i class="fas fa-bell"></i></span></a>
 						</li> -->
 					</ul>
-					
+
 				</div>
 
-			<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
+				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
 
 				<!-- <div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -85,22 +85,18 @@
 
 
 
-
-
-
 					<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-3">
 
-						<div class="col-md">
+						<div class="col-md" id="div-7">
 							<header>
 								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">List Of Tested PWG</a>
+									<a class="h4 text-dark font-weight-bold pt-2">PWGS-A</a>
 									<form class="form-inline">
 										<div class="input-group-prepend  mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
 											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
-
-										<a href="admin-seller" class="btn btn-danger text-white">Back</a>
+										<a href="pwg-getback" class="btn btn-danger text-white">Back</a>
 
 									</form>
 								</nav>
@@ -112,83 +108,33 @@
 									<tr>
 										<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere"> <i class="fas fa-sort-down"></i></th>
 										<th scope="col">Name</th>
+										<th scope="col">Tested Status</th>
 
 									</tr>
 								</thead>
 								<tbody id="myTable">
 									<tr>
 										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
-										<td>PWG-1</td>
-
-
-
+										<td>PWGS-A-1</td>
+										<td>T</td>
 									</tr>
 
 									<tr>
 										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
-										<td>PWG-2</td>
-
-
+										<td>PWGS-A-2</td>
+										<td>U</td>
 									</tr>
+
 									<tr>
 										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
-										<td>PWG-3</td>
-
-
+										<td>PWGS-A-3</td>
+										<td>T</td>
 									</tr>
+
 									<tr>
 										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
-										<td>PWG-4</td>
-
-
-									</tr>
-									<tr>
-										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
-										<td>PWG-5</td>
-
-
-									</tr>
-									<tr>
-										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
-										<td>PWG-6</td>
-
-
-									</tr>
-									<tr>
-										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
-										<td>PWG-7</td>
-
-
-									</tr>
-									<tr>
-										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
-										<td>PWG-8</td>
-
-
-									</tr>
-									<tr>
-										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
-										<td>PWG-9</td>
-
-
-									</tr>
-									<tr>
-										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
-										<td>PWG-10</td>
-
-
-									</tr>
-									<tr>
-										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
-										<td>PWG-11</td>
-
-
-									</tr>
-									<tr>
-										<th><input type="checkbox" name="book"  value="floatingButtonHere"></th>
-										<td>PWG-12</td>
-
-
+										<td>PWGS-A-4</td>
+										<td>U</td>
 									</tr>
 								</tbody>
 
@@ -196,86 +142,53 @@
 							</table>
 							</div>
 
-							<!-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Transfer Tested PWG to Seller</button> -->
-							<!-- Modal -->
-							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLabel">Transferred PWG</h5>
-											<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
-										</div>
-										<div class="modal-body text-center p-4">
-											<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-											<p class="pt-2 font-weight-bold">Your PWG has been successfully transferred to seller</p>
 
-										</div>
-
-									</div>
-								</div>
-							</div>
 
 
 						</div>
 
+
+
+
 					</div>
-
-				</div>
-
-
-
-
 
 
 
 			</div>
+
+
+
+
+
+
+
 		</div>
-
-
 	</div>
+
+
+</div>
 </section>
 
 
 
 
-<!-- <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title font-weight-bold">Login History</h5>
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<!-- <h5 class="modal-title" id="exampleModalLabel">Transfered PWG</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a> -->
 			</div>
-			<div class="modal-body">
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">SL No</th>
-							<th scope="col">Name</th>
-							<th scope="col">Date</th>
-							<th scope="col">Time</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td><a href="">Faiz Elahi</a></td>
-							<td>05//06/2020</td>
-							<td>04:30 pm</td>
-						</tr>
+			<div class="modal-body text-center p-4">
+				<i class="fas fa-check-circle fa-5x" style="color: #3aff3a;"></i>
+				<p class="pt-2 font-weight-bold">Your PWG has been successfully Getbacked</p>
+				<a href="pwg-getback-sublist" class="btn btn-success btn-sm">OK</a>
 
-						<tr>
-							<th scope="row">1</th>
-							<td><a href="">Naqui Hasan</a></td>
-							<td>07//06/2020</td>
-							<td>04:00 pm</td>
-						</tr>
-					</tbody>
-
-				</table>
 			</div>
+
 		</div>
 	</div>
-</div> -->
+</div>
 
 
 
@@ -299,8 +212,8 @@
 
 
 <section class="floatingButtonHere" style="display: none;">
-	<a href="" class=" btn btn-primary" data-toggle="modal" data-target="#exampleModal">Transfer To Seller</a>
-	<a href="transfer" class=" btn btn-danger">Cancel</a>
+	<a href="" class=" btn btn-primary pop" data-toggle="modal" data-target="#exampleModal">Confirm</a>
+	<a href="pwg-getback-sublist" class=" btn btn-danger">Cancel</a>
 </section>
 
 
@@ -338,32 +251,32 @@
 
 
 
-$('input[type="checkbox"]').click(function(){
-    if($(this).attr("value")=="floatingButtonHere"){
-        $(".floatingButtonHere").show(150);
-    }
-});
+	$('input[type="checkbox"]').click(function(){
+		if($(this).attr("value")=="floatingButtonHere"){
+			$(".floatingButtonHere").show(150);
+		}
+	});
 
 
 // search filter table
-	$(document).ready(function(){
-		$("#myInput").on("keyup", function() {
-			var value = $(this).val().toLowerCase();
-			$("#myTable tr").filter(function() {
-				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-			});
+$(document).ready(function(){
+	$("#myInput").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#myTable tr").filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 		});
 	});
+});
 
 
 
 // modal popup
-	$(function() {
-		$('.pop').on('click', function() {
-			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-			$('#imagemodal').modal('show');
-		});
+$(function() {
+	$('.pop').on('click', function() {
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodal').modal('show');
 	});
+});
 
 
 
@@ -424,6 +337,17 @@ $('input[type="checkbox"]').click(function(){
 		document.getElementById("div-1").style.display = "block";
 	}
 
+
+
+	// function fun6() {
+	// 	document.getElementById("div-7").style.display = "none";
+	// 	document.getElementById("div-8").style.display = "block";
+	// }
+
+	// function fun7() {
+	// 	document.getElementById("div-7").style.display = "block";
+	// 	document.getElementById("div-8").style.display = "none";
+	// }
 
 
 

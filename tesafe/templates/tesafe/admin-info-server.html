@@ -98,6 +98,9 @@
 						<a class="dropdown-item" href="">Broadcast</a>
 
 						<a class="dropdown-item" href="#">Delete</a>
+						<a class="dropdown-item" href="#div-3" onclick="myfun2()">Change Password</a>
+						<a class="dropdown-item" href="#div-5" onclick="myfun3()">Tested PWG List</a>
+						<a class="dropdown-item" href="#div-2" onclick="myfun4()">Summary PWG</a>
 						<a class="dropdown-item" href="admin-home" >Exit</a>
 					</div>
 				</div>
@@ -106,6 +109,8 @@
 			</nav>
 		</div>
 	</section>
+
+
 
 	<section class="bg-detail">
 		<div class="container-fluid">
@@ -267,7 +272,7 @@
 												<th scope="col">Account Name</th>
 												<th scope="col">Total Number</th>
 												<th scope="col">Online</th>
-												<th scope="col">Ofline</th>
+												<th scope="col">Offline</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -299,7 +304,7 @@
 
 								<header>
 									<nav class="navbar navbar-light  venue-registration">
-										<a class="h4 text-dark font-weight-bold pt-2">PWG SERVERS</a>
+										<a class="h4 text-dark font-weight-bold pt-2">PWG SERVER LIST</a>
 										<form class="form-inline">
 											<div class="input-group-prepend mb-1 mr-2">
 												<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
@@ -363,7 +368,7 @@
 														<!-- <a class="dropdown-item" href="">Payment</a> -->
 														<a class="dropdown-item pop1" href="#" > Login Record </a>
 														<a class="dropdown-item pop" href="#" >Password History</a>
-														<a class="dropdown-item pop2" href="#" >Change Name</a>
+														<a class="dropdown-item" href="" >Change Name</a>
 														<a class="dropdown-item" href="" >Delete</a>
 													</div>
 												</div></td>
@@ -382,7 +387,7 @@
 														<!-- <a class="dropdown-item" href="">Payment</a> -->
 														<a class="dropdown-item pop1" href="#" > Login Record </a>
 														<a class="dropdown-item pop" href="#" >Password History</a>
-														<a class="dropdown-item pop2" href="#" >Change Name</a>
+														<a class="dropdown-item" href="" >Change Name</a>
 														<a class="dropdown-item" href="" >Delete</a>
 													</div>
 												</div></td>
@@ -401,7 +406,7 @@
 														<!-- <a class="dropdown-item" href="">Payment</a> -->
 														<a class="dropdown-item pop1" href="#" > Login Record </a>
 														<a class="dropdown-item pop" href="#" >Password History</a>
-														<a class="dropdown-item pop2" href="#" >Change Name</a>
+														<a class="dropdown-item" href="" >Change Name</a>
 														<a class="dropdown-item" href="" >Delete</a>
 													</div>
 												</div></td>
@@ -425,10 +430,12 @@
 									<div class="col-md-8 py-3">
 
 										<form>
+
 											<div class="form-row">
 												<div class="col-md-4 mb-2">
 													<input type="Password" class="form-control" placeholder=" Enter Old Password">
 												</div>
+
 											</div>
 
 											<div class="form-row">
@@ -439,9 +446,7 @@
 													<input type="Password" class="form-control" placeholder=" Confirm Password">
 												</div>
 											</div>
-
 											<div class="form-row">
-
 												<div class="col-md-4 mb-2">
 													<button  type="submit" class="btn btn-danger btn-block">Proceed</button>
 												</div>
@@ -506,13 +511,20 @@
 											</tr>
 										</thead>
 										<tbody>
-										{% for i in num %}
 											<tr>
-												<th scope="row">{{forloop.counter}}</th>
-												<td><a href="">PWG-{{forloop.counter}}</a></td>
+												<th scope="row">1</th>
+												<td><a href="">PWG-1</a></td>
 												<td><i class="fas fa-check pl-4"></i></td>
+
+
 											</tr>
-										{% endfor %}
+
+											<tr>
+												<th scope="row">2</th>
+												<td>PWG-2</td>
+												<td><i class="fas fa-check pl-4"></i></td>
+
+											</tr>
 										</tbody>
 
 
@@ -551,10 +563,9 @@
 														</tr>
 													</thead>
 													<tbody>
-													{% for i in num %}
 														<tr>
-															<th scope="row">{{forloop.counter}}</th>
-															<td><a href="">PWG-{{forloop.counter}}</a></td>
+															<th scope="row">1</th>
+															<td><a href="">PWG-1</a></td>
 															<td><i class="fas fa-check pl-4"></i></td>
 															<td>
 																<div class="form-check">
@@ -564,7 +575,30 @@
 
 
 														</tr>
-													{% endfor %}
+
+														<tr>
+															<th scope="row">2</th>
+															<td>PWG-2</td>
+															<td><i class="fas fa-check pl-4"></i></td>
+															<td>
+																<div class="form-check">
+																	<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+																</div>
+															</td>
+
+														</tr>
+
+														<tr>
+															<th scope="row">3</th>
+															<td>PWG-3</td>
+															<td><i class="fas fa-check pl-4"></i></td>
+															<td>
+																<div class="form-check">
+																	<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+																</div>
+															</td>
+
+														</tr>
 													</tbody>
 
 
@@ -601,15 +635,19 @@
 											</tr>
 										</thead>
 										<tbody>
-										{% for i in num %}
 											<tr>
-												<th scope="row">{{forloop.counter}}</th>
-												<td><a href="">PWG-{{forloop.counter}}</a></td>
+												<th scope="row">1</th>
+												<td><a href="">PWG-1</a></td>
 
 
 
 											</tr>
-										{% endfor %}
+
+											<tr>
+												<th scope="row">2</th>
+												<td>PWG-2</td>
+
+											</tr>
 										</tbody>
 
 
@@ -648,10 +686,9 @@
 															</tr>
 														</thead>
 														<tbody>
-														{% for i in num %}
 															<tr>
-																<th scope="row">{{forloop.counter}}</th>
-																<td><a href="">PWG-{{forloop.counter}}</a></td>
+																<th scope="row">1</th>
+																<td><a href="">PWG-1</a></td>
 
 																<td>
 																	<div class="form-check">
@@ -661,8 +698,30 @@
 
 
 															</tr>
-														{% endfor %}
 
+															<tr>
+																<th scope="row">2</th>
+																<td>PWG-2</td>
+
+																<td>
+																	<div class="form-check">
+																		<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+																	</div>
+																</td>
+
+															</tr>
+
+															<tr>
+																<th scope="row">3</th>
+																<td>PWG-3</td>
+
+																<td>
+																	<div class="form-check">
+																		<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+																	</div>
+																</td>
+
+															</tr>
 														</tbody>
 
 
@@ -700,6 +759,291 @@
 		</div>
 	</section>
 
+
+
+
+
+
+
+
+
+
+
+	<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5>Password History</h5>
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				</div>
+				<div class="modal-body text-center">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+
+									<th scope="col">Sr. No.</th>
+									<th scope="col">Last Change</th>
+									<th scope="col">Device Name</th>
+									<th scope="col">Last Password</th>
+
+								</tr>
+							</thead>
+							<tbody>
+							{% for i in num %}
+								<tr>
+									<th scope="row">{{forloop.counter}}</th>
+									<td>02/5/20</td>
+									<td>Samsung</td>
+									<td>abc@12345678</td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="imagemodal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5>Login Record</h5>
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				</div>
+				<div class="modal-body">
+					<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Number Of Admin Been Logged in </h6>
+					<p>5 times</p>
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Sr. No.</th>
+									<th scope="col">Date</th>
+									<th scope="col">TIme</th>
+									<th scope="col">Device Name</th>
+									<th scope="col">Login IP Address</th>
+									<th scope="col">duration Of Online</th>
+
+								</tr>
+							</thead>
+							<tbody>
+							{% for i in num %}
+								<tr>
+									<th scope="row">{{forloop.counter}}</th>
+									<td>20/06/5</td>
+									<td>5:30pm</td>
+									<td>Samsung</td>
+									<td>10.2.0.10:8090</td>
+									<td>30 minutes</td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="imagemodal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5>Channge Name</h5>
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				</div>
+				<div class="modal-body" id="change-name">
+					<form>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Alias</label>
+							<input type="text" class="form-control" id="emp" value="">
+						</div>
+						<a  href="#" type="submit" id="bt" class="btn btn-primary" onclick="changeLabel()">Submit</a>
+					</form>
+				</div>
+
+				<div class="modal-body text-center p-4" style="display: none;" id="successfully-changed">
+					<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
+					<p class="pt-2 font-weight-bold">Your PWG's name has been changed</p>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	<script type="text/javascript">
+
+
+		function changeLabel() {
+        let lbl = document.getElementById('lblEmp');
+        let empName = document.getElementById('emp').value;
+
+        lbl.innerText = empName;
+         // TREATS EVERY CONTENT AS TEXT.
+
+        document.getElementById("change-name").style.display="none";
+        document.getElementById("successfully-changed").style.display="block";
+
+    }
+
+
+
+		// search filter table
+		$(document).ready(function(){
+			$("#myInput").on("keyup", function() {
+				var value = $(this).val().toLowerCase();
+				$("#myTable tr").filter(function() {
+					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+				});
+			});
+		});
+
+
+
+// modal popup
+$(function() {
+	$('.pop').on('click', function() {
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodal').modal('show');
+	});
+});
+
+
+$(function() {
+	$('.pop1').on('click', function() {
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodal1').modal('show');
+	});
+});
+
+
+$(function() {
+	$('.pop2').on('click', function() {
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodal2').modal('show');
+	});
+});
+
+
+	// check all checkbox in one click
+
+	$(document).ready(function() {
+
+		$('#checkAll').click(function () {
+			$('input:checkbox').not(this).prop('checked', this.checked);
+		});
+
+		$("[id*=book_]").change(function () {
+			if ($('input[type=checkbox]:checked').length == $('input[type=checkbox]').length) {
+				$('#checkAll').prop('checked', true);
+			} else {
+				$('#checkAll').prop('checked', false);
+			}
+		});
+
+	});
+
+	function myfun(){
+
+		document.getElementById("div-1").style.display = "block";
+		document.getElementById("div-3").style.display = "none";
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-6").style.display = "none";
+		document.getElementById("div-4").style.display = "none";
+		document.getElementById("div-5").style.display = "none";
+
+	}
+
+	function myfun1(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-2").style.display = "block";
+		document.getElementById("div-3").style.display = "none";
+		document.getElementById("div-5").style.display = "none";
+
+
+	}
+
+
+	function myfun2(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-3").style.display = "block";
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-6").style.display = "none";
+		document.getElementById("div-4").style.display = "none";
+		document.getElementById("div-5").style.display = "none";
+
+
+	}
+
+	function myfun3(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-3").style.display = "none";
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-6").style.display = "block";
+		document.getElementById("div-4").style.display = "none";
+		document.getElementById("div-5").style.display = "block";
+
+
+	}
+
+
+	function myfun4(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-3").style.display = "none";
+		document.getElementById("div-2").style.display = "block";
+		document.getElementById("div-6").style.display = "none";
+		document.getElementById("div-5").style.display = "none";
+		document.getElementById("div-4").style.display = "none";
+
+
+	}
+
+	function myfun5(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-3").style.display = "none";
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-6").style.display = "none";
+		document.getElementById("div-5").style.display = "none";
+		document.getElementById("div-4").style.display = "block";
+
+
+	}
+
+	function assign(){
+		document.getElementById("assign-hide").style.display = "none";
+		document.getElementById("successfully").style.display = "block";
+	}
+
+
+	function transfer(){
+		document.getElementById("transfer-hide").style.display = "none";
+		document.getElementById("successfully-transfer").style.display = "block";
+	}
+
+
+
+
+
+
+</script>
+</body>
+</html>
 
 
 
