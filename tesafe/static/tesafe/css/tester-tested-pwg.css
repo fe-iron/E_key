@@ -440,7 +440,7 @@ header .form-control {
     border-color: #ffffff;
     box-shadow: 0 0 0 0.2rem rgba(216, 217, 219, 0);
 }
-
+/*
 
 .table thead th {
     vertical-align: bottom;
@@ -453,6 +453,25 @@ header .form-control {
     vertical-align: top;
     border-top: 0px solid #ffffff!important; 
 }
+*/
+
+
+
+
+   .dropdown-menu{
+     position: absolute;
+    transform: translate3d(0px, -54px, 0px);
+    top: 0px;
+    left: 0px;
+    will-change: transform;
+    width: max-content;
+}
+   
+
+
+
+
+
 
 @media (min-width: 778px) and (max-width: 930px){
 .floatingButtonHere {
