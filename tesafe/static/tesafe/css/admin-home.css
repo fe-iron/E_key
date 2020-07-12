@@ -185,16 +185,6 @@ svg circle:nth-child(2)
 }
 
 
-.bg-button-1 h4::after {
-    content: "";
-    width: 100%;
-    position: absolute;
-    height: 1.5px;
-    background: blue!important;
-    left: 0;
-    right: 0;
-    bottom: -10px;
-}
 
 
 
@@ -250,8 +240,43 @@ header .dropdown-toggle::after {
 
 
 
+.btn-danger {
+    position: fixed;
+    bottom: 100px;
+    left:48%;
+}
+
+
+@media (min-width: 778px) and (max-width: 930px){
+.btn-danger {
+    position: fixed;
+   bottom:20px;
+    left:42%;
+}
+}
+
+
+
+@media (min-width:570px ) and (max-width:778px){
+.btn-danger {
+    position: fixed;
+   bottom:20px;
+    left:45%;
+}
+}
+
+
+
 @media(max-width: 570px){
     h4{
         font-size: 1rem;
     }
+
+
+.btn-danger {
+    position: fixed;
+   bottom:20px;
+    left:45%;
 }
+}
+

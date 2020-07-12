@@ -412,6 +412,67 @@ header .dropdown-toggle::after {
 }
 
 
+
+
+
+
+
+.floatingButtonHere {
+    position: fixed;
+    bottom: 100px;
+    left:45%;
+}
+
+
+@media (min-width: 778px) and (max-width: 930px){
+.floatingButtonHere {
+    position: fixed;
+   bottom:20px;
+    left:42%;
+}
+}
+
+
+
+@media (min-width:570px ) and (max-width:778px){
+.floatingButtonHere {
+    position: fixed;
+   bottom:20px;
+    left:40%;
+}
+}
+
+
+
+@media(max-width: 570px){
+    h4{
+        font-size: 1rem;
+    }
+
+    .table {
+    width: 100%;
+    margin-bottom: 0rem!important;
+    color: #212529;
+    font-size: 13px;
+}
+
+.rounded-circle {
+    border-radius: 50%!important;
+    width: 28px;
+    height: 28px;
+}
+.fa-ellipsis-v {
+    font-size: 10px;
+}
+
+.floatingButtonHere {
+    position: fixed;
+   bottom:20px;
+    left:29%;
+}
+}
+
+
 @media (min-width: 576px){
 
 #imagemodal  .modal-dialog{

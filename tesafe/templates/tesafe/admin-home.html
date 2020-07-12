@@ -1,11 +1,9 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Admin | Home</title>
-
- 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 
@@ -31,14 +29,14 @@
 	<link rel="stylesheet" href="bootstrap4/css/bootstrap-reboot.css">
 	<link rel="stylesheet" href="bootstrap4/css/bootstrap-reboot.min.cs"> -->
 
-
+	
 
 	<!-- fontawesome cdn -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
-
+	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/admin-home.css' %}">
 
 	<!-- Latest compiled JavaScript -->
 	<!-- <script src="bootstrap4/js/bootstrap.min.js"></script>
@@ -46,7 +44,6 @@
 	<script src="bootstrap4/js/bootstrap.bundle.min.js"></script>
 	<script src="bootstrap4/js/bootstrap.js"></script>
 	<script src="bootstrap4/js/popper.min.js"></script> -->
-	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/admin-home.css' %}">
 </head>
 <body>
 
@@ -55,7 +52,7 @@
 	<section class="bg-light">
 		<div class="container-fluid">
 			<nav class="navbar navbar-expand-lg navbar-light ">
-
+				
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -79,27 +76,26 @@
 							<a class="nav-link" href="admin-info-server.html">Unread Messages <span><i class="fas fa-bell"></i></span></a>
 						</li> -->
 					</ul>
-
+					
 				</div>
 
 				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 20px; position: relative;"><i class="fas fa-bell fa-2x"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
-
+				
 				<div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-					<i class="fas fa-ellipsis-v"></i>
+						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
 						<a class="dropdown-item" href="" onclick="myfun()">Broadcast</a>
 						<a class="dropdown-item" href="#Statics" onclick="myfun()">Statistics</a>
 						<a class="dropdown-item" href="#login-history" onclick="myfun1()">Login History</a>
 						<a class="dropdown-item" href="#password-history" onclick="myfun2()">Password History</a>
 						<a class="dropdown-item" href="#change-passward" onclick="myfun3()">Change Password</a>
-						<a class="dropdown-item" href="admin-home" >Exit</a>
+						<a class="dropdown-item" href="admin-home">Exit</a>
 
 					</div>
 				</div>
-
+				
 
 			</nav>
 		</div>
@@ -108,13 +104,226 @@
 	<section class="bg-detail">
 		<div class="container-fluid">
 			<div class="row justify-content-center ">
+			<!-- 	<div class="col-md-3 bg-user">
+					<div class="row">
+						<ul class="nav py-2">
+							
+							<li class="nav-item display-block">
+								<a class="nav-link font-weight-bold text-success" href="#">Unread Messages ( 4 )</a>
+							</li>
+						</ul>
+					</div>
 
+					<div class="row" style="overflow:scroll; height:520px;">
+						<div class="col-md ">
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom border-top pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<a href="">
+								<div class="d-flex bd-highlight border-bottom pt-2">
+									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+										<p><i class="fas fa-circle fa-1x"></i> Online</p>
+									</div>
+								</div>
+							</a>
+
+							<div class="d-flex bd-highlight border-bottom pt-2">
+								<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
+								<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
+									<p><i class="fas fa-circle fa-1x"></i> Online</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
 				<div class="col-md-10 py-2 px-5">
 
-					<div class="row justify-content-center bg-button-1 p-4 my-5" id="Statics">
+					
 
+					<!-- <div class="row justify-content-center bg-button-1 p-4">
+						<div class="col-md text-center mb-2">
+							<div class="card">
+								<div class="box">
+									<div class="percent">
+										<svg>
+											<circle cx="50"  cy="50" r="50"></circle>
+											<circle cx="50"  cy="50" r="50"></circle>
+										</svg>
+										<div class="text">
+											<h5>17</h5>
+										</div>
+									</div>
+									<p>Seller</p>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-md text-center mb-2">
+							<div class="card">
+								<div class="box">
+									<div class="percent">
+										<svg>
+											<circle cx="50"  cy="50" r="50"></circle>
+											<circle cx="50"  cy="50" r="50"></circle>
+										</svg>
+										<div class="text">
+											<h5>10</h5>
+										</div>	
+									</div>
+									<p>Tester</p>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-md text-center mb-2">
+							<div class="card">
+								<div class="box">
+									<div class="percent">
+										<svg>
+											<circle cx="50"  cy="50" r="50"></circle>
+											<circle cx="50"  cy="50" r="50"></circle>
+										</svg>
+										<div class="text">
+											<h5>20</h5>
+										</div>
+									</div>
+									<p>Information</p>
+								</div>
+								
+							</div>
+						</div>
+
+
+					</div> -->
+
+					<div class="row justify-content-center bg-button-1 p-4 my-5" id="Statics">
+						
 						<div class="col-md">
-							<h4 class="">STATISTICS</h4>
+							<h4 class="">statistics</h4>
+							<!-- <div class="row">
+								<div class="col-md py-3"><h5 class="font-weight-bold">1. Seller</h5></div>
+							</div>
+							<div class="row">
+								<div class="col-md ">
+									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Total Number Of seller </h6>
+									<p>17 </p>
+								</div>
+
+								<div class="col-md ">
+									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Total Number Of Seller is Online</h6>
+									<p>5 </p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md py-3"><h5 class="font-weight-bold">2. Tester</h5></div>
+							</div>
+							<div class="row">
+								<div class="col-md ">
+									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Total Number Of Tester </h6>
+									<p>10 </p>
+								</div>
+
+								<div class="col-md ">
+									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Total Number Of Tester is Online</h6>
+									<p>2 </p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md py-3"><h5 class="font-weight-bold">3. Information Server</h5></div>
+							</div>
+							<div class="row">
+								<div class="col-md ">
+									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Total Number Of Information Server </h6>
+									<p>20 </p>
+								</div>
+
+								<div class="col-md ">
+									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Total Number Of Information Server Online</h6>
+									<p>4</p>
+								</div>
+							</div> -->
+
 							<div class="row">
 								<div class="col-md">
 									<div class="table-responsive">
@@ -137,7 +346,7 @@
 												</tr>
 
 												<tr>
-													<th scope="row">Rester</th>
+													<th scope="row">Tester</th>
 													<td>20</td>
 													<td>15</td>
 													<td>5</td>
@@ -153,7 +362,7 @@
 												</tr>
 
 												<tr>
-													<th scope="row">User</th>
+													<th scope="row">Users</th>
 													<td>20</td>
 													<td>15</td>
 													<td>5</td>
@@ -165,19 +374,20 @@
 								</div>
 							</div>
 
-
+							
 						</div>
 
 					</div>
 
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="login-history" style="display: none;">
-
+						
 						<div class="col-md">
-							<h4 class="">Login History</h4>
+							<h4 class="">Login History<span class="float-right">
+							<a href="admin-home" type="button" class="btn btn-danger btn-sm">Return</a></span></h4>
 							<div class="row">
 								<div class="col-md-6 py-3">
-									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Number Of Times Admin Been Logged in </h6>
-									<p>9 times</p>
+									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Number Of times Admin Been Logged in </h6>
+									<p>2 times</p>
 								</div>
 							</div>
 
@@ -190,7 +400,7 @@
 												<tr>
 													<th scope="col">Sr. No.</th>
 													<th scope="col">Date</th>
-													<th scope="col">Time</th>
+													<th scope="col">TIme</th>
 													<th scope="col">Device Name</th>
 													<th scope="col">Login IP Address</th>
 													<th scope="col">Duration Of Online</th>
@@ -199,15 +409,21 @@
 											</thead>
 											<tbody>
 												<tr>
-													{% for item in num %}
-													<th scope="row">{{forloop.counter}}</th>
+													<th scope="row">1</th>
 													<td>20/06/5</td>
 													<td>5:30pm</td>
 													<td>Samsung</td>
 													<td>10.2.0.10:8090</td>
-													<td>{{item}} minutes</td>
+													<td>30 minutes</td>
 												</tr>
-											{% endfor %}
+												<tr>
+													<th scope="row">2</th>
+													<td>19/06/5</td>
+													<td>3:32pm</td>
+													<td>Chrome</td>
+													<td>10.2.0.10:7690</td>
+													<td>45 minutes</td>
+												</tr>
 											</tbody>
 										</table>
 									</div>
@@ -219,34 +435,25 @@
 
 
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="change-passward" style="display: none;">
-
+						
 						<div class="col-md">
-							<h4 class="">Change Password</h4>
+							<h4 class="">Change Password<span class="float-right"></span></h4>
 							<div class="row ">
 								<div class="col-md-8 py-3">
 									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change Your Current Password </h6>
 									<form>
+									  <div class="form-group">
+									    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Old Password ">
+									  </div>
+									  <div class="form-group">
+									     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter New Password ">
+									  </div>
 
-										<div class="form-row">
-											<div class="col-md mb-2">
-													<input type="Password" class="form-control" placeholder=" Enter Old Password">
-											</div>
-										</div>
-
-										<div class="form-row">
-											<div class="col-md mb-2">
-												<input type="Password" class="form-control" placeholder=" Enter New Password">
-											</div>
-											<div class="col-md mb-2">
-												<input type="Password" class="form-control" placeholder="Confirm Password">
-											</div>
-										</div>
-										<div class="form-row">
-											<div class="col-md-4 mb-2">
-												<button  type="submit" class="btn btn-danger btn-block">Proceed</button>
-											</div>
-										</div>
-
+									  <div class="form-group">
+									     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Confirm New Password ">
+									  </div>
+									<button class="btn btn-success" type="submit">Proceed</button>
+									<button class="btn btn-secondary" type="submit" onclick="cancel()">Cancel</button>
 									</form>
 								</div>
 							</div>
@@ -255,10 +462,10 @@
 					</div>
 
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="password-history" style="display: none;">
-
+						
 						<div class="col-md">
 
-							<h4 class=""> Password HistoryY</h4>
+							<h4 class=""> Password HISTORY<span class="float-right"><a href="admin-home" type="button" class="btn btn-danger btn-sm">Return</a></span></h4>
 							<div class="table-responsive">
 								<table class="table">
 									<thead>
@@ -272,14 +479,18 @@
 										</tr>
 									</thead>
 									<tbody>
-									{% for item in num %}
 										<tr>
-											<th scope="row">{{forloop.counter}}</th>
-											<td>02//5/20</td>
+											<th scope="row">1</th>
+											<td>02/5/20</td>
 											<td>Samsung</td>
 											<td>abc@12345678</td>
 										</tr>
-									{% endfor %}
+										<tr>
+											<th scope="row">2</th>
+											<td>02/9/19</td>
+											<td>Apple</td>
+											<td>abc@172345678</td>
+										</tr>
 									</tbody>
 								</table>
 							</div>
@@ -287,12 +498,38 @@
 
 					</div>
 
+					<!-- <div class="row justify-content-center py-3 bg-button-1 m-4">
+						<div class="col-md">
+							<button type="button" class="btn btn-primary"> Admin Login Detail</button>
+							<div class="">
+								<h5>Number Of times Admin Been Logged in  <span>5 Times</span></h5>
+								<h5>Admin Login History</h5>
+								<ol>
+									 <li>	
+									 	20/01/20 <span> 50:30 Pm</span>
+								     </li>
+
+								</ul>
+							</div>
+						</div>
+						
+					</div> -->
+
+					<!-- <div class="row justify-content-center py-3 bg-button-1 m-4">
+						<div class="col-md">
+							<button type="button" class="btn btn-primary"> Admin Login Detail</button>
+						</div>
+								
+					</div> -->
 				</div>
 			</div>
 
 
 		</div>
 	</section>
+
+
+
 
 
 	<script type="text/javascript">
