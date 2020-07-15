@@ -155,6 +155,10 @@ def tester_pwg_sublist(request):
     return render(request, 'tesafe/tester-pwg-sublist.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
 
 
+def transfer_seller(request):
+    return render(request, 'seller/transfer-seller.html')
+
+
 
 def names_view(request):
     ctx = {}

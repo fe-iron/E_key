@@ -1,9 +1,19 @@
 *{
     margin: 0;
     padding: 0;
+    
+}
+
+
+.navbar .nav-link{
     font-family: 'sen' ,sans-serif;
 }
 
+
+h1,h2,h3,h4,h5,h6,p,a,.table, .table td{
+    font-family: 'Lato', sans-serif;
+    font-weight: 560;
+}
 
 
 /*.bg-light {
@@ -82,20 +92,20 @@ border-bottom: 1px solid #e2e2e2;
 }
 
 .bg-detail p{
-	font-size: 14px;
+    font-size: 14px;
 }
 
 .bg-detail a{
-	text-decoration: none;
-	
+    text-decoration: none;
+    
 }
 
 
 svg{
-	position: relative;
-	height: 130px;
-	width: 150px;
-	z-index: 1000;
+    position: relative;
+    height: 130px;
+    width: 150px;
+    z-index: 1000;
 }
 
 svg circle {
@@ -110,8 +120,8 @@ svg circle {
 
 svg circle:nth-child(2)
 {
-	stroke-dasharray: 220;
-	stroke-dashoffset:200;	
+    stroke-dasharray: 220;
+    stroke-dashoffset:200;  
 }
 
 .card:nth-child(1) svg circle:nth-child(2) {
@@ -121,17 +131,17 @@ svg circle:nth-child(2)
 
 
 .card:nth-child(2) svg circle:nth-child(2){
-	stroke: green!important;
+    stroke: green!important;
 }
 
 
 
 .card:nth-child(3) svg circle:nth-child(2){
-	stroke: #00ff43;
+    stroke: #00ff43;
 }
 
 .card:nth-child(4) svg circle:nth-child(2){
-	stroke: #00ff43;
+    stroke: #00ff43;
 }
 
 
@@ -175,16 +185,6 @@ svg circle:nth-child(2)
 }
 
 
-.bg-button-1 h4::after {
-    content: "";
-    width: 100%;
-    position: absolute;
-    height: 1.5px;
-    background: blue!important;
-    left: 0;
-    right: 0;
-    bottom: -10px;
-}
 
 
 
@@ -205,9 +205,108 @@ svg circle:nth-child(2)
 }
 
 
+.dropdown, .dropleft, .dropright, .dropup {
+    position: relative;
+    display: inline;
+}
+
+.table .dropdown-toggle::after {
+    display: none;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+
+
+header .dropdown-toggle::after {
+    display: none;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+
+
+.fa-ellipsis-v {
+    font-size: 20px;
+}
+
+
+.btn-secondary {
+    color: #fff;
+    background-color: #d43100;
+    border-color: #d43100;
+}
+
+.btn-secondary:hover {
+    color: #fff;
+    background-color: #b13608;
+    border-color: #b13608;
+}
+
+.btn-secondary.focus, .btn-secondary:focus {
+    color: #fff;
+    background-color: #a53b09;
+    border-color: #a53b09;
+    box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.03);
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: #b74915;
+    border-color: #b74915;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active:focus, .btn-secondary:not(:disabled):not(.disabled):active:focus, .show>.btn-secondary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(248, 252, 255, 0.5);
+}
+
+
+
+.btn-danger {
+    position: fixed;
+    bottom: 100px;
+    left:48%;
+}
+
+
+@media (min-width: 778px) and (max-width: 930px){
+.btn-danger {
+    position: fixed;
+   bottom:20px;
+    left:42%;
+}
+}
+
+
+
+@media (min-width:570px ) and (max-width:778px){
+.btn-danger {
+    position: fixed;
+   bottom:20px;
+    left:45%;
+}
+}
+
+
 
 @media(max-width: 570px){
     h4{
         font-size: 1rem;
     }
+
+
+.btn-danger {
+    position: fixed;
+   bottom:20px;
+    left:45%;
 }
+}
+

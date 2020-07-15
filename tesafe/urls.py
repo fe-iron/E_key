@@ -22,6 +22,7 @@ urlpatterns = [
     path("pwg-getback", views.pwg_getback, name="pwg-getback"),
     path("pwg-getback-sublist", views.pwg_getback_sublist, name="pwg-getback-sublist"),
     path("tester-pwg-sublist", views.tester_pwg_sublist, name="pwg-getback-sublist"),
+    path("transfer-seller", views.transfer_seller, name="transfer-seller"),
     # path("webAdmin_register", views.webAdmin_register.as_view(), name="webAdmin_register"),
 
 ]
