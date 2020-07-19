@@ -397,6 +397,24 @@ header .dropdown-toggle::after {
 }
 
 
+
+.accordion .pwg-list{
+    margin-left: 150px;
+}
+
+#collapseOne, #collapseTwo, #collapseThree
+
+{
+    margin-left: 200px;
+}
+
+@media (max-width: 1230px){
+.accordion .pwg-list{
+    margin-left: 100px;
+}
+}
+
+
 @media (min-width: 778px) and (max-width: 930px){
 .floatingButtonHere {
     position: fixed;
@@ -442,5 +460,17 @@ header .dropdown-toggle::after {
     position: fixed;
    bottom:20px;
     left:29%;
+}
+.accordion .pwg-list{
+    margin-left: 30px;
+}
+.h5, h5 {
+    font-size: 1rem;
+}
+
+#collapseOne, #collapseTwo, #collapseThree
+
+{
+    margin-left: 45px;
 }
 }

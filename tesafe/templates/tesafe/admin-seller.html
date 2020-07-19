@@ -54,24 +54,24 @@
 					
 				</div>
 
+
 				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
-				
+
 				<div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
-						<a class="dropdown-item" href="">Broadcast</a>
-						<a class="dropdown-item" href="" >Chat</a>
 						<a class="dropdown-item" href="#" onclick="myFunction()">Delete</a>
 						<a class="dropdown-item" href="#" onclick="myFunction1()"> Freeze </a>
-
+						<a class="dropdown-item" href="#" onclick="myFunction2()">Chat</a>
+						<a class="dropdown-item" href="#" onclick="myFunction2()">Broadcast</a>
 						<!-- <a class="dropdown-item" href="#div-3" onclick="myfun2()">Tested PWG List</a> -->
 						<a class="dropdown-item" href="admin-home" >Exit</a>
 					</div>
 				</div>
-				
+
 
 			</nav>
 		</div>
@@ -82,9 +82,9 @@
 			<div class="row justify-content-center">
 
 				<div class="col-md-10  py-5 px-5">
-					
+
 					<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-1" >
-						
+
 						<div class="col-md">
 
 							<header>
@@ -101,19 +101,21 @@
 							</header>
 
 
-							
+
 
 							<div class="table-responsive">
 
-								
+
 								<br>
 								<table class="table">
 									<thead>
 										<tr>
-											
+
 											<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere" disabled> <i class="fas fa-sort-down"></i></th>
 											<th scope="col">Name</th>
 											<th scope="col">Action</th>
+
+
 										</tr>
 									</thead>
 									<tbody id="myTable">
@@ -137,7 +139,7 @@
 
 										<tr>
 											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book2"></th>
-											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"></span> Naqui</td>
+											<td><span><img src="{% static 'tesafe/images/tesafe.jpg' %}" height="40" width="40" class="rounded-circle"></span> Frank</td>
 											<td><a href="transfer" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
@@ -156,7 +158,7 @@
 
 										<tr>
 											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book3"></th>
-											<td><span><img src="{% static 'tesafe/images/tesafe.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Frank</td>
+											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Naqui</td>
 											<td><a href="transfer" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
@@ -174,7 +176,7 @@
 
 										<tr>
 											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book4"></th>
-											<td><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Natasha</td>
+											<td><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Jennifer</td>
 											<td><a href="transfer" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
@@ -189,7 +191,7 @@
 												</div>
 											</div></td>
 										</tr>
-										
+
 									</tbody>
 								</table>
 							</div>
@@ -236,13 +238,13 @@
 									  </div>
 
 									  <div class="form-group">
-									     <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Contact Number ">
+									     <input type="tel" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Contact Number ">
 									  </div>
 
 									  <div class="form-group">
 									     <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Password ">
 									  </div>
-									  
+
 									<button class="btn btn-primary" type="submit">Submit</button>
 												<button class="btn btn-danger" type="submit" onclick="cancel()">Cancel</button>
 									</form>
@@ -290,7 +292,7 @@
 
 							</table>
 
-							 <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Transfer Tested PWG to Seller</button>
+							<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Transfer Tested PWG to Seller</button>
 							<!-- Modal -->
 							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<div class="modal-dialog" role="document">
@@ -388,7 +390,7 @@
 
 <section class="floatingButtonHere" style="display: none;">
 	<a href="" class=" btn btn-primary" data-toggle="modal" data-target="#exampleModal">Confirm</a>
-	<a href="admin-seller" class=" btn btn-danger">Cancel</a>
+	<a href="tester-tested-pwg-list" class=" btn btn-danger">Cancel</a>
 </section>
 
 
@@ -400,11 +402,11 @@
 
 <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
-		<div class="modal-content">  
+		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title font-weight-bold">Login History</h5>
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			</div>            
+			</div>
 			<div class="modal-body">
 				<div class="table-responsive">
 					<table class="table">
@@ -412,7 +414,7 @@
 							<tr>
 								<th scope="col">Sr. No.</th>
 								<th scope="col">Date</th>
-								<th scope="col">TIme</th>
+								<th scope="col">Time</th>
 								<th scope="col">Device Name</th>
 								<th scope="col">Login IP Address</th>
 								<th scope="col">Duration Of Online</th>
@@ -431,10 +433,10 @@
 							<tr>
 								<th scope="row">2</th>
 								<td>20/06/5</td>
-								<td>5:00am</td>
+								<td>5:30pm</td>
 								<td>Samsung</td>
 								<td>10.2.0.10:8090</td>
-								<td>10 minutes</td>
+								<td>30 minutes</td>
 							</tr>
 						</tbody>
 					</table>
@@ -516,8 +518,8 @@
 	$(function() {
 		$('.pop').on('click', function() {
 			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-			$('#imagemodal').modal('show');   
-		});     
+			$('#imagemodal').modal('show');
+		});
 	});
 
 
@@ -602,6 +604,15 @@ function myFunction() {
 }
 
 function myFunction1() {
+  document.getElementById("checkAll").disabled = false;
+    document.getElementById("book1").disabled = false;
+    document.getElementById("book2").disabled = false;
+    document.getElementById("book3").disabled = false;
+    document.getElementById("book4").disabled = false;
+}
+
+
+function myFunction2() {
   document.getElementById("checkAll").disabled = false;
     document.getElementById("book1").disabled = false;
     document.getElementById("book2").disabled = false;

@@ -411,6 +411,17 @@ header .form-control {
     border-color: #ffffff;
     box-shadow: 0 0 0 0.2rem rgba(216, 217, 219, 0);
 }
+
+
+
+
+
+
+
+
+
+
+
 /*
 
 .table thead th {
@@ -457,9 +468,23 @@ header .form-control {
     border: 0;
 }
 
+.accordion .pwg-list{
+    margin-left: 150px;
+}
+
+#collapseOne, #collapseTwo, #collapseThree
+
+{
+    margin-left: 200px;
+}
 
 
 
+@media (max-width: 1230px){
+.accordion .pwg-list{
+    margin-left: 100px;
+}
+}
 
 
 @media (min-width: 778px) and (max-width: 930px){
@@ -508,4 +533,19 @@ header .form-control {
    bottom:20px;
     left:29%;
 }
+
+.accordion .pwg-list{
+    margin-left: 30px;
+}
+.h5, h5 {
+    font-size: 1rem;
+}
+
+#collapseOne, #collapseTwo, #collapseThree
+
+{
+    margin-left: 45px;
+}
+
+
 }
