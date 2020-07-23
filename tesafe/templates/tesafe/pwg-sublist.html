@@ -87,20 +87,32 @@
 
 				</div>
 
-
-
                     <a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;">
                         <i class="fas fa-bell"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left: 15px;">1</span>
                     </a>
 
-                    <div class="dropdown dropleft float-xl-right mb-0">
+                    <div class="dropdown dropleft float-xl-right mb-0" id="untested-downlist">
                        <button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#" onclick="myFunction()">Get Back</a>
-                            <a class="dropdown-item" href="#" onclick="myfun()">Transfer To Seller</a>
-                            <a class="dropdown-item" href="#" onclick="myfun2()">Assign To Seller</a>
+                            <a class="dropdown-item" href="#" onclick="myFunction1()">Assign To Tester</a>
+                            <a class="dropdown-item" href="#" onclick="myfun3()">Freeze </a>
+                            <a class="dropdown-item" href="#" onclick="myfun4()">Return</a>
+                            <a class="dropdown-item" href="admin-home">Exit</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown dropleft float-xl-right mb-0" style="display: none;"  id="tested-downlist">
+                       <button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#" onclick="myFunction()">Get Back</a>
+                            <a class="dropdown-item" href="#" onclick="myFunction1()">Transfer To Seller</a>
+                            <a class="dropdown-item" href="#" onclick="myFunction2()">Assign To Tester</a>
                             <a class="dropdown-item" href="#" onclick="myfun3()">Freeze </a>
                             <a class="dropdown-item" href="#" onclick="myfun4()">Return</a>
                             <a class="dropdown-item" href="admin-home">Exit</a>
@@ -215,7 +227,7 @@
                                                 <th scope="col" style="position: relative;"><input type="checkbox" name="checkAll1" id="checkAll1" value="floatingButtonHere" disabled=""> <i class="fas fa-sort-down"></i></th>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Location</th>
-                                                <th scope="col">OwnerNme</th>
+                                                <th scope="col">Owner Nme</th>
                                                 <th scope="col">Action</th>
                                             </tr>
                                         </thead>
@@ -325,7 +337,7 @@
         				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         			</div>
         			<div class="modal-body text-center">
-                        <h5>It is Accessed 4 times</h5>
+        				It is Accessed 4 times
         			</div>
         		</div>
         	</div>
@@ -335,7 +347,7 @@
 
 <section class="floatingButtonHere" style="display: none;">
     <a href="" class=" btn btn-primary" data-toggle="modal" data-target="#exampleModal">Confirm</a>
-    <a href="tester-tested-pwg-list" class=" btn btn-danger">Cancel</a>
+    <a href="pwg-sublist" class=" btn btn-danger">Cancel</a>
 </section>
 
 
@@ -435,12 +447,14 @@
             }
 
             function myfun3() {
-                document.getElementById("div-1").style.display = "none";
-                document.getElementById("div-2").style.display = "none";
-                document.getElementById("div-3").style.display = "none";
-                document.getElementById("div-4").style.display = "block";
-                document.getElementById("div-5").style.display = "none";
-                document.getElementById("div-6").style.display = "none";
+                 document.getElementById("checkAll").disabled = false;
+    document.getElementById("book1").disabled = false;
+    document.getElementById("book2").disabled = false;
+    document.getElementById("book3").disabled = false;
+    document.getElementById("book4").disabled = false;
+     document.getElementById("book5").disabled = false;
+      document.getElementById("book6").disabled = false;
+       document.getElementById("checkAll1").disabled = false;
             }
 
             function myfun4() {
@@ -465,11 +479,15 @@
     function tested() {
         document.getElementById("untested").style.display = "none";
         document.getElementById("tested").style.display = "block";
+        document.getElementById("tested-downlist").style.display = "block";
+        document.getElementById("untested-downlist").style.display = "none";
     }
 
     function untested() {
         document.getElementById("untested").style.display = "block";
         document.getElementById("tested").style.display = "none";
+         document.getElementById("tested-downlist").style.display = "none";
+         document.getElementById("untested-downlist").style.display = "block";
     }
 
 
@@ -504,11 +522,26 @@ function myFunction() {
 }
 
 function myFunction1() {
-  document.getElementById("checkAll").disabled = false;
+   document.getElementById("checkAll").disabled = false;
     document.getElementById("book1").disabled = false;
     document.getElementById("book2").disabled = false;
     document.getElementById("book3").disabled = false;
     document.getElementById("book4").disabled = false;
+     document.getElementById("book5").disabled = false;
+      document.getElementById("book6").disabled = false;
+       document.getElementById("checkAll1").disabled = false;
+}
+
+
+function myFunction2() {
+   document.getElementById("checkAll").disabled = false;
+    document.getElementById("book1").disabled = false;
+    document.getElementById("book2").disabled = false;
+    document.getElementById("book3").disabled = false;
+    document.getElementById("book4").disabled = false;
+     document.getElementById("book5").disabled = false;
+      document.getElementById("book6").disabled = false;
+       document.getElementById("checkAll1").disabled = false;
 }
 
 

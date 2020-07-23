@@ -54,7 +54,6 @@
 					
 				</div>
 
-
 				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
 
 				<div class="dropdown  dropleft float-xl-right mb-0" >
@@ -66,7 +65,7 @@
 						<a class="dropdown-item" href="#" onclick="myFunction()">Delete</a>
 						<a class="dropdown-item" href="#" onclick="myFunction1()"> Freeze </a>
 						<a class="dropdown-item" href="#" onclick="myFunction2()">Chat</a>
-						<a class="dropdown-item" href="#" onclick="myFunction2()">Broadcast</a>
+						<a class="dropdown-item" href="">Broadcast</a>
 						<!-- <a class="dropdown-item" href="#div-3" onclick="myfun2()">Tested PWG List</a> -->
 						<a class="dropdown-item" href="admin-home" >Exit</a>
 					</div>
@@ -145,7 +144,7 @@
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
 												<div class="dropdown-menu">
-
+													<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
 													<a class="dropdown-item" href="">Chat</a>
 													<a class="dropdown-item" href=""> Payment</a>
 													<a class="dropdown-item pop" href="#" >Login History</a>
@@ -176,7 +175,7 @@
 
 										<tr>
 											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book4"></th>
-											<td><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Jennifer</td>
+											<td><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Jacquelin</td>
 											<td><a href="transfer" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
@@ -238,7 +237,7 @@
 									  </div>
 
 									  <div class="form-group">
-									     <input type="tel" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Contact Number ">
+									     <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Contact Number ">
 									  </div>
 
 									  <div class="form-group">
@@ -246,7 +245,7 @@
 									  </div>
 
 									<button class="btn btn-primary" type="submit">Submit</button>
-												<button class="btn btn-danger" type="submit" onclick="cancel()">Cancel</button>
+									<button class="btn btn-danger" type="submit" onclick="cancel()">Cancel</button>
 									</form>
 								</div>
 							</div>
@@ -388,9 +387,9 @@
 </section>
 
 
-<section class="floatingButtonHere" style="display: none;">
-	<a href="" class=" btn btn-primary" data-toggle="modal" data-target="#exampleModal">Confirm</a>
-	<a href="tester-tested-pwg-list" class=" btn btn-danger">Cancel</a>
+<section class="floatingButtonHere" style="display: none;" id="floating-button">
+	<a href="" class=" btn btn-primary" >Confirm</a>
+	<a href="admin-seller" class=" btn btn-danger">Cancel</a>
 </section>
 
 
@@ -430,14 +429,6 @@
 								<td>10.2.0.10:8090</td>
 								<td>30 minutes</td>
 							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>20/06/5</td>
-								<td>5:30pm</td>
-								<td>Samsung</td>
-								<td>10.2.0.10:8090</td>
-								<td>30 minutes</td>
-							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -445,59 +436,6 @@
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <script type="text/javascript">
@@ -564,6 +502,7 @@
 		document.getElementById("div-1").style.display = "none";
 		document.getElementById("div-2").style.display = "block";
 		document.getElementById("div-3").style.display = "none";
+		document.getElementById("floating-button").style.display = "none";
 
 
 	}

@@ -85,22 +85,26 @@
 					
 				</div>
 
+
 				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
-				
+
 				<div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="">Broadcast</a>
-						<a class="dropdown-item" href="#div-4" onclick="myfun5()">Add New</a>
-						<a class="dropdown-item" href="#">Delete</a>
-
+						<a class="dropdown-item" href="#" onclick="myfun5()">Add New</a>
+						<a class="dropdown-item" href="#" onclick="myFunction()">Delete</a>
+						<a class="dropdown-item" href="#" onclick="myFunction1()"> Freeze </a>
+						<a class="dropdown-item" href="#" onclick="myFunction2()">Chat</a>
+						<!-- <a class="dropdown-item" href="#div-3" onclick="myfun2()">Change Password</a> -->
+						<a class="dropdown-item" href="#div-2" onclick="myfun4()">Summary PWG</a>
 
 						<a class="dropdown-item" href="admin-home" >Exit</a>
 					</div>
 				</div>
-				
+
 
 			</nav>
 		</div>
@@ -112,7 +116,7 @@
 			<!-- 	<div class="col-md-3 bg-user">
 					<div class="row">
 						<ul class="nav py-2">
-							
+
 							<li class="nav-item display-block">
 								<a class="nav-link font-weight-bold text-success" href="#">Unread Messages ( 4 )</a>
 							</li>
@@ -222,7 +226,7 @@
 				</div> -->
 				<div class="col-md-10 py-5 px-5">
 						<!-- <div class="row bg-button-2 p-4">
-							
+
 							<div class="col-md mb-2" >
 								<div class="card" onclick="myfun()">
 									<div class="card-body">
@@ -244,7 +248,7 @@
 							</div>
 
 							<div class="col-md mb-2" >
-								<div class="card px-3" onclick="myfun2()">
+								<div class="card px-3" >
 									<div class="card-body">
 										<div class="card-title">
 											PWG INFO SERVER
@@ -258,7 +262,7 @@
 						<div class="row  bg-button-2 p-4 mt-3" id="div-2">
 
 							<div class="col-md-6">
-								<h4 class="font-weight-bold">PWG Server Summary</h4>
+								<h4 class="font-weight-bold">Summary PWG</h4>
 								<div class="tabl-responsive">
 									<table class="table">
 										<thead>
@@ -275,7 +279,7 @@
 												<td>500</td>
 												<td>100</td>
 												<td>400</td>
-												
+
 											</tr>
 
 											<tr>
@@ -283,7 +287,7 @@
 												<td>580</td>
 												<td>80</td>
 												<td>500</td>
-												
+
 											</tr>
 										</tbody>
 
@@ -298,7 +302,7 @@
 
 								<header>
 									<nav class="navbar navbar-light  venue-registration">
-										<a class="h4 text-dark font-weight-bold pt-2">PWG SERVERS</a>
+										<a class="h4 text-dark font-weight-bold pt-2">PWG SERVER LIST</a>
 										<form class="form-inline">
 											<div class="input-group-prepend mb-1 mr-2">
 												<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
@@ -320,7 +324,7 @@
 										<thead>
 											<tr>
 
-												<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll"> <i class="fas fa-sort-down"></i></th>
+												<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere" disabled> <i class="fas fa-sort-down"></i></th>
 												<th scope="col">Name</th>
 												<th scope="col">Action</th>
 
@@ -330,7 +334,7 @@
 										<tbody id="myTable">
 											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
 
-												<th><input type="checkbox" name="book"></th>
+												<th><input type="checkbox" name="book" id="book1" value="floatingButtonHere" disabled></th>
 												<td id="lblEmp"> PWGS-A</td>
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 													<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -340,10 +344,7 @@
 														<a class="dropdown-item" href="pwg-sublist">PWG</a>
 														<a class="dropdown-item" href="#">Chat</a>
 														<!-- <a class="dropdown-item" href="">Payment</a> -->
-
 														<a class="dropdown-item pop1" href="#" > Login Record </a>
-
-														<a class="dropdown-item" href="#div-3" onclick="myfun2()">Change Password</a>
 														<a class="dropdown-item pop" href="#" >Password History</a>
 														<a class="dropdown-item pop2" href="#" >Change Name</a>
 														<a class="dropdown-item" href="" >Delete</a>
@@ -353,7 +354,7 @@
 											</tr>
 											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
 
-												<th><input type="checkbox" name="book"></th>
+												<th><input type="checkbox" name="book" id="book2" value="floatingButtonHere" disabled></th>
 												<td>PWGS-B</td>
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 													<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -364,16 +365,15 @@
 														<a class="dropdown-item" href="#">Chat</a>
 														<!-- <a class="dropdown-item" href="">Payment</a> -->
 														<a class="dropdown-item pop1" href="#" > Login Record </a>
-														<a class="dropdown-item" href="#div-3" onclick="myfun2()">Change Password</a>
 														<a class="dropdown-item pop" href="#" >Password History</a>
-														<a class="dropdown-item" href="" >Change Name</a>
+														<a class="dropdown-item pop2" href="#" >Change Name</a>
 														<a class="dropdown-item" href="" >Delete</a>
 													</div>
 												</div></td>
 											</tr>
 
 											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
-												<th><input type="checkbox" name="book"></th>
+												<th><input type="checkbox" name="book" id="book3" value="floatingButtonHere" disabled></th>
 												<td>PWGS-C</td>
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 													<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -384,16 +384,15 @@
 														<a class="dropdown-item" href="#">Chat</a>
 														<!-- <a class="dropdown-item" href="">Payment</a> -->
 														<a class="dropdown-item pop1" href="#" > Login Record </a>
-														<a class="dropdown-item" href="#div-3" onclick="myfun2()">Change Password</a>
 														<a class="dropdown-item pop" href="#" >Password History</a>
-														<a class="dropdown-item" href="" >Change Name</a>
+														<a class="dropdown-item pop2" href="#" >Change Name</a>
 														<a class="dropdown-item" href="" >Delete</a>
 													</div>
 												</div></td>
 											</tr>
 
 											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
-												<th><input type="checkbox" name="book"></th>
+												<th><input type="checkbox" name="book" id="book4" value="floatingButtonHere" disabled></th>
 												<td>PWGS-D</td>
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 													<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -404,9 +403,8 @@
 														<a class="dropdown-item" href="#">Chat</a>
 														<!-- <a class="dropdown-item" href="">Payment</a> -->
 														<a class="dropdown-item pop1" href="#" > Login Record </a>
-														<a class="dropdown-item" href="#div-3" onclick="myfun2()">Change Password</a>
 														<a class="dropdown-item pop" href="#" >Password History</a>
-														<a class="dropdown-item" href="" >Change Name</a>
+														<a class="dropdown-item pop2" href="#" >Change Name</a>
 														<a class="dropdown-item" href="" >Delete</a>
 													</div>
 												</div></td>
@@ -420,68 +418,42 @@
 						</div>
 
 
-						
 
-<!--						<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-3" style="display: none;">-->
 
-<!--							<div class="col-md">-->
-<!--								<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change PWGs Account Password</h5>-->
-<!--								<div class="row ">-->
-<!--									<div class="col-md-8 py-3">-->
+						<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-3" style="display: none;">
 
-<!--										<form>-->
+							<div class="col-md">
+								<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change PWGs Account Password</h5>
+								<div class="row ">
+									<div class="col-md-8 py-3">
 
-<!--											<div class="form-row">-->
-<!--												<div class="col-md mb-2">-->
-<!--													<input type="Password" class="form-control" placeholder=" Enter Old Password">-->
-<!--												</div>-->
-<!--												<div class="col-md mb-2">-->
-<!--													<input type="Password" class="form-control" placeholder=" Enter New Password">-->
-<!--												</div>-->
-<!--											</div>-->
+										<form>
 
-<!--											<div class="form-row">-->
-<!--												<div class="col-md mb-2">-->
-<!--													<input type="Password" class="form-control" placeholder=" Confirm Password">-->
-<!--												</div>-->
-<!--												<div class="col-md mb-2">-->
-<!--													<button  type="submit" class="btn btn-danger btn-block">Proceed</button>-->
-<!--												</div>-->
-<!--											</div>-->
+											<div class="form-row">
+												<div class="col-md mb-2">
+													<input type="Password" class="form-control" placeholder=" Enter Old Password">
+												</div>
+												<div class="col-md mb-2">
+													<input type="Password" class="form-control" placeholder=" Enter New Password">
+												</div>
+											</div>
 
-<!--										</form>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
+											<div class="form-row">
+												<div class="col-md mb-2">
+													<input type="Password" class="form-control" placeholder=" Enter New Password">
+												</div>
+												<div class="col-md mb-2">
+													<button  type="submit" class="btn btn-danger btn-block">Proceed</button>
+												</div>
+											</div>
 
-<!--						</div>-->
-
-					<div class="row justify-content-center bg-button-1 p-4 my-5" id="div-3" style="display: none;background-color: white;">
-
-						<div class="col-md">
-							<h4 class="">Change Password<span class="float-right"></span></h4>
-							<div class="row ">
-								<div class="col-md-8 py-3">
-									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change Your Current Password </h6>
-									<form>
-									  <div class="form-group">
-									    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Old Password ">
-									  </div>
-									  <div class="form-group">
-									     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter New Password ">
-									  </div>
-
-									  <div class="form-group">
-									     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Confirm New Password ">
-									  </div>
-									<button class="btn btn-success" type="submit">Proceed</button>
-									<button class="btn btn-secondary" type="submit" onclick="cancel()">Cancel</button>
-									</form>
+										</form>
+									</div>
 								</div>
 							</div>
+
 						</div>
 
-					</div>
 
 						<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-4" style="display: none;">
 
@@ -508,8 +480,8 @@
 									  <div class="form-group">
 									     <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Password ">
 									  </div>
-									  
-									<button class="btn btn-primary" type="submit">Submit</button>
+
+									<button class="btn btn-primary" type="submit">Sumbit</button>
 									<button class="btn btn-danger" type="submit" onclick="cancel()">Cancel</button>
 									</form>
 									</div>
@@ -529,7 +501,7 @@
 									<table class="table">
 										<thead>
 											<tr>
-												<th scope="col">Sr. No.</th>
+												<th scope="col">SL No</th>
 												<th scope="col">Name</th>
 												<th scope="col">TESTED</th>
 
@@ -559,7 +531,7 @@
 
 								</div>
 								<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Transfer Tested PWG to Seller</button>
-								<a href="admin-info-server.html" class="btn btn-danger text-white">Cancel</a>
+								<a href="admin-info-server" class="btn btn-danger text-white">Cancel</a>
 
 								<!-- Modal -->
 								<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -574,12 +546,12 @@
 											<div class="modal-body">
 												<div class="text-center" style="display: none;" id="successfully-transfer">
 													<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-													<p class="pt-2 font-weight-bold "  >Your PWG has been successfully transferred to tester</p>
+													<p class="pt-2 font-weight-bold "  >Your PWG has been successfully transfered to tester</p>
 												</div>
 												<table class="table" id="transfer-hide">
 													<thead>
 														<tr>
-															<th scope="col">Sr. No.</th>
+															<th scope="col">SL No</th>
 															<th scope="col">Name</th>
 															<th scope="col">TESTED</th>
 															<th scope="col">Select</th>
@@ -617,7 +589,7 @@
 
 														<tr>
 															<th scope="row">3</th>
-															<td>PWG-3</td>
+															<td>PWG-2</td>
 															<td><i class="fas fa-check pl-4"></i></td>
 															<td>
 																<div class="form-check">
@@ -632,7 +604,7 @@
 												</table>
 											</div>
 											<div class="modal-footer">
-												
+
 												<button type="button" class="btn btn-primary" onclick="transfer()">Transfer</button>
 											</div>
 										</div>
@@ -653,7 +625,7 @@
 									<table class="table">
 										<thead>
 											<tr>
-												<th scope="col">Sr. No.</th>
+												<th scope="col">SL No</th>
 												<th scope="col">Name</th>
 
 
@@ -679,7 +651,7 @@
 
 
 									</table>
-								</div>	
+								</div>
 
 								<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">Assign New PWG to Tester for Testing</button>
 								<a href="admin-info-server" class="btn btn-danger text-white">Cancel</a>
@@ -696,13 +668,13 @@
 											<div class="modal-body">
 												<div class="text-center" style="display: none;" id="successfully">
 													<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-													<p class="pt-2 font-weight-bold"  >Your PWG has been successfully Assigned to Tester</p>
+													<p class="pt-2 font-weight-bold "  >Your PWG has been successfully Assigned to Tester</p>
 												</div>
 												<div class="table-responsive" id="assign-hide">
 													<table class="table">
 														<thead>
 															<tr>
-																<th scope="col">Sr. No.</th>
+																<th scope="col">SL No</th>
 																<th scope="col">Name</th>
 
 																<th scope="col">Select</th>
@@ -740,7 +712,7 @@
 
 															<tr>
 																<th scope="row">3</th>
-																<td>PWG-3</td>
+																<td>PWG-2</td>
 
 																<td>
 																	<div class="form-check">
@@ -756,12 +728,12 @@
 												</div>
 											</div>
 											<div class="modal-footer">
-												
+
 												<button type="button" class="btn btn-primary" onclick="assign()">Assign</button>
 											</div>
 										</div>
 									</div>
-								</div>						
+								</div>
 
 
 							</div>
@@ -798,18 +770,18 @@
 
 	<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<div class="modal-content">  
+			<div class="modal-content">
 				<div class="modal-header">
 					<h5>Password History</h5>
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-				</div>            
+				</div>
 				<div class="modal-body text-center">
 					<div class="table-responsive">
 						<table class="table">
 							<thead>
 								<tr>
 
-									<th scope="col">Sr. No.</th>
+									<th scope="col">SL No.</th>
 									<th scope="col">Last Change</th>
 									<th scope="col">Device Name</th>
 									<th scope="col">Last Password</th>
@@ -819,15 +791,9 @@
 							<tbody>
 								<tr>
 									<th scope="row">1</th>
-									<td>02/9/19</td>
+									<td>02//5/20</td>
 									<td>Samsung</td>
 									<td>abc@12345678</td>
-								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td>12/5/20</td>
-									<td>Samsung</td>
-									<td>abc@1234566363678</td>
 								</tr>
 							</tbody>
 						</table>
@@ -840,24 +806,24 @@
 
 	<div class="modal fade" id="imagemodal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<div class="modal-content">  
+			<div class="modal-content">
 				<div class="modal-header">
 					<h5>Login Record</h5>
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-				</div>            
+				</div>
 				<div class="modal-body">
 					<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Number Of Admin Been Logged in </h6>
-					<p>2 times</p>
+					<p>5 times</p>
 					<div class="table-responsive">
 						<table class="table">
 							<thead>
 								<tr>
-									<th scope="col">Sr. No.</th>
+									<th scope="col">SL No</th>
 									<th scope="col">Date</th>
 									<th scope="col">TIme</th>
 									<th scope="col">Device Name</th>
 									<th scope="col">Login IP Address</th>
-									<th scope="col">Duration Of Online</th>
+									<th scope="col">duration Of Online</th>
 
 								</tr>
 							</thead>
@@ -868,15 +834,7 @@
 									<td>5:30pm</td>
 									<td>Samsung</td>
 									<td>10.2.0.10:8090</td>
-									<td>30 minutes</td>
-								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td>10/06/5</td>
-									<td>1:30pm</td>
-									<td>Samsung</td>
-									<td>10.12.0.10:8090</td>
-									<td>59 minutes</td>
+									<td>30minuts</td>
 								</tr>
 							</tbody>
 						</table>
@@ -889,11 +847,11 @@
 
 	<div class="modal fade" id="imagemodal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<div class="modal-content">  
+			<div class="modal-content">
 				<div class="modal-header">
-					<h5>Change Name</h5>
+					<h5>Channge Name</h5>
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-				</div>            
+				</div>
 				<div class="modal-body" id="change-name">
 					<form>
 						<div class="form-group">
@@ -906,7 +864,7 @@
 
 				<div class="modal-body text-center p-4" style="display: none;" id="successfully-changed">
 					<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-					<p class="pt-2 font-weight-bold">Your PWG has been successfully transferred to seller</p>
+					<p class="pt-2 font-weight-bold">Your PWG has been successfully transfered to seller</p>
 
 				</div>
 			</div>
@@ -915,6 +873,12 @@
 
 
 
+
+
+<section class="floatingButtonHere" style="display: none;" id="floating-button">
+	<a href="" class=" btn btn-primary" >Confirm</a>
+	<a href="admin-info-server" class=" btn btn-danger">Cancel</a>
+</section>
 
 
 
@@ -926,12 +890,21 @@
 
 	<script type="text/javascript">
 
+		$('input[type="checkbox"]').click(function(){
+		if($(this).attr("value")=="floatingButtonHere"){
+			$(".floatingButtonHere").show(150);
+		}
+	});
+
+
+
+		// change name JS
 
 		function changeLabel() {
         let lbl = document.getElementById('lblEmp');
         let empName = document.getElementById('emp').value;
 
-        lbl.innerText = empName; 
+        lbl.innerText = empName;
          // TREATS EVERY CONTENT AS TEXT.
 
         document.getElementById("change-name").style.display="none";
@@ -957,24 +930,24 @@
 $(function() {
 	$('.pop').on('click', function() {
 		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-		$('#imagemodal').modal('show');   
-	});     
+		$('#imagemodal').modal('show');
+	});
 });
 
 
 $(function() {
 	$('.pop1').on('click', function() {
 		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-		$('#imagemodal1').modal('show');   
-	});     
+		$('#imagemodal1').modal('show');
+	});
 });
 
 
 $(function() {
 	$('.pop2').on('click', function() {
 		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-		$('#imagemodal2').modal('show');   
-	});     
+		$('#imagemodal2').modal('show');
+	});
 });
 
 
@@ -1052,12 +1025,14 @@ $(function() {
 	}
 
 	function myfun5(){
+		document.getElementById("floating-button").style.display = "none";
 		document.getElementById("div-1").style.display = "none";
 		document.getElementById("div-3").style.display = "none";
 		document.getElementById("div-2").style.display = "none";
 		document.getElementById("div-6").style.display = "none";
 		document.getElementById("div-5").style.display = "none";
 		document.getElementById("div-4").style.display = "block";
+
 
 
 	}
@@ -1073,6 +1048,32 @@ $(function() {
 		document.getElementById("successfully-transfer").style.display = "block";
 	}
 
+
+
+		function myFunction() {
+  document.getElementById("checkAll").disabled = false;
+    document.getElementById("book1").disabled = false;
+    document.getElementById("book2").disabled = false;
+    document.getElementById("book3").disabled = false;
+    document.getElementById("book4").disabled = false;
+}
+
+function myFunction1() {
+  document.getElementById("checkAll").disabled = false;
+    document.getElementById("book1").disabled = false;
+    document.getElementById("book2").disabled = false;
+    document.getElementById("book3").disabled = false;
+    document.getElementById("book4").disabled = false;
+}
+
+
+function myFunction2() {
+  document.getElementById("checkAll").disabled = false;
+    document.getElementById("book1").disabled = false;
+    document.getElementById("book2").disabled = false;
+    document.getElementById("book3").disabled = false;
+    document.getElementById("book4").disabled = false;
+}
 
 
 
