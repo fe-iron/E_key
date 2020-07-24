@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Seller | Transfer-Users</title>
+	<title>Seller | Shared</title>
 
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/transfer.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'seller/css/seller-shared.css' %}">
 </head>
 <body>
 
@@ -38,10 +38,10 @@
 							<a class="nav-link "  href="seller-home">Home <span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link active" href="seller-user">User</a>
+							<a class="nav-link " href="seller-user">User</a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link" href="seller-pwg">PWG</a>
+							<a class="nav-link active" href="seller-pwg">PWG</a>
 						</li>
 						
 
@@ -52,20 +52,22 @@
 					
 				</div>
 
-								<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
-
+				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
+				
 				<div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-
-						<a class="dropdown-item" href="">Broadcaste</a>
-						<!-- <a class="dropdown-item" href="#div-3" onclick="myfun2()">Tested PWG List</a> -->
-						<a class="dropdown-item" href="admin-home" >Exit</a>
+						<!-- <a class="dropdown-item" href="">Delete</a>
+						<a class="dropdown-item" href=""> Freeze </a>
+						<a class="dropdown-item" href="" >Chat</a> -->
+						<a class="dropdown-item" href="">Broadcast</a>
+						
+						<a class="dropdown-item" href="seller-home" >Exit</a>
 					</div>
 				</div>
-
+				
 
 			</nav>
 		</div>
@@ -76,27 +78,31 @@
 			<div class="row justify-content-center">
 
 				<div class="col-md-10  py-5 px-5">
-
+					
 					<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-3">
 
 						<div class="col-md" id="div-7">
 							<header class="pb-4">
 								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">Transfer Tested PWG To User ABC</a>
+									<a class="h4 text-dark font-weight-bold pt-2">List of Shared PWG</a>
 									<form class="form-inline">
 										<div class="input-group-prepend  mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
 											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
-										<a href="seller-user" class="btn btn-danger text-white">Back</a>
+										<a href="seller-pwg" class="btn btn-danger text-white">Back</a>
 										<!-- <a href="#" class="btn btn-success ml-1 text-white" onclick="fun6()">Tested PWG List</a> -->
 									</form>
+
 								</nav>
+
+								
 							</header>
 
-
+							
 							<div class="accordion" id="accordionExample">
-								<div class="row px-5">
+
+								<div class="row px-3">
 									<div class="col-2">
 										<h5>Select</h5>
 									</div>
@@ -104,8 +110,11 @@
 										<h5 class="pl-3">Name</h5>
 									</div>
 
-
+									<div class="col-3">
+<!--										<h5>Status</h5>-->
+									</div>
 								</div>
+								
 								<div class="card">
 									<div class="card-header" id="headingOne">
 										<h2 class="mb-0">
@@ -113,46 +122,46 @@
 												<input type="checkbox"  id="checkAll" name="checkAll" value="floatingButtonHere"> <span class="pwg-list">PWGS-A</span>
 											</button>
 											<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
-
+											
 										</h2>
 									</div>
 
 									<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-										<div class="card-body px-xl-5">
+										<div class="card-body px-5">
 											<table class="table table-borderless">
 												<thead>
-													<tr>
-
-
-
-
-													</tr>
+											
 												</thead>
 												<tbody>
 													<tr>
 
 														<td><a href="#"><input type="checkbox" name="book" class="book" value="floatingButtonHere"> PWGS-A-1</a></td>
-
+<!--														<td class="status">U</td>-->
+														
 
 													</tr>
 
 													<tr>
 														<td><a href="#"><input type="checkbox" name="book" class="book" value="floatingButtonHere"> PWGS-A-12</a></td>
-
+<!--														<td class="status">U</td>-->
+														
 													</tr>
 
 													<tr>
 														<td><a href="#"><input type="checkbox" name="book" class="book" value="floatingButtonHere"> PWGS-A-3</a></td>
-
+<!--														<td class="status">U</td>-->
+														
 													</tr>
 
 													<tr>
 														<td><a href="#"><input type="checkbox" name="book" class="book" value="floatingButtonHere"> PWGS-A-4</a></td>
-
+<!--														<td class="status">T</td>-->
+														
 													</tr>
 												</tbody>
 
 											</table>
+
 										</div>
 									</div>
 								</div>
@@ -166,37 +175,33 @@
 										</h2>
 									</div>
 									<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-										<div class="card-body px-xl-5">
+										<div class="card-body px-5">
 											<table class="table table-borderless">
-												<thead>
-													<tr>
-
-
-
-
-													</tr>
-												</thead>
 												<tbody>
 													<tr>
 
 														<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" > PWGS-B-1</a></td>
-
+<!--														<td class="status">U</td>-->
+														
 
 													</tr>
 
 													<tr>
 														<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" > PWGS-B-12</a></td>
-
+<!--														<td class="status">U</td>-->
+														
 													</tr>
 
 													<tr>
 														<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" > PWGS-B-3</a></td>
-
+<!--														<td class="status">U</td>-->
+														
 													</tr>
 
 													<tr>
 														<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" > PWGS-B-4</a></td>
-
+<!--														<td class="status">T</td>-->
+														
 													</tr>
 												</tbody>
 
@@ -214,37 +219,40 @@
 										</h2>
 									</div>
 									<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-										<div class="card-body px-xl-5">
-											<table class="table">
+										<div class="card-body px-5">
+											<table class="table table-borderless">
 												<thead>
 													<tr>
 
-
-
-
+														
+														
 													</tr>
 												</thead>
 												<tbody>
 													<tr>
 
 														<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" > PWGS-C-1</a></td>
-
+<!--														<td class="status">U</td>-->
+														
 
 													</tr>
 
 													<tr>
 														<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" > PWGS-C-12</a></td>
-
+<!--														<td class="status">U</td>-->
+														
 													</tr>
 
 													<tr>
 														<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" > PWGS-C-3</a></td>
-
+<!--														<td class="status">T</td>-->
+														
 													</tr>
 
 													<tr>
 														<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" > PWGS-C-4</a></td>
-
+<!--														<td class="status">T</td>-->
+														
 													</tr>
 												</tbody>
 
@@ -259,13 +267,13 @@
 									<thead>
 										<tr>
 											<th scope="col" style="position: relative;">Select</th>
-
+											<th scope="col">Name</th>
 											<th scope="col">Total PWG</th>
 
 										</tr>
 									</thead>
 									<tbody id="myTable">
-										<tr>
+										<tr> 
 											<th>
 												<input type="checkbox"  id="checkAll" name="checkAll" value="floatingButtonHere"></th>
 												<td><a href="tester-pwg-sublist.html">PWGS-A</a><div class="dropdown">
@@ -278,7 +286,7 @@
 															<thead>
 																<tr>
 
-
+																	<th scope="col">Name</th>
 																	<th scope="col">Status</th>
 
 																</tr>
@@ -287,23 +295,23 @@
 																<tr>
 
 																	<td><a href="#"><input type="checkbox" name="book" class="book" > PWGS-A-1</a></td>
-
+																	
 
 																</tr>
 
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="book" class="book" > PWGS-A-12</a></td>
-
+																	
 																</tr>
 
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="book" class="book" > PWGS-A-3</a></td>
-
+																	<td>T</td>
 																</tr>
 
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="book" class="book" > PWGS-A-4</a></td>
-
+																	
 																</tr>
 															</tbody>
 
@@ -316,7 +324,7 @@
 											<td>20</td>
 										</tr>
 
-										<tr>
+										<tr> 
 											<th>
 												<input type="checkbox"  id="checkAll1" name="checkAll1" value="floatingButtonHere"></th>
 												<td><a href="tester-pwg-sublist.html">PWGS-B</a><div class="dropdown">
@@ -329,7 +337,7 @@
 															<thead>
 																<tr>
 
-
+																	<th scope="col">Name</th>
 																	<th scope="col">Status</th>
 
 																</tr>
@@ -338,23 +346,23 @@
 																<tr>
 
 																	<td><a href="#"><input type="checkbox" name="book1" class="book1" > PWGS-B-1</a></td>
-
+																	<td>T</td>
 
 																</tr>
 
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="book1" class="book1" > PWGS-B-12</a></td>
-
+																	<td>U</td>
 																</tr>
 
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="book1" class="book1" > PWGS-B-3</a></td>
-
+																	<td>T</td>
 																</tr>
 
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="book1" class="book1" > PWGS-B-4</a></td>
-
+																	<td>U</td>
 																</tr>
 															</tbody>
 
@@ -367,7 +375,7 @@
 
 
 										</tr>
-										<tr>
+										<tr> 
 											<th>
 												<input type="checkbox"  id="checkAll2" name="checkAll2" value="floatingButtonHere"></th>
 												<td><a href="tester-pwg-sublist.html">PWGS-C</a><div class="dropdown">
@@ -380,7 +388,7 @@
 															<thead>
 																<tr>
 
-
+																	<th scope="col">Name</th>
 																	<th scope="col">Status</th>
 
 																</tr>
@@ -389,23 +397,23 @@
 																<tr>
 
 																	<td><a href="#"><input type="checkbox" name="book2" class="book2" > PWGS-C-1</a></td>
-
+																	<td>T</td>
 
 																</tr>
 
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="book2" class="book2" > PWGS-C-12</a></td>
-
+																	<td>U</td>
 																</tr>
 
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="book2" class="book2" > PWGS-C-3</a></td>
-
+																	<td>T</td>
 																</tr>
 
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="book2" class="book2" > PWGS-C-4</a></td>
-
+																	<td>U</td>
 																</tr>
 															</tbody>
 
@@ -436,7 +444,7 @@
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
 											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
-										<a href="seller-user" class="btn btn-danger text-white">Back</a>
+										<a href="admin-tester.html" class="btn btn-danger text-white">Back</a>
 										<a href="#" class="btn btn-success ml-1 text-white" onclick="fun7()">Untested PWG List</a>
 									</form>
 								</nav>
@@ -453,7 +461,7 @@
 										</tr>
 									</thead>
 									<tbody id="myTable">
-										<tr>
+										<tr> 
 											<th>
 												<input type="checkbox"  id="checkAll-tested" name="checkAll-tested" value="floatingButtonHere"></th>
 												<td><a href="tester-pwg-sublist">PWGS-A</a><div class="dropdown">
@@ -475,23 +483,23 @@
 																<tr>
 
 																	<td><a href="#"><input type="checkbox" name="book-tested" class="book-tested" > PWGS-A-1</a></td>
-
+																	<td>T</td>
 
 																</tr>
 
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="book-tested" class="book-tested" > PWGS-A-12</a></td>
-
+																	<td>U</td>
 																</tr>
 
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="book-tested" class="book-tested" > PWGS-A-3</a></td>
-
+																	<td>T</td>
 																</tr>
 
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="book-tested" class="book-tested" > PWGS-A-4</a></td>
-
+																	<td>U</td>
 																</tr>
 															</tbody>
 
@@ -507,7 +515,7 @@
 
 										</tr>
 
-										<tr>
+										<tr> 
 											<th>
 												<input type="checkbox"  id="checkAll-tested1" name="checkAll-tested1" value="floatingButtonHere"></th>
 												<td><a href="tester-pwg-sublist">PWGS-B</a><div class="dropdown">
@@ -529,23 +537,23 @@
 																<tr>
 
 																	<td><a href="#"><input type="checkbox" name="book-tested1" class="book-tested1" > PWGS-B-1</a></td>
-
+																	<td>T</td>
 
 																</tr>
 
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="book-tested1" class="book-tested1" > PWGS-B-12</a></td>
-
+																	<td>U</td>
 																</tr>
 
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="book-tested1" class="book-tested1" > PWGS-B-3</a></td>
-
+																	<td>T</td>
 																</tr>
 
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="book-tested1" class="book-tested1" > PWGS-B-4</a></td>
-
+																	<td>U</td>
 																</tr>
 															</tbody>
 
@@ -558,7 +566,7 @@
 
 
 										</tr>
-										<tr>
+										<tr> 
 											<th>
 												<input type="checkbox"  id="checkAll-tested2" name="checkAll-tested2" value="floatingButtonHere"></th>
 												<td><a href="tester-pwg-sublist">PWGS-C</a><div class="dropdown">
@@ -580,23 +588,23 @@
 																<tr>
 
 																	<td><a href="#"><input type="checkbox" name="book-tested2" class="book-tested2" > PWGS-C-1</a></td>
-
+																	<td>T</td>
 
 																</tr>
 
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="book-tested2" class="book-tested2" >PWGS-C-12</a></td>
-
+																	<td>U</td>
 																</tr>
 
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="book-tested2" class="book-tested2" >PWGS-C-3</a></td>
-
+																	<td>T</td>
 																</tr>
 
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="book-tested2" class="book-tested2" >PWGS-C-4</a></td>
-
+																	<td>U</td>
 																</tr>
 															</tbody>
 
@@ -612,7 +620,7 @@
 								</table>
 							</div>
 
-
+							
 
 
 						</div>
@@ -641,12 +649,12 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Transfered PWG</h5>
-				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+				<h5 class="modal-title" id="exampleModalLabel">Transferred PWG</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a> 
 			</div>
 			<div class="modal-body text-center p-4">
 				<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-				<p class="pt-2 font-weight-bold">Your PWG has been successfully transfered to seller</p>
+				<p class="pt-2 font-weight-bold">Your PWG has been successfully transferred to User</p>
 
 			</div>
 
@@ -659,11 +667,11 @@
 
 <!-- <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
-		<div class="modal-content">
+		<div class="modal-content">  
 			<div class="modal-header">
 				<h5 class="modal-title font-weight-bold">Login History</h5>
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			</div>
+			</div>            
 			<div class="modal-body">
 				<table class="table">
 					<thead>
@@ -719,7 +727,7 @@
 
 <section class="floatingButtonHere" style="display: none;">
 	<a href="" class=" btn btn-primary" data-toggle="modal" data-target="#exampleModal">Confirm</a>
-	<a href="transfer-seller" class=" btn btn-danger">Cancel</a>
+	<a href="seller-shared" class=" btn btn-danger">Cancel</a>
 </section>
 
 
@@ -780,8 +788,8 @@ $(document).ready(function(){
 $(function() {
 	$('.pop').on('click', function() {
 		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-		$('#imagemodal').modal('show');
-	});
+		$('#imagemodal').modal('show');   
+	});     
 });
 
 
@@ -929,18 +937,6 @@ $(function() {
 			console.log(tog);
 		}
 	}
-
-
-
-		// search filter table
-	$(document).ready(function(){
-		$("#myInput").on("keyup", function() {
-			var value = $(this).val().toLowerCase();
-			$("#myTable tr").filter(function() {
-				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-			});
-		});
-	});
 
 
 

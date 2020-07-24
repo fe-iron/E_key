@@ -52,14 +52,17 @@
 					
 				</div>
 
+
 				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
-				
+
 				<div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
+						<a class="dropdown-item" href="#" onclick="myFunction3()">Authorize</a>
+						<a class="dropdown-item" href="#" onclick="myFunction4()">Share</a>
 						<a class="dropdown-item" href="#" onclick="myFunction()">Delete</a>
 						<a class="dropdown-item" href="#" onclick="myFunction1()"> Freeze </a>
 						<a class="dropdown-item" href="#" onclick="myFunction2()">Chat</a>
@@ -68,7 +71,7 @@
 						<a class="dropdown-item" href="seller-home" >Exit</a>
 					</div>
 				</div>
-				
+
 
 			</nav>
 		</div>
@@ -80,7 +83,7 @@
 				<!-- <div class="col-md-3 bg-user">
 					<div class="row">
 						<ul class="nav py-2">
-							
+
 							<li class="nav-item display-block">
 								<a class="nav-link font-weight-bold text-success" href="#">Unread Messages ( 4 )</a>
 							</li>
@@ -188,9 +191,9 @@
 						</div>
 					</div>
 				</div> -->
-				<div class="col-md-10  py-5 px-5">
+				<div class="col-md-10  py-5">
 					<!-- <div class="row bg-button-2 p-4">
-						
+
 						<div class="col-md mb-2" >
 							<div class="card" onclick="myfun()">
 								<div class="card-body">
@@ -223,13 +226,13 @@
 
 					</div> -->
 
-					<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-1" >
-						
+					<div class="row justify-content-center bg-button-2 p-2 mt-3" id="div-1" >
+
 						<div class="col-md">
 							<!-- <h4 class="font-weight-bold">User Account list<span onclick="myfun1()" class="float-right"><i class="fas fa-plus-circle" style="color:#07a007;"></i></span></h4> -->
 							<header>
 								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">User Accounts</a>
+									<a class="h4 text-dark font-weight-bold pt-2">User Account list</a>
 									<form class="form-inline">
 										<div class="input-group-prepend mb-1 mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
@@ -242,12 +245,12 @@
 
 							<div class="table-responsive">
 
-								
+
 								<br>
 								<table class="table">
 									<thead>
 										<tr>
-											
+
 											<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere" disabled> <i class="fas fa-sort-down"></i></th>
 											<th scope="col">Name</th>
 											<th scope="col">Action</th>
@@ -265,8 +268,8 @@
 												</button>
 												<div class="dropdown-menu">
 													<a class="dropdown-item" href="#">Chat</a>
-													<a class="dropdown-item" href="">Payment</a>
-													<a class="dropdown-item pop" href="#" > Login History </a>
+													<a class="dropdown-item pop1" href="#">Authorized</a>
+													<a class="dropdown-item pop" href="#" >Shared</a>
 													<a class="dropdown-item" href="" >Chat History</a>
 													<a class="dropdown-item" href="" >Delete</a>
 													<a class="dropdown-item" href="" >Freeze</a>
@@ -282,10 +285,10 @@
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
 												<div class="dropdown-menu">
-
+													<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
 													<a class="dropdown-item" href="">Chat</a>
-													<a class="dropdown-item" href=""> Payment</a>
-													<a class="dropdown-item pop" href="#" >Login History</a>
+													<a class="dropdown-item pop1" href="#">Authorized</a>
+													<a class="dropdown-item pop" href="#" >Shared</a>
 													<a class="dropdown-item" href="" >Chat History</a>
 													<a class="dropdown-item" href="" >Delete</a>
 													<a class="dropdown-item" href="" >Freeze</a>
@@ -295,15 +298,15 @@
 
 										<tr>
 											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book3"></th>
-											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"> </span>Naqui</td>
+											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Naqui</td>
 											<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
 												<div class="dropdown-menu">
 													<a class="dropdown-item" href="#">Chat</a>
-													<a class="dropdown-item" href="">Payment</a>
-													<a class="dropdown-item pop" href="#"> Login History </a>
+													<a class="dropdown-item pop1" href="#">Authorized</a>
+													<a class="dropdown-item pop" href="#"> Shared</a>
 													<a class="dropdown-item" href="" >Chat History</a>
 													<a class="dropdown-item" href="" >Delete</a>
 													<a class="dropdown-item" href="" >Freeze</a>
@@ -313,22 +316,22 @@
 
 										<tr>
 											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book4"></th>
-											<td><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Jennifer</td>
+											<td><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Jacqueline</td>
 											<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
 												<div class="dropdown-menu">
 													<a class="dropdown-item" href="#">Chat</a>
-													<a class="dropdown-item" href="">Payment</a>
-													<a class="dropdown-item pop" href="#"> Login History </a>
+													<a class="dropdown-item pop1" href="#">Authorized</a>
+													<a class="dropdown-item pop" href="#"> Shared </a>
 													<a class="dropdown-item" href="" >Chat History</a>
 													<a class="dropdown-item" href="" >Delete</a>
 													<a class="dropdown-item" href="" >Freeze</a>
 												</div>
 											</div></td>
 										</tr>
-										
+
 									</tbody>
 								</table>
 							</div>
@@ -337,7 +340,7 @@
 					</div>
 
 
-					<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-2" style="display: none;">
+					<div class="row justify-content-center bg-button-2 p-2 mt-3" id="div-2" style="display: none;">
 
 						<div class="col-md">
 							<h4 class="font-weight-bold"> Add User Account</h4>
@@ -356,33 +359,35 @@
 									  </div>
 
 									  <div class="form-group">
-									     <input type="tel" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Contact Number ">
+									     <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Contact Number ">
 									  </div>
 
 									  <div class="form-group">
 									     <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Password ">
 									  </div>
-									  
+
 									<button class="btn btn-primary" type="submit">Submit</button>
 									<a href="seller-user" class="btn btn-warning">Cancel</a>
 									</form>
 								</div>
+
+								<div class="col-md text-center">
+									<img src="{% static 'tesafe/images/qr-code.png' %}" class="img-fluid">
+								</div>
 							</div>
-
-
 						</div>
 
 					</div>
 
 
-					<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-3" style="display: none;">
+					<div class="row justify-content-center bg-button-2 p-2 mt-3" id="div-3" style="display: none;">
 
 						<div class="col-md">
 							<h4 class="font-weight-bold">List Of PWG</h4>
 							<table class="table">
 								<thead>
 									<tr>
-										<th scope="col">Sr. No.</th>
+										<th scope="col">SL No</th>
 										<th scope="col">Name</th>
 										<th scope="col">Action</th>
 
@@ -397,25 +402,15 @@
 										<td>PWG-1</td>
 										<td><a href="" class="btn btn-sm btn-danger mb-1 ml-1 text-white" data-toggle="modal" data-target="#exampleModal">Transfer</a> <a href="" class="btn btn-sm btn-success  mb-1 ml-1 text-white" data-toggle="modal" data-target="#exampleModal1" >Share</a> <a href="" class="btn btn-sm btn-danger  mb-1 ml-1 text-white" data-toggle="modal" data-target="#exampleModal2">Authorized</a></td>
 									</tr>
-									<tr>
-										<th scope="row">2</th>
-										<td>PWG-2</td>
-										<td><a href="" class="btn btn-sm btn-danger mb-1 ml-1 text-white" data-toggle="modal" data-target="#exampleModal">Transfer</a> <a href="" class="btn btn-sm btn-success  mb-1 ml-1 text-white" data-toggle="modal" data-target="#exampleModal1" >Share</a> <a href="" class="btn btn-sm btn-danger  mb-1 ml-1 text-white" data-toggle="modal" data-target="#exampleModal2">Authorized</a></td>
-									</tr>
-									<tr>
-										<th scope="row">3</th>
-										<td>PWG-3</td>
-										<td><a href="" class="btn btn-sm btn-danger mb-1 ml-1 text-white" data-toggle="modal" data-target="#exampleModal">Transfer</a> <a href="" class="btn btn-sm btn-success  mb-1 ml-1 text-white" data-toggle="modal" data-target="#exampleModal1" >Share</a> <a href="" class="btn btn-sm btn-danger  mb-1 ml-1 text-white" data-toggle="modal" data-target="#exampleModal2">Authorized</a></td>
-									</tr>
 
-									
+
 								</tbody>
 
 
 							</table>
 
 							<!-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Transfer PWG to User</button> -->
-							
+
 							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
@@ -519,7 +514,7 @@
 											<table class="table">
 												<thead>
 													<tr>
-														<th scope="col">Sr. No.</th>
+														<th scope="col">SL No</th>
 														<th scope="col">Name</th>
 														<th scope="col">Online/Offline</th>
 														<th scope="col">select</th>
@@ -565,7 +560,7 @@
 							<thead>
 								<tr>
 									<th scope="col">Sr. No.</th>
-									<th scope="col"> User Name</th>
+									<th scope="col">User Name</th>
 									<th scope="col">Transferred PWG</th>
 									<th scope="col">Online/Offline</th>
 									<th scope="col">Action</th>
@@ -579,18 +574,18 @@
 									<td>Faiz Elahi</td>
 									<td>PWG-1</td>
 									<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
-									
+
 									<td><a href="" class="btn-secondary btn btn-sm text-white mb-1">Disabled</a>
 									</td>
 								</tr>
 
 								<tr>
-									<th scope="row">2</th>
-									<td>Naqui</td>
+									<th scope="row">1</th>
+									<td>Faiz Elahi</td>
 									<td>PWG-2</td>
 									<td><p class="pl-4"><i class="fas fa-circle fa-2x"></i></p></td>
-									
-									<td><a href="" class="btn-secondary btn btn-sm text-white mb-1">Disabled</a> 
+
+									<td><a href="" class="btn-secondary btn btn-sm text-white mb-1">Disabled</a>
 									</td>
 								</tr>
 							</tbody>
@@ -626,16 +621,16 @@
 									<td>Faiz Elahi</td>
 									<td>PWG-2</td>
 									<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
-									<td><a href="" class="btn-primary text-white btn btn-sm mb-1">Get Back PWG</a> 
+									<td><a href="" class="btn-primary text-white btn btn-sm mb-1">Get Back PWG</a>
 									</td>
 								</tr>
 
 								<tr>
-									<th scope="row">2</th>
-									<td>naqui</td>
-									<td>PWG-12</td>
+									<th scope="row">1</th>
+									<td>Faiz Elahi</td>
+									<td>PWG-2</td>
 									<td><p class="pl-4"><i class="fas fa-circle fa-2x"></i></p></td>
-									<td><a href="" class="btn-primary text-white btn btn-sm mb-1">Get Back PWG</a> 
+									<td><a href="" class="btn-primary text-white btn btn-sm mb-1">Get Back PWG</a>
 									</td>
 								</tr>
 							</tbody>
@@ -671,17 +666,17 @@
 									<td>Faiz Elahi</td>
 									<td>PWG-1</td>
 									<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
-									
+
 									<td><a href="" class="btn-primary text-white btn btn-sm mb-1">Get Back PWG</a>
 									</td>
 								</tr>
 
 								<tr>
-									<th scope="row">2</th>
+									<th scope="row">1</th>
 									<td>Faiz Elahi</td>
-									<td>PWG-2</td>
+									<td>PWG-1</td>
 									<td><p class="pl-4"><i class="fas fa-circle fa-2x"></i></p></td>
-									
+
 									<td><a href="" class="btn-primary text-white btn btn-sm mb-1">Get Back PWG</a>
 									</td>
 								</tr>
@@ -710,8 +705,47 @@
 </section>
 
 
-<section class="floatingButtonHere" style="display: none;">
-	<a href="" class=" btn btn-primary" data-toggle="modal" data-target="#exampleModal">Confirm</a>
+
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Shared PWG</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+			</div>
+			<div class="modal-body text-center p-4">
+				<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
+				<p class="pt-2 font-weight-bold">Your PWG has been successfully Shared</p>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="imagemoda1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Authorized PWG</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+			</div>
+			<div class="modal-body text-center p-4">
+				<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
+				<p class="pt-2 font-weight-bold">Your PWG has been successfully Authorized</p>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+<section class="floatingButtonHere" style="display: none;" id="floating-button">
+	<a href="seller-user" class=" btn btn-primary" data-toggle="modal" data-target="#exampleModal">Confirm</a>
 	<a href="seller-user" class=" btn btn-warning">Cancel</a>
 </section>
 
@@ -738,8 +772,16 @@
 	$(function() {
 		$('.pop').on('click', function() {
 			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-			$('#imagemodal').modal('show');   
-		});     
+			$('#imagemodal').modal('show');
+		});
+	});
+
+
+	$(function() {
+		$('.pop1').on('click', function() {
+			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+			$('#imagemodal').modal('show');
+		});
 	});
 
 
@@ -781,6 +823,7 @@
 	}
 
 	function myfun1(){
+		document.getElementById("floating-button").style.display = "none";
 		document.getElementById("div-1").style.display = "none";
 		document.getElementById("div-2").style.display = "block";
 		document.getElementById("div-3").style.display = "none";
@@ -864,6 +907,23 @@ function myFunction1() {
 
 
 function myFunction2() {
+  document.getElementById("checkAll").disabled = false;
+    document.getElementById("book1").disabled = false;
+    document.getElementById("book2").disabled = false;
+    document.getElementById("book3").disabled = false;
+    document.getElementById("book4").disabled = false;
+}
+
+
+function myFunction3() {
+  document.getElementById("checkAll").disabled = false;
+    document.getElementById("book1").disabled = false;
+    document.getElementById("book2").disabled = false;
+    document.getElementById("book3").disabled = false;
+    document.getElementById("book4").disabled = false;
+}
+
+function myFunction4() {
   document.getElementById("checkAll").disabled = false;
     document.getElementById("book1").disabled = false;
     document.getElementById("book2").disabled = false;

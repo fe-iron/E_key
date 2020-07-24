@@ -55,7 +55,7 @@
 				</div>
 
 				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 20px; position: relative;"><i class="fas fa-bell fa-2x"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
-				
+
 				<div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
 						<i class="fas fa-ellipsis-v"></i>
@@ -66,11 +66,13 @@
 						<a class="dropdown-item" href="#login-history" onclick="myfun1()">Login History</a>
 						<a class="dropdown-item" href="#password-history" onclick="myfun2()">Password History</a>
 						<a class="dropdown-item" href="#change-passward" onclick="myfun3()">Change Password</a>
-						<a class="dropdown-item" href="seller-home">Exit</a>
+						<a class="dropdown-item" href="#" onclick="myfun4()">Set Alias</a>
+						<a class="dropdown-item" href="#">Chat To Admin</a>
+						<a class="dropdown-item" href="/">Exit</a>
 
 					</div>
 				</div>
-				
+
 
 			</nav>
 		</div>
@@ -82,7 +84,7 @@
 			<!-- 	<div class="col-md-3 bg-user">
 					<div class="row">
 						<ul class="nav py-2">
-							
+
 							<li class="nav-item display-block">
 								<a class="nav-link font-weight-bold text-success" href="#">Unread Messages ( 4 )</a>
 							</li>
@@ -192,7 +194,7 @@
 				</div> -->
 				<div class="col-md-10 py-2 px-5">
 
-					
+
 
 					<!-- <div class="row justify-content-center bg-button-1 p-4">
 						<div class="col-md text-center mb-2">
@@ -223,7 +225,7 @@
 										</svg>
 										<div class="text">
 											<h5>10</h5>
-										</div>	
+										</div>
 									</div>
 									<p>Tester</p>
 								</div>
@@ -245,7 +247,7 @@
 									</div>
 									<p>Information</p>
 								</div>
-								
+
 							</div>
 						</div>
 
@@ -253,9 +255,9 @@
 					</div> -->
 
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="Statics">
-						
+
 						<div class="col-md">
-							<h4 class="">Statistics</h4>
+							<h4 class="">statistics</h4>
 							<!-- <div class="row">
 								<div class="col-md py-3"><h5 class="font-weight-bold">1. Seller</h5></div>
 							</div>
@@ -313,8 +315,9 @@
 											</thead>
 											<tbody>
 
+
 												<tr>
-													<th scope="row">PWG</th>
+													<th scope="row">PWGs</th>
 													<td>20</td>
 													<td>15</td>
 													<td>5</td>
@@ -322,7 +325,7 @@
 												</tr>
 
 												<tr>
-													<th scope="row">Users</th>
+													<th scope="row">User</th>
 													<td>20</td>
 													<td>15</td>
 													<td>5</td>
@@ -334,20 +337,20 @@
 								</div>
 							</div>
 
-							
+
 						</div>
 
 					</div>
 
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="login-history" style="display: none;">
-						
+
 						<div class="col-md">
 							<h4 class="">Login History<span class="float-right">
 							<a href="seller-home" type="button" class="btn btn-danger btn-sm">Return</a></span></h4>
 							<div class="row">
 								<div class="col-md-6 py-3">
 									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Number Of Admin Been Logged in </h6>
-									<p>5 times</p>
+									<p>1 times</p>
 								</div>
 							</div>
 
@@ -386,8 +389,35 @@
 					</div>
 
 
+
+					<div class="row justify-content-center bg-button-1 p-4 mt-3" id="alias" style="display: none;">
+						<div class="col-md">
+							<h4 class="font-weight-bold"> Set Alias</h4>
+							<div class="row">
+								<div class="col-md-6 py-3">
+									<form>
+									  <div class="form-group">
+									    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Alias ">
+									  </div>
+									  <div class="form-group">
+									     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Confirm Alias ">
+									  </div>
+
+
+
+									<button class="btn btn-success" type="submit">Submit</button>
+									<a href="seller-home" class="btn btn-warning">Cancel</a>
+									</form>
+								</div>
+
+
+							</div>
+						</div>
+
+					</div>
+
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="change-passward" style="display: none;">
-						
+
 						<div class="col-md">
 							<h4 class="">Change Password<span class="float-right"></span></h4>
 							<div class="row ">
@@ -398,11 +428,11 @@
 									    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Old Password ">
 									  </div>
 									  <div class="form-group">
-									     <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter New Password ">
+									     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter New Password ">
 									  </div>
 
 									  <div class="form-group">
-									     <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Confirm New Password ">
+									     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Confirm New Password ">
 									  </div>
 									<button class="btn btn-success" type="submit">Proceed</button>
 									<a href="seller-home" class="btn-secondary btn ">Cancel</a>
@@ -414,10 +444,10 @@
 					</div>
 
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="password-history" style="display: none;">
-						
+
 						<div class="col-md">
 
-							<h4 class=""> Password History<span class="float-right"><a href="seller-home" type="button" class="btn btn-danger btn-sm">Return</a></span></h4>
+							<h4 class=""> Password HISTORY<span class="float-right"><a href="seller-home" type="button" class="btn btn-danger btn-sm">Return</a></span></h4>
 							<div class="table-responsive">
 								<table class="table">
 									<thead>
@@ -433,7 +463,7 @@
 									<tbody>
 										<tr>
 											<th scope="row">1</th>
-											<td>02/5/20</td>
+											<td>02//5/20</td>
 											<td>Samsung</td>
 											<td>abc@12345678</td>
 										</tr>
@@ -451,21 +481,21 @@
 								<h5>Number Of times Admin Been Logged in  <span>5 Times</span></h5>
 								<h5>Admin Login History</h5>
 								<ol>
-									 <li>	
+									 <li>
 									 	20/01/20 <span> 50:30 Pm</span>
 								     </li>
 
 								</ul>
 							</div>
 						</div>
-						
+
 					</div> -->
 
 					<!-- <div class="row justify-content-center py-3 bg-button-1 m-4">
 						<div class="col-md">
 							<button type="button" class="btn btn-primary"> Admin Login Detail</button>
 						</div>
-								
+
 					</div> -->
 				</div>
 			</div>
@@ -478,7 +508,7 @@
 
 	<script type="text/javascript">
 
-	
+
 
 		function myfun(){
 			document.getElementById("Statics").style.display="block";
@@ -506,6 +536,16 @@
 			document.getElementById("change-passward").style.display="none";
 			document.getElementById("login-history").style.display="none";
 			document.getElementById("Statics").style.display="none";
+		}
+
+
+		function myfun4(){
+			document.getElementById("login-history").style.display="none";
+			document.getElementById("change-passward").style.display="none";
+			document.getElementById("alias").style.display="block";
+			document.getElementById("password-history").style.display="none";
+			document.getElementById("Statics").style.display="none";
+			// document.getElementById("login-history").style.display="block";
 		}
 	</script>
 
