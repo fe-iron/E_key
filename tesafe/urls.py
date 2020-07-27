@@ -23,6 +23,9 @@ urlpatterns = [
     path("pwg-getback-sublist", views.pwg_getback_sublist, name="pwg-getback-sublist"),
     path("tester-pwg-sublist", views.tester_pwg_sublist, name="pwg-getback-sublist"),
     path("transfer-seller", views.transfer_seller, name="transfer-seller"),
+    path("seller-authorized", views.seller_authorized, name="seller-authorized"),
+    path("seller-shared", views.seller_shared, name="seller-shared"),
+    path("seller-pwg-transfer", views.seller_pwg_transfer, name="seller-pwg-transfer"),
 
     # path("webAdmin_register", views.webAdmin_register.as_view(), name="webAdmin_register"),
 

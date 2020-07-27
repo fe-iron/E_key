@@ -159,6 +159,17 @@ def transfer_seller(request):
     return render(request, 'seller/transfer-seller.html')
 
 
+def seller_authorized(request):
+    return render(request, 'seller/seller-authorized.html')
+
+
+def seller_shared(request):
+    return render(request, 'seller/seller-shared.html')
+
+
+def seller_pwg_transfer(request):
+    return render(request, 'seller/seller-pwg-transfer.html')
+
 
 def names_view(request):
     ctx = {}
