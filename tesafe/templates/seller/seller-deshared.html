@@ -11,7 +11,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-	
+
 
 	<!-- fontawesome cdn -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -27,7 +27,7 @@
 	<section class="bg-light">
 		<div class="container-fluid">
 			<nav class="navbar navbar-expand-lg navbar-light ">
-				
+
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -43,13 +43,13 @@
 						<li class="nav-item pl-3">
 							<a class="nav-link active" href="seller-pwg">PWG</a>
 						</li>
-						
+
 
 						<!-- <li class="nav-item pl-3">
 							<a class="nav-link" href="admin-info-server.html">Unread Messages <span><i class="fas fa-bell"></i></span></a>
 						</li> -->
 					</ul>
-					
+
 				</div>
 
 	<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
@@ -61,7 +61,7 @@
 					<div class="dropdown-menu">
 <!--						<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>-->
 						<!-- <a class="dropdown-item" href="#" onclick="authorized()">Authorize</a> -->
-						<a class="dropdown-item" href="#" onclick="shared()">Share</a>
+						<a class="dropdown-item" href="#" onclick="shared()">De-share</a>
 <!--						<a class="dropdown-item" href="#" onclick="myFunction()">Delete</a>-->
 <!--						<a class="dropdown-item" href="#" onclick="myFunction1()"> Freeze </a>-->
 						<a class="dropdown-item" href="#" onclick="myFunction2()">Chat</a>
@@ -231,7 +231,7 @@
 							<!-- <h4 class="font-weight-bold">User Account list<span onclick="myfun1()" class="float-right"><i class="fas fa-plus-circle" style="color:#07a007;"></i></span></h4> -->
 							<header>
 								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">User Account list</a>
+									<a class="h4 text-dark font-weight-bold pt-2">Shared Users list</a>
 									<form class="form-inline">
 										<div class="input-group-prepend mb-1 mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
@@ -708,12 +708,12 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Sharing PWG</h5>
+				<h5 class="modal-title" id="exampleModalLabel">De-sharing PWG</h5>
 				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
 			</div>
 			<div class="modal-body text-center p-4">
 				<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-				<p class="pt-2 font-weight-bold">Your PWG has been successfully Shared to User ABC</p>
+				<p class="pt-2 font-weight-bold">Your PWG has been successfully de-shared from the User ABC</p>
 
 			</div>
 
@@ -744,7 +744,7 @@
 
 <section class="floatingButtonHere" style="display: none;" id="floating-button">
 	<a href="#" class=" btn btn-primary pop1">Confirm</a>
-	<a href="seller-shared" class=" btn btn-danger">Cancel</a>
+	<a href="seller-deshared" class=" btn btn-danger">Cancel</a>
 </section>
 
 

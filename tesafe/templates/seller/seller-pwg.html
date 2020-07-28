@@ -60,7 +60,7 @@
 <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="{% static 'seller/css/seller-user.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'seller/css/seller-pwg1.css' %}">
 
 </head>
 <body>
@@ -92,21 +92,20 @@
 				</div>
 
 
-				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
+		<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
 
 				<div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
+						<!-- <a class="dropdown-item" href="">Delete</a>
+						<a class="dropdown-item" href=""> Freeze </a>
+						<a class="dropdown-item" href="" >Chat</a> -->
 						<a class="dropdown-item" href="">Broadcast</a>
 
-						<a class="dropdown-item" href="#" onclick="myFunction()">Delete</a>
-						<a class="dropdown-item" href="#" onclick="myFunction1()"> Freeze </a>
-						<a class="dropdown-item" href="#" onclick="myFunction2()">Chat</a>
 						<a class="dropdown-item" href="seller-home" >Exit</a>
 					</div>
-
 				</div>
 
 
@@ -117,752 +116,1032 @@
 	<section class="bg-detail">
 		<div class="container-fluid">
 			<div class="row justify-content-center">
-				<!-- <div class="col-md-3 bg-user">
-					<div class="row">
-						<ul class="nav py-2">
 
-							<li class="nav-item display-block">
-								<a class="nav-link font-weight-bold text-success" href="#">Unread Messages ( 4 )</a>
-							</li>
-						</ul>
-					</div>
+				<div class="col-md-10  py-5 px-5">
 
-					<div class="row" style="overflow:scroll; height:520px;">
-						<div class="col-md ">
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom border-top pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
+					<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-3">
 
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<div class="d-flex bd-highlight border-bottom pt-2">
-								<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-								<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-									<p><i class="fas fa-circle fa-1x"></i> Online</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div> -->
-				<div class="col-md-10  py-5">
-					<!-- <div class="row bg-button-2 p-2">
-
-						<div class="col-md mb-2" >
-							<div class="card" onclick="myfun()">
-								<div class="card-body">
-									<div class="card-title">
-										SELLER ACCOUNT LIST
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md mb-2" >
-							<div class="card" onclick="myfun1()">
-								<div class="card-body">
-									<div class="card-title">
-										ADD SELLER ACCOUNT
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md mb-2" >
-							<div class="card px-3" onclick="myfun2()">
-								<div class="card-body">
-									<div class="card-title">
-										TESTED PWG LIST
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div> -->
-
-					<div class="row justify-content-center bg-button-2  mt-3" id="div-1" >
-
-						<div class="col-md">
-							<!-- <h4 class="font-weight-bold">PWG Account list<span onclick="myfun1()" class="float-right"><i class="fas fa-plus-circle"></i></span></h4> -->
-
-							<header>
+						<div class="col-md" id="div-7">
+							<header class="pb-4">
 								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">PWG Account list</a>
+									<a class="h4 text-dark font-weight-bold pt-2">PWG Account List</a>
 									<form class="form-inline">
-										<div class="input-group-prepend mb-1 mr-2">
+										<div class="input-group-prepend  mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
 											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
 
+										<!-- <a href="#" class="btn btn-success ml-1 text-white" onclick="fun6()">Tested PWG List</a> -->
 									</form>
+
 								</nav>
 
-								<div class="pb-3 pl-3">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked onclick="Occupied()" style="cursor: pointer;">
-                                            <label class="form-check-label" for="inlineRadio1" >Occupied</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onclick="Unoccupied()" style="cursor: pointer;">
-                                            <label class="form-check-label" for="inlineRadio2" >Unoccupied</label>
 
-                                        </div>
-                                    </div>
+								<div class="pb-3 pl-3">
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked="" onclick="Occupied()" style="cursor: pointer;">
+										<label class="form-check-label" for="inlineRadio1">Occupied</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onclick="Unoccupied()" style="cursor: pointer;">
+										<label class="form-check-label" for="inlineRadio2">Unoccupied</label>
+
+									</div>
+								</div>
+
+
 							</header>
 
-							<div class="table-responsive" id="Occupied">
-								<table class="table">
-									<thead>
-										<tr>
+							<div id="occupied">
+								<div class="accordion" id="accordionExample">
 
-											<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere" disabled> <i class="fas fa-sort-down"></i></th>
-											<th scope="col">Name</th>
-											<th scope="col">Status</th>
-											<th scope="col">Action</th>
+								<div class="row px-3">
 
+									<div class="col-4 pl-2">
+										<h5 class="pl-3">Name</h5>
+									</div>
 
-										</tr>
-									</thead>
-									<tbody id="myTable">
-										<tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td><span><img src="{% static 'tesafe/images/faiz.png' %}" height="40" width="40" class="rounded-circle"></span> Faiz Elahi</td>
-											<td>A</td>
-											<td><a href="seller-pwg-transfer" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-													<i class="fas fa-ellipsis-v"></i>
-												</button>
-												<div class="dropdown-menu">
-													<a class="dropdown-item" href="#">Chat</a>
-													<a class="dropdown-item" href="#">Authorized</a>
-													<a class="dropdown-item pop" href="#" >Shared</a>
-													<a class="dropdown-item" href="" >Chat History</a>
-													<a class="dropdown-item" href="" >Delete</a>
-													<a class="dropdown-item" href="" >Freeze</a>
-												</div>
-											</div></td>
-										</tr>
+									<div class="col-4">
+										<h5>Status</h5>
+									</div>
 
-										<tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book2"></th>
-											<td><span><img src="{% static 'tesafe/images/tesafe.jpg' %}" height="40" width="40" class="rounded-circle"></span> Frank</td>
-											<td>S</td>
-											<td><a href="seller-pwg-transfer" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-													<i class="fas fa-ellipsis-v"></i>
-												</button>
-												<div class="dropdown-menu">
+									<div class="col-2">
+										<h5>Action</h5>
+									</div>
 
-													<a class="dropdown-item" href="">Chat</a>
-													<a class="dropdown-item" href="#">Authorized</a>
-													<a class="dropdown-item pop" href="#" >Shared</a>
-													<a class="dropdown-item" href="" >Chat History</a>
-													<a class="dropdown-item" href="" >Delete</a>
-													<a class="dropdown-item" href="" >Freeze</a>
-												</div>
-											</div></td>
-										</tr>
-
-										<tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book3"></th>
-											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Naqui</td>
-											<td>DA</td>
-											<td><a href="seller-pwg-transfer" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-													<i class="fas fa-ellipsis-v"></i>
-												</button>
-												<div class="dropdown-menu">
-													<a class="dropdown-item" href="#">Chat</a>
-													<a class="dropdown-item" href="#">Authorized</a>
-													<a class="dropdown-item pop" href="#"> Shared</a>
-													<a class="dropdown-item" href="" >Chat History</a>
-													<a class="dropdown-item" href="" >Delete</a>
-													<a class="dropdown-item" href="" >Freeze</a>
-												</div>
-											</div></td>
-										</tr>
-
-										<tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book4"></th>
-											<td><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Jacqui</td>
-											<td>DS</td>
-											<td><a href="seller-pwg-transfer" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-													<i class="fas fa-ellipsis-v"></i>
-												</button>
-												<div class="dropdown-menu">
-													<a class="dropdown-item" href="#">Chat</a>
-													<a class="dropdown-item" href="#">Authorized</a>
-													<a class="dropdown-item pop" href="#"> Shared </a>
-													<a class="dropdown-item" href="" >Chat History</a>
-													<a class="dropdown-item" href="" >Delete</a>
-													<a class="dropdown-item" href="" >Freeze</a>
-												</div>
-											</div></td>
-										</tr>
-
-									</tbody>
-								</table>
-							</div>
-
-
-							<div class="table-responsive" id="unoccupied" style="display: none;">
-								<table class="table">
-									<thead>
-										<tr>
-
-											<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere" disabled> <i class="fas fa-sort-down"></i></th>
-											<th scope="col">Name</th>
-											<th scope="col">Action</th>
-
-
-										</tr>
-									</thead>
-									<tbody id="myTable">
-										<tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td><span><img src="{% static 'tesafe/images/faiz.png' %}" height="40" width="40" class="rounded-circle"></span> Faiz Elahi</td>
-											<td><a href="seller-pwg-transfer" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-													<i class="fas fa-ellipsis-v"></i>
-												</button>
-												<div class="dropdown-menu">
-													<a class="dropdown-item" href="#">Chat</a>
-													<a class="dropdown-item" href="#">Authorized</a>
-													<a class="dropdown-item pop" href="#" >Shared</a>
-													<a class="dropdown-item" href="" >Chat History</a>
-													<a class="dropdown-item" href="" >Delete</a>
-													<a class="dropdown-item" href="" >Freeze</a>
-												</div>
-											</div></td>
-										</tr>
-
-										<tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book2"></th>
-											<td><span><img src="{% static 'tesafe/images/tesafe.jpg' %}" height="40" width="40" class="rounded-circle"></span> Naqui</td>
-											<td><a href="seller-pwg-transfer" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-													<i class="fas fa-ellipsis-v"></i>
-												</button>
-												<div class="dropdown-menu">
-
-													<a class="dropdown-item" href="">Chat</a>
-													<a class="dropdown-item" href="#">Authorized</a>
-													<a class="dropdown-item pop" href="#" >Shared</a>
-													<a class="dropdown-item" href="" >Chat History</a>
-													<a class="dropdown-item" href="" >Delete</a>
-													<a class="dropdown-item" href="" >Freeze</a>
-												</div>
-											</div></td>
-										</tr>
-
-										<tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book3"></th>
-											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Naqui</td>
-											<td><a href="seller-pwg-transfer" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-													<i class="fas fa-ellipsis-v"></i>
-												</button>
-												<div class="dropdown-menu">
-													<a class="dropdown-item" href="#">Chat</a>
-													<a class="dropdown-item" href="#">Authorized</a>
-													<a class="dropdown-item pop" href="#"> Shared</a>
-													<a class="dropdown-item" href="" >Chat History</a>
-													<a class="dropdown-item" href="" >Delete</a>
-													<a class="dropdown-item" href="" >Freeze</a>
-												</div>
-											</div></td>
-										</tr>
-
-										<tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book4"></th>
-											<td><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Jennifer</td>
-											<td><a href="seller-pwg-transfer" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-													<i class="fas fa-ellipsis-v"></i>
-												</button>
-												<div class="dropdown-menu">
-													<a class="dropdown-item" href="#">Chat</a>
-													<a class="dropdown-item" href="#">Authorized</a>
-													<a class="dropdown-item pop" href="#"> Shared </a>
-													<a class="dropdown-item" href="" >Chat History</a>
-													<a class="dropdown-item" href="" >Delete</a>
-													<a class="dropdown-item" href="" >Freeze</a>
-												</div>
-											</div></td>
-										</tr>
-
-									</tbody>
-								</table>
-							</div>
-						</div>
-
-					</div>
-
-
-					<div class="row justify-content-center bg-button-2 p-2 mt-3" id="div-2" style="display: none;">
-
-						<div class="col-md">
-							<h4 class="font-weight-bold"> Add User Account</h4>
-							<div class="row">
-								<div class="col-md py-3">
-									<form>
-										<div class="row">
-											<div class="col-md mb-2">
-												<input type="text" class="form-control" placeholder="Enter Name">
-											</div>
-											<div class="col-md mb-2">
-												<input type="email" class="form-control" placeholder="Enter Email">
-											</div>
-
-											<div class="col-md mb-2">
-												<input type="password" class="form-control" placeholder="Enter Password">
-											</div>
-
-											<div class="col-md mb-2">
-												<button class="btn btn-primary" type="submit">Submit</button>
-											</div>
-										</div>
-									</form>
 								</div>
-							</div>
+
+								<div class="card">
+									<div class="card-header" id="headingOne">
+										<h2 class="mb-0">
+											<button class="btn p-1" type="button" data-toggle="collapse">
+												 <span class="pwg-list">PWGS-A</span>
+											</button>
+											<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+
+										</h2>
+									</div>
+
+									<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+										<div class="card-body p-1">
+											<table class="table table-borderless">
+												<thead>
+
+												</thead>
+												<tbody>
+													<tr>
+
+														<td><a href="#"> PWGS-A-1</a></td>
+														<td class="status">DA</td>
+														<td class="text-center mb-2">
+															<a href="seller-pwg-transfer" class="btn btn-light  btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
+
+																<a class="dropdown-item" href="seller-deauthorized">De-authorize</a>
+<!--																<a class="dropdown-item pop" href="seller-shared" >Shared</a>-->
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
 
 
-						</div>
+													</tr>
 
-					</div>
+													<tr>
+														<td><a href="#"> PWGS-A-12</a></td>
+														<td class="">DS</td>
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light  btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
 
+<!--																<a class="dropdown-item" href="seller-authorized.html">Authorized</a>-->
+																<a class="dropdown-item pop" href="seller-deshared" >De-share</a>
 
-					<div class="row justify-content-center bg-button-2 p-2 mt-3" id="div-3" style="display: none;">
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
 
-						<div id="div-7">
-							<div class="col-md" >
-								<h4 class="font-weight-bold">Unoccupied PWG List <a  class="btn btn-sm btn-primary float-xl-right text-white" onclick="fun6()">Occupied</a></h4>
-								<table class="table">
-									<thead>
-										<tr>
-											<th scope="col">Sr. No.</th>
-											<th scope="col">Name</th>
-											<th scope="col">Action</th>
+													</tr>
 
+													<tr>
+														<td><a href="#"> PWGS-A-3</a></td>
+														<td class="">DS</td>
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light   btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
 
+<!--																<a class="dropdown-item" href="seller-authorized">De-authorized</a>-->
+																<a class="dropdown-item pop" href="seller-deshared" >De-share</a>
 
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
 
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th scope="row">1</th>
-											<td>PWG-1</td>
-											<td><a href="" class="btn btn-sm btn-danger mb-1 ml-1 text-white" data-toggle="modal" data-target="#exampleModal">Transfer</a> <a href="" class="btn btn-sm btn-success  mb-1 ml-1 text-white" data-toggle="modal" data-target="#exampleModal1" >Share</a> <a href="" class="btn btn-sm btn-danger  mb-1 ml-1 text-white" data-toggle="modal" data-target="#exampleModal2">Authorize</a></td>
-										</tr>
+													</tr>
 
+													<tr>
+														<td><a href="#"> PWGS-A-4</a></td>
+														<td class="">DA</td>
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light   btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu dropdown-menu-right">
 
-									</tbody>
+																<a class="dropdown-item" href="seller-deauthorized">De-authorized</a>
+<!--																<a class="dropdown-item pop" href="seller-shared">Shared</a>-->
 
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
 
-								</table>
+													</tr>
+												</tbody>
 
-								<!-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Transfer PWG to User</button> -->
+											</table>
 
-								<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">Transfer PWG to User</h5>
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-											<div class="modal-body">
-												<div class="table-responsive">
-													<table class="table">
-														<thead>
-															<tr>
-																<th scope="col">Sr. No.</th>
-																<th scope="col">Name</th>
-																<th scope="col">Online/Offline</th>
-																<th scope="col">select</th>
-
-
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<th scope="row">1</th>
-																<td>Faiz Elahi</td>
-																<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
-																<td><div class="form-check">
-																	<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-																</div>
-															</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-primary">Transfer</button>
 										</div>
 									</div>
 								</div>
-							</div>
-
-
-							<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLabel">Shared PWG to User</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
+								<div class="card">
+									<div class="card-header" id="headingTwo">
+										<h2 class="mb-0">
+											<button class="btn p-1" type="button" data-toggle="collapse">
+												 <span class="pwg-list">PWGS-B</span>
 											</button>
-										</div>
-										<div class="modal-body">
-											<div class="table-responsive">
-												<table class="table">
-													<thead>
-														<tr>
-															<th scope="col">Sr. No.</th>
-															<th scope="col">Name</th>
-															<th scope="col">Online/Offline</th>
-															<th scope="col">select</th>
+											<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+										</h2>
+									</div>
+									<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+										<div class="card-body p-1">
+											<table class="table table-borderless">
+												<tbody>
+													<tr>
 
+														<td><a href="#">PWGS-B-1</a></td>
+														<td class="">DS</td>
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light   btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
 
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<th scope="row">1</th>
-															<td>Faiz Elahi</td>
-															<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
-															<td><div class="form-check">
-																<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+<!--																<a class="dropdown-item" href="seller-authorized.html">Authorized</a>-->
+																<a class="dropdown-item pop" href="seller-deshared" >De-share</a>
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
 															</div>
-														</td>
+														</div></td>
+
+
+													</tr>
+
+													<tr>
+														<td><a href="#"> PWGS-B-12</a></td>
+														<td class="">DS</td>
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light   btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
+
+<!--																<a class="dropdown-item" href="seller-authorized">Authorized</a>-->
+																<a class="dropdown-item pop" href="seller-deshared" >De-share</a>
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
+
+													</tr>
+
+													<tr>
+														<td><a href="#"> PWGS-B-12</a></td>
+														<td class="">DS</td>
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light   btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
+
+<!--																<a class="dropdown-item" href="seller-authorized">Authorized</a>-->
+																<a class="dropdown-item pop" href="seller-deshared" >De-share</a>
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
+
+													</tr>
+
+													<tr>
+														<td><a href="#"> PWGS-B-12</a></td>
+														<td class="">DA</td>
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light   btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
+
+																<a class="dropdown-item" href="seller-deauthorized">De-authorize</a>
+<!--																<a class="dropdown-item pop" href="seller-shared" >De-share</a>-->
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
+
 													</tr>
 												</tbody>
+
 											</table>
 										</div>
 									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										<button type="button" class="btn btn-primary">Shared</button>
-									</div>
 								</div>
-							</div>
-						</div>
-
-						<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Authorized PWG to User</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
+								<div class="card">
+									<div class="card-header" id="headingThree">
+										<h2 class="mb-0">
+											<button class="btn p-1" type="button" data-toggle="collapse">
+												 <span class="pwg-list">PWGS-C</span>
+											</button>
+											<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+										</h2>
 									</div>
-									<div class="modal-body">
-										<div class="table-responsive">
-											<table class="table">
+									<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+										<div class="card-body p-1">
+											<table class="table table-borderless">
 												<thead>
 													<tr>
-														<th scope="col">Sr. No.</th>
-														<th scope="col">Name</th>
-														<th scope="col">Online/Offline</th>
-														<th scope="col">select</th>
+
 
 
 													</tr>
 												</thead>
 												<tbody>
 													<tr>
-														<th scope="row">1</th>
-														<td>Faiz Elahi</td>
-														<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
-														<td><div class="form-check">
-															<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-														</div>
-													</td>
-												</tr>
-											</tbody>
-										</table>
+
+														<td><a href="#">PWGS-C-1</a></td>
+														<td class="">DS</td>
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light   btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
+
+<!--																<a class="dropdown-item" href="seller-authorized.html">Authorized</a>-->
+																<a class="dropdown-item pop" href="seller-deshared" >De-share</a>
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
+
+
+													</tr>
+
+													<tr>
+														<td><a href="#"> PWGS-C-12</a></td>
+														<td class="">DA</td>
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light   btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
+
+																<a class="dropdown-item" href="seller-deauthorized">De-authorize</a>
+<!--																<a class="dropdown-item pop" href="seller-shared.html" >Shared</a>-->
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
+
+													</tr>
+
+													<tr>
+														<td><a href="#"> PWGS-C-3</a></td>
+														<td class="">DA</td>
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light   btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
+
+																<a class="dropdown-item" href="seller-deauthorized">De-authorize</a>
+<!--																<a class="dropdown-item pop" href="seller-shared.html" >Shared</a>-->
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
+													</tr>
+												</tbody>
+
+											</table>
+										</div>
 									</div>
 								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Shared</button>
+							</div>
+							</div>
+
+							<div id="unoccupied" style="display: none;">
+							<div class="accordion" id="accordionExample">
+
+								<div class="row px-3">
+
+									<div class="col-4 pl-2">
+										<h5 class="pl-3">Name</h5>
+									</div>
+
+									<div class="col-4">
+<!--										<h5>Status</h5>-->
+									</div>
+
+									<div class="col-2">
+										<h5>Action</h5>
+									</div>
+
+								</div>
+
+								<div class="card">
+									<div class="card-header" id="headingOne">
+										<h2 class="mb-0">
+											<button class="btn p-1" type="button" data-toggle="collapse">
+												 <span class="pwg-list">PWGS-D</span>
+											</button>
+											<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+
+										</h2>
+									</div>
+
+									<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+										<div class="card-body p-1">
+											<table class="table table-borderless">
+												<thead>
+
+												</thead>
+												<tbody>
+													<tr>
+
+														<td><a href="#"> PWGS-A-1</a></td>
+<!--														<td class="status">U</td>-->
+														<td class="text-center mb-2">
+															<a href="seller-pwg-transfer" class="btn btn-light  btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
+
+																<a class="dropdown-item" href="seller-authorized">Authorized</a>
+																<a class="dropdown-item pop" href="seller-shared" >Shared</a>
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
+
+
+													</tr>
+
+													<tr>
+														<td><a href="#"> PWGS-A-12</a></td>
+<!--														<td class="">U</td>-->
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light  btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
+
+																<a class="dropdown-item" href="seller-authorized">Authorized</a>
+																<a class="dropdown-item pop" href="seller-shared" >Shared</a>
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
+
+													</tr>
+
+													<tr>
+														<td><a href="#"> PWGS-A-3</a></td>
+<!--														<td class="">U</td>-->
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light   btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
+
+																<a class="dropdown-item" href="seller-authorized">Authorized</a>
+																<a class="dropdown-item pop" href="seller-shared" >Shared</a>
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
+
+													</tr>
+
+													<tr>
+														<td><a href="#"> PWGS-A-4</a></td>
+<!--														<td class="">T</td>-->
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light   btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu dropdown-menu-right">
+
+																<a class="dropdown-item" href="seller-authorized">Authorized</a>
+																<a class="dropdown-item pop" href="seller-shared" >Shared</a>
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
+
+													</tr>
+												</tbody>
+
+											</table>
+
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<div class="card-header" id="headingTwo">
+										<h2 class="mb-0">
+											<button class="btn p-1" type="button" data-toggle="collapse">
+												 <span class="pwg-list">PWGS-E</span>
+											</button>
+											<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+										</h2>
+									</div>
+									<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+										<div class="card-body p-1">
+											<table class="table table-borderless">
+												<tbody>
+													<tr>
+
+														<td><a href="#">PWGS-B-1</a></td>
+<!--														<td class="">U</td>-->
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light   btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
+
+																<a class="dropdown-item" href="seller-authorized">Authorized</a>
+																<a class="dropdown-item pop" href="seller-shared" >Shared</a>
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
+
+
+													</tr>
+
+													<tr>
+														<td><a href="#"> PWGS-B-12</a></td>
+<!--														<td class="">U</td>-->
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light   btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
+
+																<a class="dropdown-item" href="seller-authorized">Authorized</a>
+																<a class="dropdown-item pop" href="seller-shared" >Shared</a>
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
+
+													</tr>
+
+													<tr>
+														<td><a href="#"> PWGS-B-3</a></td>
+<!--														<td class="">U</td>-->
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light   btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
+
+																<a class="dropdown-item" href="seller-authorized">Authorized</a>
+																<a class="dropdown-item pop" href="seller-shared" >Shared</a>
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
+
+													</tr>
+
+													<tr>
+														<td><a href="#"> PWGS-B-4</a></td>
+<!--														<td class="">T</td>-->
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light   btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu dropdown-menu-right">
+
+																<a class="dropdown-item" href="seller-authorized">Authorized</a>
+																<a class="dropdown-item pop" href="seller-shared" >Shared</a>
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
+
+													</tr>
+												</tbody>
+
+											</table>
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<div class="card-header" id="headingThree">
+										<h2 class="mb-0">
+											<button class="btn p-1" type="button" data-toggle="collapse">
+												 <span class="pwg-list">PWGS-F</span>
+											</button>
+											<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+										</h2>
+									</div>
+									<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+										<div class="card-body p-1">
+											<table class="table table-borderless">
+												<thead>
+													<tr>
+
+
+
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+
+														<td><a href="#">PWGS-C-1</a></td>
+<!--														<td class="">U</td>-->
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light   btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
+
+																<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																<a class="dropdown-item pop" href="seller-shared" >Share</a>
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
+
+
+													</tr>
+
+													<tr>
+														<td><a href="#"> PWGS-C-12</a></td>
+<!--														<td class="">U</td>-->
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light   btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
+
+																<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																<a class="dropdown-item pop" href="seller-shared" >Share</a>
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
+
+													</tr>
+
+													<tr>
+														<td><a href="#"> PWGS-C-3</a></td>
+<!--														<td class="">T</td>-->
+														<td class="text-center"><a href="seller-pwg-transfer.html" class="btn btn-light   btn-sm">Transfer</a> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu">
+
+																<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																<a class="dropdown-item pop" href="seller-shared" >Share</a>
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
+													</tr>
+
+													<tr>
+														<td><a href="#"> PWGS-C-4</a></td>
+<!--														<td class="">T</td>-->
+														<td class="text-center"><a href="seller-pwg-transfer" class="btn btn-light   btn-sm">Transfer</a>
+															<div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																<i class="fas fa-ellipsis-v"></i>
+															</button>
+															<div class="dropdown-menu dropdown-menu-right">
+
+																<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																<a class="dropdown-item pop" href="seller-shared" >Share</a>
+
+																<a class="dropdown-item" href="" >Delete</a>
+																<a class="dropdown-item" href="" >Freeze</a>
+															</div>
+														</div></td>
+
+													</tr>
+												</tbody>
+
+											</table>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
+							</div>
 
 
-				</div>
 
-			</div>
-			<div class="" id="div-8" style="display: none;">
-				<div class="col-md" >
-					<h4 class="font-weight-bold">Occupied PWG List <a href="#" class="btn btn-sm btn-primary float-xl-right text-white" onclick="fun7()">Unoccupied </a></h4>
-					<div class="table-responsive">
-						<table class="table">
-							<thead>
-								<tr>
-									<th scope="col">Sr. No.</th>
-									<th scope="col">PWG Name</th>
-									<th scope="col">Action</th>
+							<!-- <div class="table-responsive" style="overflow:scroll; height:520px;">
+								<table class="table table-borderless">
+									<thead>
+										<tr>
+											<th scope="col" style="position: relative;">Select</th>
+											<th scope="col">Name</th>
+											<th scope="col">Total PWG</th>
 
+										</tr>
+									</thead>
+									<tbody id="myTable">
+										<tr>
+											<th>
+												<input type="checkbox"  id="checkAll" name="checkAll" value="floatingButtonHere"></th>
+												<td><a href="tester-pwg-sublist.html">PWGS-A</a><div class="dropdown">
+													<button class="btn btn-light dropdown-toggle"  onclick="myOpen('one')" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													</button>
 
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>PWG-1</td>
-									<td><a href="#" class="btn-secondary btn btn-sm text-white mb-1" id="myBtn">More</a>
-									</td>
-								</tr>
+													<div class="dropdown-menu" aria-labelledby="dropdownMenu2" id="one">
 
+														<table class="table">
+															<thead>
+																<tr>
 
-							</tbody>
+																	<th scope="col">Name</th>
+																	<th scope="col"></th>
 
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
 
-						</table>
-					</div>
-
-				</div>
-			</div>
-
-
-		</div>
+																	<td><a href="#"><input type="checkbox" name="book" class="book" > PWGS-A-1</a></td>
 
 
-		<div class="row justify-content-center bg-button-2 p-2 mt-3" id="div-4" style="display: none;">
+																</tr>
 
-			<div class="col-md">
-				<h4 class="font-weight-bold">Transferred PWG List</h4>
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book" class="book" > PWGS-A-12</a></td>
 
-				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">Sr. No.</th>
-								<!-- <th scope="col"> User Name</th> -->
-								<th scope="col">Transferred PWG</th>
-								<th scope="col">Online/Offline</th>
-								<th scope="col">Action</th>
+																</tr>
 
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book" class="book" > PWGS-A-3</a></td>
+																	<td>T</td>
+																</tr>
 
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th scope="row">1</th>
-								<!-- <td>Faiz Elahi</td> -->
-								<td>PWG-1</td>
-								<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book" class="book" > PWGS-A-4</a></td>
 
-								<td><a href="" class="btn-secondary btn btn-sm text-white mb-1">Disabled</a>
+																</tr>
+															</tbody>
 
-								</td>
-							</tr>
-
-							<tr>
-								<th scope="row">1</th>
-							<!-- 	<td>Faiz Elahi</td> -->
-								<td>PWG-2</td>
-								<td><p class="pl-4"><i class="fas fa-circle fa-2x"></i></p></td>
-
-								<td><a href="" class="btn-secondary btn btn-sm text-white mb-1">Disabled</a>
-
-								</td>
-							</tr>
-						</tbody>
+														</table>
 
 
-					</table>
-				</div>
-			</div>
-
-		</div>
-
-		<div class="row justify-content-center bg-button-2 p-2 mt-3" id="div-5" style="display: none;">
-
-			<div class="col-md">
-				<h4 class="font-weight-bold">Shared PWG List</h4>
-
-				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">Sr. No.</th>
-							<!-- 	<th scope="col">User Name</th> -->
-								<th scope="col">Shared PWG</th>
-								<th scope="col">Online/Offline</th>
-								<th scope="col">Action</th>
-
-
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th scope="row">1</th>
-								<!-- <td>Faiz Elahi</td> -->
-								<td>PWG-2</td>
-								<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
-								<td><a href="" class="btn-primary text-white btn btn-sm mb-1">Get Back PWG</a>
-									<td><a href="" class="btn-danger text-white btn btn-sm mb-1 pl-1">Cancel</a>
-									</td>
-								</tr>
-
-								<tr>
-									<th scope="row">1</th>
-								<!-- 	<td>Faiz Elahi</td> -->
-									<td>PWG-2</td>
-									<td><p class="pl-4"><i class="fas fa-circle fa-2x"></i></p></td>
-									<td><a href="" class="btn-primary text-white btn btn-sm mb-1">Get Back PWG</a>
-										<td><a href="" class="btn-danger text-white btn btn-sm mb-1 pl-1">Cancel</a>
-										</td>
-									</tr>
-								</tbody>
-
-
-							</table>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="row justify-content-center bg-button-2 p-2 mt-3" id="div-6" style="display: none;">
-
-					<div class="col-md">
-						<h4 class="font-weight-bold">Authorized PWG List</h4>
-
-						<div class="table-responsive">
-							<table class="table">
-								<thead>
-									<tr>
-										<th scope="col">Sr. No.</th>
-										<!-- <th scope="col"> User Name</th> -->
-										<th scope="col">Authorized PWG</th>
-										<th scope="col">Online/Offline</th>
-										<th scope="col">Action</th>
-
-
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th scope="row">1</th>
-										<!-- <td>Faiz Elahi</td> -->
-										<td>PWG-1</td>
-										<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
-
-										<td><a href="" class="btn-primary text-white btn btn-sm mb-1">Get Back PWG</a>
-											<td><a href="" class="btn-danger text-white btn btn-sm mb-1 pl-1">Cancel</a>
+													</div>
+												</div>
 											</td>
+											<td>20</td>
 										</tr>
 
 										<tr>
-											<th scope="row">1</th>
-											<!-- <td>Faiz Elahi</td> -->
-											<td>PWG-1</td>
-											<td><p class="pl-4"><i class="fas fa-circle fa-2x"></i></p></td>
+											<th>
+												<input type="checkbox"  id="checkAll1" name="checkAll1" value="floatingButtonHere"></th>
+												<td><a href="tester-pwg-sublist.html">PWGS-B</a><div class="dropdown">
+													<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-											<td><a href="" class="btn-primary text-white btn btn-sm mb-1">Get Back PWG</a>
-												<td><a href="" class="btn-danger text-white btn btn-sm mb-1 pl-1">Cancel</a>
-												</td>
-											</tr>
-										</tbody>
+													</button>
+													<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+														<table class="table">
+															<thead>
+																<tr>
+
+																	<th scope="col">Name</th>
+																	<th scope="col">Status</th>
+
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+
+																	<td><a href="#"><input type="checkbox" name="book1" class="book1" > PWGS-B-1</a></td>
+																	<td>T</td>
+
+																</tr>
+
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book1" class="book1" > PWGS-B-12</a></td>
+																	<td>U</td>
+																</tr>
+
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book1" class="book1" > PWGS-B-3</a></td>
+																	<td>T</td>
+																</tr>
+
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book1" class="book1" > PWGS-B-4</a></td>
+																	<td>U</td>
+																</tr>
+															</tbody>
+
+														</table>
+													</div>
+												</div>
+											</td>
+											<td>20</td>
 
 
-									</table>
-								</div>
+
+										</tr>
+										<tr>
+											<th>
+												<input type="checkbox"  id="checkAll2" name="checkAll2" value="floatingButtonHere"></th>
+												<td><a href="tester-pwg-sublist.html">PWGS-C</a><div class="dropdown">
+													<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+													</button>
+													<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+														<table class="table">
+															<thead>
+																<tr>
+
+																	<th scope="col">Name</th>
+																	<th scope="col">Status</th>
+
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+
+																	<td><a href="#"><input type="checkbox" name="book2" class="book2" > PWGS-C-1</a></td>
+																	<td>T</td>
+
+																</tr>
+
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book2" class="book2" > PWGS-C-12</a></td>
+																	<td>U</td>
+																</tr>
+
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book2" class="book2" > PWGS-C-3</a></td>
+																	<td>T</td>
+																</tr>
+
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book2" class="book2" > PWGS-C-4</a></td>
+																	<td>U</td>
+																</tr>
+															</tbody>
+
+														</table>
+													</div>
+												</div>
+											</td>
+											<td>20</td>
+										</tr>
+									</tbody>
+
+
+								</table>
+							</div> -->
+
+
+
+
+						</div>
+
+
+						<div class="col-md" style="display: none;" id="div-8">
+							<header>
+								<nav class="navbar navbar-light  venue-registration">
+									<a class="h4 text-dark font-weight-bold pt-2">List Of Tested PWG</a>
+									<form class="form-inline">
+										<div class="input-group-prepend  mr-2">
+											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
+											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
+										</div>
+										<a href="#" class="btn btn-danger text-white">Back</a>
+										<a href="#" class="btn btn-success ml-1 text-white" onclick="fun7()">Untested PWG List</a>
+									</form>
+								</nav>
+							</header>
+							<!-- <h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> List Of Tested PWG</h5> -->
+							<div class="table-responsive" style="overflow:scroll; height:520px;">
+								<table class="table table-borderless">
+									<thead>
+										<tr>
+											<th scope="col" style="position: relative;"><!-- <input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere"> <i class="fas fa-sort-down"></i> -->Select</th>
+											<th scope="col">Name</th>
+											<th scope="col">Total PWG</th>
+
+										</tr>
+									</thead>
+									<tbody id="myTable">
+										<tr>
+											<th>
+												<input type="checkbox"  id="checkAll-tested" name="checkAll-tested" value="floatingButtonHere"></th>
+												<td><a href="tester-pwg-sublist.html">PWGS-A</a><div class="dropdown">
+													<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+													</button>
+													<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+														<table class="table">
+															<thead>
+																<tr>
+
+																	<th scope="col">Name</th>
+																	<th scope="col">Status</th>
+
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+
+																	<td><a href="#"><input type="checkbox" name="book-tested" class="book-tested" > PWGS-A-1</a></td>
+																	<td>T</td>
+
+																</tr>
+
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book-tested" class="book-tested" > PWGS-A-12</a></td>
+																	<td>U</td>
+																</tr>
+
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book-tested" class="book-tested" > PWGS-A-3</a></td>
+																	<td>T</td>
+																</tr>
+
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book-tested" class="book-tested" > PWGS-A-4</a></td>
+																	<td>U</td>
+																</tr>
+															</tbody>
+
+														</table>
+
+
+													</div>
+												</div>
+											</td>
+											<td>20</td>
+
+
+
+										</tr>
+
+										<tr>
+											<th>
+												<input type="checkbox"  id="checkAll-tested1" name="checkAll-tested1" value="floatingButtonHere"></th>
+												<td><a href="tester-pwg-sublist.html">PWGS-B</a><div class="dropdown">
+													<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+													</button>
+													<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+														<table class="table">
+															<thead>
+																<tr>
+
+																	<th scope="col">Name</th>
+																	<th scope="col">Status</th>
+
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+
+																	<td><a href="#"><input type="checkbox" name="book-tested1" class="book-tested1" > PWGS-B-1</a></td>
+																	<td>T</td>
+
+																</tr>
+
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book-tested1" class="book-tested1" > PWGS-B-12</a></td>
+																	<td>U</td>
+																</tr>
+
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book-tested1" class="book-tested1" > PWGS-B-3</a></td>
+																	<td>T</td>
+																</tr>
+
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book-tested1" class="book-tested1" > PWGS-B-4</a></td>
+																	<td>U</td>
+																</tr>
+															</tbody>
+
+														</table>
+													</div>
+												</div>
+											</td>
+											<td>20</td>
+
+
+
+										</tr>
+										<tr>
+											<th>
+												<input type="checkbox"  id="checkAll-tested2" name="checkAll-tested2" value="floatingButtonHere"></th>
+												<td><a href="tester-pwg-sublist.html">PWGS-C</a><div class="dropdown">
+													<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+													</button>
+													<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+														<table class="table">
+															<thead>
+																<tr>
+
+																	<th scope="col">Name</th>
+																	<th scope="col">Status</th>
+
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+
+																	<td><a href="#"><input type="checkbox" name="book-tested2" class="book-tested2" > PWGS-C-1</a></td>
+																	<td>T</td>
+
+																</tr>
+
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book-tested2" class="book-tested2" >PWGS-C-12</a></td>
+																	<td>U</td>
+																</tr>
+
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book-tested2" class="book-tested2" >PWGS-C-3</a></td>
+																	<td>T</td>
+																</tr>
+
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book-tested2" class="book-tested2" >PWGS-C-4</a></td>
+																	<td>U</td>
+																</tr>
+															</tbody>
+
+														</table>
+													</div>
+												</div>
+											</td>
+											<td>20</td>
+										</tr>
+									</tbody>
+
+
+								</table>
 							</div>
+
+
+
 
 						</div>
 
@@ -870,205 +1149,325 @@
 
 
 
-
-
-
-
 				</div>
+
+
+
+
+
+
+
 			</div>
-
-
 		</div>
-	</section>
 
 
+	</div>
+</section>
 
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog">
 
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header border-bottom">
-					<h4 class="modal-title text-center font-weight-bold">Occupied PWG</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-				<div class="modal-body text-center">
-					<p class="text-danger">This PWG has been Transferred</p>
-					<a href="" class="btn btn-secondary btn-sm">Disable??</a>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Transfered PWG</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+			</div>
+			<div class="modal-body text-center p-4">
+				<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
+				<p class="pt-2 font-weight-bold">Your PWG has been successfully transfered to seller</p>
+
 			</div>
 
 		</div>
 	</div>
+</div>
 
 
 
-	<section class="floatingButtonHere" style="display: none;" id="floating-button">
-	<a href="" class=" btn btn-primary" data-toggle="modal" data-target="#exampleModal">Confirm</a>
-	<a href="seller-pwg" class=" btn btn-warning">Cancel</a>
+
+<!-- <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title font-weight-bold">Login History</h5>
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			</div>
+			<div class="modal-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">SL No</th>
+							<th scope="col">Name</th>
+							<th scope="col">Date</th>
+							<th scope="col">Time</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">1</th>
+							<td><a href="">Faiz Elahi</a></td>
+							<td>05//06/2020</td>
+							<td>04:30 pm</td>
+						</tr>
+
+						<tr>
+							<th scope="row">1</th>
+							<td><a href="">Naqui Hasan</a></td>
+							<td>07//06/2020</td>
+							<td>04:00 pm</td>
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="floatingButtonHere" style="display: none;">
+	<a href="" class=" btn btn-primary" >Confirm</a>
+	<a href="seller-pwg" class=" btn btn-danger">Cancel</a>
 </section>
 
 
 
 
-	<script type="text/javascript">
 
-		// check all checkbox in one click
 
-	$(document).ready(function() {
 
-		$('#checkAll').click(function () {
-			$('input:checkbox').not(this).prop('checked', this.checked);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+// floating button JS
+
+$('input[type="checkbox"]').click(function(){
+	if($(this).attr("value")=="floatingButtonHere"){
+		$(".floatingButtonHere").show(150);
+	}
+});
+
+
+// search filter table
+$(document).ready(function(){
+	$("#myInput").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#myTable tr").filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 		});
-
-		$("[id*=book_]").change(function () {
-			if ($('input[type=checkbox]:checked').length == $('input[type=checkbox]').length) {
-				$('#checkAll').prop('checked', true);
-			} else {
-				$('#checkAll').prop('checked', false);
-			}
-		});
-
 	});
-
-
-		function myfun(){
-
-			document.getElementById("div-1").style.display = "block";
-			document.getElementById("div-2").style.display = "none";
-			document.getElementById("div-3").style.display = "none";
-			document.getElementById("div-4").style.display = "none";
-			document.getElementById("div-5").style.display = "none";
-			document.getElementById("div-6").style.display = "none";
-
-		}
-
-		function myfun1(){
-			document.getElementById("div-1").style.display = "none";
-			document.getElementById("div-2").style.display = "block";
-			document.getElementById("div-3").style.display = "none";
-			document.getElementById("div-4").style.display = "none";
-			document.getElementById("div-5").style.display = "none";
-			document.getElementById("div-6").style.display = "none";
-
-
-		}
-
-
-		function myfun2(){
-			document.getElementById("div-1").style.display = "none";
-			document.getElementById("div-2").style.display = "none";
-			document.getElementById("div-3").style.display = "block";
-			document.getElementById("div-4").style.display = "none";
-			document.getElementById("div-5").style.display = "none";
-			document.getElementById("div-6").style.display = "none";
-
-
-		}
-
-		function myfun3(){
-			document.getElementById("div-1").style.display = "none";
-			document.getElementById("div-2").style.display = "none";
-			document.getElementById("div-3").style.display = "none";
-			document.getElementById("div-4").style.display = "block";
-			document.getElementById("div-5").style.display = "none";
-			document.getElementById("div-6").style.display = "none";
-
-
-		}
-
-		function myfun4(){
-			document.getElementById("div-1").style.display = "none";
-			document.getElementById("div-2").style.display = "none";
-			document.getElementById("div-3").style.display = "none";
-			document.getElementById("div-4").style.display = "none";
-			document.getElementById("div-5").style.display = "block";
-			document.getElementById("div-6").style.display = "none";
-
-
-		}
-
-		function myfun5(){
-			document.getElementById("div-1").style.display = "none";
-			document.getElementById("div-2").style.display = "none";
-			document.getElementById("div-3").style.display = "none";
-			document.getElementById("div-4").style.display = "none";
-			document.getElementById("div-5").style.display = "none";
-			document.getElementById("div-6").style.display = "block";
-
-
-		}
-
-		function fun6(){
-			document.getElementById("div-7").style.display = "none";
-			document.getElementById("div-8").style.display = "block";
-		}
-
-		function fun7(){
-			document.getElementById("div-7").style.display = "block";
-			document.getElementById("div-8").style.display = "none";
-		}
-
-
-			function Occupied(){
-			document.getElementById("unoccupied").style.display = "none";
-			document.getElementById("Occupied").style.display = "block";
-		}
-
-		function Unoccupied(){
-			document.getElementById("unoccupied").style.display = "block";
-			document.getElementById("Occupied").style.display = "none";
-		}
-
-
-		$(document).ready(function(){
-			$("#myBtn").click(function(){
-				$("#myModal").modal();
-			});
-		});
+});
 
 
 
-		// floating button JS
+// modal popup
+$(function() {
+	$('.pop').on('click', function() {
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodal').modal('show');
+	});
+});
 
-	$('input[type="checkbox"]').click(function(){
-		if($(this).attr("value")=="floatingButtonHere"){
-			$(".floatingButtonHere").show(150);
+
+
+
+$(function () {
+	$("#checkAll").click(function () {
+		if ($("#checkAll").is(':checked')) {
+			$(".book").prop("checked", true);
+		} else {
+			$(".book").prop("checked", false);
 		}
 	});
+});
 
 
 
-function myFunction() {
-  document.getElementById("checkAll").disabled = false;
-    document.getElementById("book1").disabled = false;
-    document.getElementById("book2").disabled = false;
-    document.getElementById("book3").disabled = false;
-    document.getElementById("book4").disabled = false;
-}
-
-function myFunction1() {
-  document.getElementById("checkAll").disabled = false;
-    document.getElementById("book1").disabled = false;
-    document.getElementById("book2").disabled = false;
-    document.getElementById("book3").disabled = false;
-    document.getElementById("book4").disabled = false;
-}
+$(function () {
+	$("#checkAll1").click(function () {
+		if ($("#checkAll1").is(':checked')) {
+			$(".book1").prop("checked", true);
+		} else {
+			$(".book1").prop("checked", false);
+		}
+	});
+});
 
 
-function myFunction2() {
-  document.getElementById("checkAll").disabled = false;
-    document.getElementById("book1").disabled = false;
-    document.getElementById("book2").disabled = false;
-    document.getElementById("book3").disabled = false;
-    document.getElementById("book4").disabled = false;
-}
+$(function () {
+	$("#checkAll2").click(function () {
+		if ($("#checkAll2").is(':checked')) {
+			$(".book2").prop("checked", true);
+		} else {
+			$(".book2").prop("checked", false);
+		}
+	});
+});
 
 
-	</script>
+
+
+
+
+
+
+$(function () {
+	$("#checkAll-tested").click(function () {
+		if ($("#checkAll-tested").is(':checked')) {
+			$(".book-tested").prop("checked", true);
+		} else {
+			$(".book-tested").prop("checked", false);
+		}
+	});
+});
+
+$(function () {
+	$("#checkAll-tested1").click(function () {
+		if ($("#checkAll-tested1").is(':checked')) {
+			$(".book-tested1").prop("checked", true);
+		} else {
+			$(".book-tested1").prop("checked", false);
+		}
+	});
+});
+
+$(function () {
+	$("#checkAll-tested2").click(function () {
+		if ($("#checkAll-tested2").is(':checked')) {
+			$(".book-tested2").prop("checked", true);
+		} else {
+			$(".book-tested2").prop("checked", false);
+		}
+	});
+});
+
+
+
+
+	// division hide/show js
+
+	function myfun(){
+
+		document.getElementById("div-1").style.display = "block";
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-3").style.display = "none";
+
+	}
+
+	function myfun1(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-2").style.display = "block";
+		document.getElementById("div-3").style.display = "none";
+
+
+	}
+
+
+	function myfun2(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-3").style.display = "block";
+		document.getElementById("div-2").style.display = "none";
+
+
+	}
+
+
+
+	function cancel() {
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-1").style.display = "block";
+	}
+
+
+
+	function fun6() {
+		document.getElementById("div-7").style.display = "none";
+		document.getElementById("div-8").style.display = "block";
+	}
+
+	function fun7() {
+		document.getElementById("div-7").style.display = "block";
+		document.getElementById("div-8").style.display = "none";
+	}
+
+	function funDown(){
+		document.getElementsByClassName('fa-sort-down').style.display="block";
+		document.getElementsByClassName('fa-sort-up').style.display="none";
+	}
+
+
+
+
+
+
+
+	function myFunction(x) {
+		x.classList.toggle("fa-sort-down");
+	}
+
+
+	function myOpen(one) {
+		$("#" + one).slideToggle("slow");
+		var tog = document.getElementById(one);
+		if (tog.style.display == "none") {
+			console.log(tog);
+		}
+	}
+
+
+	function Occupied(){
+	 document.getElementById('occupied').style.display = "block";
+	 document.getElementById('unoccupied').style.display = "none";
+	}
+	function Unoccupied(){
+	 document.getElementById('unoccupied').style.display = "block";
+	 document.getElementById('occupied').style.display = "none";
+	}
+
+</script>
 </body>
 </html>

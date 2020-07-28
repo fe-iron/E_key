@@ -163,12 +163,23 @@ def seller_authorized(request):
     return render(request, 'seller/seller-authorized.html')
 
 
+def seller_deauthorized(request):
+    return render(request, 'seller/seller-deauthorized.html')
+
+
+
 def seller_shared(request):
     return render(request, 'seller/seller-shared.html')
 
 
+def seller_deshared(request):
+    return render(request, 'seller/seller-deshared.html')
+
+
+
 def seller_pwg_transfer(request):
     return render(request, 'seller/seller-pwg-transfer.html')
+
 
 
 def names_view(request):
