@@ -60,7 +60,7 @@
 <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="{% static 'seller/css/seller-pwg1.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'seller/css/seller-pwg.css' %}">
 
 </head>
 <body>
@@ -92,18 +92,16 @@
 				</div>
 
 
-		<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
+			<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
 
 				<div class="dropdown  dropleft float-xl-right mb-0"  id="occupied-batch">
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-						<!-- <a class="dropdown-item" href="">Delete</a>
-						<a class="dropdown-item" href=""> Freeze </a>
-						<a class="dropdown-item" href="" >Chat</a> -->
-						<a class="dropdown-item" href="">Broadcast</a>
-						<a class="dropdown-item" href="admin-home">Return to Admin</a>
+						<a class="dropdown-item" href="#" onclick="authorize();"> Authorize </a>
+						<a class="dropdown-item" href="#" onclick="share();"> Share</a>
+
 
 						<a class="dropdown-item" href="seller-home" >Exit</a>
 					</div>
@@ -126,9 +124,9 @@
 
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="#" onclick="transfer();">Transfer</a>
-						<a class="dropdown-item" href="#" onclick="authorize();"> Authorize </a>
-						<a class="dropdown-item" href="#" onclick="share();">Share</a>
-						<a class="dropdown-item" href="admin-home">Return to Admin</a>
+						<a class="dropdown-item" href="#" onclick="authorize1();"> Authorize </a>
+						<a class="dropdown-item" href="#" onclick="share1();">Share</a>
+						<a class="dropdown-item" href="#" onclick="returntoadmin();">Return to Admin</a>
 						<a class="dropdown-item" href="seller-home" >Exit</a>
 					</div>
 				</div>
@@ -156,7 +154,7 @@
 											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
 
-										<!-- <a href="#" class="btn btn-success ml-1 text-white" onclick="fun6()">Tested PWG List</a> -->
+
 									</form>
 
 								</nav>
@@ -178,358 +176,228 @@
 
 
 							<div id="occupied">
+
 								<div class="accordion" id="accordionExample">
-									<div class="row px-3">
-										<div class="col-6 pl-2">
+									<div class="row px-2 big-screen-table-header">
+										<div class="col-2">
+											<h5>Select</h5>
+										</div>
+										<div class="col-5 pl-2">
 											<h5 class="pl-3">Name</h5>
 										</div>
 
-										<div class="col-4">
-											<h5>Status</h5>
+										<div class="col-2 pl-2">
+											<h5 class="pl-3">Status</h5>
 										</div>
 
-										<div class="col-2">
-											<h5>Action</h5>
+										<div class="col-2 pl-2">
+											<h5 class="pl-3">Action</h5>
 										</div>
-
 									</div>
 
+									<div class="row px-2 small-screen-table-header">
+										<div class="col-2">
+											<h5>Select</h5>
+										</div>
+										<div class="col-4 pl-2">
+											<h5 class="pl-3">Name</h5>
+										</div>
+
+										<div class="col-2 pl-2">
+											<h5 class="pl-3">Status</h5>
+										</div>
+
+										<div class="col-2 pl-2">
+											<h5 class="pl-3">Action</h5>
+										</div>
+									</div>
 									<div class="card">
 										<div class="card-header" id="headingOne">
 											<h2 class="mb-0">
-												<button class="btn p-1" type="button" data-toggle="collapse">
-													<span >PWGS-A</span>
+												<button class="btn" type="button" data-toggle="collapse">
+													<input type="checkbox"  id="checkAll" name="checkAll" value="floatingButtonHere" disabled=""><span class="pwg-list">PWGS-A</span>
 												</button>
-												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
 
 											</h2>
 										</div>
 
-										<div id="collapseOne1" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-											<div class="card-body p-1">
+										<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+											<div class="card-body px-xl-5">
 												<table class="table table-borderless">
-													<thead>
 
-													</thead>
 													<tbody>
 														<tr>
 
-															<td><a href="#"> PWGS-A-1</a></td>
-															<td class="status">DA</td>
-															<td class="text-center mb-2">
-																<div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+															<td><a href="#"><input type="checkbox" name="book" class="book" value="floatingButtonHere" id="book1" disabled=""> PWGS-A-1</a></td>
+															<td>DS</td>
+															<td>
+																<div class="dropdown  mb-0 ml-xl-3  ml-sm-2" >
 																	<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 																		<i class="fas fa-ellipsis-v"></i>
 																	</button>
-																	<div class="dropdown-menu">
-
+																	<div class="dropdown-menu menu-left-align">
 																		<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																		<a class="dropdown-item " href="seller-shared" >Share</a>
-																		<a class="dropdown-item" href="seller-deauthorized">De-authorize</a>
-																		<a class="dropdown-item pop1" href="#">History</a>
-																		<a class="dropdown-item" href="" >Delete</a>
-																		<a class="dropdown-item" href="" >Freeze</a>
+																			<a class="dropdown-item" href="seller-shared" >Share</a>
+																			<a class="dropdown-item" href="seller-deshared" >De-Share</a>
+																			<a class="dropdown-item pop1" href="#" >History</a>
+																			<a class="dropdown-item" href="" >Delete</a>
+
 																	</div>
 																</div></td>
-
-
 															</tr>
 
 															<tr>
-																<td><a href="#"> PWGS-A-12</a></td>
-																<td class="">DS</td>
-																<td class="text-center">
-																	<div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+																<td><a href="#"><input type="checkbox" name="book" class="book" value="floatingButtonHere" id="book2" disabled=""> PWGS-A-12</a></td>
+																<td>DS</td>
+																<td>
+																	<div class="dropdown  mb-0 ml-xl-3  ml-sm-2" >
 																		<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 																			<i class="fas fa-ellipsis-v"></i>
 																		</button>
 																		<div class="dropdown-menu">
 																			<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																			<a class="dropdown-item " href="seller-shared" >Share</a>
-																			<a class="dropdown-item" href="seller-deshared">De-share</a>
-																			<a class="dropdown-item pop1" href="#">History</a>
+																			<a class="dropdown-item" href="seller-shared" >Share</a>
+																			<a class="dropdown-item" href="seller-deshared" >De-Share</a>
+																			<a class="dropdown-item pop1" href="#" >History</a>
 																			<a class="dropdown-item" href="" >Delete</a>
-																			<a class="dropdown-item" href="" >Freeze</a>
+
 																		</div>
-																	</div>
-																</div>
-															</td>
+																	</div></td>
+																</tr>
 
-														</tr>
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="" class="" value="" id="book3" disabled=""> PWGS-A-3</a></td>
+																	<td>NA</td>
+																	<td>
+																		<div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																			<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																				<i class="fas fa-ellipsis-v"></i>
+																			</button>
+																			<div class="dropdown-menu">
 
-														<tr>
-															<td><a href="#"> PWGS-A-3</a></td>
-															<td class="">DA</td>
-															<td class="text-center"><div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+<!--																				<a class="dropdown-item" href="seller-authorized.html">Authorized</a>-->
+<!--																				<a class="dropdown-item" href="seller-shared.html">Shared</a>-->
+																				<a class="dropdown-item pop1" href="#" >History</a>
+<!--																				<a class="dropdown-item" href="" >Delete</a>-->
+
+																			</div>
+																		</div></td>
+																	</tr>
+
+																	<tr>
+																		<td><a href="#"><input type="checkbox" name="book" class="book" value="" id="book4" disabled=""> PWGS-A-4</a></td>
+																		<td>DS</td>
+																		<td>
+																			<div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																				<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																					<i class="fas fa-ellipsis-v"></i>
+																				</button>
+																				<div class="dropdown-menu">
+																					<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																					<a class="dropdown-item" href="seller-shared" >Share</a>
+																					<a class="dropdown-item" href="seller-deshared" >De-Share</a>
+																					<a class="dropdown-item pop1" href="#" >History</a>
+																					<a class="dropdown-item" href="" >Delete</a>
+
+																				</div>
+																			</div></td>
+
+																		</tr>
+																	</tbody>
+
+																</table>
+															</div>
+														</div>
+													</div>
+													<div class="card">
+														<div class="card-header" id="headingTwo">
+															<h2 class="mb-0">
+																<button class="btn" type="button" data-toggle="collapse">
+																	<input type="checkbox"  id="checkAll1" name="checkAll1" value="floatingButtonHere" disabled=""> <span class="pwg-list">PWGS-B</span>
+																</button>
+																<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+															</h2>
+														</div>
+														<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+															<div class="card-body px-xl-5">
+																<table class="table table-borderless">
+
+																	<tbody>
+																		<tr>
+
+																			<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" id="book5" disabled="" > PWGS-B-1</a></td>
+																			<td>DS</td>
+																			<td>
+																				<div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																					<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																						<i class="fas fa-ellipsis-v"></i>
+																					</button>
+																					<div class="dropdown-menu">
+																						<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																						<a class="dropdown-item" href="seller-shared" >Share</a>
+																						<a class="dropdown-item" href="seller-deshared" >De-Share</a>
+																						<a class="dropdown-item pop1" href="#" >History</a>
+																						<a class="dropdown-item" href="" >Delete</a>
+
+																					</div>
+																				</div></td>
+																			</tr>
+
+																			<tr>
+																				<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" id="book6" disabled="" > PWGS-B-12</a></td>
+																				<td>DA</td>
+																				<td>
+																					<div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																						<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																							<i class="fas fa-ellipsis-v"></i>
+																						</button>
+																						<div class="dropdown-menu">
+																							<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																							<a class="dropdown-item" href="seller-deauthorized">De-Authorize</a>
+																							<a class="dropdown-item" href="seller-shared" >Share</a>
+																							<a class="dropdown-item pop1" href="#" >History</a>
+																							<a class="dropdown-item" href="" >Delete</a>
+
+																						</div>
+																					</div></td>
+																				</tr>
+
+																				<tr>
+																					<td><a href="#"><input type="checkbox" name="" class="" value="" id="book7" disabled="" > PWGS-B-3</a></td>
+																					<td>NA</td>
+																					<td>
+																						<div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																							<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																								<i class="fas fa-ellipsis-v"></i>
+																							</button>
+																							<div class="dropdown-menu">
+																	<!-- <a class="dropdown-item" href="seller-authorized.html">Authorized</a>
+																	<a class="dropdown-item" href="seller-shared.html" >Shared</a>
+<!--																	<a class="dropdown-item pop1" href="#" >History</a>-->
+																	<a class="dropdown-item pop1" href="#" >History</a>
+
+															</div>
+														</div></td>
+													</tr>
+
+													<tr>
+														<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" id="book8" disabled="" > PWGS-B-4</a></td>
+														<td>DA</td>
+														<td>
+															<div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 																	<i class="fas fa-ellipsis-v"></i>
 																</button>
 																<div class="dropdown-menu">
-
 																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item " href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="seller-deauthorized">De-authorize</a>
-																	<a class="dropdown-item pop1" href="#">History</a>
+																	<a class="dropdown-item" href="seller-deauthorized">De-Authorize</a>
+																	<a class="dropdown-item" href="seller-shared" >Share</a>
+																	<a class="dropdown-item pop1" href="#" >History</a>
 																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div>
-														</div></td>
 
-													</tr>
-
-													<tr>
-														<td><a href="#"> PWGS-A-4</a></td>
-														<td class="">NA</td>
-														<td class="text-center">
-															<div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu dropdown-menu-right">
-																<!-- <a class="dropdown-item" href="seller-authorized.html">Authorize</a>
-																<a class="dropdown-item " href="seller-shared.html" >Share</a>
-																<a class="dropdown-item" href="seller-deauthorized.html">De-authorize</a> -->
-																<a class="dropdown-item pop1" href="#">History</a>
-																<!-- <a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a> -->
-																</div>
-															</div>
-														</td>
-
-													</tr>
-													<tr>
-														<td><a href="#"> PWGS-A-5</a></td>
-														<td class="">NA</td>
-														<td class="text-center">
-															<div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu dropdown-menu-right">
-																<!-- <a class="dropdown-item" href="seller-authorized.html">Authorize</a>
-																<a class="dropdown-item " href="seller-shared.html" >Share</a>
-																<a class="dropdown-item" href="seller-deauthorized.html">De-authorize</a> -->
-																<a class="dropdown-item pop1" href="#">History</a>
-																<!-- <a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a> -->
-																</div>
-															</div>
-														</td>
-
-													</tr>
-													<tr>
-														<td><a href="#"> PWGS-A-6</a></td>
-														<td class="">NA</td>
-														<td class="text-center">
-															<div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu dropdown-menu-right">
-																<!-- <a class="dropdown-item" href="seller-authorized.html">Authorize</a>
-																<a class="dropdown-item " href="seller-shared.html" >Share</a>
-																<a class="dropdown-item" href="seller-deauthorized.html">De-authorize</a> -->
-																<a class="dropdown-item pop1" href="#">History</a>
-																<!-- <a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a> -->
-																</div>
-															</div>
-														</td>
-
-													</tr>
-													<tr>
-														<td><a href="#"> PWGS-A-7</a></td>
-														<td class="">DS</td>
-														<td class="text-center">
-															<div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu dropdown-menu-right">
-																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item " href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="seller-deshared">De-share</a>
-																	<a class="dropdown-item pop1" href="#">History</a>
-																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div>
-														</td>
-
-													</tr>
-													<tr>
-														<td><a href="#"> PWGS-A-8</a></td>
-														<td class="">DA</td>
-														<td class="text-center">
-															<div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu dropdown-menu-right">
-																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item " href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="seller-deauthorized">De-authorize</a>
-																	<a class="dropdown-item pop1" href="#">History</a>
-																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div>
-														</td>
-
-													</tr>
-												</tbody>
-
-											</table>
-
-										</div>
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-header" id="headingTwo">
-										<h2 class="mb-0">
-											<button class="btn p-1" type="button" data-toggle="collapse">
-												<span >PWGS-B</span>
-											</button>
-											<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo1" aria-expanded="true" aria-controls="collapseTwo1" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
-										</h2>
-									</div>
-									<div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-										<div class="card-body p-1">
-											<table class="table table-borderless">
-												<tbody>
-													<tr>
-
-														<td><a href="#">PWGS-B-1</a></td>
-														<td class="">DS</td>
-														<td class="text-center"> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
-															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																<i class="fas fa-ellipsis-v"></i>
-															</button>
-															<div class="dropdown-menu">
-																<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																<a class="dropdown-item " href="seller-shared" >Share</a>
-																<a class="dropdown-item" href="seller-deshared">De-authorize</a>
-																<a class="dropdown-item pop1" href="#">History</a>
-																<a class="dropdown-item" href="" >Delete</a>
-																<a class="dropdown-item" href="" >Freeze</a>
-															</div>
-														</div></td>
-
-
-													</tr>
-
-													<tr>
-														<td><a href="#"> PWGS-B-2</a></td>
-														<td class="">DA</td>
-														<td class="text-center"> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
-															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																<i class="fas fa-ellipsis-v"></i>
-															</button>
-															<div class="dropdown-menu">
-																<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																<a class="dropdown-item " href="seller-shared" >Share</a>
-																<a class="dropdown-item" href="seller-deauthorized">De-authorize</a>
-																<a class="dropdown-item pop1" href="#">History</a>
-																<a class="dropdown-item" href="" >Delete</a>
-																<a class="dropdown-item" href="" >Freeze</a>
-															</div>
-														</div></td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#"> PWGS-B-3</a></td>
-														<td class="">NA</td>
-														<td class="text-center"> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
-															<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																<i class="fas fa-ellipsis-v"></i>
-															</button>
-															<div class="dropdown-menu">
-																<!-- <a class="dropdown-item" href="seller-authorized.html">Authorize</a>
-																<a class="dropdown-item " href="seller-shared.html" >Share</a>
-																<a class="dropdown-item" href="seller-deauthorized.html">De-authorize</a> -->
-																<a class="dropdown-item pop1" href="#">History</a>
-																<!-- <a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a> -->
 																</div>
 															</div></td>
-
-														</tr>
-
-														<tr>
-															<td><a href="#"> PWGS-B-4</a></td>
-															<td class="">NA</td>
-															<td class="text-center"> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu dropdown-menu-right">
-															<!-- 	<a class="dropdown-item" href="seller-authorized.html">Authorize</a>
-																<a class="dropdown-item " href="seller-shared.html" >Share</a>
-																<a class="dropdown-item" href="seller-deauthorized.html">De-authorize</a> -->
-																<a class="dropdown-item pop1" href="#">History</a>
-																<!-- <a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a> -->
-																</div>
-															</div></td>
-
-														</tr>
-
-														<tr>
-															<td><a href="#"> PWGS-B-5</a></td>
-															<td class="">NA</td>
-															<td class="text-center"> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu ">
-																<!-- <a class="dropdown-item" href="seller-authorized.html">Authorize</a>
-																<a class="dropdown-item " href="seller-shared.html" >Share</a>
-																<a class="dropdown-item" href="seller-deauthorized.html">De-authorize</a> -->
-																<a class="dropdown-item pop1" href="#">History</a>
-																<!-- <a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a> -->
-																</div>
-															</div></td>
-
-														</tr>
-
-														<tr>
-															<td><a href="#"> PWGS-B-6</a></td>
-															<td class="">DA</td>
-															<td class="text-center"> <div class="dropup mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu dropdown-menu-right">
-																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item " href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="seller-deauthorized">De-authorize</a>
-																	<a class="dropdown-item pop1" href="#">History</a>
-																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div></td>
-
-														</tr>
-														<tr>
-															<td><a href="#"> PWGS-B-7</a></td>
-															<td class="">DS</td>
-															<td class="text-center"> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu dropdown-menu-right">
-																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item " href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="seller-deshared">De-share</a>
-																	<a class="dropdown-item pop1" href="#">History</a>
-																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div></td>
-
 														</tr>
 													</tbody>
 
@@ -540,17 +408,18 @@
 									<div class="card">
 										<div class="card-header" id="headingThree">
 											<h2 class="mb-0">
-												<button class="btn p-1" type="button" data-toggle="collapse">
-													<span >PWGS-C</span>
+												<button class="btn" type="button" data-toggle="collapse">
+													<input type="checkbox"  id="checkAll2" name="checkAll2" value="floatingButtonHere" disabled=""> <span class="pwg-list">PWGS-C</span>
 												</button>
-												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseThree1" aria-expanded="true" aria-controls="collapseThree1" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
 											</h2>
 										</div>
-										<div id="collapseThree1" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-											<div class="card-body p-1">
+										<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+											<div class="card-body px-xl-5">
 												<table class="table table-borderless">
 													<thead>
 														<tr>
+
 
 
 
@@ -559,403 +428,391 @@
 													<tbody>
 														<tr>
 
-															<td><a href="#">PWGS-C-1</a></td>
-															<td class="">DS</td>
-															<td class="text-center"> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu">
-																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item " href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="seller-deshared">De-share</a>
-																	<a class="dropdown-item pop1" href="#">History</a>
-																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div></td>
-
-
-														</tr>
-
-														<tr>
-															<td><a href="#"> PWGS-C-12</a></td>
-															<td class="">NA</td>
-															<td class="text-center"> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu">
-																	<a class="dropdown-item pop1" href="#">History</a>
-																</div>
-															</div></td>
-
-														</tr>
-
-														<tr>
-															<td><a href="#"> PWGS-C-3</a></td>
-															<td class="">DA</td>
-															<td class="text-center"> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu dropdown-menu-right">
-																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item " href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="seller-deauthorized">De-authorize</a>
-																	<a class="dropdown-item pop1" href="#">History</a>
-																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div></td>
-														</tr>
-
-														<tr>
-															<td><a href="#"> PWGS-C-4</a></td>
-															<td class="">DS</td>
-															<td class="text-center">
+															<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" id="book9" disabled > PWGS-C-1</a></td>
+															<td>DA</td>
+															<td>
 																<div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 																	<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 																		<i class="fas fa-ellipsis-v"></i>
 																	</button>
-																	<div class="dropdown-menu dropdown-menu-right">
-																		<a class="dropdown-item" href="seller-authorized.html">Authorize</a>
-																		<a class="dropdown-item " href="seller-shared" >Share</a>
-																		<a class="dropdown-item" href="seller-deshared">De-shared</a>
-																		<a class="dropdown-item pop1" href="#">History</a>
+																	<div class="dropdown-menu">
+																		<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																		<a class="dropdown-item" href="seller-deauthorized">De-Authorize</a>
+																		<a class="dropdown-item" href="seller-shared" >Share</a>
+																		<a class="dropdown-item pop1" href="#" >History</a>
 																		<a class="dropdown-item" href="" >Delete</a>
-																		<a class="dropdown-item" href="" >Freeze</a>
+
 																	</div>
 																</div></td>
-
-															</tr>
-														</tbody>
-
-													</table>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-
-
-								<div id="unoccupied" style="display: none;">
-
-									<div class="accordion" id="accordionExample">
-										<div class="row px-2">
-											<div class="col-2">
-												<h5>Select</h5>
-											</div>
-											<div class="col-5 pl-2">
-												<h5 class="pl-3">Name</h5>
-											</div>
-
-											<div class="col-3 pl-2">
-												<h5 class="pl-3">Action</h5>
-											</div>
-
-
-										</div>
-										<div class="card">
-											<div class="card-header" id="headingOne">
-												<h2 class="mb-0">
-													<button class="btn" type="button" data-toggle="collapse">
-														<input type="checkbox"  id="checkAll" name="checkAll" value="floatingButtonHere" disabled=""> <span class="pwg-list">PWGS-A</span>
-													</button>
-													<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
-
-												</h2>
-											</div>
-
-											<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-												<div class="card-body px-xl-5">
-													<table class="table table-borderless">
-														<thead>
-															<tr>
-
-
-
-
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-
-																<td><a href="#"><input type="checkbox" name="book" class="book" value="floatingButtonHere" id="book1" disabled=""> PWGS-A-1</a></td>
-																<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu">
-																	<a class="dropdown-item" href="#">Chat</a>
-																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item" href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="#" >Chat History</a>
-																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div></td>
-
-
-															</tr>
-
-															<tr>
-																<td><a href="#"><input type="checkbox" name="book" class="book" value="floatingButtonHere" id="book2" disabled=""> PWGS-A-12</a></td>
-																<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu">
-																	<a class="dropdown-item" href="#">Chat</a>
-																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item" href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="#" >Chat History</a>
-																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div></td>
-
-															</tr>
-
-															<tr>
-																<td><a href="#"><input type="checkbox" name="book" class="book" value="floatingButtonHere" id="book3" disabled=""> PWGS-A-3</a></td>
-																<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu">
-																	<a class="dropdown-item" href="#">Chat</a>
-																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item" href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="#" >Chat History</a>
-																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div></td>
-
-															</tr>
-
-															<tr>
-																<td><a href="#"><input type="checkbox" name="book" class="book" value="floatingButtonHere" id="book4" disabled=""> PWGS-A-4</a></td>
-																<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu">
-																	<a class="dropdown-item" href="#">Chat</a>
-																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item" href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="#" >Chat History</a>
-																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div></td>
-
-															</tr>
-														</tbody>
-
-													</table>
-												</div>
-											</div>
-										</div>
-										<div class="card">
-											<div class="card-header" id="headingTwo">
-												<h2 class="mb-0">
-													<button class="btn" type="button" data-toggle="collapse">
-														<input type="checkbox"  id="checkAll1" name="checkAll1" value="floatingButtonHere" disabled=""> <span class="pwg-list">PWGS-B</span>
-													</button>
-													<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
-												</h2>
-											</div>
-											<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-												<div class="card-body px-xl-5">
-													<table class="table table-borderless">
-														<thead>
-															<tr>
-
-
-
-
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-
-																<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" id="book5" disabled="" > PWGS-B-1</a></td>
-																<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu">
-																	<a class="dropdown-item" href="#">Chat</a>
-																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item" href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="" >Chat History</a>
-																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div></td>
-															</tr>
-
-															<tr>
-																<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" id="book6" disabled="" > PWGS-B-12</a></td>
-																<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu">
-																	<a class="dropdown-item" href="#">Chat</a>
-																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item" href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="" >Chat History</a>
-																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div></td>
-															</tr>
-
-															<tr>
-																<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" id="book7" disabled="" > PWGS-B-3</a></td>
-																<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu">
-																	<a class="dropdown-item" href="#">Chat</a>
-																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item" href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="" >Chat History</a>
-																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div></td>
-															</tr>
-
-															<tr>
-																<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" id="book8" disabled="" > PWGS-B-4</a></td>
-																<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu">
-																	<a class="dropdown-item" href="#">Chat</a>
-																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item" href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="" >Chat History</a>
-																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div></td>
-															</tr>
-														</tbody>
-
-													</table>
-												</div>
-											</div>
-										</div>
-										<div class="card">
-											<div class="card-header" id="headingThree">
-												<h2 class="mb-0">
-													<button class="btn" type="button" data-toggle="collapse">
-														<input type="checkbox"  id="checkAll2" name="checkAll2" value="floatingButtonHere" disabled=""> <span class="pwg-list">PWGS-C</span>
-													</button>
-													<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
-												</h2>
-											</div>
-											<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-												<div class="card-body px-xl-5">
-													<table class="table">
-														<thead>
-															<tr>
-
-
-
-
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-
-																<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" id="book9" disabled > PWGS-C-1</a></td>
-																<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu">
-																	<a class="dropdown-item" href="#">Chat</a>
-																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item" href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="" >Chat History</a>
-																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div></td>
 
 
 															</tr>
 
 															<tr>
 																<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" id="book10" disabled > PWGS-C-12</a></td>
-																<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu">
-																	<a class="dropdown-item" href="#">Chat</a>
-																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item" href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="" >Chat History</a>
-																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div></td>
+																<td>DA</td>
+																<td>
+																	<div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																		<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																			<i class="fas fa-ellipsis-v"></i>
+																		</button>
+																		<div class="dropdown-menu">
+																			<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																			<a class="dropdown-item" href="seller-deauthorized">De-Authorize</a>
+																			<a class="dropdown-item" href="seller-shared" >Share</a>
+																			<a class="dropdown-item pop1" href="#" >History</a>
+																			<a class="dropdown-item" href="" >Delete</a>
 
-															</tr>
+																		</div>
+																	</div></td>
 
-															<tr>
-																<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" id="book11" disabled > PWGS-C-3</a></td>
-																<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu">
-																	<a class="dropdown-item" href="#">Chat</a>
-																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item" href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="" >Chat History</a>
-																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div></td>
+																</tr>
 
-															</tr>
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" id="book11" disabled > PWGS-C-3</a></td>
+																	<td>DS</td>
+																	<td>
+																		<div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																			<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																				<i class="fas fa-ellipsis-v"></i>
+																			</button>
+																			<div class="dropdown-menu">
+																				<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																				<a class="dropdown-item" href="seller-shared" >Share</a>
+																				<a class="dropdown-item" href="seller-deshared">De-Share</a>
+																				<a class="dropdown-item pop1" href="#" >History</a>
+																				<a class="dropdown-item" href="" >Delete</a>
 
-															<tr>
-																<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" id="book12" disabled > PWGS-C-4</a></td>
-																<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-																<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-ellipsis-v"></i>
-																</button>
-																<div class="dropdown-menu">
-																	<a class="dropdown-item" href="#">Chat</a>
-																	<a class="dropdown-item" href="seller-authorized">Authorize</a>
-																	<a class="dropdown-item" href="seller-shared" >Share</a>
-																	<a class="dropdown-item" href="" >Chat History</a>
-																	<a class="dropdown-item" href="" >Delete</a>
-																	<a class="dropdown-item" href="" >Freeze</a>
-																</div>
-															</div></td>
+																			</div>
+																		</div></td>
 
-															</tr>
-														</tbody>
+																	</tr>
 
-													</table>
+																	<tr>
+																		<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" id="book12" disabled > PWGS-C-4</a></td>
+																		<td>DA</td>
+																		<td>
+																			<div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																				<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																					<i class="fas fa-ellipsis-v"></i>
+																				</button>
+																				<div class="dropdown-menu">
+																					<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																					<a class="dropdown-item" href="seller-deauthorized">De-Authorize</a>
+																					<a class="dropdown-item" href="seller-shared" >Shared</a>
+																					<a class="dropdown-item pop1" href="#" >History</a>
+																					<a class="dropdown-item" href="" >Delete</a>
+
+																				</div>
+																			</div></td>
+
+																		</tr>
+																	</tbody>
+
+																</table>
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
-										</div>
-									</div>
-								</div>
+
+
+
+											<div id="unoccupied" style="display: none;">
+
+												<div class="accordion" id="accordionExample">
+													<div class="row px-2">
+														<div class="col-2">
+															<h5>Select</h5>
+														</div>
+														<div class="col-5 pl-2">
+															<h5 class="pl-3">Name</h5>
+														</div>
+
+														<div class="col-3 pl-2">
+															<h5 class="pl-3">Action</h5>
+														</div>
+													</div>
+													<div class="card">
+														<div class="card-header" id="headingOne">
+															<h2 class="mb-0">
+																<button class="btn" type="button" data-toggle="collapse">
+																	<input type="checkbox"  id="checkAll3" name="checkAll3" value="floatingButtonHere" disabled=""><span class="pwg-list">PWGS-A</span>
+																</button>
+																<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+
+															</h2>
+														</div>
+
+														<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+															<div class="card-body px-xl-5">
+																<table class="table table-borderless">
+
+																	<tbody>
+																		<tr>
+
+																			<td><a href="#"><input type="checkbox" name="book" class="book" id="book13" value="floatingButtonHere" id="book1" disabled=""> PWGS-A-1</a></td>
+																			<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																				<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																					<i class="fas fa-ellipsis-v"></i>
+																				</button>
+																				<div class="dropdown-menu">
+																					<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																					<a class="dropdown-item" href="seller-shared" >Share</a>
+																					<a class="dropdown-item pop1" href="#" >History</a>
+																					<a class="dropdown-item" href="" >Delete</a>
+
+																				</div>
+																			</div></td>
+
+
+																		</tr>
+
+																		<tr>
+																			<td><a href="#"><input type="checkbox" name="book" class="book" id="book14" value="floatingButtonHere" id="book2" disabled=""> PWGS-A-12</a></td>
+																			<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																				<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																					<i class="fas fa-ellipsis-v"></i>
+																				</button>
+																				<div class="dropdown-menu">
+																					<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																					<a class="dropdown-item" href="seller-shared" >Share</a>
+																					<a class="dropdown-item pop1" href="#" >History</a>
+																					<a class="dropdown-item" href="" >Delete</a>
+
+																				</div>
+																			</div></td>
+
+																		</tr>
+
+																		<tr>
+																			<td><a href="#"><input type="checkbox" name="book" class="book" id="book15" value="floatingButtonHere" id="book3" disabled=""> PWGS-A-3</a></td>
+																			<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																				<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																					<i class="fas fa-ellipsis-v"></i>
+																				</button>
+																				<div class="dropdown-menu">
+																					<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																					<a class="dropdown-item" href="seller-shared" >Share</a>
+																					<a class="dropdown-item pop1" href="#" >History</a>
+																					<a class="dropdown-item" href="" >Delete</a>
+
+																				</div>
+																			</div></td>
+
+																		</tr>
+
+																		<tr>
+																			<td><a href="#"><input type="checkbox" name="book" class="book" id="book16" value="floatingButtonHere" id="book4" disabled=""> PWGS-A-4</a></td>
+																			<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																				<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																					<i class="fas fa-ellipsis-v"></i>
+																				</button>
+																				<div class="dropdown-menu">
+																					<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																					<a class="dropdown-item" href="seller-shared" >Share</a>
+																					<a class="dropdown-item pop1" href="#" >History</a>
+																					<a class="dropdown-item" href="" >Delete</a>
+
+																				</div>
+																			</div></td>
+
+																		</tr>
+																	</tbody>
+
+																</table>
+															</div>
+														</div>
+													</div>
+													<div class="card">
+														<div class="card-header" id="headingTwo">
+															<h2 class="mb-0">
+																<button class="btn" type="button" data-toggle="collapse">
+																	<input type="checkbox"  id="checkAll4" name="checkAll4" value="floatingButtonHere" disabled=""> <span class="pwg-list">PWGS-B</span>
+																</button>
+																<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+															</h2>
+														</div>
+														<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+															<div class="card-body px-xl-5">
+																<table class="table table-borderless">
+																	<thead>
+																		<tr>
+
+
+
+
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr>
+
+																			<td><a href="#"><input type="checkbox" name="book1" class="book1" id="book17" value="floatingButtonHere" id="book5" disabled="" > PWGS-B-1</a></td>
+																			<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																				<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																					<i class="fas fa-ellipsis-v"></i>
+																				</button>
+																				<div class="dropdown-menu">
+																					<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																					<a class="dropdown-item" href="seller-shared" >Share</a>
+																					<a class="dropdown-item pop1" href="#" >History</a>
+																					<a class="dropdown-item" href="" >Delete</a>
+
+																				</div>
+																			</div></td>
+																		</tr>
+
+																		<tr>
+																			<td><a href="#"><input type="checkbox" name="book1" class="book1" id="book18" value="floatingButtonHere" id="book6" disabled="" > PWGS-B-12</a></td>
+																			<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																				<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																					<i class="fas fa-ellipsis-v"></i>
+																				</button>
+																				<div class="dropdown-menu">
+																					<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																					<a class="dropdown-item" href="seller-shared" >Share</a>
+																					<a class="dropdown-item pop1" href="#" >History</a>
+																					<a class="dropdown-item" href="" >Delete</a>
+
+																				</div>
+																			</div></td>
+																		</tr>
+
+																		<tr>
+																			<td><a href="#"><input type="checkbox" name="book1" class="book1" id="book19" value="floatingButtonHere" id="book7" disabled="" > PWGS-B-3</a></td>
+																			<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																				<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																					<i class="fas fa-ellipsis-v"></i>
+																				</button>
+																				<div class="dropdown-menu">
+																					<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																					<a class="dropdown-item" href="seller-shared" >Share</a>
+																					<a class="dropdown-item pop1" href="#" >History</a>
+																					<a class="dropdown-item" href="" >Delete</a>
+
+																				</div>
+																			</div></td>
+																		</tr>
+
+																		<tr>
+																			<td><a href="#"><input type="checkbox" name="book1" class="book1" id="book20" value="floatingButtonHere" id="book8" disabled="" > PWGS-B-4</a></td>
+																			<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																				<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																					<i class="fas fa-ellipsis-v"></i>
+																				</button>
+																				<div class="dropdown-menu">
+																					<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																					<a class="dropdown-item" href="seller-shared" >Share</a>
+																					<a class="dropdown-item pop1" href="#" >History</a>
+																					<a class="dropdown-item" href="" >Delete</a>
+
+																				</div>
+																			</div></td>
+																		</tr>
+																	</tbody>
+
+																</table>
+															</div>
+														</div>
+													</div>
+													<div class="card">
+														<div class="card-header" id="headingThree">
+															<h2 class="mb-0">
+																<button class="btn" type="button" data-toggle="collapse">
+																	<input type="checkbox"  id="checkAll5" name="checkAll5" value="floatingButtonHere" disabled=""> <span class="pwg-list">PWGS-C</span>
+																</button>
+																<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+															</h2>
+														</div>
+														<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+															<div class="card-body px-xl-5">
+																<table class="table table-borderless">
+																	<thead>
+																		<tr>
+
+
+
+
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr>
+
+																			<td><a href="#"><input type="checkbox" name="book2" class="book2" id="book21" value="floatingButtonHere" id="book9" disabled > PWGS-C-1</a></td>
+																			<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																				<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																					<i class="fas fa-ellipsis-v"></i>
+																				</button>
+																				<div class="dropdown-menu">
+																					<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																					<a class="dropdown-item" href="seller-shared" >Share</a>
+																					<a class="dropdown-item pop1" href="#" >History</a>
+																					<a class="dropdown-item" href="" >Delete</a>
+
+																				</div>
+																			</div></td>
+
+
+																		</tr>
+
+																		<tr>
+																			<td><a href="#"><input type="checkbox" name="book2" class="book2" id="book22" value="floatingButtonHere" id="book10" disabled > PWGS-C-12</a></td>
+																			<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																				<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																					<i class="fas fa-ellipsis-v"></i>
+																				</button>
+																				<div class="dropdown-menu">
+																					<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																					<a class="dropdown-item" href="seller-shared" >Share</a>
+																					<a class="dropdown-item pop1" href="#" >History</a>
+																					<a class="dropdown-item" href="" >Delete</a>
+
+																				</div>
+																			</div></td>
+
+																		</tr>
+
+																		<tr>
+																			<td><a href="#"><input type="checkbox" name="book2" class="book2" id="book23" value="floatingButtonHere" id="book11" disabled > PWGS-C-3</a></td>
+																			<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																				<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																					<i class="fas fa-ellipsis-v"></i>
+																				</button>
+																				<div class="dropdown-menu">
+																					<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																					<a class="dropdown-item" href="seller-shared" >Share</a>
+																					<a class="dropdown-item pop1" href="#" >History</a>
+																					<a class="dropdown-item" href="" >Delete</a>
+
+																				</div>
+																			</div></td>
+
+																		</tr>
+
+																		<tr>
+																			<td><a href="#"><input type="checkbox" name="book2" class="book2" id="book24" value="floatingButtonHere" id="book12" disabled > PWGS-C-4</a></td>
+																			<td><a href="transfer-seller" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+																				<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+																					<i class="fas fa-ellipsis-v"></i>
+																				</button>
+																				<div class="dropdown-menu">
+																					<a class="dropdown-item" href="seller-authorized">Authorize</a>
+																					<a class="dropdown-item" href="seller-shared" >Share</a>
+																					<a class="dropdown-item pop1" href="#" >History</a>
+																					<a class="dropdown-item" href="" >Delete</a>
+
+																				</div>
+																			</div></td>
+
+																		</tr>
+																	</tbody>
+
+																</table>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
 
 							<!-- <div class="table-responsive" style="overflow:scroll; height:520px;">
 								<table class="table table-borderless">
@@ -1130,329 +987,301 @@
 
 
 
-						<div class="col-md" style="display: none;" id="div-8">
-							<header>
-								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">List Of Tested PWG</a>
-									<form class="form-inline">
-										<div class="input-group-prepend  mr-2">
-											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
-											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
-										</div>
-										<a href="admin-tester.html" class="btn btn-danger text-white">Back</a>
-										<a href="#" class="btn btn-success ml-1 text-white" onclick="fun7()">Untested PWG List</a>
-									</form>
-								</nav>
-							</header>
-							<!-- <h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> List Of Tested PWG</h5> -->
-							<div class="table-responsive" style="overflow:scroll; height:520px;">
-								<table class="table table-borderless">
-									<thead>
-										<tr>
-											<th scope="col" style="position: relative;"><!-- <input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere"> <i class="fas fa-sort-down"></i> -->Select</th>
-											<th scope="col">Name</th>
-											<th scope="col">Total PWG</th>
+							<div class="col-md" style="display: none;" id="div-8">
+								<header>
+									<nav class="navbar navbar-light  venue-registration">
+										<a class="h4 text-dark font-weight-bold pt-2">List Of Tested PWG</a>
+										<form class="form-inline">
+											<div class="input-group-prepend  mr-2">
+												<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
+												<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
+											</div>
+											<a href="admin-tester.html" class="btn btn-danger text-white">Back</a>
+											<a href="#" class="btn btn-success ml-1 text-white" onclick="fun7()">Untested PWG List</a>
+										</form>
+									</nav>
+								</header>
+								<!-- <h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> List Of Tested PWG</h5> -->
+								<div class="table-responsive" style="overflow:scroll; height:520px;">
+									<table class="table table-borderless">
+										<thead>
+											<tr>
+												<th scope="col" style="position: relative;"><!-- <input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere"> <i class="fas fa-sort-down"></i> -->Select</th>
+												<th scope="col">Name</th>
+												<th scope="col">Total PWG</th>
 
-										</tr>
-									</thead>
-									<tbody id="myTable">
-										<tr>
-											<th>
-												<input type="checkbox"  id="checkAll-tested" name="checkAll-tested" value="floatingButtonHere"></th>
-												<td><a href="tester-pwg-sublist.html">PWGS-A</a><div class="dropdown">
-													<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											</tr>
+										</thead>
+										<tbody id="myTable">
+											<tr>
+												<th>
+													<input type="checkbox"  id="checkAll-tested" name="checkAll-tested" value="floatingButtonHere"></th>
+													<td><a href="tester-pwg-sublist.html">PWGS-A</a><div class="dropdown">
+														<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-													</button>
-													<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+														</button>
+														<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 
-														<table class="table">
-															<thead>
-																<tr>
+															<table class="table">
+																<thead>
+																	<tr>
 
-																	<th scope="col">Name</th>
-																	<th scope="col">Status</th>
+																		<th scope="col">Name</th>
+																		<th scope="col">Status</th>
 
-																</tr>
-															</thead>
-															<tbody>
-																<tr>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
 
-																	<td><a href="#"><input type="checkbox" name="book-tested" class="book-tested" > PWGS-A-1</a></td>
-																	<td>T</td>
+																		<td><a href="#"><input type="checkbox" name="book-tested" class="book-tested" > PWGS-A-1</a></td>
+																		<td>T</td>
 
-																</tr>
+																	</tr>
 
-																<tr>
-																	<td><a href="#"><input type="checkbox" name="book-tested" class="book-tested" > PWGS-A-12</a></td>
-																	<td>U</td>
-																</tr>
+																	<tr>
+																		<td><a href="#"><input type="checkbox" name="book-tested" class="book-tested" > PWGS-A-12</a></td>
+																		<td>U</td>
+																	</tr>
 
-																<tr>
-																	<td><a href="#"><input type="checkbox" name="book-tested" class="book-tested" > PWGS-A-3</a></td>
-																	<td>T</td>
-																</tr>
+																	<tr>
+																		<td><a href="#"><input type="checkbox" name="book-tested" class="book-tested" > PWGS-A-3</a></td>
+																		<td>T</td>
+																	</tr>
 
-																<tr>
-																	<td><a href="#"><input type="checkbox" name="book-tested" class="book-tested" > PWGS-A-4</a></td>
-																	<td>U</td>
-																</tr>
-															</tbody>
+																	<tr>
+																		<td><a href="#"><input type="checkbox" name="book-tested" class="book-tested" > PWGS-A-4</a></td>
+																		<td>U</td>
+																	</tr>
+																</tbody>
 
-														</table>
+															</table>
 
 
+														</div>
 													</div>
-												</div>
-											</td>
-											<td>20</td>
+												</td>
+												<td>20</td>
 
 
 
-										</tr>
+											</tr>
 
-										<tr>
-											<th>
-												<input type="checkbox"  id="checkAll-tested1" name="checkAll-tested1" value="floatingButtonHere"></th>
-												<td><a href="tester-pwg-sublist.html">PWGS-B</a><div class="dropdown">
-													<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<tr>
+												<th>
+													<input type="checkbox"  id="checkAll-tested1" name="checkAll-tested1" value="floatingButtonHere"></th>
+													<td><a href="tester-pwg-sublist.html">PWGS-B</a><div class="dropdown">
+														<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-													</button>
-													<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+														</button>
+														<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 
-														<table class="table">
-															<thead>
-																<tr>
+															<table class="table">
+																<thead>
+																	<tr>
 
-																	<th scope="col">Name</th>
-																	<th scope="col">Status</th>
+																		<th scope="col">Name</th>
+																		<th scope="col">Status</th>
 
-																</tr>
-															</thead>
-															<tbody>
-																<tr>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
 
-																	<td><a href="#"><input type="checkbox" name="book-tested1" class="book-tested1" > PWGS-B-1</a></td>
-																	<td>T</td>
+																		<td><a href="#"><input type="checkbox" name="book-tested1" class="book-tested1" > PWGS-B-1</a></td>
+																		<td>T</td>
 
-																</tr>
+																	</tr>
 
-																<tr>
-																	<td><a href="#"><input type="checkbox" name="book-tested1" class="book-tested1" > PWGS-B-12</a></td>
-																	<td>U</td>
-																</tr>
+																	<tr>
+																		<td><a href="#"><input type="checkbox" name="book-tested1" class="book-tested1" > PWGS-B-12</a></td>
+																		<td>U</td>
+																	</tr>
 
-																<tr>
-																	<td><a href="#"><input type="checkbox" name="book-tested1" class="book-tested1" > PWGS-B-3</a></td>
-																	<td>T</td>
-																</tr>
+																	<tr>
+																		<td><a href="#"><input type="checkbox" name="book-tested1" class="book-tested1" > PWGS-B-3</a></td>
+																		<td>T</td>
+																	</tr>
 
-																<tr>
-																	<td><a href="#"><input type="checkbox" name="book-tested1" class="book-tested1" > PWGS-B-4</a></td>
-																	<td>U</td>
-																</tr>
-															</tbody>
+																	<tr>
+																		<td><a href="#"><input type="checkbox" name="book-tested1" class="book-tested1" > PWGS-B-4</a></td>
+																		<td>U</td>
+																	</tr>
+																</tbody>
 
-														</table>
+															</table>
+														</div>
 													</div>
-												</div>
-											</td>
-											<td>20</td>
+												</td>
+												<td>20</td>
 
 
 
-										</tr>
-										<tr>
-											<th>
-												<input type="checkbox"  id="checkAll-tested2" name="checkAll-tested2" value="floatingButtonHere"></th>
-												<td><a href="tester-pwg-sublist">PWGS-C</a><div class="dropdown">
-													<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											</tr>
+											<tr>
+												<th>
+													<input type="checkbox"  id="checkAll-tested2" name="checkAll-tested2" value="floatingButtonHere"></th>
+													<td><a href="tester-pwg-sublist.html">PWGS-C</a><div class="dropdown">
+														<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-													</button>
-													<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+														</button>
+														<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 
-														<table class="table">
-															<thead>
-																<tr>
+															<table class="table">
+																<thead>
+																	<tr>
 
-																	<th scope="col">Name</th>
-																	<th scope="col">Status</th>
+																		<th scope="col">Name</th>
+																		<th scope="col">Status</th>
 
-																</tr>
-															</thead>
-															<tbody>
-																<tr>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
 
-																	<td><a href="#"><input type="checkbox" name="book-tested2" class="book-tested2" > PWGS-C-1</a></td>
-																	<td>T</td>
+																		<td><a href="#"><input type="checkbox" name="book-tested2" class="book-tested2" > PWGS-C-1</a></td>
+																		<td>T</td>
 
-																</tr>
+																	</tr>
 
-																<tr>
-																	<td><a href="#"><input type="checkbox" name="book-tested2" class="book-tested2" >PWGS-C-12</a></td>
-																	<td>U</td>
-																</tr>
+																	<tr>
+																		<td><a href="#"><input type="checkbox" name="book-tested2" class="book-tested2" >PWGS-C-12</a></td>
+																		<td>U</td>
+																	</tr>
 
-																<tr>
-																	<td><a href="#"><input type="checkbox" name="book-tested2" class="book-tested2" >PWGS-C-3</a></td>
-																	<td>T</td>
-																</tr>
+																	<tr>
+																		<td><a href="#"><input type="checkbox" name="book-tested2" class="book-tested2" >PWGS-C-3</a></td>
+																		<td>T</td>
+																	</tr>
 
-																<tr>
-																	<td><a href="#"><input type="checkbox" name="book-tested2" class="book-tested2" >PWGS-C-4</a></td>
-																	<td>U</td>
-																</tr>
-															</tbody>
+																	<tr>
+																		<td><a href="#"><input type="checkbox" name="book-tested2" class="book-tested2" >PWGS-C-4</a></td>
+																		<td>U</td>
+																	</tr>
+																</tbody>
 
-														</table>
+															</table>
+														</div>
 													</div>
-												</div>
-											</td>
-											<td>20</td>
-										</tr>
-									</tbody>
+												</td>
+												<td>20</td>
+											</tr>
+										</tbody>
 
 
-								</table>
+									</table>
+								</div>
+
+
+
+
 							</div>
 
-
-
-
 						</div>
+
+
 
 					</div>
 
 
 
-				</div>
 
 
 
 
-
-
-
-			</div>
-		</div>
-
-
-	</div>
-</section>
-
-
-<!--<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--	<div class="modal-dialog" role="document">-->
-<!--		<div class="modal-content">-->
-<!--			<div class="modal-header">-->
-<!--				<h5 class="modal-title" id="exampleModalLabel">Transfered PWG</h5>-->
-<!--				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>-->
-<!--			</div>-->
-<!--			<div class="modal-body text-center p-4">-->
-<!--&lt;!&ndash;				<i class="fas fa-check-circle fa-3x" style="color: green;"></i>&ndash;&gt;-->
-<!--				<p class="pt-2 font-weight-bold"></p>-->
-
-<!--			</div>-->
-
-<!--		</div>-->
-<!--	</div>-->
-<!--</div>-->
-
-<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-
-				<h5 class="modal-title font-weight-bold">History of PWG ABC</h5>
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			</div>
-			<div class="modal-body">
-				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<tr>
-<!--								<th scope="col">Device Name</th>-->
-<!--								<th scope="col">Login IP Address</th>-->
-								<th scope="col">Authorized on</th>
-								<th scope="col">Shared on</th>
-								<th scope="col">Transferred on</th>
-								<th scope="col">To User</th>
-
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>20/06/2020</td>
-								<td></td>
-								<td></td>
-								<td>Jennifer</td>
-
-							</tr>
-
-							<tr>
-								<td></td>
-								<td>20/07/2020</td>
-								<td></td>
-								<td>Faiz</td>
-
-							</tr>
-
-							<tr>
-								<td></td>
-								<td></td>
-								<td>28/07/2020</td>
-								<td>John</td>
-
-							</tr>
-						</tbody>
-					</table>
 				</div>
 			</div>
-			<div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Return</button>
-      </div>
+
+
 		</div>
-	</div>
-</div>
+	</section>
 
 
-<!-- <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title font-weight-bold">Login History</h5>
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			</div>
-			<div class="modal-body">
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">SL No</th>
-							<th scope="col">Name</th>
-							<th scope="col">Date</th>
-							<th scope="col">Time</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td><a href="">Faiz Elahi</a></td>
-							<td>05//06/2020</td>
-							<td>04:30 pm</td>
-						</tr>
+	<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Transfered PWG</h5>
+					<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+				</div>
+				<div class="modal-body text-center p-4">
+					<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
+					<p class="pt-2 font-weight-bold" id="confirmation">
 
-						<tr>
-							<th scope="row">1</th>
-							<td><a href="">Naqui Hasan</a></td>
-							<td>07//06/2020</td>
-							<td>04:00 pm</td>
-						</tr>
-					</tbody>
 
-				</table>
+					</p>
+
+				</div>
+
 			</div>
 		</div>
 	</div>
-</div> -->
+
+
+
+
+	<div class="modal fade" id="imagemodal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title font-weight-bold">History of PWG ABC</h5>
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				</div>
+				<div class="modal-body">
+					<div class="tabl-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Action</th>
+									<th scope="col">Date & Time</th>
+									<th scope="col">Objects</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">Authorize</th>
+									<td>20/06/2020</td>
+									<td>Naqui</td>
+								</tr>
+
+								<tr>
+									<th scope="row">Share</th>
+									<td>24/06/2020</td>
+									<td>Faiz</td>
+								</tr>
+
+								<tr>
+									<th scope="row">Transfer</th>
+									<td>27/06/2020</td>
+									<td>Jenifer<span><div class="dropdown">
+										<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="position: relative;">
+											<i class="fas fa-sort-down" style="position: absolute;top: 0px; left: 0px;"></i>
+										</button>
+										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+											<a class="dropdown-item">Jack</a>
+											<a class="dropdown-item">Michael</a>
+											<a class="dropdown-item">Nazia</a>
+										</div>
+									</div></span></td>
+								</tr>
+
+								<tr>
+									<th scope="row">Buy From Admin</th>
+									<td>30/06/2020</td>
+									<td>Admin</td>
+								</tr>
+							</tbody>
+
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			</div>
+			</div>
+		</div>
+	</div>
 
 
 
@@ -1475,12 +1304,10 @@
 
 
 
-<section class="floatingButtonHere" style="display: none;" id="buttons_bottom">
-
-</section>
-
-
-
+	<section class="floatingButtonHere" style="display: none;" id="button-floating-1">
+		<a href="#" class=" btn btn-primary pop">Confirm</a>
+		<a href="seller-pwg" class=" btn btn-danger">Cancel</a>
+	</section>
 
 
 
@@ -1510,7 +1337,10 @@
 
 
 
-<script type="text/javascript">
+
+
+
+	<script type="text/javascript">
 
 // floating button JS
 
@@ -1535,9 +1365,17 @@ $(document).ready(function(){
 
 // modal popup
 $(function() {
-	$('.pop1').on('click', function() {
+	$('.pop').on('click', function() {
 		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
 		$('#imagemodal').modal('show');
+	});
+});
+
+
+$(function() {
+	$('.pop1').on('click', function() {
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodal1').modal('show');
 	});
 });
 
@@ -1684,67 +1522,151 @@ $(function () {
 	}
 
 
-   function transfer(){
-
-   	document.getElementById("buttons_bottom").innerHTML = '<a href="transfer-seller" class=" btn btn-primary">Proceed</a> <a href="seller-pwg" class=" btn btn-danger">Cancel</a>';
-   	document.getElementById("checkAll").disabled = false;
-    document.getElementById("book1").disabled = false;
-    document.getElementById("book2").disabled = false;
-    document.getElementById("book3").disabled = false;
-    document.getElementById("book4").disabled = false;
-    document.getElementById("checkAll1").disabled = false;
-    document.getElementById("book5").disabled = false;
-    document.getElementById("book6").disabled = false;
-    document.getElementById("book7").disabled = false;
-    document.getElementById("book8").disabled = false;
-    	document.getElementById("checkAll2").disabled = false;
-    document.getElementById("book9").disabled = false;
-    document.getElementById("book10").disabled = false;
-    document.getElementById("book11").disabled = false;
-    document.getElementById("book12").disabled = false;
-   }
-
-
-   function authorize(){
-	document.getElementById("buttons_bottom").innerHTML = '<a href="seller-authorized" class=" btn btn-primary">Proceed</a> <a href="seller-pwg" class=" btn btn-danger">Cancel</a>';
-   	document.getElementById("checkAll").disabled = false;
-    document.getElementById("book1").disabled = false;
-    document.getElementById("book2").disabled = false;
-    document.getElementById("book3").disabled = false;
-    document.getElementById("book4").disabled = false;
-    document.getElementById("checkAll1").disabled = false;
-    document.getElementById("book5").disabled = false;
-    document.getElementById("book6").disabled = false;
-    document.getElementById("book7").disabled = false;
-    document.getElementById("book8").disabled = false;
-    	document.getElementById("checkAll2").disabled = false;
-    document.getElementById("book9").disabled = false;
-    document.getElementById("book10").disabled = false;
-    document.getElementById("book11").disabled = false;
-    document.getElementById("book12").disabled = false;
-   }
+	function transfer(){
+		document.getElementById("button-floating-1").innerHTML= '<a href="transfer-seller" class=" btn btn-primary pop">Proceed</a> <a href="seller-pwg" class=" btn btn-danger">Cancel</a>';
+		document.getElementById("checkAll3").disabled = false;
+		document.getElementById("checkAll4").disabled = false;
+		document.getElementById("checkAll5").disabled = false;
+		document.getElementById("book13").disabled = false;
+		document.getElementById("book14").disabled = false;
+		document.getElementById("book15").disabled = false;
+		document.getElementById("book16").disabled = false;
+		document.getElementById("book17").disabled = false;
+		document.getElementById("book18").disabled = false;
+		document.getElementById("book19").disabled = false;
+		document.getElementById("book20").disabled = false;
+		document.getElementById("book21").disabled = false;
+		document.getElementById("book22").disabled = false;
+		document.getElementById("book23").disabled = false;
+		document.getElementById("book24").disabled = false;
+	}
 
 
+	function authorize(){
+		document.getElementById("button-floating-1").innerHTML= '<a href="seller-authorized" class=" btn btn-primary pop">Proceed</a> <a href="seller-pwg" class=" btn btn-danger">Cancel</a>';
+		document.getElementById("checkAll").disabled = false;
+		document.getElementById("book1").disabled = false;
+		document.getElementById("book2").disabled = false;
+		document.getElementById("book3").disabled = false;
+		document.getElementById("book4").disabled = false;
+		document.getElementById("checkAll1").disabled = false;
+		document.getElementById("book5").disabled = false;
+		document.getElementById("book6").disabled = false;
+		document.getElementById("book7").disabled = false;
+		document.getElementById("book8").disabled = false;
+		document.getElementById("checkAll2").disabled = false;
+		document.getElementById("book9").disabled = false;
+		document.getElementById("book10").disabled = false;
+		document.getElementById("book11").disabled = false;
+		document.getElementById("book12").disabled = false;
+		document.getElementById("book12").disabled = false;
 
-   function share(){
-	document.getElementById("buttons_bottom").innerHTML = '<a href="seller-shared" class=" btn btn-primary">Proceed</a> <a href="seller-pwg" class=" btn btn-danger">Cancel</a>';
-   	document.getElementById("checkAll").disabled = false;
-    document.getElementById("book1").disabled = false;
-    document.getElementById("book2").disabled = false;
-    document.getElementById("book3").disabled = false;
-    document.getElementById("book4").disabled = false;
-    document.getElementById("checkAll1").disabled = false;
-    document.getElementById("book5").disabled = false;
-    document.getElementById("book6").disabled = false;
-    document.getElementById("book7").disabled = false;
-    document.getElementById("book8").disabled = false;
-    	document.getElementById("checkAll2").disabled = false;
-    document.getElementById("book9").disabled = false;
-    document.getElementById("book10").disabled = false;
-    document.getElementById("book11").disabled = false;
-    document.getElementById("book12").disabled = false;
-   }
+	}
 
+
+
+	function share(){
+		document.getElementById("button-floating-1").innerHTML= '<a href="seller-shared" class=" btn btn-primary pop">Proceed</a> <a href="seller-pwg" class=" btn btn-danger">Cancel</a>';
+		document.getElementById("checkAll").disabled = false;
+		document.getElementById("book1").disabled = false;
+		document.getElementById("book2").disabled = false;
+		document.getElementById("book3").disabled = false;
+		document.getElementById("book4").disabled = false;
+		document.getElementById("checkAll1").disabled = false;
+		document.getElementById("book5").disabled = false;
+		document.getElementById("book6").disabled = false;
+		document.getElementById("book7").disabled = false;
+		document.getElementById("book8").disabled = false;
+		document.getElementById("checkAll2").disabled = false;
+		document.getElementById("book9").disabled = false;
+		document.getElementById("book10").disabled = false;
+		document.getElementById("book11").disabled = false;
+		document.getElementById("book12").disabled = false;
+	}
+
+
+	function returntoadmin(){
+
+		document.getElementById("checkAll").disabled = false;
+		document.getElementById("book1").disabled = false;
+		document.getElementById("book2").disabled = false;
+		document.getElementById("book3").disabled = false;
+		document.getElementById("book4").disabled = false;
+		document.getElementById("checkAll1").disabled = false;
+		document.getElementById("book5").disabled = false;
+		document.getElementById("book6").disabled = false;
+		document.getElementById("book7").disabled = false;
+		document.getElementById("book8").disabled = false;
+		document.getElementById("checkAll2").disabled = false;
+		document.getElementById("book9").disabled = false;
+		document.getElementById("book10").disabled = false;
+		document.getElementById("book11").disabled = false;
+		document.getElementById("book12").disabled = false;
+	}
+
+
+
+	function authorize1(){
+		document.getElementById("button-floating-1").innerHTML= '<a href="seller-authorized" class=" btn btn-primary pop">Proceed</a> <a href="seller-pwg" class=" btn btn-danger">Cancel</a>';
+		document.getElementById("checkAll3").disabled = false;
+		document.getElementById("checkAll4").disabled = false;
+		document.getElementById("checkAll5").disabled = false;
+		document.getElementById("book13").disabled = false;
+		document.getElementById("book14").disabled = false;
+		document.getElementById("book15").disabled = false;
+		document.getElementById("book16").disabled = false;
+		document.getElementById("book17").disabled = false;
+		document.getElementById("book18").disabled = false;
+		document.getElementById("book19").disabled = false;
+		document.getElementById("book20").disabled = false;
+		document.getElementById("book21").disabled = false;
+		document.getElementById("book22").disabled = false;
+		document.getElementById("book23").disabled = false;
+		document.getElementById("book24").disabled = false;
+
+
+	}
+
+
+
+	function share1(){
+		document.getElementById("button-floating-1").innerHTML= '<a href="seller-shared" class=" btn btn-primary pop">Proceed</a> <a href="seller-pwg" class=" btn btn-danger">Cancel</a>';
+		document.getElementById("checkAll3").disabled = false;
+		document.getElementById("checkAll4").disabled = false;
+		document.getElementById("checkAll5").disabled = false;
+		document.getElementById("book13").disabled = false;
+		document.getElementById("book14").disabled = false;
+		document.getElementById("book15").disabled = false;
+		document.getElementById("book16").disabled = false;
+		document.getElementById("book17").disabled = false;
+		document.getElementById("book18").disabled = false;
+		document.getElementById("book19").disabled = false;
+		document.getElementById("book20").disabled = false;
+		document.getElementById("book21").disabled = false;
+		document.getElementById("book22").disabled = false;
+		document.getElementById("book23").disabled = false;
+		document.getElementById("book24").disabled = false;
+	}
+
+
+	function returntoadmin(){
+
+		document.getElementById("checkAll").disabled = false;
+		document.getElementById("book1").disabled = false;
+		document.getElementById("book2").disabled = false;
+		document.getElementById("book3").disabled = false;
+		document.getElementById("book4").disabled = false;
+		document.getElementById("checkAll1").disabled = false;
+		document.getElementById("book5").disabled = false;
+		document.getElementById("book6").disabled = false;
+		document.getElementById("book7").disabled = false;
+		document.getElementById("book8").disabled = false;
+		document.getElementById("checkAll2").disabled = false;
+		document.getElementById("book9").disabled = false;
+		document.getElementById("book10").disabled = false;
+		document.getElementById("book11").disabled = false;
+		document.getElementById("book12").disabled = false;
+	}
 
 
 
