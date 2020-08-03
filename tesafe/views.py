@@ -1,6 +1,4 @@
 from django.shortcuts import render
-from django.views.generic import CreateView
-# from .form import WebAdminSignUpForn, SellerSignUpForm
 from .models import Names
 from django.contrib.auth.models import auth
 from django.contrib import messages
@@ -112,6 +110,7 @@ def register_next(request):
 
     return render(request, 'tesafe/admin-seller.html', {})
 
+
 def seller_home(request):
     return render(request, 'seller/seller-home.html', {'num': [11,23,33,42,35,67,78,49,10]})
 
@@ -159,12 +158,25 @@ def transfer_seller(request):
     return render(request, 'seller/transfer-seller.html')
 
 
+def transfer_seller_pwg(request):
+    return render(request, 'seller/transfer-seller-pwg.html')
+
+
 def seller_authorized(request):
     return render(request, 'seller/seller-authorized.html')
 
 
-def seller_deauthorized(request):
-    return render(request, 'seller/seller-deauthorized.html')
+def seller_authorized_pwg(request):
+    return render(request, 'seller/seller-authorized-pwg.html')
+
+
+def seller_shared_pwg(request):
+    return render(request, 'seller/seller-shared-pwg.html')
+
+
+
+def seller_deauthorized_pwg(request):
+    return render(request, 'seller/seller-deauthorized-pwg.html')
 
 
 
@@ -172,8 +184,8 @@ def seller_shared(request):
     return render(request, 'seller/seller-shared.html')
 
 
-def seller_deshared(request):
-    return render(request, 'seller/seller-deshared.html')
+def seller_deshared_pwg(request):
+    return render(request, 'seller/seller-deshared-pwg.html')
 
 
 

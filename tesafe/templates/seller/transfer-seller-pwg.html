@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Seller | PWG-Share</title>
+	<title>Seller | Pwg-Transfer</title>
 
 
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -18,7 +18,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="{% static 'seller/css/seller-shared.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'seller/css/seller-user.css' %}">
 </head>
 <body>
 
@@ -38,7 +38,7 @@
 							<a class="nav-link "  href="seller-home">Home <span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link" href="seller-user">User</a>
+							<a class="nav-link " href="seller-user">User</a>
 						</li>
 						<li class="nav-item pl-3">
 							<a class="nav-link active" href="seller-pwg">PWG</a>
@@ -52,7 +52,7 @@
 
 				</div>
 
-	<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
+				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
 
 				<div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -60,11 +60,11 @@
 					</button>
 					<div class="dropdown-menu">
 <!--						<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>-->
-						<!-- <a class="dropdown-item" href="#" onclick="authorized()">Authorize</a> -->
-						<a class="dropdown-item" href="#" onclick="shared()">De-share</a>
+<!--						<a class="dropdown-item" href="#" onclick="authorized()">Authorize</a>-->
+<!--						&lt;!&ndash; <a class="dropdown-item" href="#" onclick="shared()">Share</a> &ndash;&gt;-->
 <!--						<a class="dropdown-item" href="#" onclick="myFunction()">Delete</a>-->
 <!--						<a class="dropdown-item" href="#" onclick="myFunction1()"> Freeze </a>-->
-						<a class="dropdown-item" href="#" onclick="myFunction2()">Chat</a>
+<!--						<a class="dropdown-item" href="#" onclick="myFunction2()">Chat</a>-->
 						<a class="dropdown-item" href="">Broadcast</a>
 						<!-- <a class="dropdown-item" href="#div-3" onclick="myfun2()">Tested PWG List</a> -->
 						<a class="dropdown-item" href="seller-home" >Exit</a>
@@ -231,13 +231,15 @@
 							<!-- <h4 class="font-weight-bold">User Account list<span onclick="myfun1()" class="float-right"><i class="fas fa-plus-circle" style="color:#07a007;"></i></span></h4> -->
 							<header>
 								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">Shared Users list</a>
+									<a class="h4 text-dark font-weight-bold pt-2">Transfer PWGxx1, PWG xx2, ... to User, can be Select from below</a>
 									<form class="form-inline">
 										<div class="input-group-prepend mb-1 mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
 											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
-										<a href="seller-pwg" class="btn btn-danger text-white">Back</a>
+
+										<a href="seller-pwg" class="btn btn-warning">Back</a>
+
 									</form>
 								</nav>
 							</header>
@@ -250,7 +252,7 @@
 									<thead>
 										<tr>
 
-											<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere" disabled> <i class="fas fa-sort-down"></i></th>
+<!--											<th scope="col" style="position: relative;"><input type="radio" name="checkAll" id="checkAll" value="floatingButtonHere" > <i class="fas fa-sort-down"></i></th>-->
 											<th scope="col">Name</th>
 
 
@@ -259,7 +261,7 @@
 									</thead>
 									<tbody id="myTable">
 										<tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
+											<th><input type="radio" name="book" value="floatingButtonHere"   id="book1"></th>
 											<td><span><img src="{% static 'tesafe/images/faiz.png' %}" height="40" width="40" class="rounded-circle"></span> Faiz Elahi</td>
 											<!-- <td><a href="transfer-seller.html" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -277,8 +279,8 @@
 										</tr>
 
 										<tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book2"></th>
-											<td><span><img src="{% static 'tesafe/images/tesafe.jpg' %}" height="40" width="40" class="rounded-circle"></span> Frank</td>
+											<th><input type="radio" name="book" value="floatingButtonHere"   id="book2"></th>
+											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"></span> Naqui</td>
 											<!-- <td><a href="transfer-seller.html" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
@@ -296,8 +298,8 @@
 										</tr>
 
 										<tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book3"></th>
-											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Naqui</td>
+											<th><input type="radio" name="book" value="floatingButtonHere"   id="book3"></th>
+											<td><span><img src="{% static 'tesafe/images/tesafe.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Frank</td>
 											<!-- <td><a href="transfer-seller.html" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
@@ -314,8 +316,8 @@
 										</tr>
 
 										<tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book4"></th>
-											<td><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span>Jacqueline</td>
+											<th><input type="radio" name="book" value="floatingButtonHere"   id="book4"></th>
+											<td><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Jacqueline</td>
 											<!-- <td><a href="transfer-seller.html" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
@@ -437,7 +439,7 @@
 															<td>Faiz Elahi</td>
 															<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
 															<td><div class="form-check">
-																<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+																<input class="form-check-input" type="radio" value="" id="defaultCheck1">
 															</div>
 														</td>
 													</tr>
@@ -482,7 +484,7 @@
 														<td>Faiz Elahi</td>
 														<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
 														<td><div class="form-check">
-															<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+															<input class="form-check-input" type="radio" value="" id="defaultCheck1">
 														</div>
 													</td>
 												</tr>
@@ -526,7 +528,7 @@
 													<td>Faiz Elahi</td>
 													<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
 													<td><div class="form-check">
-														<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+														<input class="form-check-input" type="radio" value="" id="defaultCheck1">
 													</div>
 												</td>
 											</tr>
@@ -573,7 +575,7 @@
 									<td>PWG-1</td>
 									<td><p class="pl-4"><i class="fas fa-circle fa-1x"></i></p></td>
 
-									<td><a href="" class="btn-secondary btn btn-sm text-white mb-1">Disabled</a>
+									<td><a href="" class="btn-secondary btn btn-sm text-white mb-1"></a>
 									</td>
 								</tr>
 
@@ -583,7 +585,7 @@
 									<td>PWG-2</td>
 									<td><p class="pl-4"><i class="fas fa-circle fa-2x"></i></p></td>
 
-									<td><a href="" class="btn-secondary btn btn-sm text-white mb-1">Disabled</a>
+									<td><a href="" class="btn-secondary btn btn-sm text-white mb-1"></a>
 									</td>
 								</tr>
 							</tbody>
@@ -704,34 +706,16 @@
 
 
 
-<div class="modal fade" id="imagemodal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">De-sharing PWG</h5>
-				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
-			</div>
-			<div class="modal-body text-center p-4">
-				<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-				<p class="pt-2 font-weight-bold">Your PWG has been successfully de-shared from the User ABC</p>
-
-			</div>
-
-		</div>
-	</div>
-</div>
-
-
 <!-- <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Authorized PWG</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Shared PWG</h5>
 				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
 			</div>
 			<div class="modal-body text-center p-4">
 				<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-				<p class="pt-2 font-weight-bold">Your PWG has been successfully Authorized</p>
+				<p class="pt-2 font-weight-bold">Your PWG has been successfully Shared</p>
 
 			</div>
 
@@ -740,11 +724,29 @@
 </div> -->
 
 
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Transferring PWG</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+			</div>
+			<div class="modal-body text-center p-4">
+				<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
+				<p class="pt-2 font-weight-bold">You have successfully Transferred the PWG</p>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
 
 
 <section class="floatingButtonHere" style="display: none;" id="floating-button">
-	<a href="#" class=" btn btn-primary pop1">Confirm</a>
-	<a href="seller-deshared" class=" btn btn-danger">Cancel</a>
+	<a href="#" class=" btn btn-primary pop">Confirm</a>
+	<a href="transfer-seller-pwg" class=" btn btn-warning">Cancel</a>
 </section>
 
 
@@ -792,16 +794,16 @@
 
 
 
-	// check all checkbox in one click
+	// check all radio in one click
 
 	$(document).ready(function() {
 
 		$('#checkAll').click(function () {
-			$('input:checkbox').not(this).prop('checked', this.checked);
+			$('input:radio').not(this).prop('checked', this.checked);
 		});
 
 		$("[id*=book_]").change(function () {
-			if ($('input[type=checkbox]:checked').length == $('input[type=checkbox]').length) {
+			if ($('input[type=radio]:checked').length == $('input[type=radio]').length) {
 				$('#checkAll').prop('checked', true);
 			} else {
 				$('#checkAll').prop('checked', false);
@@ -882,7 +884,7 @@
 
 // floating button JS
 
-	$('input[type="checkbox"]').click(function(){
+	$('input[type="radio"]').click(function(){
 		if($(this).attr("value")=="floatingButtonHere"){
 			$(".floatingButtonHere").show(150);
 		}
@@ -916,7 +918,7 @@ function myFunction2() {
 }
 
 
-function shared() {
+function authorized() {
   document.getElementById("checkAll").disabled = false;
     document.getElementById("book1").disabled = false;
     document.getElementById("book2").disabled = false;
