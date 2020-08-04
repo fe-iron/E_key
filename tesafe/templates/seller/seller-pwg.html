@@ -105,15 +105,6 @@
 
 						<a class="dropdown-item" href="seller-home" >Exit</a>
 					</div>
-
-					<!-- <div class="dropdown-menu" style="display: none;" id="unoccupied-batch">
-						<a class="dropdown-item" href="">Transfer</a>
-						<a class="dropdown-item" href=""> Authorize </a>
-						<a class="dropdown-item" href="" >Share</a>
-						<a class="dropdown-item" href="">Return to Admin</a>
-
-						<a class="dropdown-item" href="admin-home.html" >Exit</a>
-					</div> -->
 				</div>
 
 				<div class="dropdown  dropleft float-xl-right mb-0"  id="unoccupied-batch" style="display: none;">
@@ -126,7 +117,7 @@
 						<a class="dropdown-item" href="#" onclick="transfer();">Transfer</a>
 						<a class="dropdown-item" href="#" onclick="authorize1();"> Authorize </a>
 						<a class="dropdown-item" href="#" onclick="share1();">Share</a>
-						<a class="dropdown-item" href="#" onclick="returntoadmin();">Return to Admin</a>
+						<a class="dropdown-item" href="#" onclick="returnAdmin();">Return to Admin</a>
 						<a class="dropdown-item" href="seller-home" >Exit</a>
 					</div>
 				</div>
@@ -147,7 +138,7 @@
 						<div class="col-md" id="div-7">
 							<header class="pb-4">
 								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">Select One or more below PWG to Authorize / Share to Users</a>
+									<a class="h4 text-dark font-weight-bold pt-2" id="heading">PWG Account List</a>
 									<form class="form-inline">
 										<div class="input-group-prepend  mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
@@ -1335,363 +1326,315 @@
 
 
 
+<script type="text/javascript">
+      // floating button JS
+
+      $('input[type="checkbox"]').click(function () {
+        if ($(this).attr("value") == "floatingButtonHere") {
+          $(".floatingButtonHere").show(150);
+        }
+      });
+
+      // search filter table
+      $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+          var value = $(this).val().toLowerCase();
+          $("#myTable tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+          });
+        });
+      });
+
+      // modal popup
+      $(function () {
+        $(".pop").on("click", function () {
+          $(".imagepreview").attr("src", $(this).find("img").attr("src"));
+          $("#imagemodal").modal("show");
+        });
+      });
 
 
 
+      $(function () {
+        $(".pop1").on("click", function () {
+          $(".imagepreview").attr("src", $(this).find("img").attr("src"));
+          $("#imagemodal1").modal("show");
+        });
+      });
 
 
-	<script type="text/javascript">
-
-// floating button JS
-
-$('input[type="checkbox"]').click(function(){
-	if($(this).attr("value")=="floatingButtonHere"){
-		$(".floatingButtonHere").show(150);
-	}
-});
-
-
-// search filter table
-$(document).ready(function(){
-	$("#myInput").on("keyup", function() {
-		var value = $(this).val().toLowerCase();
-		$("#myTable tr").filter(function() {
-			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-		});
-	});
-});
-
-
-
-// modal popup
-$(function() {
-	$('.pop').on('click', function() {
-		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-		$('#imagemodal').modal('show');
-	});
-});
-
-
-$(function() {
-	$('.pop1').on('click', function() {
-		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-		$('#imagemodal1').modal('show');
-	});
-});
-
-
-
-
-$(function () {
-	$("#checkAll").click(function () {
-		if ($("#checkAll").is(':checked')) {
-			$(".book").prop("checked", true);
-		} else {
-			$(".book").prop("checked", false);
-		}
-	});
-});
-
-
+      $(function () {
+        $("#checkAll").click(function () {
+          if ($("#checkAll").is(":checked")) {
+            $(".book").prop("checked", true);
+          } else {
+            $(".book").prop("checked", false);
+          }
+        });
+      });
 
 $(function () {
-	$("#checkAll1").click(function () {
-		if ($("#checkAll1").is(':checked')) {
-			$(".book1").prop("checked", true);
-		} else {
-			$(".book1").prop("checked", false);
-		}
-	});
-});
+        $("#checkAll3").click(function () {
+          if ($("#checkAll3").is(":checked")) {
+            $(".book1").prop("checked", true);
+          } else {
+            $(".book1").prop("checked", false);
+          }
+        });
+      });
+
+      $(function () {
+        $("#checkAll2").click(function () {
+          if ($("#checkAll2").is(":checked")) {
+            $(".book2").prop("checked", true);
+          } else {
+            $(".book2").prop("checked", false);
+          }
+        });
+      });
+
+
+
+
+
+
+
+
+
+       $(function () {
+        $("#checkAll3").click(function () {
+          if ($("#checkAll3").is(":checked")) {
+            $(".book3").prop("checked", true);
+          } else {
+            $(".book3").prop("checked", false);
+          }
+        });
+      });
+
+      $(function () {
+        $("#checkAll4").click(function () {
+          if ($("#checkAll4").is(":checked")) {
+            $(".book4").prop("checked", true);
+          } else {
+            $(".book4").prop("checked", false);
+          }
+        });
+      });
+
+      $(function () {
+        $("#checkAll5").click(function () {
+          if ($("#checkAll5").is(":checked")) {
+            $(".book5").prop("checked", true);
+          } else {
+            $(".book5").prop("checked", false);
+          }
+        });
+      });
+
+
+
+
+
+
+      // division hide/show js
+
+      function myfun() {
+        document.getElementById("div-1").style.display = "block";
+        document.getElementById("div-2").style.display = "none";
+        document.getElementById("div-3").style.display = "none";
+      }
+
+      function myfun1() {
+        document.getElementById("div-1").style.display = "none";
+        document.getElementById("div-2").style.display = "block";
+        document.getElementById("div-3").style.display = "none";
+      }
+
+      function myfun2() {
+        document.getElementById("div-1").style.display = "none";
+        document.getElementById("div-3").style.display = "block";
+        document.getElementById("div-2").style.display = "none";
+      }
+
+      function cancel() {
+        document.getElementById("div-2").style.display = "none";
+        document.getElementById("div-1").style.display = "block";
+      }
+
+      function fun6() {
+        document.getElementById("div-7").style.display = "none";
+        document.getElementById("div-8").style.display = "block";
+      }
+
+      function fun7() {
+        document.getElementById("div-7").style.display = "block";
+        document.getElementById("div-8").style.display = "none";
+      }
+
+      function funDown() {
+        document.getElementsByClassName("fa-sort-down").style.display = "block";
+        document.getElementsByClassName("fa-sort-up").style.display = "none";
+      }
+
+      function occupied() {
+        document.getElementById("unoccupied").style.display = "none";
+        document.getElementById("occupied").style.display = "block";
+        document.getElementById("unoccupied-batch").style.display = "none";
+        document.getElementById("occupied-batch").style.display = "block";
+      }
+
+      function unoccupied() {
+        document.getElementById("unoccupied").style.display = "block";
+        document.getElementById("unoccupied-batch").style.display = "block";
+        document.getElementById("occupied-batch").style.display = "none";
+        document.getElementById("occupied").style.display = "none";
+      }
+
+      function transfer() {
+        document.getElementById("button-floating-1").innerHTML = '<a href="transfer-seller-pwg" class=" btn btn-primary">Transfer To</a><a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
+        document.getElementById("button-floating-1").style.display = "block";
+        document.getElementById("heading").innerHTML="Select one or more PWG below to Transfer to User"
+        document.getElementById("checkAll3").disabled = false;
+        document.getElementById("checkAll4").disabled = false;
+        document.getElementById("checkAll5").disabled = false;
+        document.getElementById("book13").disabled = false;
+        document.getElementById("book14").disabled = false;
+        document.getElementById("book15").disabled = false;
+        document.getElementById("book16").disabled = false;
+        document.getElementById("book17").disabled = false;
+        document.getElementById("book18").disabled = false;
+        document.getElementById("book19").disabled = false;
+        document.getElementById("book20").disabled = false;
+        document.getElementById("book21").disabled = false;
+        document.getElementById("book22").disabled = false;
+        document.getElementById("book23").disabled = false;
+        document.getElementById("book24").disabled = false;
+      }
+
+      function authorize() {
+        document.getElementById("button-floating-1").innerHTML = '<a href="seller-authorized-pwg" class=" btn btn-primary">Authorize To</a><a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
+        document.getElementById("heading").innerHTML="Select one or more PWG below to Authorize to User"
+        document.getElementById("button-floating-1").style.display = "block";
+        document.getElementById("checkAll").disabled = false;
+        document.getElementById("book1").disabled = false;
+        document.getElementById("book2").disabled = false;
+        document.getElementById("book3").disabled = false;
+        document.getElementById("book4").disabled = false;
+        document.getElementById("checkAll1").disabled = false;
+        document.getElementById("book5").disabled = false;
+        document.getElementById("book6").disabled = false;
+        document.getElementById("book7").disabled = false;
+        document.getElementById("book8").disabled = false;
+        document.getElementById("checkAll2").disabled = false;
+        document.getElementById("book9").disabled = false;
+        document.getElementById("book10").disabled = false;
+        document.getElementById("book11").disabled = false;
+        document.getElementById("book12").disabled = false;
+        document.getElementById("book12").disabled = false;
+      }
+
+      function share() {
+        document.getElementById("button-floating-1").innerHTML = '<a href="seller-shared-pwg" class=" btn btn-primary">Share To</a><a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
+        document.getElementById("heading").innerHTML="Select one or more PWG below to Share to User"
+        document.getElementById("checkAll").disabled = false;
+        document.getElementById("button-floating-1").style.display = "block";
+        document.getElementById("book1").disabled = false;
+        document.getElementById("book2").disabled = false;
+        document.getElementById("book3").disabled = false;
+        document.getElementById("book4").disabled = false;
+        document.getElementById("checkAll1").disabled = false;
+        document.getElementById("book5").disabled = false;
+        document.getElementById("book6").disabled = false;
+        document.getElementById("book7").disabled = false;
+        document.getElementById("book8").disabled = false;
+        document.getElementById("checkAll2").disabled = false;
+        document.getElementById("book9").disabled = false;
+        document.getElementById("book10").disabled = false;
+        document.getElementById("book11").disabled = false;
+        document.getElementById("book12").disabled = false;
+      }
+
+      function returnAdmin() {
+      	document.getElementById("button-floating-1").style.display = "block";
+        document.getElementById("button-floating-1").innerHTML = '<a href="#" class="btn btn-primary">Get Payment</a><a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
+        document.getElementById("confirmation").innerHTML ="PWG has been Returned to Admin successfully";
+        document.getElementById("checkAll3").disabled = false;
+        document.getElementById("checkAll4").disabled = false;
+        document.getElementById("checkAll5").disabled = false;
+        document.getElementById("book13").disabled = false;
+        document.getElementById("book14").disabled = false;
+        document.getElementById("book15").disabled = false;
+        document.getElementById("book16").disabled = false;
+        document.getElementById("book17").disabled = false;
+        document.getElementById("book18").disabled = false;
+        document.getElementById("book19").disabled = false;
+        document.getElementById("book20").disabled = false;
+        document.getElementById("book21").disabled = false;
+        document.getElementById("book22").disabled = false;
+        document.getElementById("book23").disabled = false;
+        document.getElementById("book24").disabled = false;
+      }
+
+      function authorize1() {
+        document.getElementById("button-floating-1").style.display = "block";
+        document.getElementById("button-floating-1").innerHTML = '<a href="seller-authorized-pwg" class=" btn btn-primary">Authorize To</a> <a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
+        document.getElementById("heading").innerHTML="Select one or more PWG below to Authorize to User"
+        document.getElementById("checkAll3").disabled = false;
+        document.getElementById("checkAll4").disabled = false;
+        document.getElementById("checkAll5").disabled = false;
+        document.getElementById("book13").disabled = false;
+        document.getElementById("book14").disabled = false;
+        document.getElementById("book15").disabled = false;
+        document.getElementById("book16").disabled = false;
+        document.getElementById("book17").disabled = false;
+        document.getElementById("book18").disabled = false;
+        document.getElementById("book19").disabled = false;
+        document.getElementById("book20").disabled = false;
+        document.getElementById("book21").disabled = false;
+        document.getElementById("book22").disabled = false;
+        document.getElementById("book23").disabled = false;
+        document.getElementById("book24").disabled = false;
+      }
+
+      function share1() {
+        document.getElementById("button-floating-1").style.display = "block";
+        document.getElementById("button-floating-1").innerHTML = '<a href="seller-shared-pwg" class=" btn btn-primary">Share To</a> <a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
+        document.getElementById("heading").innerHTML="Select one or more PWG below to Share to User"
+        document.getElementById("checkAll3").disabled = false;
+        document.getElementById("checkAll4").disabled = false;
+        document.getElementById("checkAll5").disabled = false;
+        document.getElementById("book13").disabled = false;
+        document.getElementById("book14").disabled = false;
+        document.getElementById("book15").disabled = false;
+        document.getElementById("book16").disabled = false;
+        document.getElementById("book17").disabled = false;
+        document.getElementById("book18").disabled = false;
+        document.getElementById("book19").disabled = false;
+        document.getElementById("book20").disabled = false;
+        document.getElementById("book21").disabled = false;
+        document.getElementById("book22").disabled = false;
+        document.getElementById("book23").disabled = false;
+        document.getElementById("book24").disabled = false;
+      }
+
+
+      function myFunction(x) {
+        x.classList.toggle("fa-sort-down");
+      }
+
+      function myOpen(one) {
+        $("#" + one).slideToggle("slow");
+        var tog = document.getElementById(one);
+        if (tog.style.display == "none") {
+          console.log(tog);
+        }
+      }
+    </script>
 
 
-$(function () {
-	$("#checkAll2").click(function () {
-		if ($("#checkAll2").is(':checked')) {
-			$(".book2").prop("checked", true);
-		} else {
-			$(".book2").prop("checked", false);
-		}
-	});
-});
 
 
 
 
-
-
-
-
-$(function () {
-	$("#checkAll-tested").click(function () {
-		if ($("#checkAll-tested").is(':checked')) {
-			$(".book-tested").prop("checked", true);
-		} else {
-			$(".book-tested").prop("checked", false);
-		}
-	});
-});
-
-$(function () {
-	$("#checkAll-tested1").click(function () {
-		if ($("#checkAll-tested1").is(':checked')) {
-			$(".book-tested1").prop("checked", true);
-		} else {
-			$(".book-tested1").prop("checked", false);
-		}
-	});
-});
-
-$(function () {
-	$("#checkAll-tested2").click(function () {
-		if ($("#checkAll-tested2").is(':checked')) {
-			$(".book-tested2").prop("checked", true);
-		} else {
-			$(".book-tested2").prop("checked", false);
-		}
-	});
-});
-
-
-
-
-	// division hide/show js
-
-	function myfun(){
-
-		document.getElementById("div-1").style.display = "block";
-		document.getElementById("div-2").style.display = "none";
-		document.getElementById("div-3").style.display = "none";
-
-	}
-
-	function myfun1(){
-		document.getElementById("div-1").style.display = "none";
-		document.getElementById("div-2").style.display = "block";
-		document.getElementById("div-3").style.display = "none";
-
-
-	}
-
-
-	function myfun2(){
-		document.getElementById("div-1").style.display = "none";
-		document.getElementById("div-3").style.display = "block";
-		document.getElementById("div-2").style.display = "none";
-
-
-	}
-
-
-
-	function cancel() {
-		document.getElementById("div-2").style.display = "none";
-		document.getElementById("div-1").style.display = "block";
-	}
-
-
-
-	function fun6() {
-		document.getElementById("div-7").style.display = "none";
-		document.getElementById("div-8").style.display = "block";
-	}
-
-	function fun7() {
-		document.getElementById("div-7").style.display = "block";
-		document.getElementById("div-8").style.display = "none";
-	}
-
-	function funDown(){
-		document.getElementsByClassName('fa-sort-down').style.display="block";
-		document.getElementsByClassName('fa-sort-up').style.display="none";
-	}
-
-
-	function occupied(){
-		document.getElementById("unoccupied").style.display = "none";
-		document.getElementById("occupied").style.display = "block";
-		document.getElementById("unoccupied-batch").style.display = "none";
-		document.getElementById("occupied-batch").style.display = "block";
-	}
-
-	function unoccupied(){
-		document.getElementById("unoccupied").style.display = "block";
-		document.getElementById("unoccupied-batch").style.display = "block";
-		document.getElementById("occupied-batch").style.display = "none";
-		document.getElementById("occupied").style.display = "none";
-	}
-
-
-	function transfer(){
-		document.getElementById("button-floating-1").style.display = "block";
-		document.getElementById("button-floating-1").innerHTML= '<a href="transfer-seller-pwg" class=" btn btn-primary pop">To Select User</a> <a href="seller-pwg" class=" btn btn-danger">Cancel</a>';
-		document.getElementById("checkAll3").disabled = false;
-		document.getElementById("checkAll4").disabled = false;
-		document.getElementById("checkAll5").disabled = false;
-		document.getElementById("book13").disabled = false;
-		document.getElementById("book14").disabled = false;
-		document.getElementById("book15").disabled = false;
-		document.getElementById("book16").disabled = false;
-		document.getElementById("book17").disabled = false;
-		document.getElementById("book18").disabled = false;
-		document.getElementById("book19").disabled = false;
-		document.getElementById("book20").disabled = false;
-		document.getElementById("book21").disabled = false;
-		document.getElementById("book22").disabled = false;
-		document.getElementById("book23").disabled = false;
-		document.getElementById("book24").disabled = false;
-	}
-
-
-	function authorize(){
-		document.getElementById("button-floating-1").style.display = "block";
-
-		document.getElementById("button-floating-1").innerHTML= '<a href="seller-authorized-pwg" class=" btn btn-primary pop">To Select User</a> <a href="seller-pwg" class=" btn btn-danger">Cancel</a>';
-		document.getElementById("checkAll").disabled = false;
-		document.getElementById("book1").disabled = false;
-		document.getElementById("book2").disabled = false;
-
-		document.getElementById("book4").disabled = false;
-		document.getElementById("checkAll1").disabled = false;
-		document.getElementById("book5").disabled = false;
-		document.getElementById("book6").disabled = false;
-
-		document.getElementById("book8").disabled = false;
-		document.getElementById("checkAll2").disabled = false;
-		document.getElementById("book9").disabled = false;
-		document.getElementById("book10").disabled = false;
-		document.getElementById("book11").disabled = false;
-		document.getElementById("book12").disabled = false;
-		document.getElementById("book12").disabled = false;
-
-	}
-
-
-
-	function share(){
-		document.getElementById("button-floating-1").style.display = "block";
-		document.getElementById("button-floating-1").innerHTML= '<a href="seller-shared-pwg" class=" btn btn-primary pop">To Select User</a> <a href="seller-pwg" class=" btn btn-danger">Cancel</a>';
-		document.getElementById("checkAll").disabled = false;
-		document.getElementById("book1").disabled = false;
-		document.getElementById("book2").disabled = false;
-
-		document.getElementById("book4").disabled = false;
-		document.getElementById("checkAll1").disabled = false;
-		document.getElementById("book5").disabled = false;
-		document.getElementById("book6").disabled = false;
-
-		document.getElementById("book8").disabled = false;
-		document.getElementById("checkAll2").disabled = false;
-		document.getElementById("book9").disabled = false;
-		document.getElementById("book10").disabled = false;
-		document.getElementById("book11").disabled = false;
-		document.getElementById("book12").disabled = false;
-	}
-
-
-	function returntoadmin(){
-
-		document.getElementById("checkAll").disabled = false;
-		document.getElementById("book1").disabled = false;
-		document.getElementById("book2").disabled = false;
-		document.getElementById("book3").disabled = false;
-		document.getElementById("book4").disabled = false;
-		document.getElementById("checkAll1").disabled = false;
-		document.getElementById("book5").disabled = false;
-		document.getElementById("book6").disabled = false;
-
-		document.getElementById("book8").disabled = false;
-		document.getElementById("checkAll2").disabled = false;
-		document.getElementById("book9").disabled = false;
-		document.getElementById("book10").disabled = false;
-		document.getElementById("book11").disabled = false;
-		document.getElementById("book12").disabled = false;
-	}
-
-
-
-	function authorize1(){
-		document.getElementById("button-floating-1").style.display = "block";
-		document.getElementById("button-floating-1").innerHTML= '<a href="seller-authorized-pwg" class=" btn btn-primary pop">To Select User</a> <a href="seller-pwg" class=" btn btn-danger">Cancel</a>';
-		document.getElementById("checkAll3").disabled = false;
-		document.getElementById("checkAll4").disabled = false;
-		document.getElementById("checkAll5").disabled = false;
-		document.getElementById("book13").disabled = false;
-		document.getElementById("book14").disabled = false;
-		document.getElementById("book15").disabled = false;
-		document.getElementById("book16").disabled = false;
-		document.getElementById("book17").disabled = false;
-		document.getElementById("book18").disabled = false;
-		document.getElementById("book19").disabled = false;
-		document.getElementById("book20").disabled = false;
-		document.getElementById("book21").disabled = false;
-		document.getElementById("book22").disabled = false;
-		document.getElementById("book23").disabled = false;
-		document.getElementById("book24").disabled = false;
-
-
-	}
-
-
-
-	function share1(){
-		document.getElementById("button-floating-1").style.display = "block";
-		document.getElementById("button-floating-1").innerHTML= '<a href="seller-shared-pwg" class=" btn btn-primary pop">To Select User</a> <a href="seller-pwg" class=" btn btn-danger">Cancel</a>';
-		document.getElementById("checkAll3").disabled = false;
-		document.getElementById("checkAll4").disabled = false;
-		document.getElementById("checkAll5").disabled = false;
-		document.getElementById("book13").disabled = false;
-		document.getElementById("book14").disabled = false;
-		document.getElementById("book15").disabled = false;
-		document.getElementById("book16").disabled = false;
-		document.getElementById("book17").disabled = false;
-		document.getElementById("book18").disabled = false;
-		document.getElementById("book19").disabled = false;
-		document.getElementById("book20").disabled = false;
-		document.getElementById("book21").disabled = false;
-		document.getElementById("book22").disabled = false;
-		document.getElementById("book23").disabled = false;
-		document.getElementById("book24").disabled = false;
-	}
-
-
-	function returntoadmin(){
-
-		document.getElementById("checkAll").disabled = false;
-		document.getElementById("book1").disabled = false;
-		document.getElementById("book2").disabled = false;
-		document.getElementById("book3").disabled = false;
-		document.getElementById("book4").disabled = false;
-		document.getElementById("checkAll1").disabled = false;
-		document.getElementById("book5").disabled = false;
-		document.getElementById("book6").disabled = false;
-		document.getElementById("book7").disabled = false;
-		document.getElementById("book8").disabled = false;
-		document.getElementById("checkAll2").disabled = false;
-		document.getElementById("book9").disabled = false;
-		document.getElementById("book10").disabled = false;
-		document.getElementById("book11").disabled = false;
-		document.getElementById("book12").disabled = false;
-	}
-
-
-
-
-	function myFunction(x) {
-		x.classList.toggle("fa-sort-down");
-	}
-
-
-	function myOpen(one) {
-		$("#" + one).slideToggle("slow");
-		var tog = document.getElementById(one);
-		if (tog.style.display == "none") {
-			console.log(tog);
-		}
-	}
-
-
-
-</script>
 </body>
 </html>
