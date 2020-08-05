@@ -1,27 +1,44 @@
-from django.shortcuts import render
-from .models import Names
-from django.contrib.auth.models import auth
+from django.shortcuts import render, redirect
+from .models import WebAdmin, Seller
+from django.contrib.auth.models import auth, User
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.http import JsonResponse
-# Create your views here.
+from django.contrib.sessions.models import Session
+from django.utils import timezone
 
+
+
+
+
+
+# Create your views here.
 def index(request):
     if request.method == 'POST':
         accType = request.POST['accType']
         password = request.POST['password']
         email = request.POST['email']
-        print(accType)
+
+        # user = auth.authenticate(username=email, password=password)
+        # if user is not None:
+        #     auth.login(request, user)
+        #     messages.info(request, "Successfully Logged in ")
+        #
+        #
+        # else:
+        #     messages.info(request, 'Invalid user id and password')
+        #     return redirect('/')
+
         if accType == 'admin':
-            return render(request, 'tesafe/admin-home.html', {'num': [11,23,33,42,35,67,78,49,10]})
+            return admin_home(request)
         elif accType == 'seller':
-            return render(request, 'seller/seller-home.html', {'num': [11,23,33,42,35,67,78,49,10]})
+            return seller_home(request)
         elif accType == 'Tester':
-            return render(request, 'tesafe/admin-home.html', {'num': [11,23,33,42,35,67,78,49,10]})
+            return render(request, 'tesafe/admin-home.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
         elif accType == 'user':
-            return render(request, 'tesafe/admin-home.html', {'num': [11,23,33,42,35,67,78,49,10]})
-        else:
-            return render(request, 'tesafe/admin-home.html', {'num': [11,23,33,42,35,67,78,49,10]})
+            return render(request, 'tesafe/admin-home.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
+
+
     else:
         return render(request, 'tesafe/index.html')
 
@@ -37,33 +54,72 @@ def register(request):
         password1 = request.POST['password1']
         password2 = request.POST['password2']
 
+        # password checking
 
-
-        if accType == 'admin':
-            if password1 == password2:
-                user = User.objects.create_user(username=uname, first_name=fname, last_name=lname, email=email, password=password1, is_webAdmin=True)
-                user.save()
-
-                webAdmin = WebAdmin(user=user, phone=phone, email=email)
-                webAdmin.save()
-                msg = messages.info("Account successfully created!")
-                return render(request, 'tesafe/admin-page.html', {'msg': msg})
-
+        if password1 == password2:
+            # conditions to see if it already exists
+            if User.objects.filter(username=uname):
+                messages.error(request, "Username already exists! try again")
+                return redirect('register')
+            elif User.objects.filter(email=email):
+                messages.error(request, "Email already exists! try again")
+                return redirect('register')
             else:
-                msg = messages.error(request,"Password do not match! try again")
-                return render(request, 'tesafe/admin-page.html', {'msg': msg})
-        elif accType == 'seller':
-            pass
-        elif accType == 'Tester':
-            pass
-        elif accType == 'user':
-            pass
+            # if it is admin
+                if accType == 'admin':
+                    user = User.objects.create_user(username=uname, first_name=fname, last_name=lname, email=email, password=password1)
+                    user.save()
+
+                    webAdmin = WebAdmin(user=user, first_name=fname, last_name=lname, email=email, phone=phone)
+                    webAdmin.save()
+
+                    return render(request, 'tesafe/admin-home.html')
+
+
+                elif accType == 'seller':
+
+                    user = User.objects.create_user(username=uname, first_name=fname, last_name=lname, email=email, password=password1)
+                    user.save()
+
+                    seller = Seller(user=user, first_name=fname, last_name=lname, email=email, phone=phone)
+                    seller.save()
+
+                    return render(request, 'seller/seller-home.html')
+
+                elif accType == 'tester':
+                    pass
+                elif accType == 'user':
+                    pass
+        else:
+            messages.error(request, "Password do not match! try again")
+            return redirect('register')
 
     return render(request, 'tesafe/register.html')
 
 
+def get_current_users(table):
+    active_sessions = Session.objects.filter(expire_date__gte=timezone.now())
+    user_id_list = []
+    for session in active_sessions:
+        data = session.get_decoded()
+        user_id_list.append(data.get('_auth_user_id', None))
+    # Query all logged in users based on id list
+    print("active session: ",user_id_list)
+
+    return table.objects.filter(id__in=user_id_list)
+
+
 def admin_home(request):
-    return render(request, 'tesafe/admin-home.html', {'num': [11,23,33,42,35,67,78,49,10]})
+    admin_count = WebAdmin.objects.all().count()
+    seller_count = Seller.objects.all().count()
+    queryset = get_current_users(Seller)
+    params = {
+        'admin_count': admin_count,
+        'seller_count': seller_count,
+        'num': [11, 23, 33, 42, 35, 67, 78, 49, 10],
+        'seller_online': queryset.count()
+    }
+    return render(request, 'tesafe/admin-home.html', params)
 
 
 def admin_seller(request):
