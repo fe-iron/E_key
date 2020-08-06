@@ -17,24 +17,24 @@ def index(request):
     if request.method == 'POST':
         accType = request.POST['accType']
         password = request.POST['password']
-        email = request.POST['email']
+        uname = request.POST['uname']
 
-        # user = auth.authenticate(username=email, password=password)
+        # user = auth.authenticate(username=uname, password=password)
         # if user is not None:
         #     auth.login(request, user)
         #     messages.info(request, "Successfully Logged in ")
-        #
-        #
+
+
+
         # else:
         #     messages.info(request, 'Invalid user id and password')
         #     return redirect('/')
-
         if accType == 'admin':
             return admin_home(request)
         elif accType == 'seller':
             return seller_home(request)
-        elif accType == 'Tester':
-            return render(request, 'tesafe/admin-home.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
+        elif accType == 'tester':
+            return render(request, 'tester/tester-home.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
         elif accType == 'user':
             return render(request, 'tesafe/admin-home.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
 
@@ -97,7 +97,7 @@ def register(request):
     return render(request, 'tesafe/register.html')
 
 
-def get_current_users(table):
+def get_current_users():
     active_sessions = Session.objects.filter(expire_date__gte=timezone.now())
     user_id_list = []
     for session in active_sessions:
@@ -106,13 +106,13 @@ def get_current_users(table):
     # Query all logged in users based on id list
     print("active session: ",user_id_list)
 
-    return table.objects.filter(id__in=user_id_list)
+    return User.objects.filter(id__in=user_id_list)
 
 
 def admin_home(request):
     admin_count = WebAdmin.objects.all().count()
     seller_count = Seller.objects.all().count()
-    queryset = get_current_users(Seller)
+    queryset = get_current_users()
     params = {
         'admin_count': admin_count,
         'seller_count': seller_count,
@@ -132,10 +132,7 @@ def admin_tester(request):
 
 def admin_info_server(request):
     return render(request, 'tesafe/admin-info-server.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
-# class webAdmin_register(CreateView):
-#     model = User
-#     form_class = WebAdminSignUpForn
-#     template_name = 'tesafe/register.html'
+
 
 
 def register_next(request):
@@ -270,3 +267,11 @@ def names_view(request):
 
     return render(request, "tesafe/admin-home.html", context=ctx)
 
+
+
+def tester_home(request):
+    return render(request, 'tester/tester-home.html')
+
+
+def tester_test(request):
+    return render(request, 'tester/tester-test.html')

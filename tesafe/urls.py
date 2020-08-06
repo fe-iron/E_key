@@ -31,7 +31,9 @@ urlpatterns = [
     path("seller-shared-pwg", views.seller_shared_pwg, name="seller-shared-pwg"),
     path("seller-deshared-pwg", views.seller_deshared_pwg, name="seller-deshared-pwg"),
     path("seller-pwg-transfer", views.seller_pwg_transfer, name="seller-pwg-transfer"),
-
+    #tester URLs
+    path("tester-home", views.tester_home, name='tester-home'),
+    path("tester-test", views.tester_test, name='tester-test'),
     # path("webAdmin_register", views.webAdmin_register.as_view(), name="webAdmin_register"),
 
 ]
