@@ -79,10 +79,10 @@ WSGI_APPLICATION = 'E_key.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tesafe_E_key',
-        'USER': 'postgres',
-        'PASSWORD': '12345',
-        'HOST': 'localhost'
+        'NAME': 'dsufdihdl8ohm',
+        'USER': 'qhuozylilutvvo',
+        'PASSWORD': '82789103a196fb9a8b03da3a36794a9b88cd011ada31505fa7d4780bbd662fde',
+        'HOST': 'ec2-34-197-141-7.compute-1.amazonaws.com'
     }
 }
 
