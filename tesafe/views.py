@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import WebAdmin, Seller
+from .models import WebAdmin, Seller, Tester
 from django.contrib.auth.models import auth, User
 from django.contrib import messages
 from django.template.loader import render_to_string
@@ -87,8 +87,17 @@ def register(request):
                     return render(request, 'seller/seller-home.html')
 
                 elif accType == 'tester':
-                    pass
-                elif accType == 'user':
+
+                    user = User.objects.create_user(username=uname, first_name=fname, last_name=lname, email=email,
+                                                    password=password1)
+                    user.save()
+
+                    tester = Tester(user=user, first_name=fname, last_name=lname, email=email, phone=phone)
+                    tester.save()
+
+                    return render(request, 'tester/tester-home.html')
+
+            elif accType == 'user':
                     pass
         else:
             messages.error(request, "Password do not match! try again")
