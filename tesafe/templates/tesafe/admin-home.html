@@ -72,10 +72,16 @@
 					</button>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="" onclick="myfun()">Broadcast</a>
-						<a class="dropdown-item" href="#Statics" onclick="myfun()">Statistics</a>
-						<a class="dropdown-item" href="#login-history" onclick="myfun1()">Login History</a>
-						<a class="dropdown-item" href="#password-history" onclick="myfun2()">Password History</a>
 						<a class="dropdown-item" href="#change-passward" onclick="myfun3()">Change Password</a>
+						<a class="dropdown-item" href="#login-history" onclick="myfun1()">Login History</a>
+
+						<a class="dropdown-item" href="#password-history" onclick="myfun2()">Password History</a>
+						<a class="dropdown-item" href="#Statics" onclick="myfun()">Statistics</a>
+						{% if user.is_authenticated %}
+						<a class="dropdown-item" href="logout">Log Out</a>
+						{%else%}
+						<a class="dropdown-item" href="/">Log In</a>
+						{% endif %}
 						<a class="dropdown-item" href="/">Exit</a>
 
 					</div>
@@ -117,32 +123,32 @@
 													<th scope="row">Seller</th>
 													<td>{{seller_count}}</td>
 													<td>{{seller_online}}</td>
-													<td>5</td>
+													<td>{{seller_offline}}</td>
+
 
 												</tr>
 
 												<tr>
 													<th scope="row">Tester</th>
-													<td>20</td>
-													<td>15</td>
-													<td>5</td>
+													<td>{{tester_count}}</td>
+													<td>{{tester_online}}</td>
+													<td>{{tester_offline}}</td>
 
 												</tr>
 
 												<tr>
+													<th scope="row">User</th>
+													<td>{{web_user_count}}</td>
+													<td>{{web_user_online}}</td>
+													<td>{{web_user_offline}}</td>
+
+												</tr>
+												<tr>
+
 													<th scope="row">PWGs</th>
 													<td>20</td>
 													<td>15</td>
 													<td>5</td>
-
-												</tr>
-
-												<tr>
-													<th scope="row">Users</th>
-													<td>20</td>
-													<td>15</td>
-													<td>5</td>
-
 												</tr>
 											</tbody>
 										</table>

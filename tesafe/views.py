@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
-from .models import WebAdmin, Seller, Tester
+from .models import WebAdmin, Seller, Tester, WebUser
 from django.contrib.auth.models import auth, User
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.contrib.sessions.models import Session
 from django.utils import timezone
+from django.http import HttpResponse
+
 
 
 
@@ -97,7 +99,7 @@ def register(request):
 
                     return render(request, 'tester/tester-home.html')
 
-            elif accType == 'user':
+                elif accType == 'user':
                     pass
         else:
             messages.error(request, "Password do not match! try again")
@@ -106,29 +108,62 @@ def register(request):
     return render(request, 'tesafe/register.html')
 
 
-def get_current_users():
+def logout(request):
+    det = User.last_login
+    print(det)
+    return HttpResponse("log out")
+
+
+def get_current_users(obj):
     active_sessions = Session.objects.filter(expire_date__gte=timezone.now())
     user_id_list = []
     for session in active_sessions:
         data = session.get_decoded()
         user_id_list.append(data.get('_auth_user_id', None))
     # Query all logged in users based on id list
-    print("active session: ",user_id_list)
 
-    return User.objects.filter(id__in=user_id_list)
+    return obj.objects.filter(id__in=user_id_list)
+
+
+
+def get_ip(request):
+    try:
+        x_forward = request.META.get("HTTP_X_FORWARDED_FOR")
+        if x_forward:
+            ip = x_forward.split(",")[0]
+        else:
+            ip = request.META.get("REMOTE_ADDR")
+    except:
+        ip = ""
+
+    return ip
+
 
 
 def admin_home(request):
-    admin_count = WebAdmin.objects.all().count()
+
     seller_count = Seller.objects.all().count()
-    queryset = get_current_users()
+    tester_count = Tester.objects.all().count()
+    web_user_count = WebUser.objects.all().count()
+    queryset_seller = get_current_users(Seller)
+    queryset_tester = get_current_users(Tester)
+    queryset_web_user = get_current_users(WebUser)
     params = {
-        'admin_count': admin_count,
         'seller_count': seller_count,
+        'tester_count': tester_count,
+        'web_user_count': web_user_count,
         'num': [11, 23, 33, 42, 35, 67, 78, 49, 10],
-        'seller_online': queryset.count()
+        'seller_online': queryset_seller.count(),
+        'seller_offline': seller_count - queryset_seller.count(),
+        'tester_online': queryset_tester.count(),
+        'tester_offline': tester_count - queryset_tester.count(),
+        'web_user_online': queryset_web_user.count(),
+        'web_user_offline': web_user_count - queryset_web_user.count(),
     }
+    print(get_ip(request))
+    print(request.META.get("COMPUTERNAME"))
     return render(request, 'tesafe/admin-home.html', params)
+
 
 
 def admin_seller(request):

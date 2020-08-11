@@ -348,10 +348,10 @@
 								<div class="col-md-6 py-3">
 									<form>
 									  <div class="form-group">
-									    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name ">
+									    <input type="text" class="form-control" id="acc-name" aria-describedby="emailHelp" placeholder="Enter Name " value="" onchange="display_qr()">
 									  </div>
 									  <div class="form-group">
-									     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Alias Name ">
+									     <input type="password" class="form-control" id="acc-password" aria-describedby="emailHelp" placeholder="Enter Password " value="" onchange="display_qr()">
 									  </div>
 
 									  <div class="form-group">
@@ -359,11 +359,11 @@
 									  </div>
 
 									  <div class="form-group">
-									     <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Contact Number ">
+									     <input type="tel" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Contact Number ">
 									  </div>
 
 									  <div class="form-group">
-									     <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Password ">
+										  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Alias Name ">
 									  </div>
 
 									<button class="btn btn-primary" type="submit">Submit</button>
@@ -371,7 +371,7 @@
 									</form>
 								</div>
 
-								<div class="col-md text-center">
+								<div class="col-md text-center" id="qr-block" style="display:none">
 									<img src="{% static 'tesafe/images/qr-code.png' %}" class="img-fluid">
 								</div>
 							</div>
@@ -755,6 +755,20 @@
 
 
 <script type="text/javascript">
+
+
+
+<!--	to show QR block-->
+function display_qr(){
+
+			var acc_name = document.getElementById("acc-name").value;
+			var password = document.getElementById("acc-password").value;
+			console.log(acc_name+ " "+ password);
+			if(acc_name != "" && password != ""){
+				document.getElementById("qr-block").style.display = "block";
+			}
+}
+
 
 	// search filter table
 	$(document).ready(function(){
