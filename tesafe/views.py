@@ -109,9 +109,9 @@ def register(request):
 
 
 def logout(request):
-    det = User.last_login
+    # det = User.objects.ge
     print(det)
-    return HttpResponse("log out")
+    return render(request, 'tesafe/index.html')
 
 
 def get_current_users(obj):
@@ -123,7 +123,6 @@ def get_current_users(obj):
     # Query all logged in users based on id list
 
     return obj.objects.filter(id__in=user_id_list)
-
 
 
 def get_ip(request):

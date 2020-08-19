@@ -44,6 +44,11 @@ border-bottom: 1px solid #e2e2e2;
 }
 
 
+
+.label-font{
+    font-family: sans-serif;
+}
+
 .navbar-light .navbar-brand {
     color: rgb(21, 47, 105);
 }

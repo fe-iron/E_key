@@ -28,7 +28,6 @@ class WebAdmin(models.Model):
         return self.first_name
 
 
-
 class Seller(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
@@ -50,6 +49,7 @@ class Tester(models.Model):
     def __str__(self):
         return self.first_name
 
+
 class WebUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
@@ -61,24 +61,14 @@ class WebUser(models.Model):
         return self.first_name
 
 
-# Login Activity model
-class UserLoginActivity(models.Model):
-    # Login Status
-    SUCCESS = 'S'
-    FAILED = 'F'
-
-    LOGIN_STATUS = ((SUCCESS, 'Success'),
-                           (FAILED, 'Failed'))
-
+# Login Activity model of Admin
+class WebAdminLoginHistory(models.Model):
     login_IP = models.GenericIPAddressField(null=True, blank=True)
     login_datetime = models.DateTimeField(auto_now=True)
     login_username = models.CharField(max_length=40, null=True, blank=True)
-    status = models.CharField(max_length=1, default=SUCCESS, choices=LOGIN_STATUS, null=True, blank=True)
-    user_agent_info = models.CharField(max_length=255)
-    duration = models.IntegerField()
+    duration = models.CharField(max_length=50, default="0 minutes")
     device_name = models.CharField(max_length=255)
 
-
     class Meta:
-        verbose_name = 'user_login_activity'
-        verbose_name_plural = 'user_login_activities'
+        verbose_name = 'web_login_history'
+        verbose_name_plural = 'webAdmin login history'

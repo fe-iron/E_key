@@ -326,9 +326,7 @@
 																								<i class="fas fa-ellipsis-v"></i>
 																							</button>
 																							<div class="dropdown-menu">
-																	<!-- <a class="dropdown-item" href="seller-authorized.html">Authorized</a>
-																	<a class="dropdown-item" href="seller-shared.html" >Shared</a>
-<!--																	<a class="dropdown-item pop1" href="#" >History</a>-->
+
 																	<a class="dropdown-item pop1" href="#" >History</a>
 
 															</div>
@@ -806,178 +804,6 @@
 													</div>
 												</div>
 											</div>
-
-							<!-- <div class="table-responsive" style="overflow:scroll; height:520px;">
-								<table class="table table-borderless">
-									<thead>
-										<tr>
-											<th scope="col" style="position: relative;">Select</th>
-											<th scope="col">Name</th>
-											<th scope="col">Total PWG</th>
-
-										</tr>
-									</thead>
-									<tbody id="myTable">
-										<tr>
-											<th>
-												<input type="checkbox"  id="checkAll" name="checkAll" value="floatingButtonHere"></th>
-												<td><a href="tester-pwg-sublist.html">PWGS-A</a><div class="dropdown">
-													<button class="btn btn-light dropdown-toggle"  onclick="myOpen('one')" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													</button>
-
-													<div class="dropdown-menu" aria-labelledby="dropdownMenu2" id="one">
-
-														<table class="table">
-															<thead>
-																<tr>
-
-																	<th scope="col">Name</th>
-																	<th scope="col"></th>
-
-																</tr>
-															</thead>
-															<tbody>
-																<tr>
-
-																	<td><a href="#"><input type="checkbox" name="book" class="book" > PWGS-A-1</a></td>
-
-
-																</tr>
-
-																<tr>
-																	<td><a href="#"><input type="checkbox" name="book" class="book" > PWGS-A-12</a></td>
-
-																</tr>
-
-																<tr>
-																	<td><a href="#"><input type="checkbox" name="book" class="book" > PWGS-A-3</a></td>
-																	<td>T</td>
-																</tr>
-
-																<tr>
-																	<td><a href="#"><input type="checkbox" name="book" class="book" > PWGS-A-4</a></td>
-
-																</tr>
-															</tbody>
-
-														</table>
-
-
-													</div>
-												</div>
-											</td>
-											<td>20</td>
-										</tr>
-
-										<tr>
-											<th>
-												<input type="checkbox"  id="checkAll1" name="checkAll1" value="floatingButtonHere"></th>
-												<td><a href="tester-pwg-sublist.html">PWGS-B</a><div class="dropdown">
-													<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-													</button>
-													<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-
-														<table class="table">
-															<thead>
-																<tr>
-
-																	<th scope="col">Name</th>
-																	<th scope="col">Status</th>
-
-																</tr>
-															</thead>
-															<tbody>
-																<tr>
-
-																	<td><a href="#"><input type="checkbox" name="book1" class="book1" > PWGS-B-1</a></td>
-																	<td>T</td>
-
-																</tr>
-
-																<tr>
-																	<td><a href="#"><input type="checkbox" name="book1" class="book1" > PWGS-B-12</a></td>
-																	<td>U</td>
-																</tr>
-
-																<tr>
-																	<td><a href="#"><input type="checkbox" name="book1" class="book1" > PWGS-B-3</a></td>
-																	<td>T</td>
-																</tr>
-
-																<tr>
-																	<td><a href="#"><input type="checkbox" name="book1" class="book1" > PWGS-B-4</a></td>
-																	<td>U</td>
-																</tr>
-															</tbody>
-
-														</table>
-													</div>
-												</div>
-											</td>
-											<td>20</td>
-
-
-
-										</tr>
-										<tr>
-											<th>
-												<input type="checkbox"  id="checkAll2" name="checkAll2" value="floatingButtonHere"></th>
-												<td><a href="tester-pwg-sublist.html">PWGS-C</a><div class="dropdown">
-													<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-													</button>
-													<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-
-														<table class="table">
-															<thead>
-																<tr>
-
-																	<th scope="col">Name</th>
-																	<th scope="col">Status</th>
-
-																</tr>
-															</thead>
-															<tbody>
-																<tr>
-
-																	<td><a href="#"><input type="checkbox" name="book2" class="book2" > PWGS-C-1</a></td>
-																	<td>T</td>
-
-																</tr>
-
-																<tr>
-																	<td><a href="#"><input type="checkbox" name="book2" class="book2" > PWGS-C-12</a></td>
-																	<td>U</td>
-																</tr>
-
-																<tr>
-																	<td><a href="#"><input type="checkbox" name="book2" class="book2" > PWGS-C-3</a></td>
-																	<td>T</td>
-																</tr>
-
-																<tr>
-																	<td><a href="#"><input type="checkbox" name="book2" class="book2" > PWGS-C-4</a></td>
-																	<td>U</td>
-																</tr>
-															</tbody>
-
-														</table>
-													</div>
-												</div>
-											</td>
-											<td>20</td>
-										</tr>
-									</tbody>
-
-
-								</table>
-							</div> -->
-
-
-
-
-
 
 
 							<div class="col-md" style="display: none;" id="div-8">
@@ -1610,15 +1436,6 @@ $(function () {
 
         jQuery('input[type=checkbox]').on('change', function() {
 		   if (this.checked) {
-
-		   		document.getElementById('select').onclick = function() {
-					  var checkboxes = document.getElementsByName('vechicle');
-					  for (var checkbox of checkboxes) {
-						if (checkbox.checked)
-						  document.body.append(checkbox.value + ' ');
-					  }
-				}
-
 		        document.getElementById("button-floating-1").innerHTML = '<a href="#" class=" btn btn-primary">Return</a><a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
 		   }
 		 });
