@@ -21,10 +21,10 @@ def index(request):
         password = request.POST['password']
         uname = request.POST['uname']
 
-        # user = auth.authenticate(username=uname, password=password)
-        # if user is not None:
-        #     auth.login(request, user)
-        #     messages.info(request, "Successfully Logged in ")
+        user = auth.authenticate(username=uname, password=password)
+        if user is not None:
+            auth.login(request, user)
+            messages.info(request, "Successfully Logged in ")
 
 
 
@@ -77,7 +77,7 @@ def register(request):
 
                     return render(request, 'tesafe/admin-home.html')
 
-
+                # if it is seller
                 elif accType == 'seller':
 
                     user = User.objects.create_user(username=uname, first_name=fname, last_name=lname, email=email, password=password1)
@@ -88,6 +88,8 @@ def register(request):
 
                     return render(request, 'seller/seller-home.html')
 
+
+                # if it is tester
                 elif accType == 'tester':
 
                     user = User.objects.create_user(username=uname, first_name=fname, last_name=lname, email=email,
@@ -99,6 +101,7 @@ def register(request):
 
                     return render(request, 'tester/tester-home.html')
 
+                # if it is user
                 elif accType == 'user':
                     pass
         else:
