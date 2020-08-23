@@ -30,7 +30,7 @@
           <div class="collapse navbar-collapse justify-content" id="navbarSupportedContent">
             <ul class="navbar-nav">
               <li class="nav-item pl-3">
-                <a class="nav-link active" href="seller-home">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link active" href="tester-home">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item pl-3">
                 <a class="nav-link" href="tester-test">Test</a>
@@ -42,7 +42,7 @@
             <i class="fas fa-bell"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left: 15px;">1</span>
           </a>
 
-          <div class="dropdown dropleft float-xl-right mb-0" id="pwg-off">
+          <div class="dropdown dropleft float-xl-right mb-0" id="pwg-off" style="display:none;">
             <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
               <i class="fas fa-ellipsis-v"></i>
             </button>
@@ -53,7 +53,7 @@
             </div>
           </div>
 
-          <div class="dropdown dropleft float-xl-right mb-0" id="pwg-on" style="display: none;">
+          <div class="dropdown dropleft float-xl-right mb-0" id="pwg-on">
             <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
               <i class="fas fa-ellipsis-v"></i>
             </button>
@@ -95,7 +95,7 @@
                       <label class="form-check-label label-font" for="inlineRadio1">Tested</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onclick="untested()" style="cursor: pointer;" />
+                      <input class="form-check-input" type="radio" checked name="inlineRadioOptions" id="inlineRadio2" value="option2" onclick="untested()" style="cursor: pointer;" />
                       <label class="form-check-label label-font" for="inlineRadio2">Untested</label>
                     </div>
                   </div>
@@ -103,11 +103,11 @@
                   <div class="pb-3 pl-3" id="tested-faulty" style="display: none;">
                     <div class="form-check form-check-inline">
                       <input type="radio" onclick="tested()" name="inlineRadioOption" style="cursor: pointer;">
-                      <label class="form-check-label label-font" for="inlineRadio1"> Tested</label>
+                      <label class="form-check-label label-font" for="inlineRadio1"> Tested Good</label>
                     </div>
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="inlineRadioOption" id="inlineRadio2" value="option2" onclick="faulty()" style="cursor: pointer;" />
-                      <label class="form-check-label label-font" for="inlineRadio2"> Faulty</label>
+                      <label class="form-check-label label-font" for="inlineRadio2"> Tested Faulty</label>
                     </div>
                   </div>
                 </header>
@@ -150,7 +150,7 @@
                     <div class="card">
                       <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
-                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" id="checkAll" name="checkAll" value="floatingButtonHere" disabled="" /><span class="pwg-list">PWGS1</span></button>
+                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" class="checkAll" name="checkAll" value="floatingButtonHere" disabled="" /><span class="pwg-list">PWGS1</span></button>
                           <i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px; font-size: 18px; cursor:pointer;"></i>
                         </h2>
                       </div>
@@ -247,7 +247,7 @@
                     <div class="card">
                       <div class="card-header" id="headingTwo">
                         <h2 class="mb-0">
-                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" id="checkAll1" name="checkAll1" value="floatingButtonHere" disabled="" /> <span class="pwg-list">PWGS2</span></button>
+                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" class="checkAll" name="checkAll1" value="floatingButtonHere" disabled="" /> <span class="pwg-list">PWGS2</span></button>
                           <i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="myFunction(this)" style="position: absolute; top: 31px; font-size: 18px; cursor:pointer;"></i>
                         </h2>
                       </div>
@@ -257,7 +257,7 @@
                             <tbody>
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book1" class="book1" id="book5" value="floatingButtonHere" disabled="" /> PWGS2-1
+                                  <input type="checkbox" name="book1" class="book" id="book5" value="floatingButtonHere" disabled="" /> PWGS2-1
                                 </td>
                                 <!-- <td>DS</td> -->
                                 <td>
@@ -277,7 +277,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book1" class="book1" id="book6" value="floatingButtonHere" disabled="" /> PWGS2-2
+                                  <input type="checkbox" name="book1" class="book" id="book6" value="floatingButtonHere" disabled="" /> PWGS2-2
                                 </td>
                                 <!-- <td>DA</td> -->
                                 <td>
@@ -297,7 +297,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book1" class="book1" id="book7" value="floatingButtonHere" disabled="" /> PWGS2-3
+                                  <input type="checkbox" name="book1" class="book" id="book7" value="floatingButtonHere" disabled="" /> PWGS2-3
                                 </td>
                                 <!-- <td>NA</td> -->
                                 <td>
@@ -316,7 +316,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book1" class="book1" id="book8" value="floatingButtonHere" disabled="" /> PWGS2-4
+                                  <input type="checkbox" name="book1" class="book" id="book8" value="floatingButtonHere" disabled="" /> PWGS2-4
                                 </td>
                                 <!-- <td>DA</td> -->
                                 <td>
@@ -341,7 +341,7 @@
                     <div class="card">
                       <div class="card-header" id="headingThree">
                         <h2 class="mb-0">
-                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" id="checkAll2" name="checkAll2" value="floatingButtonHere" disabled="" /> <span class="pwg-list">PWGS3</span></button>
+                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" class="checkAll" name="checkAll2" value="floatingButtonHere" disabled="" /> <span class="pwg-list">PWGS3</span></button>
                           <i
                             class="fas fa-sort-up"
                             data-toggle="collapse"
@@ -382,7 +382,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book2" class="book2" id="book10" value="floatingButtonHere" disabled /> PWGS3-2
+                                  <input type="checkbox" name="book2" class="book" id="book10" value="floatingButtonHere" disabled /> PWGS3-2
                                 </td>
                                 <!-- <td>DA</td> -->
                                 <td>
@@ -402,7 +402,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book2" class="book2" id="book11" value="floatingButtonHere" disabled /> PWGS3-3
+                                  <input type="checkbox" name="book2" class="book" id="book11" value="floatingButtonHere" disabled /> PWGS3-3
                                 </td>
                                 <!-- <td>DS</td> -->
                                 <td>
@@ -422,7 +422,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book2" class="book2" id="book12" value="floatingButtonHere" disabled /> PWGS3-4
+                                  <input type="checkbox" name="book2" class="book" id="book12" value="floatingButtonHere" disabled /> PWGS3-4
                                 </td>
                                 <!-- <td>DA</td> -->
                                 <td>
@@ -482,7 +482,7 @@
                     <div class="card">
                       <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
-                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" id="checkAll" name="checkAll" value="floatingButtonHere" disabled="" /><span class="pwg-list">PWGS11</span></button>
+                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" class="checkAll" id="checkAll" name="checkAll" value="floatingButtonHere" disabled="" /><span class="pwg-list">PWGS11</span></button>
                           <i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px; font-size: 18px; cursor:pointer;"></i>
                         </h2>
                       </div>
@@ -551,7 +551,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book" class="book" value="" id="book4" value="floatingButtonHere" disabled="" /> PWGS1-4
+                                  <input type="checkbox" name="book" class="book" id="book4" value="floatingButtonHere" disabled="" /> PWGS1-4
                                 </td>
                                 <!-- <td>DS</td> -->
                                 <td>
@@ -575,7 +575,7 @@
                     <div class="card">
                       <div class="card-header" id="headingTwo">
                         <h2 class="mb-0">
-                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" id="checkAll1" name="checkAll1" value="floatingButtonHere" disabled="" /> <span class="pwg-list">PWGS12</span></button>
+                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" class="checkAll" name="checkAll1" value="floatingButtonHere" disabled="" /> <span class="pwg-list">PWGS12</span></button>
                           <i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="myFunction(this)" style="position: absolute; top: 31px; font-size: 18px; cursor:pointer;"></i>
                         </h2>
                       </div>
@@ -585,7 +585,7 @@
                             <tbody>
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book1" class="book1" id="book5" value="floatingButtonHere" disabled="" /> PWGS2-1
+                                  <input type="checkbox" name="book1" class="book" id="book5" value="floatingButtonHere" disabled="" /> PWGS2-1
                                 </td>
                                 <!-- <td>DS</td> -->
                                 <td>
@@ -604,7 +604,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book1" class="book1" id="book6" value="floatingButtonHere" disabled="" /> PWGS2-2
+                                  <input type="checkbox" name="book1" class="book" id="book6" value="floatingButtonHere" disabled="" /> PWGS2-2
                                 </td>
                                 <!-- <td>DA</td> -->
                                 <td>
@@ -623,7 +623,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book1" class="book1" id="book7" value="floatingButtonHere" disabled="" /> PWGS2-3
+                                  <input type="checkbox" name="book1" class="book" id="book7" value="floatingButtonHere" disabled="" /> PWGS2-3
                                 </td>
                                 <!-- <td>NA</td> -->
                                 <td>
@@ -642,7 +642,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book1" class="book1" id="book8" value="floatingButtonHere" disabled="" /> PWGS2-4
+                                  <input type="checkbox" name="book1" class="book" id="book8" value="floatingButtonHere" disabled="" /> PWGS2-4
                                 </td>
                                 <!-- <td>DA</td> -->
                                 <td>
@@ -666,7 +666,7 @@
                     <div class="card">
                       <div class="card-header" id="headingThree">
                         <h2 class="mb-0">
-                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" id="checkAll2" name="checkAll2" value="floatingButtonHere" disabled="" /> <span class="pwg-list">PWGS13</span></button>
+                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" class="checkAll" name="checkAll2" value="floatingButtonHere" disabled="" /> <span class="pwg-list">PWGS13</span></button>
                           <i
                             class="fas fa-sort-up"
                             data-toggle="collapse"
@@ -687,7 +687,7 @@
                             <tbody>
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book2" class="book2" id="book9" value="floatingButtonHere" disabled /> PWGS3-1
+                                  <input type="checkbox" name="book2" class="book" id="book9" value="floatingButtonHere" disabled /> PWGS3-1
                                 </td>
                                 <!-- <td>DA</td> -->
                                 <td>
@@ -706,7 +706,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book2" class="book2" id="book10" value="floatingButtonHere" disabled /> PWGS3-2
+                                  <input type="checkbox" name="book2" class="book" id="book10" value="floatingButtonHere" disabled /> PWGS3-2
                                 </td>
                                 <!-- <td>DA</td> -->
                                 <td>
@@ -725,7 +725,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book2" class="book2" id="book11" value="floatingButtonHere" disabled /> PWGS3-3
+                                  <input type="checkbox" name="book2" class="book" id="book11" value="floatingButtonHere" disabled /> PWGS3-3
                                 </td>
                                 <!-- <td>DS</td> -->
                                 <td>
@@ -744,7 +744,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book2" class="book2" id="book12" value="floatingButtonHere" disabled /> PWGS3-4
+                                  <input type="checkbox" name="book2" class="book" id="book12" value="floatingButtonHere" disabled /> PWGS3-4
                                 </td>
                                 <!-- <td>DA</td> -->
                                 <td>
@@ -774,7 +774,7 @@
 
 
 
-                <div id="untested" style="display: none;">
+                <div id="untested">
                   <div class="accordion" id="accordionExample">
                     <div class="row px-2">
                       <div class="col-2">
@@ -791,7 +791,7 @@
                     <div class="card">
                       <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
-                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" id="checkAll3" name="checkAll3" value="floatingButtonHere" disabled="" /><span class="pwg-list">PWGS1</span></button>
+                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" class="checkAll" name="checkAll3" value="floatingButtonHere" disabled="" /><span class="pwg-list">PWGS1</span></button>
                           <i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px; font-size: 18px; cursor:pointer;"></i>
                         </h2>
                       </div>
@@ -802,7 +802,7 @@
                             <tbody>
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book3" class="book3" id="book13" value="floatingButtonHere" disabled="" /> PWGS1-1
+                                  <input type="checkbox" name="book3" class="book" id="book13" value="floatingButtonHere" disabled="" /> PWGS1-1
                                 </td>
                                 <td>
                                   <!-- <a href="seller-transfer-pwg.html" class="btn btn-primary btn-light btn-sm">Transfer</a> -->
@@ -820,7 +820,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book3" class="book3" id="book14" value="floatingButtonHere" disabled="" /> PWGS1-2
+                                  <input type="checkbox" name="book3" class="book" id="book14" value="floatingButtonHere" disabled="" /> PWGS1-2
                                 </td>
                                 <td>
                                   <!-- <a href="seller-transfer-pwg.html" class="btn btn-primary btn-light btn-sm">Transfer</a> -->
@@ -838,7 +838,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book3" class="book3" id="book15" value="floatingButtonHere" disabled="" /> PWGS1-3
+                                  <input type="checkbox" name="book3" class="book" id="book15" value="floatingButtonHere" disabled="" /> PWGS1-3
                                 </td>
                                 <td>
                                   <!-- <a href="seller-transfer-pwg.html" class="btn btn-primary btn-light btn-sm">Transfer</a> -->
@@ -856,7 +856,7 @@
 
                               <tr>
                                 <td>
-                                 <input type="checkbox" name="book3" class="book3" id="book16" value="floatingButtonHere" disabled="" /> PWGS1-4
+                                 <input type="checkbox" name="book3" class="book" id="book16" value="floatingButtonHere" disabled="" /> PWGS1-4
                                 </td>
                                 <td>
                                   <!-- <a href="seller-transfer-pwg.html" class="btn btn-primary btn-light btn-sm">Transfer</a> -->
@@ -879,7 +879,7 @@
                     <div class="card">
                       <div class="card-header" id="headingTwo">
                         <h2 class="mb-0">
-                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" id="checkAll4" name="checkAll4" value="floatingButtonHere" disabled="" /> <span class="pwg-list">PWGS2</span></button>
+                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" class="checkAll" name="checkAll4" value="floatingButtonHere" disabled="" /> <span class="pwg-list">PWGS2</span></button>
                           <i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="myFunction(this)" style="position: absolute; top: 31px; font-size: 18px; cursor:pointer;"></i>
                         </h2>
                       </div>
@@ -892,7 +892,7 @@
                             <tbody>
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book4" class="book4" id="book17" value="floatingButtonHere" disabled="" /> PWGS2-1
+                                  <input type="checkbox" name="book4" class="book" id="book17" value="floatingButtonHere" disabled="" /> PWGS2-1
                                 </td>
                                 <td>
                                   <!-- <a href="seller-transfer-pwg.html" class="btn btn-primary btn-light btn-sm">Transfer</a> -->
@@ -910,7 +910,7 @@
 
                               <tr>
                                 <td>
-                                 <input type="checkbox" name="book4" class="book4" id="book18" value="floatingButtonHere" disabled="" /> PWGS2-2
+                                 <input type="checkbox" name="book4" class="book" id="book18" value="floatingButtonHere" disabled="" /> PWGS2-2
                                 </td>
                                 <td>
                                   <!-- <a href="seller-transfer-pwg.html" class="btn btn-primary btn-light btn-sm">Transfer</a> -->
@@ -928,7 +928,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book4" class="book4" id="book19" value="floatingButtonHere" disabled="" /> PWGS2-3
+                                  <input type="checkbox" name="book4" class="book" id="book19" value="floatingButtonHere" disabled="" /> PWGS2-3
                                 </td>
                                 <td>
                                   <!-- <a href="seller-transfer-pwg.html" class="btn btn-primary btn-light btn-sm">Transfer</a> -->
@@ -946,7 +946,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book4" class="book4" id="book20" value="floatingButtonHere" disabled="" /> PWGS2-4
+                                  <input type="checkbox" name="book4" class="book" id="book20" value="floatingButtonHere" disabled="" /> PWGS2-4
                                 </td>
                                 <td>
                                   <!-- <a href="seller-transfer-pwg.html" class="btn btn-primary btn-light btn-sm">Transfer</a> -->
@@ -969,7 +969,7 @@
                     <div class="card">
                       <div class="card-header" id="headingThree">
                         <h2 class="mb-0">
-                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" id="checkAll5" name="checkAll5" value="floatingButtonHere" disabled="" /> <span class="pwg-list">PWGS3</span></button>
+                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" class="checkAll" name="checkAll5" value="floatingButtonHere" disabled="" /> <span class="pwg-list">PWGS3</span></button>
                           <i
                             class="fas fa-sort-up"
                             data-toggle="collapse"
@@ -990,7 +990,7 @@
                             <tbody>
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book5" class="book5" id="book21" value="floatingButtonHere" disabled /> PWGS3-1
+                                  <input type="checkbox" name="book5" class="book" id="book21" value="floatingButtonHere" disabled /> PWGS3-1
                                 </td>
                                 <td>
                                   <!-- <a href="seller-transfer-pwg.html" class="btn btn-primary btn-light btn-sm">Transfer</a> -->
@@ -1008,7 +1008,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book5" class="book5" id="book22" value="floatingButtonHere" disabled /> PWGS3-2
+                                  <input type="checkbox" name="book5" class="book" id="book22" value="floatingButtonHere" disabled /> PWGS3-2
                                 </td>
                                 <td>
                                   <!-- <a href="seller-transfer-pwg.html" class="btn btn-primary btn-light btn-sm">Transfer</a> -->
@@ -1026,7 +1026,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book5" class="book5" id="book23" value="floatingButtonHere" disabled /> PWGS3-3
+                                  <input type="checkbox" name="book5" class="book" id="book23" value="floatingButtonHere" disabled /> PWGS3-3
                                 </td>
                                 <td>
                                   <!-- <a href="seller-transfer-pwg.html" class="btn btn-primary btn-light btn-sm">Transfer</a> -->
@@ -1044,7 +1044,7 @@
 
                               <tr>
                                 <td>
-                                  <input type="checkbox" name="book5" class="book5" id="book24" value="floatingButtonHere" disabled /> PWGS3-4
+                                  <input type="checkbox" name="book5" class="book" id="book24" value="floatingButtonHere" disabled /> PWGS3-4
                                 </td>
                                 <td>
                                   <!-- <a href="seller-transfer-pwg.html" class="btn btn-primary btn-light btn-sm">Transfer</a> -->
@@ -1084,7 +1084,7 @@
         <div class="modal-content">
           <div class="modal-header">
            <!--  <h5 class="modal-title" id="exampleModalLabel">Transfered PWG</h5> -->
-            <a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+            <a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" onclick="vanish()">&times;</span></a>
           </div>
           <div class="modal-body text-center p-4">
             <i class="fas fa-check-circle fa-3x" style="color: green;"></i>
@@ -1172,7 +1172,9 @@
       });
 
 
-
+      function vanish(){
+        window.location.href = "tester-home";
+      }
 
       $(function () {
         $("#checkAll").click(function () {
@@ -1185,7 +1187,7 @@
       });
 
 
-$(function () {
+      $(function () {
         $("#checkAll1").click(function () {
           if ($("#checkAll1").is(":checked")) {
             $(".book1").prop("checked", true);
@@ -1204,14 +1206,6 @@ $(function () {
           }
         });
       });
-
-
-
-
-
-
-
-
 
        $(function () {
         $("#checkAll3").click(function () {
@@ -1293,9 +1287,13 @@ $(function () {
       function tested_faulty() {
         document.getElementById("tested-faulty").style.display = "block";
         document.getElementById("faulty").style.display = "none";
+        document.getElementById("untested").style.display = "none";
+        document.getElementById("pwg-on").style.display = "none";
+        document.getElementById("pwg-off").style.display = "block";
 
-        document.getElementById("tested-batch").style.display = "block";
-        document.getElementById("untested-batch").style.display = "none";
+
+        //document.getElementById("tested-batch").style.display = "block";
+        //document.getElementById("untested-batch").style.display = "none";
       }
 
 
@@ -1303,11 +1301,13 @@ $(function () {
         document.getElementById("faulty").style.display = "block";
 
         document.getElementById("pwg-on").style.display = "block";
+
         document.getElementById("pwg-off").style.display = "none";
+        document.getElementById("untested").style.display = "none";
 
         document.getElementById("tested").style.display = "none";
-        document.getElementById("tested-batch").style.display = "block";
-        document.getElementById("untested-batch").style.display = "none";
+        //document.getElementById("tested-batch").style.display = "block";
+        //document.getElementById("untested-batch").style.display = "none";
       }
 
 
@@ -1319,8 +1319,8 @@ $(function () {
 
         document.getElementById("faulty").style.display = "none";
         document.getElementById("tested").style.display = "block";
-        document.getElementById("tested-batch").style.display = "block";
-        document.getElementById("untested-batch").style.display = "none";
+        //document.getElementById("tested-batch").style.display = "block";
+        //document.getElementById("untested-batch").style.display = "none";
 
       }
 
@@ -1333,107 +1333,25 @@ $(function () {
         document.getElementById("faulty").style.display = "none";
         document.getElementById("untested").style.display = "block";
         document.getElementById("tested").style.display = "none";
-        document.getElementById("tested-batch").style.display = "none";
-        document.getElementById("untested-batch").style.display = "block";
+
       }
 
       function Delete() {
-        document.getElementById("confirmation").innerHTML ="PWG has been Successfully Deleted" ;
-        document.getElementById("checkAll").disabled = false;
-        document.getElementById("book1").disabled = false;
-        document.getElementById("book2").disabled = false;
-        document.getElementById("book3").disabled = false;
-        document.getElementById("book4").disabled = false;
-        document.getElementById("checkAll1").disabled = false;
-        document.getElementById("book5").disabled = false;
-        document.getElementById("book6").disabled = false;
-        document.getElementById("book7").disabled = false;
-        document.getElementById("book8").disabled = false;
-        document.getElementById("checkAll2").disabled = false;
-        document.getElementById("book9").disabled = false;
-        document.getElementById("book10").disabled = false;
-        document.getElementById("book11").disabled = false;
-        document.getElementById("book12").disabled = false;
-        document.getElementById("book12").disabled = false;
+        document.getElementById("confirmation").innerHTML ="PWG has been Successfully send for re-test" ;
+        $(".checkAll").prop('disabled',false);
+        $(".book").prop('disabled',false);
+
       }
+
+
 
       function Freeze() {
-      document.getElementById("confirmation").innerHTML ="PWG has been Successfully Freezed" ;
-        document.getElementById("book1").disabled = false;
-        document.getElementById("book2").disabled = false;
-        document.getElementById("book3").disabled = false;
-        document.getElementById("book4").disabled = false;
-        document.getElementById("checkAll1").disabled = false;
-        document.getElementById("checkAll").disabled = false;
-        document.getElementById("book5").disabled = false;
-        document.getElementById("book6").disabled = false;
-        document.getElementById("book7").disabled = false;
-        document.getElementById("book8").disabled = false;
-        document.getElementById("checkAll2").disabled = false;
-        document.getElementById("book9").disabled = false;
-        document.getElementById("book10").disabled = false;
-        document.getElementById("book11").disabled = false;
-        document.getElementById("book12").disabled = false;
+        document.getElementById("confirmation").innerHTML ="PWG has been Successfully send back to admin" ;
+        $(".checkAll").prop('disabled',false);
+        $(".book").prop('disabled',false);
+
       }
 
-      // function returnAdmin() {
-      // 	document.getElementById("button-floating-1").style.display = "block";
-      //   document.getElementById("button-floating-1").innerHTML = '<a href="#" class="btn btn-primary">confirm</a><a href="seller-pwg.html" class=" btn btn-danger ml-1">Cancel</a>';
-      //   document.getElementById("confirmation").innerHTML ="PWG Has Been Returned To Admin Successfully";
-      //   document.getElementById("checkAll3").disabled = false;
-      //   document.getElementById("checkAll4").disabled = false;
-      //   document.getElementById("checkAll5").disabled = false;
-      //   document.getElementById("book13").disabled = false;
-      //   document.getElementById("book14").disabled = false;
-      //   document.getElementById("book15").disabled = false;
-      //   document.getElementById("book16").disabled = false;
-      //   document.getElementById("book17").disabled = false;
-      //   document.getElementById("book18").disabled = false;
-      //   document.getElementById("book19").disabled = false;
-      //   document.getElementById("book20").disabled = false;
-      //   document.getElementById("book21").disabled = false;
-      //   document.getElementById("book22").disabled = false;
-      //   document.getElementById("book23").disabled = false;
-      //   document.getElementById("book24").disabled = false;
-      // }
-
-      function Delete1() {
-          document.getElementById("confirmation").innerHTML ="PWG has been Successfully Deleted" ;
-        document.getElementById("checkAll3").disabled = false;
-        document.getElementById("checkAll4").disabled = false;
-        document.getElementById("checkAll5").disabled = false;
-        document.getElementById("book13").disabled = false;
-        document.getElementById("book14").disabled = false;
-        document.getElementById("book15").disabled = false;
-        document.getElementById("book16").disabled = false;
-        document.getElementById("book17").disabled = false;
-        document.getElementById("book18").disabled = false;
-        document.getElementById("book19").disabled = false;
-        document.getElementById("book20").disabled = false;
-        document.getElementById("book21").disabled = false;
-        document.getElementById("book22").disabled = false;
-        document.getElementById("book23").disabled = false;
-        document.getElementById("book24").disabled = false;
-      }
-
-      function Freeze1() {
-         document.getElementById("confirmation").innerHTML ="PWG has been Successfully Freezed" ;
-        document.getElementById("checkAll3").disabled = false;
-        document.getElementById("checkAll4").disabled = false;
-        document.getElementById("checkAll5").disabled = false;
-        document.getElementById("book13").disabled = false;
-        document.getElementById("book14").disabled = false;
-        document.getElementById("book15").disabled = false;
-        document.getElementById("book16").disabled = false;
-        document.getElementById("book17").disabled = false;
-        document.getElementById("book18").disabled = false;
-        document.getElementById("book19").disabled = false;
-        document.getElementById("book20").disabled = false;
-        document.getElementById("book21").disabled = false;
-        document.getElementById("book22").disabled = false;
-        document.getElementById("book23").disabled = false;
-        document.getElementById("book24").disabled = false;
-      }
 
 
       function myFunction(x) {

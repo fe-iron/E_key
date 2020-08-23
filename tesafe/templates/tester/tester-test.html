@@ -25,6 +25,11 @@
 <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{% static 'tester/css/tester-test.css' %}">
+	<style>
+		.cursor{
+			cursor: pointer;
+		}
+	</style>
 </head>
 <body>
 
@@ -59,9 +64,6 @@
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-
-						<a class="dropdown-item" href="#" onclick="myfun2()">Tested PWG List</a>
-						<a class="dropdown-item" href="#"  onclick="myfun3()">Untested PWG List</a>
 						<a class="dropdown-item" href="#" >Chat With Admin</a>
 						<a class="dropdown-item" href="tester-home" >Exit</a>
 					</div>
@@ -71,155 +73,6 @@
 			</nav>
 		</div>
 	</section>
-
-
-
-
-<!--	<section class="bg-detail">-->
-<!--		<div class="container-fluid">-->
-<!--			<div class="row justify-content-center">-->
-
-<!--				<div class="col-md-10  py-5 px-5">-->
-
-<!--					<div class="row justify-content-center bg-button-2 p-2 mt-3" id="div-8">-->
-<!--						<div class="col-md" >-->
-<!--							<header>-->
-<!--								<nav class="navbar navbar-light ">-->
-<!--									<a class="h4 text-dark font-weight-bold pt-2">Untested PWG List</a>-->
-<!--									<form class="form-inline">-->
-<!--										<div class="input-group-prepend mb-1 mr-2">-->
-<!--											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>-->
-<!--											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">-->
-<!--										</div>-->
-
-
-<!--									</form>-->
-<!--								</nav>-->
-<!--							</header>-->
-<!--							<div class="table-responsive">-->
-<!--								<table class="table">-->
-<!--									<thead>-->
-<!--										<tr>-->
-<!--											<th scope="col">Sr. No.</th>-->
-<!--											<th scope="col">PWG Name</th>-->
-
-<!--										</tr>-->
-<!--									</thead>-->
-<!--									<tbody>-->
-<!--										<tr onclick="myfun4()" style="cursor: pointer;">-->
-<!--											<th scope="row">1</th>-->
-<!--											<td >PWGS-1</td>-->
-<!--										</tr>-->
-
-<!--                                        <tr onclick="myfun4()" style="cursor: pointer;">-->
-<!--											<th scope="row">2</th>-->
-<!--											<td >PWGS-2</td>-->
-<!--										</tr>-->
-
-<!--                                        <tr onclick="myfun4()" style="cursor: pointer;">-->
-<!--											<th scope="row">3</th>-->
-<!--											<td >PWGS-3</td>-->
-<!--										</tr>-->
-
-<!--									</tbody>-->
-
-
-<!--								</table>-->
-<!--							</div>-->
-
-<!--						</div>-->
-<!--					</div>-->
-
-
-<!--					<div class="row justify-content-center bg-button-2 p-2 mt-3" id="div-7" style="display: none;">-->
-
-
-<!--						<div class="col-md" >-->
-<!--							<h4 class="font-weight-bold">Tested PWG List</h4>-->
-<!--							<div class="table-responsive">-->
-<!--								<table class="table">-->
-<!--									<thead>-->
-<!--										<tr >-->
-<!--											<th scope="col">Sr. No.</th>-->
-<!--											<th scope="col">Name</th>-->
-
-
-<!--										</tr>-->
-<!--									</thead>-->
-<!--									<tbody>-->
-<!--										<tr >-->
-<!--											<th scope="row">1</th>-->
-<!--											<td >PWGS-1</td>-->
-
-<!--										</tr>-->
-
-<!--                                        <tr >-->
-<!--											<th scope="row">2</th>-->
-<!--											<td >PWGS-11</td>-->
-
-<!--										</tr>-->
-<!--                                        <tr >-->
-<!--											<th scope="row">2</th>-->
-<!--											<td >PWGS-12</td>-->
-
-<!--										</tr>-->
-<!--									</tbody>-->
-
-
-<!--								</table>-->
-<!--							</div>-->
-<!--						</div>-->
-
-<!--					</div>-->
-
-
-
-
-
-<!--				</div>-->
-
-
-
-
-
-
-
-
-
-
-<!--			</div>-->
-
-
-<!--			<div class="row justify-content-center next-password">-->
-<!--				<div class="col-md-5">-->
-<!--					<div class="row justify-content-center bg-button-2 p-2 mb-3" id="div-4" style="display: none;">-->
-
-<!--						<div class="col-md text-center my-5">-->
-<!--							<h6>The XXXth Password Of PWGx-x is Below</h6>-->
-<!--							<p>!@#$%^&*()_++_)(*&^%$#@!s</p>-->
-
-<!--							<ul class="nav justify-content-around mt-5">-->
-
-<!--								<li class="nav-item">-->
-<!--									<a class="nav-link btn-success btn text-white btn-sm"  onclick="myfun2()">Pass</a>-->
-<!--								</li>-->
-<!--								<li class="nav-item">-->
-<!--									<button class="nav-link btn-primary btn text-white btn-sm" href="#" id="yourButton">Next Password</button>-->
-<!--								</li>-->
-<!--								<li class="nav-item">-->
-<!--									<a class="nav-link btn-danger btn text-white btn-sm" href="#" onclick="myfun3()">Fail</a>-->
-<!--								</li>-->
-<!--							</ul>-->
-
-<!--						</div>-->
-<!--					</div>-->
-<!--				</div>-->
-
-<!--			</div>-->
-<!--            <a href="tester-test" id="ret" style="display:none;" type="button" class="btn btn-danger btn-sm">Return</a>-->
-
-<!--		</section>-->
-
 
 
 	<section class="bg-detail">
@@ -234,7 +87,7 @@
 
 							<header>
 								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">PWG LIST</a>
+									<a class="h4 text-dark font-weight-bold pt-2">Untested PWG LIST</a>
 									<form class="form-inline">
 										<div class="input-group-prepend mb-1 mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
@@ -251,19 +104,19 @@
 					<div class="row justify-content-center bg-button-2 p-2 mb-3" id="div-4">
 
 						<div class="col-md text-center my-5">
-							<h6>The XXXth Password Of PWGx-x is Below</h6>
-							<p>!@#$%^&*()_++_)(*&^%$#@!s</p>
+							<h6 id="password">The XXXth Password Of PWGx-x is Below</h6>
+							<p id="randomText" class="font-weight-bolder">Your Password</p>
 
 							<ul class="nav justify-content-around mt-5">
 
-								<li class="nav-item">
-									<a class="nav-link btn-success btn text-white btn-sm"  onclick="myfun2()">Pass</a>
+								<li class="nav-item" id="pass">
+									<button class="nav-link btn-info btn text-white btn-sm" id="pass_pwg" disabled onclick="myfun2()">Pass</button>
 								</li>
 								<li class="nav-item">
-									<button class="nav-link btn-primary btn text-white btn-sm" href="#" id="yourButton">Next Password</button>
+									<button class="nav-link btn-primary btn text-white btn-sm" disabled id="yourButton">Get Password</button>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link btn-danger btn text-white btn-sm" href="#" onclick="myfun3()">Fail</a>
+									<button class="nav-link btn-danger btn text-white btn-sm" id="fail_button" disabled onclick="myfun3()">Fail</button>
 								</li>
 							</ul>
 
@@ -273,57 +126,107 @@
 
 			</div>
 
+							<div class="row">
+				<div class="col-md-6">
+					<div class="table-responsive">
+								<br>
+								<table class="table">
+									<thead>
+										<tr>
+											<td>Selected PWG</td>
+										</tr>
 
-							<div class="table-responsive">
+										<tr>
+											<th scope="col">PWGs</th>
+										</tr>
+									</thead>
+									<tbody id="myTable" class="table-borderless">
+
+										<tr>
+
+											<td onclick="select_pwg('PWG11')" class="cursor">PWG11</td>
+
+										</tr>
+
+										<tr>
+											<td class="cursor" onclick="select_pwg('PWG12')">PWG12</td>
+
+										</tr>
+
+										<tr>
+
+											<td class="cursor" onclick="select_pwg('PWG13')">PWG13</td>
+										</tr>
+
+										<tr>
+
+											<td class="cursor" onclick="select_pwg('PWG14')">PWG14</td>
+
+										</tr>
+									<tr>
+
+										<td class="cursor" onclick="select_pwg('PWG09')">PWG09</td>
+
+									</tr>
+									<tr>
+										<td class="cursor" onclick="select_pwg('PWG17')">PWG17</td>
+									</tr>
+									<tr>
+										<td class="cursor" onclick="select_pwg('PWG15')">PWG15</td>
+									</tr>
+
+									</tbody>
+								</table>
+							</div>
+				</div>
+				<div class="col-md-6">
+					<div class="table-responsive">
 
 
 								<br>
 								<table class="table">
 									<thead>
 										<tr>
-											<th scope="col">Name</th>
+											<th id="select_pwg"></th>
+										</tr>
+
+										<tr>
 											<th scope="col">Action</th>
+
 										</tr>
 									</thead>
-									<tbody id="myTable" class="table-borderless">
+									<tbody class="table-borderless">
+
 										<tr>
-
-											<td> PWG11</td>
-<!--											<td><a href="transfer" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >-->
-
-											</div></td>
+											<td></td>
 										</tr>
 
 										<tr>
-											<td> PWG12</td>
-
-<!--											<td><a href="transfer" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >-->
-
-											</div></td>
+											<td colspan="4" id="right_next"><button type="button" class="btn btn-primary" id="first_next" onclick="right_next()" ><i class="fas fa-chevron-right"></i> Next</button></td>
 										</tr>
 
 										<tr>
-
-											<td> PWG13</td>
-<!--											<td><a href="transfer" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >-->
-
-											</div></td>
+											<td></td>
 										</tr>
 
 										<tr>
-
-											<td> PWG14</td>
-<!--											<td><a href="transfer" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >-->
-
-											</div></td>
+											<td></td>
 										</tr>
+									<tr>
+										<td colspan="3" id="left_next"><button type="button"  id="last_prev" class="btn btn-primary" onclick="left_next()" ><i class="fas fa-chevron-left"></i> Prev One</button></td>
+									</tr>
+									<tr>
+									</tr>
+									<tr>
+									</tr>
 
 									</tbody>
 								</table>
 							</div>
+				</div>
+			</div>
 						</div>
 
-					</div>
 
 
 					<div class="row justify-content-center bg-button-2 p-4 mt-3" id="div-2" style="display: none;">
@@ -332,43 +235,25 @@
 							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Add Seller Account</h5>
 							<div class="row">
 								<div class="col-md-6 py-3">
-									<!-- <form>
-										<div class="row">
-											<div class="col-md mb-2">
-												<input type="text" class="form-control" placeholder="Enter Name">
-											</div>
-											<div class="col-md mb-2">
-												<input type="email" class="form-control" placeholder="Enter Email">
-											</div>
 
-											<div class="col-md mb-2">
-												<input type="password" class="form-control" placeholder="Enter Password">
-											</div>
-
-											<div class="col-md mb-2">
-												<button class="btn btn-primary" type="submit">Sumbit</button>
-												<button class="btn btn-danger" type="submit" onclick="cancel()">Cancel</button>
-											</div>
-										</div>
-									</form> -->
 									<form>
 									  <div class="form-group">
-									    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name ">
+									    <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Name ">
 									  </div>
 									  <div class="form-group">
-									     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Alias Name ">
-									  </div>
-
-									  <div class="form-group">
-									     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email ">
+									     <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Alias Name ">
 									  </div>
 
 									  <div class="form-group">
-									     <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Contact Number ">
+									     <input type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Email ">
 									  </div>
 
 									  <div class="form-group">
-									     <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Password ">
+									     <input type="number" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Contact Number ">
+									  </div>
+
+									  <div class="form-group">
+									     <input type="password" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Password ">
 									  </div>
 
 									<button class="btn btn-primary" type="submit">Submit</button>
@@ -420,77 +305,22 @@
 
 							<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Transfer Tested PWG to Seller</button>
 							<!-- Modal -->
-							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLabel">Transfer Tested PWG to Seller</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body">
-											<table class="table">
-												<thead>
-													<tr>
-														<th scope="col">Sr. No.</th>
-														<th scope="col">Name</th>
-														<th scope="col">TESTED</th>
-														<th scope="col">Select</th>
+							<div class="modal fade" id="imagemodal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+								<div class="modal-content">
+								  <div class="modal-header">
+									<h5 class="modal-title font-weight-bold">PWG Passed</h5>
+									<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+								  </div>
+								  <div class="modal-body">
+								  	<p id="removed_pwg"></p>
+								  </div>
 
-
-
-
-													</tr>
-												</thead>
-												<tbody id="myTable">
-													<tr>
-														<th scope="row">1</th>
-														<td><a href="">PWG-1</a></td>
-														<td><i class="fas fa-check pl-4"></i></td>
-														<td>
-															<div class="form-check">
-																<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-															</div>
-														</td>
-
-
-													</tr>
-
-													<tr>
-														<th scope="row">2</th>
-														<td>PWG-2</td>
-														<td><i class="fas fa-check pl-4"></i></td>
-														<td>
-															<div class="form-check">
-																<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-															</div>
-														</td>
-
-													</tr>
-
-													<tr>
-														<th scope="row">3</th>
-														<td>PWG-3</td>
-														<td><i class="fas fa-check pl-4"></i></td>
-														<td>
-															<div class="form-check">
-																<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-															</div>
-														</td>
-
-													</tr>
-												</tbody>
-
-
-											</table>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-primary">Transfer</button>
-										</div>
-									</div>
+								  <div class="modal-footer">
+									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+								  </div>
 								</div>
+							  </div>
 							</div>
 
 
@@ -499,13 +329,6 @@
 					</div>
 
 				</div>
-
-
-
-
-
-
-
 			</div>
 		</div>
 
@@ -521,18 +344,38 @@
 
 
 		<script type="text/javascript">
+			var clicks = 0;
+			var next_pass = 0;
 
-
+			function randomText(length) {
+				   var result           = '';
+				   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789(){}[]+-/*^_@#$%!&';
+				   var charactersLength = characters.length;
+				   for ( var i = 0; i < length; i++ ) {
+					  result += characters.charAt(Math.floor(Math.random() * charactersLength));
+				   }
+				   return result;
+				}
 
 			$(function(){
 				$('#yourButton').click(function(){
+					next_pass += 1;
 					var btn = $(this);
+					btn.html("Next Password");
+					$('#randomText').html(randomText(15));
 					btn.prop('disabled',true);
 					window.setTimeout(function(){
 						btn.prop('disabled',false);
 					},3000);
+
+					if(next_pass >= 3){
+						$('#pass_pwg').prop('disabled',false);
+						$('#pass').html('<a class="nav-link btn-success btn text-white btn-sm pop1"  onclick="myfun2()" id="pass_pwg">Pass</a>');
+					}
+					$('#fail_button').prop('disabled',false);
 				});
 			});
+
 
 
 				// search filter table
@@ -546,19 +389,29 @@
 				});
 
 
-				function myfun(){
-
-					document.getElementById("div-4").style.display = "block";
-					document.getElementById("div-7").style.display = "none";
-
-
-				}
-
+		//for pass button
 		function myfun2(){
-			document.getElementById("div-7").style.display = "block";
-			document.getElementById("div-4").style.display = "none";
-			document.getElementById("div-8").style.display = "none";
-			document.getElementById("ret").style = "margin-left: 48%;margin-top: 15px;margin-bottom: 15px;";
+			var pwg_name = document.getElementById('select_pwg').innerHTML;
+
+			//fetching table's td values
+			table = document.getElementById("myTable");
+			rows = table.rows;
+			var len = rows.length;
+
+			for(i=0;i<len;i++){
+				if(pwg_name == rows[i].getElementsByTagName("td")[0].innerHTML){
+					rows[i].getElementsByTagName("td")[0].remove();
+					$('#select_pwg').html("");
+					$('#select_pwg').removeClass("select_pwg");
+					//$('#pwg_removed').("select_pwg");
+					break;
+				}
+			}
+
+			// modal popup
+
+				  $("#removed_pwg").html(pwg_name+" is successfully Passed and send to tested list");
+				  $("#imagemodal1").modal("show");
 
 		}
 
@@ -567,14 +420,26 @@
 
 
 
+
+		//for fail button
 		function myfun3(){
 
-			document.getElementById("div-7").style.display = "none";
-			document.getElementById("div-8").style.display = "block";
-			document.getElementById("div-4").style.display = "none";
-      		document.getElementById("ret").style = "margin-left: 48%;margin-top: 15px;margin-bottom: 15px;";
+			var pwg_name = document.getElementById('select_pwg').innerHTML;
 
+			//fetching table's td values
+			table = document.getElementById("myTable");
+			rows = table.rows;
+			var len = rows.length;
 
+			for(i=0;i<len;i++){
+				if(pwg_name == rows[i].getElementsByTagName("td")[0].innerHTML){
+					rows[i].getElementsByTagName("td")[0].remove();
+					$('#select_pwg').html("");
+					$('#select_pwg').removeClass("select_pwg");
+
+					break;
+				}
+			}
 		}
 
 		function myfun4(){
@@ -585,6 +450,154 @@
 
 		}
 
+		function select_pwg(value){
+
+		//resetting the value of next_pass, use to enable pass button
+
+
+		$('#pass').html('<button class="nav-link btn-info btn text-white btn-sm"  onclick="myfun2()" id="pass_pwg">Pass</button>');
+		$('#pass_pwg').prop('disabled',true);
+		next_pass = 0;
+
+
+		//resetting Next Password password to get Password
+			$('#yourButton').html("Get Password");
+
+		//resetting Password field to empty
+		$('#randomText').html(" ");
+
+			$("#yourButton").removeAttr("disabled");
+			$('#select_pwg').addClass("select_pwg");
+			document.getElementById("password").innerHTML = "The XXXth Password Of "+value+" is Below";
+
+			document.getElementById("select_pwg").innerHTML = value;
+
+			//checking prev one button's value to set warning
+			text = document.getElementById("first_next").innerHTML;
+			if("Prev One" != text.slice(-8)){
+				$('#left_next').html('<button type="button" id="last_prev" class="btn btn-primary" onclick="left_next()"><i class="fas fa-chevron-left"></i> Prev One</button>');
+			}
+
+			//checking Next button's value to set warning
+				text = document.getElementById("last_prev").innerHTML;
+				if("Next" != text.slice(-4)){
+					$('#right_next').html('<button type="button" class="btn btn-primary" onclick="right_next()" id="first_next"><i class="fas fa-chevron-right"></i> Next</button>');
+				}
+
+		}
+
+
+
+
+		function right_next(){
+		//resetting the value of next_pass, use to enable pass button
+		$('#pass').html('<button class="nav-link btn-info btn text-white btn-sm"  onclick="myfun2()" id="pass_pwg">Pass</button>');
+		$('#pass_pwg').attr('disabled','true');
+		next_pass = 0;
+
+
+		//resetting Next Password password to get Password
+		$('#yourButton').html("Get Password");
+
+		//resetting Password field to empty
+		$('#randomText').html(" ");
+
+
+		//enabling next password button to get next password
+		$("#yourButton").removeAttr("disabled");
+
+		//checking prev one button's value to set warning
+			text = document.getElementById("first_next").innerHTML;
+				if("Prev One" != text.slice(-8)){
+					$('#left_next').html('<button type="button" id="last_prev" class="btn btn-primary" onclick="left_next()"><i class="fas fa-chevron-left"></i> Prev One</button>');
+				}
+
+			//checking Selected PWG's value to set pwg according
+			text = document.getElementById("select_pwg").innerHTML;
+
+			//fetching table's td values
+			table = document.getElementById("myTable");
+			rows = table.rows;
+			var len = rows.length;
+
+			//for the first time it will set pwg name using global click var
+			if(text == ""){
+				$('#select_pwg').addClass("select_pwg");
+				document.getElementById("select_pwg").innerHTML = rows[clicks].getElementsByTagName("td")[0].innerHTML;
+				document.getElementById("password").innerHTML = 'The XXXth Password Of '+rows[clicks].getElementsByTagName("td")[0].innerHTML+' is Below';
+				clicks += 1;
+			}else{
+
+				for(i=0;i<len;i++){
+					if(text == rows[i].getElementsByTagName("td")[0].innerHTML){
+						if(i+1 < len){
+							$('#select_pwg').addClass("select_pwg");
+							document.getElementById("select_pwg").innerHTML = rows[i+1].getElementsByTagName("td")[0].innerHTML;
+							document.getElementById("password").innerHTML = 'The XXXth Password Of '+rows[i+1].getElementsByTagName("td")[0].innerHTML+' is Below';
+							break;
+						} else{
+							$('#right_next').html('<button type="button" class="btn btn-info" id="first_next">No More PWG, Try below Button</button>');
+							break;
+						}
+					}
+				}
+			}
+		}
+
+
+		function left_next(){
+				//resetting the value of next_pass, use to enable pass button
+				$('#pass').html('<button class="nav-link btn-info btn text-white btn-sm"  onclick="myfun2()" id="pass_pwg">Pass</button>');
+				$('#pass_pwg').attr('disabled',"true");
+				next_pass = 0;
+
+
+				//resetting Next Password password to get Password
+				$('#yourButton').html("Get Password");
+
+				//resetting Password field to empty
+				$('#randomText').html(" ");
+
+
+
+
+				//enabling next password button to get next password
+				$("#yourButton").removeAttr("disabled");
+
+				//checking Next button's value to set warning
+				text = document.getElementById("last_prev").innerHTML;
+				if("Next" != text.slice(-4)){
+					$('#right_next').html('<button type="button" class="btn btn-primary" onclick="right_next()" id="first_next"><i class="fas fa-chevron-right"></i> Next</button>');
+				}
+
+				//checking Selected PWG's value to set pwg according
+				text = document.getElementById("select_pwg").innerHTML;
+
+				//fetching table's td values
+				table = document.getElementById("myTable");
+				rows = table.rows;
+				var len = rows.length;
+
+				//for the first time it will set warning using text
+				if(text == ""){
+					$('#left_next').html('<button type="button" class="btn btn-info" id="last_prev">No More PWG, Try above Button</button>');
+				}else{
+					for(i=0;i<len;i++){
+						if(text == rows[i].getElementsByTagName("td")[0].innerHTML){
+							if(i-1 >= 0){
+								$('#select_pwg').addClass("select_pwg");
+								document.getElementById("select_pwg").innerHTML = rows[i-1].getElementsByTagName("td")[0].innerHTML;
+								document.getElementById("password").innerHTML = 'The XXXth Password Of '+rows[i-1].getElementsByTagName("td")[0].innerHTML+' is Below';
+								break;
+							}else{
+								$('#left_next').html('<button type="button" class="btn btn-info" id="last_prev">No More PWG, Try above Button</button>');
+								break;
+							}
+						}
+					}
+				}
+
+		}
 	</script>
 </body>
 </html>
