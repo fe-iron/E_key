@@ -8,12 +8,6 @@ from django.contrib.sessions.models import Session
 from django.utils import timezone
 from django.http import HttpResponse
 
-
-
-
-
-
-
 # Create your views here.
 def index(request):
     if request.method == 'POST':
@@ -38,7 +32,7 @@ def index(request):
         elif accType == 'tester':
             return render(request, 'tester/tester-home.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
         elif accType == 'user':
-            return render(request, 'tesafe/admin-home.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
+            return render(request, 'user/user-home.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
 
 
     else:
@@ -292,32 +286,15 @@ def seller_pwg_transfer(request):
     return render(request, 'seller/seller-pwg-transfer.html')
 
 
-
-def names_view(request):
-    ctx = {}
-    url_parameter = request.GET.get("q")
-
-    if url_parameter:
-        name = Names.objects.filter(name__icontains=url_parameter)
-    else:
-        name = Names.objects.all()
-
-    ctx["Name"] = name
-    if request.is_ajax():
-
-        html = render_to_string(
-            template_name="artists-results-partial.html", context={"name": name}
-        )
-        data_dict = {"html_from_view": html}
-        return JsonResponse(data=data_dict, safe=False)
-
-    return render(request, "tesafe/admin-home.html", context=ctx)
-
-
-
 def tester_home(request):
     return render(request, 'tester/tester-home.html')
 
 
 def tester_test(request):
     return render(request, 'tester/tester-test.html')
+
+def user_user(request):
+    return render(request, 'user/user-user.html')
+
+def user_home(request):
+    return render(request, 'user/user-home.html')

@@ -18,6 +18,13 @@
     <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="{% static 'tester/css/tester-home.css' %}" />
+    <style>
+      .onClick{
+        color: #000000;
+        background-color: #ffffff;
+        border-color: #007bff;
+      }
+    </style>
   </head>
   <body>
     <section class="bg-light">
@@ -53,13 +60,25 @@
             </div>
           </div>
 
-          <div class="dropdown dropleft float-xl-right mb-0" id="pwg-on">
+          <div class="dropdown dropleft float-xl-right mb-0" id="pwg-on" style="display:none">
             <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
               <i class="fas fa-ellipsis-v"></i>
             </button>
             <div class="dropdown-menu">
 
               <a class="dropdown-item" href="#" onclick="Delete();">Retest</a>
+              <a class="dropdown-item" href="#" onclick="Freeze();">Return PWG to Admin</a>
+              <a class="dropdown-item" href="#">Chat With Admin</a>
+              <a class="dropdown-item" href="#">Get Payment from Admin</a>
+              <a class="dropdown-item" href="/">Exit</a>
+            </div>
+          </div>
+
+          <div class="dropdown dropleft float-xl-right mb-0" id="pwg-on-untested">
+            <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+              <i class="fas fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu">
               <a class="dropdown-item" href="#" onclick="Freeze();">Return PWG to Admin</a>
               <a class="dropdown-item" href="#">Chat With Admin</a>
               <a class="dropdown-item" href="#">Get Payment from Admin</a>
@@ -91,12 +110,15 @@
 
                   <div class="pb-3 pl-3">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" onclick="tested_faulty()" style="cursor: pointer;" />
-                      <label class="form-check-label label-font" for="inlineRadio1">Tested</label>
+                      <button type="button" class="btn btn-primary" style="border-radius:20px;" id="tested-button" onclick="tested_faulty()"> Tested </button>
+
+<!--                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" onclick="tested_faulty()" style="cursor: pointer;" />-->
+<!--                      <label class="form-check-label label-font" for="inlineRadio1">Tested</label>-->
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" checked name="inlineRadioOptions" id="inlineRadio2" value="option2" onclick="untested()" style="cursor: pointer;" />
-                      <label class="form-check-label label-font" for="inlineRadio2">Untested</label>
+                        <button type="button" class="btn btn-primary onClick" id="untested-button" style="border-radius:20px;" onclick="untested()"> Untested </button>
+                      <!--                      <input class="form-check-input" type="radio" checked name="inlineRadioOptions" id="inlineRadio2" value="option2" onclick="untested()" style="cursor: pointer;" />-->
+<!--                      <label class="form-check-label label-font" for="inlineRadio2">Untested</label>-->
                     </div>
                   </div>
 
@@ -1285,10 +1307,15 @@
 
 
       function tested_faulty() {
+        $('#tested-button').removeClass('btn-primary');
+        $('#tested-button').addClass('onClick');
+        $('#untested-button').addClass('btn-primary');
+        $('#untested-button').removeClass('onClick');
         document.getElementById("tested-faulty").style.display = "block";
         document.getElementById("faulty").style.display = "none";
         document.getElementById("untested").style.display = "none";
         document.getElementById("pwg-on").style.display = "none";
+        document.getElementById("pwg-on-untested").style.display = "none";
         document.getElementById("pwg-off").style.display = "block";
 
 
@@ -1303,6 +1330,7 @@
         document.getElementById("pwg-on").style.display = "block";
 
         document.getElementById("pwg-off").style.display = "none";
+        document.getElementById("pwg-on-untested").style.display = "none";
         document.getElementById("untested").style.display = "none";
 
         document.getElementById("tested").style.display = "none";
@@ -1316,6 +1344,7 @@
 
         document.getElementById("pwg-on").style.display = "block";
         document.getElementById("pwg-off").style.display = "none";
+        document.getElementById("pwg-on-untested").style.display = "none";
 
         document.getElementById("faulty").style.display = "none";
         document.getElementById("tested").style.display = "block";
@@ -1325,6 +1354,10 @@
       }
 
       function untested() {
+        $('#untested-button').removeClass('btn-primary');
+        $('#untested-button').addClass('onClick');
+        $('#tested-button').addClass('btn-primary');
+        $('#tested-button').removeClass('onClick');
         document.getElementById("tested-faulty").style.display = "none";
 
         document.getElementById("pwg-on").style.display = "block";

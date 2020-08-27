@@ -35,6 +35,11 @@ urlpatterns = [
     #tester URLs
     path("tester-home", views.tester_home, name='tester-home'),
     path("tester-test", views.tester_test, name='tester-test'),
+    #User Urls
+    # path("user-home", views.user_home, name='user-home'),
+    path("user-user", views.user_user, name='user-user'),
+    path("user-home", views.user_home, name='user-home'),
+
     # path("webAdmin_register", views.webAdmin_register.as_view(), name="webAdmin_register"),
 
 ]

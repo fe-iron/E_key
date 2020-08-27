@@ -1,0 +1,332 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User | Users</title>
+
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+
+	<!-- fontawesome cdn -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/admin-seller.css' %}">
+</head>
+<body>
+
+
+
+	<section class="bg-light">
+		<div class="container-fluid">
+			<nav class="navbar navbar-expand-lg navbar-light ">
+
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse justify-content" id="navbarSupportedContent">
+					<ul class="navbar-nav">
+						<li class="nav-item pl-3">
+							<a class="nav-link"  href="user-home">Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item pl-3">
+							<a class="nav-link active" href="user-user">User</a>
+						</li>
+					</ul>
+
+				</div>
+
+				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
+
+				<div class="dropdown  dropleft float-xl-right mb-0" >
+					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+						<i class="fas fa-ellipsis-v"></i>
+					</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
+						<a class="dropdown-item" href="#" onclick="myFunction()">Delete</a>
+						<a class="dropdown-item" href="#" onclick="myFunction1()"> Freeze </a>
+						<a class="dropdown-item" href="#" onclick="myFunction2()">Chat</a>
+						<a class="dropdown-item" href="">Broadcast</a>
+						<!-- <a class="dropdown-item" href="#div-3" onclick="myfun2()">Tested PWG List</a> -->
+						<a class="dropdown-item" href="admin-home" >Exit</a>
+					</div>
+				</div>
+
+
+			</nav>
+		</div>
+	</section>
+
+	<section class="bg-detail">
+		<div class="container-fluid">
+			<div class="row justify-content-center">
+
+				<div class="col-md-10  py-5 px-5">
+
+					<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-1" >
+
+						<div class="col-md">
+
+							<header>
+								<nav class="navbar navbar-light  venue-registration">
+									<a class="h4 text-dark font-weight-bold pt-2">Users</a>
+									<form class="form-inline">
+										<div class="input-group-prepend mb-1 mr-2">
+											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
+											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
+										</div>
+
+									</form>
+								</nav>
+							</header>
+
+
+
+
+							<div class="table-responsive col-md-8">
+								<br>
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere" disabled> <i class="fas fa-sort-down"></i></th>
+											<th scope="col">Name</th>
+										</tr>
+									</thead>
+									<tbody id="myTable" class="table-borderless">
+										<tr>
+											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
+											<td>PWG1-1</td>
+
+
+										</tr>
+                                        <tr>
+											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
+											<td>PWG1-11</td>
+
+
+										</tr>
+                                        <tr>
+											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
+											<td>PWG1-12</td>
+
+
+										</tr>
+                                        <tr>
+											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
+											<td>PWG1-13</td>
+
+
+										</tr>
+
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+
+
+
+
+
+
+			</div>
+		</div>
+    </section>
+
+
+<section class="floatingButtonHere" style="display: none;" id="floating-button">
+	<a href="" class=" btn btn-primary" >Confirm</a>
+	<a href="admin-seller" class=" btn btn-danger">Cancel</a>
+</section>
+
+
+
+
+
+
+
+
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title font-weight-bold">Login History of Seller ABC</h5>
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			</div>
+			<div class="modal-body">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Sr. No.</th>
+								<th scope="col">Date</th>
+								<th scope="col">Time</th>
+								<th scope="col">Device Name</th>
+								<th scope="col">Login IP Address</th>
+								<th scope="col">Duration Of Online</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">1</th>
+								<td>20/06/5</td>
+								<td>5:30pm</td>
+								<td>Samsung</td>
+								<td>10.2.0.10:8090</td>
+								<td>30 minutes</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Return</button>
+      </div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+
+// search filter table
+	$(document).ready(function(){
+		$("#myInput").on("keyup", function() {
+			var value = $(this).val().toLowerCase();
+			$("#myTable tr").filter(function() {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
+	});
+
+
+
+// modal popup
+	$(function() {
+		$('.pop').on('click', function() {
+			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+			$('#imagemodal').modal('show');
+		});
+	});
+
+
+
+
+
+
+
+
+	// check all checkbox in one click
+
+	$(document).ready(function() {
+
+		$('#checkAll').click(function () {
+			$('input:checkbox').not(this).prop('checked', this.checked);
+		});
+
+		$("[id*=book_]").change(function () {
+			if ($('input[type=checkbox]:checked').length == $('input[type=checkbox]').length) {
+				$('#checkAll').prop('checked', true);
+			} else {
+				$('#checkAll').prop('checked', false);
+			}
+		});
+
+	});
+
+
+
+
+	// division hide/show js
+
+	function myfun(){
+
+		document.getElementById("div-1").style.display = "block";
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-3").style.display = "none";
+
+	}
+
+	function myfun1(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-2").style.display = "block";
+		document.getElementById("div-3").style.display = "none";
+		document.getElementById("floating-button").style.display = "none";
+
+
+	}
+
+
+	function myfun2(){
+		document.getElementById("div-1").style.display = "none";
+		document.getElementById("div-3").style.display = "block";
+		document.getElementById("div-2").style.display = "none";
+
+
+	}
+
+
+
+	function cancel() {
+		document.getElementById("div-2").style.display = "none";
+		document.getElementById("div-1").style.display = "block";
+	}
+
+
+// floating button JS
+
+	$('input[type="checkbox"]').click(function(){
+		if($(this).attr("value")=="floatingButtonHere"){
+			$(".floatingButtonHere").show(150);
+		}
+	});
+
+
+
+function myFunction() {
+  document.getElementById("checkAll").disabled = false;
+    document.getElementById("book1").disabled = false;
+    document.getElementById("book2").disabled = false;
+    document.getElementById("book3").disabled = false;
+    document.getElementById("book4").disabled = false;
+}
+
+function myFunction1() {
+  document.getElementById("checkAll").disabled = false;
+    document.getElementById("book1").disabled = false;
+    document.getElementById("book2").disabled = false;
+    document.getElementById("book3").disabled = false;
+    document.getElementById("book4").disabled = false;
+}
+
+
+function myFunction2() {
+  document.getElementById("checkAll").disabled = false;
+    document.getElementById("book1").disabled = false;
+    document.getElementById("book2").disabled = false;
+    document.getElementById("book3").disabled = false;
+    document.getElementById("book4").disabled = false;
+}
+
+
+
+
+
+</script>
+</body>
+</html>
