@@ -19,6 +19,17 @@
 	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/admin-seller.css' %}">
+	<style>
+		.cursor{
+			cursor: pointer;
+		}
+		.selected_pwg{
+			    background-color: #007bff;
+				display: inline-block;
+				color: white;
+				border-radius: 6px;
+		}
+	</style>
 </head>
 <body>
 
@@ -51,16 +62,11 @@
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
-						<a class="dropdown-item" href="#" onclick="myFunction()">Delete</a>
-						<a class="dropdown-item" href="#" onclick="myFunction1()"> Freeze </a>
-						<a class="dropdown-item" href="#" onclick="myFunction2()">Chat</a>
-						<a class="dropdown-item" href="">Broadcast</a>
-						<!-- <a class="dropdown-item" href="#div-3" onclick="myfun2()">Tested PWG List</a> -->
-						<a class="dropdown-item" href="admin-home" >Exit</a>
+						<a class="dropdown-item" href="#">Delete</a>
+						<a class="dropdown-item" href="#">Chat</a>
+						<a class="dropdown-item" href="user-home">Exit</a>
 					</div>
 				</div>
-
 
 			</nav>
 		</div>
@@ -84,14 +90,11 @@
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
 											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
-
 									</form>
 								</nav>
 							</header>
 
-
-
-
+							<div class="row">
 							<div class="table-responsive col-md-8">
 								<br>
 								<table class="table">
@@ -104,44 +107,42 @@
 									<tbody id="myTable" class="table-borderless">
 										<tr>
 											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td>PWG1-1</td>
+											<td onclick="show_buttons('PWG1-1')" id="pwg-0" class="cursor">PWG1-1</td>
 
 
 										</tr>
                                         <tr>
 											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td>PWG1-11</td>
+											<td onclick="show_buttons('PWG1-11')" id="pwg-1" class="cursor">PWG1-11</td>
 
 
 										</tr>
                                         <tr>
 											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td>PWG1-12</td>
+											<td onclick="show_buttons('PWG1-12')" id="pwg-2"  class="cursor">PWG1-12</td>
 
 
 										</tr>
                                         <tr>
 											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td>PWG1-13</td>
-
-
+											<td onclick="show_buttons('PWG1-13');" id="pwg-3" class="cursor">PWG1-13</td>
 										</tr>
-
-
 									</tbody>
 								</table>
+							</div>
+							<div class="col-md-4 mt-5 pt-3" id="buttons" style="display:none;">
+								<button class="btn btn-primary my-3">Chat</button>
+								<br>
+								<button class="btn btn-primary my-3">Delete</button>
+								<br>
+								<button class="btn btn-primary my-3 pop">Review Record</button>
+							</div>
 							</div>
 						</div>
 
 					</div>
 
 				</div>
-
-
-
-
-
-
 
 			</div>
 		</div>
@@ -164,7 +165,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title font-weight-bold">Login History of Seller ABC</h5>
+				<h5 class="modal-title font-weight-bold">Record of PWGs-1</h5>
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 			</div>
 			<div class="modal-body">
@@ -175,20 +176,27 @@
 								<th scope="col">Sr. No.</th>
 								<th scope="col">Date</th>
 								<th scope="col">Time</th>
-								<th scope="col">Device Name</th>
-								<th scope="col">Login IP Address</th>
-								<th scope="col">Duration Of Online</th>
-
+								<th scope="col">Password</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<th scope="row">1</th>
-								<td>20/06/5</td>
-								<td>5:30pm</td>
-								<td>Samsung</td>
-								<td>10.2.0.10:8090</td>
-								<td>30 minutes</td>
+								<td>20/06/20</td>
+								<td>5:30 pm</td>
+								<td>6kBuSpm&MO64y{q</td>
+							</tr>
+							<tr>
+								<th scope="row">2</th>
+								<td>10/05/20</td>
+								<td>1:30 pm</td>
+								<td>{!ZAwaKYW-zm}$s</td>
+							</tr>
+							<tr>
+								<th scope="row">3</th>
+								<td>19/04/20</td>
+								<td>2:30 pm</td>
+								<td>ln19gUFU%-&&B[b</td>
 							</tr>
 						</tbody>
 					</table>
@@ -225,12 +233,6 @@
 	});
 
 
-
-
-
-
-
-
 	// check all checkbox in one click
 
 	$(document).ready(function() {
@@ -250,83 +252,22 @@
 	});
 
 
+	function show_buttons(value){
 
-
-	// division hide/show js
-
-	function myfun(){
-
-		document.getElementById("div-1").style.display = "block";
-		document.getElementById("div-2").style.display = "none";
-		document.getElementById("div-3").style.display = "none";
-
-	}
-
-	function myfun1(){
-		document.getElementById("div-1").style.display = "none";
-		document.getElementById("div-2").style.display = "block";
-		document.getElementById("div-3").style.display = "none";
-		document.getElementById("floating-button").style.display = "none";
-
-
-	}
-
-
-	function myfun2(){
-		document.getElementById("div-1").style.display = "none";
-		document.getElementById("div-3").style.display = "block";
-		document.getElementById("div-2").style.display = "none";
-
-
-	}
-
-
-
-	function cancel() {
-		document.getElementById("div-2").style.display = "none";
-		document.getElementById("div-1").style.display = "block";
-	}
-
-
-// floating button JS
-
-	$('input[type="checkbox"]').click(function(){
-		if($(this).attr("value")=="floatingButtonHere"){
-			$(".floatingButtonHere").show(150);
+		$('#buttons').css('display', 'block');
+		$('.modal-title').html("Record of "+value);
+		table = document.getElementById('myTable');
+		rows = table.rows;
+		for(i=0;i<rows.length;i++){
+			if( value == rows[i].getElementsByTagName("td")[0].innerHTML){
+				id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
+				$('#'+id_name).addClass("selected_pwg");
+			} else{
+				id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
+				$('#'+id_name).removeClass("selected_pwg");
+			}
 		}
-	});
-
-
-
-function myFunction() {
-  document.getElementById("checkAll").disabled = false;
-    document.getElementById("book1").disabled = false;
-    document.getElementById("book2").disabled = false;
-    document.getElementById("book3").disabled = false;
-    document.getElementById("book4").disabled = false;
-}
-
-function myFunction1() {
-  document.getElementById("checkAll").disabled = false;
-    document.getElementById("book1").disabled = false;
-    document.getElementById("book2").disabled = false;
-    document.getElementById("book3").disabled = false;
-    document.getElementById("book4").disabled = false;
-}
-
-
-function myFunction2() {
-  document.getElementById("checkAll").disabled = false;
-    document.getElementById("book1").disabled = false;
-    document.getElementById("book2").disabled = false;
-    document.getElementById("book3").disabled = false;
-    document.getElementById("book4").disabled = false;
-}
-
-
-
-
-
+	}
 </script>
 </body>
 </html>

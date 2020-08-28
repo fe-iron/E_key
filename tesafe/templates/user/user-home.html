@@ -118,11 +118,11 @@
 														<i class="fas fa-ellipsis-v"></i>
 													</button>
 													<div class="dropdown-menu">
-														<a class="dropdown-item" href="#">Review Record</a>
-														<a class="dropdown-item pop1" href="#">Authorize</a>
-														<a class="dropdown-item pop2" href="#">Transfer</a>
-														<a class="dropdown-item pop" href="#">Share</a>
-														<a class="dropdown-item" href="#">Delete</a>
+														<a class="dropdown-item pop1" id="0" href="#">Review Record</a>
+<!--														<a class="dropdown-item pop1" href="#">Authorize</a>-->
+<!--														<a class="dropdown-item pop2" href="#">Transfer</a>-->
+<!--														<a class="dropdown-item pop" href="#">Share</a>-->
+<!--														<a class="dropdown-item" href="#">Delete</a>-->
 													</div>
 												</div></td>
 											</tr>
@@ -138,10 +138,10 @@
 														<i class="fas fa-ellipsis-v"></i>
 													</button>
 													<div class="dropdown-menu">
-														<a class="dropdown-item" href="#">Review Record</a>
-														<a class="dropdown-item pop1" href="#">Authorize</a>
-														<a class="dropdown-item pop2" href="#">Transfer</a>
-														<a class="dropdown-item pop" href="#">Share</a>
+														<a class="dropdown-item pop1" id="1" href="#">Review Record</a>
+														<a class="dropdown-item" href="#">Authorize</a>
+														<a class="dropdown-item" href="#">Transfer</a>
+								 						<a class="dropdown-item" href="#">Share</a>
 														<a class="dropdown-item" href="#">Delete</a>
 													</div>
 												</div></td>
@@ -158,11 +158,11 @@
 														<i class="fas fa-ellipsis-v"></i>
 													</button>
 													<div class="dropdown-menu">
-														<a class="dropdown-item" href="#">Review Record</a>
-														<a class="dropdown-item pop1" href="#">Authorize</a>
-														<a class="dropdown-item pop2" href="#">Transfer</a>
-														<a class="dropdown-item pop" href="#">Share</a>
-														<a class="dropdown-item" href="#">Delete</a>
+														<a class="dropdown-item pop1" id="2" href="#">Review Record</a>
+<!--														<a class="dropdown-item pop1" href="#">Authorize</a>-->
+<!--														<a class="dropdown-item pop2" href="#">Transfer</a>-->
+<!--														<a class="dropdown-item pop" href="#">Share</a>-->
+<!--														<a class="dropdown-item" href="#">Delete</a>-->
 													</div>
 												</div></td>
 											</tr>
@@ -178,11 +178,11 @@
 														<i class="fas fa-ellipsis-v"></i>
 													</button>
 													<div class="dropdown-menu">
-														<a class="dropdown-item" href="#">Review Record</a>
-														<a class="dropdown-item pop1" href="#">Authorize</a>
-														<a class="dropdown-item pop2" href="#">Transfer</a>
-														<a class="dropdown-item pop" href="#">Share</a>
-														<a class="dropdown-item" href="#">Delete</a>
+														<a class="dropdown-item pop1" id="3" href="#">Review Record</a>
+														<a class="dropdown-item" href="#">De-authorize</a>
+<!--														<a class="dropdown-item pop2" href="#">Transfer</a>-->
+<!--														<a class="dropdown-item pop" href="#">Share</a>-->
+<!--														<a class="dropdown-item" href="#">Delete</a>-->
 													</div>
 												</div></td>
 											</tr>
@@ -317,7 +317,7 @@
 
 
 
-
+<!--modal for get password-->
 <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -327,12 +327,62 @@
 			</div>
 			<div class="modal-body">
 				<h6 id="tagline"></h6>
-				<p id="randomText" class="font-weight-bolder px-5"></p>
+				<p id="randomText" class="font-weight-bolder px-5" style="display:none;"></p>
 				<ul class="nav mt-5 px-4" id="buttons">
 								<li class="nav-item">
 									<button class="nav-link btn-primary btn text-white btn-sm" id="yourButton">Get Password</button>
 								</li>
 				</ul>
+			</div>
+			<div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Return</button>
+      </div>
+		</div>
+	</div>
+</div>
+
+
+<!--modal for review record-->
+<div class="modal fade" id="imagemodal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title font-weight-bold" id="modal_title">Record of PWGs-1</h5>
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			</div>
+			<div class="modal-body">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Sr. No.</th>
+								<th scope="col">Date</th>
+								<th scope="col">Time</th>
+								<th scope="col">Password</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">1</th>
+								<td>20/06/20</td>
+								<td>5:30 pm</td>
+								<td>6kBuSpm&MO64y{q</td>
+							</tr>
+							<tr>
+								<th scope="row">2</th>
+								<td>10/05/20</td>
+								<td>1:30 pm</td>
+								<td>{!ZAwaKYW-zm}$s</td>
+							</tr>
+							<tr>
+								<th scope="row">3</th>
+								<td>19/04/20</td>
+								<td>2:30 pm</td>
+								<td>ln19gUFU%-&&B[b</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 			<div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Return</button>
@@ -363,6 +413,8 @@
 					var btn = $(this);
 					btn.html("Next Password");
 					$('#randomText').html(randomText(15));
+
+					$('#randomText').css("display","inline-block");
 
 
 					//fetching search bar's value
@@ -402,7 +454,7 @@
 
 
 
-// modal popup
+// modal popup for get password
 	$(function() {
 		$('.pop').on('click', function() {
 			next_pass = 0
@@ -424,6 +476,24 @@
 
 
 
+
+// modal popup for review record
+	$(function() {
+		$('.pop1').on('click', function() {
+			pwg_id = $(this).attr("id");
+			table = document.getElementById('myTable');
+			rows = table.rows;
+			for(i=0;i<rows.length;i++){
+				if(pwg_id == i){
+					selected_pwg = rows[i].getElementsByTagName("td")[0].innerHTML;
+					$('#modal_title').html("Record of "+selected_pwg);
+					break;
+				}
+			}
+			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+			$('#imagemodal1').modal('show');
+		});
+	});
 
 
 
@@ -447,79 +517,6 @@
 
 	});
 
-
-
-
-	// division hide/show js
-
-	function myfun(){
-
-		document.getElementById("div-1").style.display = "block";
-		document.getElementById("div-2").style.display = "none";
-		document.getElementById("div-3").style.display = "none";
-
-	}
-
-	function myfun1(){
-		document.getElementById("div-1").style.display = "none";
-		document.getElementById("div-2").style.display = "block";
-		document.getElementById("div-3").style.display = "none";
-		document.getElementById("floating-button").style.display = "none";
-
-
-	}
-
-
-	function myfun2(){
-		document.getElementById("div-1").style.display = "none";
-		document.getElementById("div-3").style.display = "block";
-		document.getElementById("div-2").style.display = "none";
-
-
-	}
-
-
-
-	function cancel() {
-		document.getElementById("div-2").style.display = "none";
-		document.getElementById("div-1").style.display = "block";
-	}
-
-
-// floating button JS
-
-	$('input[type="checkbox"]').click(function(){
-		if($(this).attr("value")=="floatingButtonHere"){
-			$(".floatingButtonHere").show(150);
-		}
-	});
-
-
-
-function myFunction() {
-  document.getElementById("checkAll").disabled = false;
-    document.getElementById("book1").disabled = false;
-    document.getElementById("book2").disabled = false;
-    document.getElementById("book3").disabled = false;
-    document.getElementById("book4").disabled = false;
-}
-
-function myFunction1() {
-  document.getElementById("checkAll").disabled = false;
-    document.getElementById("book1").disabled = false;
-    document.getElementById("book2").disabled = false;
-    document.getElementById("book3").disabled = false;
-    document.getElementById("book4").disabled = false;
-}
-
-
-function myFunction2() {
-  document.getElementById("checkAll").disabled = false;
-    document.getElementById("book1").disabled = false;
-    document.getElementById("book2").disabled = false;
-    document.getElementById("book3").disabled = false;
-    document.getElementById("book4").disabled = false;
-}
 </script>
 </body>
 </html>

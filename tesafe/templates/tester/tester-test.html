@@ -29,6 +29,12 @@
 		.cursor{
 			cursor: pointer;
 		}
+		.selected_pwg{
+			    background-color: #007bff;
+				display: inline-block;
+				color: white;
+				border-radius: 6px;
+		}
 	</style>
 </head>
 <body>
@@ -146,35 +152,35 @@
 
 										<tr>
 
-											<td onclick="select_pwg('PWG11')" class="cursor">PWG11</td>
+											<td onclick="select_pwg('PWG11')" class="cursor" id="pwg0">PWG11</td>
 
 										</tr>
 
 										<tr>
-											<td class="cursor" onclick="select_pwg('PWG12')">PWG12</td>
+											<td class="cursor" onclick="select_pwg('PWG12')" id="pwg1">PWG12</td>
 
 										</tr>
 
 										<tr>
 
-											<td class="cursor" onclick="select_pwg('PWG13')">PWG13</td>
+											<td class="cursor" onclick="select_pwg('PWG13')" id="pwg2">PWG13</td>
 										</tr>
 
 										<tr>
 
-											<td class="cursor" onclick="select_pwg('PWG14')">PWG14</td>
+											<td class="cursor" onclick="select_pwg('PWG14')" id="pwg3">PWG14</td>
 
 										</tr>
 									<tr>
 
-										<td class="cursor" onclick="select_pwg('PWG09')">PWG09</td>
+										<td class="cursor" onclick="select_pwg('PWG09')" id="pwg4">PWG09</td>
 
 									</tr>
 									<tr>
-										<td class="cursor" onclick="select_pwg('PWG17')">PWG17</td>
+										<td class="cursor" onclick="select_pwg('PWG17')" id="pwg5">PWG17</td>
 									</tr>
 									<tr>
-										<td class="cursor" onclick="select_pwg('PWG15')">PWG15</td>
+										<td class="cursor" onclick="select_pwg('PWG15')" id="pwg6">PWG15</td>
 									</tr>
 
 									</tbody>
@@ -470,7 +476,7 @@
 		function select_pwg(value){
 
 		//displaying the next password block
-		$('#password-tagline').css("display", "block")
+		$('#password-tagline').css("display", "block");
 
 		//resetting the value of next_pass, use to enable pass button
 		$('#pass').html('<button class="nav-link btn-info btn text-white btn-sm"  onclick="myfun2()" id="pass_pwg">Pass</button>');
@@ -501,6 +507,19 @@
 				if("Next" != text.slice(-4)){
 					$('#right_next').html('<button type="button" class="btn btn-primary" onclick="right_next()" id="first_next"><i class="fas fa-chevron-right"></i> Next</button>');
 				}
+
+			//making selected PWG highlighted and de-highlighted
+			table = document.getElementById('myTable');
+			rows = table.rows;
+			for(i=0;i<rows.length;i++){
+				if( value == rows[i].getElementsByTagName("td")[0].innerHTML){
+					id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
+					$('#'+id_name).addClass("selected_pwg");
+				} else{
+					id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
+					$('#'+id_name).removeClass("selected_pwg");
+				}
+			}
 
 		}
 
@@ -546,21 +565,39 @@
 				$("#myInput").attr("value", rows[clicks].getElementsByTagName("td")[0].innerHTML);
 				document.getElementById("password").innerHTML = 'The XXXth Password Of '+rows[clicks].getElementsByTagName("td")[0].innerHTML+' is Below';
 				clicks += 1;
+				//Highlighting selected PWG
+				id_name = rows[0].getElementsByTagName("td")[0].getAttribute('id');
+				$('#'+id_name).addClass("selected_pwg");
 			}else{
-
+				//making selected PWG de-highlighted
+				id_name = rows[0].getElementsByTagName("td")[0].getAttribute('id');
+				$('#'+id_name).removeClass("selected_pwg");
 				for(i=0;i<len;i++){
 					if(text == rows[i].getElementsByTagName("td")[0].innerHTML){
 						if(i+1 < len){
-							$("#myInput").attr("value",rows[i+1].getElementsByTagName("td")[0].innerHTML);
+							text = rows[i+1].getElementsByTagName("td")[0].innerHTML;
+							$("#myInput").attr("value",text);
 							document.getElementById("password").innerHTML = 'The XXXth Password Of '+rows[i+1].getElementsByTagName("td")[0].innerHTML+' is Below';
 							break;
 						} else{
 							$('#right_next').html('<button type="button" class="btn btn-info" id="first_next">No More PWG, Try below Button</button>');
-							break;
 						}
 					}
 				}
 			}
+
+			//making selected PWG highlighted and de-highlighted
+
+			for(i=1;i<len;i++){
+				if( text == rows[i].getElementsByTagName("td")[0].innerHTML){
+					id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
+					$('#'+id_name).addClass("selected_pwg");
+				} else{
+					id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
+					$('#'+id_name).removeClass("selected_pwg");
+				}
+			}
+
 		}
 
 
@@ -606,7 +643,8 @@
 					for(i=0;i<len;i++){
 						if(text == rows[i].getElementsByTagName("td")[0].innerHTML){
 							if(i-1 >= 0){
-								$("#myInput").attr("value", rows[i-1].getElementsByTagName("td")[0].innerHTML);
+								text = rows[i-1].getElementsByTagName("td")[0].innerHTML;
+								$("#myInput").attr("value", text);
 								document.getElementById("password").innerHTML = 'The XXXth Password Of '+rows[i-1].getElementsByTagName("td")[0].innerHTML+' is Below';
 								break;
 							}else{
@@ -617,6 +655,18 @@
 					}
 				}
 
+				//making selected PWG highlighted and de-highlighted
+				table = document.getElementById('myTable');
+				rows = table.rows;
+				for(i=0;i<rows.length;i++){
+					if( text == rows[i].getElementsByTagName("td")[0].innerHTML){
+						id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
+						$('#'+id_name).addClass("selected_pwg");
+					} else{
+						id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
+						$('#'+id_name).removeClass("selected_pwg");
+					}
+				}
 		}
 	</script>
 </body>

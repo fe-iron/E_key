@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'E_key.wsgi.application'
 #         'PASSWORD': '12345',
 #         'HOST': 'localhost'
 #     }
-# }
+#  }
 
 DATABASES = {
     'default': {
