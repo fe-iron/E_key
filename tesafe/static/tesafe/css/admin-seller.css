@@ -395,8 +395,12 @@ header .dropdown-toggle::after {
     border-left: .3em solid transparent;
 }
 
-
-
+#randomText{
+    border: 1px solid #cfd5d6;
+    display: inline-block;
+    padding: .5rem 2rem;
+    margin-top: 1rem;
+}
 
 .floatingButtonHere {
     position: fixed;

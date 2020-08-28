@@ -51,11 +51,11 @@
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-														<a class="dropdown-item pop1" href="#">Authorize</a>
-														<a class="dropdown-item pop2" href="#">Transfer</a>
-														<a class="dropdown-item pop" href="#">Share</a>
-														<a class="dropdown-item" href="#">Delete</a>
-														<a class="dropdown-item" href="/">Exit</a>
+						<a class="dropdown-item" href="#">Authorize</a>
+						<a class="dropdown-item" href="#">Transfer</a>
+						<a class="dropdown-item" href="#">Share</a>
+						<a class="dropdown-item" href="#">Delete</a>
+						<a class="dropdown-item" href="/">Exit</a>
 					</div>
 				</div>
 
@@ -113,7 +113,7 @@
 												<td id="lblEmp"> A</td>
 
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
-													<a href="#" class="btn btn-primary btn-light btn-sm">Get PW.</a>
+													<a href="#" class="btn btn-primary btn-light btn-sm pop" id="0">Get PW.</a>
 													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 														<i class="fas fa-ellipsis-v"></i>
 													</button>
@@ -133,7 +133,7 @@
 												<td>T</td>
 
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
-													<a href="#" class="btn btn-primary btn-light btn-sm">Get PW.</a>
+													<a href="#" class="btn btn-primary btn-light btn-sm pop" id="1">Get PW.</a>
 													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 														<i class="fas fa-ellipsis-v"></i>
 													</button>
@@ -153,7 +153,7 @@
 												<td>S</td>
 
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
-													<a href="#" class="btn btn-primary btn-light btn-sm">Get PW.</a>
+													<a href="#" class="btn btn-primary btn-light btn-sm pop" id="2">Get PW.</a>
 													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 														<i class="fas fa-ellipsis-v"></i>
 													</button>
@@ -173,7 +173,7 @@
 												<td>DA</td>
 
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
-													<a href="#" class="btn btn-primary btn-light btn-sm">Get PW.</a>
+													<a href="#" class="btn btn-primary btn-light btn-sm pop" id="3">Get PW.</a>
 													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 														<i class="fas fa-ellipsis-v"></i>
 													</button>
@@ -322,35 +322,17 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title font-weight-bold">Login History of Seller ABC</h5>
+				<h5 class="modal-title font-weight-bold px-4" id="pwg_name_selected"></h5>
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 			</div>
 			<div class="modal-body">
-				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">Sr. No.</th>
-								<th scope="col">Date</th>
-								<th scope="col">Time</th>
-								<th scope="col">Device Name</th>
-								<th scope="col">Login IP Address</th>
-								<th scope="col">Duration Of Online</th>
-
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th scope="row">1</th>
-								<td>20/06/5</td>
-								<td>5:30pm</td>
-								<td>Samsung</td>
-								<td>10.2.0.10:8090</td>
-								<td>30 minutes</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<h6 id="tagline"></h6>
+				<p id="randomText" class="font-weight-bolder px-5"></p>
+				<ul class="nav mt-5 px-4" id="buttons">
+								<li class="nav-item">
+									<button class="nav-link btn-primary btn text-white btn-sm" id="yourButton">Get Password</button>
+								</li>
+				</ul>
 			</div>
 			<div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Return</button>
@@ -361,6 +343,52 @@
 
 
 <script type="text/javascript">
+
+			var next_pass = 0;
+
+
+			function randomText(length) {
+				   var result           = '';
+				   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789(){}[]+-/*^_@#$%!&';
+				   var charactersLength = characters.length;
+				   for ( var i = 0; i < length; i++ ) {
+					  result += characters.charAt(Math.floor(Math.random() * charactersLength));
+				   }
+				   return result;
+				}
+
+			$(function(){
+				$('#yourButton').click(function(){
+					next_pass += 1
+					var btn = $(this);
+					btn.html("Next Password");
+					$('#randomText').html(randomText(15));
+
+
+					//fetching search bar's value
+					pwg_name = $("#myInput").val();
+
+					//displaying password section and text on the top
+					$("#password").css("display","block");
+
+					if(next_pass == 1){
+						$("#tagline").html("The "+next_pass+"<sup>st</sup> Password is given below");
+					} else if(next_pass == 2){
+						$("#tagline").html("The "+next_pass+"<sup>nd</sup> Password is given below");
+					} else if (next_pass == 3){
+						$("#tagline").html("The "+next_pass+"<sup>rd</sup> Password is given below");
+					} else{
+						$("#tagline").html("The "+next_pass+"<sup>th</sup> Password is given below");
+					}
+
+
+
+				});
+			});
+
+
+
+
 
 // search filter table
 	$(document).ready(function(){
@@ -377,6 +405,18 @@
 // modal popup
 	$(function() {
 		$('.pop').on('click', function() {
+			next_pass = 0
+			id = $(this).attr('id');
+			table = document.getElementById('myTable');
+			rows = table.rows;
+			for(i=0;i<rows.length;i++){
+				if(id == i){
+					$("#pwg_name_selected").html("PWG Name: "+rows[i].getElementsByTagName("td")[0].innerHTML);
+				}
+			}
+
+
+
 			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
 			$('#imagemodal').modal('show');
 		});
@@ -480,11 +520,6 @@ function myFunction2() {
     document.getElementById("book3").disabled = false;
     document.getElementById("book4").disabled = false;
 }
-
-
-
-
-
 </script>
 </body>
 </html>
