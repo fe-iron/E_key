@@ -16,6 +16,7 @@ def index(request):
         uname = request.POST['uname']
 
         user = auth.authenticate(username=uname, password=password)
+
         if user is not None:
             auth.login(request, user)
             messages.info(request, "Successfully Logged in ")

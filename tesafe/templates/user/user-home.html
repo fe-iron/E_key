@@ -19,6 +19,17 @@
 	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/admin-seller.css' %}">
+	<style>
+		.cursor{
+			cursor: pointer;
+		}
+		.selected_pwg{
+			    background-color: #007bff;
+				display: inline-block;
+				color: white;
+				border-radius: 6px;
+		}
+	</style>
 </head>
 <body>
 
@@ -74,8 +85,8 @@
 							<div class="col-md">
 
 								<header>
-									<nav class="navbar navbar-light  venue-registration">
-										<a class="h4 text-dark font-weight-bold pt-2">PWGs</a>
+									<nav class="navbar navbar-light   venue-registration">
+
 										<form class="form-inline">
 											<div class="input-group-prepend mb-1 mr-2">
 												<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
@@ -83,6 +94,7 @@
 											</div>
 
 										</form>
+										<button type="button" class="btn btn-primary pop" disabled style="border-radius:10px;" id="tested-button"> Get Password </button>
 									</nav>
 								</header>
 
@@ -109,31 +121,25 @@
 											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
 
 												<th><input type="checkbox" name="book" id="book1" value="floatingButtonHere" disabled=""></th>
-												<td id="lblEmp"> PWGS-A</td>
-												<td id="lblEmp"> A</td>
+												<td id="pwg0" class="cursor" onclick="selected_pwg('PWGS-A');">PWGS-A</td>
+												<td> A</td>
 
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
-													<a href="#" class="btn btn-primary btn-light btn-sm pop" id="0">Get PW.</a>
 													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 														<i class="fas fa-ellipsis-v"></i>
 													</button>
 													<div class="dropdown-menu">
-														<a class="dropdown-item pop1" id="0" href="#">Review Record</a>
-<!--														<a class="dropdown-item pop1" href="#">Authorize</a>-->
-<!--														<a class="dropdown-item pop2" href="#">Transfer</a>-->
-<!--														<a class="dropdown-item pop" href="#">Share</a>-->
-<!--														<a class="dropdown-item" href="#">Delete</a>-->
-													</div>
+														<a class="dropdown-item pop1" id="0" href="#">Review Record</a></div>
 												</div></td>
 											</tr>
 											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
 
 												<th><input type="checkbox" name="book" id="book2" value="floatingButtonHere" disabled=""></th>
-												<td>PWGS-B</td>
+												<td class="cursor" id="pwg1" onclick="selected_pwg('PWGS-B');">PWGS-B</td>
 												<td>T</td>
 
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
-													<a href="#" class="btn btn-primary btn-light btn-sm pop" id="1">Get PW.</a>
+
 													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 														<i class="fas fa-ellipsis-v"></i>
 													</button>
@@ -149,40 +155,33 @@
 
 											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
 												<th><input type="checkbox" name="book" id="book3" value="floatingButtonHere" disabled=""></th>
-												<td>PWGS-C</td>
+												<td class="cursor" id="pwg2" onclick="selected_pwg('PWGS-C');">PWGS-C</td>
 												<td>S</td>
 
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
-													<a href="#" class="btn btn-primary btn-light btn-sm pop" id="2">Get PW.</a>
+
 													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 														<i class="fas fa-ellipsis-v"></i>
 													</button>
 													<div class="dropdown-menu">
 														<a class="dropdown-item pop1" id="2" href="#">Review Record</a>
-<!--														<a class="dropdown-item pop1" href="#">Authorize</a>-->
-<!--														<a class="dropdown-item pop2" href="#">Transfer</a>-->
-<!--														<a class="dropdown-item pop" href="#">Share</a>-->
-<!--														<a class="dropdown-item" href="#">Delete</a>-->
 													</div>
 												</div></td>
 											</tr>
 
 											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
 												<th><input type="checkbox" name="book" id="book4" value="floatingButtonHere" disabled=""></th>
-												<td>PWGS-D</td>
+												<td class="cursor" id="pwg3" onclick="selected_pwg('PWGS-D');">PWGS-D</td>
 												<td>DA</td>
 
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
-													<a href="#" class="btn btn-primary btn-light btn-sm pop" id="3">Get PW.</a>
+
 													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 														<i class="fas fa-ellipsis-v"></i>
 													</button>
 													<div class="dropdown-menu">
 														<a class="dropdown-item pop1" id="3" href="#">Review Record</a>
 														<a class="dropdown-item" href="#">De-authorize</a>
-<!--														<a class="dropdown-item pop2" href="#">Transfer</a>-->
-<!--														<a class="dropdown-item pop" href="#">Share</a>-->
-<!--														<a class="dropdown-item" href="#">Delete</a>-->
 													</div>
 												</div></td>
 											</tr>
@@ -195,113 +194,6 @@
 						</div>
 				</div>
 			</div>
-
-
-
-
-
-
-<!--				<div class="col-md-10 py-5 px-5">-->
-
-<!--					<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-1" >-->
-
-<!--						<div class="col-md-10">-->
-<!--							<header>-->
-<!--								<nav class="navbar navbar-light  venue-registration">-->
-<!--									<a class="h4 text-dark font-weight-bold pt-2">PWGs</a>-->
-<!--									<form class="form-inline">-->
-<!--										<div class="input-group-prepend mb-1 mr-2">-->
-<!--											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>-->
-<!--											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">-->
-<!--										</div>-->
-
-<!--									</form>-->
-<!--								</nav>-->
-<!--							</header>-->
-<!--							<div class="row">-->
-<!--								<div class="col-md-6 border-right">-->
-<!--									<div class="table-responsive">-->
-<!--									<br>-->
-<!--									<table class="table table-borderless">-->
-<!--										<thead>-->
-<!--											<tr>-->
-
-<!--												<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere" disabled> <i class="fas fa-sort-down"></i></th>-->
-<!--												<th scope="col">Name</th>-->
-<!--												<th scope="col">Attribute</th>-->
-
-
-<!--											</tr>-->
-<!--										</thead>-->
-<!--										<tbody id="myTable" class="table-borderless">-->
-<!--											<tr>-->
-<!--												<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>-->
-<!--												<td>PWG1-1</td>-->
-<!--												<td>T</td>-->
-
-<!--											</tr>-->
-<!--											<tr>-->
-<!--												<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>-->
-<!--												<td>PWG1-11</td>-->
-<!--												<td>A</td>-->
-
-<!--											</tr>-->
-<!--											<tr>-->
-<!--												<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>-->
-<!--												<td>PWG1-12</td>-->
-<!--												<td>S</td>-->
-
-<!--											</tr>-->
-<!--											<tr>-->
-<!--												<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>-->
-<!--												<td>PWG1-13</td>-->
-<!--												<td>DA</td>-->
-
-<!--											</tr>-->
-<!--											<tr>-->
-<!--												<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>-->
-<!--												<td>PWG1-15</td>-->
-<!--												<td>A</td>-->
-
-<!--											</tr>-->
-<!--											<tr>-->
-<!--												<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>-->
-<!--												<td>PWG1-16</td>-->
-<!--												<td>DS</td>-->
-
-<!--											</tr>-->
-<!--											<tr>-->
-<!--												<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>-->
-<!--												<td>PWG1-17</td>-->
-<!--												<td>T</td>-->
-
-<!--											</tr>-->
-
-<!--										</tbody>-->
-<!--									</table>-->
-<!--								</div>-->
-<!--								</div>-->
-<!--								<div class="col-md-4 px-5 py-5">-->
-<!--									<h5 class="font-weight-bold">Actions</h5>-->
-<!--									<button class="btn btn-primary my-2">Get Password</button>-->
-<!--									<br>-->
-<!--									<button class="btn btn-primary my-2">Review rec.</button>-->
-<!--									<br>-->
-<!--									<button class="btn btn-primary my-2">Authorize</button>-->
-<!--									<br>-->
-<!--									<button class="btn btn-primary my-2">Transfer</button>-->
-<!--									<br>-->
-<!--									<button class="btn btn-primary my-2">Share</button>-->
-<!--									<br>-->
-<!--									<button class="btn btn-primary my-2">Del</button>-->
-<!--								</div>-->
-<!--							</div>-->
-
-<!--						</div>-->
-
-<!--					</div>-->
-<!--				</div>-->
-
 		</div>
     </section>
 
@@ -459,15 +351,10 @@
 		$('.pop').on('click', function() {
 			next_pass = 0
 			id = $(this).attr('id');
+			pwg_name = $(this).attr('value');
 			table = document.getElementById('myTable');
 			rows = table.rows;
-			for(i=0;i<rows.length;i++){
-				if(id == i){
-					$("#pwg_name_selected").html("PWG Name: "+rows[i].getElementsByTagName("td")[0].innerHTML);
-				}
-			}
-
-
+			$("#pwg_name_selected").html("PWG Name: "+pwg_name);
 
 			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
 			$('#imagemodal').modal('show');
@@ -516,6 +403,28 @@
 		});
 
 	});
+
+	function selected_pwg(value){
+			//making selected PWG highlighted and de-highlighted
+			table = document.getElementById('myTable');
+			rows = table.rows;
+			for(i=0;i<rows.length;i++){
+				if( value == rows[i].getElementsByTagName("td")[0].innerHTML){
+					pwg_name = rows[i].getElementsByTagName("td")[0].innerHTML;
+					id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
+					console.log(id_name);
+					$('#'+id_name).addClass("selected_pwg");
+				} else{
+					id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
+					$('#'+id_name).removeClass("selected_pwg");
+				}
+			}
+
+			$('#tested-button').prop("disabled",false);
+			$('#tested-button').prop("value",value);
+	}
+
+
 
 </script>
 </body>

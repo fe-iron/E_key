@@ -457,6 +457,9 @@ header .form-control {
 .fa-ellipsis-v {
     font-size: 10px;
 }
+.test_tag{
+    font-size: 1rem !important;
+}
 }
 
 .select_pwg{

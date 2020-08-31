@@ -97,7 +97,7 @@
               <div class="col-md" id="div-7">
                 <header class="pb-4">
                   <nav class="navbar navbar-light venue-registration">
-                    <a class="h4 text-dark font-weight-bold pt-2" id="heading">PWG Account List</a>
+                    <a class="h4 text-dark font-weight-bold pt-2" id="heading">PWG List</a>
                     <form class="form-inline">
                       <div class="input-group-prepend mr-2">
                         <span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
@@ -110,13 +110,13 @@
 
                   <div class="pb-3 pl-3">
                     <div class="form-check form-check-inline">
-                      <button type="button" class="btn btn-primary" style="border-radius:20px;" id="tested-button" onclick="tested_faulty()"> Tested </button>
+                      <button type="button" class="btn btn-primary onClick" style="border-radius:20px;" id="tested-button" onclick="tested_faulty()"> Tested </button>
 
 <!--                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" onclick="tested_faulty()" style="cursor: pointer;" />-->
 <!--                      <label class="form-check-label label-font" for="inlineRadio1">Tested</label>-->
                     </div>
                     <div class="form-check form-check-inline">
-                        <button type="button" class="btn btn-primary onClick" id="untested-button" style="border-radius:20px;" onclick="untested()"> Untested </button>
+                        <button type="button" class="btn btn-primary" id="untested-button" style="border-radius:20px;" onclick="untested()"> Untested </button>
                       <!--                      <input class="form-check-input" type="radio" checked name="inlineRadioOptions" id="inlineRadio2" value="option2" onclick="untested()" style="cursor: pointer;" />-->
 <!--                      <label class="form-check-label label-font" for="inlineRadio2">Untested</label>-->
                     </div>
@@ -124,7 +124,7 @@
 
                   <div class="pb-3 pl-3" id="tested-faulty" style="display: none;">
                     <div class="form-check form-check-inline">
-                      <input type="radio" onclick="tested()" name="inlineRadioOption" style="cursor: pointer;">
+                      <input type="radio" onclick="tested()" name="inlineRadioOption" style="cursor: pointer;" checked>
                       <label class="form-check-label label-font" for="inlineRadio1"> Tested Good</label>
                     </div>
                     <div class="form-check form-check-inline">
@@ -1307,20 +1307,18 @@
 
 
       function tested_faulty() {
-        $('#tested-button').removeClass('btn-primary');
-        $('#tested-button').addClass('onClick');
-        $('#untested-button').addClass('btn-primary');
-        $('#untested-button').removeClass('onClick');
+        $('#tested-button').addClass('btn-primary');
+        $('#tested-button').removeClass('onClick');
+        $('#untested-button').removeClass('btn-primary');
+        $('#untested-button').addClass('onClick');
         document.getElementById("tested-faulty").style.display = "block";
         document.getElementById("faulty").style.display = "none";
         document.getElementById("untested").style.display = "none";
         document.getElementById("pwg-on").style.display = "none";
         document.getElementById("pwg-on-untested").style.display = "none";
         document.getElementById("pwg-off").style.display = "block";
+        document.getElementById("tested").style.display = "block";
 
-
-        //document.getElementById("tested-batch").style.display = "block";
-        //document.getElementById("untested-batch").style.display = "none";
       }
 
 
@@ -1334,8 +1332,7 @@
         document.getElementById("untested").style.display = "none";
 
         document.getElementById("tested").style.display = "none";
-        //document.getElementById("tested-batch").style.display = "block";
-        //document.getElementById("untested-batch").style.display = "none";
+
       }
 
 
@@ -1348,16 +1345,15 @@
 
         document.getElementById("faulty").style.display = "none";
         document.getElementById("tested").style.display = "block";
-        //document.getElementById("tested-batch").style.display = "block";
-        //document.getElementById("untested-batch").style.display = "none";
+
 
       }
 
       function untested() {
-        $('#untested-button').removeClass('btn-primary');
-        $('#untested-button').addClass('onClick');
-        $('#tested-button').addClass('btn-primary');
-        $('#tested-button').removeClass('onClick');
+        $('#untested-button').addClass('btn-primary');
+        $('#untested-button').removeClass('onClick');
+        $('#tested-button').removeClass('btn-primary');
+        $('#tested-button').addClass('onClick');
         document.getElementById("tested-faulty").style.display = "none";
 
         document.getElementById("pwg-on").style.display = "block";
