@@ -135,10 +135,7 @@ def get_ip(request):
 
     return ip
 
-
-
 def admin_home(request):
-
     seller_count = Seller.objects.all().count()
     tester_count = Tester.objects.all().count()
     web_user_count = WebUser.objects.all().count()
