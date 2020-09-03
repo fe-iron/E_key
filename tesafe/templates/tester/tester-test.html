@@ -89,7 +89,7 @@
 
 					<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-1" >
 
-						<div class="col-md">
+						<div class="col-md-8">
 
 							<header class="">
 								<nav class="navbar navbar-light justify-content-center">
@@ -112,23 +112,22 @@
 
 
 							<div class="row justify-content-center next-password">
-				<div class="col-md-5">
+				<div class="col-md">
 					<div class="row justify-content-center bg-button-2 p-2 mb-3" id="div-4">
 
-						<div class="col-md text-center my-5" id="password-tagline" style="display: none;">
+						<div class="col-md-5 text-center my-5" id="password-tagline" style="display: none;">
 							<h6 id="password" style="display: none;"></h6>
 							<p id="randomText" class="font-weight-bolder">Your Password</p>
 
 							<ul class="nav justify-content-around mt-5" id="buttons">
 
 								<li class="nav-item" id="pass">
-									<button class="nav-link btn-info btn text-white btn-sm" id="pass_pwg" disabled onclick="myfun2()">Pass</button>
+									<button class="nav-link btn-info btn text-white btn-sm my-3" id="pass_pwg" disabled onclick="myfun2()">Pass</button>
+								</li>
+									<button class="nav-link btn-primary btn text-white btn-sm my-2" disabled id="yourButton">Get Password</button>
 								</li>
 								<li class="nav-item">
-									<button class="nav-link btn-primary btn text-white btn-sm" disabled id="yourButton">Get Password</button>
-								</li>
-								<li class="nav-item">
-									<button class="nav-link btn-danger btn text-white btn-sm" id="fail_button" disabled onclick="myfun3()">Fail</button>
+									<button class="nav-link btn-danger btn text-white btn-sm my-2" id="fail_button" disabled onclick="myfun3()">Fail</button>
 								</li>
 							</ul>
 
@@ -396,7 +395,7 @@
 
 					if(next_pass >= 3){
 						$('#pass_pwg').prop('disabled',false);
-						$('#pass').html('<a class="nav-link btn-success btn text-white btn-sm pop1"  onclick="myfun2()" id="pass_pwg">Pass</a>');
+						$('#pass').html('<a class="nav-link btn-success btn text-white btn-sm pop1 my-2"  onclick="myfun2()" id="pass_pwg">Pass</a>');
 					}
 					$('#fail_button').prop('disabled',false);
 				});
@@ -476,7 +475,7 @@
 		$('#password-tagline').css("display", "block");
 
 		//resetting the value of next_pass, use to enable pass button
-		$('#pass').html('<button class="nav-link btn-info btn text-white btn-sm"  onclick="myfun2()" id="pass_pwg">Pass</button>');
+		$('#pass').html('<button class="nav-link btn-info btn text-white btn-sm my-2"  onclick="myfun2()" id="pass_pwg">Pass</button>');
 		$('#pass_pwg').prop('disabled',true);
 		next_pass = 0;
 
@@ -529,7 +528,7 @@
 
 		function right_next(){
 		//resetting the value of next_pass, use to enable pass button
-		$('#pass').html('<button class="nav-link btn-info btn text-white btn-sm"  onclick="myfun2()" id="pass_pwg">Pass</button>');
+		$('#pass').html('<button class="nav-link btn-info btn text-white btn-sm my-2"  onclick="myfun2()" id="pass_pwg">Pass</button>');
 		$('#pass_pwg').attr('disabled','true');
 		next_pass = 0;
 
@@ -614,7 +613,7 @@
 
 		function left_next(){
 				//resetting the value of next_pass, use to enable pass button
-				$('#pass').html('<button class="nav-link btn-info btn text-white btn-sm"  onclick="myfun2()" id="pass_pwg">Pass</button>');
+				$('#pass').html('<button class="nav-link btn-info btn text-white btn-sm my-2"  onclick="myfun2()" id="pass_pwg">Pass</button>');
 				$('#pass_pwg').attr('disabled',"true");
 				next_pass = 0;
 
