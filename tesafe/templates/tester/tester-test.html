@@ -30,10 +30,21 @@
 			cursor: pointer;
 		}
 		.selected_pwg{
-			    background-color: #007bff;
+			    background-color: #9acbff !important;
 				display: inline-block;
 				color: white;
-				border-radius: 6px;
+				border-radius: 25px;
+		}
+		.mx-n5{
+			    margin-left: -5rem!important;
+		}
+		.list-group-item {
+			position: relative;
+			display: block;
+			padding: .75rem 1.25rem;
+			background-color: #fff;
+			border:0px;
+			//padding-left: 67px;
 		}
 	</style>
 </head>
@@ -115,22 +126,20 @@
 				<div class="col-md">
 					<div class="row justify-content-center bg-button-2 p-2 mb-3" id="div-4">
 
-						<div class="col-md-5 text-center my-5" id="password-tagline" style="display: none;">
-							<h6 id="password" style="display: none;"></h6>
-							<p id="randomText" class="font-weight-bolder">Your Password</p>
+						<div class="col-md-6  my-2" id="password-tagline">
+							<div style="display:flex;" class="text-center">
+								<p id="password" class="h6 test_tag">The XX<sup>th</sup> Password</p>
+								<p id="randomText" class="font-weight-bolder ml-3"></p>
+							</div>
+							<div class="col-md-12  mt-5" id="buttons" style="display:none">
 
-							<ul class="nav justify-content-around mt-5" id="buttons">
+									<button class="btn btn-info text-white  my-2 mx-2" id="pass_pwg" disabled onclick="myfun2()">Pass</button>
 
-								<li class="nav-item" id="pass">
-									<button class="nav-link btn-info btn text-white btn-sm my-3" id="pass_pwg" disabled onclick="myfun2()">Pass</button>
-								</li>
-									<button class="nav-link btn-primary btn text-white btn-sm my-2" disabled id="yourButton">Get Password</button>
-								</li>
-								<li class="nav-item">
-									<button class="nav-link btn-danger btn text-white btn-sm my-2" id="fail_button" disabled onclick="myfun3()">Fail</button>
-								</li>
-							</ul>
+									<button class="btn btn-primary text-white btn-sm my-2 mx-2" disabled id="yourButton">Get Password</button>
 
+									<button class="btn btn-danger text-white my-2 mx-2" id="fail_button" disabled onclick="myfun3()">Fail</button>
+
+							</div>
 						</div>
 					</div>
 				</div>
@@ -138,63 +147,47 @@
 			</div>
 
 							<div class="row">
-				<div class="col-6">
-					<div class="table-responsive">
-								<br>
-								<table class="table">
-									<thead>
-										<tr>
-											<th scope="col">PWGs</th>
-										</tr>
-									</thead>
-									<tbody id="myTable" class="table-borderless">
+								<div class="col-md-2"></div>
+								<div class="col-4">
+							<ul class="list-group  mt-5 text-center" id="myTable">
+								<li class="list-group-item cursor" id="pwg0" onclick="select_pwg('PWG11')">
+									 PWG11
+								</li>
 
-										<tr>
+								<li class="list-group-item cursor" id="pwg1" onclick="select_pwg('PWG12')">
+									PWG12
+								</li>
 
-											<td onclick="select_pwg('PWG11')" class="cursor" id="pwg0">PWG11</td>
+								<li class="list-group-item cursor" id="pwg2" onclick="select_pwg('PWG13')">
+									PWG13
+								</li>
 
-										</tr>
+								<li class="list-group-item cursor" id="pwg3" onclick="select_pwg('PWG14')">
+									PWG14
+								</li>
 
-										<tr>
-											<td class="cursor" onclick="select_pwg('PWG12')" id="pwg1">PWG12</td>
+								<li class="list-group-item cursor" id="pwg4" onclick="select_pwg('PWG15')">
+									PWG15
+								</li>
 
-										</tr>
-
-										<tr>
-
-											<td class="cursor" onclick="select_pwg('PWG13')" id="pwg2">PWG13</td>
-										</tr>
-
-										<tr>
-
-											<td class="cursor" onclick="select_pwg('PWG14')" id="pwg3">PWG14</td>
-
-										</tr>
-									<tr>
-
-										<td class="cursor" onclick="select_pwg('PWG09')" id="pwg4">PWG09</td>
-
-									</tr>
-									<tr>
-										<td class="cursor" onclick="select_pwg('PWG17')" id="pwg5">PWG17</td>
-									</tr>
-									<tr>
-										<td class="cursor" onclick="select_pwg('PWG15')" id="pwg6">PWG15</td>
-									</tr>
-
-									</tbody>
-								</table>
-							</div>
+								<li class="list-group-item cursor" id="pwg5" onclick="select_pwg('PWG17')">
+									PWG17
+								</li>
+								<li class="list-group-item cursor" id="pwg6" onclick="select_pwg('PWG09')">
+									PWG09
+								</li>
+								<li class="list-group-item" style="display:none;">No more PWG</li>
+							</ul>
 				</div>
-				<div class="col-6">
-					<div class="table-responsive">
+								<div class="col-6">
+					<div class="table-responsive ml-5">
 
 
 								<br>
 								<table class="table">
 									<thead>
 										<tr>
-											<th scope="col">Action</th>
+<!--											<th scope="col" style="width: 10%;">Action</th>-->
 
 										</tr>
 									</thead>
@@ -227,6 +220,7 @@
 								</table>
 							</div>
 				</div>
+
 			</div>
 						</div>
 
@@ -363,13 +357,13 @@
 			function setNextPassValue(pwg_name){
 					next_pass += 1
 					if(next_pass == 1){
-						$("#password").html("The "+next_pass+"<sup>st</sup> Password Of "+pwg_name+" is Below");
+						$("#password").html("The "+next_pass+"<sup>st</sup> Password");
 					} else if(next_pass == 2){
-						$("#password").html("The "+next_pass+"<sup>nd</sup> Password Of "+pwg_name+" is Below");
+						$("#password").html("The "+next_pass+"<sup>nd</sup> Password");
 					} else if (next_pass == 3){
-						$("#password").html("The "+next_pass+"<sup>rd</sup> Password Of "+pwg_name+" is Below");
+						$("#password").html("The "+next_pass+"<sup>rd</sup> Password");
 					} else{
-						$("#password").html("The "+next_pass+"<sup>th</sup> Password Of "+pwg_name+" is Below");
+						$("#password").html("The "+next_pass+"<sup>th</sup> Password");
 					}
 			}
 
@@ -388,14 +382,14 @@
 					pwg_name = $("#myInput").val();
 
 					//displaying password section and text on the top
-					$("#password").css("display","block");
-					$("#randomText").css("display","block");
+					//$("#password").css("display","block");
+					//$("#randomText").css("display","block");
 
 					setNextPassValue(pwg_name);
 
 					if(next_pass >= 3){
 						$('#pass_pwg').prop('disabled',false);
-						$('#pass').html('<a class="nav-link btn-success btn text-white btn-sm pop1 my-2"  onclick="myfun2()" id="pass_pwg">Pass</a>');
+						$('#pass').html('<a class="btn btn-success text-white my-2 mx-2"  onclick="myfun2()" id="pass_pwg">Pass</a>');
 					}
 					$('#fail_button').prop('disabled',false);
 				});
@@ -407,7 +401,7 @@
 				$(document).ready(function(){
 					$("#myInput").on("keyup", function() {
 						var value = $(this).val().toLowerCase();
-						$("#myTable tr").filter(function() {
+						$("#myTable li").filter(function() {
 							$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 						});
 					});
@@ -419,16 +413,16 @@
 			var pwg_name = $('#myInput').val();
 
 			//fetching table's td values
-			table = document.getElementById("myTable");
-			rows = table.rows;
-			var len = rows.length;
+			list = document.getElementById("myTable").getElementsByTagName("li");
+
+			var len = list.length;
 
 			for(i=0;i<len;i++){
-				if(pwg_name == rows[i].getElementsByTagName("td")[0].innerHTML){
-					rows[i].getElementsByTagName("td")[0].remove();
+				if(pwg_name == list[i].innerHTML.trim()){
+					list[i].remove();
 					$('#myInput').attr("value", "");
-					$('#password').html("The XXXth Password Of PWGx-x is Below");
-					$('#randomText').html("Your Password");
+					$('#password').html("The XXX<sup>th</sup> Password");
+					$('#randomText').html("");
 					$('#yourButton').prop("disabled", true);
 					break;
 				}
@@ -436,8 +430,9 @@
 
 			// modal popup
 
-				  $("#removed_pwg").html(pwg_name+" is successfully Passed and send to tested list");
-				  $("#imagemodal1").modal("show");
+				  //$("#removed_pwg").html(pwg_name+" is successfully Passed and send to tested list");
+				  //$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+				  //$("#imagemodal1").modal("show");
 
 		}
 
@@ -453,16 +448,16 @@
 			var pwg_name = $('#myInput').val();
 
 			//fetching table's td values
-			table = document.getElementById("myTable");
-			rows = table.rows;
-			var len = rows.length;
+			list = document.getElementById("myTable").getElementsByTagName("li");
+
+			var len = list.length;
 
 			for(i=0;i<len;i++){
-				if(pwg_name == rows[i].getElementsByTagName("td")[0].innerHTML){
-					rows[i].getElementsByTagName("td")[0].remove();
+				if(pwg_name == list[i].innerHTML.trim()){
+					list[i].remove();
 					$('#myInput').attr("value","");
-					$('#password').html("The XXXth Password Of PWGx-x is Below");
-					$('#randomText').html("Your Password");
+					$('#password').html("The XXX<sup>th</sup> Password");
+					$('#randomText').html("");
 					break;
 				}
 			}
@@ -471,8 +466,8 @@
 
 		function select_pwg(value){
 
-		//displaying the next password block
-		$('#password-tagline').css("display", "block");
+		//displaying the buttons block
+		$('#buttons').css("display", "flex");
 
 		//resetting the value of next_pass, use to enable pass button
 		$('#pass').html('<button class="nav-link btn-info btn text-white btn-sm my-2"  onclick="myfun2()" id="pass_pwg">Pass</button>');
@@ -505,14 +500,17 @@
 				}
 
 			//making selected PWG highlighted and de-highlighted
-			table = document.getElementById('myTable');
-			rows = table.rows;
-			for(i=0;i<rows.length;i++){
-				if( value == rows[i].getElementsByTagName("td")[0].innerHTML){
-					id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
+			list = document.getElementById('myTable').getElementsByTagName("li");
+
+
+			for(i=0;i<list.length;i++){
+				if( value == list[i].innerHTML.trim()){
+					id_name = list[i].getAttribute('id');
+
 					$('#'+id_name).addClass("selected_pwg");
 				} else{
-					id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
+					id_name = list[i].getAttribute('id');
+
 					$('#'+id_name).removeClass("selected_pwg");
 				}
 			}
@@ -528,7 +526,7 @@
 
 		function right_next(){
 		//resetting the value of next_pass, use to enable pass button
-		$('#pass').html('<button class="nav-link btn-info btn text-white btn-sm my-2"  onclick="myfun2()" id="pass_pwg">Pass</button>');
+		$('#pass').html('<button class="btn btn-info text-white my-2 mx-2"  onclick="myfun2()" id="pass_pwg">Pass</button>');
 		$('#pass_pwg').attr('disabled','true');
 		next_pass = 0;
 
@@ -540,8 +538,8 @@
 		$('#randomText').html(" ");
 
 
-		//displaying the next password block
-		$('#password-tagline').css("display", "block")
+		//displaying the buttons block
+		$('#buttons').css("display", "flex");
 
 		//enabling next password button to get next password
 		$("#yourButton").removeAttr("disabled");
@@ -555,41 +553,42 @@
 			//checking Selected PWG's value to set pwg according
 			text = $("#myInput").val();
 
-			//fetching table's td values
-			table = document.getElementById("myTable");
-			rows = table.rows;
-			var len = rows.length;
+			//fetching ul's li values
+			list = document.getElementById('myTable').getElementsByTagName("li");
+
+			var len = list.length;
 
 			//for the first time it will set pwg name using global click var
 			if(text == ""){
-				$("#myInput").attr("value", rows[clicks].getElementsByTagName("td")[0].innerHTML);
+				$("#myInput").attr("value", list[clicks].innerHTML.trim());
 				//document.getElementById("password").innerHTML = 'The XXXth Password Of '+rows[clicks].getElementsByTagName("td")[0].innerHTML+' is Below';
 				//showing password when it got selected
 				$('#randomText').html(randomText(15));
-				setNextPassValue(rows[clicks].getElementsByTagName("td")[0].innerHTML);
+				setNextPassValue(list[clicks].innerHTML);
 
 				clicks += 1;
 
 				//Highlighting selected PWG
-				id_name = rows[0].getElementsByTagName("td")[0].getAttribute('id');
+				id_name = list[0].getAttribute('id');
 				$('#'+id_name).addClass("selected_pwg");
+
 			}else{
 				//making selected PWG de-highlighted
-				id_name = rows[0].getElementsByTagName("td")[0].getAttribute('id');
+				id_name = list[0].getAttribute('id');
 				$('#'+id_name).removeClass("selected_pwg");
 				for(i=0;i<len;i++){
-					if(text == rows[i].getElementsByTagName("td")[0].innerHTML){
+					if(text == list[i].innerHTML.trim()){
 						if(i+1 < len){
-							text = rows[i+1].getElementsByTagName("td")[0].innerHTML;
+							text = list[i+1].innerHTML.trim();
 							$("#myInput").attr("value",text);
 							//document.getElementById("password").innerHTML = 'The XXXth Password Of '+rows[i+1].getElementsByTagName("td")[0].innerHTML+' is Below';
 
 							//showing password when it got selected
 							$('#randomText').html(randomText(15));
-							setNextPassValue(rows[i+1].getElementsByTagName("td")[0].innerHTML);
+							setNextPassValue(list[i+1].innerHTML.trim());
 							break;
 						} else{
-							$('#right_next').html('<button type="button" class="btn btn-info" id="first_next">No More PWG, Try below Button</button>');
+							$('#right_next').html('<button type="button" class="btn btn-info" id="first_next">Next</button>');
 						}
 					}
 				}
@@ -598,11 +597,11 @@
 			//making selected PWG highlighted and de-highlighted
 
 			for(i=1;i<len;i++){
-				if( text == rows[i].getElementsByTagName("td")[0].innerHTML){
-					id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
+				if( text == list[i].innerHTML.trim()){
+					id_name = list[i].getAttribute('id');
 					$('#'+id_name).addClass("selected_pwg");
 				} else{
-					id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
+					id_name = list[i].getAttribute('id');
 					$('#'+id_name).removeClass("selected_pwg");
 				}
 			}
@@ -613,7 +612,7 @@
 
 		function left_next(){
 				//resetting the value of next_pass, use to enable pass button
-				$('#pass').html('<button class="nav-link btn-info btn text-white btn-sm my-2"  onclick="myfun2()" id="pass_pwg">Pass</button>');
+				$('#pass').html('<button class="btn btn-info text-white my-2 mx-2"  onclick="myfun2()" id="pass_pwg">Pass</button>');
 				$('#pass_pwg').attr('disabled',"true");
 				next_pass = 0;
 
@@ -625,12 +624,9 @@
 				$('#randomText').html(" ");
 
 
-				//displaying the next password block
-				$('#password-tagline').css("display", "block")
-
-
 				//enabling next password button to get next password
 				$("#yourButton").removeAttr("disabled");
+
 
 				//checking Next button's value to set warning
 				text = document.getElementById("last_prev").innerHTML;
@@ -641,28 +637,31 @@
 				//checking Selected PWG's value to set pwg according
 				text = $("#myInput").val();
 
-				//fetching table's td values
-				table = document.getElementById("myTable");
-				rows = table.rows;
-				var len = rows.length;
+				//fetching ul's li values
+				list = document.getElementById('myTable').getElementsByTagName("li");
+				var len = list.length;
+
 
 				//for the first time it will set warning using text
 				if(text == ""){
-					$('#left_next').html('<button type="button" class="btn btn-info" id="last_prev">No More PWG, Try above Button</button>');
+					$('#left_next').html('<button type="button" class="btn btn-info" id="last_prev">Prev One</button>');
 				}else{
 					for(i=0;i<len;i++){
-						if(text == rows[i].getElementsByTagName("td")[0].innerHTML){
+						if(text == list[i].innerHTML.trim()){
 							if(i-1 >= 0){
-								text = rows[i-1].getElementsByTagName("td")[0].innerHTML;
+								//displaying the buttons block
+								$('#buttons').css("display", "flex");
+
+								text = list[i-1].innerHTML.trim();
 								$("#myInput").attr("value", text);
 								//document.getElementById("password").innerHTML = 'The XXXth Password Of '+rows[i-1].getElementsByTagName("td")[0].innerHTML+' is Below';
 
 								//showing password when it got selected
 								$('#randomText').html(randomText(15));
-								setNextPassValue(rows[i-1].getElementsByTagName("td")[0].innerHTML);
+								setNextPassValue(list[i-1].innerHTML.trim());
 								break;
 							}else{
-								$('#left_next').html('<button type="button" class="btn btn-info" id="last_prev">No More PWG, Try above Button</button>');
+								$('#left_next').html('<button type="button" class="btn btn-info" id="last_prev">Prev One</button>');
 								break;
 							}
 						}
@@ -670,14 +669,14 @@
 				}
 
 				//making selected PWG highlighted and de-highlighted
-				table = document.getElementById('myTable');
-				rows = table.rows;
-				for(i=0;i<rows.length;i++){
-					if( text == rows[i].getElementsByTagName("td")[0].innerHTML){
-						id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
+				//table = document.getElementById('myTable');
+				//rows = table.rows;
+				for(i=0;i<len;i++){
+					if( text == list[i].innerHTML.trim()){
+						id_name = list[i].getAttribute('id');
 						$('#'+id_name).addClass("selected_pwg");
 					} else{
-						id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
+						id_name = list[i].getAttribute('id');
 						$('#'+id_name).removeClass("selected_pwg");
 					}
 				}

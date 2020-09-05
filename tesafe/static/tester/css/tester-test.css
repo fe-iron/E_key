@@ -178,7 +178,7 @@ svg circle:nth-child(2)
     border-radius: 5px;
 }
 
-.bg-button-2 h6{
+#password{
 
     margin-bottom: 0rem;
     font-weight: 500;
@@ -429,11 +429,13 @@ header .form-control {
 }
 
 
-.next-password p{
-    border: 1px solid #cfd5d6;
+#randomText{
+    border: 2px solid #00dbff;
     display: inline-block;
-    padding: .5rem 2rem;
-    margin-top: 1rem;
+    padding: 0.5rem 2rem;
+    margin-top: 0.3rem;
+    border-radius: 20px;
+    //max-height: 40px;
 }
 
 
@@ -459,6 +461,13 @@ header .form-control {
 }
 .test_tag{
     font-size: 1rem !important;
+}
+.selected_pwg{
+    background-color: #9acbff !important;
+    display: inline-block;
+    color: white;
+    border-radius: 25px;
+    margin-right: auto;
 }
 }
 
