@@ -24,10 +24,15 @@
 			cursor: pointer;
 		}
 		.selected_pwg{
-			    background-color: #9acbff;
+			    background-color: #007bff;
 				display: inline-block;
 				color: white;
 				border-radius: 25px;
+		}
+		.btn-primary:disabled{
+			    color: #1868bb;
+				background-color: #72ebff;
+				border-color: #007bff;
 		}
 	</style>
 </head>
@@ -46,7 +51,7 @@
 				<div class="collapse navbar-collapse justify-content" id="navbarSupportedContent">
 					<ul class="navbar-nav">
 						<li class="nav-item pl-3">
-							<a class="nav-link active"  href="user-home">Home <span class="sr-only">(current)</span></a>
+							<a class="nav-link active"  href="user-home">PWGs <span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item pl-3">
 							<a class="nav-link" href="user-user">User</a>
@@ -88,7 +93,7 @@
 							<div class="col-md-8 col-md-6">
 
 								<header>
-									<nav class="navbar navbar-light   venue-registration">
+									<nav class="navbar navbar-light  venue-registration" id="nav-mobile">
 
 										<form class="form-inline">
 											<div class="input-group-prepend mb-1 mr-2">
@@ -97,49 +102,75 @@
 											</div>
 
 										</form>
-										<button type="button" class="btn btn-primary pop my-2" disabled style="border-radius:10px;" id="tested-button"> Get Password </button>
+										<button type="button" class="btn btn-primary pop my-2 mr-5" disabled style="border-radius:20px;" id="tested-button"> Get Password </button>
 									</nav>
 								</header>
+								<div class="col-md" style="display: flex;">
+									<ul class="list-group">
+									<li class="list mr-3 mt-3"><a href="#">a</a></li>
+									<li class="list mr-3"><a href="#">b</a></li>
+									<li class="list mr-3"><a href="#">c</a></li>
+									<li class="list mr-3"><a href="#">d</a></li>
+									<li class="list mr-3"><a href="#">e</a></li>
+									<li class="list mr-3"><a href="#">f</a></li>
+									<li class="list mr-3"><a href="#">g</a></li>
+									<li class="list mr-3"><a href="#">h</a></li>
+									<li class="list mr-3"><a href="#">i</a></li>
+									<li class="list mr-3"><a href="#">j</a></li>
+									<li class="list mr-3"><a href="#">k</a></li>
+									<li class="list mr-3"><a href="#">l</a></li>
+									<li class="list mr-3"><a href="#">m</a></li>
+									<li class="list mr-3"><a href="#">n</a></li>
+									<li class="list mr-3"><a href="#">o</a></li>
+									<li class="list mr-3"><a href="#">p</a></li>
+									<li class="list mr-3"><a href="#">q</a></li>
+									<li class="list mr-3"><a href="#">r</a></li>
+									<li class="list mr-3"><a href="#">s</a></li>
+									<li class="list mr-3"><a href="#">t</a></li>
+									<li class="list mr-3"><a href="#">u</a></li>
+									<li class="list mr-3"><a href="#">v</a></li>
+									<li class="list mr-3"><a href="#">w</a></li>
+									<li class="list mr-3"><a href="#">x</a></li>
+									<li class="list mr-3"><a href="#">y</a></li>
+									<li class="list mr-3"><a href="#">z</a></li>
 
-
-
-
-								<div class="table-responsive">
-
-
+								</ul>
+									<div class="table-responsive">
 									<br>
+
 									<table class="table">
 										<thead>
-											<tr>
-
+											<tr class="d-flex">
 												<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere" disabled=""> <i class="fas fa-sort-down"></i></th>
-												<th scope="col">Name</th>
-												<th scope="col">Attributes</th>
-												<th scope="col">Action</th>
+												<th class="col-5">Name</th>
+												<th class="col-3">Attribute</th>
+												<th class="col-2">Action</th>
 
 
 											</tr>
 										</thead>
 										<tbody id="myTable" class="table-borderless">
-											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
+											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi" class="d-flex align-items-center">
 
-												<th><span style="font-weight: 500;" class="pr-2">a </span><input type="checkbox" name="book" id="book1" value="floatingButtonHere" disabled=""></th>
-												<td id="pwg0" class="cursor" onclick="selected_pwg('PWGS-A');">PWGS-A</td>
-												<td> A</td>
+												<th><input type="checkbox" name="book" id="book1" value="floatingButtonHere" disabled=""></th>
+												<td id="pwg0" class="cursor col-5 text-center" onclick="selected_pwg('PWGS-A');">PWGS-A</td>
+												<td class="col-3"> A</td>
 
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
 													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 														<i class="fas fa-ellipsis-v"></i>
 													</button>
 													<div class="dropdown-menu">
-														<a class="dropdown-item pop1" id="0" href="#">Review Record</a></div>
+														<a class="dropdown-item pop1" id="0" href="#">Review Record</a>
+														<a class="dropdown-item" onclick="pop2('PWGS-A')" href="#" >Set Alias</a>
+													</div>
 												</div></td>
 											</tr>
-											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
+											<tr data-toggle="tooltip" class="d-flex align-items-center" data-placement="top" title="this PWG is assign to Faiz elahi">
 
-												<th><span style="font-weight: 500;" class="pr-2">b </span><input type="checkbox" name="book" id="book2" value="floatingButtonHere" disabled=""></th>
-												<td class="cursor" id="pwg1" onclick="selected_pwg('PWGS-B');">PWGS-B</td>
-												<td>T</td>
+												<th><input type="checkbox" name="book" id="book2" value="floatingButtonHere" disabled=""></th>
+												<td class="cursor col-5 text-center" id="pwg1" onclick="selected_pwg('PWGS-B');">PWGS-B</td>
+												<td class="col-3">T</td>
 
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
 
@@ -151,15 +182,16 @@
 														<a class="dropdown-item" href="#">Authorize</a>
 														<a class="dropdown-item" href="#">Transfer</a>
 								 						<a class="dropdown-item" href="#">Share</a>
+														<a class="dropdown-item" onclick="pop2('PWGS-B')" href="#" >Set Alias</a>
 														<a class="dropdown-item" href="#">Delete</a>
 													</div>
 												</div></td>
 											</tr>
 
-											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
-												<th><span style="font-weight: 500;" class="pr-2">c </span><input type="checkbox" name="book" id="book3" value="floatingButtonHere" disabled=""></th>
-												<td class="cursor" id="pwg2" onclick="selected_pwg('PWGS-C');">PWGS-C</td>
-												<td>S</td>
+											<tr data-toggle="tooltip" class="d-flex align-items-center" data-placement="top" title="this PWG is assign to Faiz elahi">
+												<th><input type="checkbox" name="book" id="book3" value="floatingButtonHere" disabled=""></th>
+												<td class="cursor col-5 text-center" id="pwg2" onclick="selected_pwg('PWGS-C');">PWGS-C</td>
+												<td class="col-3">S</td>
 
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
 
@@ -168,14 +200,15 @@
 													</button>
 													<div class="dropdown-menu">
 														<a class="dropdown-item pop1" id="2" href="#">Review Record</a>
+														<a class="dropdown-item" onclick="pop2('PWGS-C')" href="#" >Set Alias</a>
 													</div>
 												</div></td>
 											</tr>
 
-											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi">
-												<th><span style="font-weight: 500;" class="pr-2">d </span> <input type="checkbox" name="book" id="book4" value="floatingButtonHere" disabled=""></th>
-												<td class="cursor" id="pwg3" onclick="selected_pwg('PWGS-D');">PWGS-D</td>
-												<td>DA</td>
+											<tr data-toggle="tooltip" class="d-flex align-items-center" data-placement="top" title="this PWG is assign to Faiz elahi">
+												<th><input type="checkbox" name="book" id="book4" value="floatingButtonHere" disabled=""></th>
+												<td class="cursor col-5 text-center" id="pwg3" onclick="selected_pwg('PWGS-D');">PWGS-D</td>
+												<td class="col-3">DA</td>
 
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
 
@@ -185,16 +218,126 @@
 													<div class="dropdown-menu">
 														<a class="dropdown-item pop1" id="3" href="#">Review Record</a>
 														<a class="dropdown-item" href="#">De-authorize</a>
+														<a class="dropdown-item" onclick="pop2('PWGS-D')" href="#" >Set Alias</a>
 													</div>
 												</div></td>
 											</tr>
 
+											<tr data-toggle="tooltip" class="d-flex align-items-center" data-placement="top" title="this PWG is assign to Faiz elahi">
+												<th><input type="checkbox" name="book" id="book4" value="floatingButtonHere" disabled=""></th>
+												<td class="cursor col-5 text-center" id="pwg4" onclick="selected_pwg('PWGS-E');">PWGS-E</td>
+												<td class="col-3">DA</td>
+
+												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
+
+													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+														<i class="fas fa-ellipsis-v"></i>
+													</button>
+													<div class="dropdown-menu">
+														<a class="dropdown-item pop1" id="4" href="#">Review Record</a>
+														<a class="dropdown-item" href="#">De-authorize</a>
+														<a class="dropdown-item" onclick="pop2('PWGS-E')" href="#" >Set Alias</a>
+													</div>
+												</div></td>
+											</tr>
+											<tr data-toggle="tooltip" class="d-flex align-items-center" data-placement="top" title="this PWG is assign to Faiz elahi">
+												<th><input type="checkbox" name="book" id="book3" value="floatingButtonHere" disabled=""></th>
+												<td class="cursor col-5 text-center" id="pwg5" onclick="selected_pwg('PWGS-F');">PWGS-F</td>
+												<td class="col-3">S</td>
+
+												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
+
+													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+														<i class="fas fa-ellipsis-v"></i>
+													</button>
+													<div class="dropdown-menu">
+														<a class="dropdown-item pop1" id="5" href="#">Review Record</a>
+														<a class="dropdown-item" onclick="pop2('PWGS-F')" href="#" >Set Alias</a>
+													</div>
+												</div></td>
+											</tr>
+
+											<tr data-toggle="tooltip" class="d-flex align-items-center" data-placement="top" title="this PWG is assign to Faiz elahi">
+												<th><input type="checkbox" name="book" id="book4" value="floatingButtonHere" disabled=""></th>
+												<td class="cursor col-5 text-center" id="pwg6" onclick="selected_pwg('PWGS-G');">PWGS-G</td>
+												<td class="col-3">DA</td>
+
+												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
+
+													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+														<i class="fas fa-ellipsis-v"></i>
+													</button>
+													<div class="dropdown-menu">
+														<a class="dropdown-item pop1" id="6" href="#">Review Record</a>
+														<a class="dropdown-item" href="#">De-authorize</a>
+														<a class="dropdown-item" onclick="pop2('PWGS-G')" href="#" >Set Alias</a>
+													</div>
+												</div></td>
+											</tr>
+
+											<tr data-toggle="tooltip" class="d-flex align-items-center" data-placement="top" title="this PWG is assign to Faiz elahi">
+												<th><input type="checkbox" name="book" id="book4" value="floatingButtonHere" disabled=""></th>
+												<td class="cursor col-5 text-center" id="pwg7" onclick="selected_pwg('PWGS-H');">PWGS-H</td>
+												<td class="col-3">DA</td>
+
+												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
+
+													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+														<i class="fas fa-ellipsis-v"></i>
+													</button>
+													<div class="dropdown-menu">
+														<a class="dropdown-item pop1" id="7" href="#">Review Record</a>
+														<a class="dropdown-item" href="#">De-authorize</a>
+														<a class="dropdown-item" onclick="pop2('PWGS-I')" href="#" >Set Alias</a>
+													</div>
+												</div></td>
+											</tr>
+
+											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi" class="d-flex align-items-center">
+
+												<th><input type="checkbox" name="book" id="book1" value="floatingButtonHere" disabled=""></th>
+												<td id="pwg8" class="cursor col-5 text-center" onclick="selected_pwg('PWGS-I');">PWGS-I</td>
+												<td class="col-3"> A</td>
+
+												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
+													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+														<i class="fas fa-ellipsis-v"></i>
+													</button>
+													<div class="dropdown-menu">
+														<a class="dropdown-item pop1" id="8" href="#">Review Record</a>
+														<a class="dropdown-item" onclick="pop2('PWGS-I')" href="#" >Set Alias</a>
+													</div>
+												</div></td>
+											</tr>
+
+											<tr data-toggle="tooltip" class="d-flex align-items-center" data-placement="top" title="this PWG is assign to Faiz elahi">
+
+												<th><input type="checkbox" name="book" id="book2" value="floatingButtonHere" disabled=""></th>
+												<td class="cursor col-5 text-center" id="pwg9" onclick="selected_pwg('PWGS-J');">PWGS-J</td>
+												<td class="col-3">T</td>
+
+												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
+
+													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+														<i class="fas fa-ellipsis-v"></i>
+													</button>
+													<div class="dropdown-menu">
+														<a class="dropdown-item pop1" id="9" href="#">Review Record</a>
+														<a class="dropdown-item" href="#">Authorize</a>
+														<a class="dropdown-item" href="#">Transfer</a>
+								 						<a class="dropdown-item" onclick="pop2('PWGS-J')" href="#">Set Alias</a>
+														<a class="dropdown-item" href="#">Share</a>
+														<a class="dropdown-item" href="#">Delete</a>
+													</div>
+												</div></td>
+											</tr>
 										</tbody>
 									</table>
 								</div>
+								</div>
 							</div>
 
-						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -286,6 +429,32 @@
 	</div>
 </div>
 
+<!--modal for alias record-->
+<div class="modal fade" id="imagemodal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5>Set Alias</h5>
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				</div>
+				<div class="modal-body" id="change-name">
+					<form>
+						<div class="form-group">
+							<label id="alias_pwg"></label>
+							<input type="text" class="form-control" id="emp" value="">
+						</div>
+						<a  href="#" type="submit" id="bt" class="btn btn-primary" onclick="changeLabel()">Submit</a>
+					</form>
+				</div>
+
+				<div class="modal-body text-center p-4" style="display: none;" id="successfully-changed">
+					<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
+					<p class="pt-2 font-weight-bold">You've successfully set the Alias</p>
+
+				</div>
+			</div>
+		</div>
+	</div>
 
 <script type="text/javascript">
 
@@ -365,6 +534,29 @@
 	});
 
 
+// change name JS
+		function changeLabel() {
+		var empName = document.getElementById('emp').value;
+        pop_title = document.getElementById('alias_pwg').innerHTML;
+        elements = pop_title.split(" ");
+        len = elements.length;
+        pwg_name = elements[len-1];
+
+        table = document.getElementById('myTable');
+		rows = table.rows;
+		for(i=0;i<rows.length;i++){
+			if(pwg_name == rows[i].getElementsByTagName("td")[0].innerHTML){
+				console.log(pwg_name);
+				rows[i].getElementsByTagName("td")[0].innerHTML = empName;
+			}
+		}
+
+
+        document.getElementById("change-name").style.display="none";
+        document.getElementById("successfully-changed").style.display="block";
+
+    }
+
 
 
 // modal popup for review record
@@ -417,6 +609,9 @@
 					id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
 					console.log(id_name);
 					$('#'+id_name).addClass("selected_pwg");
+
+					//placing selected PWG to the input field
+					$("#myInput").attr("value",pwg_name);
 				} else{
 					id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
 					$('#'+id_name).removeClass("selected_pwg");
@@ -427,6 +622,12 @@
 			$('#tested-button').prop("value",value);
 	}
 
+	//show pop to set alias
+	function pop2(pwg_name) {
+		$("#alias_pwg").html("Set alias for "+pwg_name);
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodal2').modal('show');
+	}
 
 
 </script>

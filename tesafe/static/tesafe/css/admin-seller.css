@@ -274,7 +274,9 @@ svg circle:nth-child(2)
     color: #212529;
 }
 
-
+.list{
+    display:block;
+}
 
 .modal-header {
     display: -ms-flexbox;
@@ -409,6 +411,8 @@ header .dropdown-toggle::after {
 }
 
 
+
+
 @media (min-width: 778px) and (max-width: 930px){
 .floatingButtonHere {
     position: fixed;
@@ -427,7 +431,11 @@ header .dropdown-toggle::after {
 }
 }
 
+@media (min-width:570.998px ) and (max-width:850px){
+    #nav-mobile{
 
+    }
+}
 
 @media(max-width: 570px){
     h4{
@@ -455,6 +463,9 @@ header .dropdown-toggle::after {
    bottom:20px;
     left:29%;
 }
+#nav-mobile{
+        display: grid;
+    }
 }
 
 
@@ -469,6 +480,8 @@ header .dropdown-toggle::after {
     margin-bottom: 0rem!important;
     color: #212529;
     font-size: 12px;
+
+
 }
 
 .rounded-circle {
@@ -488,4 +501,7 @@ header .dropdown-toggle::after {
      max-width: 837px;
     margin: 1.75rem auto;
 }
+
 }
+
+
