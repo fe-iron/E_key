@@ -102,7 +102,7 @@
 											</div>
 
 										</form>
-										<button type="button" class="btn btn-primary pop my-2 mr-5" disabled style="border-radius:20px;" id="tested-button"> Get Password </button>
+										<button type="button" class="btn btn-primary pop my-2 my_mr-5 pop" disabled style="border-radius:20px;" id="tested-button"> Get Password </button>
 									</nav>
 								</header>
 								<div class="col-md" style="display: flex;">
@@ -142,7 +142,7 @@
 										<thead>
 											<tr class="d-flex">
 												<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere" disabled=""> <i class="fas fa-sort-down"></i></th>
-												<th class="col-5">Name</th>
+												<th class="col-5 text-center">Name</th>
 												<th class="col-3">Attribute</th>
 												<th class="col-2">Action</th>
 
@@ -355,7 +355,7 @@
 
 
 
-<!--modal for get password-->
+modal for get password
 <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -451,6 +451,9 @@
 					<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
 					<p class="pt-2 font-weight-bold">You've successfully set the Alias</p>
 
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Return</button>
 				</div>
 			</div>
 		</div>
@@ -624,6 +627,8 @@
 
 	//show pop to set alias
 	function pop2(pwg_name) {
+		$("#successfully-changed").css("display","none");
+		$("#change-name").css("display","block");
 		$("#alias_pwg").html("Set alias for "+pwg_name);
 		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
 		$('#imagemodal2').modal('show');

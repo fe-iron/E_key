@@ -410,8 +410,9 @@ header .dropdown-toggle::after {
     left:45%;
 }
 
-
-
+.my_mr-5{
+    margin-right: 3rem!important;
+}
 
 @media (min-width: 778px) and (max-width: 930px){
 .floatingButtonHere {
@@ -440,6 +441,9 @@ header .dropdown-toggle::after {
 @media(max-width: 570px){
     h4{
         font-size: 1rem;
+    }
+    .my_mr-5{
+        margin-right: 0rem!important;
     }
 
     .table {

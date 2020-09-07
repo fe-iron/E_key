@@ -29,6 +29,11 @@
 				color: white;
 				border-radius: 25px;
 		}
+		.btn-primary:disabled{
+			    color: #1868bb;
+				background-color: #72ebff;
+				border-color: #007bff;
+		}
 	</style>
 </head>
 <body>
@@ -80,63 +85,130 @@
 
 					<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-1" >
 
-						<div class="col-md-8 col-md-6">
+						<div class="col-md-6 col-md-4">
 
-							<header>
-								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">Users</a>
+							<header class="d-flex justify-content-center mt-2">
+
+								<nav class="navbar navbar-light  venue-registration" style="display:contents;">
 									<form class="form-inline">
 										<div class="input-group-prepend mb-1 mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
-											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
+											<input type="text" class="form-control" placeholder="Username" aria-label="Username"
+												   aria-describedby="addon-wrapping" id="myInput">
 										</div>
 									</form>
+									<!-- Example split danger button -->
+									<div class="btn-group mb-1">
+									  <button type="button" class="btn btn-primary" id="button-chat" disabled>Chat</button>
+									  <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+											  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled id="button-dropdown">
+										<i class="fas fa-caret-down"></i>
+									  </button>
+									  <div class="dropdown-menu">
+										<a class="dropdown-item" href="#">Delete</a>
+										<a class="dropdown-item pop" href="#">Review Record</a>
+										<a class="dropdown-item" onclick="pop2();" href="#" >Set Alias</a>
+									  </div>
+									</div>
+
 								</nav>
+
 							</header>
 
-							<div class="row">
-							<div class="table-responsive col-8">
+							<div class="row justify-content-center">
+							<div class="col-md-6" style="display: flex;">
+									<ul class="list-group mt-2">
+									<li class="list mr-3 mt-3"><a href="#">a</a></li>
+									<li class="list mr-3"><a href="#">b</a></li>
+									<li class="list mr-3"><a href="#">c</a></li>
+									<li class="list mr-3"><a href="#">d</a></li>
+									<li class="list mr-3"><a href="#">e</a></li>
+									<li class="list mr-3"><a href="#">f</a></li>
+									<li class="list mr-3"><a href="#">g</a></li>
+									<li class="list mr-3"><a href="#">h</a></li>
+									<li class="list mr-3"><a href="#">i</a></li>
+									<li class="list mr-3"><a href="#">j</a></li>
+									<li class="list mr-3"><a href="#">k</a></li>
+									<li class="list mr-3"><a href="#">l</a></li>
+									<li class="list mr-3"><a href="#">m</a></li>
+									<li class="list mr-3"><a href="#">n</a></li>
+									<li class="list mr-3"><a href="#">o</a></li>
+									<li class="list mr-3"><a href="#">p</a></li>
+									<li class="list mr-3"><a href="#">q</a></li>
+									<li class="list mr-3"><a href="#">r</a></li>
+									<li class="list mr-3"><a href="#">s</a></li>
+									<li class="list mr-3"><a href="#">t</a></li>
+									<li class="list mr-3"><a href="#">u</a></li>
+									<li class="list mr-3"><a href="#">v</a></li>
+									<li class="list mr-3"><a href="#">w</a></li>
+									<li class="list mr-3"><a href="#">x</a></li>
+									<li class="list mr-3"><a href="#">y</a></li>
+									<li class="list mr-3"><a href="#">z</a></li>
+
+								</ul>
+									<div class="table-responsive">
 								<br>
 								<table class="table">
-									<thead>
-										<tr>
-											<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere" disabled> <i class="fas fa-sort-down"></i></th>
-											<th scope="col">Name</th>
-										</tr>
-									</thead>
+
 									<tbody id="myTable" class="table-borderless">
-										<tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td onclick="show_buttons('PWG1-1')" id="pwg-0" class="cursor">PWG1-1</td>
-
-
+										<tr class="d-flex">
+											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
+											<td onclick="show_buttons('Faiz')" id="pwg-0" class="cursor col-5 text-center">Faiz</td>
 										</tr>
-                                        <tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td onclick="show_buttons('PWG1-11')" id="pwg-1" class="cursor">PWG1-11</td>
-
-
+                                        <tr class="d-flex">
+											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
+											<td onclick="show_buttons('Frank')" id="pwg-1" class="cursor col-5 text-center">Frank</td>
 										</tr>
-                                        <tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td onclick="show_buttons('PWG1-12')" id="pwg-2"  class="cursor">PWG1-12</td>
-
-
+                                        <tr class="d-flex">
+											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
+											<td onclick="show_buttons('Trump')" id="pwg-2"  class="cursor col-5 text-center">Trump</td>
 										</tr>
-                                        <tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td onclick="show_buttons('PWG1-13');" id="pwg-3" class="cursor">PWG1-13</td>
+                                        <tr class="d-flex">
+											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
+											<td onclick="show_buttons('Putin');" id="pwg-3" class="cursor col-5 text-center">Putin</td>
 										</tr>
+										<tr class="d-flex">
+											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
+											<td onclick="show_buttons('Jennifer');" id="pwg-4" class="cursor col-5 text-center">Jennifer</td>
+										</tr>
+										<tr class="d-flex">
+											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
+											<td onclick="show_buttons('Chris');" id="pwg-5" class="cursor col-5 text-center">Chris</td>
+										</tr>
+										<tr class="d-flex">
+											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
+											<td onclick="show_buttons('Naqui');" id="pwg-6" class="cursor col-5 text-center">Naqui</td>
+										</tr>
+										<tr class="d-flex">
+											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
+											<td onclick="show_buttons('John');" id="pwg-7" class="cursor col-5 text-center">John</td>
+										</tr>
+										<tr class="d-flex">
+											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
+											<td onclick="show_buttons('Scarlett');" id="pwg-8" class="cursor col-5 text-center">Scarlett</td>
+										</tr>
+										<tr class="d-flex">
+											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
+											<td onclick="show_buttons('Mark');" id="pwg-9" class="cursor col-5 text-center">Mark</td>
+										</tr>
+										<tr class="d-flex">
+											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
+											<td onclick="show_buttons('Tesafe');" id="pwg-10" class="cursor col-5 text-center">Tesafe</td>
+										</tr>
+										<tr class="d-flex">
+											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
+											<td onclick="show_buttons('Kristen');" id="pwg-11" class="cursor col-5 text-center">Kristen</td>
+										</tr>
+										<tr class="d-flex">
+											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
+											<td onclick="show_buttons('Elizabeth');" id="pwg-12" class="cursor col-5 text-center">Elizabeth</td>
+										</tr>
+
 									</tbody>
 								</table>
 							</div>
-							<div class="col-4 mt-5 pt-3" id="buttons" style="display:none;">
-								<button class="btn btn-primary my-2 btn-block">Chat</button>
-								<br>
-								<button class="btn btn-primary my-2 btn-block">Delete</button>
-								<br>
-								<button class="btn btn-primary my-2 pop btn-block">Review Record</button>
 							</div>
+
 							</div>
 						</div>
 
@@ -160,7 +232,7 @@
 
 
 
-
+//modal for review record
 <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -210,6 +282,36 @@
 </div>
 
 
+<!--modal for alias record-->
+<div class="modal fade" id="imagemodal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5>Set Alias</h5>
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				</div>
+				<div class="modal-body" id="change-name">
+					<form>
+						<div class="form-group">
+							<label id="alias_pwg"></label>
+							<input type="text" class="form-control" id="emp" value="">
+						</div>
+						<a  href="#" type="submit" id="bt" class="btn btn-primary" onclick="changeLabel()">Submit</a>
+					</form>
+				</div>
+
+				<div class="modal-body text-center p-4" id="successfully-changed">
+					<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
+					<p class="pt-2 font-weight-bold">You've successfully set the Alias</p>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Return</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 <script type="text/javascript">
 
 // search filter table
@@ -253,9 +355,14 @@
 
 
 	function show_buttons(value){
+	//enabling top chat button and dropdown icon
+		$('#button-chat').prop("disabled",false);
+		$('#button-dropdown').prop("disabled",false);
 
-		$('#buttons').css('display', 'block');
+	//putting pwg name in input field
+		$("#myInput").attr("value",value);
 		$('.modal-title').html("Record of "+value);
+		$('#alias_pwg').html("Set alias for "+value);
 		table = document.getElementById('myTable');
 		rows = table.rows;
 		for(i=0;i<rows.length;i++){
@@ -268,6 +375,39 @@
 			}
 		}
 	}
+
+
+
+		// change name JS
+		function changeLabel() {
+		var empName = document.getElementById('emp').value;
+        pop_title = document.getElementById('alias_pwg').innerHTML;
+        elements = pop_title.split(" ");
+        len = elements.length;
+        pwg_name = elements[len-1];
+
+        table = document.getElementById('myTable');
+		rows = table.rows;
+		for(i=0;i<rows.length;i++){
+			if(pwg_name == rows[i].getElementsByTagName("td")[0].innerHTML){
+				rows[i].getElementsByTagName("td")[0].innerHTML = empName;
+			}
+		}
+
+
+        document.getElementById("change-name").style.display="none";
+        document.getElementById("successfully-changed").style.display="block";
+
+    }
+
+	//show pop to set alias
+	function pop2(pwg_name) {
+		$("#successfully-changed").css("display","none");
+		$("#change-name").css("display","block");
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodal2').modal('show');
+	}
+
 </script>
 </body>
 </html>
