@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'E_key.wsgi.application'
 #    }
 # }
 
- DATABASES = {
+DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.postgresql',
          'NAME': 'dsufdihdl8ohm',
@@ -99,7 +99,7 @@ WSGI_APPLICATION = 'E_key.wsgi.application'
          'PASSWORD': '82789103a196fb9a8b03da3a36794a9b88cd011ada31505fa7d4780bbd662fde',
          'HOST': 'ec2-34-197-141-7.compute-1.amazonaws.com'
      }
- }
+}
 
 
 # Password validation
