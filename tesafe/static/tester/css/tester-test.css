@@ -305,43 +305,6 @@ svg circle:nth-child(2)
     display: none;
 }
 
-header .input-group-text {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: center;
-    align-items: center;
-    padding: .375rem .75rem;
-    margin-bottom: 0;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    text-align: center;
-    white-space: nowrap;
-    background-color: #fefeff;
-    border: 1px solid #ced4da;
-    border-radius: 0rem;
-    border-right: 0px;
-}
-
-header .form-control {
-    display: block;
-    width: 100%;
-    height: calc(1.5em + .75rem + 2px);
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-     border-radius: 0rem; 
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    border-left: 0px;
-}
-
-
 
 
 .form-control:focus {
@@ -399,7 +362,7 @@ header .form-control {
     display: block;
     width: 100%;
     height: calc(1.5em + .75rem + 2px);
-    padding: .375rem .75rem;
+    padding: .375rem .07rem;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -432,10 +395,10 @@ header .form-control {
 #randomText{
     border: 2px solid #00dbff;
     display: inline-block;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 6.5rem;
     margin-top: 0.3rem;
     border-radius: 20px;
-    //max-height: 40px;
+    margin: initial;
 }
 
 
@@ -469,6 +432,15 @@ header .form-control {
     border-radius: 25px;
     margin-right: auto;
 }
+#randomText{
+    border: 2px solid #00dbff;
+    display: inline-block;
+    padding: 0.5rem 4rem;
+    margin-right: 33px;
+    margin-top: 0.3rem;
+    border-radius: 20px;
+}
+
 }
 
 .select_pwg{

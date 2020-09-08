@@ -102,7 +102,7 @@
 
 						<div class="col-md-8">
 
-							<header class="">
+							<header>
 								<nav class="navbar navbar-light justify-content-center">
 									<div class="row "><div class="col-md" style="display:inline-flex">
 									<a class="h4 text-dark font-weight-bold pt-2 test_tag">Testing PWG: </a>
@@ -111,46 +111,43 @@
 											<span class="input-group-text" id="addon-wrapping">
 												<i class="fas fa-search fa-1x"></i>
 											</span>
-											<input type="text" class="form-control" placeholder="Enter PWG Name" aria-label="Username" aria-describedby="addon-wrapping" id="myInput" style="font-weight:700;">
+											<input type="text" class="form-control" placeholder="PWG Name" aria-label="Username" aria-describedby="addon-wrapping" id="myInput" style="font-weight:700;">
 										</div>
 
 									</form>
 									</div></div>
-
-
 								</nav>
 							</header>
 
 
 							<div class="row justify-content-center next-password">
-				<div class="col-md">
-					<div class="row justify-content-center bg-button-2 p-2 mb-3" id="div-4">
+								<div class="col-md">
+									<div class="row justify-content-center bg-button-2 p-2 mb-3" id="div-4">
 
-						<div class="col-md-6  my-2" id="password-tagline">
-							<div style="display:flex;" class="text-center">
-								<p id="password" class="h6 test_tag">The XX<sup>th</sup> Password</p>
-								<p id="randomText" class="font-weight-bolder ml-3"></p>
+										<div class="col-md-6  my-2" id="password-tagline">
+											<div style="display:flex;" class="text-center">
+												<p id="password" class="h6 test_tag">The XX<sup>th</sup> Password</p>
+												<p id="randomText" class="font-weight-bolder ml-3"></p>
+											</div>
+											<div class="col-md-12  mt-5" id="buttons" style="display:none">
+
+													<button class="btn btn-info text-white  my-2 mx-2" id="pass_pwg" disabled onclick="myfun2()">Pass</button>
+
+													<button class="btn btn-primary text-white btn-sm my-2 mx-2" disabled id="yourButton">Get Password</button>
+
+													<button class="btn btn-danger text-white my-2 mx-2" id="fail_button" disabled onclick="myfun3()">Fail</button>
+
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
-							<div class="col-md-12  mt-5" id="buttons" style="display:none">
-
-									<button class="btn btn-info text-white  my-2 mx-2" id="pass_pwg" disabled onclick="myfun2()">Pass</button>
-
-									<button class="btn btn-primary text-white btn-sm my-2 mx-2" disabled id="yourButton">Get Password</button>
-
-									<button class="btn btn-danger text-white my-2 mx-2" id="fail_button" disabled onclick="myfun3()">Fail</button>
-
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
 
 							<div class="row">
 								<div class="col-md-2"></div>
 								<div class="col-4">
-							<ul class="list-group  mt-5 text-center" id="myTable">
-								<li class="list-group-item cursor" id="pwg0" onclick="select_pwg('PWG11')">
+									<ul class="list-group  mt-5 text-center" id="myTable">
+								<li class="list-group-item cursor" id="pwg0" onclick="select_pwg('PWG11')" style="border-radius: 30px;">
 									 PWG11
 								</li>
 
@@ -178,50 +175,49 @@
 								</li>
 								<li class="list-group-item" style="display:none;">No more PWG</li>
 							</ul>
-				</div>
+								</div>
 								<div class="col-6">
-					<div class="table-responsive ml-5">
+									<div class="table-responsive ml-5">
 
 
-								<br>
-								<table class="table">
-									<thead>
-										<tr>
-<!--											<th scope="col" style="width: 10%;">Action</th>-->
+												<br>
+												<table class="table">
+													<thead>
+														<tr>
+				<!--											<th scope="col" style="width: 10%;">Action</th>-->
 
-										</tr>
-									</thead>
-									<tbody class="table-borderless">
+														</tr>
+													</thead>
+													<tbody class="table-borderless">
 
-										<tr>
-											<td></td>
-										</tr>
+														<tr>
+															<td></td>
+														</tr>
 
-										<tr>
-											<td colspan="4" id="right_next"><button type="button" class="btn btn-primary" id="first_next" onclick="right_next()" ><i class="fas fa-chevron-right"></i> Next</button></td>
-										</tr>
+														<tr>
+															<td colspan="4" id="right_next"><button type="button" class="btn btn-primary" id="first_next" onclick="right_next()" ><i class="fas fa-chevron-right"></i> Next</button></td>
+														</tr>
 
-										<tr>
-											<td></td>
-										</tr>
+														<tr>
+															<td></td>
+														</tr>
 
-										<tr>
-											<td></td>
-										</tr>
-									<tr>
-										<td colspan="3" id="left_next"><button type="button"  id="last_prev" class="btn btn-primary" onclick="left_next()" ><i class="fas fa-chevron-left"></i> Prev One</button></td>
-									</tr>
-									<tr>
-									</tr>
-									<tr>
-									</tr>
+														<tr>
+															<td></td>
+														</tr>
+													<tr>
+														<td colspan="3" id="left_next"><button type="button"  id="last_prev" class="btn btn-primary" onclick="left_next()" ><i class="fas fa-chevron-left"></i> Prev One</button></td>
+													</tr>
+													<tr>
+													</tr>
+													<tr>
+													</tr>
 
-									</tbody>
-								</table>
+													</tbody>
+												</table>
+											</div>
+								</div>
 							</div>
-				</div>
-
-			</div>
 						</div>
 
 
@@ -355,7 +351,6 @@
 				}
 
 			function setNextPassValue(pwg_name){
-					next_pass += 1
 					if(next_pass == 1){
 						$("#password").html("The "+next_pass+"<sup>st</sup> Password");
 					} else if(next_pass == 2){
@@ -365,6 +360,7 @@
 					} else{
 						$("#password").html("The "+next_pass+"<sup>th</sup> Password");
 					}
+					next_pass += 1
 			}
 
 			$(function(){
@@ -387,7 +383,7 @@
 
 					setNextPassValue(pwg_name);
 
-					if(next_pass >= 3){
+					if(next_pass > 3){
 						$('#pass_pwg').prop('disabled',false);
 						$('#pass').html('<a class="btn btn-success text-white my-2 mx-2"  onclick="myfun2()" id="pass_pwg">Pass</a>');
 					}
@@ -479,10 +475,12 @@
 			$('#yourButton').html("Get Password");
 
 		//resetting Password field to empty
-		$('#randomText').html(" ");
+		$('#randomText').html("xxxxxxxxxx");
+		$('#randomText').css("padding","0.5rem 1.4rem");
 
-			$("#yourButton").removeAttr("disabled");
-			$('#myInput').attr("value",value);
+
+		$("#yourButton").removeAttr("disabled");
+		$('#myInput').attr("value",value);
 
 
 
@@ -516,7 +514,7 @@
 			}
 
 			//making password available when it got selected
-			$('#randomText').html(randomText(15));
+			//$('#randomText').html(randomText(15));
 			setNextPassValue(value);
 
 		}
@@ -534,9 +532,10 @@
 		//resetting Next Password password to get Password
 		$('#yourButton').html("Get Password");
 
-		//resetting Password field to empty
-		$('#randomText').html(" ");
 
+		//resetting Password field to empty
+		$('#randomText').html("xxxxxxxxxx");
+		$('#randomText').css("padding","0.5rem 1.4rem");
 
 		//displaying the buttons block
 		$('#buttons').css("display", "flex");
@@ -563,7 +562,7 @@
 				$("#myInput").attr("value", list[clicks].innerHTML.trim());
 				//document.getElementById("password").innerHTML = 'The XXXth Password Of '+rows[clicks].getElementsByTagName("td")[0].innerHTML+' is Below';
 				//showing password when it got selected
-				$('#randomText').html(randomText(15));
+				//$('#randomText').html(randomText(15));
 				setNextPassValue(list[clicks].innerHTML);
 
 				clicks += 1;
@@ -584,7 +583,7 @@
 							//document.getElementById("password").innerHTML = 'The XXXth Password Of '+rows[i+1].getElementsByTagName("td")[0].innerHTML+' is Below';
 
 							//showing password when it got selected
-							$('#randomText').html(randomText(15));
+							//$('#randomText').html(randomText(15));
 							setNextPassValue(list[i+1].innerHTML.trim());
 							break;
 						} else{
@@ -621,7 +620,7 @@
 				$('#yourButton').html("Get Password");
 
 				//resetting Password field to empty
-				$('#randomText').html(" ");
+				$('#randomText').html("xxxxxxxxxx");
 
 
 				//enabling next password button to get next password
@@ -657,7 +656,7 @@
 								//document.getElementById("password").innerHTML = 'The XXXth Password Of '+rows[i-1].getElementsByTagName("td")[0].innerHTML+' is Below';
 
 								//showing password when it got selected
-								$('#randomText').html(randomText(15));
+								//$('#randomText').html(randomText(15));
 								setNextPassValue(list[i-1].innerHTML.trim());
 								break;
 							}else{

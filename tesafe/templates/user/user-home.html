@@ -360,17 +360,17 @@ modal for get password
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title font-weight-bold px-4" id="pwg_name_selected"></h5>
+
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 			</div>
 			<div class="modal-body">
-				<h6 id="tagline"></h6>
-				<p id="randomText" class="font-weight-bolder px-5" style="display:none;"></p>
-				<ul class="nav mt-5 px-4" id="buttons">
-								<li class="nav-item">
-									<button class="nav-link btn-primary btn text-white btn-sm" id="yourButton">Get Password</button>
-								</li>
-				</ul>
+				<h5 class="modal-title font-weight-bold px-4" id="pwg_name_selected"></h5>
+				<p id="randomText" class="font-weight-bolder px-5 mx-3">g2XThspHAB8QJZH</p>
+<!--				<ul class="nav mt-5 px-4" id="buttons">-->
+<!--					<li class="nav-item">-->
+<!--						<button class="nav-link btn-primary btn text-white btn-sm" id="yourButton">Get Password</button>-->
+<!--					</li>-->
+<!--				</ul>-->
 			</div>
 			<div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Return</button>
@@ -529,10 +529,13 @@ modal for get password
 			pwg_name = $(this).attr('value');
 			table = document.getElementById('myTable');
 			rows = table.rows;
-			$("#pwg_name_selected").html("PWG Name: "+pwg_name);
+			$("#pwg_name_selected").html("The Password of "+pwg_name+" is:");
 
 			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
 			$('#imagemodal').modal('show');
+			window.setTimeout(function(){
+				$('#imagemodal').modal('hide')
+			},300000);
 		});
 	});
 

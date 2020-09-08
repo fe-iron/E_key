@@ -65,11 +65,10 @@
               <i class="fas fa-ellipsis-v"></i>
             </button>
             <div class="dropdown-menu">
-
-              <a class="dropdown-item" href="#" onclick="Delete();">Retest</a>
-              <a class="dropdown-item" href="#" onclick="Freeze();">Return PWG to Admin</a>
               <a class="dropdown-item" href="#">Chat With Admin</a>
               <a class="dropdown-item" href="#">Get Payment from Admin</a>
+              <a class="dropdown-item" href="#" onclick="Delete();">Retest</a>
+              <a class="dropdown-item" href="#" onclick="Freeze();">Return PWG to Admin</a>
               <a class="dropdown-item" href="/">Exit</a>
             </div>
           </div>
@@ -1314,9 +1313,9 @@
         document.getElementById("tested-faulty").style.display = "block";
         document.getElementById("faulty").style.display = "none";
         document.getElementById("untested").style.display = "none";
-        document.getElementById("pwg-on").style.display = "none";
+        document.getElementById("pwg-on").style.display = "block";
         document.getElementById("pwg-on-untested").style.display = "none";
-        document.getElementById("pwg-off").style.display = "block";
+        document.getElementById("pwg-off").style.display = "none";
         document.getElementById("tested").style.display = "block";
 
       }
@@ -1345,8 +1344,6 @@
 
         document.getElementById("faulty").style.display = "none";
         document.getElementById("tested").style.display = "block";
-
-
       }
 
       function untested() {
