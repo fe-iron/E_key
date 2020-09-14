@@ -53,7 +53,7 @@ class WebAdminLoginHistory(models.Model):
     login_time = models.TimeField(auto_now=True)
     login_date = models.DateField(auto_now=True)
     duration = models.CharField(max_length=50, default="0 minutes")
-    device_name = models.CharField(max_length=255)
+    device_name = models.CharField(max_length=255, null=True)
 
     def __str__(self):
         return self.user

@@ -54,6 +54,7 @@ def index(request):
             return redirect('/')
 
     else:
+        print(request)
         return render(request, 'tesafe/index.html')
 
 
