@@ -1,20 +1,5 @@
-
 from django.db import models
 from django.contrib.auth.models import User
-
-
-# class User(AbstractUser):
-#     is_webAdmin = models.BooleanField(default=False)
-#     is_seller = models.BooleanField(default=False)
-#     is_tester = models.BooleanField(default=False)
-#     is_user = models.BooleanField(default=False)
-
-
-# class Seller(models.Model):
-#     name = models.ForeignKey(getUser, related_name='first_name', on_delete=models.CASCADE)
-#
-#     email = models.CharField(max_length=150)
-#     phone = models.CharField(max_length=12)
 
 
 class WebAdmin(models.Model):
@@ -63,12 +48,59 @@ class WebUser(models.Model):
 
 # Login Activity model of Admin
 class WebAdminLoginHistory(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     login_IP = models.GenericIPAddressField(null=True, blank=True)
-    login_datetime = models.DateTimeField(auto_now=True)
-    login_username = models.CharField(max_length=40, null=True, blank=True)
+    login_time = models.TimeField(auto_now=True)
+    login_date = models.DateField(auto_now=True)
     duration = models.CharField(max_length=50, default="0 minutes")
     device_name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.user
 
     class Meta:
         verbose_name = 'web_login_history'
         verbose_name_plural = 'webAdmin login history'
+
+
+# Login Activity model of Admin
+class PasswordHistory(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    login_time = models.TimeField(auto_now=True)
+    login_date = models.DateField(auto_now=True)
+    device_name = models.CharField(max_length=255)
+    last_pass = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.user
+
+    class Meta:
+        verbose_name = 'Password History'
+        verbose_name_plural = 'Password Histories'
+
+
+# PWG Server
+class PWGServers(models.Model):
+    name = models.CharField(max_length=255)
+    alias = models.CharField(max_length=255)
+    pwg_count = models.IntegerField()
+
+    class Meta:
+        verbose_name_plural = "PWG Servers"
+
+    def __str__(self):
+        return self.name
+
+
+# PWGs modal
+class PWG(models.Model):
+    name = models.CharField(max_length=255)
+    alias = models.CharField(max_length=255)
+    owned_by = models.ForeignKey(PWGServers, verbose_name="PWGServers", on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = "PWGs"
+
+    def __str__(self):
+        return self.name
+

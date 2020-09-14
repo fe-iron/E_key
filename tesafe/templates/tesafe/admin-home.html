@@ -4,11 +4,6 @@
 <head>
 	<title>Admin | Home</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
-
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
@@ -56,10 +51,6 @@
 						<li class="nav-item pl-3">
 							<a class="nav-link" href="admin-info-server">PWG Server</a>
 						</li>
-
-						<!-- <li class="nav-item pl-3">
-							<a class="nav-link" href="admin-info-server.html">Unread Messages <span><i class="fas fa-bell"></i></span></a>
-						</li> -->
 					</ul>
 					
 				</div>
@@ -147,9 +138,9 @@
 												<tr>
 
 													<th scope="row">PWGs</th>
-													<td>20</td>
-													<td>15</td>
-													<td>5</td>
+													<td>{{PWGs_count}}</td>
+													<td>{{PWGs_online}}</td>
+													<td>{{PWGs_offline}}</td>
 												</tr>
 											</tbody>
 										</table>
@@ -165,12 +156,15 @@
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="login-history" style="display: none;">
 						
 						<div class="col-md">
-							<h4 class="">Login History<span class="float-right">
-							<a href="admin-home" type="button" class="btn btn-danger btn-sm">Return</a></span></h4>
+							<h4>Login History
+                                <span class="d-flex justify-content-end">
+							        <a href="admin-home" type="button" class="btn btn-danger btn-sm">Return</a>
+                                </span>
+                            </h4>
 							<div class="row">
 								<div class="col-md-6 py-3">
 									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Number Of times Admin Been Logged in </h6>
-									<p>2 times</p>
+									<p>{{history_count}}</p>
 								</div>
 							</div>
 
@@ -186,27 +180,18 @@
 													<th scope="col">TIme</th>
 													<th scope="col">Device Name</th>
 													<th scope="col">Login IP Address</th>
-													<th scope="col">Duration Of Online</th>
-
 												</tr>
 											</thead>
 											<tbody>
+											{% for admin_history in history %}
 												<tr>
-													<th scope="row">1</th>
-													<td>20/06/5</td>
-													<td>5:30pm</td>
-													<td>Samsung</td>
-													<td>10.2.0.10:8090</td>
-													<td>30 minutes</td>
+													<th scope="row">{{forloop.counter}}</th>
+													<td>{{admin_history.login_date}}</td>
+													<td>{{admin_history.login_time}}</td>
+													<td>{{admin_history.device_name}}</td>
+													<td>{{admin_history.login_IP}}</td>
 												</tr>
-												<tr>
-													<th scope="row">2</th>
-													<td>19/06/5</td>
-													<td>3:32pm</td>
-													<td>Chrome</td>
-													<td>10.2.0.10:7690</td>
-													<td>45 minutes</td>
-												</tr>
+											{% endfor %}
 											</tbody>
 										</table>
 									</div>
@@ -224,19 +209,20 @@
 							<div class="row ">
 								<div class="col-md-8 py-3">
 									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change Your Current Password </h6>
-									<form>
+									<form action="password_change" method="post">
+										{% csrf_token %}
 									  <div class="form-group">
-									    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Old Password ">
+									    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email" name="old_email">
 									  </div>
 									  <div class="form-group">
-									     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter New Password ">
+									     <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter New Password " name="new_email">
 									  </div>
 
 									  <div class="form-group">
-									     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Confirm New Password ">
+									     <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Confirm New Password " name="new_conf_email">
 									  </div>
 									<button class="btn btn-success" type="submit">Proceed</button>
-									<button class="btn btn-secondary" type="submit" onclick="cancel()">Cancel</button>
+                                        <a href="admin-home"><button class="btn btn-secondary" type="button" onclick="cancel()">Cancel</button></a>
 									</form>
 								</div>
 							</div>
@@ -253,57 +239,29 @@
 								<table class="table">
 									<thead>
 										<tr>
-
 											<th scope="col">Sr. No.</th>
-											<th scope="col">Last Change</th>
+											<th scope="col">Date</th>
+											<th scope="col">Time</th>
 											<th scope="col">Device Name</th>
 											<th scope="col">Last Password</th>
-
 										</tr>
 									</thead>
 									<tbody>
+                                    {% for history in password_history %}
 										<tr>
-											<th scope="row">1</th>
-											<td>02/5/20</td>
-											<td>Samsung</td>
-											<td>abc@12345678</td>
+											<th scope="row">{{forloop.counter}}</th>
+											<td>{{history.login_date}}</td>
+											<td>{{history.login_time}}</td>
+											<td>{{history.device_name}}</td>
+											<td>{{history.last_pass}}</td>
 										</tr>
-										<tr>
-											<th scope="row">2</th>
-											<td>02/9/19</td>
-											<td>Apple</td>
-											<td>abc@172345678</td>
-										</tr>
+                                    {% endfor %}
 									</tbody>
 								</table>
 							</div>
 						</div>
 
 					</div>
-
-					<!-- <div class="row justify-content-center py-3 bg-button-1 m-4">
-						<div class="col-md">
-							<button type="button" class="btn btn-primary"> Admin Login Detail</button>
-							<div class="">
-								<h5>Number Of times Admin Been Logged in  <span>5 Times</span></h5>
-								<h5>Admin Login History</h5>
-								<ol>
-									 <li>	
-									 	20/01/20 <span> 50:30 Pm</span>
-								     </li>
-
-								</ul>
-							</div>
-						</div>
-						
-					</div> -->
-
-					<!-- <div class="row justify-content-center py-3 bg-button-1 m-4">
-						<div class="col-md">
-							<button type="button" class="btn btn-primary"> Admin Login Detail</button>
-						</div>
-								
-					</div> -->
 				</div>
 			</div>
 
@@ -320,7 +278,7 @@
 		function myfun(){
 			document.getElementById("Statics").style.display="block";
 			document.getElementById("change-passward").style.display="none";
-			document.getElementById("login-history").style.display="block";
+			document.getElementById("login-history").style.display="none";
 			document.getElementById("login-history").style.display="none";
 		}
 		function myfun1(){

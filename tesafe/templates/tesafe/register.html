@@ -59,7 +59,7 @@
 
 									<div class="form-group mb-4">
 										<label class="font-weight-bold">Account Type</label>
-										<select class="form-control" name="accType">
+										<select class="form-control" name="accType" id="accType">
 											<option value="admin">Admin</option>
 											<option value="seller">Seller</option>
 											<option value="tester">Tester</option>
@@ -75,6 +75,7 @@
 									<div class="form-group mb-4">
 										<input type="text" class="form-control"  name="uname" placeholder="Enter username ( includes @,#,!,_,-,etc )">
 									</div>
+									<div id="upload"></div>
 									<div class="form-group mb-4">
 										<input type="email" class="form-control"  name="email" placeholder="Enter Your email" required>
 									</div>
@@ -82,10 +83,10 @@
 										<input type="tel" class="form-control"  name="phone" placeholder="Enter Your Phone Number" title="Invalid Phone Number" pattern="[1-9]{1}[0-9]{9}">
 									</div>
 									<div class="form-group mb-4">
-										<input type="password" class="form-control" name="password1" placeholder="Enter Password" required>
+										<input type="password" class="form-control" name="password1" placeholder="Enter Password" required autocomplete="on">
 									</div>
 									<div class="form-group mb-4">
-										<input type="password" class="form-control"  name="password2" placeholder="Confirm Password" required>
+										<input type="password" class="form-control"  name="password2" placeholder="Confirm Password" required autocomplete="on">
 									</div>
 									<div class="form-group">
 										<button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -103,5 +104,15 @@
 		</div>
 	</section>
 
+	<script>
+		$('#accType').on('change',function() {
+			if($('#accType').val() == 'seller' || $('#accType').val() == 'tester' || $('#accType').val() == 'user'){
+				$('#upload').html('<div class="form-group"><label for="exampleFormControlFile1">Profile Pic</label><input type="file" class="form-control-file"></div>');
+  			}else{
+  				$('#upload').html('');
+  			}
+		});
+
+	</script>
 </body>
 </html>
