@@ -67,6 +67,7 @@ def register(request):
         phone = request.POST['phone']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
+        device = request.META.get("COMPUTERNAME")
 
         # password checking
 
@@ -86,8 +87,7 @@ def register(request):
                     user.save()
 
                     # creating password history
-                    passHistory = PasswordHistory(user=user, device_name=request.META.get("COMPUTERNAME"),
-                                                  last_pass=password1)
+                    passHistory = PasswordHistory(user=user, device_name=device,last_pass=password1)
                     passHistory.save()
 
                     webAdmin = WebAdmin(user=user, first_name=fname, last_name=lname, email=email, phone=phone)
