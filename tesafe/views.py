@@ -28,6 +28,7 @@ def index(request):
         accType = request.POST['accType']
         password = request.POST['password']
         uname = request.POST['uname']
+        print(request)
 
         user = auth.authenticate(username=uname, password=password)
 
