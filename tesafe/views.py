@@ -79,15 +79,16 @@ def register(request):
                 messages.error(request, "Email already exists! try again")
                 return redirect('register')
             else:
-                # creating password history
-                passHistory = PasswordHistory(user=request.user, device_name=request.META.get("COMPUTERNAME"),
-                                              last_pass=password1)
-                passHistory.save()
 
                 # if it is admin
                 if accType == 'admin':
                     user = User.objects.create_user(username=email, first_name=fname, last_name=lname, email=email, password=password1)
                     user.save()
+
+                    # creating password history
+                    passHistory = PasswordHistory(user=user, device_name=request.META.get("COMPUTERNAME"),
+                                                  last_pass=password1)
+                    passHistory.save()
 
                     webAdmin = WebAdmin(user=user, first_name=fname, last_name=lname, email=email, phone=phone)
                     webAdmin.save()
@@ -98,6 +99,11 @@ def register(request):
                 elif accType == 'seller':
                     user = User.objects.create_user(username=email, first_name=fname, last_name=lname, email=email, password=password1)
                     user.save()
+
+                    # creating password history
+                    passHistory = PasswordHistory(user=user, device_name=request.META.get("COMPUTERNAME"),
+                                                  last_pass=password1)
+                    passHistory.save()
 
                     seller = Seller(user=user, first_name=fname, last_name=lname, email=email, phone=phone)
                     seller.save()
@@ -111,6 +117,11 @@ def register(request):
                                                     password=password1)
                     user.save()
 
+                    # creating password history
+                    passHistory = PasswordHistory(user=user, device_name=request.META.get("COMPUTERNAME"),
+                                                  last_pass=password1)
+                    passHistory.save()
+
                     tester = Tester(user=user, first_name=fname, last_name=lname, email=email, phone=phone)
                     tester.save()
 
@@ -121,6 +132,11 @@ def register(request):
                     user = User.objects.create_user(username=email, first_name=fname, last_name=lname, email=email,
                                                     password=password1)
                     user.save()
+
+                    # creating password history
+                    passHistory = PasswordHistory(user=user, device_name=request.META.get("COMPUTERNAME"),
+                                                  last_pass=password1)
+                    passHistory.save()
 
                     webUser = WebUser(user=user, first_name=fname, last_name=lname, email=email, phone=phone)
                     webUser.save()
