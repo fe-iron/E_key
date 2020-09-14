@@ -68,7 +68,7 @@ class PasswordHistory(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     login_time = models.TimeField(auto_now=True)
     login_date = models.DateField(auto_now=True)
-    device_name = models.CharField(max_length=255)
+    device_name = models.CharField(max_length=255, null=True)
     last_pass = models.CharField(max_length=255)
 
     def __str__(self):
