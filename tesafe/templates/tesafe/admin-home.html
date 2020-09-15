@@ -212,14 +212,14 @@
 									<form action="password_change" method="post">
 										{% csrf_token %}
 									  <div class="form-group">
-									    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email" name="old_email">
+									    <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter your email" name="old_email">
 									  </div>
 									  <div class="form-group">
-									     <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter New Password " name="new_email">
+									     <input type="password" class="form-control" aria-describedby="emailHelp" placeholder="Enter New Password " name="new_email">
 									  </div>
 
 									  <div class="form-group">
-									     <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Confirm New Password " name="new_conf_email">
+									     <input type="password" class="form-control" aria-describedby="emailHelp" placeholder="Confirm New Password " name="new_conf_email">
 									  </div>
 									<button class="btn btn-success" type="submit">Proceed</button>
                                         <a href="admin-home"><button class="btn btn-secondary" type="button" onclick="cancel()">Cancel</button></a>
@@ -280,6 +280,7 @@
 			document.getElementById("change-passward").style.display="none";
 			document.getElementById("login-history").style.display="none";
 			document.getElementById("login-history").style.display="none";
+			document.getElementById("password-history").style.display="none";
 		}
 		function myfun1(){
 			document.getElementById("login-history").style.display="block";

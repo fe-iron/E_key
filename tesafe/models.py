@@ -19,6 +19,7 @@ class Seller(models.Model):
     last_name = models.CharField(max_length=100)
     email = models.CharField(max_length=150)
     phone = models.CharField(max_length=15)
+    profile_pic = models.ImageField(upload_to='seller')
 
     def __str__(self):
         return self.first_name
@@ -30,6 +31,7 @@ class Tester(models.Model):
     last_name = models.CharField(max_length=100)
     email = models.CharField(max_length=150)
     phone = models.CharField(max_length=15)
+    profile_pic = models.ImageField(upload_to='tester', default="none")
 
     def __str__(self):
         return self.first_name
@@ -41,6 +43,7 @@ class WebUser(models.Model):
     last_name = models.CharField(max_length=100)
     email = models.CharField(max_length=150)
     phone = models.CharField(max_length=15)
+    profile_pic = models.ImageField(upload_to='user', default="none")
 
     def __str__(self):
         return self.first_name
@@ -56,11 +59,11 @@ class WebAdminLoginHistory(models.Model):
     device_name = models.CharField(max_length=255, null=True)
 
     def __str__(self):
-        return self.user
+        return self.user.first_name
 
     class Meta:
         verbose_name = 'web_login_history'
-        verbose_name_plural = 'webAdmin login history'
+        verbose_name_plural = 'login history'
 
 
 # Login Activity model of Admin
@@ -72,7 +75,7 @@ class PasswordHistory(models.Model):
     last_pass = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.user
+        return self.user.first_name
 
     class Meta:
         verbose_name = 'Password History'

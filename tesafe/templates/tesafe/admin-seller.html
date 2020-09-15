@@ -113,14 +113,13 @@
 											<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere" disabled> <i class="fas fa-sort-down"></i></th>
 											<th scope="col">Name</th>
 											<th scope="col">Action</th>
-
-
 										</tr>
 									</thead>
 									<tbody id="myTable">
+									{% for sel in seller %}
 										<tr>
 											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td><span><img src="{% static 'tesafe/images/faiz.png' %}" height="40" width="40" class="rounded-circle"></span> Faiz Elahi</td>
+											<td><span><img src="{{sel.profile_pic.url}}" height="40" width="40" class="rounded-circle"></span> {{sel.first_name}} {{sel.last_name}}</td>
 											<td><a href="transfer" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
@@ -128,69 +127,14 @@
 												<div class="dropdown-menu">
 													<a class="dropdown-item" href="#">Chat</a>
 													<a class="dropdown-item" href="">Payment</a>
-													<a class="dropdown-item pop" href="#" > Login History </a>
+													<a class="dropdown-item" onclick="pop({{sel.user.pk}});" href="#" > Login History </a>
 													<a class="dropdown-item" href="" >Chat History</a>
-													<a class="dropdown-item" href="" >Delete</a>
+													<a class="dropdown-item" onclick="delete_user({{sel.user.pk}});" href="#" >Delete</a>
 													<a class="dropdown-item" href="" >Freeze</a>
 												</div>
 											</div></td>
 										</tr>
-
-										<tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book2"></th>
-											<td><span><img src="{% static 'tesafe/images/tesafe.jpg' %}" height="40" width="40" class="rounded-circle"></span> Frank</td>
-											<td><a href="transfer" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-													<i class="fas fa-ellipsis-v"></i>
-												</button>
-												<div class="dropdown-menu">
-													<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
-													<a class="dropdown-item" href="">Chat</a>
-													<a class="dropdown-item" href=""> Payment</a>
-													<a class="dropdown-item pop" href="#" >Login History</a>
-													<a class="dropdown-item" href="" >Chat History</a>
-													<a class="dropdown-item" href="" >Delete</a>
-													<a class="dropdown-item" href="" >Freeze</a>
-												</div>
-											</div></td>
-										</tr>
-
-										<tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book3"></th>
-											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Naqui</td>
-											<td><a href="transfer" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-													<i class="fas fa-ellipsis-v"></i>
-												</button>
-												<div class="dropdown-menu">
-													<a class="dropdown-item" href="#">Chat</a>
-													<a class="dropdown-item" href="">Payment</a>
-													<a class="dropdown-item pop" href="#"> Login History </a>
-													<a class="dropdown-item" href="" >Chat History</a>
-													<a class="dropdown-item" href="" >Delete</a>
-													<a class="dropdown-item" href="" >Freeze</a>
-												</div>
-											</div></td>
-										</tr>
-
-										<tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book4"></th>
-											<td><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Jacquelin</td>
-											<td><a href="transfer" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-													<i class="fas fa-ellipsis-v"></i>
-												</button>
-												<div class="dropdown-menu">
-													<a class="dropdown-item" href="#">Chat</a>
-													<a class="dropdown-item" href="">Payment</a>
-													<a class="dropdown-item pop" href="#"> Login History </a>
-													<a class="dropdown-item" href="" >Chat History</a>
-													<a class="dropdown-item" href="" >Delete</a>
-													<a class="dropdown-item" href="" >Freeze</a>
-												</div>
-											</div></td>
-										</tr>
-
+									{% endfor %}
 									</tbody>
 								</table>
 							</div>
@@ -205,43 +149,24 @@
 							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Add Seller Account</h5>
 							<div class="row">
 								<div class="col-md-6 py-3">
-									<!-- <form>
-										<div class="row">
-											<div class="col-md mb-2">
-												<input type="text" class="form-control" placeholder="Enter Name">
-											</div>
-											<div class="col-md mb-2">
-												<input type="email" class="form-control" placeholder="Enter Email">
-											</div>
-
-											<div class="col-md mb-2">
-												<input type="password" class="form-control" placeholder="Enter Password">
-											</div>
-
-											<div class="col-md mb-2">
-												<button class="btn btn-primary" type="submit">Sumbit</button>
-												<button class="btn btn-danger" type="submit" onclick="cancel()">Cancel</button>
-											</div>
-										</div>
-									</form> -->
 									<form>
 									  <div class="form-group">
-									    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name ">
+									    <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Name ">
 									  </div>
 									  <div class="form-group">
-									     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Alias Name ">
-									  </div>
-
-									  <div class="form-group">
-									     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email ">
+									     <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Alias Name ">
 									  </div>
 
 									  <div class="form-group">
-									     <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Contact Number ">
+									     <input type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Email ">
 									  </div>
 
 									  <div class="form-group">
-									     <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Password ">
+									     <input type="number" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Contact Number ">
+									  </div>
+
+									  <div class="form-group">
+									     <input type="password" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Password ">
 									  </div>
 
 									<button class="btn btn-primary" type="submit">Submit</button>
@@ -392,21 +317,14 @@
 	<a href="admin-seller" class=" btn btn-danger">Cancel</a>
 </section>
 
-
-
-
-
-
-
-
 <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title font-weight-bold">Login History of Seller ABC</h5>
+				<h5 class="modal-title font-weight-bold" id="modal-title-history">Login History of Seller ABC</h5>
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body" id="modal-body-login-history">
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
@@ -416,8 +334,6 @@
 								<th scope="col">Time</th>
 								<th scope="col">Device Name</th>
 								<th scope="col">Login IP Address</th>
-								<th scope="col">Duration Of Online</th>
-
 							</tr>
 						</thead>
 						<tbody>
@@ -427,7 +343,6 @@
 								<td>5:30pm</td>
 								<td>Samsung</td>
 								<td>10.2.0.10:8090</td>
-								<td>30 minutes</td>
 							</tr>
 						</tbody>
 					</table>
@@ -440,7 +355,26 @@
 	</div>
 </div>
 
+<!--	to show confirmation popup-->
+<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Message</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+			</div>
+			<div class="modal-body text-center p-4">
+				<i class="fas fa-check-circle fa-3x" style="color: green;" id="confirm-message-color"></i>
+				<p class="pt-2 font-weight-bold" id="confirm-message"></p>
 
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+<script src="{% static 'tesafe/js/ajax.js' %}"></script>
 <script type="text/javascript">
 
 // search filter table
@@ -453,15 +387,6 @@
 		});
 	});
 
-
-
-// modal popup
-	$(function() {
-		$('.pop').on('click', function() {
-			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-			$('#imagemodal').modal('show');
-		});
-	});
 
 
 

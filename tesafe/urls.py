@@ -48,4 +48,9 @@ urlpatterns = [
     # path("reset/<uidb64>/<token>/", auth_views.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
     # path("reset_password_complete/", auth_views.PasswordResetCompleteView.as_view(), name="password_reset_complete"),
 
+    # ajax url
+    path("validate_nickname", views.ajax_request, name="validate_nickname"),
+    path("find_username", views.find_username, name="find_username"),
+    # delete
+    path("delete", views.delete, name="delete"),
 ]

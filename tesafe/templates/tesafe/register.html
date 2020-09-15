@@ -107,7 +107,7 @@
 	<script>
 		$('#accType').on('change',function() {
 			if($('#accType').val() == 'seller' || $('#accType').val() == 'tester' || $('#accType').val() == 'user'){
-				$('#upload').html('<div class="form-group"><label for="exampleFormControlFile1">Profile Pic</label><input type="file" class="form-control-file"></div>');
+				$('#upload').html('<div class="form-group"><label for="exampleFormControlFile1">Profile Pic</label><input type="file" class="form-control-file" name="file"></div>');
   			}else{
   				$('#upload').html('');
   			}

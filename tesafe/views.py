@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import WebAdmin, Seller, Tester, WebUser, PWGServers, PWG, WebAdminLoginHistory, PasswordHistory
 from django.contrib.auth.models import auth, User
 from django.contrib import messages
+from django.core import serializers
 from django.contrib.sessions.models import Session
 from django.utils import timezone
 from django.http import HttpResponse
@@ -69,6 +70,7 @@ def register(request):
         phone = request.POST['phone']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
+        file = request.POST['file']
         device = request.META.get("COMPUTERNAME")
 
         # password checking
@@ -107,7 +109,7 @@ def register(request):
                                                   last_pass=password1)
                     passHistory.save()
 
-                    seller = Seller(user=user, first_name=fname, last_name=lname, email=email, phone=phone)
+                    seller = Seller(user=user, first_name=fname, last_name=lname, email=email, phone=phone, profile_pic=file)
                     seller.save()
 
                     return render(request, 'seller/seller-home.html')
@@ -124,7 +126,7 @@ def register(request):
                                                   last_pass=password1)
                     passHistory.save()
 
-                    tester = Tester(user=user, first_name=fname, last_name=lname, email=email, phone=phone)
+                    tester = Tester(user=user, first_name=fname, last_name=lname, email=email, phone=phone, profile_pic=file)
                     tester.save()
 
                     return render(request, 'tester/tester-home.html')
@@ -140,7 +142,7 @@ def register(request):
                                                   last_pass=password1)
                     passHistory.save()
 
-                    webUser = WebUser(user=user, first_name=fname, last_name=lname, email=email, phone=phone)
+                    webUser = WebUser(user=user, first_name=fname, last_name=lname, email=email, phone=phone, profile_pic=file)
                     webUser.save()
 
                     return render(request, 'tester/tester-home.html')
@@ -200,7 +202,13 @@ def admin_home(request):
 
 
 def admin_seller(request):
-    return render(request, 'tesafe/admin-seller.html', {'num': [11,23,33,42,35,67,78,49,10]})
+    seller = Seller.objects.all()
+    history = WebAdminLoginHistory.objects.all()
+    param = {
+        'seller': seller,
+        'history': history
+    }
+    return render(request, 'tesafe/admin-seller.html', param)
 
 
 def admin_tester(request):
@@ -242,7 +250,11 @@ def register_next(request):
 
 
 def seller_home(request):
-    return render(request, 'seller/seller-home.html', {'num': [11,23,33,42,35,67,78,49,10]})
+    seller = Seller.objects.all()
+    param = {
+        'seller': seller
+    }
+    return render(request, 'seller/seller-home.html', param)
 
 
 def seller_user(request):
@@ -354,3 +366,59 @@ def password_change(request):
 
     else:
         return render(request, "index.html")
+
+
+def ajax_request(request):
+    # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        # get the history from the database
+        pk = request.GET.get("pk", None)
+        # check for the pk in the database.
+        if WebAdminLoginHistory.objects.filter(user_id=pk).exists():
+            # if history found return history
+            history = WebAdminLoginHistory.objects.filter(user_id=pk)
+            name = WebAdminLoginHistory.objects.get(user_id=pk)
+            history_json = serializers.serialize('json', history)
+
+            return HttpResponse(history_json, content_type='application/json')
+        else:
+            # if history not found, then return true
+            return JsonResponse({"history": False}, status=200)
+
+    return JsonResponse({}, status=400)
+
+
+def find_username(request):
+    # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        # get the history from the database
+        pk = request.GET.get("pk", None)
+        # check for the pk in the database.
+        if User.objects.filter(pk=pk).exists():
+            name = User.objects.get(pk=pk)
+            name1 = name.first_name
+            return JsonResponse({"name": name1}, status=200)
+        else:
+            # if name not found, then return true
+            return JsonResponse({"name": False}, status=200)
+
+    return JsonResponse({}, status=400)
+
+
+def delete(request):
+    # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        # get the history from the database
+        pk = request.GET.get("pk", None)
+        # check for the pk in the database.
+        if User.objects.filter(id=pk).exists():
+            my_object = User.objects.get(id=pk)
+            name = my_object.first_name
+            name = "{} has been successfully deleted".format(name)
+            my_object.delete()
+            return JsonResponse({"msg": name}, status=200)
+        else:
+            # if name not found, then return msg
+            return JsonResponse({"msg": False}, status=200)
+
+    return JsonResponse({}, status=400)
