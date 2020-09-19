@@ -35,7 +35,7 @@ function pop(pk){
 
 
 
-//to fetch seller name
+//to fetch seller name for the login history
 function user_name(pk){
         // GET AJAX request
         $.ajax({
@@ -58,7 +58,7 @@ function delete_user(pk){
         $.ajax({
             type: 'GET',
             url: "delete",
-            data: {"pk": pk},
+            data: {"pk": pk, "user":"seller"},
             success: function (response) {
                     if(response['msg'] == false){
                         $("#confirm-message").html("Something went wrong, Try again");
@@ -77,4 +77,59 @@ function delete_user(pk){
                 console.log(response)
             }
         })
+}
+
+
+//to freeze seller
+function freeze_user(pk){
+        // GET AJAX request
+        $.ajax({
+            type: 'GET',
+            url: "freeze",
+            data: {"pk": pk, "user":"seller"},
+            success: function (response) {
+                    if(response['msg'] == false){
+                        $("#confirm-message").html("Something went wrong, Try again");
+                        $("#confirm-message-color").css("color","red");
+                    }else{
+                        $("#confirm-message").html(response['msg']);
+                        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                        $('#confirm').modal('show');
+                    }
+                    window.setTimeout(function(){
+                        location.reload(true);
+                    }, 3000);
+
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+}
+
+function unfreeze_user(pk){
+        // GET AJAX request
+        $.ajax({
+            type: 'GET',
+            url: "unfreeze",
+            data: {"pk": pk, "user":"seller"},
+            success: function (response) {
+                    if(response['msg'] == false){
+                        $("#confirm-message").html("Something went wrong, Try again");
+                        $("#confirm-message-color").css("color","red");
+                    }else{
+                        $("#confirm-message").html(response['msg']);
+                        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                        $('#confirm').modal('show');
+                    }
+                    window.setTimeout(function(){
+                        location.reload(true);
+                    }, 3000);
+
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+
 }

@@ -11,7 +11,7 @@ urlpatterns = [
     path("admin-seller", views.admin_seller, name="admin-seller"),
     path("admin-tester", views.admin_tester, name="admin-tester"),
     path("admin-info-server", views.admin_info_server, name="admin-info-server"),
-    path("transfer", views.transfer, name="transfer"),
+    path("transfer<int:id>", views.transfer, name="transfer"),
     path("tester-getback", views.tester_getback, name="tester-getback"),
     path("tester-tested-pwg-list", views.tester_tested_pwg_list, name="tester-tested-pwg-list"),
     path("pwg-sublist", views.pwg_sublist, name="pwg-sublist"),
@@ -53,4 +53,17 @@ urlpatterns = [
     path("find_username", views.find_username, name="find_username"),
     # delete
     path("delete", views.delete, name="delete"),
+    # freeze
+    path("freeze", views.freeze, name="freeze"),
+    # Unfreeze
+    path("unfreeze", views.unfreeze, name="unfreeze"),
+    # transfer_pwg and pwgs
+    path("transfer_pwgs", views.transfer_pwgs, name="transfer_pwgs"),
+    # transfer_pwg and pwgs
+    path("add-new", views.add_new, name="add-new"),
+    # transfer_pwg and pwgs
+    path("delete_multiple_user", views.delete_multiple_user, name="delete_multiple_user"),
+    # transfer_pwg and pwgs
+    path("freeze_multiple_user", views.freeze_multiple_user, name="freeze_multiple_user"),
+
 ]

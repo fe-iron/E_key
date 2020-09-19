@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import WebAdmin, Seller, Tester, WebUser, PWGServers, PWG, WebAdminLoginHistory, PasswordHistory
+from .models import WebAdmin, Seller, Tester, WebUser, PWGServers, PWG, WebAdminLoginHistory, PasswordHistory, TransferPwgs, TransferPwg
 from django.contrib.auth.models import auth, User
 from django.contrib import messages
 from django.core import serializers
@@ -8,6 +8,12 @@ from django.utils import timezone
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.http import JsonResponse
+
+
+# dictionary of num to text
+num = {
+    1:"One",2:"Two",3:"Three",4:"Four",5:"Five",6:"Six",7:"Seven",8:"Eight",9:"Nine",10:"Ten",11:"Eleven",12:"Twelve",13:"Thirteen",14:"Fourteen",15:"Fifteen",16:"Sixteen",17:"Seventeen",18:"Eighteen",19:"Nineteen",20:"Twenty"
+}
 
 
 # Create your views here.
@@ -219,7 +225,6 @@ def admin_info_server(request):
     return render(request, 'tesafe/admin-info-server.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
 
 
-
 def register_next(request):
     if request.method == 'POST':
         accType = request.POST['accType']
@@ -265,8 +270,18 @@ def seller_pwg(request):
     return render(request, 'seller/seller-pwg.html', {'num': [11,23,33,42,35,67,78,49,10]})
 
 
-def transfer(request):
-    return render(request, 'tesafe/transfer.html', {'num': [11,23,33,42,35,67,78,49,10]})
+def transfer(request, id):
+    user = User.objects.get(id=id)
+    pwgserver = PWGServers.objects.all()
+    pwg = PWG.objects.all()
+    param = {
+        "name": user.first_name + " " + user.last_name,
+        "pwgserver": pwgserver,
+        "pwg": pwg,
+        "num": num,
+        "id": id
+    }
+    return render(request, 'tesafe/transfer.html', param)
 
 
 def tester_getback(request):
@@ -345,6 +360,7 @@ def user_home(request):
     return render(request, 'user/user-home.html')
 
 
+# TODOs
 def password_change(request):
     if request.method == "POST":
         old_email = request.POST['old_email']
@@ -410,6 +426,8 @@ def delete(request):
     if request.is_ajax and request.method == "GET":
         # get the history from the database
         pk = request.GET.get("pk", None)
+        user = request.GET.get("user", None)
+        # if user == "seller":
         # check for the pk in the database.
         if User.objects.filter(id=pk).exists():
             my_object = User.objects.get(id=pk)
@@ -422,3 +440,168 @@ def delete(request):
             return JsonResponse({"msg": False}, status=200)
 
     return JsonResponse({}, status=400)
+
+
+def freeze(request):
+    # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        # get the history from the database
+        pk = request.GET.get("pk", None)
+        user = request.GET.get("user", None)
+        if user == "seller":
+            # check for the pk in the database.
+            if Seller.objects.filter(id=pk).exists():
+                my_object = Seller.objects.get(id=pk)
+                my_object.is_freeze = True
+                name = my_object.alias
+                my_object.save()
+                name = "{} has been successfully freezed".format(name)
+                return JsonResponse({"msg": name}, status=200)
+            else:
+                # if name not found, then return msg
+                return JsonResponse({"msg": False}, status=200)
+
+    return JsonResponse({}, status=400)
+
+
+def unfreeze(request):
+    # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        # get the history from the database
+        pk = request.GET.get("pk", None)
+        user = request.GET.get("user", None)
+        if user == "seller":
+        # check for the pk in the database.
+            if Seller.objects.filter(id=pk).exists():
+                my_object = Seller.objects.get(id=pk)
+                my_object.is_freeze = False
+                name = my_object.alias
+                my_object.save()
+                name = "{} has been successfully unfreezed".format(name)
+                return JsonResponse({"msg": name}, status=200)
+            else:
+                # if name not found, then return msg
+                return JsonResponse({"msg": False}, status=200)
+
+    return JsonResponse({}, status=400)
+
+
+def delete_multiple_user(request):
+    # request's method  should be POST
+    if request.method == "POST":
+        sellers = []
+        # fetch the data from the request
+        values = request.POST.get("values", None)
+        accType = request.POST.get("accType", None)
+
+        # print(values)
+        if accType == "seller":
+            for i in values:
+                if Seller.objects.filter(id=i).exists():
+                    seller = Seller.objects.get(id=i)
+                    id_user = seller.user_id
+                    seller = User.objects.get(id=id_user)
+                    seller.delete()
+
+            return redirect('admin-seller')
+
+    return redirect('admin-seller')
+
+
+def transfer_pwgs(request):
+    # request's method  should be POST
+    if request.method == "POST":
+        pwg = []
+        pwg_server = []
+        flag = False
+        # fetch the data from the database
+        values = request.POST.get("values", None)
+        pk = request.POST.get("user_pk", None)
+
+        current_user = User.objects.get(pk=pk)
+        # separating pk of PWG Server and PWG
+        # print("values ",values)
+        for i in range(len(values)):
+            if values[i] == 's':
+                pwg_server.append(values[i+1])
+                flag = True
+            elif values[i] == ',':
+                pass
+            else:
+                if flag:
+                    flag = False
+                else:
+                    pwg.append(values[i])
+
+        # making it unique
+        pwg = set(pwg)
+        pwg = list(pwg)
+
+        if len(pwg_server) != 0:
+            for i in pwg_server:
+                pwgs = PWGServers.objects.get(id=i)
+                name = pwgs.name
+                # print(name)
+                transfer = TransferPwgs(pwgs_name=name, pwgs_owner=pwgs, user=current_user)
+                transfer.save()
+
+        if len(pwg) != 0:
+            for i in pwg:
+                pwg_object = PWG.objects.get(id=i)
+                name = pwg_object.name
+                transfer = TransferPwg(pwg_name=name, pwg_owner=pwg_object, user=current_user)
+                transfer.save()
+
+        return redirect('admin-seller')
+    return redirect('admin-seller')
+
+
+def add_new(request):
+    if request.method == 'POST':
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        alias = request.POST['alias']
+        email = request.POST['email']
+        number = request.POST['number']
+        password = request.POST['password']
+        accType = request.POST['accType']
+
+        # creating user
+        user = User.objects.create_user(username=email, email=email, password=password)
+        user.save()
+
+        # creating seller account
+        if accType == "seller":
+            seller = Seller(user=user, first_name=fname, last_name=lname, alias=alias, email=email, phone=number)
+            seller.save()
+            return redirect("admin-seller")
+
+        # creating tester account
+        elif accType == "tester":
+            tester = Tester(user=user, first_name=fname, last_name=lname, alias=alias, email=email, phone=number)
+            tester.save()
+            return redirect("admin-tester")
+
+    else:
+        return redirect("admin-seller")
+
+
+def freeze_multiple_user(request):
+    # request's method  should be POST
+    if request.method == "POST":
+        sellers = []
+        # fetch the data from the request
+        values = request.POST.get("freeze_values", None)
+        accType = request.POST.get("accType", None)
+
+        # print(values)
+        if accType == "seller":
+            for i in values:
+                if Seller.objects.filter(id=i).exists():
+                    seller = Seller.objects.get(id=i)
+                    seller.is_freeze = True
+                    seller.save()
+
+            return redirect('admin-seller')
+
+    return redirect('admin-seller')
