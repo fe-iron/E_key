@@ -29,7 +29,7 @@ itsdangerous==1.1.0
 Jinja2==2.11.1
 joblib==0.14.1
 msgpack==0.6.2
-pillow==6.1.0
+pillow==7.2.0
 post==2019.4.13
 protobuf==3.10.0
 psycopg2==2.8.5
