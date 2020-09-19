@@ -37,7 +37,6 @@ pycparser==2.20
 PyHamcrest==2.0.2
 pyOpenSSL==19.1.0
 query-string==2019.4.13
-request==2019.4.13
 requests==2.23.0
 service-identity==18.1.0
 sqlparse==0.3.1
