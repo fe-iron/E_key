@@ -12,8 +12,8 @@ urlpatterns = [
     path("admin-tester", views.admin_tester, name="admin-tester"),
     path("admin-info-server", views.admin_info_server, name="admin-info-server"),
     path("transfer<int:id>", views.transfer, name="transfer"),
-    path("tester-getback", views.tester_getback, name="tester-getback"),
-    path("tester-tested-pwg-list", views.tester_tested_pwg_list, name="tester-tested-pwg-list"),
+    path("tester-getback<int:id>", views.tester_getback, name="tester-getback"),
+    path("tester-tested-pwg-list<int:id>", views.tester_tested_pwg_list, name="tester-tested-pwg-list"),
     path("pwg-sublist", views.pwg_sublist, name="pwg-sublist"),
     path("pwg-getback", views.pwg_getback, name="pwg-getback"),
     path("pwg-getback-sublist", views.pwg_getback_sublist, name="pwg-getback-sublist"),
@@ -59,6 +59,8 @@ urlpatterns = [
     path("unfreeze", views.unfreeze, name="unfreeze"),
     # transfer_pwg and pwgs
     path("transfer_pwgs", views.transfer_pwgs, name="transfer_pwgs"),
+    # transfer_pwg and pwgs
+    path("getback_pwgs", views.getback_pwgs, name="getback_pwgs"),
     # transfer_pwg and pwgs
     path("add-new", views.add_new, name="add-new"),
     # transfer_pwg and pwgs

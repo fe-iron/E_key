@@ -80,7 +80,7 @@
 						<div class="col-md" id="div-7">
 							<header class="pb-4">
 								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">Transfer Tested PWG To Seller {{name}}</a>
+									<a class="h4 text-dark font-weight-bold pt-2">{{name}}</a>
 									<form class="form-inline">
 										<div class="input-group-prepend  mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
@@ -230,12 +230,13 @@
 		{% csrf_token %}
 		<input type="hidden" id="assign_values" name="values">
 		<input type="hidden"  name="user_pk" value="{{id}}">
+		<input type="hidden"  name="accType" value="seller">
 	</form>
 
 <script src="{% static 'tesafe/js/transfer_ajax.js' %}"></script>
 <script type="text/javascript">
 
-// floating button JS
+	//global variable
 	let checkbox_values = [];
 
 	function showHideButtons(){

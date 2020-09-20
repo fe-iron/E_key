@@ -19,42 +19,6 @@
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
-	<!-- Latest compiled and minified CSS -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
--->
-<!-- jQuery library -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-
-<!-- Popper JS -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
--->
-<!-- Latest compiled JavaScript -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> -->
-
-<!-- Latest compiled and minified CSS -->
-<!-- <link rel="stylesheet" href="bootstrap4/css/bootstrap.min.css">
-<link rel="stylesheet" href="bootstrap4/css/bootstrap">
-<link rel="stylesheet" href="bootstrap4/css/bootstrap-grid">
-<link rel="stylesheet" href="bootstrap4/css/bootstrap-grid.min">
-<link rel="stylesheet" href="bootstrap4/css/bootstrap-reboot">
-<link rel="stylesheet" href="bootstrap4/css/bootstrap-reboot.min"> -->
-
-<!-- Latest compiled JavaScript -->
-<!-- <script src="bootstrap4/js/bootstrap.min.js"></script>
-<script src="bootstrap4/js/bootstrap.bundle"></script>
-<script src="bootstrap4/js/bootstrap.bundle.min"></script>
-<script src="bootstrap4/js/bootstrap.js"></script>
-<script src="bootstrap4/js/popper.min.js"></script>
--->
-
-
-
-<!-- Popper JS -->
-<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
-
-
-<!-- jQuery library -->
-<!-- <script src="bootstrap4/js/jquery.min.js"></script> -->
 
 <!-- fontawesome cdn -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -63,9 +27,6 @@
 <link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/admin-tester.css' %}">
 </head>
 <body>
-
-
-
 	<section class="bg-light">
 		<div class="container-fluid">
 			<nav class="navbar navbar-expand-lg navbar-light ">
@@ -88,12 +49,7 @@
 						<li class="nav-item pl-3">
 							<a class="nav-link" href="admin-info-server">PWG Server</a>
 						</li>
-
-						<!-- <li class="nav-item pl-3">
-							<a class="nav-link" href="admin-info-server.html">Unread Messages <span><i class="fas fa-bell"></i></span></a>
-						</li> -->
 					</ul>
-					
 				</div>
 
 				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
@@ -104,18 +60,13 @@
 					</button>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
-						<a class="dropdown-item" href="#" onclick="myFunction1()">Broadcast</a>
-						<!-- <a class="dropdown-item" href="#div-1" onclick="myfun()">Tester Account List</a> -->
+						<a class="dropdown-item" href="#" >Broadcast</a>
+						<a class="dropdown-item" href="#" >Chat</a>
 						<a class="dropdown-item" href="#" onclick="myFunction()">Delete</a>
 						<a class="dropdown-item" href="#" onclick="myFunction1()"> Freeze </a>
-						<a class="dropdown-item" href="#" onclick="myFunction1()">Chat</a>
-
-						<!-- <a class="dropdown-item" href="#div-3" onclick="myfun2()">Untested PWG List</a> -->
-						<a class="dropdown-item" href="admin-home" >Exit</a>
+						<a class="dropdown-item" href="admin-home">Exit</a>
 					</div>
 				</div>
-				
-
 			</nav>
 		</div>
 	</section>
@@ -124,157 +75,9 @@
 	<section class="bg-detail">
 		<div class="container-fluid">
 			<div class="row justify-content-center">
-				<!-- <div class="col-md-3 bg-user">
-					<div class="row">
-						<ul class="nav py-2">
-
-							<li class="nav-item display-block">
-								<a class="nav-link font-weight-bold text-success" href="#">Unread Messages ( 4 )</a>
-							</li>
-						</ul>
-					</div>
-
-					<div class="row" style="overflow:scroll; height:520px;">
-						<div class="col-md ">
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom border-top pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<div class="d-flex bd-highlight border-bottom pt-2">
-								<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-								<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-									<p><i class="fas fa-circle fa-1x"></i> Online</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div> -->
 				<div class="col-md-10  py-5 px-5">
-					<!-- <div class="row bg-button-2 p-4">
-
-						<div class="col-md mb-2" >
-							<div class="card" onclick="myfun()">
-								<div class="card-body">
-									<div class="card-title">
-										TESTER ACCOUNT LIST
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md mb-2" >
-							<div class="card" onclick="myfun1()">
-								<div class="card-body">
-									<div class="card-title">
-										ADD TESTER ACCOUNT
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md mb-2" >
-							<div class="card px-3" onclick="myfun2()">
-								<div class="card-body">
-									<div class="card-title">
-										TESTED PWG LIST
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div> -->
-
-
 					<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-1" >
-
 						<div class="col-md">
-
 							<header>
 								<nav class="navbar navbar-light  venue-registration">
 									<a class="h4 text-dark font-weight-bold pt-2">TESTER ACCOUNTS</a>
@@ -283,16 +86,11 @@
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
 											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
-
 									</form>
 								</nav>
 							</header>
 
-
-
-
 							<div class="table-responsive">
-
 
 								<br>
 								<table class="table">
@@ -302,94 +100,37 @@
 											<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere" disabled> <i class="fas fa-sort-down"></i></th>
 											<th scope="col">Name</th>
 											<th scope="col">Action</th>
-
-
 										</tr>
 									</thead>
 									<tbody id="myTable">
+									{% for tes in tester %}
 										<tr>
-
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled id="book1"></th>
-											<td><span><img src="{% static 'tesafe/images/faiz.png' %}" height="40" width="40" class="rounded-circle"></span> Faiz Elahi</td>
-											<td><a href="tester-tested-pwg-list" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+											<th><input type="checkbox" name="floatingButtonHere" disabled id="book1"></th>
+											<td><span><img src="{{tes.profile_pic.url}}" height="40" width="40" class="rounded-circle"></span> {{tes.first_name}} {{tes.last_name}}</td>
+											<td><a href="tester-tested-pwg-list{{tes.user.id}}" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
 												<div class="dropdown-menu">
 													<a class="dropdown-item" href="#">Chat</a>
-													<a class="dropdown-item" href="">Payment</a>
-													<a class="dropdown-item pop" href="#" > Login History </a>
-													<a class="dropdown-item" href="" >Chat History</a>
-													<a class="dropdown-item" href="" >Delete</a>
-													<a class="dropdown-item" href="" >Freeze</a>
-													<a class="dropdown-item" href="tester-getback" >Get Back</a>
+													<a class="dropdown-item" href="#">Payment</a>
+													<a class="dropdown-item" href="#" onclick="pop({{tes.user.pk}})"> Login History </a>
+													<a class="dropdown-item" href="#">Chat History</a>
+													<a class="dropdown-item" href="#" onclick="delete_user({{tes.user.pk}});">Delete</a>
+													{% if tes.is_freeze %}
+													<a class="dropdown-item" href="#" onclick="unfreeze_user({{tes.id}}, 'tester');">Unfreeze</a>
+													{% else %}
+													<a class="dropdown-item" href="#" onclick="freeze_user({{tes.id}}, 'tester');">Freeze</a>
+													{% endif %}
+													<a class="dropdown-item" href="tester-getback{{tes.user.pk}}">Get Back</a>
 												</div>
 											</div></td>
 										</tr>
-										<tr>
-
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled id="book2"></th>
-											<td><span><img src="{% static 'tesafe/images/tesafe.jpg' %}" height="40" width="40" class="rounded-circle"></span> Frank</td>
-											<td><a href="tester-tested-pwg-list" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-													<i class="fas fa-ellipsis-v"></i>
-												</button>
-												<div class="dropdown-menu">
-<!--													<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>-->
-													<a class="dropdown-item" href="">Chat</a>
-													<a class="dropdown-item" href=""> Payment</a>
-													<a class="dropdown-item pop" href="#" >Login History</a>
-													<a class="dropdown-item" href="" >Chat History</a>
-													<a class="dropdown-item" href="" >Delete</a>
-													<a class="dropdown-item" href="" >Freeze</a>
-													<a class="dropdown-item" href="tester-getback" >Get Back</a>
-												</div>
-											</div></td>
-										</tr>
-
-										<tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled id="book3"></th>
-											<td><span><img src="{% static 'tesafe/images/naqui.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Naqui</td>
-											<td><a href="tester-tested-pwg-list" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-													<i class="fas fa-ellipsis-v"></i>
-												</button>
-												<div class="dropdown-menu">
-													<a class="dropdown-item" href="#">Chat</a>
-													<a class="dropdown-item" href="">Payment</a>
-													<a class="dropdown-item pop" href="#"> Login History </a>
-													<a class="dropdown-item" href="" >Chat History</a>
-													<a class="dropdown-item" href="" >Delete</a>
-													<a class="dropdown-item" href="" >Freeze</a>
-													<a class="dropdown-item" href="tester-getback" >Get Back</a>
-												</div>
-											</div></td>
-										</tr>
-
-										<tr>
-											<th><input type="checkbox" name="book" value="floatingButtonHere" disabled id="book4"></th>
-											<td><span><img src="{% static 'tesafe/images/banner-8.jpg' %}" height="40" width="40" class="rounded-circle"> </span> Jacqueline</td>
-											<td><a href="tester-tested-pwg-list" class="btn btn-primary btn-light btn-sm">Transfer</a><div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
-												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-													<i class="fas fa-ellipsis-v"></i>
-												</button>
-												<div class="dropdown-menu">
-													<a class="dropdown-item" href="#">Chat</a>
-													<a class="dropdown-item" href="">Payment</a>
-													<a class="dropdown-item pop" href="#"> Login History </a>
-													<a class="dropdown-item" href="" >Chat History</a>
-													<a class="dropdown-item" href="" >Delete</a>
-													<a class="dropdown-item" href="" >Freeze</a>
-													<a class="dropdown-item" href="tester-getback" >Get Back</a>
-												</div>
-											</div></td>
-										</tr>
-
+									{% endfor %}
 									</tbody>
 								</table>
 							</div>
 						</div>
-
 					</div>
 
 
@@ -402,270 +143,55 @@
 							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Add Tester Account</h5>
 							<div class="row">
 								<div class="col-md-6 py-3">
-									<form>
+									<form action="add-new" method="post">
+										{% csrf_token %}
 									  <div class="form-group">
-									    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name ">
+									    <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Enter First Name" name="fname" required>
 									  </div>
 									  <div class="form-group">
-									     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Alias Name ">
+									    <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Last Name " name="lname">
 									  </div>
-
 									  <div class="form-group">
-									     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email ">
-									  </div>
-
-									  <div class="form-group">
-									     <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Contact Number ">
+									     <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Alias Name " name="alias">
 									  </div>
 
 									  <div class="form-group">
-									     <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Password ">
+									     <input type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Email " name="email" required autocomplete="true">
 									  </div>
 
-									<button class="btn btn-primary" type="submit">Sumbit</button>
-									<button class="btn btn-danger" type="submit" onclick="cancel()">Cancel</button>
-									</form>
-								</div>
-							</div>
-
-
-						</div>
-
-					</div>
-
-
-					<!-- <div class="row bg-button-2 p-4 mt-3" id="div-3" style="display: none;">
-
-						<div class="col-md">
-							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Tested PWG ( 24 )</h5>
-							<table class="table">
-								<thead>
-									<tr>
-										<th scope="col">SL No</th>
-										<th scope="col">Name</th>
-										<th scope="col">TESTED</th>
-
-
-
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th scope="row">1</th>
-										<td><a href="">PWG-1</a></td>
-										<td><i class="fas fa-check pl-4"></i></td>
-
-
-									</tr>
-
-									<tr>
-										<th scope="row">2</th>
-										<td>PWG-2</td>
-										<td><i class="fas fa-check pl-4"></i></td>
-
-									</tr>
-								</tbody>
-
-
-							</table>
-
-
-
-
-						</div>
-
-
-
-
-					</div> -->
-
-
-
-
-
-
-					<div class="row bg-button-2 p-4 mt-3" id="div-4" style="display: none;">
-
-						<div class="col-md">
-							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Untested PWG  ( 20 )</h5>
-							<table class="table">
-								<thead>
-									<tr>
-										<th scope="col">Sr. No.</th>
-										<th scope="col">Name</th>
-
-
-
-
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th scope="row">1</th>
-										<td><a href="">PWG-1</a></td>
-
-
-
-									</tr>
-
-									<tr>
-										<th scope="row">2</th>
-										<td>PWG-2</td>
-
-									</tr>
-								</tbody>
-
-
-							</table>
-
-							<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Assign New PWG to Tester for Testing</button>
-							<a href="admin-tester" class="btn-danger btn text-white">Cancel</a>
-							<!-- Modal -->
-							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLabel">Assign New PWG to Tester for Testing</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body">
-
-											<div class="text-center" style="display: none;" id="successfully">
-												<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-											<p class="pt-2 font-weight-bold "  >Your PWG has been successfully transferred to seller</p>
-											</div>
-
-											<table class="table" id="assign-hide">
-												<thead>
-													<tr>
-														<th scope="col">Sr. No.</th>
-														<th scope="col">Name</th>
-
-														<th scope="col">Select</th>
-
-
-
-
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<th scope="row">1</th>
-														<td><a href="">PWG-1</a></td>
-
-														<td>
-															<div class="form-check">
-																<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-															</div>
-														</td>
-
-
-													</tr>
-
-													<tr>
-														<th scope="row">2</th>
-														<td>PWG-2</td>
-
-														<td>
-															<div class="form-check">
-																<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-															</div>
-														</td>
-
-													</tr>
-
-													<tr>
-														<th scope="row">3</th>
-														<td>PWG-2</td>
-
-														<td>
-															<div class="form-check">
-																<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-															</div>
-														</td>
-
-													</tr>
-												</tbody>
-
-
-											</table>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-											<button type="button" class="btn btn-primary" onclick="assign()">Assign</button>
-										</div>
-									</div>
-								</div>
-							</div>
-
-
-						</div>
-
-
-
-
-					</div>
-
-					<!-- <div class="row justify-content-center bg-button-1 p-4 mt-3">
-
-						<div class="col-md">
-							<h4 class=""></h4>
-							<div class="row">
-								<div class="col-md py-3">
-									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change Password</h6>
-									<form>
-									  <div class="row">
-									    <div class="col">
-									      <input type="Password" class="form-control" placeholder="New Password">
-									    </div>
-									    <div class="col">
-									       <input type="Password" class="form-control" placeholder=" Confirm New Password">
-									    </div>
-									    <div class="col">
-									      <button  type="submit" class="btn btn-danger">Submit</button>
-									    </div>
+									  <div class="form-group">
+									     <input type="tel" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Contact Number " name="number" autocomplete="true">
 									  </div>
+
+									  <div class="form-group">
+									     <input type="password" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Password " name="password" required autocomplete="true">
+									  </div>
+									  <input type="hidden" value="tester" name="accType">
+
+									<button class="btn btn-primary" type="submit">Submit</button>
+									<button class="btn btn-danger" type="button" onclick="cancel()">Cancel</button>
 									</form>
 								</div>
 							</div>
 						</div>
-
-					</div> -->
-
+					</div>
 				</div>
-
-
-
-
-
-
-
 			</div>
 		</div>
-
-
 	</div>
 </section>
 
 
 
-
-
-
-
-
-
-
+	<!--	to show login of history-->
 <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title font-weight-bold">Login History of Tester ABC</h5>
+				<h5 class="modal-title font-weight-bold" id="modal-title-history">Login History of Seller ABC</h5>
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body" id="modal-body-login-history">
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
@@ -675,8 +201,6 @@
 								<th scope="col">Time</th>
 								<th scope="col">Device Name</th>
 								<th scope="col">Login IP Address</th>
-								<th scope="col">Duration Of Online</th>
-
 							</tr>
 						</thead>
 						<tbody>
@@ -686,7 +210,6 @@
 								<td>5:30pm</td>
 								<td>Samsung</td>
 								<td>10.2.0.10:8090</td>
-								<td>30 minutes</td>
 							</tr>
 						</tbody>
 					</table>
@@ -699,6 +222,23 @@
 	</div>
 </div>
 
+<!--	to show confirmation popup of single delete-->
+<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Message</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+			</div>
+			<div class="modal-body text-center p-4">
+				<i class="fas fa-check-circle fa-3x" style="color: green;" id="confirm-message-color"></i>
+				<p class="pt-2 font-weight-bold" id="confirm-message"></p>
+
+			</div>
+
+		</div>
+	</div>
+</div>
 
 
 <section class="floatingButtonHere" style="display: none;" id="floating-button1">
@@ -706,31 +246,27 @@
 	<a href="admin-tester" class=" btn btn-danger">Cancel</a>
 </section>
 
-
-
-
-
-
+<script src="{% static 'tesafe/js/ajax.js' %}"></script>
 <script type="text/javascript">
 
 
 	$('input[type="checkbox"]').click(function(){
-    if($(this).attr("value")=="floatingButtonHere"){
-        $(".floatingButtonHere").show(150);
-    }
-});
+		if($(this).attr("value")=="floatingButtonHere"){
+			$(".floatingButtonHere").show(150);
+		}
+	});
 
 
 
-// search filter table
-$(document).ready(function(){
-	$("#myInput").on("keyup", function() {
-		var value = $(this).val().toLowerCase();
-		$("#myTable tr").filter(function() {
-			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	// search filter table
+	$(document).ready(function(){
+		$("#myInput").on("keyup", function() {
+			var value = $(this).val().toLowerCase();
+			$("#myTable tr").filter(function() {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
 		});
 	});
-});
 
 
 
@@ -755,15 +291,6 @@ $(document).ready(function(){
 
 
 
-	// modal popup
-	$(function() {
-		$('.pop').on('click', function() {
-			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-			$('#imagemodal').modal('show');
-		});
-	});
-
-
 	// check all checkbox in one click
 
 	$(document).ready(function() {
@@ -782,34 +309,12 @@ $(document).ready(function(){
 
 	});
 
-
-	function myfun(){
-		document.getElementById("div-1").style.display = "block";
-		document.getElementById("div-2").style.display = "none";
-		document.getElementById("div-3").style.display = "none";
-		document.getElementById("div-4").style.display = "none";
-
-	}
-
+// for adding new tester account
 	function myfun1(){
 		document.getElementById("floating-button1").style.display = "none";
 		document.getElementById("div-1").style.display = "none";
 		document.getElementById("div-2").style.display = "block";
-		document.getElementById("div-3").style.display = "none";
 		document.getElementById("div-4").style.display = "none";
-
-
-
-	}
-
-
-	function myfun2(){
-		document.getElementById("div-1").style.display = "none";
-		document.getElementById("div-3").style.display = "block";
-		document.getElementById("div-2").style.display = "none";
-		document.getElementById("div-4").style.display = "block";
-
-
 	}
 
 
@@ -818,13 +323,7 @@ $(document).ready(function(){
 		document.getElementById("div-1").style.display = "block";
 	}
 
-
-	function assign(){
-		document.getElementById("assign-hide").style.display = "none";
-		document.getElementById("successfully").style.display = "block";
-	}
-
-
+// for deleting multiple users
 function myFunction() {
   document.getElementById("checkAll").disabled = false;
     document.getElementById("book1").disabled = false;
@@ -833,6 +332,7 @@ function myFunction() {
     document.getElementById("book4").disabled = false;
 }
 
+// for freezing muktiple users
 function myFunction1() {
   document.getElementById("checkAll").disabled = false;
     document.getElementById("book1").disabled = false;
@@ -840,8 +340,6 @@ function myFunction1() {
     document.getElementById("book3").disabled = false;
     document.getElementById("book4").disabled = false;
 }
-
-
 
 </script>
 </body>

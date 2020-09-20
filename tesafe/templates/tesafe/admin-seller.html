@@ -127,9 +127,9 @@
 													<a class="dropdown-item" href="" >Chat History</a>
 													<a class="dropdown-item" onclick="delete_user({{sel.user.pk}});" href="#" >Delete</a>
 													{% if sel.is_freeze %}
-													<a class="dropdown-item" onclick="unfreeze_user({{sel.id}});">Unfreeze</a>
+													<a class="dropdown-item" onclick="unfreeze_user({{sel.id}}, 'seller');">Unfreeze</a>
 													{% else %}
-													<a class="dropdown-item" onclick="freeze_user({{sel.id}});">Freeze</a>
+													<a class="dropdown-item" onclick="freeze_user({{sel.id}}, 'seller');">Freeze</a>
 													{% endif %}
 												</div>
 											</div></td>
@@ -194,12 +194,12 @@
 
 
 <section class="floatingButtonHere" style="display: none;" id="floating-button">
-	<a href="#" class="btn btn-primary" id="floating-confirm" onclick="delete_multiple_users();">Confirm</a>
+	<a href="#" class="btn btn-primary" id="floating-confirm" onclick="delete_multiple_users();">Proceed</a>
 	<a href="admin-seller" class=" btn btn-danger">Cancel</a>
 </section>
 
 
-	<!--	to show modal of history-->
+	<!--	to show login of history-->
 <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">

@@ -208,16 +208,18 @@ def admin_home(request):
 
 def admin_seller(request):
     seller = Seller.objects.all()
-    history = WebAdminLoginHistory.objects.all()
     param = {
         'seller': seller,
-        'history': history
     }
     return render(request, 'tesafe/admin-seller.html', param)
 
 
 def admin_tester(request):
-    return render(request, 'tesafe/admin-tester.html', {'num': [11,23,33,42,35,67,78,49,10]})
+    tester = Tester.objects.all()
+    param = {
+        'tester': tester,
+    }
+    return render(request, 'tesafe/admin-tester.html', param)
 
 
 def admin_info_server(request):
@@ -274,7 +276,7 @@ def transfer(request, id):
     pwgserver = PWGServers.objects.all()
     pwg = PWG.objects.all()
     param = {
-        "name": user.first_name + " " + user.last_name,
+        "name": "Transfer Tested PWG to Seller "+user.first_name + " " + user.last_name,
         "pwgserver": pwgserver,
         "pwg": pwg,
         "num": num,
@@ -283,12 +285,41 @@ def transfer(request, id):
     return render(request, 'tesafe/transfer.html', param)
 
 
-def tester_getback(request):
-    return render(request, 'tesafe/tester-getback.html', {'num': [11,23,33,42,35,67,78,49,10]})
+def tester_getback(request, id):
+    user = User.objects.get(id=id)
+    list1 = []
+
+    transferred_pwg = TransferPwg.objects.filter(user=id)
+
+    if transferred_pwg is None:
+        transferred_pwg = TransferPwg.objects.all()
+
+    for obj in transferred_pwg:
+        list1.append(obj.pwgs_owner)
+
+    list1 = set(list1)
+
+    param = {
+        'trans_pwg': transferred_pwg,
+        'servers': list1,
+        "name": user.first_name + " " + user.last_name,
+        "id": id,
+    }
+    return render(request, 'tesafe/tester-getback.html', param)
 
 
-def tester_tested_pwg_list(request):
-    return render(request, 'tesafe/tester-tested-pwg-list.html', {'num': [11,23,33,42,35,67,78,49,10]})
+def tester_tested_pwg_list(request, id):
+    user = User.objects.get(id=id)
+    pwgserver = PWGServers.objects.all()
+    pwg = PWG.objects.all()
+    param = {
+        "name": "Transfer PWG to Tester " + user.first_name + " " + user.last_name,
+        "pwgserver": pwgserver,
+        "pwg": pwg,
+        "num": num,
+        "id": id
+    }
+    return render(request, 'tesafe/tester-tested-pwg-list.html', param)
 
 
 def pwg_sublist(request):
@@ -383,6 +414,7 @@ def password_change(request):
         return render(request, "index.html")
 
 
+# to find username
 def ajax_request(request):
     # request should be ajax and method should be GET.
     if request.is_ajax and request.method == "GET":
@@ -392,7 +424,6 @@ def ajax_request(request):
         if WebAdminLoginHistory.objects.filter(user_id=pk).exists():
             # if history found return history
             history = WebAdminLoginHistory.objects.filter(user_id=pk)
-            name = WebAdminLoginHistory.objects.get(user_id=pk)
             history_json = serializers.serialize('json', history)
 
             return HttpResponse(history_json, content_type='application/json')
@@ -425,7 +456,7 @@ def delete(request):
     if request.is_ajax and request.method == "GET":
         # get the history from the database
         pk = request.GET.get("pk", None)
-        user = request.GET.get("user", None)
+
         # if user == "seller":
         # check for the pk in the database.
         if User.objects.filter(id=pk).exists():
@@ -460,6 +491,19 @@ def freeze(request):
                 # if name not found, then return msg
                 return JsonResponse({"msg": False}, status=200)
 
+        elif user == "tester":
+            # check for the pk in the database.
+            if Tester.objects.filter(id=pk).exists():
+                my_object = Tester.objects.get(id=pk)
+                my_object.is_freeze = True
+                name = my_object.alias
+                my_object.save()
+                name = "{} has been successfully freezed".format(name)
+                return JsonResponse({"msg": name}, status=200)
+            else:
+                # if name not found, then return msg
+                return JsonResponse({"msg": False}, status=200)
+
     return JsonResponse({}, status=400)
 
 
@@ -473,6 +517,18 @@ def unfreeze(request):
         # check for the pk in the database.
             if Seller.objects.filter(id=pk).exists():
                 my_object = Seller.objects.get(id=pk)
+                my_object.is_freeze = False
+                name = my_object.alias
+                my_object.save()
+                name = "{} has been successfully unfreezed".format(name)
+                return JsonResponse({"msg": name}, status=200)
+            else:
+                # if name not found, then return msg
+                return JsonResponse({"msg": False}, status=200)
+        elif user == "tester":
+        # check for the pk in the database.
+            if Tester.objects.filter(id=pk).exists():
+                my_object = Tester.objects.get(id=pk)
                 my_object.is_freeze = False
                 name = my_object.alias
                 my_object.save()
@@ -516,6 +572,7 @@ def transfer_pwgs(request):
         # fetch the data from the database
         values = request.POST.get("values", None)
         pk = request.POST.get("user_pk", None)
+        accType = request.POST.get("accType", None)
 
         current_user = User.objects.get(pk=pk)
         # separating pk of PWG Server and PWG
@@ -536,23 +593,58 @@ def transfer_pwgs(request):
         pwg = set(pwg)
         pwg = list(pwg)
 
-        if len(pwg_server) != 0:
-            for i in pwg_server:
-                pwgs = PWGServers.objects.get(id=i)
-                name = pwgs.name
-                # print(name)
-                transfer = TransferPwgs(pwgs_name=name, pwgs_owner=pwgs, user=current_user)
-                transfer.save()
-
         if len(pwg) != 0:
             for i in pwg:
                 pwg_object = PWG.objects.get(id=i)
-                name = pwg_object.name
-                transfer = TransferPwg(pwg_name=name, pwg_owner=pwg_object, user=current_user)
+                pwgs_id = pwg_object.owned_by
+                transfer = TransferPwg(pwg_owner=pwg_object, pwgs_owner=pwgs_id, user=current_user)
                 transfer.save()
 
-        return redirect('admin-seller')
+        if accType == "seller":
+            return redirect('admin-seller')
+        elif accType == "tester":
+            return redirect('admin-tester')
     return redirect('admin-seller')
+
+
+def getback_pwgs(request):
+    # request's method  should be POST
+    if request.method == "POST":
+        pwg = []
+        pwg_server = []
+        flag = False
+        # fetch the data from the database
+        values = request.POST.get("values", None)
+        pk = request.POST.get("user_pk", None)
+
+        current_user = User.objects.get(pk=pk)
+        # separating pk of PWG Server and PWG
+        # print("values ",values)
+        for i in range(len(values)):
+            if values[i] == 's':
+                pwg_server.append(values[i+1])
+                flag = True
+            elif values[i] == ',':
+                pass
+            else:
+                if flag:
+                    flag = False
+                else:
+                    pwg.append(values[i])
+
+        # making it unique
+        print(pwg)
+        print(pwg_server)
+        pwg = set(pwg)
+        pwg = list(pwg)
+
+        if len(pwg) != 0:
+            for i in pwg:
+                trans_pwg = TransferPwg.objects.get(pwg_owner=i)
+                trans_pwg.delete()
+
+        return redirect('admin-tester')
+    return redirect('admin-tester')
 
 
 def add_new(request):
@@ -566,7 +658,7 @@ def add_new(request):
         accType = request.POST['accType']
 
         # creating user
-        user = User.objects.create_user(username=email, email=email, password=password)
+        user = User.objects.create_user(username=email, email=email, first_name=fname, last_name=lname, password=password)
         user.save()
 
         # creating seller account
@@ -582,7 +674,7 @@ def add_new(request):
             return redirect("admin-tester")
 
     else:
-        return redirect("admin-seller")
+        return redirect("admin-home")
 
 
 def freeze_multiple_user(request):

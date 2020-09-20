@@ -46,31 +46,21 @@
 						<li class="nav-item pl-3">
 							<a class="nav-link" href="admin-info-server">PWG Server</a>
 						</li>
-
-						<!-- <li class="nav-item pl-3">
-							<a class="nav-link" href="admin-info-server.html">Unread Messages <span><i class="fas fa-bell"></i></span></a>
-						</li> -->
 					</ul>
 					
 				</div>
 
-<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
+				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
 
 				<div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-						<!-- <a class="dropdown-item" href="">Delete</a>
-						<a class="dropdown-item" href=""> Freeze </a>
-						<a class="dropdown-item" href="" >Chat</a> -->
-						<a class="dropdown-item" href="">Broadcast</a>
-
-						<a class="dropdown-item" href="admin-home" >Exit</a>
+						<a class="dropdown-item" href="#">Broadcast</a>
+						<a class="dropdown-item" href="admin-home">Exit</a>
 					</div>
 				</div>
-
-
 			</nav>
 		</div>
 	</section>
@@ -86,13 +76,12 @@
 						<div class="col-md" id="div-7">
 							<header class="">
 								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">GetBack PWG From Tester ABC</a>
+									<a class="h4 text-dark font-weight-bold pt-2">GetBack PWG From Tester {{name}}</a>
 									<form class="form-inline">
 										<div class="input-group-prepend  mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
 											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
-										<!-- <a href="#" class="btn btn-success text-white" onclick="fun6()">Tested</a> -->
 										<a href="admin-tester" class="btn btn-danger text-white  ml-1">Back</a>
 									</form>
 
@@ -115,473 +104,337 @@
 
 
 							<div id="untested" class="py-3">
+
 								<div class="accordion" id="accordionExample">
-								  <p class="font-weight-bold mb-0" style="font-size: 18px; margin-left: 20px;"> </p>
-								 <div class="row px-3">
-									<div class="col-2">
-										<h5>Select</h5>
-									</div>
-									<div class="col-7 pl-2">
+									<p class="font-weight-bold mb-0" style="font-size: 18px; margin-left: 20px;"> </p>
+								  	<div class="row px-3">
+										<div class="col-2">
+											<h5>Select</h5>
+										</div>
+										<div class="col-7 pl-2">
 										<h5 class="pl-3">Name</h5>
 									</div>
+								 	</div>
 
-
-								</div>
-								<div class="card">
-									<div class="card-header" id="headingOne">
-										<h2 class="mb-0">
-											<button class="btn" type="button" data-toggle="collapse">
-												<input type="checkbox"  id="checkAll" name="checkAll" value="floatingButtonHere"> <span class="pwg-list">PWGS-A</span>
-											</button>
-											<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
-
-										</h2>
-									</div>
-
-									<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-										<div class="card-body px-5">
-											<table class="table table-borderless">
-												<thead>
-
-												</thead>
-												<tbody>
-													<tr>
-
-														<td><a href="#"><input type="checkbox" name="book" class="book" value="floatingButtonHere"> PWGS-A-1</a></td>
-
-
-													</tr>
-
-													<tr>
-														<td><a href="#"><input type="checkbox" name="book" class="book" value="floatingButtonHere"> PWGS-A-12</a></td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#"><input type="checkbox" name="book" class="book" value="floatingButtonHere"> PWGS-A-3</a></td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#"><input type="checkbox" name="book" class="book" value="floatingButtonHere"> PWGS-A-4</a></td>
-
-													</tr>
-												</tbody>
-
-											</table>
+									{% for server in servers %}
+									{% with count=forloop.counter%}
+									{% if forloop.counter == 1%}
+									<div class="card">
+										<div class="card-header" id="headingOne">
+											<h2 class="mb-0">
+												<button class="btn" type="button" data-toggle="collapse">
+													<input type="checkbox" id="checkAll{{forloop.counter}}" name="floatingButtonHere" value="s{{server.id}}" class="s{{server.id}}"> <span class="pwg-list">{{server}}</span>
+												</button>
+												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+											</h2>
 										</div>
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-header" id="headingTwo">
-										<h2 class="mb-0">
-											<button class="btn" type="button" data-toggle="collapse">
-												<input type="checkbox"  id="checkAll1" name="checkAll1" value="floatingButtonHere"> <span class="pwg-list">PWGS-B</span>
-											</button>
-											<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
-										</h2>
-									</div>
-									<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-										<div class="card-body px-5">
-											<table class="table table-borderless">
-												<thead>
-													<tr>
 
-														<th scope="col">Name</th>
-														<th scope="col">Status</th>
-
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-
-														<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" > PWGS-B-1</a></td>
-
-
-													</tr>
-
-													<tr>
-														<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" > PWGS-B-12</a></td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" > PWGS-B-3</a></td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" > PWGS-B-4</a></td>
-
-													</tr>
-												</tbody>
-
-											</table>
+										<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+										{% elif forloop.counter == 2 %}
+										<div class="card">
+										<div class="card-header" id="headingTwo">
+											<h2 class="mb-0">
+												<button class="btn" type="button" data-toggle="collapse">
+													<input type="checkbox" id="checkAll{{forloop.counter}}" name="floatingButtonHere" value="s{{server.id}}" class="s{{server.id}}"> <span class="pwg-list">{{server}}</span>
+												</button>
+												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+											</h2>
 										</div>
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-header" id="headingThree">
-										<h2 class="mb-0">
-											<button class="btn" type="button" data-toggle="collapse">
-												<input type="checkbox"  id="checkAll2" name="checkAll2" value="floatingButtonHere"> <span class="pwg-list">PWGS-C</span>
-											</button>
-											<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
-										</h2>
-									</div>
-									<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-										<div class="card-body  px-5">
-											<table class="table">
-												<thead>
-													<tr>
 
-														<th scope="col">Name</th>
-
-
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-
-														<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" > PWGS-C-1</a></td>
-
-
-													</tr>
-
-													<tr>
-														<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" > PWGS-C-12</a></td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" > PWGS-C-3</a></td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" > PWGS-C-4</a></td>
-
-													</tr>
-												</tbody>
-
-											</table>
+										<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+										{% elif forloop.counter == 3 %}
+										<div class="card">
+										<div class="card-header" id="headingThree">
+											<h2 class="mb-0">
+												<button class="btn" type="button" data-toggle="collapse">
+													<input type="checkbox" id="checkAll{{forloop.counter}}" name="floatingButtonHere" value="s{{server.id}}" class="s{{server.id}}"> <span class="pwg-list">{{server}}</span>
+												</button>
+												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+											</h2>
 										</div>
+
+										<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+										{% elif forloop.counter == 4 %}
+										<div class="card">
+										<div class="card-header" id="headingFour">
+											<h2 class="mb-0">
+												<button class="btn" type="button" data-toggle="collapse">
+													<input type="checkbox" id="checkAll{{forloop.counter}}" name="floatingButtonHere" value="s{{server.id}}" class="s{{server.id}}"> <span class="pwg-list">{{server}}</span>
+												</button>
+												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+											</h2>
+										</div>
+
+										<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+										{% elif forloop.counter == 5 %}
+										<div class="card">
+										<div class="card-header" id="headingFive">
+											<h2 class="mb-0">
+												<button class="btn" type="button" data-toggle="collapse">
+													<input type="checkbox" id="checkAll{{forloop.counter}}" name="floatingButtonHere" value="s{{server.id}}" class="s{{server.id}}"> <span class="pwg-list">{{server}}</span>
+												</button>
+												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+											</h2>
+										</div>
+
+										<div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+										{% endif %}
+											<div class="card-body px-xl-5">
+												<table class="table table-borderless">
+													<thead>
+													</thead>
+													<tbody>
+													{% for pwg in trans_pwg %}
+														{% if server.id == pwg.pwgs_owner.id %}
+															{% if not pwg.pwg_owner.is_tested %}
+														<tr>
+															<td><a href="#"><input type="checkbox" name="floatingButtonHere" class="pwg{{count}}" value="{{pwg.pwg_owner.id}}"> {{pwg.pwg_owner}}</a></td>
+														</tr>
+															{% endif %}
+														{% endif %}
+													{% endfor %}
+													</tbody>
+												</table>
+											</div>
+										</div>
+
 									</div>
+
+									{% endwith %}
+									{% endfor %}
 								</div>
-							</div>
 							</div>
 
 
-							<div id="tested" style="display: none;" class="py-3">
+							<div id="tested" class="py-3" style="display:none;">
+
 								<div class="accordion" id="accordionExample">
-								  <p class="font-weight-bold mb-0" style="font-size: 18px; margin-left: 20px;"></p>
-								  <div class="row px-3">
-									<div class="col-2">
-										<h5>Select</h5>
-									</div>
-									<div class="col-7 pl-2">
+									<p class="font-weight-bold mb-0" style="font-size: 18px; margin-left: 20px;"> </p>
+								  	<div class="row px-3">
+										<div class="col-2">
+											<h5>Select</h5>
+										</div>
+										<div class="col-7 pl-2">
 										<h5 class="pl-3">Name</h5>
 									</div>
+								 	</div>
 
+									{% for server in servers %}
+									{% with count=forloop.counter%}
 
-								</div>
-								<div class="card">
-									<div class="card-header" id="headingOne">
-										<h2 class="mb-0">
-											<button class="btn" type="button" data-toggle="collapse">
-												<input type="checkbox"  id="checkAll" name="checkAll" value="floatingButtonHere"> <span class="pwg-list">PWGS-A</span>
-											</button>
-											<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
-
-										</h2>
-									</div>
-
-									<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-										<div class="card-body px-5">
-											<table class="table table-borderless">
-												<thead>
-													<tr>
-
-														<th scope="col">Name</th>
-
-
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-
-														<td><a href="#"><input type="checkbox" name="book" class="book" value="floatingButtonHere"> PWGS-A-1</a></td>
-
-
-													</tr>
-
-													<tr>
-														<td><a href="#"><input type="checkbox" name="book" class="book" value="floatingButtonHere"> PWGS-A-12</a></td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#"><input type="checkbox" name="book" class="book" value="floatingButtonHere"> PWGS-A-3</a></td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#"><input type="checkbox" name="book" class="book" value="floatingButtonHere"> PWGS-A-4</a></td>
-
-													</tr>
-												</tbody>
-
-											</table>
+									{% if forloop.counter == 1%}
+									<div class="card">
+										<div class="card-header" id="headingOne">
+											<h2 class="mb-0">
+												<button class="btn" type="button" data-toggle="collapse">
+													<input type="checkbox" id="checkAll{{forloop.counter}}" name="floatingButtonHere" value="s{{server.id}}" class="s{{server.id}}"> <span class="pwg-list">{{server}}</span>
+												</button>
+												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+											</h2>
 										</div>
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-header" id="headingTwo">
-										<h2 class="mb-0">
-											<button class="btn" type="button" data-toggle="collapse">
-												<input type="checkbox"  id="checkAll1" name="checkAll1" value="floatingButtonHere"> <span class="pwg-list">PWGS-B</span>
-											</button>
-											<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
-										</h2>
-									</div>
-									<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-										<div class="card-body px-5">
-											<table class="table table-borderless">
-												<thead>
-													<tr>
 
-														<th scope="col">Name</th>
-
-
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-
-														<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" > PWGS-B-1</a></td>
-
-
-													</tr>
-
-													<tr>
-														<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" > PWGS-B-12</a></td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" > PWGS-B-3</a></td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#"><input type="checkbox" name="book1" class="book1" value="floatingButtonHere" > PWGS-B-4</a></td>
-
-													</tr>
-												</tbody>
-
-											</table>
+										<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+										{% elif forloop.counter == 2 %}
+										<div class="card">
+										<div class="card-header" id="headingTwo">
+											<h2 class="mb-0">
+												<button class="btn" type="button" data-toggle="collapse">
+													<input type="checkbox" id="checkAll{{forloop.counter}}" name="floatingButtonHere" value="s{{server.id}}" class="s{{server.id}}"> <span class="pwg-list">{{server}}</span>
+												</button>
+												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+											</h2>
 										</div>
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-header" id="headingThree">
-										<h2 class="mb-0">
-											<button class="btn" type="button" data-toggle="collapse">
-												<input type="checkbox"  id="checkAll2" name="checkAll2" value="floatingButtonHere"> <span class="pwg-list">PWGS-C</span>
-											</button>
-											<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
-										</h2>
-									</div>
-									<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-										<div class="card-body  px-5">
-											<table class="table">
-												<thead>
-													<tr>
 
-														<th scope="col">Name</th>
-
-
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-
-														<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" > PWGS-C-1</a></td>
-
-
-													</tr>
-
-													<tr>
-														<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" > PWGS-C-12</a></td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" > PWGS-C-3</a></td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#"><input type="checkbox" name="book2" class="book2" value="floatingButtonHere" > PWGS-C-4</a></td>
-
-													</tr>
-												</tbody>
-
-											</table>
+										<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+										{% elif forloop.counter == 3 %}
+										<div class="card">
+										<div class="card-header" id="headingThree">
+											<h2 class="mb-0">
+												<button class="btn" type="button" data-toggle="collapse">
+													<input type="checkbox" id="checkAll{{forloop.counter}}" name="floatingButtonHere" value="s{{server.id}}" class="s{{server.id}}"> <span class="pwg-list">{{server}}</span>
+												</button>
+												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+											</h2>
 										</div>
+
+										<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+										{% elif forloop.counter == 4 %}
+										<div class="card">
+										<div class="card-header" id="headingFour">
+											<h2 class="mb-0">
+												<button class="btn" type="button" data-toggle="collapse">
+													<input type="checkbox" id="checkAll{{forloop.counter}}" name="floatingButtonHere" value="s{{server.id}}" class="s{{server.id}}"> <span class="pwg-list">{{server}}</span>
+												</button>
+												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+											</h2>
+										</div>
+
+										<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+										{% elif forloop.counter == 5 %}
+										<div class="card">
+										<div class="card-header" id="headingFive">
+											<h2 class="mb-0">
+												<button class="btn" type="button" data-toggle="collapse">
+													<input type="checkbox" id="checkAll{{forloop.counter}}" name="floatingButtonHere" value="s{{server.id}}" class="s{{server.id}}"> <span class="pwg-list">{{server}}</span>
+												</button>
+												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
+											</h2>
+										</div>
+
+										<div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+										{% endif %}
+											<div class="card-body px-xl-5">
+												<table class="table table-borderless">
+													<thead>
+													</thead>
+													<tbody>
+													{% for pwg in trans_pwg %}
+														{% if server.id == pwg.pwgs_owner.id %}
+															{% if pwg.pwg_owner.is_tested %}
+														<tr>
+															<td><a href="#"><input type="checkbox" name="floatingButtonHere" class="pwg{{count}}" value="{{pwg.pwg_owner.id}}"> {{pwg.pwg_owner}}</a></td>
+														</tr>
+															{% endif %}
+														{% endif %}
+													{% endfor %}
+													</tbody>
+												</table>
+											</div>
+										</div>
+
 									</div>
+
+									{% endwith %}
+									{% endfor %}
 								</div>
 							</div>
-							</div>
+
 
 						</div>
-
 					</div>
-
-
-
 				</div>
-
-
-
-
-
-
-
 			</div>
 		</div>
-
-
 	</div>
 </section>
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--	to show confirmation of getback-->
+<div class="modal fade" id="imagemodalConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Transferred PWG</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
 				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
 			</div>
 			<div class="modal-body text-center p-4">
-				<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-				<p class="pt-2 font-weight-bold">Your PWG has been successfully transfered to seller</p>
-				<a href="tester-getback" class="btn-sm btn btn-success">OK</a>
+				<i class="fa fa-question-circle fa-3x" style="color: #bd2130;" id="confirm-message-color"></i>
+				<p class="pt-2 font-weight-bold" id="confirm-message-getback"></p>
 
 			</div>
-
+			<div class="modal-footer justify-content-center">
+				<button type="button" class="btn btn-primary" id="confirm-modal-button" onclick="confirm_getback();">Confirm</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+		  	</div>
 		</div>
 	</div>
 </div>
 
 
-
-
-<!-- <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title font-weight-bold">Login History</h5>
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			</div>
-			<div class="modal-body">
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">SL No</th>
-							<th scope="col">Name</th>
-							<th scope="col">Date</th>
-							<th scope="col">Time</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td><a href="">Faiz Elahi</a></td>
-							<td>05//06/2020</td>
-							<td>04:30 pm</td>
-						</tr>
-
-						<tr>
-							<th scope="row">1</th>
-							<td><a href="">Naqui Hasan</a></td>
-							<td>07//06/2020</td>
-							<td>04:00 pm</td>
-						</tr>
-					</tbody>
-
-				</table>
-			</div>
-		</div>
-	</div>
-</div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <section class="floatingButtonHere" style="display: none;">
-	<a href="" class=" btn btn-primary" data-toggle="modal" data-target="#exampleModal">Confirm</a>
-	<a href="tester-getback" class=" btn btn-danger">Cancel</a>
+	<a href="" class=" btn btn-primary" data-toggle="modal" data-target="imagemodalConfirm" onclick="assign_value();">Proceed</a>
+	<a href="tester-getback{{id}}" class=" btn btn-danger">Cancel</a>
 </section>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!--	to get back PWG and PWGS names-->
+	<form action="getback_pwgs" method="post" name="getback">
+		{% csrf_token %}
+		<input type="hidden" id="assign_values" name="values">
+		<input type="hidden"  name="user_pk" value="{{id}}">
+	</form>
 
 <script type="text/javascript">
 
-// floating button JS
+	let checkbox_values = [];
 
-$('input[type="checkbox"]').click(function(){
-	if($(this).attr("value")=="floatingButtonHere"){
-		$(".floatingButtonHere").show(150);
+	function showHideButtons(){
+		if( checkbox_values.length == 0){
+			$(".floatingButtonHere").hide();
+		}else{
+			$(".floatingButtonHere").show(150);
+		}
+
 	}
-});
+
+	// to remove all occurrence of the element
+	function removeItemAll(value) {
+		  var i = 0;
+		  while (i < checkbox_values.length) {
+				if (checkbox_values[i] === value) {
+				  checkbox_values.splice(i, 1);
+				} else {
+				  ++i;
+				}
+		  }
+	}
+
+
+	$('input[type="checkbox"]').click(function(){
+		if($(this).attr("name")=="floatingButtonHere"){
+
+			if($(this).is(':checked')){
+				checkbox_values.push($(this).val());
+				console.log(checkbox_values);
+
+			}else{
+				removeItemAll($(this).val());
+				console.log(checkbox_values);
+			}
+
+			showHideButtons();
+		}
+
+	});
+
+
+	//creating dynamic functions for the each single pwg selection
+	// for checking/unchecking all the child pwg
+	{% for server in servers %}
+		$(function () {
+			$("#checkAll{{forloop.counter}}").click(function () {
+				if ($("#checkAll{{forloop.counter}}").is(':checked')) {
+					$(".pwg{{forloop.counter}}").prop("checked", true);
+
+					var ele = $(".pwg{{forloop.counter}}");
+					for(i=0;i<ele.length;i++){
+						checkbox_values.push(ele[i].value);
+					}
+					console.log(checkbox_values);
+
+				} else {
+					$(".pwg{{forloop.counter}}").prop("checked", false);
+
+					// fetch and delete all the PWG from the checkbox_values list
+					var ele = $(".pwg{{forloop.counter}}");
+					for(i=0;i<ele.length;i++){
+						var value = ele[i].value;
+						removeItemAll(value);
+					}
+
+					// fetch and delete corresponding PWGS from the checkbox_values list
+					var ele = $("#checkAll{{forloop.counter}}");
+					var index = checkbox_values.indexOf(ele[0].value);
+					if( index > -1 ){
+						checkbox_values.splice(index,1);
+					}
+					console.log(checkbox_values);
+
+				}
+				showHideButtons();
+			});
+		});
+	{% endfor %}
 
 
 // search filter table
@@ -596,126 +449,9 @@ $(document).ready(function(){
 
 
 
-// modal popup
-$(function() {
-	$('.pop').on('click', function() {
-		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-		$('#imagemodal').modal('show');
-	});
-});
-
-
-
-
-$(function () {
-	$("#checkAll").click(function () {
-		if ($("#checkAll").is(':checked')) {
-			$(".book").prop("checked", true);
-		} else {
-			$(".book").prop("checked", false);
-		}
-	});
-});
-
-
-
-$(function () {
-	$("#checkAll1").click(function () {
-		if ($("#checkAll1").is(':checked')) {
-			$(".book1").prop("checked", true);
-		} else {
-			$(".book1").prop("checked", false);
-		}
-	});
-});
-
-
-$(function () {
-	$("#checkAll2").click(function () {
-		if ($("#checkAll2").is(':checked')) {
-			$(".book2").prop("checked", true);
-		} else {
-			$(".book2").prop("checked", false);
-		}
-	});
-});
-
-
-
-
-
-
-
-
-$(function () {
-	$("#checkAll-tested").click(function () {
-		if ($("#checkAll-tested").is(':checked')) {
-			$(".book-tested").prop("checked", true);
-		} else {
-			$(".book-tested").prop("checked", false);
-		}
-	});
-});
-
-$(function () {
-	$("#checkAll-tested1").click(function () {
-		if ($("#checkAll-tested1").is(':checked')) {
-			$(".book-tested1").prop("checked", true);
-		} else {
-			$(".book-tested1").prop("checked", false);
-		}
-	});
-});
-
-$(function () {
-	$("#checkAll-tested2").click(function () {
-		if ($("#checkAll-tested2").is(':checked')) {
-			$(".book-tested2").prop("checked", true);
-		} else {
-			$(".book-tested2").prop("checked", false);
-		}
-	});
-});
-
-
 
 
 	// division hide/show js
-
-	function myfun(){
-
-		document.getElementById("div-1").style.display = "block";
-		document.getElementById("div-2").style.display = "none";
-		document.getElementById("div-3").style.display = "none";
-
-	}
-
-	function myfun1(){
-		document.getElementById("div-1").style.display = "none";
-		document.getElementById("div-2").style.display = "block";
-		document.getElementById("div-3").style.display = "none";
-
-
-	}
-
-
-	function myfun2(){
-		document.getElementById("div-1").style.display = "none";
-		document.getElementById("div-3").style.display = "block";
-		document.getElementById("div-2").style.display = "none";
-
-
-	}
-
-
-
-	function cancel() {
-		document.getElementById("div-2").style.display = "none";
-		document.getElementById("div-1").style.display = "block";
-	}
-
-
-
 	function tested() {
 		document.getElementById("untested").style.display = "none";
 		document.getElementById("tested").style.display = "block";
@@ -726,36 +462,19 @@ $(function () {
 		document.getElementById("tested").style.display = "none";
 	}
 
-
-
-
 	function funDown(){
 		document.getElementsByClassName('fa-chevron-up').style.display="block";
 		document.getElementsByClassName('fa-chevron-down').style.display="none";
 	}
-
-
-
-
 
 	function funDown(){
 		document.getElementsByClassName('fa-sort-down').style.display="block";
 		document.getElementsByClassName('fa-sort-up').style.display="none";
 	}
 
-
-
-
-
-
-
 	function myFunction(x) {
 		x.classList.toggle("fa-sort-down");
 	}
-
-
-
-
 
 	function myOpen(one) {
 		$("#" + one).slideToggle("slow");
@@ -765,7 +484,20 @@ $(function () {
 		}
 	}
 
+	function confirm_getback(){
+		$('#assign_values').attr('value', checkbox_values);
+		document.forms['getback'].submit();
+	}
 
+	function assign_value(){
+		if(checkbox_values.length == 1){
+			$("#confirm-message-getback").html("Do you want to get back this "+checkbox_values.length+" PWG");
+		} else{
+			$("#confirm-message-getback").html("Do you want to get back these "+checkbox_values.length+" PWGs");
+		}
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodalConfirm').modal('show');
+	}
 
 </script>
 </body>

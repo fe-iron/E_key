@@ -110,6 +110,7 @@ class PWG(models.Model):
     alias = models.CharField(max_length=255)
     owned_by = models.ForeignKey(PWGServers, verbose_name="PWGServers", on_delete=models.CASCADE, null=True)
     transfer_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, default=None)
+    is_tested = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = "PWGs"
@@ -120,19 +121,20 @@ class PWG(models.Model):
 
 # model for Transfer PWG management
 class TransferPwg(models.Model):
-    pwg_name = models.CharField(max_length=255, null=True)
-    pwg_owner = models.ForeignKey(PWG, on_delete=models.CASCADE, null=True)
+    pwg_owner = models.OneToOneField(PWG, on_delete=models.CASCADE, null=True, blank=True)
+    pwgs_owner = models.ForeignKey(PWGServers, on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.pwg_name
+    class Meta:
+        verbose_name = 'Transfer PWG'
+        verbose_name_plural = 'Transfer PWGs'
 
 
 # model for Transfer PWG Server management
 class TransferPwgs(models.Model):
-    pwgs_name = models.CharField(max_length=255, null=True)
-    pwgs_owner = models.ForeignKey(PWGServers, on_delete=models.CASCADE, null=True)
+    pwgs_owner = models.OneToOneField(PWGServers, on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.pwgs_name
+    class Meta:
+        verbose_name = 'Transfer PWG Server'
+        verbose_name_plural = 'Transfer PWG Servers'
