@@ -1,6 +1,6 @@
 # Register your models here.
 from django.contrib import admin
-from .models import WebAdmin, Seller, WebAdminLoginHistory, Tester, WebUser, PWGServers, PWG, PasswordHistory, TransferPwg, TransferPwgs
+from .models import WebAdmin, Seller, WebAdminLoginHistory, Tester, WebUser, PWGServers, PWG, PasswordHistory, TransferPwg, TransferPwgs, PwgUseRecord
 
 
 
@@ -13,9 +13,14 @@ admin.site.register(PWGServers)
 # admin.site.register(PWG)
 
 
+@admin.register(PwgUseRecord)
+class PwgUseRecord(admin.ModelAdmin):
+    list_display = ("date", "time", "count", "password")
+
+
 @admin.register(PWG)
 class PWGAdmin(admin.ModelAdmin):
-    list_display = ('name', 'owned_by', 'transfer_to')
+    list_display = ('name', 'owned_by', 'is_freeze', 'transfer_to')
 
 
 admin.site.register(WebAdminLoginHistory)

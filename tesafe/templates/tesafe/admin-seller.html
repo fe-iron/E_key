@@ -123,9 +123,9 @@
 												<div class="dropdown-menu">
 													<a class="dropdown-item" href="#">Chat</a>
 													<a class="dropdown-item" href="">Payment</a>
-													<a class="dropdown-item" onclick="pop({{sel.user.pk}});" href="#" > Login History </a>
+													<a class="dropdown-item" onclick="pop({{sel.user.pk}}, 'seller');" href="#" > Login History </a>
 													<a class="dropdown-item" href="" >Chat History</a>
-													<a class="dropdown-item" onclick="delete_user({{sel.user.pk}});" href="#" >Delete</a>
+													<a class="dropdown-item" onclick="delete_user({{sel.user.pk}},'seller');" href="#" >Delete</a>
 													{% if sel.is_freeze %}
 													<a class="dropdown-item" onclick="unfreeze_user({{sel.id}}, 'seller');">Unfreeze</a>
 													{% else %}

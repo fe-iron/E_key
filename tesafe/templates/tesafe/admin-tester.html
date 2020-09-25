@@ -63,7 +63,7 @@
 						<a class="dropdown-item" href="#" >Broadcast</a>
 						<a class="dropdown-item" href="#" >Chat</a>
 						<a class="dropdown-item" href="#" onclick="myFunction()">Delete</a>
-						<a class="dropdown-item" href="#" onclick="myFunction1()"> Freeze </a>
+						<a class="dropdown-item" href="#" onclick="freeze()"> Freeze </a>
 						<a class="dropdown-item" href="admin-home">Exit</a>
 					</div>
 				</div>
@@ -105,7 +105,7 @@
 									<tbody id="myTable">
 									{% for tes in tester %}
 										<tr>
-											<th><input type="checkbox" name="floatingButtonHere" disabled id="book1"></th>
+											<th><input type="checkbox" name="floatingButtonHere" disabled class="check" value="{{tes.pk}}"></th>
 											<td><span><img src="{{tes.profile_pic.url}}" height="40" width="40" class="rounded-circle"></span> {{tes.first_name}} {{tes.last_name}}</td>
 											<td><a href="tester-tested-pwg-list{{tes.user.id}}" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -114,9 +114,9 @@
 												<div class="dropdown-menu">
 													<a class="dropdown-item" href="#">Chat</a>
 													<a class="dropdown-item" href="#">Payment</a>
-													<a class="dropdown-item" href="#" onclick="pop({{tes.user.pk}})"> Login History </a>
+													<a class="dropdown-item" href="#" onclick="pop({{tes.user.pk}}, 'tester')"> Login History </a>
 													<a class="dropdown-item" href="#">Chat History</a>
-													<a class="dropdown-item" href="#" onclick="delete_user({{tes.user.pk}});">Delete</a>
+													<a class="dropdown-item" href="#" onclick="delete_user({{tes.user.pk}}, 'tester');">Delete</a>
 													{% if tes.is_freeze %}
 													<a class="dropdown-item" href="#" onclick="unfreeze_user({{tes.id}}, 'tester');">Unfreeze</a>
 													{% else %}
@@ -240,25 +240,60 @@
 	</div>
 </div>
 
+<!--	to show confirmation of delete and freeze-->
+<div class="modal fade" id="imagemodalConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+			</div>
+			<div class="modal-body text-center p-4">
+				<i class="fa fa-question-circle fa-3x" style="color: #bd2130;" id="confirm-message-color"></i>
+				<p class="pt-2 font-weight-bold" id="confirm-message-delete"></p>
 
-<section class="floatingButtonHere" style="display: none;" id="floating-button1">
-	<a href="" class=" btn btn-primary" >Confirm</a>
-	<a href="admin-tester" class=" btn btn-danger">Cancel</a>
+			</div>
+			<div class="modal-footer justify-content-center">
+				<button type="button" class="btn btn-primary" id="confirm-modal-button" onclick="sendsellerspk();">Confirm</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+		  	</div>
+		</div>
+	</div>
+</div>
+
+
+<section class="floatingButtonHere" id="floating-button" style="display:none;">
+	<a href="#" class="btn btn-primary" id="floating-confirm" onclick="delete_multiple_users()">Proceed</a>
+	<a href="admin-seller" class=" btn btn-danger">Cancel</a>
 </section>
+
+
+
+<!--	to delete sellers names-->
+	<form action="delete_multiple_user" method="post" name="delete_multiple">
+		{% csrf_token %}
+		<input type="hidden" id="assign_values" name="values">
+		<input type="hidden" value="tester" name="accType">
+
+	</form>
+
+
+<!--	to freeze sellers -->
+	<form action="freeze_multiple_user" method="post" name="freeze_multiple">
+		{% csrf_token %}
+		<input type="hidden" id="freeze_values" name="freeze_values">
+		<input type="hidden" value="tester" name="accType">
+	</form>
+
+
+
 
 <script src="{% static 'tesafe/js/ajax.js' %}"></script>
 <script type="text/javascript">
 
+let checkbox_values = [];
 
-	$('input[type="checkbox"]').click(function(){
-		if($(this).attr("value")=="floatingButtonHere"){
-			$(".floatingButtonHere").show(150);
-		}
-	});
-
-
-
-	// search filter table
+// search filter table
 	$(document).ready(function(){
 		$("#myInput").on("keyup", function() {
 			var value = $(this).val().toLowerCase();
@@ -268,46 +303,61 @@
 		});
 	});
 
+	// to remove all occurrence of the element
+	function removeItemAll(value) {
+		  var i = 0;
+		  while (i < checkbox_values.length) {
+				if (checkbox_values[i] === value) {
+				  checkbox_values.splice(i, 1);
+				} else {
+				  ++i;
+				}
+		  }
+	}
 
 
 	// check all checkbox in one click
 
-	$(document).ready(function() {
-
 		$('#checkAll').click(function () {
-			$('input:checkbox').not(this).prop('checked', this.checked);
-		});
 
-		$("[id*=book_]").change(function () {
-			if ($('input[type=checkbox]:checked').length == $('input[type=checkbox]').length) {
-				$('#checkAll').prop('checked', true);
-			} else {
-				$('#checkAll').prop('checked', false);
+			var ele = $(".check");
+			if ($("#checkAll").is(':checked')) {
+				$(".check").prop("checked", true);
+				for(i=0;i<ele.length;i++){
+					checkbox_values.push(ele[i].value);
+				}
+			}else{
+				$(".check").prop("checked", false);
+				for(i=0;i<ele.length;i++){
+					removeItemAll(ele[i].value);
+				}
+			}
+
+			if( checkbox_values.length == 0){
+				$(".floatingButtonHere").hide();
+			}else{
+				$(".floatingButtonHere").show(150);
 			}
 		});
 
-	});
 
 
-
-
-	// check all checkbox in one click
-
-	$(document).ready(function() {
-
-		$('#checkAll').click(function () {
-			$('input:checkbox').not(this).prop('checked', this.checked);
-		});
-
-		$("[id*=book_]").change(function () {
-			if ($('input[type=checkbox]:checked').length == $('input[type=checkbox]').length) {
-				$('#checkAll').prop('checked', true);
-			} else {
-				$('#checkAll').prop('checked', false);
+	$('input[type="checkbox"]').click(function(){
+		if($(this).attr("name")=="floatingButtonHere"){
+			if($(this).is(':checked')){
+				checkbox_values.push($(this).val());
+			}else{
+				removeItemAll($(this).val());
 			}
-		});
-
+		}
+		if( checkbox_values.length == 0){
+			$(".floatingButtonHere").hide();
+		}else{
+			$(".floatingButtonHere").show(150);
+		}
+		console.log(checkbox_values);
 	});
+
 
 // for adding new tester account
 	function myfun1(){
@@ -325,21 +375,58 @@
 
 // for deleting multiple users
 function myFunction() {
-  document.getElementById("checkAll").disabled = false;
-    document.getElementById("book1").disabled = false;
-    document.getElementById("book2").disabled = false;
-    document.getElementById("book3").disabled = false;
-    document.getElementById("book4").disabled = false;
+  	$("#checkAll").attr('disabled', false);
+  	$(".check").attr('disabled', false);
 }
 
-// for freezing muktiple users
-function myFunction1() {
-  document.getElementById("checkAll").disabled = false;
-    document.getElementById("book1").disabled = false;
-    document.getElementById("book2").disabled = false;
-    document.getElementById("book3").disabled = false;
-    document.getElementById("book4").disabled = false;
+// to show confirmation modal
+function delete_multiple_users(){
+	if ( checkbox_values.length == 1 ){
+		$("#confirm-message-delete").html("Delete the selected "+checkbox_values.length+" Seller");
+	}else{
+		$("#confirm-message-delete").html("Delete the selected "+checkbox_values.length+" Sellers");
+	}
+
+	$("#confirm-modal-button").attr('onclick','sendtesterspk();');
+	$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+	$('#imagemodalConfirm').modal('show');
+
 }
+
+function sendtesterspk(){
+	$("#assign_values").attr('value', checkbox_values);
+	document.forms['delete_multiple'].submit();
+
+	checkbox_values = [];
+
+}
+function freeze(){
+	document.getElementById("checkAll").disabled = false;
+    $(".check").attr("disabled",false);
+
+	$("#floating-confirm").attr('onclick','freeze_multiple_users()');
+}
+
+function freeze_multiple_users(){
+	if ( checkbox_values.length == 1 ){
+		$("#confirm-message-delete").html("Freeze the selected "+checkbox_values.length+" Seller");
+	}else{
+		$("#confirm-message-delete").html("Freeze the selected "+checkbox_values.length+" Sellers");
+	}
+
+	$("#confirm-modal-button").attr('onclick','sendTestersPKFreeze();');
+	$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+	$('#imagemodalConfirm').modal('show');
+
+}
+
+function sendTestersPKFreeze(){
+		$("#freeze_values").attr('value', checkbox_values);
+		document.forms['freeze_multiple'].submit();
+
+		checkbox_values = [];
+}
+
 
 </script>
 </body>

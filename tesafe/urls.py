@@ -14,7 +14,7 @@ urlpatterns = [
     path("transfer<int:id>", views.transfer, name="transfer"),
     path("tester-getback<int:id>", views.tester_getback, name="tester-getback"),
     path("tester-tested-pwg-list<int:id>", views.tester_tested_pwg_list, name="tester-tested-pwg-list"),
-    path("pwg-sublist", views.pwg_sublist, name="pwg-sublist"),
+    path("pwg-sublist<int:id>", views.pwg_sublist, name="pwg-sublist"),
     path("pwg-getback", views.pwg_getback, name="pwg-getback"),
     path("pwg-getback-sublist", views.pwg_getback_sublist, name="pwg-getback-sublist"),
     path("tester-pwg-sublist", views.tester_pwg_sublist, name="pwg-getback-sublist"),
@@ -50,6 +50,7 @@ urlpatterns = [
 
     # ajax url
     path("validate_nickname", views.ajax_request, name="validate_nickname"),
+    # to find username of Users
     path("find_username", views.find_username, name="find_username"),
     # delete
     path("delete", views.delete, name="delete"),
@@ -67,5 +68,19 @@ urlpatterns = [
     path("delete_multiple_user", views.delete_multiple_user, name="delete_multiple_user"),
     # transfer_pwg and pwgs
     path("freeze_multiple_user", views.freeze_multiple_user, name="freeze_multiple_user"),
+    # change alias
+    path("change_alias", views.change_alias, name="change_alias"),
+    # get password history
+    path("getpassword", views.getpassword, name="getpassword"),
+    # get password history
+    path("use_record", views.use_record, name="use_record"),
+    # get password history
+    path("assign", views.assign, name="assign"),
+    # get password history
+    path("getback", views.getback, name="getback"),
+    # get password history
+    path("assign_multiple", views.assign_multiple, name="assign_mulltiple"),
+    # get password history
+    path("tester_list", views.tester_list, name="tester_list"),
 
 ]

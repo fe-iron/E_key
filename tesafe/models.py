@@ -94,8 +94,10 @@ class PasswordHistory(models.Model):
 class PWGServers(models.Model):
     name = models.CharField(max_length=255)
     alias = models.CharField(max_length=255)
+    email = models.CharField(max_length=255, default=None, null=True)
+    password = models.CharField(max_length=255, default=None, null=True)
     pwg_count = models.IntegerField()
-    transfer_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, default=None)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, default=None)
 
     class Meta:
         verbose_name_plural = "PWG Servers"
@@ -109,8 +111,10 @@ class PWG(models.Model):
     name = models.CharField(max_length=255)
     alias = models.CharField(max_length=255)
     owned_by = models.ForeignKey(PWGServers, verbose_name="PWGServers", on_delete=models.CASCADE, null=True)
-    transfer_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, default=None)
+    transfer_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, default=1)
     is_tested = models.BooleanField(default=False)
+    location = models.CharField(max_length=2, default='A')
+    is_freeze = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = "PWGs"
@@ -138,3 +142,16 @@ class TransferPwgs(models.Model):
     class Meta:
         verbose_name = 'Transfer PWG Server'
         verbose_name_plural = 'Transfer PWG Servers'
+
+class PwgUseRecord(models.Model):
+    count = models.IntegerField()
+    time = models.TimeField(auto_now=True)
+    date = models.DateField(auto_now=True)
+    password = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.date
+
+    class Meta:
+        verbose_name = "PWG Use Record"
+        verbose_name_plural = "PWG Use Records"

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import WebAdmin, Seller, Tester, WebUser, PWGServers, PWG, WebAdminLoginHistory, PasswordHistory, TransferPwgs, TransferPwg
+from .models import WebAdmin, Seller, Tester, WebUser, PWGServers, PWG, WebAdminLoginHistory, PasswordHistory, TransferPwgs, TransferPwg, PwgUseRecord
 from django.contrib.auth.models import auth, User
 from django.contrib import messages
 from django.core import serializers
@@ -49,11 +49,24 @@ def index(request):
             if accType == 'admin':
                 return admin_home(request)
             elif accType == 'seller':
-                return seller_home(request)
+                if Seller.objects.filter(email=uname).exists():
+                    return seller_home(request)
+                else:
+                    messages.info(request, 'Invalid user id and password for Seller')
+                    return redirect('/')
             elif accType == 'tester':
-                return render(request, 'tester/tester-home.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
+                if Tester.objects.filter(email=uname).exists():
+                    return render(request, 'tester/tester-home.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
+                else:
+                    messages.info(request, 'Invalid user id and password for Tester')
+                    return redirect('/')
+
             elif accType == 'user':
-                return render(request, 'user/user-home.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
+                if WebUser.objects.filter(email=uname).exists():
+                    return render(request, 'user/user-home.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
+                else:
+                    messages.info(request, 'Invalid user id and password for User')
+                    return redirect('/')
 
 
         else:
@@ -190,7 +203,6 @@ def admin_home(request):
         'tester_count': tester_count,
         'web_user_count': web_user_count,
         'PWGs_count': PWGS_count,
-        'num': [11, 23, 33, 42, 35, 67, 78, 49, 10],
         'seller_online': queryset_seller.count(),
         'seller_offline': seller_count - queryset_seller.count(),
         'tester_online': queryset_tester.count(),
@@ -223,7 +235,23 @@ def admin_tester(request):
 
 
 def admin_info_server(request):
-    return render(request, 'tesafe/admin-info-server.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
+    pwgs = PWGServers.objects.all()
+    pwg = PWG.objects.all()
+    count_pwgs = pwgs.count()
+    count_pwg = pwg.count()
+    pwgs_active = get_current_users(PWGServers).count()
+    pwg_active = get_current_users(PWG).count()
+    param = {
+        'pwgs': pwgs,
+        'pwg': pwg,
+        'total_pwgs': count_pwgs,
+        'total_pwgs_online': pwgs_active,
+        'total_pwgs_offline': count_pwgs - pwgs_active,
+        'total_pwg': count_pwg,
+        'total_pwg_online': pwg_active,
+        'total_pwg_offline': count_pwg - pwg_active,
+    }
+    return render(request, 'tesafe/admin-info-server.html', param)
 
 
 def register_next(request):
@@ -322,8 +350,15 @@ def tester_tested_pwg_list(request, id):
     return render(request, 'tesafe/tester-tested-pwg-list.html', param)
 
 
-def pwg_sublist(request):
-    return render(request, 'tesafe/pwg-sublist.html', {'num': [11,23,33,42,35,67,78,49,10]})
+def pwg_sublist(request, id):
+    pwg = PWG.objects.filter(owned_by=id)
+    name = pwg[0].owned_by
+    param = {
+        'pwg': pwg,
+        'name': name,
+        'id': id,
+    }
+    return render(request, 'tesafe/pwg-sublist.html', param)
 
 
 def pwg_getback(request):
@@ -439,14 +474,25 @@ def find_username(request):
     if request.is_ajax and request.method == "GET":
         # get the history from the database
         pk = request.GET.get("pk", None)
+        accType = request.GET.get("accType", None)
         # check for the pk in the database.
-        if User.objects.filter(pk=pk).exists():
-            name = User.objects.get(pk=pk)
-            name1 = name.first_name
-            return JsonResponse({"name": name1}, status=200)
-        else:
-            # if name not found, then return true
-            return JsonResponse({"name": False}, status=200)
+        if accType == "seller" or accType == "tester":
+            if User.objects.filter(pk=pk).exists():
+                name = User.objects.get(pk=pk)
+                name1 = name.first_name
+                return JsonResponse({"name": name1}, status=200)
+            else:
+                # if name not found, then return true
+                return JsonResponse({"name": False}, status=200)
+
+        elif accType == 'pwg':
+            if PWG.objects.filter(id=pk).exists():
+                pwg = PWG.objects.get(id=pk)
+                name = pwg.alias
+                return JsonResponse({"name": name}, status=200)
+            else:
+                # if name not found, then return true
+                return JsonResponse({"name": False}, status=200)
 
     return JsonResponse({}, status=400)
 
@@ -456,18 +502,32 @@ def delete(request):
     if request.is_ajax and request.method == "GET":
         # get the history from the database
         pk = request.GET.get("pk", None)
+        accType = request.GET.get("accType", None)
 
-        # if user == "seller":
-        # check for the pk in the database.
-        if User.objects.filter(id=pk).exists():
-            my_object = User.objects.get(id=pk)
-            name = my_object.first_name
-            name = "{} has been successfully deleted".format(name)
-            my_object.delete()
-            return JsonResponse({"msg": name}, status=200)
-        else:
-            # if name not found, then return msg
-            return JsonResponse({"msg": False}, status=200)
+        if accType == "seller" or accType == "tester":
+            # check for the pk in the database.
+            if User.objects.filter(id=pk).exists():
+                my_object = User.objects.get(id=pk)
+                name = my_object.first_name
+                name = "{} has been successfully deleted".format(name)
+                my_object.delete()
+                return JsonResponse({"msg": name}, status=200)
+            else:
+                # if name not found, then return msg
+                return JsonResponse({"msg": False}, status=200)
+
+        elif accType == "pwgs":
+            if PWGServers.objects.filter(id=pk).exists():
+                pwgs = PWGServers.objects.get(id=pk)
+                name = pwgs.alias
+                print(name)
+                name = "{} has been successfully deleted".format(name)
+                pwgs.delete()
+
+                return JsonResponse({"msg": name}, status=200)
+            else:
+                # if name not found, then return msg
+                return JsonResponse({"msg": False}, status=200)
 
     return JsonResponse({}, status=400)
 
@@ -495,6 +555,18 @@ def freeze(request):
             # check for the pk in the database.
             if Tester.objects.filter(id=pk).exists():
                 my_object = Tester.objects.get(id=pk)
+                my_object.is_freeze = True
+                name = my_object.alias
+                my_object.save()
+                name = "{} has been successfully freezed".format(name)
+                return JsonResponse({"msg": name}, status=200)
+            else:
+                # if name not found, then return msg
+                return JsonResponse({"msg": False}, status=200)
+        elif user == "pwg":
+            # check for the pk in the database.
+            if PWG.objects.filter(id=pk).exists():
+                my_object = PWG.objects.get(id=pk)
                 my_object.is_freeze = True
                 name = my_object.alias
                 my_object.save()
@@ -537,6 +609,19 @@ def unfreeze(request):
             else:
                 # if name not found, then return msg
                 return JsonResponse({"msg": False}, status=200)
+        elif user == "pwg":
+        # check for the pk in the database.
+            if PWG.objects.filter(id=pk).exists():
+                my_object = PWG.objects.get(id=pk)
+                my_object.is_freeze = False
+                name = my_object.alias
+                my_object.save()
+                name = "{} has been successfully unfreezed".format(name)
+                print(name)
+                return JsonResponse({"msg": name}, status=200)
+            else:
+                # if name not found, then return msg
+                return JsonResponse({"msg": False}, status=200)
 
     return JsonResponse({}, status=400)
 
@@ -560,7 +645,24 @@ def delete_multiple_user(request):
 
             return redirect('admin-seller')
 
-    return redirect('admin-seller')
+        elif accType == "tester":
+            for i in values:
+                if Tester.objects.filter(id=i).exists():
+                    tester = Tester.objects.get(id=i)
+                    id_user = tester.user_id
+                    tester = User.objects.get(id=id_user)
+                    tester.delete()
+
+            return redirect('admin-tester')
+        elif accType == "pwgs":
+            for i in values:
+                if PWGServers.objects.filter(id=i).exists():
+                    pwgs = PWGServers.objects.get(id=i)
+                    pwgs.delete()
+
+            return redirect('admin-info-server')
+
+    return redirect('admin-home')
 
 
 def transfer_pwgs(request):
@@ -649,17 +751,19 @@ def getback_pwgs(request):
 
 def add_new(request):
     if request.method == 'POST':
-        fname = request.POST['fname']
-        lname = request.POST['lname']
+        fname = request.POST.get('fname', None)
+        lname = request.POST.get('lname', None)
+        name = request.POST.get('name', None)
         alias = request.POST['alias']
         email = request.POST['email']
-        number = request.POST['number']
+        number = request.POST.get('number', None)
         password = request.POST['password']
         accType = request.POST['accType']
 
-        # creating user
-        user = User.objects.create_user(username=email, email=email, first_name=fname, last_name=lname, password=password)
-        user.save()
+        if accType != "pwgs":
+            # creating user
+            user = User.objects.create_user(username=email, email=email, first_name=fname, last_name=lname, password=password)
+            user.save()
 
         # creating seller account
         if accType == "seller":
@@ -673,6 +777,14 @@ def add_new(request):
             tester.save()
             return redirect("admin-tester")
 
+        # creating PWGS account
+        elif accType == "pwgs":
+            user = User.objects.create_user(username=email, email=email, password=password)
+            user.save()
+            pwgs = PWGServers(name=name, alias=alias, email=email, password=password, pwg_count=0, user=user)
+            pwgs.save()
+            return redirect("admin-info-server")
+
     else:
         return redirect("admin-home")
 
@@ -684,6 +796,7 @@ def freeze_multiple_user(request):
         # fetch the data from the request
         values = request.POST.get("freeze_values", None)
         accType = request.POST.get("accType", None)
+        pk = request.POST.get("pk", None)
 
         # print(values)
         if accType == "seller":
@@ -695,4 +808,158 @@ def freeze_multiple_user(request):
 
             return redirect('admin-seller')
 
-    return redirect('admin-seller')
+        elif accType == "tester":
+            for i in values:
+                if Tester.objects.filter(id=i).exists():
+                    tester = Tester.objects.get(id=i)
+                    tester.is_freeze = True
+                    tester.save()
+
+            return redirect('admin-tester')
+        elif accType == "pwg":
+            for i in values:
+                if PWG.objects.filter(id=i).exists():
+                    pwg = PWG.objects.get(id=i)
+                    pwg.is_freeze = True
+                    pwg.save()
+            if pk:
+                return redirect('pwg-sublist', id=int(pk))
+            else:
+                return redirect('admin-info-server')
+    return redirect('admin-home')
+
+
+def change_alias(request):
+    if request.method == "POST":
+        alias = request.POST.get('alias')
+        alias_id = request.POST.get('alias_id')
+        accType = request.POST.get('accType')
+        if accType == "pwgs":
+            if PWGServers.objects.filter(id=alias_id).exists():
+                pwgs = PWGServers.objects.get(id=alias_id)
+                pwgs.alias = alias
+                pwgs.save()
+
+                return redirect("admin-info-server")
+
+            return redirect("admin-info-server")
+
+    return redirect("admin-home")
+
+
+def getpassword(request):
+    # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        # get the history from the database
+        pk = request.GET.get("pk", None)
+        if PasswordHistory.objects.filter(user=pk).exists():
+            history = PasswordHistory.objects.filter(user=pk)
+            return JsonResponse({"history": history}, status=200)
+        else:
+            return JsonResponse({"history": False}, status=200)
+    else:
+        return JsonResponse({}, status=200)
+
+
+def use_record(request):
+    # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        pk = request.GET.get("pk", None)
+        if PwgUseRecord.objects.filter(id=pk).exists():
+            use_record = PwgUseRecord.objects.filter(id=pk)
+            use_record_json = serializers.serialize('json', use_record)
+
+            return HttpResponse(use_record_json, content_type='application/json')
+        else:
+            return JsonResponse({'history': False}, status=200)
+    else:
+        return JsonResponse({}, status=200)
+
+
+def assign(request):
+    # request should be ajax and method should be GET.
+    if request.method == "POST":
+        pk = request.POST.get("pk", None)
+        tester_ids = request.POST.get("tester_ids", None)
+
+        for i in tester_ids:
+            if i == ",":
+                pass
+            else:
+                pwg = PWG.objects.get(id=pk)
+                pwgs = pwg.owned_by
+                tester = Tester.objects.get(id=i)
+                user = User.objects.get(email=tester.email)
+                transfer_pwg = TransferPwg(pwg_owner=pwg, pwgs_owner=pwgs, user=user)
+                transfer_pwg.save()
+                pwg.location = "T"
+                pwg.transfer_to = user
+                pwg.save()
+
+        return redirect("pwg-sublist", id=pwgs.id)
+    else:
+        return JsonResponse({}, status=200)
+
+
+def assign_multiple(request):
+    # request should be ajax and method should be GET.
+    if request.method == "POST":
+        pk = request.POST.get("pk", None)
+        tester_ids = request.POST.get("tester_ids", None)
+
+        for i in tester_ids:
+            tester = Tester.objects.get(id=i)
+            user = User.objects.get(email=tester.email)
+            if i == ",":
+                pass
+            else:
+                for j in pk:
+                    if j == ",":
+                        pass
+                    else:
+                        pwg = PWG.objects.get(id=j)
+                        pwgs = pwg.owned_by
+                        transfer_pwg = TransferPwg(pwg_owner=pwg, pwgs_owner=pwgs, user=user)
+                        transfer_pwg.save()
+                        pwg.location = "T"
+                        pwg.transfer_to = user
+                        pwg.save()
+
+        return redirect("pwg-sublist", id=pwgs.id)
+    else:
+        return JsonResponse({}, status=200)
+
+
+
+def tester_list(request):
+    # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        tester = Tester.objects.all()
+        tester_json = serializers.serialize('json', tester)
+
+        return HttpResponse(tester_json, content_type='application/json')
+    else:
+        return JsonResponse({"data": False}, status=200)
+
+
+def getback(request):
+    # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        pk = request.GET.get("pk", None)
+        if PWG.objects.filter(id=pk).exists():
+            pwg = PWG.objects.get(id=pk)
+            if pwg.transfer_to:
+                name = "{} has been successfully taken back from Tester".format(pwg.alias)
+            else:
+                name = "{} has been successfully taken back from Tester {}".format(pwg.alias,
+                                                                                   pwg.transfer_to)
+            pwg.location = "A"
+            usr = User.objects.get(is_superuser=True)
+            pwg.transfer_to = usr
+            pwg.save()
+
+            return JsonResponse({"msg": name}, status=200)
+        else:
+            return JsonResponse({"msg": False}, status=200)
+    else:
+        return JsonResponse({}, status=200)

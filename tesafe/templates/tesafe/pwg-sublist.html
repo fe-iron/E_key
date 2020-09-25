@@ -17,45 +17,12 @@
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-        <!-- Latest compiled and minified CSS -->
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
--->
-        <!-- jQuery library -->
-
-        <!-- Popper JS -->
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
--->
-        <!-- Latest compiled JavaScript -->
-        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> -->
-
-        <!-- Latest compiled and minified CSS -->
-        <!-- <link rel="stylesheet" href="bootstrap4/css/bootstrap.min.css">
-<link rel="stylesheet" href="bootstrap4/css/bootstrap">
-<link rel="stylesheet" href="bootstrap4/css/bootstrap-grid">
-<link rel="stylesheet" href="bootstrap4/css/bootstrap-grid.min">
-<link rel="stylesheet" href="bootstrap4/css/bootstrap-reboot">
-<link rel="stylesheet" href="bootstrap4/css/bootstrap-reboot.min"> -->
-
-        <!-- Latest compiled JavaScript -->
-        <!-- <script src="bootstrap4/js/bootstrap.min.js"></script>
-<script src="bootstrap4/js/bootstrap.bundle"></script>
-<script src="bootstrap4/js/bootstrap.bundle.min"></script>
-<script src="bootstrap4/js/bootstrap.js"></script>
-<script src="bootstrap4/js/popper.min.js"></script>
--->
-
-        <!-- Popper JS -->
-        <!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
-
-        <!-- jQuery library -->
-        <!-- <script src="bootstrap4/js/jquery.min.js"></script> -->
-
         <!-- fontawesome cdn -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
         <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/pwg-sublist.css' %}" />
+        <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/pwg-sublist.css' %}" />
     </head>
     <body>
         <section class="bg-light">
@@ -80,14 +47,11 @@
 							<a class="nav-link active" href="admin-info-server">PWG Server</a>
 						</li>
 
-						<!-- <li class="nav-item pl-3">
-							<a class="nav-link" href="admin-info-server.html">Unread Messages <span><i class="fas fa-bell"></i></span></a>
-						</li> -->
 					</ul>
 
 				</div>
 
- <a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;">
+                    <a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;">
                         <i class="fas fa-bell"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left: 15px;">1</span>
                     </a>
 
@@ -96,11 +60,11 @@
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#" onclick="myFunction()">Get Back</a>
-                            <a class="dropdown-item" href="#" onclick="myFunction1()">Assign To Tester</a>
-                            <a class="dropdown-item" href="#" onclick="myfun3()">Freeze </a>
-                            <a class="dropdown-item" href="#" onclick="myfun4()">Return</a>
-                            <a class="dropdown-item" href="admin-home">Exit</a>
+                            <a class="dropdown-item" href="#" onclick="getback_pwg()">Get Back</a>
+                            <a class="dropdown-item" href="#" onclick="assign_multiple_pwg()">Assign To Tester</a>
+                            <a class="dropdown-item" href="#" onclick="freeze()">Freeze </a>
+                            <a class="dropdown-item" href="admin-info-server" >Return</a>
+
                         </div>
                     </div>
 
@@ -110,12 +74,12 @@
                     </button>
 
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#" onclick="myFunction()">Get Back</a>
-                            <a class="dropdown-item" href="#" onclick="myFunction1()">Transfer To Seller</a>
-                            <a class="dropdown-item" href="#" onclick="myFunction2()">Assign To Tester</a>
-                            <a class="dropdown-item" href="#" onclick="myfun3()">Freeze </a>
-                            <a class="dropdown-item" href="#" onclick="myfun4()">Return</a>
-                            <a class="dropdown-item" href="admin-home">Exit</a>
+                            <a class="dropdown-item" href="#" onclick="getback_pwg()">Get Back</a>
+                            <a class="dropdown-item" href="#" onclick="">Transfer To Seller</a>
+                            <a class="dropdown-item" href="#" onclick="assign_multiple_pwg()">Assign To Tester</a>
+                            <a class="dropdown-item" href="#" onclick="freeze()">Freeze </a>
+                            <a class="dropdown-item" href="admin-info-server" >Return</a>
+
                         </div>
                     </div>
                 </nav>
@@ -129,9 +93,7 @@
                         <div class="row justify-content-center bg-button-2 p-2 mt-3" id="div-3">
                            <!--  <div > -->
                                 <div class="col-md" >
-                                	<h4 class="font-weight-bold">PWG List Of PWGS-A<span class="float-right"><a href="admin-info-server" class="btn btn-danger text-white mb-1 btn-sm">Back</a></span></h4>
-
-
+                                	<h4 class="font-weight-bold">PWG List Of {{name}}<span class="float-right"><a href="admin-info-server" class="btn btn-danger text-white mb-1 btn-sm">Back</a></span></h4>
                                     <div class="py-3">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked onclick="untested()">
@@ -150,7 +112,7 @@
                                      <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere" disabled> <i class="fas fa-sort-down"></i></th>
+                                                <th scope="col" style="position: relative;"><input type="checkbox" id="checkAll" value="floatingButtonHere" disabled> <i class="fas fa-sort-down"></i></th>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Location</th>
                                                 <th scope="col">Owner Nme</th>
@@ -158,60 +120,38 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        {% for p in pwg %}
+                                            {% if not p.is_tested %}
                                             <tr>
-                                                <th><input type="checkbox" name="book" id="book1" value="floatingButtonHere" disabled ></th>
-                                                <td>PWGS-A-1</td>
-                                                <td id="assign-a">A</td>
-                                                <td style="display: none;" id="assigned-a">T</td>
-                                                <td>Frank</td>
-                                                <td><!-- <a href="tester-transfer.html" class="btn btn-primary btn-light btn-sm">Transfer</a> --> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
-                                                <button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item pop3" href="#">Use Record</a>
-                                                    <a class="dropdown-item" href="#" onclick="assign()">Assign To Tester</a>
-                                                    <a class="dropdown-item" href="" >Freeze</a>
-                                                </div>
-                                            </div></td>
-                                            </tr>
-
-                                            <tr>
-                                                <th><input type="checkbox" name="book" id="book2" value="floatingButtonHere" disabled></th>
-                                                <td>PWGS-A-2</td>
-                                                <td >T</td>
-                                                <td>Faiz</td>
+                                                {% if p.location == "A" %}
+                                                <th><input type="checkbox" name="floatingButtonHere" disabled value="{{p.id}}" class="check"></th>
+                                                {% else %}
+                                                <th><input type="checkbox" name="floatingButtonHere" disabled value="{{p.id}}" class="check_tester"></th>
+                                                {% endif %}
+                                                <td>{{p.alias}}</td>
+                                                <td id="assign-a">{{p.location}}</td>
+                                                <td>{{p.transfer_to.first_name}}</td>
                                                 <td><div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
                                                 <button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item pop3" href="#">Use Record</a>
-                                                    <a class="dropdown-item" href="" >Freeze</a>
-                                                    <a class="dropdown-item" href="#" >Get Back</a>
+                                                    <a class="dropdown-item" href="#" onclick="pop3({{p.id}}, 'pwg');">Use Record</a>
+                                                    {% if p.location == "T" %}
+                                                    <a class="dropdown-item" href="#" onclick="getback({{p.id}});">Get Back</a>
+                                                    {% else %}
+                                                    <a class="dropdown-item" href="#" onclick="tester_list({{p.id}})">Assign To Tester</a>
+                                                    {% endif %}
+                                                    {% if p.is_freeze %}
+                                                    <a class="dropdown-item" href="#" onclick="unfreeze_user({{p.id}}, 'pwg');">Unfreeze</a>
+                                                    {% else %}
+                                                    <a class="dropdown-item" href="#" onclick="freeze_user({{p.id}}, 'pwg');">Freeze</a>
+                                                    {% endif %}
                                                 </div>
                                             </div></td>
                                             </tr>
-
-                                            <tr>
-                                                <th><input type="checkbox" name="book" id="book3" value="floatingButtonHere" disabled></th>
-                                                <td>PWGS-A-3</td>
-                                                <td>A</td>
-                                                <td>Trump</td>
-                                                <td><div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
-                                                <button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item pop3" href="#">Use Record</a>
-                                                    <a class="dropdown-item" href="" >Assign To Tester</a>
-                                                    <a class="dropdown-item" href="" >Freeze</a>
-                                                </div>
-                                            </div></td>
-                                                <td>
-
-                                                </td>
-                                            </tr>
+                                        {% endif %}
+                                        {% endfor %}
                                         </tbody>
                                     </table>
                                    </div>
@@ -224,7 +164,7 @@
                                      <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col" style="position: relative;"><input type="checkbox" name="checkAll1" id="checkAll1" value="floatingButtonHere" disabled=""> <i class="fas fa-sort-down"></i></th>
+                                                <th scope="col" style="position: relative;"><input type="checkbox" id="checkAll1" name="floatingButtonHere" disabled> <i class="fas fa-sort-down"></i></th>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Location</th>
                                                 <th scope="col">Owner Nme</th>
@@ -232,70 +172,40 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        {% for p in pwg %}
+                                            {% if p.is_tested %}
                                             <tr>
-                                                <th><input type="checkbox" name="tested" id="book4" value="floatingButtonHere" disabled=""></th>
-                                                <td>PWGS-A-4</td>
-                                                <td>A</td>
-                                                <td>Naqui</td>
-                                                <td><!-- <a href="tester-transfer.html" class="btn btn-primary btn-light btn-sm">Transfer</a> --> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
+                                                {% if p.location == "A" %}
+                                                <th><input type="checkbox" name="floatingButtonHere" disabled value="{{p.id}}" class="check"></th>
+                                                {% else %}
+                                                <th><input type="checkbox" name="floatingButtonHere" disabled value="{{p.id}}" class="check_tester"></th>
+                                                {% endif %}
+                                                <td>{{p.alias}}</td>
+                                                <td>{{p.location}}</td>
+                                                <td>{{p.transfer_to.first_name}}</td>
+                                                <td><div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
                                                 <button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item pop3" href="#">Use Record</a>
-                                                    <!-- <a class="dropdown-item" href="tester-getback.html" >Get Back</a> -->
+                                                    <a class="dropdown-item" href="#" onclick="pop3({{p.id}},'pwg');">Use Record</a>
                                                     <a class="dropdown-item" href="#" >Transfer To Seller</a>
-                                                    <a class="dropdown-item" href="#" >Assign To Tester</a>
-                                                    <a class="dropdown-item" href="" >Freeze</a>
-
+                                                    {% if p.location == "A" %}
+                                                    <a class="dropdown-item" href="#" onclick="tester_list({{p.id}});">Assign To Tester</a>
+                                                    {% else %}
+                                                    <a class="dropdown-item" href="#" onclick="getback({{p.id}});">Get Back</a>
+                                                    {% endif %}
+                                                    {% if p.is_freeze %}
+                                                    <a class="dropdown-item" href="#" onclick="unfreeze_user({{p.id}}, 'pwg');">Unfreeze</a>
+                                                    {% else %}
+                                                    <a class="dropdown-item" href="#" onclick="freeze_user({{p.id}}, 'pwg');">freeze</a>
+                                                    {% endif %}
                                                 </div>
                                             </div></td>
-                                                <td>
-
-                                                </td>
                                             </tr>
+                                        {% endif %}
+                                        {% endfor %}
 
-                                            <tr>
-                                                <th><input type="checkbox" name="tested" id="book5" value="floatingButtonHere" disabled=""></th>
-                                                <td>PWGS-A-5</td>
-                                                <td id="getback-t">T</td>
-                                                <td style="display: none;" id="getbacked-t">A</td>
-                                                <td>Faiz</td>
-                                                <td><!-- <a href="tester-transfer.html" class="btn btn-primary btn-light btn-sm">Transfer</a> --> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
-                                                <button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item pop3" href="#">Use Record</a>
-                                                     <a class="dropdown-item" href="#" onclick="getBack()" >Get Back</a>
-                                                    <a class="dropdown-item" href="#" >Transfer To Seller</a>
-
-                                                    <a class="dropdown-item" href="#" >Freeze</a>
-                                                </div>
-                                            </div></td>
-                                                <td>
-
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <th><input type="checkbox" name="tested" id="book6" value="floatingButtonHere" disabled=""></th>
-                                                <td>PWGS-A-6</td>
-                                                <td>A</td>
-                                                <td>Donald</td>
-                                                <td><!-- <a href="tester-transfer.html" class="btn btn-primary btn-light btn-sm">Transfer</a> --> <div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
-                                                <button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item pop3" href="#">Use Record</a>
-                                                    <!-- <a class="dropdown-item" href="#" >Get Back</a> -->
-                                                    <a class="dropdown-item" href="#" >Transfer To Seller</a>
-                                                    <a class="dropdown-item" href="#" >Assign To Tester</a>
-                                                    <a class="dropdown-item" href="" >Freeze</a>
-                                                </div>
-                                            </div></td>
-                                                 </tr>
                                         </tbody>
                                     </table>
                                    </div>
@@ -307,58 +217,147 @@
             </div>
         </section>
 
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header border-bottom">
-                        <h4 class="modal-title text-center font-weight-bold">Occupied PWG</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body text-center">
-                        <p class="text-danger">This PWG has been Transferred</p>
-                        <a href="" class="btn btn-secondary btn-sm">Disable??</a>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+        <!--	to show confirmation of delete and freeze-->
+        <div class="modal fade" id="imagemodalFreeze" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+			</div>
+			<div class="modal-body text-center p-4">
+				<i class="fa fa-question-circle fa-3x" style="color: #bd2130;" id="confirm-message-color"></i>
+				<p class="pt-2 font-weight-bold" id="confirm-message-delete-freeze"></p>
+
+			</div>
+			<div class="modal-footer justify-content-center">
+				<button type="button" class="btn btn-primary" id="confirm-modal-button-freeze" onclick="sendsellerspk();">Confirm</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+		  	</div>
+		</div>
+	</div>
+</div>
 
 
 
+        <!--	to show tester list-->
+        <div class="modal fade" id="imagemodalConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Tester List</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+			</div>
+			<div class="modal-body text-center p-4" id="tester_modal">
+			</div>
+			<div class="modal-footer justify-content-center">
+				<button type="button" class="btn btn-primary" id="confirm-modal-button" onclick="sendsellerspk();">Confirm</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+		  	</div>
+		</div>
+	</div>
+</div>
+
+    	<!--	to show login of history-->
         <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        	<div class="modal-dialog">
-        		<div class="modal-content">
-        			<div class="modal-header">
-        				<h5 class="modal-title font-weight-bold">Use Record of PWG ABC</h5>
-        				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        			</div>
-        			<div class="modal-body text-center">
-                        <h6>It has been accessed 4 times</h6>
-        			</div>
-        		</div>
-        	</div>
-        </div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title font-weight-bold" id="modal-title-history">Login History of Seller ABC</h5>
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			</div>
+			<div class="modal-body" id="modal-body-login-history">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Sr. No.</th>
+								<th scope="col">Date</th>
+								<th scope="col">Time</th>
+								<th scope="col">Device Name</th>
+								<th scope="col">Login IP Address</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">1</th>
+								<td>20/06/5</td>
+								<td>5:30pm</td>
+								<td>Samsung</td>
+								<td>10.2.0.10:8090</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Return</button>
+      </div>
+		</div>
+	</div>
+</div>
 
+        <!--	to show confirmation popup of single freeze-->
+        <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Message</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+			</div>
+			<div class="modal-body text-center p-4">
+				<i class="fas fa-check-circle fa-3x" style="color: green;" id="confirm-message-color"></i>
+				<p class="pt-2 font-weight-bold" id="confirm-message"></p>
 
+			</div>
 
-<section class="floatingButtonHere" style="display: none;">
-    <a href="" class=" btn btn-primary" data-toggle="modal" data-target="#exampleModal">Confirm</a>
-    <a href="pwg-sublist" class=" btn btn-danger">Cancel</a>
+		</div>
+	</div>
+</div>
+
+<section class="floatingButtonHere" id="floating-button" style="display:none;">
+	<a href="#" class="btn btn-primary" id="floating-confirm" onclick="delete_multiple_users()">Proceed</a>
+	<a href="pwg-sublist{{id}}" class=" btn btn-danger">Cancel</a>
 </section>
 
 
 
+<!--	to assign PWG to tester -->
+	<form action="assign" method="post" name="assign_multiple">
+		{% csrf_token %}
+		<input type="hidden" id="tester_values" name="tester_ids">
+		<input type="hidden" id="pwg_pk" name="pk">
+	</form>
+
+<!--	to assign multiple PWG to tester-->
+	<form action="assign_multiple" method="post" name="assign_pwg">
+		{% csrf_token %}
+		<input type="hidden" id="tester_pk" name="tester_ids">
+		<input type="hidden" id="assign_pwg_pk" name="pk">
+
+	</form>
+
+<!--	to freeze PWGs -->
+	<form action="freeze_multiple_user" method="post" name="freeze_multiple">
+		{% csrf_token %}
+		<input type="hidden" id="freeze_values" name="freeze_values">
+		<input type="hidden" value="pwg" name="accType">
+        <input type="hidden" value="{{id}}" name="pk">
+	</form>
 
 
 
-        <script type="text/javascript">
+<script src="{% static 'tesafe/js/ajax.js' %}"></script>
 
 
-            // search filter table
+<script type="text/javascript">
+    //global variable
+    let checkbox_values = [];
+    let check = '';
+    let freeze_flag = false;
+
+    // search filter table
     $(document).ready(function(){
         $("#myInput").on("keyup", function() {
             var value = $(this).val().toLowerCase();
@@ -370,54 +369,88 @@
 
 
 
-        	// modal popup
-	$(function() {
-		$('.pop3').on('click', function() {
-			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-			$('#imagemodal').modal('show');
-		});
-	});
+	// to remove all occurrence of the element
+	function removeItemAll(value) {
+		  var i = 0;
+		  while (i < checkbox_values.length) {
+				if (checkbox_values[i] === value) {
+				  checkbox_values.splice(i, 1);
+				} else {
+				  ++i;
+				}
+		  }
+	}
 
 
-
-        	// check all checkbox in one click
-
-	$(document).ready(function() {
+	// check all checkbox in one click
 
 		$('#checkAll').click(function () {
-			$('input:checkbox').not(this).prop('checked', this.checked);
-		});
 
-		$("[id*=book_]").change(function () {
-			if ($('input[type=checkbox]:checked').length == $('input[type=checkbox]').length) {
-				$('#checkAll').prop('checked', true);
-			} else {
-				$('#checkAll').prop('checked', false);
+			if( !freeze_flag ){
+                var ele = $("."+check);
+                if ($("#checkAll").is(':checked')) {
+                    $("."+check).prop("checked", true);
+                    for(i=0;i<ele.length;i++){
+                        checkbox_values.push(ele[i].value);
+                    }
+                }else{
+                    $("."+check).prop("checked", false);
+                    for(i=0;i<ele.length;i++){
+                        removeItemAll(ele[i].value);
+                    }
+                }
+            }else{
+            // only for freeze operations
+                var ele = $(".check");
+                var ele1 = $(".check_tester");
+                if ($("#checkAll").is(':checked')) {
+                    $(".check").prop("checked", true);
+                    $(".check_tester").prop("checked", true);
+                    for(i=0;i<ele.length;i++){
+                        checkbox_values.push(ele[i].value);
+                    }
+                    for(i=0;i<ele1.length;i++){
+                        checkbox_values.push(ele1[i].value);
+                    }
+                }else{
+                    $(".check").prop("checked", false);
+                    $(".check_tester").prop("checked", false);
+                    for(i=0;i<ele.length;i++){
+                        removeItemAll(ele[i].value);
+                    }
+                    for(i=0;i<ele1.length;i++){
+                        removeItemAll(ele1[i].value);
+                    }
+                }
+            }
+
+			if( checkbox_values.length == 0){
+				$(".floatingButtonHere").hide();
+			}else{
+				$(".floatingButtonHere").show(150);
 			}
+			checkbox_values = [...new Set(checkbox_values)];
 		});
 
+
+
+	$('input[type="checkbox"]').click(function(){
+		if($(this).attr("name")=="floatingButtonHere"){
+			if($(this).is(':checked')){
+				checkbox_values.push($(this).val());
+			}else{
+				removeItemAll($(this).val());
+			}
+		}
+		if( checkbox_values.length == 0){
+			$(".floatingButtonHere").hide();
+		}else{
+			$(".floatingButtonHere").show(150);
+		}
+		console.log(checkbox_values);
 	});
 
 
-
-
-		// check all checkbox in one click
-
-	$(document).ready(function() {
-
-		$('#checkAll1').click(function () {
-			$('input:checkbox').not(this).prop('checked', this.checked);
-		});
-
-		$("[id*=tested_]").change(function () {
-			if ($('input[type=checkbox]:checked').length == $('input[type=checkbox]').length) {
-				$('#checkAll1').prop('checked', true);
-			} else {
-				$('#checkAll1').prop('checked', false);
-			}
-		});
-
-	});
 
             function myfun() {
                 document.getElementById("div-1").style.display = "block";
@@ -428,53 +461,11 @@
                 document.getElementById("div-6").style.display = "none";
             }
 
-            function myfun1() {
-                document.getElementById("div-1").style.display = "none";
-                document.getElementById("div-2").style.display = "block";
-                document.getElementById("div-3").style.display = "none";
-                document.getElementById("div-4").style.display = "none";
-                document.getElementById("div-5").style.display = "none";
-                document.getElementById("div-6").style.display = "none";
-            }
-
-            function myfun2() {
-                document.getElementById("div-1").style.display = "none";
-                document.getElementById("div-2").style.display = "none";
-                document.getElementById("div-3").style.display = "block";
-                document.getElementById("div-4").style.display = "none";
-                document.getElementById("div-5").style.display = "none";
-                document.getElementById("div-6").style.display = "none";
-            }
-
-            function myfun3() {
-                 document.getElementById("checkAll").disabled = false;
-    document.getElementById("book1").disabled = false;
-    document.getElementById("book2").disabled = false;
-    document.getElementById("book3").disabled = false;
-    document.getElementById("book4").disabled = false;
-     document.getElementById("book5").disabled = false;
-      document.getElementById("book6").disabled = false;
-       document.getElementById("checkAll1").disabled = false;
-            }
-
-            function myfun4() {
-                document.getElementById("div-1").style.display = "none";
-                document.getElementById("div-2").style.display = "none";
-                document.getElementById("div-3").style.display = "none";
-                document.getElementById("div-4").style.display = "none";
-                document.getElementById("div-5").style.display = "block";
-                document.getElementById("div-6").style.display = "none";
-            }
-
-            function myfun5() {
-                document.getElementById("div-1").style.display = "none";
-                document.getElementById("div-2").style.display = "none";
-                document.getElementById("div-3").style.display = "none";
-                document.getElementById("div-4").style.display = "none";
-                document.getElementById("div-5").style.display = "none";
-                document.getElementById("div-6").style.display = "block";
-            }
-
+    function getback_pwg() {
+        document.getElementById("checkAll").disabled = false;
+        $(".check_tester").attr("disabled",false);
+        check = "check_tester";
+    }
 
     function tested() {
         document.getElementById("untested").style.display = "none";
@@ -491,67 +482,131 @@
     }
 
 
-            function getBack(){
-            	 document.getElementById("getbacked-t").style.display = "block";
-                document.getElementById("getback-t").style.display = "none";
-            }
 
-            function assign(){
-            	 document.getElementById("assigned-a").style.display = "block";
-                document.getElementById("assign-a").style.display = "none";
-            }
+    function freeze(){
+        document.getElementById("checkAll").disabled = false;
+        $(".check").attr("disabled",false);
+        $(".check_tester").attr("disabled",false);
+        freeze_flag = true;
+        $("#floating-confirm").attr('onclick','freeze_multiple_users()');
+    }
 
-            $(document).ready(function () {
-                $("#myBtn").click(function () {
-                    $("#myModal").modal();
-                });
-            });
-
-
-
-
-function myFunction1() {
-  // document.getElementById("checkAll").disabled = false;
-    document.getElementById("book1").disabled = false;
-    // document.getElementById("book2").disabled = false;
-    document.getElementById("book3").disabled = false;
-    document.getElementById("book4").disabled = false;
-     // document.getElementById("book5").disabled = false;
-      document.getElementById("book6").disabled = false;
-       // document.getElementById("checkAll1").disabled = false;
-}
-
-function myFunction() {
-   // document.getElementById("checkAll").disabled = false;
-    // document.getElementById("book1").disabled = false;
-    document.getElementById("book2").disabled = false;
-    // document.getElementById("book3").disabled = false;
-    // document.getElementById("book4").disabled = false;
-     document.getElementById("book5").disabled = false;
-      // document.getElementById("book6").disabled = false;
-      //  document.getElementById("checkAll1").disabled = false;
-}
-
-
-function myFunction2() {
-   document.getElementById("checkAll").disabled = false;
-    document.getElementById("book1").disabled = false;
-    document.getElementById("book2").disabled = false;
-    document.getElementById("book3").disabled = false;
-    document.getElementById("book4").disabled = false;
-     document.getElementById("book5").disabled = false;
-      document.getElementById("book6").disabled = false;
-       document.getElementById("checkAll1").disabled = false;
-}
-
-
-
-$('input[type="checkbox"]').click(function(){
-        if($(this).attr("value")=="floatingButtonHere"){
-            $(".floatingButtonHere").show(150);
+    function freeze_multiple_users(){
+        if ( checkbox_values.length == 1 ){
+            $("#confirm-message-delete-freeze").html("Freeze the selected "+checkbox_values.length+" PWG");
+        }else{
+            $("#confirm-message-delete-freeze").html("Freeze the selected "+checkbox_values.length+" PWG");
         }
-    });
 
-        </script>
+        $("#confirm-modal-button-freeze").attr('onclick','sendPWGPKFreeze();');
+        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+        $('#imagemodalFreeze').modal('show');
+
+    }
+    function sendPWGPKFreeze(){
+            $("#freeze_values").attr('value', checkbox_values);
+            document.forms['freeze_multiple'].submit();
+
+            checkbox_values = [];
+    }
+
+
+    function assign_multiple_pwg(){
+        document.getElementById("checkAll").disabled = false;
+        $(".check").attr("disabled",false);
+        check = "check";
+
+        $("#floating-confirm").attr('onclick','assign_multiple_users()');
+    }
+
+    function assign_multiple_users(){
+        if ( checkbox_values.length == 1 ){
+            $("#confirm-message-delete-freeze").html("Assign the selected "+checkbox_values.length+" PWG to Tester");
+        }else{
+            $("#confirm-message-delete-freeze").html("Assign the selected "+checkbox_values.length+" PWG to Tester");
+        }
+
+        $("#confirm-modal-button-freeze").attr('onclick','sendPWGPKAssign();');
+        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+        $('#imagemodalFreeze').modal('show');
+
+    }
+    function sendPWGPKAssign(){
+		$("#assign_pwg_pk").attr('value', checkbox_values);
+		$('#imagemodalFreeze').modal('hide');
+        tester_list_assign('v12v');
+		checkbox_values = [];
+    }
+
+    //to tester list
+    function tester_list_assign(kuchbhi){
+        // GET AJAX request
+        $.ajax({
+            type: 'GET',
+            url: "tester_list",
+            data: {},
+            success: function (response) {
+                    if(response['data'] == false){
+                        $("#tester_modal").html("<h5>Something went wrong, Try again</h5>");
+                        $("#tester_modal").css("color","red");
+                    }else{
+                    var text = '';
+                        for(i=0;i<response.length;i++){
+                            text += "<label><b>"+response[i]['fields']['first_name']+" "+response[i]['fields']['last_name']+"</b></label> <input type='radio' value='' class='ml-5 "+kuchbhi+"' id="+response[i]['pk']+" name='same' /> <br>"
+                        }
+
+                        $("#tester_modal").html(text);
+                        $("#confirm-modal-button").attr("onclick", "assign_pwgs('"+kuchbhi+"')");
+                        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                        $('#imagemodalConfirm').modal('show');
+
+                        // event listener on click on checkboxes
+                        $('.'+kuchbhi).click(function() {
+
+                            names = $('.'+kuchbhi);
+                                for(i=0;i<names.length;i++){
+                                    value = names[i]['value'];
+                                    if(value != ''){
+                                        names[i]['value'] = '';
+                                    }
+                                }
+
+
+                            if($(this).is(':checked')){
+                                var name = $(this).attr('id');
+                                $(this).val(name);
+                            }
+                        });
+                    }
+
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+
+
+    }
+
+
+    //to assign pwg to tester
+    function assign_pwgs(pk){
+        tester_pk = [];
+        $('#imagemodalConfirm').modal('hide');
+
+        names = $('.'+pk);
+        for(i=0;i<names.length;i++){
+            name = names[i]['name']
+            value = names[i]['value']
+            if(value != ''){
+                tester_pk.push(value)
+            }
+        }
+        $("#tester_pk").attr('value', tester_pk);
+        document.forms['assign_pwg'].submit();
+
+    }
+
+</script>
     </body>
 </html>
