@@ -199,17 +199,20 @@
 							<div class="row ">
 								<div class="col-md-8 py-3">
 									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change Your Current Password </h6>
+									{% for msg in messages %}
+									<label>{{msg}}</label>
+									{% endfor %}
 									<form action="password_change" method="post">
 										{% csrf_token %}
 									  <div class="form-group">
-									    <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter your email" name="old_email">
+									    <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter your old Password" name="old_password">
 									  </div>
 									  <div class="form-group">
-									     <input type="password" class="form-control" aria-describedby="emailHelp" placeholder="Enter New Password " name="new_email">
+									     <input type="password" class="form-control"  placeholder="Enter New Password " name="new_password">
 									  </div>
 
 									  <div class="form-group">
-									     <input type="password" class="form-control" aria-describedby="emailHelp" placeholder="Confirm New Password " name="new_conf_email">
+									     <input type="password" class="form-control"  placeholder="Confirm New Password " name="new_conf_password">
 									  </div>
 									<button class="btn btn-success" type="submit">Proceed</button>
                                         <a href="admin-home"><button class="btn btn-secondary" type="button" onclick="cancel()">Cancel</button></a>

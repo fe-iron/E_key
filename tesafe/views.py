@@ -428,22 +428,26 @@ def user_home(request):
 # TODOs
 def password_change(request):
     if request.method == "POST":
-        old_email = request.POST['old_email']
-        new_email = request.POST['new_email']
-        new_conf_email = request.POST['new_conf_email']
+        old_email = request.POST['old_password']
+        new_email = request.POST['new_password']
+        new_conf_email = request.POST['new_conf_password']
+
+        print()
         if new_conf_email == new_email:
             # creating password history
-            passHistory = PasswordHistory(user=request.user, device_name=request.META.get("COMPUTERNAME"), last_pass=new_email)
-            passHistory.save()
+            u = User.objects.get(username=request.user)
+            if u.check_password(old_email):
+                passHistory = PasswordHistory(user=request.user, device_name=request.META.get("COMPUTERNAME"), last_pass=new_email)
+                passHistory.save()
 
-            user = User.objects.get(username=old_email)
-            user.set_password(new_email)
-            user.save()
-            messages.info(request, "Successfully changed your password")
-            return redirect("/")
+                u.set_password(new_email)
+                u.save()
+                messages.info(request, "Successfully changed your password")
+                return redirect("/")
+
         else:
-            messages.info("Email doesn't match!")
-            return render(request, "tesafe/admin-home.html#change-passward")
+            messages.info(request, "New Password does not match!")
+            return redirect("admin-home")
 
     else:
         return render(request, "index.html")
