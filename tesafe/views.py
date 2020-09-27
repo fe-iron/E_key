@@ -711,7 +711,13 @@ def transfer_pwgs(request):
                 pwg_object = PWG.objects.get(id=i)
                 pwgs_id = pwg_object.owned_by
                 pwg_object.transfer_to = current_user
-                pwg_object.save()
+
+                if accType == "seller":
+                    pwg_object.location = "S"
+                    pwg_object.save()
+                elif accType == "tester":
+                    pwg_object.location = "T"
+                    pwg_object.save()
 
                 transfer = TransferPwg(pwg_owner=pwg_object, pwgs_owner=pwgs_id, user=current_user)
                 transfer.save()
