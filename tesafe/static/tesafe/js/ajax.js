@@ -4,7 +4,7 @@ function pop(pk, accType){
         $.ajax({
             type: 'GET',
             url: "validate_nickname",
-            data: {"pk": pk},
+            data: {"pk": pk, "accType": accType},
             success: function (response) {
                 // if not valid user, alert the user
 

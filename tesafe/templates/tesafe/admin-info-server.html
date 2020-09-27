@@ -148,7 +148,7 @@
 														<a class="dropdown-item" href="#" onclick="change_name('{{pwg_server.alias}}',{{pwg_server.pk}});">Change Name</a>
 														<a class="dropdown-item" href="#">Chat</a>
 														<a class="dropdown-item" href="#" onclick="delete_user({{pwg_server.pk}}, 'pwgs')">Delete</a>
-														<a class="dropdown-item" href="#" onclick="pop({{pwg_server.user.pk}}, 'PWGS')"> Login Record </a>
+														<a class="dropdown-item" href="#" onclick="pop({{pwg_server.user.pk}}, 'pwgs')"> Login Record </a>
 														<a class="dropdown-item" href="#" onclick="pwd_history({{pwg_server.user.id}})">Password History</a>
 														<a class="dropdown-item" href="pwg-sublist{{pwg_server.pk}}">PWG</a>
 													</div>
@@ -516,6 +516,10 @@ $(function() {
     });
 });
 
+// to show alert if pwg server has no pwg
+{% for msg in messages %}
+	alert("{{msg}}");
+{% endfor %}
 </script>
 </body>
 </html>

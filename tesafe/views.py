@@ -29,12 +29,12 @@ def get_ip(request):
     return ip
 
 
+#  login
 def index(request):
     if request.method == 'POST':
         accType = request.POST['accType']
         password = request.POST['password']
         uname = request.POST['uname']
-        print(request)
 
         user = auth.authenticate(username=uname, password=password)
 
@@ -48,6 +48,7 @@ def index(request):
 
             if accType == 'admin':
                 return admin_home(request)
+
             elif accType == 'seller':
                 if Seller.objects.filter(email=uname).exists():
                     return seller_home(request)
@@ -314,26 +315,29 @@ def transfer(request, id):
 
 
 def tester_getback(request, id):
-    user = User.objects.get(id=id)
-    list1 = []
+    if User.objects.filter(id=id).exists():
+        user = User.objects.get(id=id)
+        list1 = []
+        transferred_pwg = TransferPwg.objects.filter(user=id)
 
-    transferred_pwg = TransferPwg.objects.filter(user=id)
+        if transferred_pwg is None:
+            transferred_pwg = TransferPwg.objects.all()
 
-    if transferred_pwg is None:
-        transferred_pwg = TransferPwg.objects.all()
+        for obj in transferred_pwg:
+            list1.append(obj.pwgs_owner)
 
-    for obj in transferred_pwg:
-        list1.append(obj.pwgs_owner)
+        list1 = set(list1)
 
-    list1 = set(list1)
-
-    param = {
-        'trans_pwg': transferred_pwg,
-        'servers': list1,
-        "name": user.first_name + " " + user.last_name,
-        "id": id,
-    }
-    return render(request, 'tesafe/tester-getback.html', param)
+        param = {
+            'trans_pwg': transferred_pwg,
+            'servers': list1,
+            "name": user.first_name + " " + user.last_name,
+            "id": id,
+        }
+        return render(request, 'tesafe/tester-getback.html', param)
+    else:
+        messages.error(request, "This Tester has no PWG")
+        return redirect('admin-tester')
 
 
 def tester_tested_pwg_list(request, id):
@@ -351,26 +355,18 @@ def tester_tested_pwg_list(request, id):
 
 
 def pwg_sublist(request, id):
-    pwg = PWG.objects.filter(owned_by=id)
-    name = pwg[0].owned_by
-    param = {
-        'pwg': pwg,
-        'name': name,
-        'id': id,
-    }
-    return render(request, 'tesafe/pwg-sublist.html', param)
-
-
-def pwg_getback(request):
-    return render(request, 'tesafe/pwg-getback.html', {'num': [11,23,33,42,35,67,78,49,10]})
-
-
-def pwg_getback_sublist(request):
-    return render(request, 'tesafe/pwg-getback-sublist.html', {'num': [11,23,33,42,35,67,78,49,10]})
-
-
-def tester_pwg_sublist(request):
-    return render(request, 'tesafe/tester-pwg-sublist.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
+    if PWG.objects.filter(owned_by=id).exists():
+        pwg = PWG.objects.filter(owned_by=id)
+        name = pwg[0].owned_by
+        param = {
+            'pwg': pwg,
+            'name': name,
+            'id': id,
+        }
+        return render(request, 'tesafe/pwg-sublist.html', param)
+    else:
+        messages.error(request, "This PWG Server has no PWG")
+        return redirect("admin-info-server")
 
 
 def transfer_seller(request):
@@ -432,7 +428,7 @@ def password_change(request):
         new_email = request.POST['new_password']
         new_conf_email = request.POST['new_conf_password']
 
-        print()
+
         if new_conf_email == new_email:
             # creating password history
             u = User.objects.get(username=request.user)
@@ -444,7 +440,9 @@ def password_change(request):
                 u.save()
                 messages.info(request, "Successfully changed your password")
                 return redirect("/")
-
+            else:
+                messages.info(request, "Wrong Old Password!")
+                return redirect("admin-home")
         else:
             messages.info(request, "New Password does not match!")
             return redirect("admin-home")
@@ -459,7 +457,9 @@ def ajax_request(request):
     if request.is_ajax and request.method == "GET":
         # get the history from the database
         pk = request.GET.get("pk", None)
+        accType = request.GET.get("accType", None)
         # check for the pk in the database.
+
         if WebAdminLoginHistory.objects.filter(user_id=pk).exists():
             # if history found return history
             history = WebAdminLoginHistory.objects.filter(user_id=pk)
@@ -932,7 +932,6 @@ def assign_multiple(request):
         return redirect("pwg-sublist", id=pwgs.id)
     else:
         return JsonResponse({}, status=200)
-
 
 
 def tester_list(request):

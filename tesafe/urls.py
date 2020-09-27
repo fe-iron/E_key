@@ -15,9 +15,6 @@ urlpatterns = [
     path("tester-getback<int:id>", views.tester_getback, name="tester-getback"),
     path("tester-tested-pwg-list<int:id>", views.tester_tested_pwg_list, name="tester-tested-pwg-list"),
     path("pwg-sublist<int:id>", views.pwg_sublist, name="pwg-sublist"),
-    path("pwg-getback", views.pwg_getback, name="pwg-getback"),
-    path("pwg-getback-sublist", views.pwg_getback_sublist, name="pwg-getback-sublist"),
-    path("tester-pwg-sublist", views.tester_pwg_sublist, name="pwg-getback-sublist"),
 
     # seller PWG
     path("seller-home", views.seller_home, name="seller-home"),

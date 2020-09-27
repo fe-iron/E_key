@@ -426,7 +426,9 @@ function sendTestersPKFreeze(){
 		checkbox_values = [];
 }
 
-
+{% for msg in messages %}
+alert("{{msg}}");
+{% endfor %}
 </script>
 </body>
 </html>

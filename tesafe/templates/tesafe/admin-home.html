@@ -200,7 +200,7 @@
 								<div class="col-md-8 py-3">
 									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change Your Current Password </h6>
 									{% for msg in messages %}
-									<label>{{msg}}</label>
+									<label class="text-danger">{{msg}}</label>
 									{% endfor %}
 									<form action="password_change" method="post">
 										{% csrf_token %}
@@ -296,6 +296,11 @@
 			document.getElementById("login-history").style.display="none";
 			document.getElementById("Statics").style.display="none";
 		}
+
+{% for msg in messages %}
+alert("{{msg}}");
+{% endfor %}
+
 	</script>
 
 
