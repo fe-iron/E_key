@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tesafe',
+    # user agent to get users details
+    'django_user_agents',
 ]
 
 
@@ -52,11 +54,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #simplified static file serving
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    # user agent middleware
+    'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
 ROOT_URLCONF = 'E_key.urls'
-
-
 
 
 TEMPLATES = [
@@ -77,6 +79,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'E_key.wsgi.application'
 
+USER_AGENTS_CACHE = 'default'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -144,12 +147,4 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# SMTP configurations
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
 

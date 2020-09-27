@@ -42,7 +42,13 @@ def index(request):
             auth.login(request, user)
             # saving history
             ip = get_ip(request)
-            device_name = request.META.get("COMPUTERNAME")
+            if request.user_agent.device.family == "Other":
+                device_name = request.user_agent.os.family
+                device_name = device_name + " " + str(request.user_agent.os.version).replace(",","")
+            else:
+                device_name = request.user_agent.device.family
+
+
             history = WebAdminLoginHistory(user=user, login_IP=ip, device_name=device_name)
             history.save()
 
@@ -232,6 +238,7 @@ def admin_tester(request):
     param = {
         'tester': tester,
     }
+
     return render(request, 'tesafe/admin-tester.html', param)
 
 
@@ -703,6 +710,9 @@ def transfer_pwgs(request):
             for i in pwg:
                 pwg_object = PWG.objects.get(id=i)
                 pwgs_id = pwg_object.owned_by
+                pwg_object.transfer_to = current_user
+                pwg_object.save()
+
                 transfer = TransferPwg(pwg_owner=pwg_object, pwgs_owner=pwgs_id, user=current_user)
                 transfer.save()
 
