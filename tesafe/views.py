@@ -868,7 +868,9 @@ def getpassword(request):
         pk = request.GET.get("pk", None)
         if PasswordHistory.objects.filter(user=pk).exists():
             history = PasswordHistory.objects.filter(user=pk)
-            return JsonResponse({"history": history}, status=200)
+            history_json = serializers.serialize('json', history)
+
+            return HttpResponse(history_json, content_type='application/json')
         else:
             return JsonResponse({"history": False}, status=200)
     else:
