@@ -22,8 +22,9 @@ class Seller(models.Model):
     alias = models.CharField(max_length=100, default="none")
     email = models.CharField(max_length=150)
     phone = models.CharField(max_length=15)
-    profile_pic = models.ImageField(upload_to='seller', default="none")
+    profile_pic = models.ImageField(upload_to='seller/', default="none")
     is_freeze = models.BooleanField(default=False)
+    user_count = models.IntegerField(default=0)
 
     def __str__(self):
         return self.first_name
@@ -37,7 +38,7 @@ class Tester(models.Model):
     alias = models.CharField(max_length=100, default="none")
     email = models.CharField(max_length=150)
     phone = models.CharField(max_length=15)
-    profile_pic = models.ImageField(upload_to='tester', default="none")
+    profile_pic = models.ImageField(upload_to='tester/', default="none")
     is_freeze = models.BooleanField(default=False)
 
     def __str__(self):
@@ -51,7 +52,12 @@ class WebUser(models.Model):
     last_name = models.CharField(max_length=100)
     email = models.CharField(max_length=150)
     phone = models.CharField(max_length=15)
-    profile_pic = models.ImageField(upload_to='user', default="none")
+    alias = models.CharField(max_length=100, default="none")
+    profile_pic = models.ImageField(upload_to='user/', default="none")
+    associated_with = models.ForeignKey(Seller, on_delete=models.SET_NULL, null=True, default=None)
+    is_freeze = models.BooleanField(default=False)
+    is_authorized = models.BooleanField(default=False)
+    is_shared = models.BooleanField(default=False)
 
     def __str__(self):
         return self.first_name

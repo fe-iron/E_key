@@ -83,6 +83,11 @@
 	<section class="bg-detail">
 		<div class="container-fluid">
 			<div class="row justify-content-center ">
+				<!--			 for showing error and messages-->
+			<div class="col-md-10 py-2 px-5 mt-3" id="msg">
+
+			</div>
+
 				<div class="col-md-10 py-2 px-5">
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="Statics">
 						<div class="col-md">
@@ -146,17 +151,19 @@
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="login-history" style="display: none;">
 						
 						<div class="col-md">
-							<h4>Login History
-                                <span class="d-flex justify-content-end">
-							        <a href="admin-home" type="button" class="btn btn-danger btn-sm">Return</a>
-                                </span>
-                            </h4>
+							<h4>Login History</h4>
 							<div class="row">
 								<div class="col-md-6 py-3">
 									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Number Of times Admin Been Logged in </h6>
 									<p>{{history_count}}</p>
 								</div>
+								<div class="col-md-6 ">
+									<div class="float-right">
+										<a href="admin-home"><button type="button" class="btn btn-info">Return</button></a>
+									</div>
+								</div>
 							</div>
+
 
 							<div class="row">
 								<div class="col-md">
@@ -167,13 +174,13 @@
 												<tr>
 													<th scope="col">Sr. No.</th>
 													<th scope="col">Date</th>
-													<th scope="col">TIme</th>
+													<th scope="col">Time</th>
 													<th scope="col">Device Name</th>
 													<th scope="col">Login IP Address</th>
 												</tr>
 											</thead>
 											<tbody>
-											{% for admin_history in history %}
+												{% for admin_history in history %}
 												<tr>
 													<th scope="row">{{forloop.counter}}</th>
 													<td>{{admin_history.login_date}}</td>
@@ -205,15 +212,16 @@
 									<form action="password_change" method="post">
 										{% csrf_token %}
 									  <div class="form-group">
-									    <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter your old Password" name="old_password">
+									    <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter your old Password" name="old_password" required>
 									  </div>
 									  <div class="form-group">
-									     <input type="password" class="form-control"  placeholder="Enter New Password " name="new_password">
+									     <input type="password" class="form-control"  placeholder="Enter New Password " name="new_password" required>
 									  </div>
 
 									  <div class="form-group">
-									     <input type="password" class="form-control"  placeholder="Confirm New Password " name="new_conf_password">
+									     <input type="password" class="form-control"  placeholder="Confirm New Password " name="new_conf_password" required>
 									  </div>
+										<input type="hidden" name="accType" value="admin">
 									<button class="btn btn-success" type="submit">Proceed</button>
                                         <a href="admin-home"><button class="btn btn-secondary" type="button" onclick="cancel()">Cancel</button></a>
 									</form>
@@ -224,10 +232,19 @@
 					</div>
 
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="password-history" style="display: none;">
-						
-						<div class="col-md">
 
-							<h4 class=""> Password HISTORY<span class="float-right"><a href="admin-home" type="button" class="btn btn-danger btn-sm">Return</a></span></h4>
+						<div class="col-md">
+							<div class="row">
+								<div class="col-md-6">
+									<h4>Password HISTORY</h4>
+								</div>
+								<div class="col-md-6">
+									<div class="float-right">
+										<a href="admin-home"><button type="button" class="btn btn-info">Return</button></a>
+									</div>
+								</div>
+							</div>
+
 							<div class="table-responsive">
 								<table class="table">
 									<thead>
@@ -267,6 +284,18 @@
 
 
 	<script type="text/javascript">
+			// Shorthand for $( document ).ready()
+		$(function() {
+			setTimeout(function(){
+				$("#msg").removeClass('bg-light');
+				$("#msg").html('');
+			}, 4000);
+			{% if messages %}
+			$("#msg").addClass('bg-light');
+			{% endif %}
+			$("#msg").html('{% for msg in messages %}<h3 class="text-danger">{{msg}}</h3>{% endfor %}');
+		});
+
 
 		function myfun(){
 			document.getElementById("Statics").style.display="block";
@@ -297,9 +326,6 @@
 			document.getElementById("Statics").style.display="none";
 		}
 
-{% for msg in messages %}
-alert("{{msg}}");
-{% endfor %}
 
 	</script>
 

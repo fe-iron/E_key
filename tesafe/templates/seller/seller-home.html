@@ -21,9 +21,6 @@
 
 </head>
 <body>
-
-
-
 	<section class="bg-light">
 		<div class="container-fluid">
 			<nav class="navbar navbar-expand-lg navbar-light ">
@@ -43,13 +40,6 @@
 						<li class="nav-item pl-3">
 							<a class="nav-link" href="seller-pwg">PWG</a>
 						</li>
-						<!-- <li class="nav-item pl-3">
-							<a class="nav-link" href="admin-info-server.html">PWG Server</a>
-						</li> -->
-
-						<!-- <li class="nav-item pl-3">
-							<a class="nav-link" href="admin-info-server.html">Unread Messages <span><i class="fas fa-bell"></i></span></a>
-						</li> -->
 					</ul>
 					
 				</div>
@@ -61,19 +51,22 @@
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="" onclick="myfun()">Broadcast</a>
-						<a class="dropdown-item" href="#Statics" onclick="myfun()">Statistics</a>
+						<a class="dropdown-item" href="#" onclick="myfun()">Broadcast</a>
+						<a class="dropdown-item" href="#change-passward" onclick="myfun3()">Change Password</a>
+						<a class="dropdown-item" href="#">Chat To Admin</a>
 						<a class="dropdown-item" href="#login-history" onclick="myfun1()">Login History</a>
 						<a class="dropdown-item" href="#password-history" onclick="myfun2()">Password History</a>
-						<a class="dropdown-item" href="#change-passward" onclick="myfun3()">Change Password</a>
 						<a class="dropdown-item" href="#" onclick="myfun4()">Set Alias</a>
-						<a class="dropdown-item" href="#">Chat To Admin</a>
+						<a class="dropdown-item" href="#Statics" onclick="myfun()">Statistics</a>
+						{% if user.is_authenticated %}
+						<a class="dropdown-item" href="logout">Log Out</a>
+						{%else%}
+						<a class="dropdown-item" href="/">Log In</a>
+						{% endif %}
 						<a class="dropdown-item" href="/">Exit</a>
 
 					</div>
 				</div>
-
-
 			</nav>
 		</div>
 	</section>
@@ -81,226 +74,14 @@
 	<section class="bg-detail">
 		<div class="container-fluid">
 			<div class="row justify-content-center ">
-			<!-- 	<div class="col-md-3 bg-user">
-					<div class="row">
-						<ul class="nav py-2">
+<!--				 for showing error and messages-->
+				<div class="col-md-10 py-2 px-5 mt-3" id="msg">
 
-							<li class="nav-item display-block">
-								<a class="nav-link font-weight-bold text-success" href="#">Unread Messages ( 4 )</a>
-							</li>
-						</ul>
-					</div>
-
-					<div class="row" style="overflow:scroll; height:520px;">
-						<div class="col-md ">
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom border-top pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<a href="">
-								<div class="d-flex bd-highlight border-bottom pt-2">
-									<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-									<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-										<p><i class="fas fa-circle fa-1x"></i> Online</p>
-									</div>
-								</div>
-							</a>
-
-							<div class="d-flex bd-highlight border-bottom pt-2">
-								<div class="p-2 flex-shrink-1 bd-highlight"><img src="images/banner-8.jpg" class="rounded-circle" height="50" width="50"></div>
-								<div class="p-2 w-100 bd-highlight"><p class="mb-0">Naqui Hasan</p>
-									<p><i class="fas fa-circle fa-1x"></i> Online</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div> -->
+				</div>
 				<div class="col-md-10 py-2 px-5">
-
-
-
-					<!-- <div class="row justify-content-center bg-button-1 p-4">
-						<div class="col-md text-center mb-2">
-							<div class="card">
-								<div class="box">
-									<div class="percent">
-										<svg>
-											<circle cx="50"  cy="50" r="50"></circle>
-											<circle cx="50"  cy="50" r="50"></circle>
-										</svg>
-										<div class="text">
-											<h5>17</h5>
-										</div>
-									</div>
-									<p>Seller</p>
-								</div>
-
-							</div>
-						</div>
-
-						<div class="col-md text-center mb-2">
-							<div class="card">
-								<div class="box">
-									<div class="percent">
-										<svg>
-											<circle cx="50"  cy="50" r="50"></circle>
-											<circle cx="50"  cy="50" r="50"></circle>
-										</svg>
-										<div class="text">
-											<h5>10</h5>
-										</div>
-									</div>
-									<p>Tester</p>
-								</div>
-
-							</div>
-						</div>
-
-						<div class="col-md text-center mb-2">
-							<div class="card">
-								<div class="box">
-									<div class="percent">
-										<svg>
-											<circle cx="50"  cy="50" r="50"></circle>
-											<circle cx="50"  cy="50" r="50"></circle>
-										</svg>
-										<div class="text">
-											<h5>20</h5>
-										</div>
-									</div>
-									<p>Information</p>
-								</div>
-
-							</div>
-						</div>
-
-
-					</div> -->
-
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="Statics">
-
 						<div class="col-md">
 							<h4 class="">statistics</h4>
-							<!-- <div class="row">
-								<div class="col-md py-3"><h5 class="font-weight-bold">1. Seller</h5></div>
-							</div>
-							<div class="row">
-								<div class="col-md ">
-									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Total Number Of seller </h6>
-									<p>17 </p>
-								</div>
-
-								<div class="col-md ">
-									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Total Number Of Seller is Online</h6>
-									<p>5 </p>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md py-3"><h5 class="font-weight-bold">2. Tester</h5></div>
-							</div>
-							<div class="row">
-								<div class="col-md ">
-									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Total Number Of Tester </h6>
-									<p>10 </p>
-								</div>
-
-								<div class="col-md ">
-									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Total Number Of Tester is Online</h6>
-									<p>2 </p>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md py-3"><h5 class="font-weight-bold">3. Information Server</h5></div>
-							</div>
-							<div class="row">
-								<div class="col-md ">
-									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Total Number Of Information Server </h6>
-									<p>20 </p>
-								</div>
-
-								<div class="col-md ">
-									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Total Number Of Information Server Online</h6>
-									<p>4</p>
-								</div>
-							</div> -->
-
 							<div class="row">
 								<div class="col-md">
 									<div class="table-responsive">
@@ -314,43 +95,40 @@
 												</tr>
 											</thead>
 											<tbody>
-
-
 												<tr>
 													<th scope="row">PWGs</th>
-													<td>20</td>
-													<td>15</td>
-													<td>5</td>
-
+													<td>{{pwgs}}</td>
+													<td>{{pwg_online}}</td>
+													<td>{{pwg_offline}}</td>
 												</tr>
 
 												<tr>
 													<th scope="row">User</th>
-													<td>20</td>
-													<td>15</td>
-													<td>5</td>
-
+													<td>{{seller.user_count}}</td>
+													<td>{{user_online}}</td>
+													<td>{{user_offline}}</td>
 												</tr>
 											</tbody>
 										</table>
 									</div>
 								</div>
 							</div>
-
-
 						</div>
-
 					</div>
 
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="login-history" style="display: none;">
 
 						<div class="col-md">
-							<h4 class="">Login History<span class="float-right">
-							<a href="seller-home" type="button" class="btn btn-danger btn-sm">Return</a></span></h4>
+							<h4 class="">Login History</h4>
 							<div class="row">
 								<div class="col-md-6 py-3">
-									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Number Of Admin Been Logged in </h6>
-									<p>1 times</p>
+									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Number Of times Admin Been Logged in </h6>
+									<p>{{history_count}} times</p>
+								</div>
+								<div class="col-md-6 ">
+									<div class="float-right">
+										<a href="seller-home"><button type="button" class="btn btn-secondary">Return</button></a>
+									</div>
 								</div>
 							</div>
 
@@ -366,19 +144,19 @@
 													<th scope="col">Time</th>
 													<th scope="col">Device Name</th>
 													<th scope="col">Login IP Address</th>
-													<th scope="col">Duration Of Online</th>
 
 												</tr>
 											</thead>
 											<tbody>
+												{% for admin_history in history %}
 												<tr>
-													<th scope="row">1</th>
-													<td>20/06/5</td>
-													<td>5:30pm</td>
-													<td>Samsung</td>
-													<td>10.2.0.10:8090</td>
-													<td>30 minutes</td>
+													<th scope="row">{{forloop.counter}}</th>
+													<td>{{admin_history.login_date}}</td>
+													<td>{{admin_history.login_time}}</td>
+													<td>{{admin_history.device_name}}</td>
+													<td>{{admin_history.login_IP}}</td>
 												</tr>
+											{% endfor %}
 											</tbody>
 										</table>
 									</div>
@@ -390,23 +168,26 @@
 
 
 
-					<div class="row justify-content-center bg-button-1 p-4 mt-3" id="alias" style="display: none;">
+					<div class="row justify-content-center bg-button-1 p-4 mt-3 mb-3" id="alias" style="display: none;">
 						<div class="col-md">
 							<h4 class="font-weight-bold"> Set Alias</h4>
 							<div class="row">
 								<div class="col-md-6 py-3">
-									<form>
+									{% for msg in messages %}
+										<label for="" class="text-danger">{{msg}}</label>
+									{% endfor %}
+									<form action="change_alias" method="post">
+										{% csrf_token %}
 									  <div class="form-group">
-									    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Alias ">
+									    <input type="text" class="form-control" placeholder="Enter Alias " required name="alias">
 									  </div>
 									  <div class="form-group">
-									     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Confirm Alias ">
+									     <input type="text" class="form-control" placeholder="Confirm Alias " required name="alias_conf">
 									  </div>
-
-
-
+										<input type="hidden" name="alias_id" value="{{request.user.id}}">
+										<input type="hidden" name="accType" value="seller">
 									<button class="btn btn-success" type="submit">Submit</button>
-									<a href="seller-home" class="btn btn-warning">Cancel</a>
+									<a href="seller-home" class="btn btn-secondary">Cancel</a>
 									</form>
 								</div>
 
@@ -423,19 +204,21 @@
 							<div class="row ">
 								<div class="col-md-8 py-3">
 									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change Your Current Password </h6>
-									<form>
+									<form action="password_change" method="post">
+										{% csrf_token %}
 									  <div class="form-group">
-									    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Old Password ">
+									    <input type="text" class="form-control"  placeholder="Enter Old Password " required name="old_password">
 									  </div>
 									  <div class="form-group">
-									     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter New Password ">
+									     <input type="password" class="form-control"  placeholder="Enter New Password " required name="new_password">
 									  </div>
 
 									  <div class="form-group">
-									     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Confirm New Password ">
+									     <input type="password" class="form-control"  placeholder="Confirm New Password " required name="new_conf_password">
 									  </div>
+										<input type="hidden" name="accType" value="seller">
 									<button class="btn btn-success" type="submit">Proceed</button>
-									<a href="seller-home" class="btn-secondary btn ">Cancel</a>
+									<a href="seller-home" class="btn-secondary btn " type="button">Cancel</a>
 									</form>
 								</div>
 							</div>
@@ -446,81 +229,75 @@
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="password-history" style="display: none;">
 
 						<div class="col-md">
-
-							<h4 class=""> Password HISTORY<span class="float-right"><a href="seller-home" type="button" class="btn btn-danger btn-sm">Return</a></span></h4>
+							<div class="row">
+								<div class="col-md-6">
+									<h4 class=""> Password HISTORY</h4>
+								</div>
+								<div class="col-md-6">
+										<div class="float-right">
+											<a href="seller-home"><button type="button" class="btn btn-secondary">Return</button></a>
+										</div>
+								</div>
+							</div>
 							<div class="table-responsive">
 								<table class="table">
 									<thead>
 										<tr>
-
 											<th scope="col">Sr. No.</th>
-											<th scope="col">Last Change</th>
+											<th scope="col">Date</th>
+											<th scope="col">Time</th>
 											<th scope="col">Device Name</th>
 											<th scope="col">Last Password</th>
-
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<th scope="row">1</th>
-											<td>02//5/20</td>
-											<td>Samsung</td>
-											<td>abc@12345678</td>
-										</tr>
+										{% for history in password_history %}
+											<tr>
+												<th scope="row">{{forloop.counter}}</th>
+												<td>{{history.login_date}}</td>
+												<td>{{history.login_time}}</td>
+												<td>{{history.device_name}}</td>
+												<td>{{history.last_pass}}</td>
+											</tr>
+                                    	{% endfor %}
 									</tbody>
 								</table>
 							</div>
 						</div>
 
 					</div>
-
-					<!-- <div class="row justify-content-center py-3 bg-button-1 m-4">
-						<div class="col-md">
-							<button type="button" class="btn btn-primary"> Admin Login Detail</button>
-							<div class="">
-								<h5>Number Of times Admin Been Logged in  <span>5 Times</span></h5>
-								<h5>Admin Login History</h5>
-								<ol>
-									 <li>
-									 	20/01/20 <span> 50:30 Pm</span>
-								     </li>
-
-								</ul>
-							</div>
-						</div>
-
-					</div> -->
-
-					<!-- <div class="row justify-content-center py-3 bg-button-1 m-4">
-						<div class="col-md">
-							<button type="button" class="btn btn-primary"> Admin Login Detail</button>
-						</div>
-
-					</div> -->
 				</div>
 			</div>
-
-
 		</div>
 	</section>
 
-
-
 	<script type="text/javascript">
 
-
-
+		// Shorthand for $( document ).ready()
+		$(function() {
+			setTimeout(function(){
+				$("#msg").removeClass('bg-light');
+				$("#msg").html('');
+			}, 4000);
+			{% if messages %}
+			$("#msg").addClass('bg-light');
+			{% endif %}
+			$("#msg").html('{% for msg in messages %}<h3 class="text-danger">{{msg}}</h3>{% endfor %}');
+		});
+		// statistics
 		function myfun(){
 			document.getElementById("Statics").style.display="block";
 			document.getElementById("change-passward").style.display="none";
-			document.getElementById("login-history").style.display="block";
 			document.getElementById("login-history").style.display="none";
+			document.getElementById("password-history").style.display="none";
+			document.getElementById("alias").style.display="none";
 		}
 		function myfun1(){
 			document.getElementById("login-history").style.display="block";
 			document.getElementById("change-passward").style.display="none";
 			document.getElementById("Statics").style.display="none";
 			document.getElementById("password-history").style.display="none";
+			document.getElementById("alias").style.display="none";
 		}
 
 		function myfun3(){
@@ -528,7 +305,7 @@
 			document.getElementById("change-passward").style.display="block";
 			document.getElementById("password-history").style.display="none";
 			document.getElementById("Statics").style.display="none";
-			// document.getElementById("login-history").style.display="block";
+			document.getElementById("alias").style.display="none";
 		}
 
 		function myfun2(){
@@ -536,6 +313,7 @@
 			document.getElementById("change-passward").style.display="none";
 			document.getElementById("login-history").style.display="none";
 			document.getElementById("Statics").style.display="none";
+			document.getElementById("alias").style.display="none";
 		}
 
 
@@ -545,8 +323,9 @@
 			document.getElementById("alias").style.display="block";
 			document.getElementById("password-history").style.display="none";
 			document.getElementById("Statics").style.display="none";
-			// document.getElementById("login-history").style.display="block";
 		}
+
+
 	</script>
 
 

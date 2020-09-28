@@ -77,6 +77,13 @@
 	<section class="bg-detail">
 		<div class="container-fluid">
 			<div class="row justify-content-center">
+
+
+				<!-- for showing error and messages-->
+				<div class="col-md-10 py-2 px-5 mt-3" id="msg">
+
+				</div>
+
 				<div class="col-md-10 py-5 px-5">
 						<div class="row  bg-button-2 p-4 mt-3" id="div-2">
 
@@ -169,24 +176,27 @@
 								<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Add PWG Account</h5>
 								<div class="row">
 									<div class="col-md-6 py-3">
+										{% for msg in messages %}
+											<label class="text-danger">{{msg}}</label>
+										{% endfor %}
 									<form method="post" action="add-new">
                                         {% csrf_token %}
 									  <div class="form-group">
-									    <input type="text" class="form-control"  placeholder="Enter Name " name="name" autocomplete="true">
+									    <input type="text" class="form-control is-integer"  placeholder="Enter Name " name="name" autocomplete="true">
 									  </div>
 									  <div class="form-group">
-									     <input type="text" class="form-control"  placeholder="Enter Alias Name " name="alias" autocomplete="true">
+									     <input type="text" class="form-control is-integer"  placeholder="Enter Alias Name " name="alias" autocomplete="true">
 									  </div>
 									  <div class="form-group">
-									     <input type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Email " name="email" autocomplete="true">
+									     <input type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Email " name="email" autocomplete="true" required>
 									  </div>
 									  <div class="form-group">
-									     <input type="password" class="form-control"  placeholder="Enter Password " name="password" autocomplete="true">
+									     <input type="password" class="form-control"  placeholder="Enter Password " name="password" autocomplete="true" required>
 									  </div>
 
 									  <input type="hidden" value="pwgs" name="accType">
 
-										<button class="btn btn-primary" type="submit">Submit</button>
+										<button class="btn btn-primary" type="submit" disabled>Submit</button>
 										<button class="btn btn-danger" type="button" onclick="cancel()">Cancel</button>
 									</form>
 									</div>
@@ -324,6 +334,32 @@
 
 	<script type="text/javascript">
         let checkbox_values = [];
+
+
+		// function to check is contains integer or not
+		$('.is-integer').on('change', function(){
+			var value = $(this).val();
+			isnum = /^\d/.test(value)   // to check if it is starting with num
+			// isnum = /^\d+$/.test(value);   to check if it is only containing num
+			if( isnum ){
+				$("#add-new-button").attr("disabled", true);
+			}else{
+				$("#add-new-button").attr("disabled", false);
+			}
+		});
+
+
+		// Shorthand for $( document ).ready()
+		$(function() {
+			setTimeout(function(){
+				$("#msg").removeClass('bg-light');
+				$("#msg").html('');
+			}, 4000);
+			{% if messages %}
+			$("#msg").addClass('bg-light');
+			{% endif %}
+			$("#msg").html('{% for msg in messages %}<h3 class="text-danger">{{msg}}</h3>{% endfor %}');
+		});
 
     // search filter table
         $(document).ready(function(){
@@ -516,10 +552,6 @@ $(function() {
     });
 });
 
-// to show alert if pwg server has no pwg
-{% for msg in messages %}
-	alert("{{msg}}");
-{% endfor %}
 </script>
 </body>
 </html>

@@ -48,19 +48,23 @@ def index(request):
             else:
                 device_name = request.user_agent.device.family
 
-
             history = WebAdminLoginHistory(user=user, login_IP=ip, device_name=device_name)
             history.save()
 
             if accType == 'admin':
-                return admin_home(request)
+                if WebAdmin.objects.filter(user=user).exists():
+                    return redirect("admin-home")
+                else:
+                    messages.info(request, 'Invalid user id and password for Admin')
+                    return redirect('/')
 
             elif accType == 'seller':
                 if Seller.objects.filter(email=uname).exists():
-                    return seller_home(request)
+                    return redirect("seller-home")
                 else:
                     messages.info(request, 'Invalid user id and password for Seller')
                     return redirect('/')
+
             elif accType == 'tester':
                 if Tester.objects.filter(email=uname).exists():
                     return render(request, 'tester/tester-home.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
@@ -70,18 +74,16 @@ def index(request):
 
             elif accType == 'user':
                 if WebUser.objects.filter(email=uname).exists():
-                    return render(request, 'user/user-home.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
+                    return redirect("user-home")
                 else:
                     messages.info(request, 'Invalid user id and password for User')
                     return redirect('/')
-
 
         else:
             messages.info(request, 'Invalid user id and password')
             return redirect('/')
 
     else:
-        print(request)
         return render(request, 'tesafe/index.html')
 
 
@@ -95,8 +97,7 @@ def register(request):
         phone = request.POST['phone']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
-        file = request.POST['file']
-        device = request.META.get("COMPUTERNAME")
+        file = request.FILES['file']
 
         # password checking
 
@@ -109,6 +110,12 @@ def register(request):
                 messages.error(request, "Email already exists! try again")
                 return redirect('register')
             else:
+                # fetching device info
+                if request.user_agent.device.family == "Other":
+                    device_name = request.user_agent.os.family
+                    device_name = device_name + " " + str(request.user_agent.os.version).replace(",", "")
+                else:
+                    device_name = request.user_agent.device.family
 
                 # if it is admin
                 if accType == 'admin':
@@ -116,7 +123,7 @@ def register(request):
                     user.save()
 
                     # creating password history
-                    passHistory = PasswordHistory(user=user, device_name=device,last_pass=password1)
+                    passHistory = PasswordHistory(user=user, device_name=device_name,last_pass=password1)
                     passHistory.save()
 
                     webAdmin = WebAdmin(user=user, first_name=fname, last_name=lname, email=email, phone=phone)
@@ -130,28 +137,25 @@ def register(request):
                     user.save()
 
                     # creating password history
-                    passHistory = PasswordHistory(user=user, device_name=request.META.get("COMPUTERNAME"),
-                                                  last_pass=password1)
+                    passHistory = PasswordHistory(user=user, device_name=device_name, last_pass=password1)
                     passHistory.save()
 
-                    seller = Seller(user=user, first_name=fname, last_name=lname, email=email, phone=phone, profile_pic=file)
+                    seller = Seller(user=user, first_name=fname, last_name=lname, email=email, phone=phone, profile_pic=file, alias=uname)
                     seller.save()
 
                     return render(request, 'seller/seller-home.html')
 
                 # if it is tester
                 elif accType == 'tester':
-
                     user = User.objects.create_user(username=email, first_name=fname, last_name=lname, email=email,
                                                     password=password1)
                     user.save()
 
                     # creating password history
-                    passHistory = PasswordHistory(user=user, device_name=request.META.get("COMPUTERNAME"),
-                                                  last_pass=password1)
+                    passHistory = PasswordHistory(user=user, device_name=device_name, last_pass=password1)
                     passHistory.save()
 
-                    tester = Tester(user=user, first_name=fname, last_name=lname, email=email, phone=phone, profile_pic=file)
+                    tester = Tester(user=user, first_name=fname, last_name=lname, email=email, phone=phone, profile_pic=file, alias=uname)
                     tester.save()
 
                     return render(request, 'tester/tester-home.html')
@@ -163,14 +167,13 @@ def register(request):
                     user.save()
 
                     # creating password history
-                    passHistory = PasswordHistory(user=user, device_name=request.META.get("COMPUTERNAME"),
-                                                  last_pass=password1)
+                    passHistory = PasswordHistory(user=user, device_name=device_name, last_pass=password1)
                     passHistory.save()
 
-                    webUser = WebUser(user=user, first_name=fname, last_name=lname, email=email, phone=phone, profile_pic=file)
+                    webUser = WebUser(user=user, first_name=fname, last_name=lname, email=email, phone=phone, profile_pic=file, alias=uname)
                     webUser.save()
 
-                    return render(request, 'tester/tester-home.html')
+                    return render(request, 'user/user-home.html')
         else:
             messages.error(request, "Password do not match! try again")
             return redirect('register')
@@ -218,9 +221,9 @@ def admin_home(request):
         'web_user_offline': web_user_count - queryset_web_user.count(),
         'PWGs_offline': PWGS_count - queryset_PWGs.count(),
         'PWGs_online': queryset_PWGs.count(),
-        'history': WebAdminLoginHistory.objects.filter(user=request.user),
+        'history': WebAdminLoginHistory.objects.filter(user=request.user).order_by('-login_date'),
         'history_count': history_count,
-        'password_history': PasswordHistory.objects.filter(user=request.user)
+        'password_history': PasswordHistory.objects.filter(user=request.user).order_by('-login_date')
     }
     return render(request, 'tesafe/admin-home.html', params)
 
@@ -262,45 +265,83 @@ def admin_info_server(request):
     return render(request, 'tesafe/admin-info-server.html', param)
 
 
-def register_next(request):
-    if request.method == 'POST':
-        accType = request.POST['accType']
-        fname = request.POST['fname']
-        lname = request.POST['lname']
-        uname = request.POST['uname']
-        email = request.POST['email']
-        phone = request.POST['phone']
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
-
-        if accType == 'admin':
-            if password1 == password2:
-                user = User.objects.create_user(username=uname, first_name=fname, last_name=lname, email=email,
-                                                password=password1, is_webAdmin=True)
-                user.save()
-
-                webAdmin = WebAdmin(name=fname, phone=phone, email=email)
-                webAdmin.save()
-                msg = messages.info("Account successfully created!")
-                return render(request, 'tesafe/admin-page.html', {'msg': msg})
-
-            else:
-                msg = messages.error(request, "Password do not match! try again")
-                return render(request, 'tesafe/admin-page.html', {'msg': msg})
-
-    return render(request, 'tesafe/admin-seller.html', {})
+# never used
+# def register_next(request):
+#     if request.method == 'POST':
+#         accType = request.POST['accType']
+#         fname = request.POST['fname']
+#         lname = request.POST['lname']
+#         uname = request.POST['uname']
+#         email = request.POST['email']
+#         phone = request.POST['phone']
+#         password1 = request.POST['password1']
+#         password2 = request.POST['password2']
+#
+#         if accType == 'admin':
+#             if password1 == password2:
+#                 user = User.objects.create_user(username=uname, first_name=fname, last_name=lname, email=email,
+#                                                 password=password1, is_webAdmin=True)
+#                 user.save()
+#
+#                 webAdmin = WebAdmin(name=fname, phone=phone, email=email)
+#                 webAdmin.save()
+#                 msg = messages.info("Account successfully created!")
+#                 return render(request, 'tesafe/admin-page.html', {'msg': msg})
+#
+#             else:
+#                 msg = messages.error(request, "Password do not match! try again")
+#                 return render(request, 'tesafe/admin-page.html', {'msg': msg})
+#
+#     return render(request, 'tesafe/admin-seller.html', {})
 
 
 def seller_home(request):
-    seller = Seller.objects.all()
+    count = 0
+    user_online = 0
+    user_offline = 0
+    seller_user = request.user
+    seller = seller_user.id
+    seller = Seller.objects.get(user=seller)
+    if TransferPwg.objects.filter(user=seller_user).exists():
+        pwg = TransferPwg.objects.filter(user=seller_user)
+        count = pwg.count()
+    if seller.user_count != 0:
+        user_online = WebUser.objects.filter(associated_with=seller)
+        user_offline = WebUser.objects.filter(associated_with=seller)
+
+    history_count = WebAdminLoginHistory.objects.filter(user=request.user).count()
+    history = WebAdminLoginHistory.objects.filter(user=request.user).order_by('-login_date')
+
     param = {
-        'seller': seller
+        "seller": seller,
+        "pwgs": count,
+        "pwg_online": count,
+        "pwg_offline": count - get_current_users(PWG).count(),
+        "user_online": user_online,
+        "user_offline": user_offline,
+        "history_count": history_count,
+        "history": history,
+        'password_history': PasswordHistory.objects.filter(user=request.user).order_by('-login_date'),
+
     }
     return render(request, 'seller/seller-home.html', param)
 
 
 def seller_user(request):
-    return render(request, 'seller/seller-user.html', {'num': [11,23,33,42,35,67,78,49,10]})
+    seller = request.user
+    user = User.objects.get(email=seller)
+    seller = Seller.objects.get(user=user.id)
+
+    if WebUser.objects.filter(associated_with=seller.id).exists():
+        web_users = WebUser.objects.filter(associated_with=seller.id)
+    else:
+        web_users = None
+
+    param = {
+        "users": web_users,
+        "id": seller.id,
+    }
+    return render(request, 'seller/seller-user.html', param)
 
 
 def seller_pwg(request):
@@ -434,13 +475,27 @@ def password_change(request):
         old_email = request.POST['old_password']
         new_email = request.POST['new_password']
         new_conf_email = request.POST['new_conf_password']
+        accType = request.POST['accType']
 
+        if old_email == new_conf_email or old_email == new_email:
+            messages.info(request, "Old and new Password are Same, use different!")
+            if accType == "seller":
+                return redirect("seller-home")
+            elif accType == "admin":
+                return redirect("admin-home")
 
-        if new_conf_email == new_email:
+        elif new_conf_email == new_email:
             # creating password history
             u = User.objects.get(username=request.user)
+            # getting device info
+            if request.user_agent.device.family == "Other":
+                device_name = request.user_agent.os.family
+                device_name = device_name + " " + str(request.user_agent.os.version).replace(",", "")
+            else:
+                device_name = request.user_agent.device.family
+
             if u.check_password(old_email):
-                passHistory = PasswordHistory(user=request.user, device_name=request.META.get("COMPUTERNAME"), last_pass=new_email)
+                passHistory = PasswordHistory(user=request.user, device_name=device_name, last_pass=old_email)
                 passHistory.save()
 
                 u.set_password(new_email)
@@ -449,10 +504,17 @@ def password_change(request):
                 return redirect("/")
             else:
                 messages.info(request, "Wrong Old Password!")
-                return redirect("admin-home")
+                if accType == "seller":
+                    return redirect("seller-home")
+                elif accType == "admin":
+                    return redirect("admin-home")
         else:
             messages.info(request, "New Password does not match!")
-            return redirect("admin-home")
+            if accType == "seller":
+                return redirect("seller-home")
+            elif accType == "admin":
+                return redirect("admin-home")
+
 
     else:
         return render(request, "index.html")
@@ -515,7 +577,7 @@ def delete(request):
         pk = request.GET.get("pk", None)
         accType = request.GET.get("accType", None)
 
-        if accType == "seller" or accType == "tester":
+        if accType == "seller" or accType == "tester" or accType == "user":
             # check for the pk in the database.
             if User.objects.filter(id=pk).exists():
                 my_object = User.objects.get(id=pk)
@@ -587,6 +649,19 @@ def freeze(request):
                 # if name not found, then return msg
                 return JsonResponse({"msg": False}, status=200)
 
+        elif user == "user":
+            # check for the pk in the database.
+            if WebUser.objects.filter(id=pk).exists():
+                my_object = WebUser.objects.get(id=pk)
+                my_object.is_freeze = True
+                name = my_object.alias
+                my_object.save()
+                name = "{} has been successfully freezed".format(name)
+                return JsonResponse({"msg": name}, status=200)
+            else:
+                # if name not found, then return msg
+                return JsonResponse({"msg": False}, status=200)
+
     return JsonResponse({}, status=400)
 
 
@@ -608,8 +683,9 @@ def unfreeze(request):
             else:
                 # if name not found, then return msg
                 return JsonResponse({"msg": False}, status=200)
+
         elif user == "tester":
-        # check for the pk in the database.
+            # check for the pk in the database.
             if Tester.objects.filter(id=pk).exists():
                 my_object = Tester.objects.get(id=pk)
                 my_object.is_freeze = False
@@ -621,7 +697,7 @@ def unfreeze(request):
                 # if name not found, then return msg
                 return JsonResponse({"msg": False}, status=200)
         elif user == "pwg":
-        # check for the pk in the database.
+            # check for the pk in the database.
             if PWG.objects.filter(id=pk).exists():
                 my_object = PWG.objects.get(id=pk)
                 my_object.is_freeze = False
@@ -629,6 +705,19 @@ def unfreeze(request):
                 my_object.save()
                 name = "{} has been successfully unfreezed".format(name)
                 print(name)
+                return JsonResponse({"msg": name}, status=200)
+            else:
+                # if name not found, then return msg
+                return JsonResponse({"msg": False}, status=200)
+
+        elif user == "user":
+            # check for the pk in the database.
+            if WebUser.objects.filter(id=pk).exists():
+                my_object = WebUser.objects.get(id=pk)
+                my_object.is_freeze = False
+                name = my_object.alias
+                my_object.save()
+                name = "{} has been successfully unfreezed".format(name)
                 return JsonResponse({"msg": name}, status=200)
             else:
                 # if name not found, then return msg
@@ -773,12 +862,22 @@ def add_new(request):
     if request.method == 'POST':
         fname = request.POST.get('fname', None)
         lname = request.POST.get('lname', None)
-        name = request.POST.get('name', None)
+        name = str(request.POST.get('name', None))
         alias = request.POST['alias']
+        seller_id = request.POST.get('seller_id', None)
         email = request.POST['email']
         number = request.POST.get('number', None)
         password = request.POST['password']
         accType = request.POST['accType']
+
+        if User.objects.filter(email=email).exists():
+            messages.info(request, "Email already exists, try again!")
+            if accType == "pwgs":
+                return redirect("admin-info-server")
+            elif accType == "seller":
+                return redirect("admin-seller")
+            elif accType == "tester":
+                return redirect("admin-tester")
 
         if accType != "pwgs":
             # creating user
@@ -789,12 +888,14 @@ def add_new(request):
         if accType == "seller":
             seller = Seller(user=user, first_name=fname, last_name=lname, alias=alias, email=email, phone=number)
             seller.save()
+            messages.info(request, "Successfully Account Created!")
             return redirect("admin-seller")
 
         # creating tester account
         elif accType == "tester":
             tester = Tester(user=user, first_name=fname, last_name=lname, alias=alias, email=email, phone=number)
             tester.save()
+            messages.info(request, "Successfully Account Created!")
             return redirect("admin-tester")
 
         # creating PWGS account
@@ -803,7 +904,19 @@ def add_new(request):
             user.save()
             pwgs = PWGServers(name=name, alias=alias, email=email, password=password, pwg_count=0, user=user)
             pwgs.save()
+            messages.info(request, "Successfully Account Created!")
             return redirect("admin-info-server")
+        # creating PWGS account
+        elif accType == "user":
+            if user is not None:
+                seller_id = Seller.objects.get(id=seller_id)
+                user_obj = WebUser(user=user, first_name=fname, last_name=lname, email=email, phone=number, alias=alias, associated_with=seller_id)
+                user_obj.save()
+                messages.info(request, "Successfully Account Created!")
+                return redirect("seller-user")
+            else:
+                messages.info(request, "Something went wrong, try again")
+                return redirect("seller-user")
 
     else:
         return redirect("admin-home")
@@ -854,6 +967,8 @@ def change_alias(request):
         alias = request.POST.get('alias')
         alias_id = request.POST.get('alias_id')
         accType = request.POST.get('accType')
+        alias_conf = request.POST.get('alias_conf', None)
+
         if accType == "pwgs":
             if PWGServers.objects.filter(id=alias_id).exists():
                 pwgs = PWGServers.objects.get(id=alias_id)
@@ -861,10 +976,26 @@ def change_alias(request):
                 pwgs.save()
 
                 return redirect("admin-info-server")
+            else:
+                messages.error(request, "PWG Server Does not exists")
+                return redirect("admin-info-server")
 
-            return redirect("admin-info-server")
+        if accType == "seller":
+            if alias_conf == alias:
+                if User.objects.filter(id=alias_id).exists():
+                    user_obj = User.objects.get(id=alias_id)
+                    print(user_obj)
+                    return redirect("seller-home")
+                else:
+                    messages.error(request, "Seller does not exists")
+                    return redirect("seller-home")
+            else:
+                messages.error(request, "Alias name does not match! try again")
+                return redirect("seller-home")
 
-    return redirect("admin-home")
+    else:
+        messages.info(request, "Something went wrong! try again")
+        return redirect("/")
 
 
 def getpassword(request):

@@ -75,6 +75,13 @@
 	<section class="bg-detail">
 		<div class="container-fluid">
 			<div class="row justify-content-center">
+
+
+				<!-- for showing error and messages-->
+				<div class="col-md-10 py-2 px-5 mt-3" id="msg">
+
+				</div>
+
 				<div class="col-md-10  py-5 px-5">
 					<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-1" >
 						<div class="col-md">
@@ -143,32 +150,35 @@
 							<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Add Tester Account</h5>
 							<div class="row">
 								<div class="col-md-6 py-3">
+									{% for msg in messages %}
+										<label class="text-danger">{{msg}}</label>
+									{% endfor %}
 									<form action="add-new" method="post">
 										{% csrf_token %}
 									  <div class="form-group">
-									    <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Enter First Name" name="fname" required>
+									    <input type="text" class="form-control is-integer"   placeholder="Enter First Name" name="fname" required>
 									  </div>
 									  <div class="form-group">
-									    <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Last Name " name="lname">
+									    <input type="text" class="form-control is-integer"   placeholder="Enter Last Name " name="lname">
 									  </div>
 									  <div class="form-group">
-									     <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Alias Name " name="alias">
-									  </div>
-
-									  <div class="form-group">
-									     <input type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Email " name="email" required autocomplete="true">
+									     <input type="text" class="form-control is-integer"   placeholder="Enter Alias Name " name="alias">
 									  </div>
 
 									  <div class="form-group">
-									     <input type="tel" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Contact Number " name="number" autocomplete="true">
+									     <input type="email" class="form-control"   placeholder="Enter Email " name="email" required autocomplete="true">
 									  </div>
 
 									  <div class="form-group">
-									     <input type="password" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Password " name="password" required autocomplete="true">
+									     <input type="tel" class="form-control"  placeholder="Enter Contact Number " name="number" autocomplete="true">
+									  </div>
+
+									  <div class="form-group">
+									     <input type="password" class="form-control"  placeholder="Enter Password " name="password" required autocomplete="true">
 									  </div>
 									  <input type="hidden" value="tester" name="accType">
 
-									<button class="btn btn-primary" type="submit">Submit</button>
+									<button class="btn btn-primary" type="submit" disabled>Submit</button>
 									<button class="btn btn-danger" type="button" onclick="cancel()">Cancel</button>
 									</form>
 								</div>
@@ -293,6 +303,22 @@
 
 let checkbox_values = [];
 
+
+		// Shorthand for $( document ).ready()
+		$(function() {
+			setTimeout(function(){
+				$("#msg").removeClass('bg-light');
+				$("#msg").html('');
+			}, 4000);
+			{% if messages %}
+			$("#msg").addClass('bg-light');
+			{% endif %}
+			$("#msg").html('{% for msg in messages %}<h3 class="text-danger">{{msg}}</h3>{% endfor %}');
+		});
+
+
+
+
 // search filter table
 	$(document).ready(function(){
 		$("#myInput").on("keyup", function() {
@@ -372,63 +398,72 @@ let checkbox_values = [];
 		document.getElementById("div-1").style.display = "block";
 	}
 
-// for deleting multiple users
-function myFunction() {
-  	$("#checkAll").attr('disabled', false);
-  	$(".check").attr('disabled', false);
-}
+	// function to check is contains integer or not
+	$('.is-integer').on('change', function(){
+		var value = $(this).val();
+		isnum = /^\d/.test(value)   // to check if it is starting with num
+		// isnum = /^\d+$/.test(value);   to check if it is only containing num
+		if( isnum ){
+			$("#add-new-button").attr("disabled", true);
+		}else{
+			$("#add-new-button").attr("disabled", false);
+		}
+	});
 
-// to show confirmation modal
-function delete_multiple_users(){
-	if ( checkbox_values.length == 1 ){
-		$("#confirm-message-delete").html("Delete the selected "+checkbox_values.length+" Seller");
-	}else{
-		$("#confirm-message-delete").html("Delete the selected "+checkbox_values.length+" Sellers");
+	// for deleting multiple users
+	function myFunction() {
+		$("#checkAll").attr('disabled', false);
+		$(".check").attr('disabled', false);
 	}
 
-	$("#confirm-modal-button").attr('onclick','sendtesterspk();');
-	$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-	$('#imagemodalConfirm').modal('show');
+	// to show confirmation modal
+	function delete_multiple_users(){
+		if ( checkbox_values.length == 1 ){
+			$("#confirm-message-delete").html("Delete the selected "+checkbox_values.length+" Seller");
+		}else{
+			$("#confirm-message-delete").html("Delete the selected "+checkbox_values.length+" Sellers");
+		}
 
-}
+		$("#confirm-modal-button").attr('onclick','sendtesterspk();');
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodalConfirm').modal('show');
 
-function sendtesterspk(){
-	$("#assign_values").attr('value', checkbox_values);
-	document.forms['delete_multiple'].submit();
-
-	checkbox_values = [];
-
-}
-function freeze(){
-	document.getElementById("checkAll").disabled = false;
-    $(".check").attr("disabled",false);
-
-	$("#floating-confirm").attr('onclick','freeze_multiple_users()');
-}
-
-function freeze_multiple_users(){
-	if ( checkbox_values.length == 1 ){
-		$("#confirm-message-delete").html("Freeze the selected "+checkbox_values.length+" Seller");
-	}else{
-		$("#confirm-message-delete").html("Freeze the selected "+checkbox_values.length+" Sellers");
 	}
 
-	$("#confirm-modal-button").attr('onclick','sendTestersPKFreeze();');
-	$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-	$('#imagemodalConfirm').modal('show');
-
-}
-
-function sendTestersPKFreeze(){
-		$("#freeze_values").attr('value', checkbox_values);
-		document.forms['freeze_multiple'].submit();
+	function sendtesterspk(){
+		$("#assign_values").attr('value', checkbox_values);
+		document.forms['delete_multiple'].submit();
 
 		checkbox_values = [];
-}
 
-{% for msg in messages %}
-alert("{{msg}}");
-{% endfor %}
+	}
+	function freeze(){
+		document.getElementById("checkAll").disabled = false;
+		$(".check").attr("disabled",false);
+
+		$("#floating-confirm").attr('onclick','freeze_multiple_users()');
+	}
+
+	function freeze_multiple_users(){
+		if ( checkbox_values.length == 1 ){
+			$("#confirm-message-delete").html("Freeze the selected "+checkbox_values.length+" Seller");
+		}else{
+			$("#confirm-message-delete").html("Freeze the selected "+checkbox_values.length+" Sellers");
+		}
+
+		$("#confirm-modal-button").attr('onclick','sendTestersPKFreeze();');
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodalConfirm').modal('show');
+
+	}
+
+	function sendTestersPKFreeze(){
+			$("#freeze_values").attr('value', checkbox_values);
+			document.forms['freeze_multiple'].submit();
+
+			checkbox_values = [];
+	}
+
 </script>
 </body>
 </html>
