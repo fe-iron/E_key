@@ -108,9 +108,9 @@
 												<div class="dropdown-menu">
 													<a class="dropdown-item" href="#">Chat</a>
 													{% if webuser.is_authorized %}
-														<a class="dropdown-item" href="seller-authorized">De-authorized</a>
+														<a class="dropdown-item" href="seller-authorized{{webuser.id}}">De-authorized</a>
 													{% else %}
-														<a class="dropdown-item" href="seller-authorized">Authorize</a>
+														<a class="dropdown-item" href="seller-authorized{{webuser.id}}">Authorize</a>
 													{% endif %}
 
 													{% if webuser.is_shared %}

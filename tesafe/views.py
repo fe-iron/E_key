@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.http import JsonResponse
+from .utils import unique_name
 
 # dictionary of num to text
 num = {
@@ -221,9 +222,9 @@ def admin_home(request):
         'web_user_offline': web_user_count - queryset_web_user.count(),
         'PWGs_offline': PWGS_count - queryset_PWGs.count(),
         'PWGs_online': queryset_PWGs.count(),
-        'history': WebAdminLoginHistory.objects.filter(user=request.user).order_by('-login_date'),
+        'history': WebAdminLoginHistory.objects.filter(user=request.user).order_by('-login_time'),
         'history_count': history_count,
-        'password_history': PasswordHistory.objects.filter(user=request.user).order_by('-login_date')
+        'password_history': PasswordHistory.objects.filter(user=request.user).order_by('-login_time')
     }
     return render(request, 'tesafe/admin-home.html', params)
 
@@ -305,23 +306,20 @@ def seller_home(request):
     if TransferPwg.objects.filter(user=seller_user).exists():
         pwg = TransferPwg.objects.filter(user=seller_user)
         count = pwg.count()
-    if seller.user_count != 0:
-        user_online = WebUser.objects.filter(associated_with=seller)
-        user_offline = WebUser.objects.filter(associated_with=seller)
 
     history_count = WebAdminLoginHistory.objects.filter(user=request.user).count()
-    history = WebAdminLoginHistory.objects.filter(user=request.user).order_by('-login_date')
+    history = WebAdminLoginHistory.objects.filter(user=request.user).order_by('-login_time')
 
     param = {
         "seller": seller,
         "pwgs": count,
         "pwg_online": count,
         "pwg_offline": count - get_current_users(PWG).count(),
-        "user_online": user_online,
-        "user_offline": user_offline,
+        "user_online": seller.user_count,
+        "user_offline": 0,
         "history_count": history_count,
         "history": history,
-        'password_history': PasswordHistory.objects.filter(user=request.user).order_by('-login_date'),
+        'password_history': PasswordHistory.objects.filter(user=request.user).order_by('-login_time'),
 
     }
     return render(request, 'seller/seller-home.html', param)
@@ -340,6 +338,7 @@ def seller_user(request):
     param = {
         "users": web_users,
         "id": seller.id,
+        "unique_name": unique_name(),
     }
     return render(request, 'seller/seller-user.html', param)
 
@@ -425,8 +424,14 @@ def transfer_seller_pwg(request):
     return render(request, 'seller/transfer-seller-pwg.html')
 
 
-def seller_authorized(request):
-    return render(request, 'seller/seller-authorized.html')
+def seller_authorized(request, pk):
+    pwg = PWG.objects.all()
+    seller = Seller.objects.get(id=pk)
+    param = {
+        'pwg': pwg,
+        'seller': seller,
+    }
+    return render(request, 'seller/seller-authorized.html', param)
 
 
 def seller_authorized_pwg(request):
@@ -484,7 +489,7 @@ def password_change(request):
             elif accType == "admin":
                 return redirect("admin-home")
 
-        elif new_conf_email == new_email:
+        else:
             # creating password history
             u = User.objects.get(username=request.user)
             # getting device info
@@ -508,13 +513,6 @@ def password_change(request):
                     return redirect("seller-home")
                 elif accType == "admin":
                     return redirect("admin-home")
-        else:
-            messages.info(request, "New Password does not match!")
-            if accType == "seller":
-                return redirect("seller-home")
-            elif accType == "admin":
-                return redirect("admin-home")
-
 
     else:
         return render(request, "index.html")
@@ -910,8 +908,11 @@ def add_new(request):
         elif accType == "user":
             if user is not None:
                 seller_id = Seller.objects.get(id=seller_id)
+                user_count = seller_id.user_count
+                seller_id.user_count = int(user_count) + 1
                 user_obj = WebUser(user=user, first_name=fname, last_name=lname, email=email, phone=number, alias=alias, associated_with=seller_id)
                 user_obj.save()
+                seller_id.save()
                 messages.info(request, "Successfully Account Created!")
                 return redirect("seller-user")
             else:

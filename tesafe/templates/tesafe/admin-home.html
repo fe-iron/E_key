@@ -71,9 +71,9 @@
 						{% if user.is_authenticated %}
 						<a class="dropdown-item" href="logout">Log Out</a>
 						{%else%}
-						<a class="dropdown-item" href="/">Log In</a>
-						{% endif %}
 						<a class="dropdown-item" href="/">Exit</a>
+						{% endif %}
+
 					</div>
 				</div>
 			</nav>
@@ -154,8 +154,8 @@
 							<h4>Login History</h4>
 							<div class="row">
 								<div class="col-md-6 py-3">
-									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Number Of times Admin Been Logged in </h6>
-									<p>{{history_count}}</p>
+									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> You have Logged in {{history_count}} times! </h6>
+
 								</div>
 								<div class="col-md-6 ">
 									<div class="float-right">
@@ -184,7 +184,7 @@
 												<tr>
 													<th scope="row">{{forloop.counter}}</th>
 													<td>{{admin_history.login_date}}</td>
-													<td>{{admin_history.login_time}}</td>
+													<td>{{admin_history.login_time|time:"H:i"}}</td>
 													<td>{{admin_history.device_name}}</td>
 													<td>{{admin_history.login_IP}}</td>
 												</tr>
@@ -210,19 +210,32 @@
 									<label class="text-danger">{{msg}}</label>
 									{% endfor %}
 									<form action="password_change" method="post">
+										<label id="add-new-msg"></label>
 										{% csrf_token %}
-									  <div class="form-group">
-									    <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter your old Password" name="old_password" required>
-									  </div>
-									  <div class="form-group">
-									     <input type="password" class="form-control"  placeholder="Enter New Password " name="new_password" required>
-									  </div>
+									  <div class="form-group"><div class="row">
+										  <div class="col-md-6">
+									   		 <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter your old Password" name="old_password" required id="old-password">
+										  </div>
+									  </div></div>
+									  <div class="form-group"><div class="row">
+										  <div class="col-md-6">
+									     	<input type="password" class="form-control"  placeholder="Enter New Password " name="new_password" required id="new-password" value="" title="Password should include One Capital letter, any character from it ! @ # $ % ^ & * ( ) _ - = { } < > ? and atleast 8 characters">
+										  </div>
+										  <div class="col-md-2">
+										  	<span id="check"></span>
+										  </div>
+									  </div></div>
 
-									  <div class="form-group">
-									     <input type="password" class="form-control"  placeholder="Confirm New Password " name="new_conf_password" required>
-									  </div>
+									  <div class="form-group"><div class="row">
+										  <div class="col-md-6">
+									     <input type="password" class="form-control"  placeholder="Confirm New Password " name="new_conf_password" required id="conf-password" value="" title="Password should include One Capital letter, any character from it ! @ # $ % ^ & * ( ) _ - = { } < > ? and atleast 8 characters">
+										  </div>
+										  <div class="col-md-2">
+										  <span id="cross"></span>
+										  </div>
+									  </div></div>
 										<input type="hidden" name="accType" value="admin">
-									<button class="btn btn-success" type="submit">Proceed</button>
+										<button class="btn btn-success" type="submit" disabled id="add-new-submit-button">Proceed</button>
                                         <a href="admin-home"><button class="btn btn-secondary" type="button" onclick="cancel()">Cancel</button></a>
 									</form>
 								</div>
@@ -261,9 +274,14 @@
 										<tr>
 											<th scope="row">{{forloop.counter}}</th>
 											<td>{{history.login_date}}</td>
-											<td>{{history.login_time}}</td>
+											<td>{{history.login_time|time:"H:i"}}</td>
 											<td>{{history.device_name}}</td>
-											<td>{{history.last_pass}}</td>
+											<td>
+												<input type="password" value="{{history.last_pass}}" disabled style="background-color: white;border: none" id="{{forloop.counter}}">
+												<span  ondblclick="show_password('{{forloop.counter}}');" onmouseleave="hide_password('{{forloop.counter}}');" title="double click to show password" id="fa{{forloop.counter}}">
+													<i class="fa fa-eye" aria-hidden="true"></i>
+												</span>
+											</td>
 										</tr>
                                     {% endfor %}
 									</tbody>
@@ -284,7 +302,123 @@
 
 
 	<script type="text/javascript">
-			// Shorthand for $( document ).ready()
+		// for change password input tag
+		$('#new-password').on('change', function(){
+			var new_pass = $(this).val();
+			var conf_pass = $('#conf-password').val();
+
+			var len_alphab = new_pass.match(/[a-z]/g);
+			if(!len_alphab){
+				 len_alphab = 0;
+			}else{
+				var len_alphab = new_pass.match(/[a-z]/g).length;
+			}
+			var len_Cap_alphab = new_pass.match(/[A-Z]/g);
+			if(!len_Cap_alphab){
+				 len_Cap_alphab = 0;
+			}else{
+				var len_Cap_alphab = new_pass.match(/[A-Z]/g).length;
+			}
+			var len_digit = new_pass.match(/[0-9]/g);
+			if(!len_digit){
+				 len_digit = 0;
+			}else{
+				var len_digit = new_pass.match(/[0-9]/g).length;
+			}
+			var len_symbols = new_pass.match(/[!,@,#,$,%,^,&,*,(,),_,-,=,{,},<,>,?]/g);
+			if(!len_symbols){
+				 len_symbols = 0;
+			}else{
+				var len_symbols = new_pass.match(/[!,@,#,$,%,^,&,*,(,),_,-,=,{,},<,>,?]/g).length;
+			}
+
+
+			if( conf_pass == "" && new_pass == ""){}else{
+				if(new_pass.length >=8 && len_alphab >=1 && len_Cap_alphab >=1 && len_digit >=1 && len_symbols >=1){
+
+					// for pass confirmations
+					if(conf_pass != new_pass && conf_pass !=""){
+						$("#add-new-msg").html("<h5 class='text-danger'>Password do not match!<h5>")
+						$("#add-new-submit-button").attr("disabled", true);
+						$("#check").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
+					}else{
+						$("#check").html('<i class="fa fa-2x fa-check" aria-hidden="true" style="color:green;"></i>');
+						$("#add-new-msg").html("");
+						$("#add-new-submit-button").attr("disabled", false);
+					}
+				}else{
+					$("#check").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
+					$("#add-new-submit-button").attr("disabled", true);
+				}
+			}
+
+		});
+
+		//for confirm input tag
+		$('#conf-password').on('change', function(){
+			var conf_pass = $(this).val();
+			var new_pass = $('#new-password').val();
+
+			var len_alphab = conf_pass.match(/[a-z]/g);
+			if(!len_alphab){
+				 len_alphab = 0;
+			}else{
+				var len_alphab = conf_pass.match(/[a-z]/g).length;
+			}
+			var len_Cap_alphab = conf_pass.match(/[A-Z]/g);
+			if(!len_Cap_alphab){
+				 len_Cap_alphab = 0;
+			}else{
+				var len_Cap_alphab = conf_pass.match(/[A-Z]/g).length;
+			}
+			var len_digit = conf_pass.match(/[0-9]/g);
+			if(!len_digit){
+				 len_digit = 0;
+			}else{
+				var len_digit = conf_pass.match(/[0-9]/g).length;
+			}
+			var len_symbols = conf_pass.match(/[!,@,#,$,%,^,&,*,(,),_,-,=,{,},<,>,?]/g);
+			if(!len_symbols){
+				 len_symbols = 0;
+			}else{
+				var len_symbols = conf_pass.match(/[!,@,#,$,%,^,&,*,(,),_,-,=,{,},<,>,?]/g).length;
+			}
+			//console.log();
+
+			if( conf_pass == "" && new_pass == ""){}else{
+				if(conf_pass.length >=8 && len_alphab >=1 && len_Cap_alphab >=1 && len_digit >=1 && len_symbols >=1){
+
+					// for pass confirmations
+					if(conf_pass != new_pass && new_pass != ""){
+						$("#add-new-msg").html("<h5 class='text-danger'>Password do not match!<h5>")
+						$("#cross").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
+						$("#add-new-submit-button").attr("disabled", true);
+					}else{
+						$("#add-new-msg").html("")
+						$("#cross").html('<i class="fa fa-2x fa-check" aria-hidden="true" style="color:green;"></i>');
+						$("#add-new-submit-button").attr("disabled", false);
+					}
+				}else{
+					$("#cross").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
+					$("#add-new-submit-button").attr("disabled", true);
+				}
+			}
+
+		});
+
+
+		// for last password toggle
+		function show_password(id){
+			$("#"+id).attr("type", "text");
+			$("#fa"+id).html('<i class="fa fa-eye-slash" aria-hidden="true"></i>');
+		}
+
+		function hide_password(id){
+			$("#"+id).attr("type", "password");
+			$("#fa"+id).html('<i class="fa fa-eye" aria-hidden="true"></i>');
+		}
+
+		// Shorthand for $( document ).ready()
 		$(function() {
 			setTimeout(function(){
 				$("#msg").removeClass('bg-light');

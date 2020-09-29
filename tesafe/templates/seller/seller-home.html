@@ -152,7 +152,7 @@
 												<tr>
 													<th scope="row">{{forloop.counter}}</th>
 													<td>{{admin_history.login_date}}</td>
-													<td>{{admin_history.login_time}}</td>
+													<td>{{admin_history.login_time|time:"H:i"}}</td>
 													<td>{{admin_history.device_name}}</td>
 													<td>{{admin_history.login_IP}}</td>
 												</tr>
@@ -206,18 +206,33 @@
 									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change Your Current Password </h6>
 									<form action="password_change" method="post">
 										{% csrf_token %}
-									  <div class="form-group">
-									    <input type="text" class="form-control"  placeholder="Enter Old Password " required name="old_password">
-									  </div>
-									  <div class="form-group">
-									     <input type="password" class="form-control"  placeholder="Enter New Password " required name="new_password">
-									  </div>
+										<label id="add-new-msg"></label>
 
-									  <div class="form-group">
-									     <input type="password" class="form-control"  placeholder="Confirm New Password " required name="new_conf_password">
-									  </div>
+										<div class="form-group"><div class="row">
+										  <div class="col-md-6">
+									   		 <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter your old Password" name="old_password" required id="old-password">
+										  </div>
+									  </div></div>
+									  <div class="form-group"><div class="row">
+										  <div class="col-md-6">
+									     	<input type="password" class="form-control"  placeholder="Enter New Password " name="new_password" required id="new-password" value="" title="Password should include One Capital letter, any character from it ! @ # $ % ^ & * ( ) _ - = { } < > ? and atleast 8 characters">
+										  </div>
+										  <div class="col-md-2">
+										  	<span id="check"></span>
+										  </div>
+									  </div></div>
+
+									  <div class="form-group"><div class="row">
+										  <div class="col-md-6">
+									     <input type="password" class="form-control"  placeholder="Confirm New Password " name="new_conf_password" required id="conf-password" value="" title="Password should include One Capital letter, any character from it ! @ # $ % ^ & * ( ) _ - = { } < > ? and atleast 8 characters">
+										  </div>
+										  <div class="col-md-2">
+										  <span id="cross"></span>
+										  </div>
+									  </div></div>
+
 										<input type="hidden" name="accType" value="seller">
-									<button class="btn btn-success" type="submit">Proceed</button>
+									<button class="btn btn-success" type="submit" disabled id="add-new-submit-button">Proceed</button>
 									<a href="seller-home" class="btn-secondary btn " type="button">Cancel</a>
 									</form>
 								</div>
@@ -255,7 +270,7 @@
 											<tr>
 												<th scope="row">{{forloop.counter}}</th>
 												<td>{{history.login_date}}</td>
-												<td>{{history.login_time}}</td>
+												<td>{{history.login_time|time:"H:i"}}</td>
 												<td>{{history.device_name}}</td>
 												<td>{{history.last_pass}}</td>
 											</tr>
@@ -272,6 +287,111 @@
 	</section>
 
 	<script type="text/javascript">
+		// for change password input tag
+		$('#new-password').on('change', function(){
+			var new_pass = $(this).val();
+			var conf_pass = $('#conf-password').val();
+
+			var len_alphab = new_pass.match(/[a-z]/g);
+			if(!len_alphab){
+				 len_alphab = 0;
+			}else{
+				var len_alphab = new_pass.match(/[a-z]/g).length;
+			}
+			var len_Cap_alphab = new_pass.match(/[A-Z]/g);
+			if(!len_Cap_alphab){
+				 len_Cap_alphab = 0;
+			}else{
+				var len_Cap_alphab = new_pass.match(/[A-Z]/g).length;
+			}
+			var len_digit = new_pass.match(/[0-9]/g);
+			if(!len_digit){
+				 len_digit = 0;
+			}else{
+				var len_digit = new_pass.match(/[0-9]/g).length;
+			}
+			var len_symbols = new_pass.match(/[!,@,#,$,%,^,&,*,(,),_,-,=,{,},<,>,?]/g);
+			if(!len_symbols){
+				 len_symbols = 0;
+			}else{
+				var len_symbols = new_pass.match(/[!,@,#,$,%,^,&,*,(,),_,-,=,{,},<,>,?]/g).length;
+			}
+
+
+			if( conf_pass == "" && new_pass == ""){}else{
+				if(new_pass.length >=8 && len_alphab >=1 && len_Cap_alphab >=1 && len_digit >=1 && len_symbols >=1){
+
+					// for pass confirmations
+					if(conf_pass != new_pass && conf_pass !=""){
+						$("#add-new-msg").html("<h5 class='text-danger'>Password do not match!<h5>")
+						$("#add-new-submit-button").attr("disabled", true);
+						$("#check").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
+					}else{
+						$("#check").html('<i class="fa fa-2x fa-check" aria-hidden="true" style="color:green;"></i>');
+						$("#add-new-msg").html("");
+						$("#add-new-submit-button").attr("disabled", false);
+					}
+				}else{
+					$("#check").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
+					$("#add-new-submit-button").attr("disabled", true);
+				}
+			}
+
+		});
+
+		//for confirm input tag
+		$('#conf-password').on('change', function(){
+			var conf_pass = $(this).val();
+			var new_pass = $('#new-password').val();
+
+			var len_alphab = conf_pass.match(/[a-z]/g);
+			if(!len_alphab){
+				 len_alphab = 0;
+			}else{
+				var len_alphab = conf_pass.match(/[a-z]/g).length;
+			}
+			var len_Cap_alphab = conf_pass.match(/[A-Z]/g);
+			if(!len_Cap_alphab){
+				 len_Cap_alphab = 0;
+			}else{
+				var len_Cap_alphab = conf_pass.match(/[A-Z]/g).length;
+			}
+			var len_digit = conf_pass.match(/[0-9]/g);
+			if(!len_digit){
+				 len_digit = 0;
+			}else{
+				var len_digit = conf_pass.match(/[0-9]/g).length;
+			}
+			var len_symbols = conf_pass.match(/[!,@,#,$,%,^,&,*,(,),_,-,=,{,},<,>,?]/g);
+			if(!len_symbols){
+				 len_symbols = 0;
+			}else{
+				var len_symbols = conf_pass.match(/[!,@,#,$,%,^,&,*,(,),_,-,=,{,},<,>,?]/g).length;
+			}
+			//console.log();
+
+			if( conf_pass == "" && new_pass == ""){}else{
+				if(conf_pass.length >=8 && len_alphab >=1 && len_Cap_alphab >=1 && len_digit >=1 && len_symbols >=1){
+
+					// for pass confirmations
+					if(conf_pass != new_pass && new_pass != ""){
+						$("#add-new-msg").html("<h5 class='text-danger'>Password do not match!<h5>")
+						$("#cross").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
+						$("#add-new-submit-button").attr("disabled", true);
+					}else{
+						$("#add-new-msg").html("")
+						$("#cross").html('<i class="fa fa-2x fa-check" aria-hidden="true" style="color:green;"></i>');
+						$("#add-new-submit-button").attr("disabled", false);
+					}
+				}else{
+					$("#cross").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
+					$("#add-new-submit-button").attr("disabled", true);
+				}
+			}
+
+		});
+
+
 
 		// Shorthand for $( document ).ready()
 		$(function() {
