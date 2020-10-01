@@ -19,6 +19,7 @@ class Seller(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100, default="none")
+    system_name = models.CharField(max_length=19, null=True, default="not assigned")
     alias = models.CharField(max_length=100, default="none")
     email = models.CharField(max_length=150)
     phone = models.CharField(max_length=15)
@@ -35,6 +36,7 @@ class Tester(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100, default="none")
+    system_name = models.CharField(max_length=19, null=True, default="not assigned")
     alias = models.CharField(max_length=100, default="none")
     email = models.CharField(max_length=150)
     phone = models.CharField(max_length=15)
@@ -50,6 +52,7 @@ class WebUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    system_name = models.CharField(max_length=19, null=True, default="not assigned")
     email = models.CharField(max_length=150)
     phone = models.CharField(max_length=15)
     alias = models.CharField(max_length=100, default="none")
@@ -98,18 +101,18 @@ class PasswordHistory(models.Model):
 
 # PWG Server
 class PWGServers(models.Model):
-    name = models.CharField(max_length=255)
     alias = models.CharField(max_length=255)
     email = models.CharField(max_length=255, default=None, null=True)
     password = models.CharField(max_length=255, default=None, null=True)
     pwg_count = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, default=None)
+    system_name = models.CharField(max_length=19, null=True, default="not assigned")
 
     class Meta:
         verbose_name_plural = "PWG Servers"
 
     def __str__(self):
-        return self.name
+        return self.alias
 
 
 # PWGs modal
@@ -121,6 +124,8 @@ class PWG(models.Model):
     is_tested = models.BooleanField(default=False)
     location = models.CharField(max_length=2, default='A')
     is_freeze = models.BooleanField(default=False)
+    is_authorized = models.BooleanField(default=False)
+    is_shared = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = "PWGs"
@@ -149,6 +154,8 @@ class TransferPwgs(models.Model):
         verbose_name = 'Transfer PWG Server'
         verbose_name_plural = 'Transfer PWG Servers'
 
+
+# PWG Use record
 class PwgUseRecord(models.Model):
     count = models.IntegerField()
     time = models.TimeField(auto_now=True)
@@ -161,3 +168,28 @@ class PwgUseRecord(models.Model):
     class Meta:
         verbose_name = "PWG Use Record"
         verbose_name_plural = "PWG Use Records"
+
+
+# models for generating system name
+class SystemName(models.Model):
+    is_user = models.BooleanField(default=False)
+    is_seller = models.BooleanField(default=False)
+    is_tester = models.BooleanField(default=False)
+    is_pwgs = models.BooleanField(default=False)
+    serial_no = models.CharField(max_length=4)
+    system_name = models.CharField(max_length=19, null=False, default="not assigned")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True)
+
+
+# model for authorize
+class Authorize(models.Model):
+    pwg = models.ForeignKey(PWG, on_delete=models.CASCADE, default=None)
+    authorize_to = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    pwgserver = models.ForeignKey(PWGServers, on_delete=models.CASCADE, default=None)
+
+
+# model for authorize
+class Share(models.Model):
+    pwg = models.ForeignKey(PWG, on_delete=models.CASCADE, default=None)
+    share_to = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    pwgserver = models.ForeignKey(PWGServers, on_delete=models.CASCADE, default=None)

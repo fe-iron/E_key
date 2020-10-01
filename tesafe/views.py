@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import WebAdmin, Seller, Tester, WebUser, PWGServers, PWG, WebAdminLoginHistory, PasswordHistory, TransferPwgs, TransferPwg, PwgUseRecord
+from .models import WebAdmin, Seller, Tester, WebUser, PWGServers, PWG, WebAdminLoginHistory, PasswordHistory, \
+    TransferPwgs, TransferPwg, PwgUseRecord, SystemName, Authorize, Share
 from django.contrib.auth.models import auth, User
 from django.contrib import messages
 from django.core import serializers
@@ -338,7 +339,7 @@ def seller_user(request):
     param = {
         "users": web_users,
         "id": seller.id,
-        "unique_name": unique_name(),
+        "unique_name": unique_name("S", '001'),
     }
     return render(request, 'seller/seller-user.html', param)
 
@@ -353,10 +354,14 @@ def transfer(request, id):
     pwg = PWG.objects.all()
     param = {
         "name": "Transfer Tested PWG to Seller "+user.first_name + " " + user.last_name,
+        "username": user.first_name + " " + user.last_name,
         "pwgserver": pwgserver,
         "pwg": pwg,
         "num": num,
-        "id": id
+        "id": id,
+        "acctype": "admin",
+        "target": "seller",
+        "action": "Transfer",
     }
     return render(request, 'tesafe/transfer.html', param)
 
@@ -416,8 +421,22 @@ def pwg_sublist(request, id):
         return redirect("admin-info-server")
 
 
-def transfer_seller(request):
-    return render(request, 'seller/transfer-seller.html')
+def transfer_seller(request, pk):
+    user = User.objects.get(id=pk)
+    pwgserver = PWGServers.objects.all()
+    pwg = PWG.objects.all()
+    param = {
+        "name": "Transfer PWG to User " + user.first_name + " " + user.last_name,
+        "username": user.first_name + " " + user.last_name,
+        "pwgserver": pwgserver,
+        "pwg": pwg,
+        "num": num,
+        "id": pk,
+        "accType": "seller",
+        "target": "user",
+        "action": "Transfer",
+    }
+    return render(request, 'tesafe/transfer.html', param)
 
 
 def transfer_seller_pwg(request):
@@ -425,13 +444,20 @@ def transfer_seller_pwg(request):
 
 
 def seller_authorized(request, pk):
+    user = User.objects.get(id=pk)
+    pwgserver = PWGServers.objects.all()
     pwg = PWG.objects.all()
-    seller = Seller.objects.get(id=pk)
     param = {
-        'pwg': pwg,
-        'seller': seller,
+        "name": "Authorize PWG to User " + user.first_name + " " + user.last_name,
+        "pwgserver": pwgserver,
+        "pwg": pwg,
+        "num": num,
+        "id": pk,
+        "accType": "seller",
+        "target": "user",
+        "action": "Authorize",
     }
-    return render(request, 'seller/seller-authorized.html', param)
+    return render(request, 'tesafe/transfer.html', param)
 
 
 def seller_authorized_pwg(request):
@@ -446,8 +472,22 @@ def seller_deauthorized_pwg(request):
     return render(request, 'seller/seller-deauthorized-pwg.html')
 
 
-def seller_shared(request):
-    return render(request, 'seller/seller-shared.html')
+def seller_shared(request,pk):
+    user = User.objects.get(id=pk)
+    pwgserver = PWGServers.objects.all()
+    pwg = PWG.objects.all()
+    param = {
+        "name": "Share PWG to User " + user.first_name + " " + user.last_name,
+        "username": user.first_name + " " + user.last_name,
+        "pwgserver": pwgserver,
+        "pwg": pwg,
+        "num": num,
+        "id": pk,
+        "accType": "seller",
+        "target": "user",
+        "action": "share",
+    }
+    return render(request, 'tesafe/transfer.html', param)
 
 
 def seller_deshared_pwg(request):
@@ -735,7 +775,9 @@ def delete_multiple_user(request):
         # print(values)
         if accType == "seller":
             for i in values:
-                if Seller.objects.filter(id=i).exists():
+                if i == ",":
+                    pass
+                elif Seller.objects.filter(id=i).exists():
                     seller = Seller.objects.get(id=i)
                     id_user = seller.user_id
                     seller = User.objects.get(id=id_user)
@@ -745,7 +787,9 @@ def delete_multiple_user(request):
 
         elif accType == "tester":
             for i in values:
-                if Tester.objects.filter(id=i).exists():
+                if i == ",":
+                    pass
+                elif Tester.objects.filter(id=i).exists():
                     tester = Tester.objects.get(id=i)
                     id_user = tester.user_id
                     tester = User.objects.get(id=id_user)
@@ -754,11 +798,24 @@ def delete_multiple_user(request):
             return redirect('admin-tester')
         elif accType == "pwgs":
             for i in values:
-                if PWGServers.objects.filter(id=i).exists():
+                if i == ",":
+                    pass
+                elif PWGServers.objects.filter(id=i).exists():
                     pwgs = PWGServers.objects.get(id=i)
                     pwgs.delete()
 
             return redirect('admin-info-server')
+        elif accType == "user":
+            for i in values:
+                if i == ",":
+                    pass
+                elif WebUser.objects.filter(id=i).exists():
+                    tester = WebUser.objects.get(id=i)
+                    user_fk = tester.user
+                    tester = User.objects.get(id=user_fk.id)
+                    tester.delete()
+
+            return redirect('seller-user')
 
     return redirect('admin-home')
 
@@ -805,6 +862,9 @@ def transfer_pwgs(request):
                 elif accType == "tester":
                     pwg_object.location = "T"
                     pwg_object.save()
+                elif accType == "user":
+                    pwg_object.location = "U"
+                    pwg_object.save()
 
                 transfer = TransferPwg(pwg_owner=pwg_object, pwgs_owner=pwgs_id, user=current_user)
                 transfer.save()
@@ -813,6 +873,63 @@ def transfer_pwgs(request):
             return redirect('admin-seller')
         elif accType == "tester":
             return redirect('admin-tester')
+        elif accType == "user":
+            return redirect('seller-user')
+
+    return redirect('admin-seller')
+
+
+def authorize_pwgs(request):
+    # request's method  should be POST
+    if request.method == "POST":
+        pwg = []
+        pwg_server = []
+        flag = False
+        # fetch the data from the database
+        values = request.POST.get("values", None)
+        pk = request.POST.get("user_pk", None)
+        accType = request.POST.get("accType", None)
+
+        current_user = User.objects.get(pk=pk)
+        # separating pk of PWG Server and PWG
+        # print("values ",values)
+        for i in range(len(values)):
+            if values[i] == 's':
+                pwg_server.append(values[i+1])
+                flag = True
+            elif values[i] == ',':
+                pass
+            else:
+                if flag:
+                    flag = False
+                else:
+                    pwg.append(values[i])
+
+        # making it unique
+        pwg = set(pwg)
+        pwg = list(pwg)
+
+        if len(pwg) != 0:
+            for i in pwg:
+                pwg_object = PWG.objects.get(id=i)
+                pwgs_id = pwg_object.owned_by
+                pwg_object.is_authorized = True
+                pwg_object.save()
+
+                web_user = WebUser.objects.get(user=current_user)
+                web_user.is_authorized = True
+                web_user.save()
+
+                authorize = Authorize(pwgserver=pwgs_id, authorize_to=current_user, pwg=pwg_object)
+                authorize.save()
+
+        if accType == "seller":
+            return redirect('seller-user')
+        elif accType == "tester":
+            return redirect('admin-tester')
+        elif accType == "user":
+            return redirect('seller-user')
+
     return redirect('admin-seller')
 
 
@@ -865,8 +982,11 @@ def add_new(request):
         seller_id = request.POST.get('seller_id', None)
         email = request.POST['email']
         number = request.POST.get('number', None)
+        system_name = request.POST.get('system_name', None)
         password = request.POST['password']
         accType = request.POST['accType']
+        if system_name:
+            serial_no = system_name[-4:]
 
         if User.objects.filter(email=email).exists():
             messages.info(request, "Email already exists, try again!")
@@ -876,22 +996,37 @@ def add_new(request):
                 return redirect("admin-seller")
             elif accType == "tester":
                 return redirect("admin-tester")
+            elif accType == "user":
+                return redirect("seller-user")
 
         if accType != "pwgs":
             # creating user
-            user = User.objects.create_user(username=email, email=email, first_name=fname, last_name=lname, password=password)
+            user = User.objects.create_user(username=email, email=email, first_name=fname, last_name=lname,
+                                            password=password)
             user.save()
+            if accType == "seller":
+                sys_name = SystemName(serial_no=serial_no, user=user, system_name=system_name, is_user=False,
+                                      is_seller=True, is_tester=False, is_pwgs=False)
+                sys_name.save()
+            elif accType == "tester":
+                sys_name = SystemName(serial_no=serial_no, user=user, system_name=system_name, is_user=False,
+                                      is_seller=False, is_tester=True, is_pwgs=False)
+                sys_name.save()
+            elif accType == "user":
+                sys_name = SystemName(serial_no=serial_no, user=user, system_name=system_name, is_user=True,
+                                      is_seller=False, is_tester=False, is_pwgs=False)
+                sys_name.save()
 
         # creating seller account
         if accType == "seller":
-            seller = Seller(user=user, first_name=fname, last_name=lname, alias=alias, email=email, phone=number)
+            seller = Seller(user=user, first_name=fname, last_name=lname, alias=alias, email=email, phone=number, system_name=system_name)
             seller.save()
             messages.info(request, "Successfully Account Created!")
             return redirect("admin-seller")
 
         # creating tester account
         elif accType == "tester":
-            tester = Tester(user=user, first_name=fname, last_name=lname, alias=alias, email=email, phone=number)
+            tester = Tester(user=user, first_name=fname, last_name=lname, alias=alias, email=email, phone=number, system_name=system_name)
             tester.save()
             messages.info(request, "Successfully Account Created!")
             return redirect("admin-tester")
@@ -900,8 +1035,11 @@ def add_new(request):
         elif accType == "pwgs":
             user = User.objects.create_user(username=email, email=email, password=password)
             user.save()
-            pwgs = PWGServers(name=name, alias=alias, email=email, password=password, pwg_count=0, user=user)
+            pwgs = PWGServers(alias=alias, email=email, password=password, pwg_count=0, user=user, system_name=system_name)
             pwgs.save()
+            sys_name = SystemName(serial_no=serial_no, user=user, system_name=system_name, is_user=False,
+                                  is_seller=False, is_tester=False, is_pwgs=True)
+            sys_name.save()
             messages.info(request, "Successfully Account Created!")
             return redirect("admin-info-server")
         # creating PWGS account
@@ -910,7 +1048,7 @@ def add_new(request):
                 seller_id = Seller.objects.get(id=seller_id)
                 user_count = seller_id.user_count
                 seller_id.user_count = int(user_count) + 1
-                user_obj = WebUser(user=user, first_name=fname, last_name=lname, email=email, phone=number, alias=alias, associated_with=seller_id)
+                user_obj = WebUser(user=user, first_name=fname, last_name=lname, email=email, phone=number, alias=alias, associated_with=seller_id, system_name=system_name)
                 user_obj.save()
                 seller_id.save()
                 messages.info(request, "Successfully Account Created!")
@@ -935,7 +1073,9 @@ def freeze_multiple_user(request):
         # print(values)
         if accType == "seller":
             for i in values:
-                if Seller.objects.filter(id=i).exists():
+                if i == ",":
+                    pass
+                elif Seller.objects.filter(id=i).exists():
                     seller = Seller.objects.get(id=i)
                     seller.is_freeze = True
                     seller.save()
@@ -944,7 +1084,9 @@ def freeze_multiple_user(request):
 
         elif accType == "tester":
             for i in values:
-                if Tester.objects.filter(id=i).exists():
+                if i == ",":
+                    pass
+                elif Tester.objects.filter(id=i).exists():
                     tester = Tester.objects.get(id=i)
                     tester.is_freeze = True
                     tester.save()
@@ -952,7 +1094,9 @@ def freeze_multiple_user(request):
             return redirect('admin-tester')
         elif accType == "pwg":
             for i in values:
-                if PWG.objects.filter(id=i).exists():
+                if i == ",":
+                    pass
+                elif PWG.objects.filter(id=i).exists():
                     pwg = PWG.objects.get(id=i)
                     pwg.is_freeze = True
                     pwg.save()
@@ -960,6 +1104,17 @@ def freeze_multiple_user(request):
                 return redirect('pwg-sublist', id=int(pk))
             else:
                 return redirect('admin-info-server')
+
+        elif accType == "user":
+            for i in values:
+                if i == ",":
+                    pass
+                elif WebUser.objects.filter(id=i).exists():
+                    tester = WebUser.objects.get(id=i)
+                    tester.is_freeze = True
+                    tester.save()
+
+            return redirect('seller-user')
     return redirect('admin-home')
 
 
@@ -1111,6 +1266,130 @@ def getback(request):
             pwg.transfer_to = usr
             pwg.save()
 
+            return JsonResponse({"msg": name}, status=200)
+        else:
+            return JsonResponse({"msg": False}, status=200)
+    else:
+        return JsonResponse({}, status=200)
+
+
+def system_name(request):
+    # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        accType = request.GET.get("accType", None)
+        nnn = request.GET.get("nnn", None)
+        name = None
+        if nnn and accType:
+            name = unique_name(accType, nnn)
+            return JsonResponse({"msg": name}, status=200)
+        else:
+            return JsonResponse({"msg": False}, status=200)
+    else:
+        return JsonResponse({}, status=200)
+
+
+def deauthorize(request):
+    # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        accType = request.GET.get("accType", None)
+        pk = request.GET.get("pk", None)
+
+        if User.objects.filter(id=pk).exists():
+            user_obj = User.objects.get(id=pk)
+            authorize_obj = Authorize.objects.filter(authorize_to=user_obj.id)
+            for item in authorize_obj:
+                pwg_obj = item.pwg
+                pwg_obj.is_authorized = False
+                pwg_obj.save()
+
+                item.delete()
+
+            web_user = WebUser.objects.get(user=pk)
+            web_user.is_authorized = False
+            name = "{} has been successfully de-authorized from User {}".format(authorize_obj[0].pwg, web_user.first_name)
+            web_user.save()
+            return JsonResponse({"msg": name}, status=200)
+        else:
+            return JsonResponse({"msg": False}, status=200)
+    else:
+        return JsonResponse({}, status=200)
+
+
+def share_pwgs(request):
+    # request's method  should be POST
+    if request.method == "POST":
+        pwg = []
+        pwg_server = []
+        flag = False
+        # fetch the data from the database
+        values = request.POST.get("values", None)
+        pk = request.POST.get("user_pk", None)
+        accType = request.POST.get("accType", None)
+
+        current_user = User.objects.get(pk=pk)
+        # separating pk of PWG Server and PWG
+        # print("values ",values)
+        for i in range(len(values)):
+            if values[i] == 's':
+                pwg_server.append(values[i+1])
+                flag = True
+            elif values[i] == ',':
+                pass
+            else:
+                if flag:
+                    flag = False
+                else:
+                    pwg.append(values[i])
+
+        # making it unique
+        pwg = set(pwg)
+        pwg = list(pwg)
+
+        if len(pwg) != 0:
+            for i in pwg:
+                pwg_object = PWG.objects.get(id=i)
+                pwgs_id = pwg_object.owned_by
+                pwg_object.is_shared = True
+                pwg_object.save()
+
+                user_obj = WebUser.objects.get(user=pk)
+                user_obj.is_shared = True
+                user_obj.save()
+
+                share_obj = Share(pwg=pwg_object, share_to=current_user, pwgserver=pwgs_id)
+                share_obj.save()
+
+        if accType == "seller":
+            return redirect('seller-user')
+        elif accType == "tester":
+            return redirect('admin-tester')
+        elif accType == "user":
+            return redirect('seller-user')
+
+    return redirect('/')
+
+
+def deshare(request):
+    # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        accType = request.GET.get("accType", None)
+        pk = request.GET.get("pk", None)
+
+        if User.objects.filter(id=pk).exists():
+            user_obj = User.objects.get(id=pk)
+            share_obj = Share.objects.filter(share_to=pk)
+            for item in share_obj:
+                pwg_obj = item.pwg
+                pwg = PWG.objects.get(id=pwg_obj.id)
+                pwg.is_shared = False
+                pwg.save()
+
+                item.delete()
+
+            web_user = WebUser.objects.get(user=pk)
+            web_user.is_shared = False
+            name = "{} has been successfully de-shared from User {}".format(share_obj[0].pwg, web_user.first_name)
+            web_user.save()
             return JsonResponse({"msg": name}, status=200)
         else:
             return JsonResponse({"msg": False}, status=200)

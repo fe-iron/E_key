@@ -311,3 +311,84 @@ function getback(pk){
         })
 
 }
+
+//to get system exclusive name
+function get_name(accType){
+        // GET AJAX request
+        var nnn = $('#unique_name').val();
+        $.ajax({
+            type: 'GET',
+            url: "unique_name",
+            data: {"accType": accType, "nnn": nnn},
+            success: function (response) {
+                    if(response['msg'] == false){
+                        $("#confirm-message").html("Something went wrong, Try again");
+                        $("#confirm-message-color").css("color","red");
+                    }else{
+                        $("#unique_name_value").attr('value',response['msg']);
+                    }
+
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+
+}
+
+//to deauthorize the pwg from a user
+function deauthorize(pk, accType){
+        // GET AJAX request
+        $.ajax({
+            type: 'GET',
+            url: "deauthorize",
+            data: {"pk": pk, "accType": accType},
+            success: function (response) {
+                    if(response['msg'] == false){
+                        $("#confirm-message").html("Something went wrong, Try again");
+                        $("#confirm-message-color").css("color","red");
+                    }else{
+                        $("#confirm-message").html(response['msg']);
+                        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                        $('#confirm').modal('show');
+                    }
+                    window.setTimeout(function(){
+                        location.reload(true);
+                    }, 3000);
+
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+
+}
+
+
+//to deauthorize the pwg from a user
+function deshare(pk, accType){
+        // GET AJAX request
+        $.ajax({
+            type: 'GET',
+            url: "deshare",
+            data: {"pk": pk, "accType": accType},
+            success: function (response) {
+                    if(response['msg'] == false){
+                        $("#confirm-message").html("Something went wrong, Try again");
+                        $("#confirm-message-color").css("color","red");
+                    }else{
+                        $("#confirm-message").html(response['msg']);
+                        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                        $('#confirm').modal('show');
+                    }
+                    window.setTimeout(function(){
+                        location.reload(true);
+                    }, 3000);
+
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+
+}

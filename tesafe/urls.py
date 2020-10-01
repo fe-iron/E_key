@@ -20,12 +20,12 @@ urlpatterns = [
     path("seller-home", views.seller_home, name="seller-home"),
     path("seller-user", views.seller_user, name="seller-user"),
     path("seller-pwg", views.seller_pwg, name="seller-pwg"),
-    path("transfer-seller", views.transfer_seller, name="transfer-seller"),
+    path("transfer-seller<int:pk>", views.transfer_seller, name="transfer-seller"),
     path("transfer-seller-pwg", views.transfer_seller_pwg, name="transfer-seller-pwg"),
     path("seller-authorized<int:pk>", views.seller_authorized, name="seller-authorized"),
     path("seller-authorized-pwg", views.seller_authorized_pwg, name="seller-authorized-pwg"),
     path("seller-deauthorized-pwg", views.seller_deauthorized_pwg, name="seller-deauthorized-pwg"),
-    path("seller-shared", views.seller_shared, name="seller-shared"),
+    path("seller-shared<int:pk>", views.seller_shared, name="seller-shared"),
     path("seller-shared-pwg", views.seller_shared_pwg, name="seller-shared-pwg"),
     path("seller-deshared-pwg", views.seller_deshared_pwg, name="seller-deshared-pwg"),
     path("seller-pwg-transfer", views.seller_pwg_transfer, name="seller-pwg-transfer"),
@@ -56,7 +56,15 @@ urlpatterns = [
     # Unfreeze
     path("unfreeze", views.unfreeze, name="unfreeze"),
     # transfer_pwg and pwgs
-    path("transfer_pwgs", views.transfer_pwgs, name="transfer_pwgs"),
+    path("Transfer_pwgs", views.transfer_pwgs, name="Transfer_pwgs"),
+    # authorize pwgs
+    path("Authorize_pwgs", views.authorize_pwgs, name="Authorize_pwgs"),
+    # De-authorize pwgs
+    path("deauthorize", views.deauthorize, name="deauthorize"),
+    # Share pwgs
+    path("share_pwgs", views.share_pwgs, name="share_pwgs"),
+    # De-authorize pwgs
+    path("deshare", views.deshare, name="deshare"),
     # transfer_pwg and pwgs
     path("getback_pwgs", views.getback_pwgs, name="getback_pwgs"),
     # transfer_pwg and pwgs
@@ -79,5 +87,7 @@ urlpatterns = [
     path("assign_multiple", views.assign_multiple, name="assign_mulltiple"),
     # get password history
     path("tester_list", views.tester_list, name="tester_list"),
+    # get system name
+    path("unique_name", views.system_name, name="unique_name"),
 
 ]

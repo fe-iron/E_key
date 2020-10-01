@@ -1,6 +1,7 @@
 # Register your models here.
 from django.contrib import admin
-from .models import WebAdmin, Seller, WebAdminLoginHistory, Tester, WebUser, PWGServers, PWG, PasswordHistory, TransferPwg, TransferPwgs, PwgUseRecord
+from .models import WebAdmin, Seller, WebAdminLoginHistory, Tester, WebUser, PWGServers, PWG, PasswordHistory, \
+    TransferPwg, TransferPwgs, PwgUseRecord, SystemName, Authorize, Share
 
 
 
@@ -11,6 +12,20 @@ admin.site.register(Tester)
 admin.site.register(WebUser)
 admin.site.register(PWGServers)
 # admin.site.register(PWG)
+
+@admin.register(Authorize)
+class Authorize(admin.ModelAdmin):
+    list_display = ("pwg", "authorize_to", "pwgserver")
+
+
+@admin.register(Share)
+class Share(admin.ModelAdmin):
+    list_display = ("pwg", "share_to", "pwgserver")
+
+
+@admin.register(SystemName)
+class SystemName(admin.ModelAdmin):
+    list_display = ("serial_no", "system_name", "is_pwgs", "is_tester", "is_seller", "is_user")
 
 
 @admin.register(PwgUseRecord)

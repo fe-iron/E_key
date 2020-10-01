@@ -2,9 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Seller | Transfer-Users</title>
-
-
+	<title>Seller | Transfer User</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -21,9 +19,6 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'seller/css/seller-pwg.css' %}">
 </head>
 <body>
-
-
-
 	<section class="bg-light">
 		<div class="container-fluid">
 			<nav class="navbar navbar-expand-lg navbar-light ">
@@ -43,11 +38,6 @@
 						<li class="nav-item pl-3">
 							<a class="nav-link " href="seller-pwg">PWG</a>
 						</li>
-						
-
-						<!-- <li class="nav-item pl-3">
-							<a class="nav-link" href="admin-info-server.html">Unread Messages <span><i class="fas fa-bell"></i></span></a>
-						</li> -->
 					</ul>
 					
 				</div>
@@ -59,13 +49,8 @@
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-<!--						<a class="dropdown-item" href="#" onclick="transfer();"> Transfer </a>-->
-<!--						<a class="dropdown-item" href="#" onclick="Delete();">Delete</a>-->
-<!--						<a class="dropdown-item" href="#" onclick="Freeze();">Freeze</a>-->
-<!--						<a class="dropdown-item" href="#" onclick="chat();">Chat</a>-->
-						<a class="dropdown-item" href="">Broadcast</a>
-
-						<a class="dropdown-item" href="seller-home" >Exit</a>
+						<a class="dropdown-item" href="#">Broadcast</a>
+						<a class="dropdown-item" href="seller-home">Exit</a>
 					</div>
 				</div>
 
@@ -76,15 +61,12 @@
 	<section class="bg-detail">
 		<div class="container-fluid">
 			<div class="row justify-content-center">
-
 				<div class="col-md-10  py-5 px-5">
-
 					<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-3">
-
 						<div class="col-md" id="div-7">
 							<header class="pb-4">
 								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">Transfer PWG to User ABC</a>
+									<a class="h4 text-dark font-weight-bold pt-2">{{name}}</a>
 									<form class="form-inline">
 										<div class="input-group-prepend  mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
@@ -92,14 +74,11 @@
 										</div>
 										<a href="seller-user" class="btn btn-danger text-white">Back</a>
 									</form>
-
 								</nav>
-
 							</header>
 
 
 							<div id="occupied">
-
 								<div class="accordion" id="accordionExample">
 									<div class="row px-2 big-screen-table-header">
 										<div class="col-2">
@@ -108,9 +87,6 @@
 										<div class="col-5 pl-2">
 											<h5 class="pl-3">Name</h5>
 										</div>
-
-
-
 									</div>
 
 									<div class="row px-2 small-screen-table-header">
@@ -120,14 +96,12 @@
 										<div class="col-4 pl-2">
 											<h5 class="pl-3">Name</h5>
 										</div>
-
-
 									</div>
 									<div class="card">
 										<div class="card-header" id="headingOne">
 											<h2 class="mb-0">
 												<button class="btn" type="button" data-toggle="collapse">
-													<input type="checkbox"  id="checkAll" name="checkAll" value="floatingButtonHere"><span class="pwg-list">PWGS-A</span>
+													<input type="checkbox"  id="checkAll" name="floatingButtonHere"><span class="pwg-list">PWGS-A</span>
 												</button>
 												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
 
@@ -414,27 +388,10 @@
 													</div>
 												</div>
 											</div>
-
-
-
-
-
 						</div>
-
-
-
 					</div>
-
-
-
-
-
-
-
 				</div>
 			</div>
-
-
 		</div>
 	</section>
 
@@ -523,61 +480,10 @@
 		</div>
 	</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<section class="floatingButtonHere" style="display: none;" id="button-floating-1">
 		<a href="#" class=" btn btn-primary pop">Confirm</a>
 		<a href="transfer-seller" class=" btn btn-danger">Cancel</a>
 	</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	<script type="text/javascript">

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Admin | Seller-Transfer</title>
+	<title>{{accType}} | {{target}} - {{action}}</title>
 
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,7 +31,7 @@
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-
+				{% if accType == "admin" %}
 				<div class="collapse navbar-collapse justify-content" id="navbarSupportedContent">
 					<ul class="navbar-nav">
 						<li class="nav-item pl-3">
@@ -49,7 +49,22 @@
 					</ul>
 					
 				</div>
+				{% else %}
+				<div class="collapse navbar-collapse justify-content" id="navbarSupportedContent">
+					<ul class="navbar-nav">
+						<li class="nav-item pl-3">
+							<a class="nav-link "  href="seller-home">Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item pl-3">
+							<a class="nav-link active" href="seller-user">User</a>
+						</li>
+						<li class="nav-item pl-3">
+							<a class="nav-link " href="seller-pwg">PWG</a>
+						</li>
+					</ul>
 
+				</div>
+				{% endif %}
 
 				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
 
@@ -58,13 +73,14 @@
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-
-						<a class="dropdown-item" href="">Broadcast</a>
+						<a class="dropdown-item" href="#">Broadcast</a>
+						{% if accType == "admin" %}
 						<a class="dropdown-item" href="admin-home" >Exit</a>
+						{% else %}
+						<a class="dropdown-item" href="seller-home" >Exit</a>
+						{% endif %}
 					</div>
 				</div>
-
-
 			</nav>
 		</div>
 	</section>
@@ -86,7 +102,11 @@
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
 											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
+										{% if accType == "admin" %}
 										<a href="admin-seller" class="btn btn-danger text-white">Back</a>
+										{% else %}
+										<a href="seller-user" class="btn btn-danger text-white">Back</a>
+										{% endif %}
 									</form>
 								</nav>
 							</header>
@@ -208,31 +228,39 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
+                {% if action == "Transfer" %}
 				<h5 class="modal-title" id="exampleModalLabel">Transferred PWG</h5>
+				{% elif action == "share" %}
+				<h5 class="modal-title" id="exampleModalLabel">Share PWG</h5>
+				{% else %}
+                <h5 class="modal-title" id="exampleModalLabel">Authorize PWG</h5>
+                {% endif %}
 				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
 			</div>
 			<div class="modal-body text-center p-4">
 				<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-				<p class="pt-2 font-weight-bold">Your PWG has been successfully transfered to seller</p>
-
+				<p class="pt-2 font-weight-bold">Are you sure you want to {{action}} PWG to {{target}} {{username}}</p>
 			</div>
-
+			<div class="modal-footer justify-content-center">
+				<button type="button" class="btn btn-primary" id="confirm-modal-button" onclick="confirm_transfer();">Confirm</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+		  	</div>
 		</div>
 	</div>
 </div>
 
 <section class="floatingButtonHere" style="display: none;">
+	<a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Proceed</a>
+	<a href="" class="btn btn-danger" onclick="reload_page()">Cancel</a>
 
-	<a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="confirm_transfer();">Confirm</a>
-	<a href="transfer{{id}}" class=" btn btn-danger">Cancel</a>
 </section>
 
 <!--	to transfer PWG and PWGS names-->
-	<form action="transfer_pwgs" method="post" name="transfer">
+	<form action="{{action}}_pwgs" method="post" name="{{action}}">
 		{% csrf_token %}
 		<input type="hidden" id="assign_values" name="values">
 		<input type="hidden"  name="user_pk" value="{{id}}">
-		<input type="hidden"  name="accType" value="seller">
+		<input type="hidden"  name="accType" value="{{target}}">
 	</form>
 
 <script src="{% static 'tesafe/js/transfer_ajax.js' %}"></script>
@@ -240,6 +268,11 @@
 
 	//global variable
 	let checkbox_values = [];
+
+    // to reload page
+    function reload_page(){
+        window.location.reload();
+    }
 
 	function showHideButtons(){
 		if( checkbox_values.length == 0){
@@ -330,86 +363,13 @@ $(document).ready(function(){
 });
 
 
-
-// modal popup
-$(function() {
-	$('.pop').on('click', function() {
-		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-		$('#imagemodal').modal('show');
-	});
-});
-
-	// division hide/show js
-
-	function myfun(){
-		document.getElementById("div-1").style.display = "block";
-		document.getElementById("div-2").style.display = "none";
-		document.getElementById("div-3").style.display = "none";
-
-	}
-
-	function myfun1(){
-		document.getElementById("div-1").style.display = "none";
-		document.getElementById("div-2").style.display = "block";
-		document.getElementById("div-3").style.display = "none";
-
-
-	}
-
-
-	function myfun2(){
-		document.getElementById("div-1").style.display = "none";
-		document.getElementById("div-3").style.display = "block";
-		document.getElementById("div-2").style.display = "none";
-
-
-	}
-
-
-
-	function cancel() {
-		document.getElementById("div-2").style.display = "none";
-		document.getElementById("div-1").style.display = "block";
-	}
-
-
-
-
-
-	function funDown(){
-		document.getElementsByClassName('fa-sort-down').style.display="block";
-		document.getElementsByClassName('fa-sort-up').style.display="none";
-	}
-
-
 	function myFunction(x) {
 		x.classList.toggle("fa-sort-down");
 	}
 
-
-	function myOpen(one) {
-		$("#" + one).slideToggle("slow");
-		var tog = document.getElementById(one);
-		if (tog.style.display == "none") {
-			console.log(tog);
-		}
-	}
-
-
-
-		// search filter table
-	$(document).ready(function(){
-		$("#myInput").on("keyup", function() {
-			var value = $(this).val().toLowerCase();
-			$("#myTable tr").filter(function() {
-				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-			});
-		});
-	});
-
 	function confirm_transfer(){
 		$('#assign_values').attr('value', checkbox_values);
-		document.forms['transfer'].submit();
+		document.forms['{{action}}'].submit();
 	}
 
 
