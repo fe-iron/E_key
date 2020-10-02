@@ -59,12 +59,18 @@ urlpatterns = [
     path("Transfer_pwgs", views.transfer_pwgs, name="Transfer_pwgs"),
     # authorize pwgs
     path("Authorize_pwgs", views.authorize_pwgs, name="Authorize_pwgs"),
+    # authorize pwgs
+    path("authorize_multiple_pwgs", views.authorize_multiple_pwgs, name="authorize_multiple_pwgs"),
     # De-authorize pwgs
     path("deauthorize", views.deauthorize, name="deauthorize"),
     # Share pwgs
     path("share_pwgs", views.share_pwgs, name="share_pwgs"),
+    # Share multiple pwgs
+    path("share_multiple_pwgs", views.share_multiple_pwgs, name="share_multiple_pwgs"),
     # De-authorize pwgs
     path("deshare", views.deshare, name="deshare"),
+    # De-authorize multiple pwgs
+    path("deshare_multiple_pwgs", views.deshare_multiple_pwgs, name="deshare_multiple_pwgs"),
     # transfer_pwg and pwgs
     path("getback_pwgs", views.getback_pwgs, name="getback_pwgs"),
     # transfer_pwg and pwgs
@@ -89,5 +95,4 @@ urlpatterns = [
     path("tester_list", views.tester_list, name="tester_list"),
     # get system name
     path("unique_name", views.system_name, name="unique_name"),
-
 ]

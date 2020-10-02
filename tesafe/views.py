@@ -345,7 +345,24 @@ def seller_user(request):
 
 
 def seller_pwg(request):
-    return render(request, 'seller/seller-pwg.html', {'num': [11,23,33,42,35,67,78,49,10]})
+    pwgserver = []
+    pwgserver1 = []
+    user = request.user
+    pwg = PWG.objects.filter(transfer_to=user)
+    for i in pwg:
+        if i.is_authorized or i.is_shared:
+            pwgs = i.owned_by
+            pwgserver.append(pwgs)
+        else:
+            pwgs = i.owned_by
+            pwgserver1.append(pwgs)
+    param = {
+        "pwgserver_occupied": pwgserver,
+        "pwgserver_unoccupied": pwgserver1,
+        "pwg": pwg,
+        "num": num,
+    }
+    return render(request, 'seller/seller-pwg.html', param)
 
 
 def transfer(request, id):
@@ -353,13 +370,13 @@ def transfer(request, id):
     pwgserver = PWGServers.objects.all()
     pwg = PWG.objects.all()
     param = {
-        "name": "Transfer Tested PWG to Seller "+user.first_name + " " + user.last_name,
+        "name": "Transfer PWG to Seller "+user.first_name + " " + user.last_name,
         "username": user.first_name + " " + user.last_name,
         "pwgserver": pwgserver,
         "pwg": pwg,
         "num": num,
         "id": id,
-        "acctype": "admin",
+        "accType": "admin",
         "target": "seller",
         "action": "Transfer",
     }
@@ -461,11 +478,65 @@ def seller_authorized(request, pk):
 
 
 def seller_authorized_pwg(request):
-    return render(request, 'seller/seller-authorized-pwg.html')
+    if request.method == "POST":
+        ids = request.POST['pwg_ids']
+        name = ''
+        pwg_ids = []
+        for id in ids:
+            pwg = PWG.objects.get(id=id)
+            name = " " + name + pwg.alias
+            pwg_ids.append(pwg.id)
+
+        seller = request.user
+        user = User.objects.get(email=seller)
+        seller = Seller.objects.get(user=user.id)
+
+        if WebUser.objects.filter(associated_with=seller.id).exists():
+            web_users = WebUser.objects.filter(associated_with=seller.id)
+        else:
+            web_users = None
+
+        param = {
+            "users": web_users,
+            "id": pwg_ids,
+            "name": str(name) + ", Authorize to Users below",
+            "form_action": "authorize_multiple_pwgs",
+            "action": "Authorize",
+        }
+        return render(request, 'seller/seller-authorized-pwg.html', param)
+
+    return render(request, 'seller/seller-pwg.html')
 
 
 def seller_shared_pwg(request):
-    return render(request, 'seller/seller-shared-pwg.html')
+    if request.method == "POST":
+        ids = request.POST['pwg_ids']
+        name = ''
+        pwg_ids = []
+        for id in ids:
+            pwg = PWG.objects.get(id=id)
+            name = " " + name + pwg.alias
+            pwg_ids.append(pwg.id)
+
+        seller = request.user
+        user = User.objects.get(email=seller)
+        seller = Seller.objects.get(user=user.id)
+
+        if WebUser.objects.filter(associated_with=seller.id).exists():
+            web_users = WebUser.objects.filter(associated_with=seller.id)
+        else:
+            web_users = None
+
+        param = {
+            "users": web_users,
+            "id": pwg_ids,
+            "name": str(name) + ", Share to Users below",
+            "form_action": "share_multiple_pwgs",
+            "action": "Share",
+        }
+        return render(request, 'seller/seller-authorized-pwg.html', param)
+
+    return render(request, 'seller/seller-pwg.html')
 
 
 def seller_deauthorized_pwg(request):
@@ -491,7 +562,31 @@ def seller_shared(request,pk):
 
 
 def seller_deshared_pwg(request):
-    return render(request, 'seller/seller-deshared-pwg.html')
+    if request.method == "POST":
+        ids = request.POST['pwg_ids']
+        pwg = PWG.objects.get(id=ids)
+        name = pwg.alias
+
+        seller = request.user
+        user = User.objects.get(email=seller)
+        seller = Seller.objects.get(user=user.id)
+        web_usrs = []
+        if Share.objects.filter(pwg=pwg).exists():
+            web_users = Share.objects.filter(pwg=pwg)
+            for usr in web_users:
+                web_user = WebUser.objects.get(user=usr.share_to.id)
+                web_usrs.append(web_user)
+        else:
+            web_users = None
+
+        param = {
+            "users": web_usrs,
+            "id": ids,
+            "name": name + ", De-share to Users below",
+            "form_action": "deshare_multiple_pwgs",
+            "action": "De-share",
+        }
+    return render(request, 'seller/seller-deshared-pwg.html', param)
 
 
 def seller_pwg_transfer(request):
@@ -1395,3 +1490,111 @@ def deshare(request):
             return JsonResponse({"msg": False}, status=200)
     else:
         return JsonResponse({}, status=200)
+
+
+def authorize_multiple_pwgs(request):
+    if request.method == "POST":
+        authorize_values = request.POST['authorize_values']
+        pwg_values = request.POST['pwg_values']
+        for pwg_id in pwg_values:
+            if pwg_id == ",":
+                pass
+            elif pwg_id == "[":
+                pass
+            elif pwg_id == "]":
+                pass
+            else:
+                pwg_obj = PWG.objects.get(id=pwg_id)
+                pwg_obj.is_authorized = True
+                pwgs = pwg_obj.owned_by
+                pwg_obj.save()
+                for user_id in authorize_values:
+                    if user_id == ",":
+                        pass
+                    else:
+                        user_obj = WebUser.objects.get(id=user_id)
+                        user_obj.is_authorized = True
+                        u = user_obj.user
+                        user_obj.save()
+
+                        if Authorize.objects.filter(authorize_to=u, pwg=pwg_obj).exists():
+                            print("not saved")
+                        else:
+                            authrize_obj = Authorize(pwg=pwg_obj, authorize_to=u, pwgserver=pwgs)
+                            authrize_obj.save()
+
+        return redirect("seller-pwg")
+
+    else:
+        return render(request, "seller/seller-pwg.html")
+
+
+def share_multiple_pwgs(request):
+    if request.method == "POST":
+        authorize_values = request.POST['authorize_values']
+        pwg_values = request.POST['pwg_values']
+        for pwg_id in pwg_values:
+            if pwg_id == ",":
+                pass
+            elif pwg_id == "[":
+                pass
+            elif pwg_id == "]":
+                pass
+            else:
+                pwg_obj = PWG.objects.get(id=pwg_id)
+                pwg_obj.is_shared = True
+                pwgs = pwg_obj.owned_by
+                pwg_obj.save()
+                for user_id in authorize_values:
+                    if user_id == ",":
+                        pass
+                    else:
+                        user_obj = WebUser.objects.get(id=user_id)
+                        user_obj.is_shared = True
+                        u = user_obj.user
+                        user_obj.save()
+
+                        if Share.objects.filter(share_to=u, pwg=pwg_obj).exists():
+                            print("not saved")
+                        else:
+                            share_obj = Share(pwg=pwg_obj, share_to=u, pwgserver=pwgs)
+                            share_obj.save()
+
+        return redirect("seller-pwg")
+
+    else:
+        return render(request, "seller/seller-pwg.html")
+
+
+def deshare_multiple_pwgs(request):
+    if request.method == "POST":
+        authorize_values = request.POST['share_values']
+        pwg_values = request.POST['pwg_values']
+        for pwg_id in pwg_values:
+            if pwg_id == ",":
+                pass
+            elif pwg_id == "[":
+                pass
+            elif pwg_id == "]":
+                pass
+            else:
+                pwg_obj = PWG.objects.get(id=pwg_id)
+                pwg_obj.is_shared = False
+                pwgs = pwg_obj.owned_by
+                pwg_obj.save()
+                for user_id in authorize_values:
+                    if user_id == ",":
+                        pass
+                    else:
+                        user_obj = WebUser.objects.get(id=user_id)
+                        user_obj.is_shared = False
+                        u = user_obj.user
+                        user_obj.save()
+
+                        if Share.objects.filter(share_to=u, pwg=pwg_obj).exists():
+                            share_obj = Share.objects.filter(share_to=u, pwg=pwg_obj)
+                            share_obj.delete()
+
+        return redirect("seller-pwg")
+    else:
+        return render(request, "seller/seller-pwg.html")
