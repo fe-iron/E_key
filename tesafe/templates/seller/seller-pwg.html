@@ -55,9 +55,9 @@
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#" onclick="authorize();"> Authorize </a>
-						<a class="dropdown-item" href="#" onclick="share();"> Share</a>
-						<a class="dropdown-item" href="seller-home" >Exit</a>
+						<a class="dropdown-item" href="#" onclick="occupied_authorize('authorize();');"> Authorize </a>
+						<a class="dropdown-item" href="#" onclick="occupied_authorize('share();');"> Share</a>
+						<a class="dropdown-item" href="seller-home">Exit</a>
 					</div>
 				</div>
 
@@ -67,10 +67,10 @@
 					</button>
 
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#" onclick="transfer();">Transfer</a>
-						<a class="dropdown-item" href="#" onclick="authorize1();"> Authorize </a>
-						<a class="dropdown-item" href="#" onclick="share1();">Share</a>
-						<a class="dropdown-item" href="#" onclick="returnAdmin();">Return to Admin</a>
+						<a class="dropdown-item" href="#" onclick="">Transfer</a>
+						<a class="dropdown-item" href="#" onclick="unoccupied_authorize('authorize()');"> Authorize </a>
+						<a class="dropdown-item" href="#" onclick="unoccupied_authorize('share()');">Share</a>
+						<a class="dropdown-item" href="#" onclick="unoccupied_authorize('return_pwg()');">Return to Admin</a>
 						<a class="dropdown-item" href="seller-home">Exit</a>
 					</div>
 				</div>
@@ -149,7 +149,7 @@
 										<div class="card-header" id="headingOne">
 											<h2 class="mb-0">
 												<button class="btn" type="button" data-toggle="collapse">
-													<input type="checkbox"  id="checkAll{{forloop.counter}}"  name="floatingButtonHere" disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
+													<input type="checkbox"  id="checkAll{{count}}"  disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
 												</button>
 												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
 
@@ -163,7 +163,7 @@
 										<div class="card-header" id="headingTwo">
 											<h2 class="mb-0">
 												<button class="btn" type="button" data-toggle="collapse">
-													<input type="checkbox"  id="checkAll{{forloop.counter}}"  name="floatingButtonHere" disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
+													<input type="checkbox"  id="checkAll{{count}}" disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
 												</button>
 												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
 
@@ -177,7 +177,7 @@
 										<div class="card-header" id="headingThree">
 											<h2 class="mb-0">
 												<button class="btn" type="button" data-toggle="collapse">
-													<input type="checkbox"  id="checkAll{{forloop.counter}}"  name="floatingButtonHere" disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
+													<input type="checkbox"  id="checkAll{{count}}"  disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
 												</button>
 												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
 
@@ -191,7 +191,7 @@
 										<div class="card-header" id="headingFour">
 											<h2 class="mb-0">
 												<button class="btn" type="button" data-toggle="collapse">
-													<input type="checkbox"  id="checkAll{{forloop.counter}}"  name="floatingButtonHere" disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
+													<input type="checkbox"  id="checkAll{{count}}"  disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
 												</button>
 												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
 
@@ -205,7 +205,7 @@
 										<div class="card-header" id="headingFive">
 											<h2 class="mb-0">
 												<button class="btn" type="button" data-toggle="collapse">
-													<input type="checkbox"  id="checkAll{{forloop.counter}}"  name="floatingButtonHere" disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
+													<input type="checkbox"  id="checkAll{{count}}" disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
 												</button>
 												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
 
@@ -220,13 +220,17 @@
 													{% for item in pwg %}
 														{% if pwgs.id == item.owned_by.id %}
 														<tr>
-															<td><a href="#"><input type="checkbox" name="floatingButtonHere" value="{{item.id}}" disabled="" class="pwg{{count}}"> {{item.alias}}</a></td>
-															{% if item.is_shared %}
-															<td>DS</td>
+															{% if item.sold_from != None %}
+																<td><a href="#"><input type="checkbox" name="floatingButtonHere" value="{{item.id}}" disabled=""> {{item.alias}}</a></td>
+																<td>NA</td>
+
+															{% elif item.is_shared %}
+																<td><a href="#"><input type="checkbox" name="floatingButtonHere" value="{{item.id}}" disabled="" class="pwg{{count}}"> {{item.alias}}</a></td>
+																<td>DS</td>
 
 															{% elif item.is_authorized %}
-															<td>DA</td>
-
+																<td><a href="#"><input type="checkbox" name="floatingButtonHere" value="{{item.id}}" disabled="" class="pwg{{count}}"> {{item.alias}}</a></td>
+																<td>DA</td>
 															{% endif %}
 															<td class="display-none">
 																<div class="dropdown  mb-0 ml-xl-3  ml-sm-2" >
@@ -234,14 +238,14 @@
 																				<i class="fas fa-ellipsis-v"></i>
 																			</button>
 																	<div class="dropdown-menu menu-left-align">
-																		{% if item.is_shared or item.is_authorized %}
+																		{% if item.sold_from == None %}
 																		<a class="dropdown-item" href="#" onclick="send_authorize({{item.id}});">Authorize</a>
 																		<a class="dropdown-item" href="#" onclick="send_share({{item.id}});">Share</a>
 																		<a class="dropdown-item" href="#" onclick="send_deshare({{item.id}});">De-Share</a>
-																		<a class="dropdown-item pop1" href="#">History</a>
-																		<a class="dropdown-item" href="" >Delete</a>
+																		<a class="dropdown-item" href="#" onclick="pop1({{item.id}}, '{{item.alias}}')">History</a>
+																		<a class="dropdown-item" href="#" onclick="delete_seller_user({{item.pk}});">Delete</a>
 																		{% else %}
-																		<a class="dropdown-item pop1" href="#">History</a>
+																		<a class="dropdown-item" href="#" onclick="pop1({{item.pk}}, '{{item.alias}}');">History</a>
 																		{% endif %}
 																	</div>
 																</div>
@@ -282,7 +286,7 @@
 										<div class="card-header" id="headingOne">
 											<h2 class="mb-0">
 												<button class="btn" type="button" data-toggle="collapse">
-													<input type="checkbox"  id="checkAll{{forloop.counter}}"  name="floatingButtonHere" disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
+													<input type="checkbox"  id="uncheckAll{{count}}"  disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
 												</button>
 												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
 
@@ -296,7 +300,7 @@
 										<div class="card-header" id="headingTwo">
 											<h2 class="mb-0">
 												<button class="btn" type="button" data-toggle="collapse">
-													<input type="checkbox"  id="checkAll{{forloop.counter}}"  name="floatingButtonHere" disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
+													<input type="checkbox"  id="uncheckAll{{count}}" disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
 												</button>
 												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
 
@@ -310,7 +314,7 @@
 										<div class="card-header" id="headingThree">
 											<h2 class="mb-0">
 												<button class="btn" type="button" data-toggle="collapse">
-													<input type="checkbox"  id="checkAll{{forloop.counter}}"  name="floatingButtonHere" disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
+													<input type="checkbox"  id="uncheckAll{{count}}"  disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
 												</button>
 												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
 
@@ -324,7 +328,7 @@
 										<div class="card-header" id="headingFour">
 											<h2 class="mb-0">
 												<button class="btn" type="button" data-toggle="collapse">
-													<input type="checkbox"  id="checkAll{{forloop.counter}}"  name="floatingButtonHere" disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
+													<input type="checkbox"  id="uncheckAll{{count}}" disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
 												</button>
 												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
 
@@ -338,7 +342,7 @@
 										<div class="card-header" id="headingFive">
 											<h2 class="mb-0">
 												<button class="btn" type="button" data-toggle="collapse">
-													<input type="checkbox"  id="checkAll{{forloop.counter}}"  name="floatingButtonHere" disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
+													<input type="checkbox"  id="uncheckAll{{count}}"  disabled=""><span class="pwg-list">{{pwgs.alias}}</span>
 												</button>
 												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
 
@@ -352,24 +356,26 @@
 													<tbody>
 													{% for item in pwg %}
 														{% if pwgs.id == item.owned_by.id %}
+														{% if item.sold_from != None %}
 														<tr>
-															<td><input type="checkbox" name="floatingButtonHere" value="{{item.id}}" disabled="" class="pwg{{count}}">  {{item.alias}}</td>
+															<td><input type="checkbox" name="floatingButtonHere" value="{{item.id}}" disabled="" class="unpwg{{count}}">  {{item.alias}}</td>
 
 															<td class="display-none">
-																<a href="transfer-seller-pwg" class="btn btn-primary btn-light btn-sm">Transfer</a>
+																<a href="#" class="btn btn-primary btn-light btn-sm" onclick="transfer_pwg({{item.id}})">Transfer</a>
 																<div class="dropdown  mb-0 ml-xl-3  ml-sm-2" >
 																	<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 																				<i class="fas fa-ellipsis-v"></i>
 																			</button>
 																	<div class="dropdown-menu">
-																		<a class="dropdown-item" href="seller-authorized-pwg">Authorize</a>
-																		<a class="dropdown-item" href="seller-shared-pwg" >Share</a>
+																		<a class="dropdown-item" href="#" onclick="send_authorize({{item.id}});">Authorize</a>
+																		<a class="dropdown-item" href="#" onclick="send_share({{item.id}});">Share</a>
 																		<a class="dropdown-item pop1" href="#">History</a>
-																		<a class="dropdown-item" href="" >Delete</a>
+																		<a class="dropdown-item" href="#" onclick="delete_seller_user({{item.pk}});">Delete</a>
 																	</div>
 																</div>
 															</td>
 														</tr>
+														{% endif %}
 														{% endif %}
 													{% endfor %}
 
@@ -390,38 +396,55 @@
 		</div>
 	</section>
 
-
-	<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Transferred PWG</h5>
-					<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
-				</div>
-				<div class="modal-body text-center p-4">
-					<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-					<p class="pt-2 font-weight-bold" id="confirmation">
-
-
-					</p>
-
-				</div>
+<!--for confirmation of multiple operations-->
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Confirmation of PWG</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+			</div>
+			<div class="modal-body text-center p-4">
+				<i class="fa fa-question-circle fa-3x" style="color: #bd2130;" id="confirm-message-color"></i>
+				<p class="pt-2 font-weight-bold" id="confirm-message-delete"></p>
 
 			</div>
+			<div class="modal-footer justify-content-center">
+				<button type="button" class="btn btn-primary" id="confirm-modal-button">Confirm</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+		  	</div>
 		</div>
 	</div>
+</div>
 
 
+<!--	to show confirmation popup of single delete-->
+<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Message</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+			</div>
+			<div class="modal-body text-center p-4">
+				<i class="fas fa-check-circle fa-3x" style="color: green;" id="confirm-message-color"></i>
+				<p class="pt-2 font-weight-bold" id="confirm-message"></p>
 
+			</div>
 
-	<div class="modal fade" id="imagemodal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		</div>
+	</div>
+</div>
+
+<!--to display history of pwg-->
+<div class="modal fade" id="imagemodal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title font-weight-bold">History of PWG ABC</h5>
+					<h5 class="modal-title font-weight-bold" id="pwg-history-title"></h5>
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body" id="modal-body-history">
 					<div class="tabl-responsive">
 						<table class="table">
 							<thead>
@@ -478,7 +501,7 @@
 	</div>
 
 	<section class="floatingButtonHere" style="display: none;" id="button-floating-1">
-		<a href="#" class=" btn btn-primary pop">Confirm</a>
+		<a href="#" class=" btn btn-primary" id="proceed">Proceed</a>
 		<a href="seller-pwg" class=" btn btn-danger">Cancel</a>
 	</section>
 
@@ -500,9 +523,22 @@
 		<input type="hidden" id="deshare_pwg" name="pwg_ids">
 	</form>
 
-<!--<h1>Authorize and share ki history banani hai</h1>-->
+	<!--	for returning PWG to Admin-->
+	<form action="return-pwg" method="post" name="return-pwg-ids">
+		{% csrf_token %}
+		<input type="hidden" id="return_pwg" name="pwg_ids">
+		<input type="hidden" value="seller" name="accType">
+	</form>
+
+    <!--	for transfer-->
+	<form action="transfer-seller-pwg" method="post" name="send-transfer-pwg-ids">
+		{% csrf_token %}
+		<input type="hidden" id="transfer_pwg" name="pwg_ids">
+	</form>
 
 <script type="text/javascript">
+	// global variables
+	var checkbox_values = []
 	// to send primary key of single PWG for authorization
 	function send_authorize(id){
 		$("#authorize_pwg").attr('value',id);
@@ -521,6 +557,12 @@
 		document.forms['send-deshare-pwg-ids'].submit();
 	}
 
+	// to send primary key of single PWG to transfer to user
+	function transfer_pwg(id){
+		$("#transfer_pwg").attr('value',id);
+		document.forms['send-transfer-pwg-ids'].submit();
+	}
+
       // search filter table
       $(document).ready(function () {
         $("#myInput").on("keyup", function () {
@@ -534,19 +576,10 @@
       // modal popup
       $(function () {
         $(".pop").on("click", function () {
-          $(".imagepreview").attr("src", $(this).find("img").attr("src"));
-          $("#imagemodal").modal("show");
+
         });
       });
 
-
-
-      $(function () {
-        $(".pop1").on("click", function () {
-          $(".imagepreview").attr("src", $(this).find("img").attr("src"));
-          $("#imagemodal1").modal("show");
-        });
-      });
 
 
       function occupied() {
@@ -563,194 +596,302 @@
         document.getElementById("occupied").style.display = "none";
       }
 
-      function transfer() {
-        document.getElementById("button-floating-1").innerHTML = '<a class=" btn btn-secondary">Transfer To</a><a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
-        document.getElementById("button-floating-1").style.display = "block";
-
-        $(".display-none").css("display","none");
-
-        document.getElementById("heading").innerHTML="Select one or more PWG below to Transfer to User"
-        document.getElementById("checkAll3").disabled = false;
-        document.getElementById("checkAll4").disabled = false;
-        document.getElementById("checkAll5").disabled = false;
-        document.getElementById("book13").disabled = false;
-        document.getElementById("book14").disabled = false;
-        document.getElementById("book15").disabled = false;
-        document.getElementById("book16").disabled = false;
-        document.getElementById("book17").disabled = false;
-        document.getElementById("book18").disabled = false;
-        document.getElementById("book19").disabled = false;
-        document.getElementById("book20").disabled = false;
-        document.getElementById("book21").disabled = false;
-        document.getElementById("book22").disabled = false;
-        document.getElementById("book23").disabled = false;
-        document.getElementById("book24").disabled = false;
-
-        jQuery('input[type=checkbox]').on('change', function() {
-		   if (this.checked) {
-                 document.getElementById("button-floating-1").innerHTML = '<a href="transfer-seller-pwg" class=" btn btn-primary">Transfer To</a><a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
-		   }
-		 });
-      }
-
-      function authorize() {
-        document.getElementById("button-floating-1").innerHTML = '<a class=" btn btn-secondary">Authorize To</a><a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
-        document.getElementById("heading").innerHTML="Select one or more PWG below to Authorize to User"
-        document.getElementById("button-floating-1").style.display = "block";
-
-        $(".display-none").css("display","none");
-        document.getElementById("checkAll").disabled = false;
-        document.getElementById("book1").disabled = false;
-        document.getElementById("book2").disabled = false;
-        document.getElementById("book3").disabled = false;
-        document.getElementById("book4").disabled = false;
-        document.getElementById("checkAll1").disabled = false;
-        document.getElementById("book5").disabled = false;
-        document.getElementById("book6").disabled = false;
-        document.getElementById("book7").disabled = false;
-        document.getElementById("book8").disabled = false;
-        document.getElementById("checkAll2").disabled = false;
-        document.getElementById("book9").disabled = false;
-        document.getElementById("book10").disabled = false;
-        document.getElementById("book11").disabled = false;
-        document.getElementById("book12").disabled = false;
-        document.getElementById("book12").disabled = false;
-
-        jQuery('input[type=checkbox]').on('change', function() {
-		   if (this.checked) {
-                 document.getElementById("button-floating-1").innerHTML = '<a href="seller-authorized-pwg" class=" btn btn-primary">Authorize To</a><a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
-		   }
-		 });
-
-      }
-
-      function share() {
-        document.getElementById("button-floating-1").innerHTML = '<a class=" btn btn-secondary">Share To</a><a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
-        document.getElementById("heading").innerHTML="Select one or more PWG below to Share to User"
-        document.getElementById("checkAll").disabled = false;
-        document.getElementById("button-floating-1").style.display = "block";
-
-        $(".display-none").css("display","none");
-
-        document.getElementById("book1").disabled = false;
-        document.getElementById("book2").disabled = false;
-        document.getElementById("book3").disabled = false;
-        document.getElementById("book4").disabled = false;
-        document.getElementById("checkAll1").disabled = false;
-        document.getElementById("book5").disabled = false;
-        document.getElementById("book6").disabled = false;
-        document.getElementById("book7").disabled = false;
-        document.getElementById("book8").disabled = false;
-        document.getElementById("checkAll2").disabled = false;
-        document.getElementById("book9").disabled = false;
-        document.getElementById("book10").disabled = false;
-        document.getElementById("book11").disabled = false;
-        document.getElementById("book12").disabled = false;
-
-        jQuery('input[type=checkbox]').on('change', function() {
-		   if (this.checked) {
-		        document.getElementById("button-floating-1").innerHTML = '<a href="seller-shared-pwg" class=" btn btn-primary">Share To</a><a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
-
-		   }
-		 });
-
-      }
-
-
-
-
-      function returnAdmin() {
-      	document.getElementById("button-floating-1").style.display = "block";
-        document.getElementById("button-floating-1").innerHTML = '<a class="btn btn-secondary">Return</a><a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
-        document.getElementById("confirmation").innerHTML ="PWG has been Returned to Admin successfully, Wait for payment";
-        document.getElementById("checkAll3").disabled = false;
-        document.getElementById("checkAll4").disabled = false;
-        document.getElementById("checkAll5").disabled = false;
-        document.getElementById("book13").disabled = false;
-        document.getElementById("book14").disabled = false;
-        document.getElementById("book15").disabled = false;
-        document.getElementById("book16").disabled = false;
-        document.getElementById("book17").disabled = false;
-        document.getElementById("book18").disabled = false;
-        document.getElementById("book19").disabled = false;
-        document.getElementById("book20").disabled = false;
-        document.getElementById("book21").disabled = false;
-        document.getElementById("book22").disabled = false;
-        document.getElementById("book23").disabled = false;
-        document.getElementById("book24").disabled = false;
-
-        jQuery('input[type=checkbox]').on('change', function() {
-		   if (this.checked) {
-		        document.getElementById("button-floating-1").innerHTML = '<a href="#" class=" btn btn-primary">Return</a><a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
-		   }
-		 });
-      }
-
-      function authorize1() {
-        document.getElementById("button-floating-1").style.display = "block";
-        document.getElementById("button-floating-1").innerHTML = '<a class=" btn btn-secondary">Authorize To</a> <a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
-        document.getElementById("heading").innerHTML="Select one or more PWG below to Authorize to User"
-
-        $(".display-none").css("display","none");
-        document.getElementById("checkAll3").disabled = false;
-        document.getElementById("checkAll4").disabled = false;
-        document.getElementById("checkAll5").disabled = false;
-        document.getElementById("book13").disabled = false;
-        document.getElementById("book14").disabled = false;
-        document.getElementById("book15").disabled = false;
-        document.getElementById("book16").disabled = false;
-        document.getElementById("book17").disabled = false;
-        document.getElementById("book18").disabled = false;
-        document.getElementById("book19").disabled = false;
-        document.getElementById("book20").disabled = false;
-        document.getElementById("book21").disabled = false;
-        document.getElementById("book22").disabled = false;
-        document.getElementById("book23").disabled = false;
-        document.getElementById("book24").disabled = false;
-
-        jQuery('input[type=checkbox]').on('change', function() {
-		   if (this.checked) {
-		        document.getElementById("button-floating-1").innerHTML = '<a href="seller-authorized-pwg" class=" btn btn-primary">Authorize To</a><a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
-		   }
-		 });
-      }
-
-      function share1() {
-        document.getElementById("button-floating-1").style.display = "block";
-        document.getElementById("button-floating-1").innerHTML = '<a class=" btn btn-secondary">Share To</a> <a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
-        document.getElementById("heading").innerHTML="Select one or more PWG below to Share to User"
-        $(".display-none").css("display","none");
-
-        document.getElementById("checkAll3").disabled = false;
-        document.getElementById("checkAll4").disabled = false;
-        document.getElementById("checkAll5").disabled = false;
-        document.getElementById("book13").disabled = false;
-        document.getElementById("book14").disabled = false;
-        document.getElementById("book15").disabled = false;
-        document.getElementById("book16").disabled = false;
-        document.getElementById("book17").disabled = false;
-        document.getElementById("book18").disabled = false;
-        document.getElementById("book19").disabled = false;
-        document.getElementById("book20").disabled = false;
-        document.getElementById("book21").disabled = false;
-        document.getElementById("book22").disabled = false;
-        document.getElementById("book23").disabled = false;
-        document.getElementById("book24").disabled = false;
-
-        jQuery('input[type=checkbox]').on('change', function() {
-		   if (this.checked) {
-		        document.getElementById("button-floating-1").innerHTML = '<a href="seller-shared-pwg" class=" btn btn-primary">Share To</a><a href="seller-pwg" class=" btn btn-danger ml-1">Cancel</a>';
-
-		   }
-		 });
-      }
-
 
       function myFunction(x) {
         x.classList.toggle("fa-sort-down");
       }
 
-    </script>
+      function delete_seller_user(pk){
+      	$.ajax({
+            type: 'GET',
+            url: "delete_temp",
+            data: {"pk": pk, "accType": "pwg"},
+            success: function (response) {
+                    if(response['msg'] == false){
+                        $("#confirm-message").html("Something went wrong, Try again");
+                        $("#confirm-message-color").css("color","red");
+                    }else{
+                        $("#confirm-message").html(response['msg']);
+                        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                        $('#imagemodal1').modal('show');
+                    }
+                    window.setTimeout(function(){
+                        location.reload(true);
+                    }, 2000);
+
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+      }
+
+
+
+    // for occupied authorization and share
+	function occupied_authorize(func_name){
+		{% for i in pwgserver_occupied %}
+			$("#checkAll{{forloop.counter}}").attr("disabled", false);
+			$(".pwg{{forloop.counter}}").attr("disabled", false);
+		{% endfor %}
+		$("#proceed").attr('onclick', func_name);
+	}
+
+	// for unoccupied authorization, share, and for return to admin
+	function unoccupied_authorize(func_name){
+		{% for i in pwgserver_unoccupied %}
+			$("#uncheckAll{{forloop.counter}}").attr("disabled", false);
+			$(".unpwg{{forloop.counter}}").attr("disabled", false);
+		{% endfor %}
+		$("#proceed").attr('onclick', func_name);
+	}
+
+	// to remove all occurrence of the element
+	function removeItemAll(value) {
+		  var i = 0;
+		  while (i < checkbox_values.length) {
+				if (checkbox_values[i] === value) {
+				  checkbox_values.splice(i, 1);
+				} else {
+				  ++i;
+				}
+		  }
+	}
+
+
+	// for selecting child elements of accordion of unoccupied
+	{% for i in pwgserver_unoccupied %}
+		$('#uncheckAll{{forloop.counter}}').click(function () {
+
+			var ele = $(".unpwg{{forloop.counter}}");
+			if ($("#uncheckAll{{forloop.counter}}").is(':checked')) {
+				$(".unpwg{{forloop.counter}}").prop("checked", true);
+				for(i=0;i<ele.length;i++){
+					checkbox_values.push(ele[i].value);
+				}
+			}else{
+				$(".unpwg{{forloop.counter}}").prop("checked", false);
+				for(i=0;i<ele.length;i++){
+					removeItemAll(ele[i].value);
+				}
+			}
+
+			if( checkbox_values.length == 0){
+				$(".floatingButtonHere").hide();
+			}else{
+				$(".floatingButtonHere").show(150);
+			}
+		});
+		{% endfor %}
+
+		// for selecting child checkboxes of occupied pwgs
+		{% for i in pwgserver_occupied %}
+		$('#checkAll{{forloop.counter}}').click(function () {
+
+			var ele = $(".pwg{{forloop.counter}}");
+			if ($("#checkAll{{forloop.counter}}").is(':checked')) {
+				$(".pwg{{forloop.counter}}").prop("checked", true);
+				for(i=0;i<ele.length;i++){
+					checkbox_values.push(ele[i].value);
+				}
+			}else{
+				$(".pwg{{forloop.counter}}").prop("checked", false);
+				for(i=0;i<ele.length;i++){
+					removeItemAll(ele[i].value);
+				}
+			}
+
+			if( checkbox_values.length == 0){
+				$(".floatingButtonHere").hide();
+			}else{
+				$(".floatingButtonHere").show(150);
+			}
+		});
+		{% endfor %}
+
+		$('input[type="checkbox"]').click(function(){
+		if($(this).attr("name")=="floatingButtonHere"){
+			if($(this).is(':checked')){
+				checkbox_values.push($(this).val());
+			}else{
+				removeItemAll($(this).val());
+			}
+		}
+		if( checkbox_values.length == 0){
+			$(".floatingButtonHere").hide();
+		}else{
+			$(".floatingButtonHere").show(150);
+		}
+		console.log(checkbox_values);
+	});
+
+	// function to authorize pwgs
+	function authorize(){
+		if(checkbox_values.length == 1){
+			$("#confirm-message-delete").html("Authorize the selected "+checkbox_values.length+" PWG");
+		}else{
+			$("#confirm-message-delete").html("Authorize the selected "+checkbox_values.length+" PWGs");
+		}
+		$("#confirm-modal-button").attr('onclick','send_pwg_pk_authorize();');
+		$(".imagepreview").attr("src", $(this).find("img").attr("src"));
+        $("#imagemodal").modal("show");
+	}
+	// function to share pwgs
+	function share(){
+		if(checkbox_values.length == 1){
+			$("#confirm-message-delete").html("Share the selected "+checkbox_values.length+" PWG");
+		}else{
+			$("#confirm-message-delete").html("Share the selected "+checkbox_values.length+" PWGs");
+		}
+		$("#confirm-modal-button").attr('onclick','send_pwg_pk_share();');
+		$(".imagepreview").attr("src", $(this).find("img").attr("src"));
+        $("#imagemodal").modal("show");
+	}
+
+	// function to return PWG to Admin
+	function return_pwg(){
+		if(checkbox_values.length == 1){
+			$("#confirm-message-delete").html("Return the selected "+checkbox_values.length+" PWG to Admin");
+		}else{
+			$("#confirm-message-delete").html("Return the selected "+checkbox_values.length+" PWGs to Admin");
+		}
+		$("#confirm-modal-button").attr('onclick','return_pwg_pk();');
+		$(".imagepreview").attr("src", $(this).find("img").attr("src"));
+        $("#imagemodal").modal("show");
+	}
+
+	// function to send pk to share pwg
+	function send_pwg_pk_share(){
+		$("#share_pwg").attr("value", checkbox_values);
+		document.forms['send-share-pwg-ids'].submit();
+	}
+
+	// function to send pk to authorize pwg
+	function send_pwg_pk_authorize(){
+		$("#authorize_pwg").attr("value", checkbox_values);
+		document.forms['send-authorize-pwg-ids'].submit();
+	}
+	// function to return PWG to Admin
+	function return_pwg_pk(){
+		$("#return_pwg").attr("value", checkbox_values);
+		document.forms['return-pwg-ids'].submit();
+	}
+	//for history
+	function pop1(pk, name){
+		$("#pwg-history-title").html("History of PWG "+name);
+		$.ajax({
+            type: 'GET',
+            url: "validate_nickname",
+            data: {"pk": pk, "accType": "seller-pwg"},
+            success: function (response) {
+                // if not valid user, alert the user
+
+                if(response["history"] == false){
+                    $('#modal-body-history').html('<div class="h4">No login history to show</div>');
+                }else{
+                var obj = []
+                var text = '';
+                var last_action = '';
+                var action_sequence = [];
+                    for(i=0;i<response.length;i++){
+                        var date = response[i]['fields']['date'];
+                        var time = response[i]['fields']['time'];
+                        obj.push(response[i]['fields']['object']);
+                        var action = response[i]['fields']['action'];
+
+
+                        if( action == "A"){
+                        	action = "Authorize";}
+                        else if( action == "S"){
+                        	action = "Share";}
+                        else if( action == "T"){
+                        	action = "Transfer";}
+                        else if( action == "DA"){
+                        	action = " De-authorize";}
+                        else if( action == "DS"){
+                        	action = " De-share";}
+                        else if( action == "D"){
+                        	action = " Deleted";}
+                        else if( action == "AD"){
+                        	action = "Buy From Admin";}
+
+						action_sequence.push(action);
+
+                        if(last_action != ""){
+                        	if(last_action == action){
+                        		continue;
+                        	}
+                        }
+                        var last_action = action
+
+                        text += '<tr><td>'+action+'</td><td>'+date+' & '+time.slice(0,-(time.length-5))+'</td><td id="'+i+'"></td>';
+
+                    }
+                    $('#modal-body-history').html('<div class="table-responsive"><table class="table"><thead><tr><th scope="col">Action</th><th scope="col">Date & Time</th><th scope="col">Objects</th></tr></thead><tbody>'+text+'</tbody></table></div>');
+
+                	get_name(action_sequence, obj);
+                }
+
+			//$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+			//$('#imagemodal1').modal('show');
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+    }
+
+
+    //function to get the name of the objects
+    function get_name(actions, objects){
+    	  console.log(objects);
+    	$.ajax({
+            type: 'GET',
+            url: "find_username",
+            dataType: "json",
+            traditional: true,
+            data: {'pk[]': objects, "accType": "seller-history"},
+            success: function (response) {
+                // if not valid user
+                if(response["msg"] == false){
+                }else{
+                	var obj_name = response['msg'];
+                	var text = '';
+                	var flag = false;
+                	for(i=0;i<actions.length;i++){
+						for(j=i;j<actions.length;j++){
+                			if(actions[i] == actions[j]){
+                				if(!flag){
+									flag = true;
+									var name = obj_name[i]
+                				}else{
+                					text += '<a class="dropdown-item">'+obj_name[j]+'</a>';
+                				}
+                			}
+                		}
+                		console.log("i= "+i+" name = "+name+" text = "+text)
+                		if(text != ""){
+							$("#"+i).html(name+'<span><div class="dropdown"><button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="position: relative;"><i class="fas fa-sort-down" style="position: absolute;top: 0px; left: 0px;"></i></button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton">'+text+'</div></div></span>');
+							text = '';
+						}else{
+							$("#"+i).html(name);
+						}
+						flag = false;
+
+                	}
+
+                }
+
+			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+			$('#imagemodal1').modal('show');
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+    }
+
+</script>
 
 </body>
 </html>

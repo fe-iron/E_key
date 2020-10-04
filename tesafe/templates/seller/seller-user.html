@@ -120,7 +120,7 @@
 													{% endif %}
 
 													<a class="dropdown-item" href="#">Chat History</a>
-													<a class="dropdown-item" href="#" onclick="delete_user({{webuser.user.pk}}, 'user');">Delete</a>
+													<a class="dropdown-item" href="#" onclick="delete_seller_user({{webuser.pk}});">Delete</a>
 
 													{% if webuser.is_freeze %}
 														<a class="dropdown-item" href="#" onclick="unfreeze_user({{webuser.id}}, 'user');">Unfreeze</a>
@@ -655,6 +655,32 @@
 
 			checkbox_values = [];
 	}
+
+	// function delete from this seller account
+	function delete_seller_user(pk){
+      	$.ajax({
+            type: 'GET',
+            url: "delete_temp",
+            data: {"pk": pk, "accType": "user"},
+            success: function (response) {
+                    if(response['msg'] == false){
+                        $("#confirm-message").html("Something went wrong, Try again");
+                        $("#confirm-message-color").css("color","red");
+                    }else{
+                        $("#confirm-message").html(response['msg']);
+                        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                        $('#confirm').modal('show');
+                    }
+                    window.setTimeout(function(){
+                        location.reload(true);
+                    }, 2000);
+
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+      }
 
 
 </script>

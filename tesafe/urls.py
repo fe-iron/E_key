@@ -95,4 +95,10 @@ urlpatterns = [
     path("tester_list", views.tester_list, name="tester_list"),
     # get system name
     path("unique_name", views.system_name, name="unique_name"),
+    # delete for a particular module
+    path("delete_temp", views.delete_temp, name="delete_temp"),
+    # return PWG to Admin
+    path('return-pwg', views.return_pwg, name='return-pwg'),
+    # transfer multiple pwgs to one users
+    path('transfer_pwg_multiple_users', views.transfer_pwg_multiple_users, name='transfer_pwg_multiple_users'),
 ]

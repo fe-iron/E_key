@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import WebAdmin, Seller, Tester, WebUser, PWGServers, PWG, WebAdminLoginHistory, PasswordHistory, \
-    TransferPwgs, TransferPwg, PwgUseRecord, SystemName, Authorize, Share
+    TransferPwgs, TransferPwg, PwgUseRecord, SystemName, Authorize, Share, PWGHistory
 from django.contrib.auth.models import auth, User
 from django.contrib import messages
 from django.core import serializers
@@ -10,6 +10,9 @@ from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 from .utils import unique_name
+from django.db.models import Q
+import json
+
 
 # dictionary of num to text
 num = {
@@ -304,8 +307,8 @@ def seller_home(request):
     seller_user = request.user
     seller = seller_user.id
     seller = Seller.objects.get(user=seller)
-    if TransferPwg.objects.filter(user=seller_user).exists():
-        pwg = TransferPwg.objects.filter(user=seller_user)
+    if PWG.objects.filter(transfer_to=seller_user).exists():
+        pwg = PWG.objects.filter(transfer_to=seller_user)
         count = pwg.count()
 
     history_count = WebAdminLoginHistory.objects.filter(user=request.user).count()
@@ -314,7 +317,7 @@ def seller_home(request):
     param = {
         "seller": seller,
         "pwgs": count,
-        "pwg_online": count,
+        "pwg_online": get_current_users(PWG).count(),
         "pwg_offline": count - get_current_users(PWG).count(),
         "user_online": seller.user_count,
         "user_offline": 0,
@@ -348,11 +351,15 @@ def seller_pwg(request):
     pwgserver = []
     pwgserver1 = []
     user = request.user
-    pwg = PWG.objects.filter(transfer_to=user)
+    pwg = PWG.objects.filter(Q(transfer_to=user) | Q(sold_from=user))
     for i in pwg:
-        if i.is_authorized or i.is_shared:
+        if i.is_authorized or i.is_shared or i.sold_from:
             pwgs = i.owned_by
-            pwgserver.append(pwgs)
+            try:
+                pwgserver.index(pwgs)
+
+            except ValueError as ve:
+                pwgserver.append(pwgs)
         else:
             pwgs = i.owned_by
             pwgserver1.append(pwgs)
@@ -457,7 +464,37 @@ def transfer_seller(request, pk):
 
 
 def transfer_seller_pwg(request):
-    return render(request, 'seller/transfer-seller-pwg.html')
+    if request.method == "POST":
+        ids = request.POST['pwg_ids']
+        name = ' '
+        pwg_ids = []
+        for id in ids:
+            if id == ",":
+                pass
+            elif id == " ":
+                pass
+            else:
+                pwg = PWG.objects.get(id=id)
+                name = " " + pwg.alias + ", " + name
+                pwg_ids.append(pwg.id)
+
+        seller = request.user
+        user = User.objects.get(email=seller)
+        seller = Seller.objects.get(user=user.id)
+
+        if WebUser.objects.filter(associated_with=seller.id).exists():
+            web_users = WebUser.objects.filter(associated_with=seller.id)
+        else:
+            web_users = None
+
+        param = {
+            "users": web_users,
+            "id": pwg_ids,
+            "name": str(name) + " Transfer to Users below",
+        }
+        return render(request, 'seller/transfer-seller-pwg.html', param)
+
+    return redirect('seller-pwg')
 
 
 def seller_authorized(request, pk):
@@ -480,12 +517,15 @@ def seller_authorized(request, pk):
 def seller_authorized_pwg(request):
     if request.method == "POST":
         ids = request.POST['pwg_ids']
-        name = ''
+        name = ' '
         pwg_ids = []
         for id in ids:
-            pwg = PWG.objects.get(id=id)
-            name = " " + name + pwg.alias
-            pwg_ids.append(pwg.id)
+            if id == ",":
+                pass
+            else:
+                pwg = PWG.objects.get(id=id)
+                name = " " + pwg.alias + ", " + name
+                pwg_ids.append(pwg.id)
 
         seller = request.user
         user = User.objects.get(email=seller)
@@ -499,7 +539,7 @@ def seller_authorized_pwg(request):
         param = {
             "users": web_users,
             "id": pwg_ids,
-            "name": str(name) + ", Authorize to Users below",
+            "name": str(name) + " Authorize to Users below",
             "form_action": "authorize_multiple_pwgs",
             "action": "Authorize",
         }
@@ -514,9 +554,14 @@ def seller_shared_pwg(request):
         name = ''
         pwg_ids = []
         for id in ids:
-            pwg = PWG.objects.get(id=id)
-            name = " " + name + pwg.alias
-            pwg_ids.append(pwg.id)
+            if id == ",":
+                pass
+            elif id == " ":
+                pass
+            else:
+                pwg = PWG.objects.get(id=id)
+                name = " " + pwg.alias + ", " + name
+                pwg_ids.append(pwg.id)
 
         seller = request.user
         user = User.objects.get(email=seller)
@@ -530,7 +575,7 @@ def seller_shared_pwg(request):
         param = {
             "users": web_users,
             "id": pwg_ids,
-            "name": str(name) + ", Share to Users below",
+            "name": str(name) + " Share to Users below",
             "form_action": "share_multiple_pwgs",
             "action": "Share",
         }
@@ -662,15 +707,26 @@ def ajax_request(request):
         accType = request.GET.get("accType", None)
         # check for the pk in the database.
 
-        if WebAdminLoginHistory.objects.filter(user_id=pk).exists():
-            # if history found return history
-            history = WebAdminLoginHistory.objects.filter(user_id=pk)
-            history_json = serializers.serialize('json', history)
+        # if accType is Seller and is seeking history of pwg
+        if accType == "seller-pwg":
+            if PWGHistory.objects.filter(pwg=pk).exists():
+                pwg_history = PWGHistory.objects.filter(pwg=pk)
 
-            return HttpResponse(history_json, content_type='application/json')
+                pwg_history = serializers.serialize('json', pwg_history)
+
+                return HttpResponse(pwg_history, content_type="application/json")
+            else:
+                return JsonResponse({"history": False}, status=200)
         else:
-            # if history not found, then return true
-            return JsonResponse({"history": False}, status=200)
+            if WebAdminLoginHistory.objects.filter(user_id=pk).exists():
+                # if history found return history
+                history = WebAdminLoginHistory.objects.filter(user_id=pk)
+                history_json = serializers.serialize('json', history)
+
+                return HttpResponse(history_json, content_type='application/json')
+            else:
+                # if history not found, then return true
+                return JsonResponse({"history": False}, status=200)
 
     return JsonResponse({}, status=400)
 
@@ -679,6 +735,8 @@ def find_username(request):
     # request should be ajax and method should be GET.
     if request.is_ajax and request.method == "GET":
         # get the history from the database
+        # fetching list from AJAX request
+        pklist = request.GET.getlist("pk[]", None)
         pk = request.GET.get("pk", None)
         accType = request.GET.get("accType", None)
         # check for the pk in the database.
@@ -699,6 +757,24 @@ def find_username(request):
             else:
                 # if name not found, then return true
                 return JsonResponse({"name": False}, status=200)
+        elif accType == 'seller-history':
+            pwg_name = []
+            print(pklist)
+            for id in pklist:
+                if id == " ":
+                    pass
+                elif id == ",":
+                    pass
+                elif id == "[":
+                    pass
+                elif id == "]":
+                    pass
+                else:
+                    if User.objects.filter(id=id).exists():
+                        u = User.objects.get(id=id)
+                        pwg_name.append(u.first_name)
+
+            return JsonResponse({"msg": pwg_name}, status=200)
 
     return JsonResponse({}, status=400)
 
@@ -1496,12 +1572,16 @@ def authorize_multiple_pwgs(request):
     if request.method == "POST":
         authorize_values = request.POST['authorize_values']
         pwg_values = request.POST['pwg_values']
+
         for pwg_id in pwg_values:
+            print(pwg_id)
             if pwg_id == ",":
                 pass
             elif pwg_id == "[":
                 pass
             elif pwg_id == "]":
+                pass
+            elif pwg_id == " ":
                 pass
             else:
                 pwg_obj = PWG.objects.get(id=pwg_id)
@@ -1510,6 +1590,8 @@ def authorize_multiple_pwgs(request):
                 pwg_obj.save()
                 for user_id in authorize_values:
                     if user_id == ",":
+                        pass
+                    elif user_id == " ":
                         pass
                     else:
                         user_obj = WebUser.objects.get(id=user_id)
@@ -1522,6 +1604,9 @@ def authorize_multiple_pwgs(request):
                         else:
                             authrize_obj = Authorize(pwg=pwg_obj, authorize_to=u, pwgserver=pwgs)
                             authrize_obj.save()
+
+                        pwg_his = PWGHistory(object=u, pwg=pwg_obj, action="A")
+                        pwg_his.save()
 
         return redirect("seller-pwg")
 
@@ -1540,6 +1625,8 @@ def share_multiple_pwgs(request):
                 pass
             elif pwg_id == "]":
                 pass
+            elif pwg_id == " ":
+                pass
             else:
                 pwg_obj = PWG.objects.get(id=pwg_id)
                 pwg_obj.is_shared = True
@@ -1547,6 +1634,8 @@ def share_multiple_pwgs(request):
                 pwg_obj.save()
                 for user_id in authorize_values:
                     if user_id == ",":
+                        pass
+                    elif user_id == " ":
                         pass
                     else:
                         user_obj = WebUser.objects.get(id=user_id)
@@ -1559,6 +1648,9 @@ def share_multiple_pwgs(request):
                         else:
                             share_obj = Share(pwg=pwg_obj, share_to=u, pwgserver=pwgs)
                             share_obj.save()
+
+                        pwg_his = PWGHistory(object=u, pwg=pwg_obj, action="S")
+                        pwg_his.save()
 
         return redirect("seller-pwg")
 
@@ -1591,6 +1683,9 @@ def deshare_multiple_pwgs(request):
                         u = user_obj.user
                         user_obj.save()
 
+                        # saving history
+                        # pwg_his = PWGHistory(object=u, pwg=pwg_obj, action="De-shared")
+
                         if Share.objects.filter(share_to=u, pwg=pwg_obj).exists():
                             share_obj = Share.objects.filter(share_to=u, pwg=pwg_obj)
                             share_obj.delete()
@@ -1598,3 +1693,129 @@ def deshare_multiple_pwgs(request):
         return redirect("seller-pwg")
     else:
         return render(request, "seller/seller-pwg.html")
+
+
+def delete_temp(request):
+    # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        # get the history from the database
+        pk = request.GET.get("pk", None)
+        accType = request.GET.get("accType", None)
+        u = request.user
+
+        if accType == "user":
+            # check for the pk in the database.
+            if WebUser.objects.filter(id=pk).exists():
+                my_object = WebUser.objects.get(id=pk)
+                my_object.associated_with = None
+                name = my_object.first_name
+                name = "{} has been successfully deleted from your list".format(name)
+                my_object.save()
+                return JsonResponse({"msg": name}, status=200)
+            else:
+                # if name not found, then return msg
+                return JsonResponse({"msg": False}, status=200)
+
+        elif accType == "pwg":
+            # check for the pk in the database.
+            if PWG.objects.filter(id=pk).exists():
+                my_object = PWG.objects.get(id=pk)
+                my_object.transfer_to = None
+                my_object.location = "A"
+                name = my_object.alias
+                # s = name + " deleted"
+                # s = PWGHistory(object=u, pwg=my_object, action=s)
+                # s.save()
+
+                name = "{} has been successfully deleted from your list".format(name)
+                my_object.save()
+
+                return JsonResponse({"msg": name}, status=200)
+            else:
+                # if name not found, then return msg
+                return JsonResponse({"msg": False}, status=200)
+
+    return JsonResponse({}, status=400)
+
+
+def return_pwg(request):
+    if request.method == "POST":
+        ids = request.POST['pwg_ids']
+        acctype = request.POST['accType']
+
+        user = request.user
+        user = User.objects.get(email=user)
+        # fetching superuser's object
+        u = User.objects.get(id=1)
+
+        if acctype == "seller":
+            for id in ids:
+                if id == ",":
+                    pass
+                elif id == " ":
+                    pass
+                else:
+                    if PWG.objects.filter(id=id).exists():
+                        pwg_obj = PWG.objects.get(id=id)
+                        pwg_obj.transfer_to = u
+                        pwg_obj.sold_from = u
+                        pwg_obj.location = "A"
+                        pwg_obj.save()
+
+                        if TransferPwg.objects.filter(user=user).exists():
+                            trans_pwg = TransferPwg.objects.get(user=user)
+                            trans_pwg.delete()
+
+                    else:
+                        messages.info(request, "PWG Object not found!")
+                        return redirect("seller-pwg")
+
+                    pwg_his = PWGHistory(object=user, pwg=pwg_obj, action="RAD")
+                    pwg_his.save()
+            return redirect("seller-pwg")
+
+    messages.error(request, 'Something went wrong')
+    return redirect("/")
+
+
+def transfer_pwg_multiple_users(request):
+    if request.method == "POST":
+        transfer_values = request.POST['transfer_values']
+        pwg_values = request.POST['pwg_values']
+        for pwg_id in pwg_values:
+            if pwg_id == ",":
+                pass
+            elif pwg_id == "[":
+                pass
+            elif pwg_id == "]":
+                pass
+            elif pwg_id == " ":
+                pass
+            else:
+                pwg_obj = PWG.objects.get(id=pwg_id)
+
+                for user_id in transfer_values:
+                    if user_id == ",":
+                        pass
+                    elif user_id == " ":
+                        pass
+                    else:
+                        user_obj = WebUser.objects.get(id=user_id)
+                        u = user_obj.user
+
+                        pwg_obj.sold_from = u
+                        pwg_obj.is_authorized = False
+                        pwg_obj.is_freeze = False
+                        pwg_obj.is_shared = False
+                        pwg_obj.save()
+
+                        p = PWGHistory(object=u, pwg=pwg_obj, action="T")
+                        p.save()
+
+        return redirect("seller-pwg")
+
+    else:
+        messages.info(request, "something went wrong try again!")
+        return redirect("/")
+
+

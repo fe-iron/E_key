@@ -126,6 +126,8 @@ class PWG(models.Model):
     is_freeze = models.BooleanField(default=False)
     is_authorized = models.BooleanField(default=False)
     is_shared = models.BooleanField(default=False)
+    # it will get active when a seller transfer to user
+    sold_from = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None, related_name="sold")
 
     class Meta:
         verbose_name_plural = "PWGs"
@@ -177,7 +179,7 @@ class SystemName(models.Model):
     is_tester = models.BooleanField(default=False)
     is_pwgs = models.BooleanField(default=False)
     serial_no = models.CharField(max_length=4)
-    system_name = models.CharField(max_length=19, null=False, default="not assigned")
+    system_name = models.CharField(max_length=19, null=True, default="not assigned")
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True)
 
 
@@ -193,3 +195,17 @@ class Share(models.Model):
     pwg = models.ForeignKey(PWG, on_delete=models.CASCADE, default=None)
     share_to = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     pwgserver = models.ForeignKey(PWGServers, on_delete=models.CASCADE, default=None)
+
+
+class PWGHistory(models.Model):
+    date = models.DateField(auto_now=True)
+    time = models.TimeField(auto_now=True)
+    object = models.ForeignKey(User, on_delete=models.SET("object Deleted"), null=True, default=None, related_name="authorize_to")
+    pwg = models.ForeignKey(PWG, on_delete=models.SET("object Deleted"), null=True, default=None, related_name="pwg")
+    # N = None, A = Authorze, S = Share, T = Transfer, DA = De-authorize, DS = De-share, D = Deleted,
+    # AD = buy from admin, RAD = Return to Admin
+    action = models.CharField(default="N", max_length=3)
+
+    class Meta:
+        verbose_name = "PWG History"
+        verbose_name_plural = "PWG Histories"
