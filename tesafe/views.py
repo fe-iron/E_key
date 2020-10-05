@@ -72,7 +72,7 @@ def index(request):
 
             elif accType == 'tester':
                 if Tester.objects.filter(email=uname).exists():
-                    return render(request, 'tester/tester-home.html', {'num': [11, 23, 33, 42, 35, 67, 78, 49, 10]})
+                    return redirect('tester-home')
                 else:
                     messages.info(request, 'Invalid user id and password for Tester')
                     return redirect('/')
