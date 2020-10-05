@@ -270,36 +270,6 @@ def admin_info_server(request):
     return render(request, 'tesafe/admin-info-server.html', param)
 
 
-# never used
-# def register_next(request):
-#     if request.method == 'POST':
-#         accType = request.POST['accType']
-#         fname = request.POST['fname']
-#         lname = request.POST['lname']
-#         uname = request.POST['uname']
-#         email = request.POST['email']
-#         phone = request.POST['phone']
-#         password1 = request.POST['password1']
-#         password2 = request.POST['password2']
-#
-#         if accType == 'admin':
-#             if password1 == password2:
-#                 user = User.objects.create_user(username=uname, first_name=fname, last_name=lname, email=email,
-#                                                 password=password1, is_webAdmin=True)
-#                 user.save()
-#
-#                 webAdmin = WebAdmin(name=fname, phone=phone, email=email)
-#                 webAdmin.save()
-#                 msg = messages.info("Account successfully created!")
-#                 return render(request, 'tesafe/admin-page.html', {'msg': msg})
-#
-#             else:
-#                 msg = messages.error(request, "Password do not match! try again")
-#                 return render(request, 'tesafe/admin-page.html', {'msg': msg})
-#
-#     return render(request, 'tesafe/admin-seller.html', {})
-
-
 def seller_home(request):
     count = 0
     user_online = 0
@@ -584,10 +554,6 @@ def seller_shared_pwg(request):
     return render(request, 'seller/seller-pwg.html')
 
 
-def seller_deauthorized_pwg(request):
-    return render(request, 'seller/seller-deauthorized-pwg.html')
-
-
 def seller_shared(request,pk):
     user = User.objects.get(id=pk)
     pwgserver = PWGServers.objects.all()
@@ -634,12 +600,37 @@ def seller_deshared_pwg(request):
     return render(request, 'seller/seller-deshared-pwg.html', param)
 
 
-def seller_pwg_transfer(request):
-    return render(request, 'seller/seller-pwg-transfer.html')
-
-
 def tester_home(request):
-    return render(request, 'tester/tester-home.html')
+    pwgs_untested = []
+    pwgs_tested_good = []
+    pwgs_tested_faulty = []
+    user = request.user
+    user = User.objects.get(email=user)
+    if PWG.objects.filter(transfer_to=user).exists():
+        pwg_obj = PWG.objects.filter(transfer_to=user)
+        for pwg in pwg_obj:
+            if pwg.is_tested:
+                if pwg.is_tested_faulty:
+                    pwgs_tested_faulty.append(pwg.owned_by)
+                if pwg.is_tested_good:
+                    pwgs_tested_good.append(pwg.owned_by)
+            else:
+                pwgs_untested.append(pwg.owned_by)
+
+    else:
+        pwg_obj = None
+    if pwg_obj:
+        for pwg in pwg_obj:
+            pwg_server.append(pwg.owned_by)
+    param = {
+        'pwg_obj': pwg_obj,
+        'pwgs_untested': pwgs_untested,
+        'pwgs_tested_good': pwgs_tested_good,
+        'pwgs_tested_faulty': pwgs_tested_faulty,
+    }
+    return render(request, "tester/tester-home.html", param)
+
+
 
 
 def tester_test(request):

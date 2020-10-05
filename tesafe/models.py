@@ -126,8 +126,10 @@ class PWG(models.Model):
     is_freeze = models.BooleanField(default=False)
     is_authorized = models.BooleanField(default=False)
     is_shared = models.BooleanField(default=False)
+    is_tested_good = models.BooleanField(default=False)
+    is_tested_faulty = models.BooleanField(default=False)
     # it will get active when a seller transfer to user
-    sold_from = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None, related_name="sold")
+    sold_from = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None, related_name="sold", blank=True)
 
     class Meta:
         verbose_name_plural = "PWGs"

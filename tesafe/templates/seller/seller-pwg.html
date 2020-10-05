@@ -220,7 +220,7 @@
 													{% for item in pwg %}
 														{% if pwgs.id == item.owned_by.id %}
 														<tr>
-															{% if item.sold_from != None %}
+															{% if item.sold_from != None  %}
 																<td><a href="#"><input type="checkbox" name="floatingButtonHere" value="{{item.id}}" disabled=""> {{item.alias}}</a></td>
 																<td>NA</td>
 
@@ -232,6 +232,7 @@
 																<td><a href="#"><input type="checkbox" name="floatingButtonHere" value="{{item.id}}" disabled="" class="pwg{{count}}"> {{item.alias}}</a></td>
 																<td>DA</td>
 															{% endif %}
+
 															<td class="display-none">
 																<div class="dropdown  mb-0 ml-xl-3  ml-sm-2" >
 																	<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -356,7 +357,7 @@
 													<tbody>
 													{% for item in pwg %}
 														{% if pwgs.id == item.owned_by.id %}
-														{% if item.sold_from != None %}
+														{% if item.sold_from != "elahi" %}
 														<tr>
 															<td><input type="checkbox" name="floatingButtonHere" value="{{item.id}}" disabled="" class="unpwg{{count}}">  {{item.alias}}</td>
 
