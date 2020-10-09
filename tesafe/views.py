@@ -5,14 +5,32 @@ from django.contrib.auth.models import auth, User
 from django.contrib import messages
 from django.core import serializers
 from django.contrib.sessions.models import Session
+# password resset email imports
+from django.core.mail import send_mail, EmailMessage
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+from django.urls import reverse
+from .utils import account_activation_token
+
 from django.utils import timezone
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 from .utils import unique_name
 from django.db.models import Q
-import json
+from django.views import View
+import threading
 
+
+class EmailThread(threading.Thread):
+    def __init__(self, email):
+        self.email = email
+        threading.Thread.__init__(self)
+
+    def run(self):
+        self.email.send(fail_silently=False)
 
 # dictionary of num to text
 num = {
@@ -275,6 +293,7 @@ def seller_home(request):
     count = 0
     user_online = 0
     user_offline = 0
+    cond = ['-login_date', '-login_time']
     seller_user = request.user
     seller = seller_user.id
     seller = Seller.objects.get(user=seller)
@@ -283,7 +302,7 @@ def seller_home(request):
         count = pwg.count()
 
     history_count = WebAdminLoginHistory.objects.filter(user=request.user).count()
-    history = WebAdminLoginHistory.objects.filter(user=request.user).order_by('-login_time')
+    history = WebAdminLoginHistory.objects.filter(user=request.user).order_by(*cond)
 
     param = {
         "seller": seller,
@@ -294,7 +313,7 @@ def seller_home(request):
         "user_offline": 0,
         "history_count": history_count,
         "history": history,
-        'password_history': PasswordHistory.objects.filter(user=request.user).order_by('-login_time'),
+        'password_history': PasswordHistory.objects.filter(user=request.user).order_by(*cond),
 
     }
     return render(request, 'seller/seller-home.html', param)
@@ -1950,3 +1969,89 @@ def retest(request):
     else:
         messages.info(request, "something went wrong, Try again!")
         return redirect("/")
+
+
+# password reset views as class based views
+class RequestPasswordResetEmail(View):
+    def get(self, request):
+        return render(request, "authentication/reset-password.html")
+
+    def post(self, request):
+        email = request.POST['email']
+
+        if not User.objects.filter(email=email).exists():
+            messages.error(request, "Email does not exists! try again")
+            return render(request, "authentication/reset-password.html")
+        else:
+            user_obj = User.objects.filter(email=email)
+            email_contents = {
+                'user': user_obj[0],
+                'domain': get_current_site(request).domain,
+                'uid': urlsafe_base64_encode(force_bytes(user_obj[0].pk)),
+                'token': PasswordResetTokenGenerator().make_token(user_obj[0])
+            }
+            link = reverse('reset-user-password', kwargs={
+                'uidb64': email_contents['uid'],
+                'token': email_contents['token']
+            })
+            email_subject = 'Password Reset Instructions'
+            reset_url = 'http://'+email_contents['domain'] + link
+
+            email = EmailMessage(
+                email_subject,
+                'Hii there, Please follow the below link to reset your password\n' + reset_url,
+                'noreply@tesafe.com',
+                [email]
+            )
+            # email.send(fail_silently=False)
+            EmailThread(email).start()
+
+            messages.success(request, "We have sent an email to reset the password")
+            return render(request, "authentication/reset-password.html")
+
+
+class CompletePasswordReset(View):
+    def get(self, request, uidb64, token):
+        param = {
+            'uidb64': uidb64,
+            'token': token
+        }
+        try:
+            user_id = force_text(urlsafe_base64_decode(uidb64))
+
+            user = User.objects.get(pk = user_id)
+            if not PasswordResetTokenGenerator().check_token(user, token):
+                messages.info(request, "Link is already used, please generate a new one")
+                return render(request, "authentication/reset-password.html")
+        except:
+            pass
+        return render(request, "authentication/set-new-password.html", param)
+
+    def post(self, request, uidb64, token):
+        param = {
+            'uidb64': uidb64,
+            'token': token
+        }
+        pass1 = request.POST['password']
+        pass2 = request.POST['password1']
+        try:
+            user_id = force_text(urlsafe_base64_decode(uidb64))
+
+            user = User.objects.get(pk = user_id)
+            user.set_password(pass1)
+            user.save()
+
+            if request.user_agent.device.family == "Other":
+                device_name = request.user_agent.os.family
+                device_name = device_name + " " + str(request.user_agent.os.version).replace(",", "")
+            else:
+                device_name = request.user_agent.device.family
+
+            pass_his = PasswordHistory(user=user, device_name=device_name, last_pass=pass1)
+            pass_his.save()
+
+            messages.success(request, "Password reset successfull, now you can login with the new password")
+            return redirect("/")
+        except Exception as e:
+            messages.info(request, "Something went wrong, try again")
+            return redirect("/")

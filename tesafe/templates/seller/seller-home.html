@@ -173,20 +173,18 @@
 							<h4 class="font-weight-bold"> Set Alias</h4>
 							<div class="row">
 								<div class="col-md-6 py-3">
-									{% for msg in messages %}
-										<label for="" class="text-danger">{{msg}}</label>
-									{% endfor %}
-									<form action="change_alias" method="post">
+									<form action="change_alias" method="post" name="alias_form">
 										{% csrf_token %}
+										<label for="" class="set_alias_error"></label>
 									  <div class="form-group">
-									    <input type="text" class="form-control" placeholder="Enter Alias " required name="alias">
+									    <input type="text" class="form-control" placeholder="Enter Alias " id="alias_name" required name="alias">
 									  </div>
 									  <div class="form-group">
-									     <input type="text" class="form-control" placeholder="Confirm Alias " required name="alias_conf">
+									     <input type="text" class="form-control" placeholder="Confirm Alias " id="alias_name_conf" required name="alias_conf">
 									  </div>
 										<input type="hidden" name="alias_id" value="{{request.user.id}}">
 										<input type="hidden" name="accType" value="seller">
-									<button class="btn btn-success" type="submit">Submit</button>
+									<button class="btn btn-success" type="button" onclick="check_alias()">Submit</button>
 									<a href="seller-home" class="btn btn-secondary">Cancel</a>
 									</form>
 								</div>
@@ -217,7 +215,12 @@
 										  <div class="col-md-6">
 									     	<input type="password" class="form-control"  placeholder="Enter New Password " name="new_password" required id="new-password" value="" title="Password should include One Capital letter, any character from it ! @ # $ % ^ & * ( ) _ - = { } < > ? and atleast 8 characters">
 										  </div>
-										  <div class="col-md-2">
+										  <div class="col-md-2 mt-2 ml-n3">
+										  <span data-toggle="tooltip" data-placement="right" title="Password should include One Capital letter, any character from this ! @ # $ % ^ & * ( ) _ - = { } < > ? and at least 8 characters">
+											  <i class="fa fa-question danger" aria-hidden="true" style="color:red;"></i>
+										  </span>
+										  </div>
+										  <div class="col-md-2 mt-2 ml-n5">
 										  	<span id="check"></span>
 										  </div>
 									  </div></div>
@@ -226,7 +229,8 @@
 										  <div class="col-md-6">
 									     <input type="password" class="form-control"  placeholder="Confirm New Password " name="new_conf_password" required id="conf-password" value="" title="Password should include One Capital letter, any character from it ! @ # $ % ^ & * ( ) _ - = { } < > ? and atleast 8 characters">
 										  </div>
-										  <div class="col-md-2">
+										  <div class="col-md-2 ml-n3 mt-2"></div>
+										  <div class="col-md-2 mt-2 ml-n5">
 										  <span id="cross"></span>
 										  </div>
 									  </div></div>
@@ -272,7 +276,12 @@
 												<td>{{history.login_date}}</td>
 												<td>{{history.login_time|time:"H:i"}}</td>
 												<td>{{history.device_name}}</td>
-												<td>{{history.last_pass}}</td>
+												<td>
+													<input type="password" value="{{history.last_pass}}" disabled style="background-color: white;border: none" id="{{forloop.counter}}">
+													<span  ondblclick="show_password('{{forloop.counter}}');" onmouseleave="hide_password('{{forloop.counter}}');" title="double click to show password" id="fa{{forloop.counter}}">                                -0
+														<i class="fa fa-eye" aria-hidden="true"></i>
+													</span>
+												</td>
 											</tr>
                                     	{% endfor %}
 									</tbody>
@@ -326,6 +335,7 @@
 						$("#add-new-msg").html("<h5 class='text-danger'>Password do not match!<h5>")
 						$("#add-new-submit-button").attr("disabled", true);
 						$("#check").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
+						$('[data-toggle="tooltip"]').tooltip();
 					}else{
 						$("#check").html('<i class="fa fa-2x fa-check" aria-hidden="true" style="color:green;"></i>');
 						$("#add-new-msg").html("");
@@ -334,6 +344,7 @@
 				}else{
 					$("#check").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
 					$("#add-new-submit-button").attr("disabled", true);
+					$('[data-toggle="tooltip"]').tooltip();
 				}
 			}
 
@@ -378,6 +389,7 @@
 						$("#add-new-msg").html("<h5 class='text-danger'>Password do not match!<h5>")
 						$("#cross").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
 						$("#add-new-submit-button").attr("disabled", true);
+						$('[data-toggle="tooltip"]').tooltip();
 					}else{
 						$("#add-new-msg").html("")
 						$("#cross").html('<i class="fa fa-2x fa-check" aria-hidden="true" style="color:green;"></i>');
@@ -386,6 +398,7 @@
 				}else{
 					$("#cross").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
 					$("#add-new-submit-button").attr("disabled", true);
+					$('[data-toggle="tooltip"]').tooltip();
 				}
 			}
 
@@ -412,6 +425,7 @@
 			document.getElementById("password-history").style.display="none";
 			document.getElementById("alias").style.display="none";
 		}
+		// login history
 		function myfun1(){
 			document.getElementById("login-history").style.display="block";
 			document.getElementById("change-passward").style.display="none";
@@ -419,7 +433,7 @@
 			document.getElementById("password-history").style.display="none";
 			document.getElementById("alias").style.display="none";
 		}
-
+		// change password
 		function myfun3(){
 			document.getElementById("login-history").style.display="none";
 			document.getElementById("change-passward").style.display="block";
@@ -427,7 +441,7 @@
 			document.getElementById("Statics").style.display="none";
 			document.getElementById("alias").style.display="none";
 		}
-
+		// password history
 		function myfun2(){
 			document.getElementById("password-history").style.display="block";
 			document.getElementById("change-passward").style.display="none";
@@ -436,7 +450,7 @@
 			document.getElementById("alias").style.display="none";
 		}
 
-
+		//set alias
 		function myfun4(){
 			document.getElementById("login-history").style.display="none";
 			document.getElementById("change-passward").style.display="none";
@@ -446,6 +460,28 @@
 		}
 
 
+		// for last password toggle
+		function show_password(id){
+			$("#"+id).attr("type", "text");
+			$("#fa"+id).html('<i class="fa fa-eye-slash" aria-hidden="true"></i>');
+		}
+
+		function hide_password(id){
+			$("#"+id).attr("type", "password");
+			$("#fa"+id).html('<i class="fa fa-eye" aria-hidden="true"></i>');
+		}
+
+		function check_alias(){
+			var name_conf = $("#alias_name_conf").val();
+			var name = $("#alias_name").val();
+			if( name == name_conf ){
+				document.forms['alias_form'].submit();
+			}else{
+				$(".set_alias_error").html("Alias name does not match, try again!");
+				$(".set_alias_error").addClass('text-danger');
+			}
+
+		}
 	</script>
 
 

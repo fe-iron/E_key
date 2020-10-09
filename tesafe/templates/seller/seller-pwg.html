@@ -502,7 +502,7 @@
 	</div>
 
 	<section class="floatingButtonHere" style="display: none;" id="button-floating-1">
-		<a href="#" class=" btn btn-primary" id="proceed">Proceed</a>
+		<button class=" btn btn-primary" id="proceed">Proceed</button>
 		<a href="seller-pwg" class=" btn btn-danger">Cancel</a>
 	</section>
 
@@ -574,13 +574,6 @@
         });
       });
 
-      // modal popup
-      $(function () {
-        $(".pop").on("click", function () {
-
-        });
-      });
-
 
 
       function occupied() {
@@ -636,6 +629,9 @@
 			$(".pwg{{forloop.counter}}").attr("disabled", false);
 		{% endfor %}
 		$("#proceed").attr('onclick', func_name);
+
+		$("#proceed").attr('disabled', true);
+		$(".floatingButtonHere").show(150);
 	}
 
 	// for unoccupied authorization, share, and for return to admin
@@ -645,6 +641,9 @@
 			$(".unpwg{{forloop.counter}}").attr("disabled", false);
 		{% endfor %}
 		$("#proceed").attr('onclick', func_name);
+
+		$("#proceed").attr('disabled', true);
+		$(".floatingButtonHere").show(150);
 	}
 
 	// to remove all occurrence of the element
@@ -678,9 +677,9 @@
 			}
 
 			if( checkbox_values.length == 0){
-				$(".floatingButtonHere").hide();
+				$("#proceed").attr('disabled', true);
 			}else{
-				$(".floatingButtonHere").show(150);
+				$("#proceed").attr('disabled', false);
 			}
 		});
 		{% endfor %}
@@ -703,9 +702,9 @@
 			}
 
 			if( checkbox_values.length == 0){
-				$(".floatingButtonHere").hide();
+				$("#proceed").attr('disabled', true);
 			}else{
-				$(".floatingButtonHere").show(150);
+				$("#proceed").attr('disabled', false);
 			}
 		});
 		{% endfor %}
@@ -719,15 +718,16 @@
 			}
 		}
 		if( checkbox_values.length == 0){
-			$(".floatingButtonHere").hide();
+			$("#proceed").attr('disabled', true);
 		}else{
-			$(".floatingButtonHere").show(150);
+			$("#proceed").attr('disabled', false);
 		}
 		console.log(checkbox_values);
 	});
 
 	// function to authorize pwgs
 	function authorize(){
+		checkbox_values = [...new Set(checkbox_values)];
 		if(checkbox_values.length == 1){
 			$("#confirm-message-delete").html("Authorize the selected "+checkbox_values.length+" PWG");
 		}else{
@@ -739,6 +739,7 @@
 	}
 	// function to share pwgs
 	function share(){
+		checkbox_values = [...new Set(checkbox_values)];
 		if(checkbox_values.length == 1){
 			$("#confirm-message-delete").html("Share the selected "+checkbox_values.length+" PWG");
 		}else{
@@ -751,6 +752,7 @@
 
 	// function to return PWG to Admin
 	function return_pwg(){
+		checkbox_values = [...new Set(checkbox_values)];
 		if(checkbox_values.length == 1){
 			$("#confirm-message-delete").html("Return the selected "+checkbox_values.length+" PWG to Admin");
 		}else{

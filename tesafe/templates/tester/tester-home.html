@@ -607,6 +607,9 @@
         $(".pwg_untested{{forloop.counter}}").attr("disabled", false);
         {% endfor %}
         $("#proceed_button").attr("onclick","confirm_popup()");
+
+        $("#proceed_button").attr('disabled', true);
+	    $(".floatingButtonHere").show(150);
       }
 
       // for  retest of multiple pwg
@@ -616,6 +619,9 @@
             $(".pwg_tested{{forloop.counter}}").attr("disabled", false);
           {% endfor %}
           $("#proceed_button").attr("onclick","confirm_popup_retest()");
+
+          $("#proceed_button").attr('disabled', true);
+	      $(".floatingButtonHere").show(150);
       }
 
       function return_pwg_tested(){
@@ -629,6 +635,9 @@
         {% endfor %}
 
         $("#proceed_button").attr("onclick","confirm_popup()");
+
+        $("#proceed_button").attr('disabled', true);
+	    $(".floatingButtonHere").show(150);
       }
 
       // to remove all occurrence of the element
@@ -661,10 +670,10 @@
 			}
 
 			if( checkbox_values.length == 0){
-				$(".floatingButtonHere").hide();
-			}else{
-				$(".floatingButtonHere").show(150);
-			}
+              $("#proceed_button").attr('disabled', true);
+            }else{
+              $("#proceed_button").attr('disabled', false);
+            }
 		});
 		{% endfor %}
 
@@ -687,10 +696,10 @@
 			}
 
 			if( checkbox_values.length == 0){
-				$(".floatingButtonHere").hide();
-			}else{
-				$(".floatingButtonHere").show(150);
-			}
+              $("#proceed_button").attr('disabled', true);
+            }else{
+              $("#proceed_button").attr('disabled', false);
+            }
 		});
 		{% endfor %}
 
@@ -712,10 +721,10 @@
 			}
 
 			if( checkbox_values.length == 0){
-				$(".floatingButtonHere").hide();
-			}else{
-				$(".floatingButtonHere").show(150);
-			}
+              $("#proceed_button").attr('disabled', true);
+            }else{
+              $("#proceed_button").attr('disabled', false);
+            }
 		});
 		{% endfor %}
 
@@ -728,15 +737,16 @@
               }
           }
           if( checkbox_values.length == 0){
-              $(".floatingButtonHere").hide();
+              $("#proceed_button").attr('disabled', true);
           }else{
-              $(".floatingButtonHere").show(150);
+              $("#proceed_button").attr('disabled', false);
           }
           console.log(checkbox_values);
       });
 
       //for return to admin confirmation
       function confirm_popup(){
+        checkbox_values = [...new Set(checkbox_values)];
         $("#assign_values").attr("value", checkbox_values);
         if(checkbox_values.length == 1){
           $("#confirm-message-delete").html("Return "+checkbox_values.length+" PWG to Admin");
@@ -755,15 +765,16 @@
         $("#retest_values").attr("value", checkbox_values);
 
         if(checkbox_values.length == 1){
+          checkbox_values = [...new Set(checkbox_values)];
           $("#confirm-message-delete").html("Send "+checkbox_values.length+" PWG for retesting");
-        }else{
-          $("#confirm-message-delete").html("Send "+checkbox_values.length+" PWGs for retesting");
-        }
-        $("#confirm-modal-button").attr("onclick", 'retest_multiple_pwg()');
+          }else{
+            $("#confirm-message-delete").html("Send "+checkbox_values.length+" PWGs for retesting");
+          }
+          $("#confirm-modal-button").attr("onclick", 'retest_multiple_pwg()');
 
 
-        $(".imagepreview").attr("src", $(this).find("img").attr("src"));
-        $("#imagemodal1").modal("show");
+          $(".imagepreview").attr("src", $(this).find("img").attr("src"));
+          $("#imagemodal1").modal("show");
       }
 
 

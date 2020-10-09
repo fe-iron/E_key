@@ -55,7 +55,7 @@ class WebUser(models.Model):
     system_name = models.CharField(max_length=19, null=True, default="not assigned")
     email = models.CharField(max_length=150)
     phone = models.CharField(max_length=15)
-    alias = models.CharField(max_length=100, default="none")
+    alias = models.CharField(max_length=100, default="none", null=True)
     profile_pic = models.ImageField(upload_to='user/', default="none")
     associated_with = models.ForeignKey(Seller, on_delete=models.SET_NULL, null=True, default=None)
     is_freeze = models.BooleanField(default=False)

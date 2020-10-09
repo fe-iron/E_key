@@ -1,6 +1,8 @@
 import random
 import datetime
+from six import text_type
 from .models import SystemName
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 
 
 def unique_name(accType, nnn):
@@ -39,3 +41,11 @@ def unique_name(accType, nnn):
         name += serial_no
         return name
 
+
+class AppTokenGenerator(PasswordResetTokenGenerator):
+
+    def _make_hash_value(self, user, timestamp):
+        return (text_type(user.is_active) + text_type(user.pk) + text_type(timestamp))
+
+
+account_activation_token = AppTokenGenerator()

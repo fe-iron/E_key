@@ -305,7 +305,26 @@ svg circle:nth-child(2)
     display: none;
 }
 
-
+.cursor{
+	cursor: pointer;
+}
+.selected_pwg{
+	    background-color: #007bff !important;
+		display: inline-block;
+		color: white;
+		border-radius: 25px;
+	}
+    .mx-n5{
+    margin-left: -5rem!important;
+}
+.list-group-item {
+	position: relative;
+	display: block;
+	padding: .75rem 1.25rem;
+	background-color: #fff;
+	border:0px;
+	//padding-left: 67px;
+}
 
 .form-control:focus {
     color: #495057;

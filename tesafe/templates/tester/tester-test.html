@@ -20,42 +20,16 @@
 
 
 <!-- fontawesome cdn -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="{% static 'tester/css/tester-test.css' %}">
-	<style>
-		.cursor{
-			cursor: pointer;
-		}
-		.selected_pwg{
-			    background-color: #007bff !important;
-				display: inline-block;
-				color: white;
-				border-radius: 25px;
-		}
-		.mx-n5{
-			    margin-left: -5rem!important;
-		}
-		.list-group-item {
-			position: relative;
-			display: block;
-			padding: .75rem 1.25rem;
-			background-color: #fff;
-			border:0px;
-			//padding-left: 67px;
-		}
-	</style>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'tester/css/tester-test.css' %}">
 </head>
 <body>
-
-
-
 	<section class="bg-light">
 		<div class="container-fluid">
 			<nav class="navbar navbar-expand-lg navbar-light ">
-
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -68,10 +42,7 @@
 						<li class="nav-item pl-3">
 							<a class="nav-link active" href="tester-test">Test</a>
 						</li>
-
-
 					</ul>
-
 				</div>
 
 				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
@@ -85,8 +56,6 @@
 						<a class="dropdown-item" href="tester-home" >Exit</a>
 					</div>
 				</div>
-
-
 			</nav>
 		</div>
 	</section>
@@ -95,18 +64,15 @@
 	<section class="bg-detail">
 		<div class="container-fluid">
 			<div class="row justify-content-center">
-
 				<div class="col-md-10  py-5 px-5">
-
 					<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-1" >
-
 						<div class="col-md-8">
-
 							<header>
 								<nav class="navbar navbar-light justify-content-center">
-									<div class="row "><div class="col-md" style="display:inline-flex">
-									<a class="h4 text-dark font-weight-bold pt-2 test_tag">Testing PWG: </a>
-									<form class="form-inline px-3" >
+									<div class="row ">
+										<div class="col-md" style="display:inline-flex">
+											<a class="h4 text-dark font-weight-bold pt-2 test_tag">Testing PWG: </a>
+											<form class="form-inline px-3" >
 										<div class="input-group-prepend mb-1 mr-2">
 											<span class="input-group-text" id="addon-wrapping">
 												<i class="fas fa-search fa-1x"></i>
@@ -115,7 +81,8 @@
 										</div>
 
 									</form>
-									</div></div>
+										</div>
+									</div>
 								</nav>
 							</header>
 
@@ -272,8 +239,6 @@
 										<th scope="col">Name</th>
 										<th scope="col">TESTED</th>
 
-
-
 									</tr>
 								</thead>
 								<tbody id="myTable">
@@ -328,12 +293,6 @@
 
 	</div>
 </section>
-
-
-
-
-
-
 
 
 		<script type="text/javascript">
@@ -431,12 +390,6 @@
 				  //$("#imagemodal1").modal("show");
 
 		}
-
-
-
-
-
-
 
 		//for fail button
 		function myfun3(){

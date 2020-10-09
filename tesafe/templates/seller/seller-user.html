@@ -144,10 +144,10 @@
 						<div class="col-md m-5">
 							<h4 class="font-weight-bold"><span><i class="fas fa-caret-right"></i>	 Add User Account</h4>
 							<div class="row">
-								<div class="col-md-6 py-3">
+								<div class="col-md-8 py-3">
 									<form action="add-new" method="post">
 										{% csrf_token %}
-									  <div class="form-group">
+									  <div class="form-group"><div class="row"><div class="col-md-7">
 										  <select name="unique_name" class="form-control" id="unique_name" onchange="get_name('U');">
 										  <!-- Countries often selected by users can be moved to the top of the list. -->
 										  <!-- Countries known to be subject to general US embargo are commented out by default. -->
@@ -369,40 +369,46 @@
 										  <option data-countryCode="YE" value="0967">Yemen (South)(+967)</option>
 										  <option data-countryCode="ZM" value="0260">Zambia (+260)</option>
 										  <option data-countryCode="ZW" value="0263">Zimbabwe (+263)</option>
-										</select>
+										  </select></div>
+										  <div class="col-md-1 ml-n1" style="color: red;">*</div
+									      </div></div>
 									  </div>
-									  <div class="form-group">
+									  <div class="form-group"><div class="row"><div class="col-md-7">
 										  <input type="text" value="" id="unique_name_value" class="form-control" readonly placeholder="System Name" name="system_name">
-									  </div>
-									  <div class="form-group">
-									    <input type="text" class="form-control is-integer" id="acc-name"  placeholder="Enter First Name " onchange="display_qr()" name="fname" required>
-									  </div>
-									  <div class="form-group">
-									    <input type="text" class="form-control is-integer"  placeholder="Enter Last Name " onchange="display_qr()" name="lname">
-									  </div>
-									  <div class="form-group">
-									     <input type="email" class="form-control" placeholder="Enter Email " name="email" required>
-									  </div>
-									  <div class="form-group">
-									     <input type="password" class="form-control" id="acc-password"  placeholder="Enter Password " value="" onchange="display_qr()" name="password" required autocomplete="true">
-									  </div>
+									  </div></div></div>
+									  <div class="form-group"><div class="row"><div class="col-md-7">
+										  <input type="text" class="form-control is-integer" id="acc-name"  placeholder="Enter First Name " onchange="display_qr()" name="fname" required></div>
+										  <div class="col-md-1 ml-n1" style="color: red;">*</div>
+									  </div></div>
+									  <div class="form-group"><div class="row"><div class="col-md-7">
+										  <input type="text" class="form-control is-integer"  placeholder="Enter Last Name " onchange="display_qr()" name="lname"></div>
+									  </div></div>
+									  <div class="form-group"><div class="row"><div class="col-md-7">
+										  <input type="email" class="form-control" placeholder="Enter Email " name="email" required></div>
+										  <div class="col-md-1 ml-n1" style="color: red;">*</div>
+									  </div></div>
+									  <div class="form-group"><div class="row"><div class="col-md-7">
+										  <input type="password" class="form-control" id="acc-password"  placeholder="Enter Password " value="" onchange="display_qr()" name="password" required autocomplete="true"></div>
+										  <div class="col-md-1  ml-n5 mt-2 pl-1"><i class="far fa-eye" id="togglePassword"></i></div>
+										  <div class="col-md-1 ml-n3" style="color: red;">*</div>
+									  </div></div>
 
-									  <div class="form-group">
+									  <div class="form-group"><div class="row"><div class="col-md-7">
 									     <input type="tel" class="form-control" placeholder="Enter Contact Number " name="number">
-									  </div>
+									  </div></div></div>
 
-									  <div class="form-group">
-										  <input type="text" class="form-control is-integer" placeholder="Enter Alias Name " name="alias" required>
-									  </div>
+									  <div class="form-group"><div class="row"><div class="col-md-7">
+										  <input type="text" class="form-control is-integer" placeholder="Enter Alias Name " name="alias">
+									  </div></div></div>
 										<input type="hidden" name="accType" value="user">
 										<input type="hidden" name="seller_id" value="{{id}}">
 
-									<button class="btn btn-primary" type="submit" id="add-new-button" disabled>Submit</button>
-									<a href="seller-user" class="btn btn-secondary" type="button">Cancel</a>
+									<button class="btn btn-primary mt-3" type="submit" id="add-new-button" disabled>Submit</button>
+									<a href="seller-user" class="btn btn-secondary mt-3" type="button">Cancel</a>
 									</form>
 								</div>
 
-								<div class="col-md text-center" id="qr-block" style="display:none">
+								<div class="col-md-4 text-center mr-5 ml-n5" id="qr-block" style="display:none">
 									<img src="{% static 'tesafe/images/qr-code.png' %}" class="img-fluid">
 								</div>
 							</div>
@@ -456,7 +462,7 @@
 
 
 <section class="floatingButtonHere" style="display: none;" id="floating-button">
-	<a href="#" class="btn btn-primary" id="floating-confirm" onclick="delete_multiple_users();">Proceed</a>
+	<button class="btn btn-primary" id="floating-confirm" onclick="delete_multiple_users();">Proceed</button>
 	<a href="seller-user" class=" btn btn-secondary">Cancel</a>
 </section>
 
@@ -514,9 +520,9 @@
 			}
 
 			if( checkbox_values.length == 0){
-				$(".floatingButtonHere").hide();
+				$("#floating-confirm").attr('disabled', true);
 			}else{
-				$(".floatingButtonHere").show(150);
+				$("#floating-confirm").attr('disabled', false);
 			}
 		});
 
@@ -531,9 +537,9 @@
 			}
 		}
 		if( checkbox_values.length == 0){
-			$(".floatingButtonHere").hide();
+			$("#floating-confirm").attr('disabled', true);
 		}else{
-			$(".floatingButtonHere").show(150);
+			$("#floating-confirm").attr('disabled', false);
 		}
 		console.log(checkbox_values);
 	});
@@ -604,6 +610,9 @@
 	  document.getElementById("checkAll").disabled = false;
       $(".check").attr("disabled",false);
       $("#floating-confirm").attr('onclick','delete_multiple_users()');
+
+      	$("#floating-confirm").attr('disabled', true);
+		$(".floatingButtonHere").show(150);
 	}
 
 	// for freeze multiple users
@@ -611,10 +620,14 @@
 		document.getElementById("checkAll").disabled = false;
 		$(".check").attr("disabled",false);
 		$("#floating-confirm").attr('onclick','freeze_multiple_users()');
+
+		$("#floating-confirm").attr('disabled', true);
+		$(".floatingButtonHere").show(150);
 	}
 
 	 // to show confirmation modal
 	function delete_multiple_users(){
+		checkbox_values = [...new Set(checkbox_values)];
 		if ( checkbox_values.length == 1 ){
 			$("#confirm-message-delete").html("Delete the selected "+checkbox_values.length+" User");
 		}else{
@@ -628,6 +641,7 @@
 	}
 
 	function freeze_multiple_users(){
+		checkbox_values = [...new Set(checkbox_values)];
 		if ( checkbox_values.length == 1 ){
 			$("#confirm-message-delete").html("Freeze the selected "+checkbox_values.length+" User");
 		}else{
@@ -650,6 +664,7 @@
 	}
 
 	function sendSellersPKFreeze(){
+
 			$("#freeze_values").attr('value', checkbox_values);
 			document.forms['freeze_multiple'].submit();
 
@@ -682,7 +697,16 @@
         })
       }
 
+	const togglePassword = document.querySelector('#togglePassword');
+	const password = document.querySelector('#acc-password');
 
+	togglePassword.addEventListener('click', function (e) {
+		// toggle the type attribute
+		const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+		password.setAttribute('type', type);
+		// toggle the eye slash icon
+		this.classList.toggle('fa-eye-slash');
+	});
 </script>
 </body>
 </html>

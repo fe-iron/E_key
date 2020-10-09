@@ -40,8 +40,9 @@ urlpatterns = [
     # path("webAdmin_register", views.webAdmin_register.as_view(), name="webAdmin_register"),
     #password change
     path("password_change",views.password_change, name="password_change"),
-    # path("reset_password/", auth_views.PasswordResetView.as_view(), name="reset_password"),
-    # path("reset_password_sent/", auth_views.PasswordResetDoneView.as_view(), name="password_reset_done"),
+    # password reset functonality
+    path("request-reset-link", views.RequestPasswordResetEmail.as_view(), name="request-reset-link"),
+    path("set-new-password/<uidb64>/<token>", views.CompletePasswordReset.as_view(), name="reset-user-password"),
     # path("reset/<uidb64>/<token>/", auth_views.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
     # path("reset_password_complete/", auth_views.PasswordResetCompleteView.as_view(), name="password_reset_complete"),
 
