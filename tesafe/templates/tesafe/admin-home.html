@@ -204,7 +204,7 @@
 						<div class="col-md">
 							<h4 class="">Change Password<span class="float-right"></span></h4>
 							<div class="row ">
-								<div class="col-md-8 py-3">
+								<div class="col-md-10 py-3">
 									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change Your Current Password </h6>
 									{% for msg in messages %}
 									<label class="text-danger">{{msg}}</label>
@@ -221,16 +221,23 @@
 										  <div class="col-md-6">
 									     	<input type="password" class="form-control"  placeholder="Enter New Password " name="new_password" required id="new-password" value="" title="Password should include One Capital letter, any character from it ! @ # $ % ^ & * ( ) _ - = { } < > ? and atleast 8 characters">
 										  </div>
-										  <div class="col-md-2">
+										  <div class="col-md-2 mt-2 ml-n3">
+										  <span data-toggle="tooltip" data-placement="right" title="Password should include One Capital letter, any character from this ! @ # $ % ^ & * ( ) _ - = { } < > ? and at least 8 characters">
+											  <i class="fa fa-question danger" aria-hidden="true" style="color:red;"></i>
+										  </span>
+										  </div>
+										  <div class="col-md-2 mt-2 ml-n5">
 										  	<span id="check"></span>
 										  </div>
+
 									  </div></div>
 
 									  <div class="form-group"><div class="row">
 										  <div class="col-md-6">
 									     <input type="password" class="form-control"  placeholder="Confirm New Password " name="new_conf_password" required id="conf-password" value="" title="Password should include One Capital letter, any character from it ! @ # $ % ^ & * ( ) _ - = { } < > ? and atleast 8 characters">
 										  </div>
-										  <div class="col-md-2">
+										  <div class="col-md-2 ml-n3 mt-2"></div>
+										  <div class="col-md-2 mt-2 ml-n5">
 										  <span id="cross"></span>
 										  </div>
 									  </div></div>
@@ -341,6 +348,7 @@
 						$("#add-new-msg").html("<h5 class='text-danger'>Password do not match!<h5>")
 						$("#add-new-submit-button").attr("disabled", true);
 						$("#check").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
+						$('[data-toggle="tooltip"]').tooltip();
 					}else{
 						$("#check").html('<i class="fa fa-2x fa-check" aria-hidden="true" style="color:green;"></i>');
 						$("#add-new-msg").html("");
@@ -349,6 +357,7 @@
 				}else{
 					$("#check").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
 					$("#add-new-submit-button").attr("disabled", true);
+					$('[data-toggle="tooltip"]').tooltip();
 				}
 			}
 
@@ -393,6 +402,7 @@
 						$("#add-new-msg").html("<h5 class='text-danger'>Password do not match!<h5>")
 						$("#cross").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
 						$("#add-new-submit-button").attr("disabled", true);
+						$('[data-toggle="tooltip"]').tooltip();
 					}else{
 						$("#add-new-msg").html("")
 						$("#cross").html('<i class="fa fa-2x fa-check" aria-hidden="true" style="color:green;"></i>');
@@ -401,6 +411,7 @@
 				}else{
 					$("#cross").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
 					$("#add-new-submit-button").attr("disabled", true);
+					$('[data-toggle="tooltip"]').tooltip();
 				}
 			}
 
@@ -459,7 +470,6 @@
 			document.getElementById("login-history").style.display="none";
 			document.getElementById("Statics").style.display="none";
 		}
-
 
 	</script>
 

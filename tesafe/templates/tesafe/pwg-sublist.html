@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Admin | Server</title>
+        <title>Admin | PWG - Server</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- Latest compiled and minified CSS -->
@@ -74,10 +74,10 @@
                     </button>
 
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#" onclick="getback_pwg()">Get Back</a>
-                            <a class="dropdown-item" href="#" onclick="">Transfer To Seller</a>
-                            <a class="dropdown-item" href="#" onclick="assign_multiple_pwg()">Assign To Tester</a>
-                            <a class="dropdown-item" href="#" onclick="freeze()">Freeze </a>
+                            <a class="dropdown-item" href="#" onclick="getback_pwg_tested()">Get Back</a>
+                            <a class="dropdown-item" href="#" onclick="transfer_multiple_pwg()">Transfer To Seller</a>
+                            <a class="dropdown-item" href="#" onclick="assign_multiple_pwg_tested()">Assign To Tester</a>
+                            <a class="dropdown-item" href="#" onclick="freeze_tested()">Freeze </a>
                             <a class="dropdown-item" href="admin-info-server" >Return</a>
 
                         </div>
@@ -112,7 +112,7 @@
                                      <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col" style="position: relative;"><input type="checkbox" id="checkAll" value="floatingButtonHere" disabled> <i class="fas fa-sort-down"></i></th>
+                                                <th scope="col" style="position: relative;"><input type="checkbox" id="checkAll" disabled> <i class="fas fa-sort-down"></i></th>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Location</th>
                                                 <th scope="col">Owner Nme</th>
@@ -164,7 +164,7 @@
                                      <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col" style="position: relative;"><input type="checkbox" id="checkAll1" name="floatingButtonHere" disabled> <i class="fas fa-sort-down"></i></th>
+                                                <th scope="col" style="position: relative;"><input type="checkbox" id="checkAll1" disabled> <i class="fas fa-sort-down"></i></th>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Location</th>
                                                 <th scope="col">Owner Nme</th>
@@ -176,9 +176,9 @@
                                             {% if p.is_tested %}
                                             <tr>
                                                 {% if p.location == "A" %}
-                                                <th><input type="checkbox" name="floatingButtonHere" disabled value="{{p.id}}" class="check"></th>
+                                                <th><input type="checkbox" name="floatingButtonHere" disabled value="{{p.id}}" class="other_check"></th>
                                                 {% else %}
-                                                <th><input type="checkbox" name="floatingButtonHere" disabled value="{{p.id}}" class="check_tester"></th>
+                                                <th><input type="checkbox" name="floatingButtonHere" disabled value="{{p.id}}" class="check_tested"></th>
                                                 {% endif %}
                                                 <td>{{p.alias}}</td>
                                                 <td>{{p.location}}</td>
@@ -317,7 +317,7 @@
 </div>
 
 <section class="floatingButtonHere" id="floating-button" style="display:none;">
-	<a href="#" class="btn btn-primary" id="floating-confirm" onclick="delete_multiple_users()">Proceed</a>
+	<button class="btn btn-primary" id="floating-confirm" onclick="delete_multiple_users()">Proceed</button>
 	<a href="pwg-sublist{{id}}" class=" btn btn-danger">Cancel</a>
 </section>
 
@@ -346,7 +346,20 @@
         <input type="hidden" value="{{id}}" name="pk">
 	</form>
 
+<!--	to get back PWGs -->
+	<form action="getback_pwgs" method="post" name="getback_multiple">
+		{% csrf_token %}
+		<input type="hidden" id="getback_values" name="values">
+		<input type="hidden" value="admin-info-server" name="accType">
+	</form>
 
+<!--	to transfer PWGs -->
+	<form action="Transfer_pwgs" method="post" name="transfer_multiple">
+		{% csrf_token %}
+		<input type="hidden" id="transfer_values" name="values">
+		<input type="hidden" id="user_pk_transfer" name="user_pk">
+		<input type="hidden" value="admin-info-server" name="accType">
+	</form>
 
 <script src="{% static 'tesafe/js/ajax.js' %}"></script>
 
@@ -356,6 +369,7 @@
     let checkbox_values = [];
     let check = '';
     let freeze_flag = false;
+    let tested_freeze = false;
 
     // search filter table
     $(document).ready(function(){
@@ -384,6 +398,55 @@
 
 	// check all checkbox in one click
 
+	//for tested getback
+
+	    $('#checkAll1').click(function () {
+	        if(tested_freeze){ // when user selects freeze in tested section
+	            var ele = $(".other_check");
+	            var ele1 = $(".check_tested");
+                if ($("#checkAll1").is(':checked')) {
+                       $(".check_tested").prop("checked", true);
+                       $(".other_check").prop("checked", true);
+                        for(i=0;i<ele.length;i++){
+                            checkbox_values.push(ele[i].value);
+                        }
+                        for(i=0;i<ele1.length;i++){
+                            checkbox_values.push(ele1[i].value);
+                        }
+                }else{
+                    $(".check_tested").prop("checked", false);
+                    $(".other_check").prop("checked", false);
+                    for(i=0;i<ele.length;i++){
+                        removeItemAll(ele[i].value);
+                    }
+                    for(i=0;i<ele1.length;i++){
+                        removeItemAll(ele1[i].value);
+                    }
+                }
+	        }else{ // otherwise
+                var ele = $("."+check);
+                if ($("#checkAll1").is(':checked')) {
+                       $("."+check).prop("checked", true);
+                        for(i=0;i<ele.length;i++){
+                            checkbox_values.push(ele[i].value);
+                        }
+                }else{
+                        $("."+check).prop("checked", false);
+                        for(i=0;i<ele.length;i++){
+                            removeItemAll(ele[i].value);
+                        }
+                }
+            }
+
+            if( checkbox_values.length == 0){
+				$("#floating-confirm").attr('disabled', true);
+			}else{
+				$("#floating-confirm").attr('disabled', false);
+			}
+        });
+
+
+
 		$('#checkAll').click(function () {
 
 			if( !freeze_flag ){
@@ -401,8 +464,10 @@
                 }
             }else{
             // only for freeze operations
+
                 var ele = $(".check");
                 var ele1 = $(".check_tester");
+
                 if ($("#checkAll").is(':checked')) {
                     $(".check").prop("checked", true);
                     $(".check_tester").prop("checked", true);
@@ -425,9 +490,9 @@
             }
 
 			if( checkbox_values.length == 0){
-				$(".floatingButtonHere").hide();
+				$("#floating-confirm").attr('disabled', true);
 			}else{
-				$(".floatingButtonHere").show(150);
+				$("#floating-confirm").attr('disabled', false);
 			}
 			checkbox_values = [...new Set(checkbox_values)];
 		});
@@ -443,28 +508,53 @@
 			}
 		}
 		if( checkbox_values.length == 0){
-			$(".floatingButtonHere").hide();
+			$("#floating-confirm").attr('disabled', true);
 		}else{
-			$(".floatingButtonHere").show(150);
+		    $("#floating-confirm").attr('disabled', false);
 		}
 		console.log(checkbox_values);
 	});
-
-
-
-            function myfun() {
-                document.getElementById("div-1").style.display = "block";
-                document.getElementById("div-2").style.display = "none";
-                document.getElementById("div-3").style.display = "none";
-                document.getElementById("div-4").style.display = "none";
-                document.getElementById("div-5").style.display = "none";
-                document.getElementById("div-6").style.display = "none";
-            }
 
     function getback_pwg() {
         document.getElementById("checkAll").disabled = false;
         $(".check_tester").attr("disabled",false);
         check = "check_tester";
+
+        $("#floating-confirm").attr('onclick','getback_multiple_users()');
+        $("#floating-confirm").attr('disabled', true);
+        $(".floatingButtonHere").show(150);
+    }
+
+    function getback_pwg_tested() {
+        document.getElementById("checkAll1").disabled = false;
+        $(".check_tested").attr("disabled",false);
+        check = "check_tested";
+
+        $("#floating-confirm").attr('onclick','getback_multiple_users()');
+        $("#floating-confirm").attr('disabled', true);
+        $(".floatingButtonHere").show(150);
+    }
+
+    function getback_multiple_users(){
+        checkbox_values = [...new Set(checkbox_values)];
+
+        if ( checkbox_values.length == 1 ){
+            $("#confirm-message-delete-freeze").html("Get Back the selected "+checkbox_values.length+" PWG");
+        }else{
+            $("#confirm-message-delete-freeze").html("Get Back the selected "+checkbox_values.length+" PWGs");
+        }
+
+        $("#confirm-modal-button-freeze").attr('onclick','getbackPWGPK();');
+        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+        $('#imagemodalFreeze').modal('show');
+
+    }
+
+    function getbackPWGPK(){
+        $("#getback_values").attr('value', checkbox_values);
+        document.forms['getback_multiple'].submit();
+
+        checkbox_values = [];
     }
 
     function tested() {
@@ -488,10 +578,26 @@
         $(".check").attr("disabled",false);
         $(".check_tester").attr("disabled",false);
         freeze_flag = true;
+
         $("#floating-confirm").attr('onclick','freeze_multiple_users()');
+        $("#floating-confirm").attr('disabled', true);
+        $(".floatingButtonHere").show(150);
+    }
+
+    function freeze_tested(){
+        tested_freeze = true;
+        document.getElementById("checkAll1").disabled = false;
+        $(".other_check").attr("disabled",false);
+        $(".check_tested").attr("disabled",false);
+        freeze_flag = true;
+
+        $("#floating-confirm").attr('onclick','freeze_multiple_users()');
+        $("#floating-confirm").attr('disabled', true);
+        $(".floatingButtonHere").show(150);
     }
 
     function freeze_multiple_users(){
+        checkbox_values = [...new Set(checkbox_values)];
         if ( checkbox_values.length == 1 ){
             $("#confirm-message-delete-freeze").html("Freeze the selected "+checkbox_values.length+" PWG");
         }else{
@@ -517,9 +623,21 @@
         check = "check";
 
         $("#floating-confirm").attr('onclick','assign_multiple_users()');
+        $("#floating-confirm").attr('disabled', true);
+        $(".floatingButtonHere").show(150);
+    }
+    function assign_multiple_pwg_tested(){
+        document.getElementById("checkAll1").disabled = false;
+        $(".other_check").attr("disabled",false);
+        check = "other_check";
+
+        $("#floating-confirm").attr('onclick','assign_multiple_users()');
+        $("#floating-confirm").attr('disabled', true);
+        $(".floatingButtonHere").show(150);
     }
 
     function assign_multiple_users(){
+        checkbox_values = [...new Set(checkbox_values)];
         if ( checkbox_values.length == 1 ){
             $("#confirm-message-delete-freeze").html("Assign the selected "+checkbox_values.length+" PWG to Tester");
         }else{
@@ -552,10 +670,10 @@
                     }else{
                     var text = '';
                         for(i=0;i<response.length;i++){
-                            text += "<label><b>"+response[i]['fields']['first_name']+" "+response[i]['fields']['last_name']+"</b></label> <input type='radio' value='' class='ml-5 "+kuchbhi+"' id="+response[i]['pk']+" name='same' /> <br>"
+                            text += "<tr><td>"+response[i]['fields']['first_name']+" "+response[i]['fields']['last_name']+"</td><td><input type='radio' value='' class='ml-5 "+kuchbhi+"' id="+response[i]['pk']+" name='same' /></td></tr>"
                         }
 
-                        $("#tester_modal").html(text);
+                        $("#tester_modal").html('<table class="table"><thead><tr><th scope="col">Tester Name</th><th scope="col">Choose</th></tr></thead><tbody>'+text+'</table>');
                         $("#confirm-modal-button").attr("onclick", "assign_pwgs('"+kuchbhi+"')");
                         $('.imagepreview').attr('src', $(this).find('img').attr('src'));
                         $('#imagemodalConfirm').modal('show');
@@ -596,17 +714,116 @@
 
         names = $('.'+pk);
         for(i=0;i<names.length;i++){
-            name = names[i]['name']
-            value = names[i]['value']
+            name = names[i]['name'];
+            value = names[i]['value'];
             if(value != ''){
-                tester_pk.push(value)
+                tester_pk.push(value);
             }
         }
         $("#tester_pk").attr('value', tester_pk);
         document.forms['assign_pwg'].submit();
+    }
+
+    //transfer multiple PWGs
+    function transfer_multiple_pwg(){
+        document.getElementById("checkAll1").disabled = false;
+        $(".other_check").attr("disabled",false);
+        check = "other_check";
+
+        $("#floating-confirm").attr('onclick','transfer_mid_users()');
+        $("#floating-confirm").attr('disabled', true);
+        $(".floatingButtonHere").show(150);
+    }
+
+    function transfer_mid_users(){
+        checkbox_values = [...new Set(checkbox_values)];
+
+        if ( checkbox_values.length == 1 ){
+            $("#confirm-message-delete-freeze").html("Transfer the selected "+checkbox_values.length+" PWG to Seller");
+        }else{
+            $("#confirm-message-delete-freeze").html("Transfer the selected "+checkbox_values.length+" PWGs to Seller");
+        }
+
+        $("#confirm-modal-button-freeze").attr('onclick','transfer_multiple_users();');
+        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+        $('#imagemodalFreeze').modal('show');
+    }
+
+    function transfer_multiple_users(){
+        $("#transfer_values").attr('value', checkbox_values);
+		$('#imagemodalFreeze').modal('hide');
+		seller_list_assign('v12v');
+
+		checkbox_values = [];
+    }
+
+    function seller_list_assign(kuchbhi){
+        // GET AJAX request
+        $.ajax({
+            type: 'GET',
+            url: "seller_list",
+            data: {},
+            success: function (response) {
+                    if(response['data'] == false){
+                        $("#tester_modal").html("<h5>Something went wrong, Try again</h5>");
+                        $("#tester_modal").css("color","red");
+                    }else{
+                    var text = '';
+                        for(i=0;i<response.length;i++){
+                            text += "<tr><td>"+response[i]['fields']['first_name']+" "+response[i]['fields']['last_name']+"</td><td><input type='radio' value='' class='ml-5 "+kuchbhi+"' id="+response[i]['pk']+" name='same' /></td></tr>"
+                        }
+
+                        $("#tester_modal").html('<table class="table"><thead><tr><th scope="col">Seller Name</th><th scope="col">Choose</th></tr></thead><tbody>'+text+'</table>');
+                        $("#confirm-modal-button").attr("onclick", "assign_transfer_pwgs('"+kuchbhi+"')");
+                        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                        $('#imagemodalConfirm').modal('show');
+
+                        // event listener on click on checkboxes
+                        $('.'+kuchbhi).click(function() {
+
+                            names = $('.'+kuchbhi);
+                                for(i=0;i<names.length;i++){
+                                    value = names[i]['value'];
+                                    if(value != ''){
+                                        names[i]['value'] = '';
+                                    }
+                                }
+
+
+                            if($(this).is(':checked')){
+                                var name = $(this).attr('id');
+                                $(this).val(name);
+                            }
+                        });
+                    }
+
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+
 
     }
 
+    //to assign pwg to tester
+    function assign_transfer_pwgs(pk){
+        seller_pk = [];
+        $('#imagemodalConfirm').modal('hide');
+
+        names = $('.'+pk);
+        for(i=0;i<names.length;i++){
+            name = names[i]['name']
+            value = names[i]['value']
+            if(value != ''){
+                seller_pk.push(value)
+            }
+        }
+        $("#user_pk_transfer").attr('value', seller_pk);
+        console.log("tester pk: "+seller_pk);
+        document.forms['transfer_multiple'].submit();
+
+    }
 </script>
     </body>
 </html>

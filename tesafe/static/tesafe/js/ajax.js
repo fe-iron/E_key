@@ -186,6 +186,7 @@ function unfreeze_user(pk, accType){
 // to get pwgs pwd history
 function pwd_history(pk){
         // GET AJAX request
+
         $.ajax({
             type: 'GET',
             url: "getpassword",
@@ -204,11 +205,11 @@ function pwd_history(pk){
                         var time = response[i]['fields']['login_time'];
                         var date = response[i]['fields']['login_date'];
                         var device_name = response[i]['fields']['device_name'];
-                        var device_name = response[i]['fields']['last_pass'];
+                        var last_pass = response[i]['fields']['last_pass'];
                         count = count + 1;
-                        text += '<tr><th scope="row">'+count+'</th><td>'+date+'</td><td>'+time.slice(0,-(time.length-5))+'</td><td>'+device_name+'</td><td>'+IP+'</td></tr>';
+                        text += '<tr><th scope="row">'+count+'</th><td>'+date+'</td><td>'+time.slice(0,-(time.length-5))+'</td><td>'+device_name+'</td><td><input type="password" value="'+last_pass+'" style="background-color: white;border: none" id="'+count+'"><i class="far fa-eye" onclick="togglePassword1('+count+')" id="toggle'+count+'"></i></td></tr>';
                     }
-                    $('#modal-body-login-history').html('<div class="table-responsive"><table class="table"><thead><tr><th scope="col">Sr. No.</th><th scope="col">Date</th><th scope="col">Time</th><th scope="col">Device Name</th><th scope="col">Login IP Address</th></tr></thead><tbody>'+text+'</tbody></table></div>');
+                    $('#modal-body-login-history').html('<div class="table-responsive"><table class="table"><thead><tr><th scope="col">Sr. No.</th><th scope="col">Date</th><th scope="col">Time</th><th scope="col">Device Name</th><th scope="col">Last Password</th></tr></thead><tbody>'+text+'</tbody></table></div>');
 
                 }
 
@@ -218,6 +219,7 @@ function pwd_history(pk){
             error: function (response) {
                 console.log(response)
             }
+
         })
 
 }

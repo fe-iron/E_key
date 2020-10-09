@@ -205,9 +205,24 @@ class PWGHistory(models.Model):
     object = models.ForeignKey(User, on_delete=models.SET("object Deleted"), null=True, default=None, related_name="authorize_to")
     pwg = models.ForeignKey(PWG, on_delete=models.SET("object Deleted"), null=True, default=None, related_name="pwg")
     # N = None, A = Authorze, S = Share, T = Transfer, DA = De-authorize, DS = De-share, D = Deleted,
-    # AD = buy from admin, RAD = Return to Admin
+    # AD = buy from admin, RAD = Return to Admin, RT = Return to Testing again
     action = models.CharField(default="N", max_length=3)
 
     class Meta:
         verbose_name = "PWG History"
         verbose_name_plural = "PWG Histories"
+
+
+class TesterPWGHistory(models.Model):
+    date = models.DateField(auto_now=True)
+    time = models.TimeField(auto_now=True)
+    pwg_name = models.ForeignKey(PWG, on_delete=models.SET_NULL, null=True)
+    got_on = models.DateTimeField()
+
+    def __str__(self):
+        return str(self.date)
+
+    class Meta:
+        verbose_name = "Tester PWG Testing History"
+        verbose_name_plural = "Tester PWG Testing Histories"
+

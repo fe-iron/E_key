@@ -91,8 +91,10 @@ urlpatterns = [
     path("getback", views.getback, name="getback"),
     # get password history
     path("assign_multiple", views.assign_multiple, name="assign_mulltiple"),
-    # get password history
+    # get all tester objects
     path("tester_list", views.tester_list, name="tester_list"),
+    # get all seller objects
+    path("seller_list", views.seller_list, name="seller_list"),
     # get system name
     path("unique_name", views.system_name, name="unique_name"),
     # delete for a particular module
@@ -101,4 +103,8 @@ urlpatterns = [
     path('return-pwg', views.return_pwg, name='return-pwg'),
     # transfer multiple pwgs to one users
     path('transfer_pwg_multiple_users', views.transfer_pwg_multiple_users, name='transfer_pwg_multiple_users'),
+    # to show testing history
+    path('testing_history', views.testing_history, name='testing_history'),
+    # to test again the PWG
+    path('retest', views.retest, name='retest'),
 ]

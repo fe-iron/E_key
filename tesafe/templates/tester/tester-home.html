@@ -65,8 +65,8 @@
             <div class="dropdown-menu">
               <a class="dropdown-item" href="#">Chat With Admin</a>
               <a class="dropdown-item" href="#">Get Payment from Admin</a>
-              <a class="dropdown-item" href="#" onclick="Delete();">Retest</a>
-              <a class="dropdown-item" href="#" onclick="Freeze();">Return PWG to Admin</a>
+              <a class="dropdown-item" href="#" onclick="retest_pwg_multiple();">Retest</a>
+              <a class="dropdown-item" href="#" onclick="return_pwg_tested();">Return PWG to Admin</a>
               {% if user.is_authenticated %}
               <a class="dropdown-item" href="logout">Logout</a>
               {% else %}
@@ -80,7 +80,7 @@
               <i class="fas fa-ellipsis-v"></i>
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="#" onclick="Freeze();">Return PWG to Admin</a>
+              <a class="dropdown-item" href="#" onclick="return_pwg_untested();">Return PWG to Admin</a>
               <a class="dropdown-item" href="#">Chat With Admin</a>
               <a class="dropdown-item" href="#">Get Payment from Admin</a>
               {% if user.is_authenticated %}
@@ -166,7 +166,7 @@
                       <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
                           <button class="btn" type="button" data-toggle="collapse">
-                            <input type="checkbox" id="checkAll{{count}}" name="floatingButtonHere" disabled="" />
+                            <input type="checkbox" id="checkAllTested{{count}}"  disabled="" />
                             <span class="pwg-list">{{pwgs.alias}}</span>
                           </button>
                           <i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px; font-size: 18px; cursor:pointer;"></i>
@@ -179,7 +179,7 @@
                       <div class="card-header" id="headingTwo">
                         <h2 class="mb-0">
                           <button class="btn" type="button" data-toggle="collapse">
-                            <input type="checkbox" id="checkAll{{count}}" name="floatingButtonHere" disabled="" />
+                            <input type="checkbox" id="checkAllTested{{count}}" disabled="" />
                             <span class="pwg-list">{{pwgs.alias}}</span>
                           </button>
                           <i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="myFunction(this)" style="position: absolute; top: 31px; font-size: 18px; cursor:pointer;"></i>
@@ -188,12 +188,12 @@
 
                       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
 
-                      {% elif count == 2 %}
+                      {% elif count == 3 %}
                     <div class="card">
                       <div class="card-header" id="headingThree">
                         <h2 class="mb-0">
                           <button class="btn" type="button" data-toggle="collapse">
-                            <input type="checkbox" id="checkAll{{count}}" name="floatingButtonHere" disabled="" />
+                            <input type="checkbox" id="checkAllTested{{count}}" disabled="" />
                             <span class="pwg-list">{{pwgs.alias}}</span>
                           </button>
                           <i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" onclick="myFunction(this)" style="position: absolute; top: 31px; font-size: 18px; cursor:pointer;"></i>
@@ -211,7 +211,7 @@
                                 {% if pwg.is_tested_good %}
                               <tr>
                                 <td>
-                                  <input type="checkbox" class="pwg{{count}}"  name="floatingButtonHere" disabled=""  value="{{pwg.id}}"/> {{pwg.alias}}
+                                  <input type="checkbox" class="pwg_tested{{count}}"  name="floatingButtonHere" disabled=""  value="{{pwg.id}}"/> {{pwg.alias}}
                                 </td>
 
                                 <td>
@@ -220,9 +220,9 @@
                                       <i class="fas fa-ellipsis-v"></i>
                                     </button>
                                     <div class="dropdown-menu menu-left-align">
-                                      <a class="dropdown-item pop1" href="#"> History</a>
-                                      <a class="dropdown-item" href="#"> Retest</a>
-                                      <a class="dropdown-item" href="#"> Return to Admin</a>
+                                      <a class="dropdown-item" href="#" onclick="testingHistory({{pwg.id}});"> History</a>
+                                      <a class="dropdown-item" href="#" onclick="retest_pwg({{pwg.id}})"> Retest</a>
+                                      <a class="dropdown-item" href="#" onclick="return_pwg({{pwg.id}}, '{{pwg.alias}}');"> Return to Admin</a>
                                     </div>
                                   </div>
                                 </td>
@@ -274,7 +274,8 @@
                     <div class="card">
                       <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
-                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" id="checkAllFaulty{{count}}" name="floatingButtonHere" disabled="" /><span class="pwg-list">{{pwgs.alias}}</span></button>
+                          <button class="btn" type="button" data-toggle="collapse">
+                            <input type="checkbox" id="checkAllFaulty{{count}}" disabled="" /><span class="pwg-list">{{pwgs.alias}}</span></button>
                           <i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px; font-size: 18px; cursor:pointer;"></i>
                         </h2>
                       </div>
@@ -285,7 +286,8 @@
                     <div class="card">
                       <div class="card-header" id="headingTwo">
                         <h2 class="mb-0">
-                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" id="checkAllFaulty{{count}}" name="floatingButtonHere" disabled="" /><span class="pwg-list">{{pwgs.alias}}</span></button>
+                          <button class="btn" type="button" data-toggle="collapse">
+                            <input type="checkbox" id="checkAllFaulty{{count}}" disabled="" /><span class="pwg-list">{{pwgs.alias}}</span></button>
                           <i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="myFunction(this)" style="position: absolute; top: 31px; font-size: 18px; cursor:pointer;"></i>
                         </h2>
                       </div>
@@ -296,7 +298,8 @@
                     <div class="card">
                       <div class="card-header" id="headingThree">
                         <h2 class="mb-0">
-                          <button class="btn" type="button" data-toggle="collapse"><input type="checkbox" id="checkAllFaulty{{count}}" name="floatingButtonHere" disabled="" /><span class="pwg-list">{{pwgs.alias}}</span></button>
+                          <button class="btn" type="button" data-toggle="collapse">
+                            <input type="checkbox" id="checkAllFaulty{{count}}" disabled="" /><span class="pwg-list">{{pwgs.alias}}</span></button>
                           <i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" onclick="myFunction(this)" style="position: absolute; top: 31px; font-size: 18px; cursor:pointer;"></i>
                         </h2>
                       </div>
@@ -312,7 +315,7 @@
                                 {% if pwg.is_tested_faulty %}
                               <tr>
                                 <td>
-                                  <input type="checkbox" class="faulty{{count}}" name="floatingButtonHere" value="{{pwg.id}}" disabled="" /> {{pwg.alias}}
+                                  <input type="checkbox" class="pwg_faulty{{count}}" name="floatingButtonHere" value="{{pwg.id}}" disabled="" /> {{pwg.alias}}
                                 </td>
 
                                 <td>
@@ -321,8 +324,8 @@
                                       <i class="fas fa-ellipsis-v"></i>
                                     </button>
                                     <div class="dropdown-menu menu-left-align">
-                                      <a class="dropdown-item pop1" href="#"> History</a>
-                                      <a class="dropdown-item" href="#"> Return to Admin</a>
+                                      <a class="dropdown-item" href="#" onclick="testingHistory({{pwg.id}});"> History</a>
+                                      <a class="dropdown-item" href="#" onclick="return_pwg({{pwg.id}}, '{{pwg.alias}}');"> Return to Admin</a>
                                     </div>
                                   </div>
                                 </td>
@@ -363,7 +366,7 @@
                       <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
                           <button class="btn" type="button" data-toggle="collapse">
-                            <input type="checkbox" name="floatingButtonHere" id="checkAllUntested{{count}}" disabled="" />
+                            <input type="checkbox" id="checkAllUntested{{count}}" disabled="" />
                             <span class="pwg-list">{{pwgs.alias}}</span>
                           </button>
                           <i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px; font-size: 18px; cursor:pointer;"></i>
@@ -377,7 +380,7 @@
                       <div class="card-header" id="headingTwo">
                         <h2 class="mb-0">
                           <button class="btn" type="button" data-toggle="collapse">
-                            <input type="checkbox" name="floatingButtonHere" id="checkAllUntested{{count}}" disabled="" />
+                            <input type="checkbox" id="checkAllUntested{{count}}" disabled="" />
                             <span class="pwg-list">{{pwgs.alias}}</span>
                           </button>
                           <i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="myFunction(this)" style="position: absolute; top: 31px; font-size: 18px; cursor:pointer;"></i>
@@ -391,7 +394,7 @@
                       <div class="card-header" id="headingThree">
                         <h2 class="mb-0">
                           <button class="btn" type="button" data-toggle="collapse">
-                            <input type="checkbox" name="floatingButtonHere" id="checkAllUntested{{count}}" disabled="" />
+                            <input type="checkbox" id="checkAllUntested{{count}}" disabled="" />
                             <span class="pwg-list">{{pwgs.alias}}</span>
                           </button>
                           <i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" onclick="myFunction(this)" style="position: absolute; top: 31px; font-size: 18px; cursor:pointer;"></i>
@@ -408,7 +411,7 @@
                                 {% if not pwg.is_tested %}
                               <tr>
                                 <td>
-                                  <input type="checkbox" class="untested{{count}}" name="floatingButtonHere" disabled="" value="{{pwg.id}}"/> {{pwg.alias}}
+                                  <input type="checkbox" class="pwg_untested{{count}}" name="floatingButtonHere" disabled="" value="{{pwg.id}}"/> {{pwg.alias}}
                                 </td>
                                 <td>
                                   <div class="dropup mb-0 ml-xl-3 ml-sm-2">
@@ -416,8 +419,8 @@
                                       <i class="fas fa-ellipsis-v"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                     <a class="dropdown-item pop1" href="#"> History</a>
-                                      <a class="dropdown-item" href="#"> Return to Admin</a>
+                                     <a class="dropdown-item" href="#" onclick="testingHistory({{pwg.id}});"> History</a>
+                                      <a class="dropdown-item" href="#" onclick="return_pwg({{pwg.id}}, '{{pwg.alias}}');"> Return to Admin</a>
                                     </div>
                                   </div>
                                 </td>
@@ -442,47 +445,26 @@
     </section>
 
 
-
-
-
-
-
-    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-           <!--  <h5 class="modal-title" id="exampleModalLabel">Transfered PWG</h5> -->
-            <a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" onclick="vanish()">&times;</span></a>
-          </div>
-          <div class="modal-body text-center p-4">
-            <i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-            <p class="pt-2 font-weight-bold" id="confirmation"></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-    <div class="modal fade" id="imagemodal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!--for showing history of pwg-->
+<div class="modal fade" id="imagemodalHistory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title font-weight-bold">Login History</h5>
+            <h5 class="modal-title font-weight-bold" id="modal_title">Testing History</h5>
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body" id="modal_body_history">
 					<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Number Of Times Tested</h6>
-					<p>3 times</p>
+					<p id="tested_count">3 times</p>
 
                     <h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> When Tested</h6>
-					<p>on 08/10/2020 at 5:30 pm</p>
+					<p id="tested_on">on 08/10/2020 at 5:30 pm</p>
 
                     <h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Get from Admin</h6>
-					<p>on 01/10/2020 at 3:30 pm</p>
+					<p id="get_from_admin">on 01/10/2020 at 3:30 pm</p>
 
 
-				</div>
+          </div>
 
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -492,26 +474,53 @@
     </div>
 
 
+<!--for confirmation of multiple operations-->
+<div class="modal fade" id="imagemodal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Confirmation of PWG</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+			</div>
+			<div class="modal-body text-center p-4">
+				<i class="fa fa-question-circle fa-3x" style="color: #bd2130;" id="confirm-message-color"></i>
+				<p class="pt-2 font-weight-bold" id="confirm-message-delete"></p>
+
+			</div>
+			<div class="modal-footer justify-content-center">
+				<button type="button" class="btn btn-primary" id="confirm-modal-button">Confirm</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+		  	</div>
+		</div>
+	</div>
+</div>
+
 
     <section class="floatingButtonHere" style="display: none;" id="button-floating-1">
-      <a href="#" class=" btn btn-primary pop">Confirm</a>
+      <a href="#" class=" btn btn-primary" onclick="confirm_popup()" id="proceed_button">Proceed</a>
       <a href="tester-home" class=" btn btn-danger">Cancel</a>
     </section>
 
 
+  <!--	to return back PWG and PWGS -->
+	<form action="getback_pwgs" method="post" name="getback">
+		{% csrf_token %}
+		<input type="hidden" id="assign_values" name="values">
+		<input type="hidden"  name="user_pk" value="{{request.user.id}}">
+		<input type="hidden"  name="accType" value="tester-home">
+	</form>
+
+  <!--	to return back PWG and PWGS -->
+	<form action="retest" method="post" name="retest">
+		{% csrf_token %}
+		<input type="hidden" id="retest_values" name="values">
+		<input type="hidden"  name="accType" value="tester-home">
+	</form>
 
 
     <script type="text/javascript">
-
-
-      // floating button JS
-
-      $('input[type="checkbox"]').click(function () {
-        if ($(this).attr("value") == "floatingButtonHere") {
-          $(".floatingButtonHere").show(150);
-        }
-      });
-
+      // global variable
+      var checkbox_values = [];
       // search filter table
       $(document).ready(function () {
         $("#myInput").on("keyup", function () {
@@ -522,134 +531,11 @@
         });
       });
 
-      // modal popup
-      $(function () {
-        $(".pop").on("click", function () {
-          $(".imagepreview").attr("src", $(this).find("img").attr("src"));
-          $("#imagemodal").modal("show");
-        });
-      });
-
-
-
-      $(function () {
-        $(".pop1").on("click", function () {
-          $(".imagepreview").attr("src", $(this).find("img").attr("src"));
-          $("#imagemodal1").modal("show");
-        });
-      });
-
 
       function vanish(){
         window.location.href = "tester-home";
       }
-
-      $(function () {
-        $("#checkAll").click(function () {
-          if ($("#checkAll").is(":checked")) {
-            $(".book").prop("checked", true);
-          } else {
-            $(".book").prop("checked", false);
-          }
-        });
-      });
-
-
-      $(function () {
-        $("#checkAll1").click(function () {
-          if ($("#checkAll1").is(":checked")) {
-            $(".book1").prop("checked", true);
-          } else {
-            $(".book1").prop("checked", false);
-          }
-        });
-      });
-
-      $(function () {
-        $("#checkAll2").click(function () {
-          if ($("#checkAll2").is(":checked")) {
-            $(".book2").prop("checked", true);
-          } else {
-            $(".book2").prop("checked", false);
-          }
-        });
-      });
-
-       $(function () {
-        $("#checkAll3").click(function () {
-          if ($("#checkAll3").is(":checked")) {
-            $(".book3").prop("checked", true);
-          } else {
-            $(".book3").prop("checked", false);
-          }
-        });
-      });
-
-      $(function () {
-        $("#checkAll4").click(function () {
-          if ($("#checkAll4").is(":checked")) {
-            $(".book4").prop("checked", true);
-          } else {
-            $(".book4").prop("checked", false);
-          }
-        });
-      });
-
-      $(function () {
-        $("#checkAll5").click(function () {
-          if ($("#checkAll5").is(":checked")) {
-            $(".book5").prop("checked", true);
-          } else {
-            $(".book5").prop("checked", false);
-          }
-        });
-      });
-
-
-
-
-
-
       // division hide/show js
-
-      function myfun() {
-        document.getElementById("div-1").style.display = "block";
-        document.getElementById("div-2").style.display = "none";
-        document.getElementById("div-3").style.display = "none";
-      }
-
-      function myfun1() {
-        document.getElementById("div-1").style.display = "none";
-        document.getElementById("div-2").style.display = "block";
-        document.getElementById("div-3").style.display = "none";
-      }
-
-      function myfun2() {
-        document.getElementById("div-1").style.display = "none";
-        document.getElementById("div-3").style.display = "block";
-        document.getElementById("div-2").style.display = "none";
-      }
-
-      function cancel() {
-        document.getElementById("div-2").style.display = "none";
-        document.getElementById("div-1").style.display = "block";
-      }
-
-      function fun6() {
-        document.getElementById("div-7").style.display = "none";
-        document.getElementById("div-8").style.display = "block";
-      }
-
-      function fun7() {
-        document.getElementById("div-7").style.display = "block";
-        document.getElementById("div-8").style.display = "none";
-      }
-
-      function funDown() {
-        document.getElementsByClassName("fa-sort-down").style.display = "block";
-        document.getElementsByClassName("fa-sort-up").style.display = "none";
-      }
-
 
 
       function tested_faulty() {
@@ -671,9 +557,9 @@
       function faulty() {
         document.getElementById("faulty").style.display = "block";
 
-        document.getElementById("pwg-on").style.display = "block";
+        document.getElementById("pwg-on").style.display = "none";
 
-        document.getElementById("pwg-off").style.display = "none";
+        document.getElementById("pwg-off").style.display = "block";
         document.getElementById("pwg-on-untested").style.display = "none";
         document.getElementById("untested").style.display = "none";
 
@@ -700,7 +586,8 @@
         $('#tested-button').addClass('onClick');
         document.getElementById("tested-faulty").style.display = "none";
 
-        document.getElementById("pwg-on").style.display = "block";
+        document.getElementById("pwg-on-untested").style.display = "block";
+        document.getElementById("pwg-on").style.display = "none";
         document.getElementById("pwg-off").style.display = "none";
 
         document.getElementById("faulty").style.display = "none";
@@ -709,35 +596,245 @@
 
       }
 
-      function Delete() {
-        document.getElementById("confirmation").innerHTML ="PWG has been Successfully send for re-test" ;
-        $(".checkAll").prop('disabled',false);
-        $(".book").prop('disabled',false);
-
-      }
-
-
-
-      function Freeze() {
-        document.getElementById("confirmation").innerHTML ="PWG has been Successfully send back to admin" ;
-        $(".checkAll").prop('disabled',false);
-        $(".book").prop('disabled',false);
-
-      }
-
-
-
       function myFunction(x) {
         x.classList.toggle("fa-sort-down");
       }
 
-      function myOpen(one) {
-        $("#" + one).slideToggle("slow");
-        var tog = document.getElementById(one);
-        if (tog.style.display == "none") {
-          console.log(tog);
-        }
+      // return pwg to admin
+      function return_pwg_untested(){
+        {% for i in pwgs_untested %}
+        $("#checkAllUntested{{forloop.counter}}").attr("disabled", false);
+        $(".pwg_untested{{forloop.counter}}").attr("disabled", false);
+        {% endfor %}
+        $("#proceed_button").attr("onclick","confirm_popup()");
       }
+
+      // for  retest of multiple pwg
+      function retest_pwg_multiple(){
+          {% for pwgs in pwgs_tested_good %}
+            $("#checkAllTested{{forloop.counter}}").attr("disabled", false);
+            $(".pwg_tested{{forloop.counter}}").attr("disabled", false);
+          {% endfor %}
+          $("#proceed_button").attr("onclick","confirm_popup_retest()");
+      }
+
+      function return_pwg_tested(){
+        {% for i in pwgs_tested_good %}
+          $("#checkAllTested{{forloop.counter}}").attr("disabled", false);
+          $(".pwg_tested{{forloop.counter}}").attr("disabled", false);
+        {% endfor %}
+        {% for i in pwgs_tested_faulty %}
+          $("#checkAllFaulty{{forloop.counter}}").attr("disabled", false);
+          $(".pwg_faulty{{forloop.counter}}").attr("disabled", false);
+        {% endfor %}
+
+        $("#proceed_button").attr("onclick","confirm_popup()");
+      }
+
+      // to remove all occurrence of the element
+      function removeItemAll(value) {
+            var i = 0;
+            while (i < checkbox_values.length) {
+                  if (checkbox_values[i] === value) {
+                    checkbox_values.splice(i, 1);
+                  } else {
+                    ++i;
+                  }
+            }
+      }
+
+      // for selecting child elements of accordion of untested
+	   {% for i in pwgs_untested %}
+		$('#checkAllUntested{{forloop.counter}}').click(function () {
+
+			var ele = $(".pwg_untested{{forloop.counter}}");
+			if ($("#checkAllUntested{{forloop.counter}}").is(':checked')) {
+				$(".pwg_untested{{forloop.counter}}").prop("checked", true);
+				for(i=0;i<ele.length;i++){
+					checkbox_values.push(ele[i].value);
+				}
+			}else{
+				$(".pwg_untested{{forloop.counter}}").prop("checked", false);
+				for(i=0;i<ele.length;i++){
+					removeItemAll(ele[i].value);
+				}
+			}
+
+			if( checkbox_values.length == 0){
+				$(".floatingButtonHere").hide();
+			}else{
+				$(".floatingButtonHere").show(150);
+			}
+		});
+		{% endfor %}
+
+
+        // for selecting child elements of accordion of tested faulty
+	   {% for i in pwgs_tested_faulty %}
+		$('#checkAllFaulty{{forloop.counter}}').click(function () {
+
+			var ele = $(".pwg_faulty{{forloop.counter}}");
+			if ($("#checkAllFaulty{{forloop.counter}}").is(':checked')) {
+				$(".pwg_faulty{{forloop.counter}}").prop("checked", true);
+				for(i=0;i<ele.length;i++){
+					checkbox_values.push(ele[i].value);
+				}
+			}else{
+				$(".pwg_faulty{{forloop.counter}}").prop("checked", false);
+				for(i=0;i<ele.length;i++){
+					removeItemAll(ele[i].value);
+				}
+			}
+
+			if( checkbox_values.length == 0){
+				$(".floatingButtonHere").hide();
+			}else{
+				$(".floatingButtonHere").show(150);
+			}
+		});
+		{% endfor %}
+
+        // for selecting child elements of accordion of tested good
+	   {% for i in pwgs_tested_good %}
+		$('#checkAllTested{{forloop.counter}}').click(function () {
+
+			var ele = $(".pwg_tested{{forloop.counter}}");
+			if ($("#checkAllTested{{forloop.counter}}").is(':checked')) {
+				$(".pwg_tested{{forloop.counter}}").prop("checked", true);
+				for(i=0;i<ele.length;i++){
+					checkbox_values.push(ele[i].value);
+				}
+			}else{
+				$(".pwg_tested{{forloop.counter}}").prop("checked", false);
+				for(i=0;i<ele.length;i++){
+					removeItemAll(ele[i].value);
+				}
+			}
+
+			if( checkbox_values.length == 0){
+				$(".floatingButtonHere").hide();
+			}else{
+				$(".floatingButtonHere").show(150);
+			}
+		});
+		{% endfor %}
+
+		$('input[type="checkbox"]').click(function(){
+          if($(this).attr("name")=="floatingButtonHere"){
+              if($(this).is(':checked')){
+                  checkbox_values.push($(this).val());
+              }else{
+                  removeItemAll($(this).val());
+              }
+          }
+          if( checkbox_values.length == 0){
+              $(".floatingButtonHere").hide();
+          }else{
+              $(".floatingButtonHere").show(150);
+          }
+          console.log(checkbox_values);
+      });
+
+      //for return to admin confirmation
+      function confirm_popup(){
+        $("#assign_values").attr("value", checkbox_values);
+        if(checkbox_values.length == 1){
+          $("#confirm-message-delete").html("Return "+checkbox_values.length+" PWG to Admin");
+        }else{
+          $("#confirm-message-delete").html("Return "+checkbox_values.length+" PWGs to Admin");
+        }
+        $("#confirm-modal-button").attr("onclick", 'returnPWG()');
+
+
+        $(".imagepreview").attr("src", $(this).find("img").attr("src"));
+        $("#imagemodal1").modal("show");
+      }
+
+      //to return for retest of PWGs
+      function confirm_popup_retest(){
+        $("#retest_values").attr("value", checkbox_values);
+
+        if(checkbox_values.length == 1){
+          $("#confirm-message-delete").html("Send "+checkbox_values.length+" PWG for retesting");
+        }else{
+          $("#confirm-message-delete").html("Send "+checkbox_values.length+" PWGs for retesting");
+        }
+        $("#confirm-modal-button").attr("onclick", 'retest_multiple_pwg()');
+
+
+        $(".imagepreview").attr("src", $(this).find("img").attr("src"));
+        $("#imagemodal1").modal("show");
+      }
+
+
+      // for submitting getback form
+      function returnPWG(){
+        document.forms['getback'].submit();
+      }
+
+     //to popup testing history
+    function testingHistory(pk){
+            // GET AJAX request
+            $.ajax({
+                type: 'GET',
+                url: "testing_history",
+                data: {"pk": pk},
+                success: function (response) {
+                    // if not valid user, alert the user
+                    $('#modal_title').html("Testing History of PWG");
+
+                    if(response["history"] == false){
+                        $('#modal_body_history').html('<div class="h4">No testing history to show</div>');
+                    }else{
+                        var text = '';
+                        var count = 0;
+
+                        for(i=0;i<response.length;i++){
+                            var date = response[i]['fields']['date'];
+                            var time = response[i]['fields']['time'];
+                            var got_on = response[i]['fields']['got_on'];
+                            got_on = got_on.replace("T", " at ");
+                            got_on = got_on.replace("Z", " ");
+                            got_on = got_on.slice(0,-4);
+                            count = count + 1;
+                            $("#tested_on").html("on "+date+" at "+time.slice(0,-(time.length-5)));
+                            $("#get_from_admin").html("on "+got_on);
+
+                        }
+                        $("#tested_count").html(count+" times");
+
+                    }
+
+                $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                $('#imagemodalHistory').modal('show');
+                },
+                error: function (response) {
+                    console.log(response)
+                }
+            })
+    }
+
+    //to return pwq to admin
+    function return_pwg(pk, pwg_name){
+       $('#assign_values').attr('value', pk);
+
+       $("#confirm-modal-button").attr("onclick", 'returnPWG()');
+       $("#confirm-message-delete").html("Are you sure to return "+pwg_name+" to Admin");
+
+       $(".imagepreview").attr("src", $(this).find("img").attr("src"));
+       $("#imagemodal1").modal("show");
+    }
+
+    // to retest the tested PWG (single)
+    function retest_pwg(pk){
+      $("#retest_values").attr("value", pk);
+      document.forms['retest'].submit();
+    }
+
+    // to retest the tested PWG (multiple)
+    function retest_multiple_pwg(){
+      document.forms['retest'].submit();
+    }
     </script>
   </body>
 </html>

@@ -175,13 +175,10 @@
 							<div class="col-md">
 								<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Add PWG Account</h5>
 								<div class="row">
-									<div class="col-md-6 py-3">
-										{% for msg in messages %}
-											<label class="text-danger">{{msg}}</label>
-										{% endfor %}
+									<div class="col-md-8 py-3">
 									<form method="post" action="add-new">
                                         {% csrf_token %}
-									  <div class="form-group">
+									  <div class="form-group"><div class="row"><div class="col-md-7">
 										  <select name="unique_name" class="form-control" id="unique_name" onchange="get_name('P');">
 										  <!-- Countries often selected by users can be moved to the top of the list. -->
 										  <!-- Countries known to be subject to general US embargo are commented out by default. -->
@@ -405,24 +402,29 @@
 										  <option data-countryCode="ZW" value="0263">Zimbabwe (+263)</option>
 										</select>
 									  </div>
-									  <div class="form-group">
+									  <div class="col-md-1 ml-n1" style="color: red;">*</div>
+									  </div></div>
+									  <div class="form-group"><div class="row"><div class="col-md-7">
 										  <input type="text" value="" id="unique_name_value" class="form-control" readonly placeholder="System Name" name="system_name">
-									  </div>
+									  </div></div></div>
 
-									  <div class="form-group">
+									  <div class="form-group"><div class="row"><div class="col-md-7">
 									     <input type="text" class="form-control is-integer"  placeholder="Enter Alias Name " name="alias" autocomplete="true">
-									  </div>
-									  <div class="form-group">
-									     <input type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Email " name="email" autocomplete="true" required>
-									  </div>
-									  <div class="form-group">
-									     <input type="password" class="form-control"  placeholder="Enter Password " name="password" autocomplete="true" required>
-									  </div>
+									  </div></div></div>
+									  <div class="form-group"><div class="row"><div class="col-md-7">
+										  <input type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Email " name="email" autocomplete="true" required></div>
+									  	  <div class="col-md-1 ml-n1" style="color: red;">*</div>
+									  </div></div>
+									  <div class="form-group"><div class="row"><div class="col-md-7">
+										  <input type="password" class="form-control" id="default-password" placeholder="Enter Password " name="password" autocomplete="true" required></div>
+										  <div class="col-md-1  ml-n5 mt-2 pl-1"><i class="far fa-eye" id="togglePassword"></i></div>
+										  <div class="col-md-1 ml-n3" style="color: red;">*</div>
+									  </div></div>
 
 									  <input type="hidden" value="pwgs" name="accType">
 
-										<button class="btn btn-primary" type="submit" disabled id="add-new-button">Submit</button>
-										<button class="btn btn-secondary" type="button" onclick="cancel()">Cancel</button>
+										<button class="btn btn-primary mt-3" type="submit" disabled id="add-new-button">Submit</button>
+										<button class="btn btn-secondary mt-3" type="button" onclick="cancel()">Cancel</button>
 									</form>
 									</div>
 								</div>
@@ -551,7 +553,7 @@
 
 
 <section class="floatingButtonHere" id="floating-button" style="display:none;">
-	<a href="#" class="btn btn-primary" id="floating-confirm" onclick="delete_multiple_users()">Proceed</a>
+	<button class="btn btn-primary" id="floating-confirm" onclick="delete_multiple_users()">Proceed</button>
 	<a href="admin-info-server" class="btn btn-danger">Cancel</a>
 </section>
 
@@ -634,9 +636,9 @@
 			}
 
 			if( checkbox_values.length == 0){
-				$(".floatingButtonHere").hide();
+				$("#floating-confirm").attr('disabled', true);
 			}else{
-				$(".floatingButtonHere").show(150);
+				$("#floating-confirm").attr('disabled', false);
 			}
 		});
 
@@ -651,9 +653,9 @@
 			}
 		}
 		if( checkbox_values.length == 0){
-			$(".floatingButtonHere").hide();
+			$("#floating-confirm").attr('disabled', true);
 		}else{
-			$(".floatingButtonHere").show(150);
+			$("#floating-confirm").attr('disabled', false);
 		}
 		console.log(checkbox_values);
 	});
@@ -740,6 +742,9 @@
 	function myFunction() {
 		document.getElementById("checkAll").disabled = false;
 		$(".check").attr('disabled', false);
+
+		$("#floating-confirm").attr('disabled', true);
+		$(".floatingButtonHere").show(150);
 }
 
 function cancel(){
@@ -748,6 +753,8 @@ function cancel(){
 
  // to show confirmation modal
 function delete_multiple_users(){
+	checkbox_values = [...new Set(checkbox_values)];
+
 	if ( checkbox_values.length == 1 ){
 		$("#confirm-message-delete").html("Delete the selected "+checkbox_values.length+" Seller");
 	}else{
@@ -771,16 +778,55 @@ function sendpwgspk(){
 function submit_alias(){
     document.forms['submit_alias_change'].submit();
 }
-$(function() {
-    $('#alias_value').on('input',function(){
-        var val = $('#alias_value').val();
-        if(val != '')
-            $("#btn-alias").attr('disabled', false);
-        else
-            $("#btn-alias").attr('disabled', true);
-    });
+
+// to add predefined password values
+$(function (){
+	var d = new Date();
+	var year = String(d.getFullYear());
+	var month = d.getMonth();
+	var day = d.getDate();
+	var hour = d.getHours();
+	if(month <= 9){
+		month = String(month);
+		month = '0' + month;
+	}
+	if(day <= 9){
+		day = String(day);
+		day = '0' + day;
+	}
+	if(hour <= 9){
+		hour = String(hour);
+		hour = '0' + hour;
+	}
+
+
+	var password = year.slice(2,) + month + day + hour;
+
+	$("#default-password").attr("value",password);
+})
+
+const togglePassword = document.querySelector('#togglePassword');
+const password = document.querySelector('#default-password');
+
+
+//for add new password
+togglePassword.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
 });
 
+//for password history
+function togglePassword1(pk){
+    password1 = document.getElementById(pk);
+    // toggle the type attribute
+    const type = password1.getAttribute('type') === 'password' ? 'text' : 'password';
+    password1.setAttribute('type', type);
+    // toggle the eye slash icon
+    $("#toggle"+pk).toggleClass('fa-eye-slash');
+}
 </script>
 </body>
 </html>
