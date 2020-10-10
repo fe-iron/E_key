@@ -165,6 +165,34 @@
 		</section>
 
 
+		<!--	to show confirmation of delete and freeze-->
+		<div class="modal fade" id="imagemodalConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+						<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+					</div>
+					<div class="modal-body text-center p-4">
+						<i class="fa fa-question-circle fa-3x" style="color: #bd2130;" id="confirm-message-color"></i>
+						<p class="pt-2 font-weight-bold" id="confirm-message-delete"></p>
+
+					</div>
+					<div class="modal-footer justify-content-center">
+						<button type="button" class="btn btn-primary" id="confirm-modal-button" onclick="sendsellerspk();">Confirm</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--	to freeze sellers -->
+		<form action="fail" method="post" name="fail_pwg">
+			{% csrf_token %}
+			<input type="hidden" id="fail_pwg_value" name="fail_pwg_value">
+		</form>
+
+
 		<script type="text/javascript">
 			var clicks = 0;
 			var next_pass = 0;
@@ -271,50 +299,38 @@
 		//for fail button
 		function myfun3(){
 
+			var pwg_id = $('#myInput').attr('data-content');
 			var pwg_name = $('#myInput').val();
+			$('#fail_pwg_value').attr('value', pwg_id);
+			$('#confirm-message-delete').html('Are you sure you want to fail this '+pwg_name);
+			$('#confirm-modal').attr('onclick', 'send_fail_pwg()');
 
-			//fetching table's td values
-			list = document.getElementById("myTable").getElementsByTagName("li");
-
-			var len = list.length;
-
-			for(i=0;i<len;i++){
-				if(pwg_name == list[i].innerHTML.trim()){
-					list[i].remove();
-					$('#myInput').attr("value","");
-					$('#password').html("The XXX<sup>th</sup> Password");
-					$('#randomText').html("");
-					break;
-				}
-			}
+			console.log(pwg_name);
 		}
 
 
 		function select_pwg(value, id_pwg){
 
-		//displaying the buttons block
-		$('#buttons').css("display", "flex");
+			//displaying the buttons block
+			$('#buttons').css("display", "flex");
 
-		//resetting the value of next_pass, use to enable pass button
-		$('#pass').html('<button class="nav-link btn-info btn text-white btn-sm my-2"  onclick="myfun2()" id="pass_pwg">Pass</button>');
-		$('#pass_pwg').prop('disabled',true);
-		next_pass = 0;
+			//resetting the value of next_pass, use to enable pass button
+			$('#pass').html('<button class="nav-link btn-info btn text-white btn-sm my-2"  onclick="myfun2()" id="pass_pwg">Pass</button>');
+			$('#pass_pwg').prop('disabled',true);
+			next_pass = 0;
 
 
-		//resetting Next Password password to get Password
+			//resetting Next Password password to get Password
 			$('#yourButton').html("Get Password");
 
-		//resetting Password field to empty
-		$('#randomText').html("xxxxxxxxxx");
-		$('#randomText').css("padding","0.5rem 1.4rem");
+			//resetting Password field to empty
+			$('#randomText').html("xxxxxxxxxx");
+			$('#randomText').css("padding","0.5rem 1.4rem");
 
 
-		$("#yourButton").removeAttr("disabled");
-		$('#myInput').attr("value",value);
-		$('#myInput').attr("data-content",id_pwg);
-
-
-
+			$("#yourButton").removeAttr("disabled");
+			$('#myInput').attr("value", value);
+			$('#myInput').attr("data-content", id_pwg);
 
 			//checking prev one button's value to set warning
 			text = document.getElementById("first_next").innerHTML;
@@ -351,25 +367,25 @@
 
 
 		function right_next(){
-		//resetting the value of next_pass, use to enable pass button
-		$('#pass').html('<button class="btn btn-info text-white my-2 mx-2"  onclick="myfun2()" id="pass_pwg">Pass</button>');
-		$('#pass_pwg').attr('disabled','true');
-		next_pass = 0;
+			//resetting the value of next_pass, use to enable pass button
+			$('#pass').html('<button class="btn btn-info text-white my-2 mx-2"  onclick="myfun2()" id="pass_pwg">Pass</button>');
+			$('#pass_pwg').attr('disabled','true');
+			next_pass = 0;
 
 
-		//resetting Next Password password to get Password
-		$('#yourButton').html("Get Password");
+			//resetting Next Password password to get Password
+			$('#yourButton').html("Get Password");
 
 
-		//resetting Password field to empty
-		$('#randomText').html("xxxxxxxxxx");
-		$('#randomText').css("padding","0.5rem 1.4rem");
+			//resetting Password field to empty
+			$('#randomText').html("xxxxxxxxxx");
+			$('#randomText').css("padding","0.5rem 1.4rem");
 
-		//displaying the buttons block
-		$('#buttons').css("display", "flex");
+			//displaying the buttons block
+			$('#buttons').css("display", "flex");
 
-		//enabling next password button to get next password
-		$("#yourButton").removeAttr("disabled");
+			//enabling next password button to get next password
+			$("#yourButton").removeAttr("disabled");
 
 			//checking prev one button's value to set warning
 			text = document.getElementById("first_next").innerHTML;
@@ -382,13 +398,14 @@
 
 			//fetching ul's li values
 			list = document.getElementById('myTable').getElementsByTagName("li");
-
+			var first_data_content = list[0]['attributes']['data-content']['value'];
 			var len = list.length;
 
 			//for the first time it will set pwg name using global click var
 			if(text == ""){
 				$("#myInput").attr("value", list[clicks].innerHTML.trim());
-				console.log($("#myInput").attr("value", list[clicks].attr('data-content')));
+				$("#myInput").attr("data-content", first_data_content);
+
 
 				//showing password when it got selected
 				setNextPassValue(list[clicks].innerHTML);
@@ -407,7 +424,9 @@
 					if(text == list[i].innerHTML.trim()){
 						if(i+1 < len-1){
 							text = list[i+1].innerHTML.trim();
+							var onward_data_content = list[i+1]['attributes']['data-content']['value'];
 							$("#myInput").attr("value",text);
+							$("#myInput").attr("data-content", onward_data_content);
 
 							//showing password when it got selected
 							//$('#randomText').html(randomText(15));
@@ -477,7 +496,9 @@
 								$('#buttons').css("display", "flex");
 
 								text = list[i-1].innerHTML.trim();
+								var data_content = list[i-1]['attributes']['data-content']['value'];
 								$("#myInput").attr("value", text);
+								$("#myInput").attr("data-content", data_content);
 
 								//showing password when it got selected
 								setNextPassValue(list[i-1].innerHTML.trim());

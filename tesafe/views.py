@@ -121,7 +121,7 @@ def register(request):
         phone = request.POST['phone']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
-        file = request.FILES['file']
+        file = request.FILES.get('file', None)
 
         # password checking
 
@@ -153,7 +153,7 @@ def register(request):
                     webAdmin = WebAdmin(user=user, first_name=fname, last_name=lname, email=email, phone=phone)
                     webAdmin.save()
 
-                    return render(request, 'tesafe/admin-home.html')
+                    return redirect("admin-home")
 
                 # if it is seller
                 elif accType == 'seller':
@@ -167,7 +167,7 @@ def register(request):
                     seller = Seller(user=user, first_name=fname, last_name=lname, email=email, phone=phone, profile_pic=file, alias=uname)
                     seller.save()
 
-                    return render(request, 'seller/seller-home.html')
+                    return redirect('seller-home')
 
                 # if it is tester
                 elif accType == 'tester':
@@ -182,7 +182,7 @@ def register(request):
                     tester = Tester(user=user, first_name=fname, last_name=lname, email=email, phone=phone, profile_pic=file, alias=uname)
                     tester.save()
 
-                    return render(request, 'tester/tester-home.html')
+                    return redirect('tester-home')
 
                 # if it is user
                 elif accType == 'user':
@@ -197,7 +197,7 @@ def register(request):
                     webUser = WebUser(user=user, first_name=fname, last_name=lname, email=email, phone=phone, profile_pic=file, alias=uname)
                     webUser.save()
 
-                    return render(request, 'user/user-home.html')
+                    return redirect('user-home')
         else:
             messages.error(request, "Password do not match! try again")
             return redirect('register')
