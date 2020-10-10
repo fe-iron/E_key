@@ -97,6 +97,13 @@
     <section class="bg-detail">
       <div class="container-fluid">
         <div class="row justify-content-center">
+
+          <!-- for showing error and messages-->
+		  <div class="col-md-10 py-2 px-5 mt-3" id="msg">
+
+		 </div>
+
+
           <div class="col-md-10 py-5 px-5">
             <div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-3">
               <div class="col-md-8 com-md-6" id="div-7">
@@ -208,7 +215,7 @@
                             <tbody>
                             {% for pwg in pwg_obj %}
                               {% if pwgs.id == pwg.owned_by.id %}
-                                {% if pwg.is_tested_good %}
+                                {% if pwg.is_tested_good or pwg.is_tested %}
                               <tr>
                                 <td>
                                   <input type="checkbox" class="pwg_tested{{count}}"  name="floatingButtonHere" disabled=""  value="{{pwg.id}}"/> {{pwg.alias}}
@@ -846,6 +853,21 @@
     function retest_multiple_pwg(){
       document.forms['retest'].submit();
     }
+
+    // Shorthand for $( document ).ready()
+	// for message showing
+		$(function() {
+			setTimeout(function(){
+				$("#msg").removeClass('bg-light');
+				$("#msg").html('');
+			}, 4000);
+			{% if messages %}
+				$("#msg").addClass('bg-light');
+			{% endif %}
+			$("#msg").html('{% for msg in messages %}<h3 class="text-danger">{{msg}}</h3>{% endfor %}');
+	    });
+
+
     </script>
   </body>
 </html>

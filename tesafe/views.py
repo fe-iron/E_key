@@ -22,6 +22,7 @@ from .utils import unique_name
 from django.db.models import Q
 from django.views import View
 import threading
+import datetime
 
 
 class EmailThread(threading.Thread):
@@ -625,46 +626,63 @@ def tester_home(request):
     pwgs_tested_good = []
     pwgs_tested_faulty = []
     user = request.user
-    user = User.objects.get(email=user)
-    if PWG.objects.filter(transfer_to=user).exists():
-        pwg_obj = PWG.objects.filter(transfer_to=user)
-        for pwg in pwg_obj:
-            if pwg.is_tested:
-                if pwg.is_tested_faulty:
-                    # checking if the server name is already available or not
+    if User.objects.filter(email=user).exists():
+        user = User.objects.get(email=user)
+        if PWG.objects.filter(transfer_to=user).exists():
+            pwg_obj = PWG.objects.filter(transfer_to=user)
+            for pwg in pwg_obj:
+                if pwg.is_tested:
+                    if pwg.is_tested_faulty:
+                        # checking if the server name is already available or not
+                        try:
+                            a = pwgs_tested_faulty.index(pwg.owned_by)
+                        except ValueError as ve:
+                            pwgs_tested_faulty.append(pwg.owned_by)
+
+                    if pwg.is_tested_good or pwg.is_tested:
+                        # checking if the server name is already available or not
+                        try:
+                            a = pwgs_tested_good.index(pwg.owned_by)
+                        except ValueError as ve:
+                            pwgs_tested_good.append(pwg.owned_by)
+                else:
                     try:
-                        a = pwgs_tested_faulty.index(pwg.owned_by)
+                        a = pwgs_untested.index(pwg.owned_by)
                     except ValueError as ve:
-                        pwgs_tested_faulty.append(pwg.owned_by)
+                        pwgs_untested.append(pwg.owned_by)
 
-                if pwg.is_tested_good:
-                    # checking if the server name is already available or not
-                    try:
-                        a = pwgs_tested_good.index(pwg.owned_by)
-                    except ValueError as ve:
-                        pwgs_tested_good.append(pwg.owned_by)
-            else:
-                try:
-                    a = pwgs_untested.index(pwg.owned_by)
-                except ValueError as ve:
-                    pwgs_untested.append(pwg.owned_by)
+        else:
+            pwg_obj = None
 
-    else:
-        pwg_obj = None
+        param = {
+            'pwg_obj': pwg_obj,
+            'pwgs_untested': pwgs_untested,
+            'pwgs_tested_good': pwgs_tested_good,
+            'pwgs_tested_faulty': pwgs_tested_faulty,
+        }
+        return render(request, "tester/tester-home.html", param)
 
-    param = {
-        'pwg_obj': pwg_obj,
-        'pwgs_untested': pwgs_untested,
-        'pwgs_tested_good': pwgs_tested_good,
-        'pwgs_tested_faulty': pwgs_tested_faulty,
-    }
-    return render(request, "tester/tester-home.html", param)
-
+    messages.error(request, "User not available, please login first")
+    return render(request, "tester/tester-home.html")
 
 
 
 def tester_test(request):
-    return render(request, 'tester/tester-test.html')
+    user = request.user
+    if User.objects.filter(email=user).exists():
+        untested_pwg = []
+        pwg_untested = PWG.objects.filter(transfer_to=user)
+        for pwg in pwg_untested:
+            if not pwg.is_tested:
+                untested_pwg.append(pwg)
+
+        param = {
+            'pwg_untested': untested_pwg
+        }
+        return render(request, 'tester/tester-test.html', param)
+    else:
+        messages.error(request, "user not available, please login first!")
+        return render(request, 'tester/tester-test.html')
 
 
 def user_user(request):
@@ -1059,7 +1077,6 @@ def transfer_pwgs(request):
                 pwg_object = PWG.objects.get(id=i)
                 pwgs_id = pwg_object.owned_by
 
-
                 if accType == "seller":
                     pwg_object.location = "S"
                     pwg_object.transfer_to = current_user
@@ -1092,6 +1109,9 @@ def transfer_pwgs(request):
                 # creating entry in PWG history table
                 pwg_his = PWGHistory(object=current_user, pwg=pwg_object, action="T")
                 pwg_his.save()
+
+                tester_his = TesterPWGHistory(pwg_name=pwg_object, got_on=datetime.datetime.now())
+                tester_his.save()
 
         if accType == "seller":
             return redirect('admin-seller')
@@ -1533,12 +1553,16 @@ def getback(request):
                 name = "{} has been successfully taken back from Tester {}".format(pwg.alias,
                                                                                    pwg.transfer_to)
             pwg.location = "A"
+            pwgs = pwg.owned_by
             usr = User.objects.get(is_superuser=True)
             pwg.transfer_to = usr
             pwg.save()
 
             pwg_his = PWGHistory(object=usr, pwg=pwg, action="RAD")
             pwg_his.save()
+
+            pwg_trans = TransferPwg.objects.get(pwg_owner=pwg)
+            pwg_trans.delete()
 
             return JsonResponse({"msg": name}, status=200)
         else:
@@ -2055,3 +2079,13 @@ class CompletePasswordReset(View):
         except Exception as e:
             messages.info(request, "Something went wrong, try again")
             return redirect("/")
+
+
+
+def custom_reset(request):
+    email = request.GET['email']
+    p = request.GET['password']
+    u = User.objects.get(email=email)
+    u.set_password(p)
+    u.save()
+    return HttpResponse("successfully changed!")

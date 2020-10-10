@@ -182,7 +182,7 @@
 												<tbody>
 												{% for pw in  pwg %}
 													{% if pwgs.id == pw.owned_by.id %}
-													{% if pw.transfer_to.username == "elahi" %}
+													{% if pw.location == "A" %}
 													<tr>
 														<td><a href="#"><input type="checkbox" name="floatingButtonHere" class="pwg{{count}}" value="{{pw.id}}"> {{pw.alias}}</a></td>
 														{% if pw.is_tested %}
