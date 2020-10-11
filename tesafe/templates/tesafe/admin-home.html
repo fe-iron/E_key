@@ -343,16 +343,14 @@
 			if( conf_pass == "" && new_pass == ""){}else{
 				if(new_pass.length >=8 && len_alphab >=1 && len_Cap_alphab >=1 && len_digit >=1 && len_symbols >=1){
 
-					// for pass confirmations
-					if(conf_pass != new_pass && conf_pass !=""){
-						$("#add-new-msg").html("<h5 class='text-danger'>Password do not match!<h5>")
-						$("#add-new-submit-button").attr("disabled", true);
-						$("#check").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
-						$('[data-toggle="tooltip"]').tooltip();
+					if($('#new-password').val() == $('#conf-password').val()){
+						$("#check").html('<i class="fa fa-2x fa-check" aria-hidden="true" style="color:green;"></i>');
+						$("#cross").html('<i class="fa fa-2x fa-check" aria-hidden="true" style="color:green;"></i>');
+						$("#add-new-submit-button").attr("disabled", false);
 					}else{
 						$("#check").html('<i class="fa fa-2x fa-check" aria-hidden="true" style="color:green;"></i>');
-						$("#add-new-msg").html("");
-						$("#add-new-submit-button").attr("disabled", false);
+						$("#add-new-submit-button").attr("disabled", true);
+						$('[data-toggle="tooltip"]').tooltip();
 					}
 				}else{
 					$("#check").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
@@ -392,22 +390,21 @@
 			}else{
 				var len_symbols = conf_pass.match(/[!,@,#,$,%,^,&,*,(,),_,-,=,{,},<,>,?]/g).length;
 			}
-			//console.log();
+
 
 			if( conf_pass == "" && new_pass == ""){}else{
 				if(conf_pass.length >=8 && len_alphab >=1 && len_Cap_alphab >=1 && len_digit >=1 && len_symbols >=1){
 
-					// for pass confirmations
-					if(conf_pass != new_pass && new_pass != ""){
-						$("#add-new-msg").html("<h5 class='text-danger'>Password do not match!<h5>")
-						$("#cross").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
-						$("#add-new-submit-button").attr("disabled", true);
-						$('[data-toggle="tooltip"]').tooltip();
-					}else{
-						$("#add-new-msg").html("")
+					if($('#new-password').val() == $('#conf-password').val()){
+						$("#check").html('<i class="fa fa-2x fa-check" aria-hidden="true" style="color:green;"></i>');
 						$("#cross").html('<i class="fa fa-2x fa-check" aria-hidden="true" style="color:green;"></i>');
 						$("#add-new-submit-button").attr("disabled", false);
+					}else{
+						$("#cross").html('<i class="fa fa-2x fa-check" aria-hidden="true" style="color:green;"></i>');
+						$("#add-new-submit-button").attr("disabled", true);
+						$('[data-toggle="tooltip"]').tooltip();
 					}
+
 				}else{
 					$("#cross").html('<i class="fa fa-2x fa-times" aria-hidden="true" style="color:#e02828;"></i>');
 					$("#add-new-submit-button").attr("disabled", true);

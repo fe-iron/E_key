@@ -523,7 +523,6 @@
 		{% csrf_token %}
 		<input type="hidden" id="assign_values" name="values">
 		<input type="hidden" value="seller" name="accType">
-
 	</form>
 
 
@@ -680,7 +679,7 @@ function freeze(){
 function delete_multiple_users(){
 	checkbox_values = [...new Set(checkbox_values)];
 
-	if ( checkbox_values.length == 1 ){
+	if( checkbox_values.length == 1 ){
 		$("#confirm-message-delete").html("Delete the selected "+checkbox_values.length+" Seller");
 	}else{
 		$("#confirm-message-delete").html("Delete the selected "+checkbox_values.length+" Sellers");
@@ -695,7 +694,6 @@ function delete_multiple_users(){
 
 function freeze_multiple_users(){
 	checkbox_values = [...new Set(checkbox_values)];
-
 
 	if ( checkbox_values.length == 1 ){
 		$("#confirm-message-delete").html("Freeze the selected "+checkbox_values.length+" Seller");

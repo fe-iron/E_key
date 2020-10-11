@@ -146,7 +146,12 @@
 										<tbody id="myTable">
 										{% for pwg_server in pwgs %}
 											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to {{pwg_server.transfer_to}}"><th><input type="checkbox" name="floatingButtonHere" disabled value="{{pwg_server.pk}}" class="check"></th>
-												<td> {{pwg_server.alias}}</td>
+												<td>{% if pwg_server.alias == "" %}
+													{{pwg_server.system_name}}
+													{% else %}
+													{{pwg_server.alias}}
+													{% endif %}
+												</td>
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
 													<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 														<i class="fas fa-ellipsis-v"></i>
@@ -423,7 +428,7 @@
 
 									  <input type="hidden" value="pwgs" name="accType">
 
-										<button class="btn btn-primary mt-3" type="submit" disabled id="add-new-button">Submit</button>
+										<button class="btn btn-primary mt-3" type="submit" id="add-new-button">Submit</button>
 										<button class="btn btn-secondary mt-3" type="button" onclick="cancel()">Cancel</button>
 									</form>
 									</div>
@@ -564,20 +569,20 @@
 
 
 		// function to check is contains integer or not
-		$('.is-integer').on('change', function(){
-			var value = $(this).val();
-			isnum = /^\d/.test(value)   // to check if it is starting with num
-			// isnum = /^\d+$/.test(value);   to check if it is only containing num
-			if( isnum ){
-				$("#add-new-button").attr("disabled", true);
-			}else{
-				if(value == ""){
-					$("#add-new-button").attr("disabled", true);
-				}else{
-					$("#add-new-button").attr("disabled", false);
-				}
-			}
-		});
+		//$('.is-integer').on('change', function(){
+		//	var value = $(this).val();
+		//	isnum = /^\d/.test(value)   // to check if it is starting with num
+		//	// isnum = /^\d+$/.test(value);   to check if it is only containing num
+		//	if( isnum ){
+		//		$("#add-new-button").attr("disabled", true);
+		//	}else{
+		//		if(value == ""){
+		//			$("#add-new-button").attr("disabled", true);
+		//		}else{
+		//			$("#add-new-button").attr("disabled", false);
+		//		}
+		//	}
+		//});
 
 
 		// Shorthand for $( document ).ready()
@@ -659,13 +664,6 @@
 		}
 		console.log(checkbox_values);
 	});
-
-
-
-
-
-
-
 
 		// search filter table
 		$(document).ready(function(){

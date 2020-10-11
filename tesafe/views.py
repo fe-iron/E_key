@@ -22,6 +22,7 @@ from django.db.models import Q
 from django.views import View
 import threading
 import datetime
+import random
 
 
 class EmailThread(threading.Thread):
@@ -1162,52 +1163,86 @@ def delete_multiple_user(request):
         # fetch the data from the request
         values = request.POST.get("values", None)
         accType = request.POST.get("accType", None)
+        new_values = []
+        temp_list = ''
 
-        # print(values)
+        for i in values:
+            if i == ",":
+                new_values.append(int(temp_list))
+                temp_list = ''
+            elif i == " ":
+                pass
+            else:
+                temp_list += i
+        new_values.append(int(temp_list))
+
         if accType == "seller":
-            for i in values:
-                if i == ",":
+            for val in new_values:
+                if val == ",":
                     pass
-                elif Seller.objects.filter(id=i).exists():
-                    seller = Seller.objects.get(id=i)
-                    id_user = seller.user_id
-                    seller = User.objects.get(id=id_user)
-                    seller.delete()
-
+                elif val == " ":
+                    pass
+                else:
+                    if Seller.objects.filter(id=val).exists():
+                        seller = Seller.objects.get(id=val)
+                        id_user = seller.user_id
+                        tester = User.objects.get(id=id_user)
+                        name = tester.first_name
+                        tester.delete()
+                        messages.info(request, "{} Seller successfully deleted!".format(name))
+                    else:
+                        messages.info(request, "Seller is not deleted!")
+                        return redirect("admin-seller")
             return redirect('admin-seller')
 
         elif accType == "tester":
-            for i in values:
+            for i in new_values:
                 if i == ",":
                     pass
                 elif Tester.objects.filter(id=i).exists():
                     tester = Tester.objects.get(id=i)
                     id_user = tester.user_id
                     tester = User.objects.get(id=id_user)
+                    name = tester.first_name
                     tester.delete()
-
+                    messages.info(request, "{} Tester successfully deleted!".format(name))
+                else:
+                    messages.info(request, "Tester is not deleted!")
+                    return redirect("admin-tester")
             return redirect('admin-tester')
         elif accType == "pwgs":
-            for i in values:
+            for i in new_values:
                 if i == ",":
                     pass
                 elif PWGServers.objects.filter(id=i).exists():
                     pwgs = PWGServers.objects.get(id=i)
+                    name = pwgs.alias
+                    if not name:
+                        name = pwgs.system_name
                     pwgs.delete()
+                    messages.info(request, "{} PWG Server successfully deleted!".format(name))
+                else:
+                    messages.info(request, "PWG Server is not deleted!")
+                    return redirect("admin-info-server")
 
             return redirect('admin-info-server')
         elif accType == "user":
-            for i in values:
+            for i in new_values:
                 if i == ",":
                     pass
                 elif WebUser.objects.filter(id=i).exists():
                     tester = WebUser.objects.get(id=i)
                     user_fk = tester.user
                     tester = User.objects.get(id=user_fk.id)
+                    name = tester.first_name
                     tester.delete()
-
+                    messages.info(request, "{} PWG Server successfully deleted!".format(name))
+                else:
+                    messages.info(request, "User is not deleted!")
+                    return redirect("seller-user")
             return redirect('seller-user')
 
+    messages.info(request, "Something went wrong, try again!")
     return redirect('admin-home')
 
 
@@ -1347,6 +1382,7 @@ def authorize_pwgs(request):
             return redirect('seller-user')
 
     return redirect('admin-seller')
+
 
 # return pwg to admin
 def getback_pwgs(request):
@@ -1497,7 +1533,6 @@ def add_new(request):
             else:
                 messages.info(request, "Something went wrong, try again")
                 return redirect("seller-user")
-
     else:
         return redirect("admin-home")
 
