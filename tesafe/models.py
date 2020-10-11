@@ -127,6 +127,7 @@ class PWG(models.Model):
     is_authorized = models.BooleanField(default=False)
     is_shared = models.BooleanField(default=False)
     is_tested_good = models.BooleanField(default=False)
+    # if failed comes here
     is_tested_faulty = models.BooleanField(default=False)
     # it will get active when a seller transfer to user
     sold_from = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None, related_name="sold", blank=True)
@@ -204,8 +205,8 @@ class PWGHistory(models.Model):
     time = models.TimeField(auto_now=True)
     object = models.ForeignKey(User, on_delete=models.SET("object Deleted"), null=True, default=None, related_name="authorize_to")
     pwg = models.ForeignKey(PWG, on_delete=models.SET("object Deleted"), null=True, default=None, related_name="pwg")
-    # N = None, A = Authorze, S = Share, T = Transfer, DA = De-authorize, DS = De-share, D = Deleted,
-    # AD = buy from admin, RAD = Return to Admin, RT = Return to Testing again
+    # N = None, A = Authorize, S = Share, T = Transfer, DA = De-authorize, DS = De-share, D = Deleted,
+    # AD = buy from admin, RAD = Return to Admin, RT = Return to Testing again, P = Pass, F = Fail
     action = models.CharField(default="N", max_length=3)
 
     class Meta:
@@ -217,7 +218,7 @@ class TesterPWGHistory(models.Model):
     date = models.DateField(auto_now=True)
     time = models.TimeField(auto_now=True)
     pwg_name = models.ForeignKey(PWG, on_delete=models.SET_NULL, null=True)
-    got_on = models.DateTimeField()
+    got_on = models.DateTimeField(null=True, default=None)
 
     def __str__(self):
         return str(self.date)

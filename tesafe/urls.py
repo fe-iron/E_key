@@ -23,39 +23,38 @@ urlpatterns = [
     path("seller-shared<int:pk>", views.seller_shared, name="seller-shared"),
     path("seller-shared-pwg", views.seller_shared_pwg, name="seller-shared-pwg"),
     path("transfer-seller<int:pk>", views.transfer_seller, name="transfer-seller"),
-    path("seller-deshared-pwg", views.seller_deshared_pwg, name="seller-deshared-pwg"),
     path("transfer-seller-pwg", views.transfer_seller_pwg, name="transfer-seller-pwg"),
+    path("seller-deshared-pwg", views.seller_deshared_pwg, name="seller-deshared-pwg"),
     path("seller-authorized<int:pk>", views.seller_authorized, name="seller-authorized"),
     path("seller-authorized-pwg", views.seller_authorized_pwg, name="seller-authorized-pwg"),
-    # path("seller-deauthorized-pwg", views.seller_deauthorized_pwg, name="seller-deauthorized-pwg"),
-    # path("seller-pwg-transfer", views.seller_pwg_transfer, name="seller-pwg-transfer"),
+
     #tester URLs
     path("tester-home", views.tester_home, name='tester-home'),
     path("tester-test", views.tester_test, name='tester-test'),
-    #User Urls
+    # to make pwg fail
+    path("fail", views.fail, name='fail'),
+    # to make pwg pass
+    path("pass_pwg", views.pass_pwg, name='pass_pwg'),
+    # User Urls
     # path("user-home", views.user_home, name='user-home'),
     path("user-user", views.user_user, name='user-user'),
     path("user-home", views.user_home, name='user-home'),
 
-    # path("webAdmin_register", views.webAdmin_register.as_view(), name="webAdmin_register"),
-    #password change
-    path("password_change",views.password_change, name="password_change"),
-    # password reset functonality
-    path("request-reset-link", views.RequestPasswordResetEmail.as_view(), name="request-reset-link"),
-    path("set-new-password/<uidb64>/<token>", views.CompletePasswordReset.as_view(), name="reset-user-password"),
-    # path("reset/<uidb64>/<token>/", auth_views.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
-    # path("reset_password_complete/", auth_views.PasswordResetCompleteView.as_view(), name="password_reset_complete"),
-
-    # ajax url
-    path("validate_nickname", views.ajax_request, name="validate_nickname"),
-    # to find username of Users
-    path("find_username", views.find_username, name="find_username"),
     # delete
     path("delete", views.delete, name="delete"),
     # freeze
     path("freeze", views.freeze, name="freeze"),
     # Unfreeze
     path("unfreeze", views.unfreeze, name="unfreeze"),
+    # to find username of Users
+    path("find_username", views.find_username, name="find_username"),
+    # password change
+    path("password_change",views.password_change, name="password_change"),
+    # password reset functionality
+    path("request-reset-link", views.RequestPasswordResetEmail.as_view(), name="request-reset-link"),
+    path("set-new-password/<uidb64>/<token>", views.CompletePasswordReset.as_view(), name="reset-user-password"),
+    # ajax url
+    path("validate_nickname", views.ajax_request, name="validate_nickname"),
     # transfer_pwg and pwgs
     path("Transfer_pwgs", views.transfer_pwgs, name="Transfer_pwgs"),
     # authorize pwgs
@@ -110,4 +109,6 @@ urlpatterns = [
     path('retest', views.retest, name='retest'),
     # custom password change
     path('custom_reset', views.custom_reset, name='custom_reset'),
+    # to check if the user is laready exists
+    path('destination', views.destination, name='destination'),
 ]

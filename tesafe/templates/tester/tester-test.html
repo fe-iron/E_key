@@ -186,10 +186,16 @@
 			</div>
 		</div>
 
-		<!--	to freeze sellers -->
+		<!--	to make fail pwg -->
 		<form action="fail" method="post" name="fail_pwg">
 			{% csrf_token %}
 			<input type="hidden" id="fail_pwg_value" name="fail_pwg_value">
+		</form>
+
+    	<!--	to make pwg passed -->
+		<form action="pass_pwg" method="post" name="pass_pwg">
+			{% csrf_token %}
+			<input type="hidden" id="pass_pwg_value" name="pass_pwg_value">
 		</form>
 
 
@@ -277,37 +283,39 @@
 
 		//for pass button
 		function myfun2(){
+		    var pwg_id = $('#myInput').attr('data-content');
 			var pwg_name = $('#myInput').val();
+			$('#pass_pwg_value').attr('value', pwg_id);
+			$('#confirm-message-delete').html('Are you sure you want to Pass this '+pwg_name);
+			$('#confirm-modal-button').attr('onclick', 'send_pass_pwg()');
 
-			//fetching table's td values
-			list = document.getElementById("myTable").getElementsByTagName("li");
+			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+	        $('#imagemodalConfirm').modal('show');
 
-			var len = list.length;
-
-			for(i=0;i<len;i++){
-				if(pwg_name == list[i].innerHTML.trim()){
-					list[i].remove();
-					$('#myInput').attr("value", "");
-					$('#password').html("The XXX<sup>th</sup> Password");
-					$('#randomText').html("");
-					$('#yourButton').prop("disabled", true);
-					break;
-				}
-			}
 		}
 
 		//for fail button
 		function myfun3(){
-
 			var pwg_id = $('#myInput').attr('data-content');
 			var pwg_name = $('#myInput').val();
 			$('#fail_pwg_value').attr('value', pwg_id);
 			$('#confirm-message-delete').html('Are you sure you want to fail this '+pwg_name);
-			$('#confirm-modal').attr('onclick', 'send_fail_pwg()');
+			$('#confirm-modal-button').attr('onclick', 'send_fail_pwg()');
 
-			console.log(pwg_name);
+			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+	        $('#imagemodalConfirm').modal('show');
+
 		}
 
+        // to submit fail form
+        function send_fail_pwg(){
+            document.forms['fail_pwg'].submit();
+        }
+
+        // to submit pass form
+        function send_pass_pwg(){
+            document.forms['pass_pwg'].submit();
+        }
 
 		function select_pwg(value, id_pwg){
 

@@ -85,5 +85,10 @@
 		</div>
 	</section>
 
+	<script>
+		{% if user.is_authenticated %}
+			window.location.replace('destination');
+		{% endif %}
+	</script>
 </body>
 </html>

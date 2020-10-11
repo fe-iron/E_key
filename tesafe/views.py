@@ -1,23 +1,21 @@
-from django.shortcuts import render, redirect
 from .models import WebAdmin, Seller, Tester, WebUser, PWGServers, PWG, WebAdminLoginHistory, PasswordHistory, \
     TransferPwgs, TransferPwg, PwgUseRecord, SystemName, Authorize, Share, PWGHistory, TesterPWGHistory
-from django.contrib.auth.models import auth, User
-from django.contrib import messages
-from django.core import serializers
-from django.contrib.sessions.models import Session
-# password resset email imports
-from django.core.mail import send_mail, EmailMessage
-from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
-from django.urls import reverse
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes, force_text
+from django.core.mail import send_mail, EmailMessage
+from django.contrib.sessions.models import Session
+from django.contrib.auth.models import auth, User
+from django.shortcuts import render, redirect
 from .utils import account_activation_token
-
-from django.utils import timezone
-from django.http import HttpResponse
-from django.template.loader import render_to_string
 from django.http import JsonResponse
+from django.http import HttpResponse
+from django.core import serializers
+from django.contrib import messages
+from django.utils import timezone
+# password resset email imports
+from django.urls import reverse
 from .utils import unique_name
 from django.db.models import Q
 from django.views import View
@@ -37,6 +35,92 @@ class EmailThread(threading.Thread):
 num = {
     1:"One",2:"Two",3:"Three",4:"Four",5:"Five",6:"Six",7:"Seven",8:"Eight",9:"Nine",10:"Ten",11:"Eleven",12:"Twelve",13:"Thirteen",14:"Fourteen",15:"Fifteen",16:"Sixteen",17:"Seventeen",18:"Eighteen",19:"Nineteen",20:"Twenty"
 }
+
+
+# password reset views as class based views
+class RequestPasswordResetEmail(View):
+    def get(self, request):
+        return render(request, "authentication/reset-password.html")
+
+    def post(self, request):
+        email = request.POST['email']
+
+        if not User.objects.filter(email=email).exists():
+            messages.error(request, "Email does not exists! try again")
+            return render(request, "authentication/reset-password.html")
+        else:
+            user_obj = User.objects.filter(email=email)
+            email_contents = {
+                'user': user_obj[0],
+                'domain': get_current_site(request).domain,
+                'uid': urlsafe_base64_encode(force_bytes(user_obj[0].pk)),
+                'token': PasswordResetTokenGenerator().make_token(user_obj[0])
+            }
+            link = reverse('reset-user-password', kwargs={
+                'uidb64': email_contents['uid'],
+                'token': email_contents['token']
+            })
+            email_subject = 'Password Reset Instructions'
+            reset_url = 'http://'+email_contents['domain'] + link
+
+            email = EmailMessage(
+                email_subject,
+                'Hii there, Please follow the below link to reset your password\n' + reset_url,
+                'noreply@tesafe.com',
+                [email]
+            )
+            # email.send(fail_silently=False)
+            EmailThread(email).start()
+
+            messages.success(request, "We have sent an email to reset the password")
+            return render(request, "authentication/reset-password.html")
+
+
+class CompletePasswordReset(View):
+    def get(self, request, uidb64, token):
+        param = {
+            'uidb64': uidb64,
+            'token': token
+        }
+        try:
+            user_id = force_text(urlsafe_base64_decode(uidb64))
+
+            user = User.objects.get(pk = user_id)
+            if not PasswordResetTokenGenerator().check_token(user, token):
+                messages.info(request, "Link is already used, please generate a new one")
+                return render(request, "authentication/reset-password.html")
+        except:
+            pass
+        return render(request, "authentication/set-new-password.html", param)
+
+    def post(self, request, uidb64, token):
+        param = {
+            'uidb64': uidb64,
+            'token': token
+        }
+        pass1 = request.POST['password']
+        pass2 = request.POST['password1']
+        try:
+            user_id = force_text(urlsafe_base64_decode(uidb64))
+
+            user = User.objects.get(pk = user_id)
+            user.set_password(pass1)
+            user.save()
+
+            if request.user_agent.device.family == "Other":
+                device_name = request.user_agent.os.family
+                device_name = device_name + " " + str(request.user_agent.os.version).replace(",", "")
+            else:
+                device_name = request.user_agent.device.family
+
+            pass_his = PasswordHistory(user=user, device_name=device_name, last_pass=pass1)
+            pass_his.save()
+
+            messages.success(request, "Password reset successfull, now you can login with the new password")
+            return redirect("/")
+        except Exception as e:
+            messages.info(request, "Something went wrong, try again")
+            return redirect("/")
 
 
 # Create your views here.
@@ -639,7 +723,7 @@ def tester_home(request):
                         except ValueError as ve:
                             pwgs_tested_faulty.append(pwg.owned_by)
 
-                    if pwg.is_tested_good or pwg.is_tested:
+                    if pwg.is_tested_good:
                         # checking if the server name is already available or not
                         try:
                             a = pwgs_tested_good.index(pwg.owned_by)
@@ -1218,7 +1302,7 @@ def getback_pwgs(request):
             for i in pwg:
                 u = request.user
                 print(u)
-                u = User.objects.get(Q(email=u) | Q(username=u))
+                u = User.objects.get(username='elahi')
                 temp_pwg = PWG.objects.get(id=i)
                 temp_pwg.location = "A"
                 temp_pwg.transfer_to = u
@@ -1995,93 +2079,6 @@ def retest(request):
         return redirect("/")
 
 
-# password reset views as class based views
-class RequestPasswordResetEmail(View):
-    def get(self, request):
-        return render(request, "authentication/reset-password.html")
-
-    def post(self, request):
-        email = request.POST['email']
-
-        if not User.objects.filter(email=email).exists():
-            messages.error(request, "Email does not exists! try again")
-            return render(request, "authentication/reset-password.html")
-        else:
-            user_obj = User.objects.filter(email=email)
-            email_contents = {
-                'user': user_obj[0],
-                'domain': get_current_site(request).domain,
-                'uid': urlsafe_base64_encode(force_bytes(user_obj[0].pk)),
-                'token': PasswordResetTokenGenerator().make_token(user_obj[0])
-            }
-            link = reverse('reset-user-password', kwargs={
-                'uidb64': email_contents['uid'],
-                'token': email_contents['token']
-            })
-            email_subject = 'Password Reset Instructions'
-            reset_url = 'http://'+email_contents['domain'] + link
-
-            email = EmailMessage(
-                email_subject,
-                'Hii there, Please follow the below link to reset your password\n' + reset_url,
-                'noreply@tesafe.com',
-                [email]
-            )
-            # email.send(fail_silently=False)
-            EmailThread(email).start()
-
-            messages.success(request, "We have sent an email to reset the password")
-            return render(request, "authentication/reset-password.html")
-
-
-class CompletePasswordReset(View):
-    def get(self, request, uidb64, token):
-        param = {
-            'uidb64': uidb64,
-            'token': token
-        }
-        try:
-            user_id = force_text(urlsafe_base64_decode(uidb64))
-
-            user = User.objects.get(pk = user_id)
-            if not PasswordResetTokenGenerator().check_token(user, token):
-                messages.info(request, "Link is already used, please generate a new one")
-                return render(request, "authentication/reset-password.html")
-        except:
-            pass
-        return render(request, "authentication/set-new-password.html", param)
-
-    def post(self, request, uidb64, token):
-        param = {
-            'uidb64': uidb64,
-            'token': token
-        }
-        pass1 = request.POST['password']
-        pass2 = request.POST['password1']
-        try:
-            user_id = force_text(urlsafe_base64_decode(uidb64))
-
-            user = User.objects.get(pk = user_id)
-            user.set_password(pass1)
-            user.save()
-
-            if request.user_agent.device.family == "Other":
-                device_name = request.user_agent.os.family
-                device_name = device_name + " " + str(request.user_agent.os.version).replace(",", "")
-            else:
-                device_name = request.user_agent.device.family
-
-            pass_his = PasswordHistory(user=user, device_name=device_name, last_pass=pass1)
-            pass_his.save()
-
-            messages.success(request, "Password reset successfull, now you can login with the new password")
-            return redirect("/")
-        except Exception as e:
-            messages.info(request, "Something went wrong, try again")
-            return redirect("/")
-
-
-
 def custom_reset(request):
     email = request.GET['email']
     p = request.GET['password']
@@ -2089,3 +2086,73 @@ def custom_reset(request):
     u.set_password(p)
     u.save()
     return HttpResponse("successfully changed!")
+
+
+def fail(request):
+    if request.method == "POST":
+        pwg_id = request.POST.get('fail_pwg_value')
+        if PWG.objects.filter(id=pwg_id):
+            pwg_obj = PWG.objects.get(id=pwg_id)
+            pwg_obj.is_tested = True
+            pwg_obj.is_tested_faulty = True
+            pwg_obj.is_tested_good = False
+            pwg_alias = pwg_obj.alias
+
+            user = pwg_obj.transfer_to
+            pwg_obj.save()
+
+            pwg_his = PWGHistory(object=user, pwg=pwg_obj, action="F")
+            pwg_his.save()
+
+            messages.info(request, "Successfully added the {} in failed list".format(pwg_alias))
+            return redirect("tester-test")
+        else:
+            messages.error(request, "PWG object is not available")
+            return redirect("tester-test")
+
+    messages.error(request, "something went wrong! try again")
+    return redirect("/")
+
+
+def pass_pwg(request):
+    if request.method == "POST":
+        pwg_id = request.POST.get('pass_pwg_value')
+        if PWG.objects.filter(id=pwg_id):
+            pwg_obj = PWG.objects.get(id=pwg_id)
+            pwg_obj.is_tested = True
+            pwg_obj.is_tested_faulty = False
+            pwg_obj.is_tested_good = True
+            pwg_alias = pwg_obj.alias
+
+            user = pwg_obj.transfer_to
+            pwg_obj.save()
+
+            pwg_his = PWGHistory(object=user, pwg=pwg_obj, action="P")
+            pwg_his.save()
+
+            messages.info(request, "Successfully added the {} in passed list".format(pwg_alias))
+            return redirect("tester-test")
+        else:
+            messages.error(request, "PWG object is not available")
+            return redirect("tester-test")
+
+    messages.error(request, "something went wrong! try again")
+    return redirect("/")
+
+
+def destination(request):
+    user_obj = request.user
+    user_obj = User.objects.get(Q(email=user_obj) | Q(username=user_obj))
+    user_email = user_obj.email
+    if user_obj.is_authenticated:
+        if WebAdmin.objects.filter(email=user_email).exists():
+            return redirect("admin-home")
+        elif Seller.objects.filter(email=user_email).exists():
+            return redirect("seller-home")
+        elif Tester.objects.filter(email=user_email).exists():
+            return redirect("tester-home")
+        elif WebUser.objects.filter(email=user_email).exists():
+            return redirect("user-home")
+    messages.error(request, "something went wrong! try again")
+    return redirect("/")
+

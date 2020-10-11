@@ -215,7 +215,7 @@
                             <tbody>
                             {% for pwg in pwg_obj %}
                               {% if pwgs.id == pwg.owned_by.id %}
-                                {% if pwg.is_tested_good or pwg.is_tested %}
+                                {% if pwg.is_tested_good %}
                               <tr>
                                 <td>
                                   <input type="checkbox" class="pwg_tested{{count}}"  name="floatingButtonHere" disabled=""  value="{{pwg.id}}"/> {{pwg.alias}}
