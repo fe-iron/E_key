@@ -111,4 +111,6 @@ urlpatterns = [
     path('custom_reset', views.custom_reset, name='custom_reset'),
     # to check if the user is laready exists
     path('destination', views.destination, name='destination'),
+    path('accounts/login/', views.index, name='login'),
+
 ]

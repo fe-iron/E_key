@@ -3,6 +3,7 @@ from .models import WebAdmin, Seller, Tester, WebUser, PWGServers, PWG, WebAdmin
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth.decorators import login_required
 from django.utils.encoding import force_bytes, force_text
 from django.core.mail import send_mail, EmailMessage
 from django.contrib.sessions.models import Session
@@ -30,6 +31,7 @@ class EmailThread(threading.Thread):
 
     def run(self):
         self.email.send(fail_silently=False)
+
 
 # dictionary of num to text
 num = {
@@ -307,144 +309,191 @@ def get_current_users(obj):
 
 
 def admin_home(request):
-    seller_count = Seller.objects.all().count()
-    tester_count = Tester.objects.all().count()
-    web_user_count = WebUser.objects.all().count()
-    PWGS_count = PWGServers.objects.all().count()
-    queryset_seller = get_current_users(Seller)
-    queryset_tester = get_current_users(Tester)
-    queryset_web_user = get_current_users(WebUser)
-    queryset_PWGs = get_current_users(PWGServers)
-    history_count = WebAdminLoginHistory.objects.filter(user=request.user).count()
-    cond = ['-login_date', '-login_time']
-    params = {
-        'seller_count': seller_count,
-        'tester_count': tester_count,
-        'web_user_count': web_user_count,
-        'PWGs_count': PWGS_count,
-        'seller_online': queryset_seller.count(),
-        'seller_offline': seller_count - queryset_seller.count(),
-        'tester_online': queryset_tester.count(),
-        'tester_offline': tester_count - queryset_tester.count(),
-        'web_user_online': queryset_web_user.count(),
-        'web_user_offline': web_user_count - queryset_web_user.count(),
-        'PWGs_offline': PWGS_count - queryset_PWGs.count(),
-        'PWGs_online': queryset_PWGs.count(),
-        'history': WebAdminLoginHistory.objects.filter(user=request.user).order_by(*cond),
-        'history_count': history_count,
-        'password_history': PasswordHistory.objects.filter(user=request.user).order_by(*cond)
-    }
-    return render(request, 'tesafe/admin-home.html', params)
+    u = request.user
+    u = User.objects.get(Q(username=u) | Q(email=u))
+    u_email = u.email
+    if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
+        seller_count = Seller.objects.all().count()
+        tester_count = Tester.objects.all().count()
+        web_user_count = WebUser.objects.all().count()
+        PWGS_count = PWGServers.objects.all().count()
+        queryset_seller = get_current_users(Seller)
+        queryset_tester = get_current_users(Tester)
+        queryset_web_user = get_current_users(WebUser)
+        queryset_PWGs = get_current_users(PWGServers)
+        history_count = WebAdminLoginHistory.objects.filter(user=request.user).count()
+        cond = ['-login_date', '-login_time']
+        params = {
+            'seller_count': seller_count,
+            'tester_count': tester_count,
+            'web_user_count': web_user_count,
+            'PWGs_count': PWGS_count,
+            'seller_online': queryset_seller.count(),
+            'seller_offline': seller_count - queryset_seller.count(),
+            'tester_online': queryset_tester.count(),
+            'tester_offline': tester_count - queryset_tester.count(),
+            'web_user_online': queryset_web_user.count(),
+            'web_user_offline': web_user_count - queryset_web_user.count(),
+            'PWGs_offline': PWGS_count - queryset_PWGs.count(),
+            'PWGs_online': queryset_PWGs.count(),
+            'history': WebAdminLoginHistory.objects.filter(user=request.user).order_by(*cond),
+            'history_count': history_count,
+            'password_history': PasswordHistory.objects.filter(user=request.user).order_by(*cond)
+        }
+        return render(request, 'tesafe/admin-home.html', params)
+    messages.error(request, "Login first then try again!!")
+    return redirect("/")
 
 
 def admin_seller(request):
-    seller = Seller.objects.all()
-    param = {
-        'seller': seller,
-    }
-    return render(request, 'tesafe/admin-seller.html', param)
+    u = request.user
+    u = User.objects.get(Q(username=u) | Q(email=u))
+    u_email = u.email
+    if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
+        seller = Seller.objects.all()
+        param = {
+            'seller': seller,
+        }
+        return render(request, 'tesafe/admin-seller.html', param)
+    messages.error(request, "Login first then try again!!")
+    return redirect("/")
 
 
+@login_required
 def admin_tester(request):
-    tester = Tester.objects.all()
-    param = {
-        'tester': tester,
-    }
+    u = request.user
+    u = User.objects.get(Q(username=u) | Q(email=u))
+    u_email = u.email
+    if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
+        tester = Tester.objects.all()
+        param = {
+            'tester': tester,
+        }
 
-    return render(request, 'tesafe/admin-tester.html', param)
+        return render(request, 'tesafe/admin-tester.html', param)
+    messages.error(request, "Login first then try again!!")
+    return redirect("/")
 
 
+@login_required
 def admin_info_server(request):
-    pwgs = PWGServers.objects.all()
-    pwg = PWG.objects.all()
-    count_pwgs = pwgs.count()
-    count_pwg = pwg.count()
-    pwgs_active = get_current_users(PWGServers).count()
-    pwg_active = get_current_users(PWG).count()
-    param = {
-        'pwgs': pwgs,
-        'pwg': pwg,
-        'total_pwgs': count_pwgs,
-        'total_pwgs_online': pwgs_active,
-        'total_pwgs_offline': count_pwgs - pwgs_active,
-        'total_pwg': count_pwg,
-        'total_pwg_online': pwg_active,
-        'total_pwg_offline': count_pwg - pwg_active,
-    }
-    return render(request, 'tesafe/admin-info-server.html', param)
+    u = request.user
+    u = User.objects.get(Q(username=u) | Q(email=u))
+    u_email = u.email
+    if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
+        pwgs = PWGServers.objects.all()
+        pwg = PWG.objects.all()
+        count_pwgs = pwgs.count()
+        count_pwg = pwg.count()
+        pwgs_active = get_current_users(PWGServers).count()
+        pwg_active = get_current_users(PWG).count()
+        param = {
+            'pwgs': pwgs,
+            'pwg': pwg,
+            'total_pwgs': count_pwgs,
+            'total_pwgs_online': pwgs_active,
+            'total_pwgs_offline': count_pwgs - pwgs_active,
+            'total_pwg': count_pwg,
+            'total_pwg_online': pwg_active,
+            'total_pwg_offline': count_pwg - pwg_active,
+        }
+        return render(request, 'tesafe/admin-info-server.html', param)
+    messages.error(request, "Login first then try again!!")
+    return redirect("/")
 
 
+@login_required
 def seller_home(request):
-    count = 0
-    user_online = 0
-    user_offline = 0
-    cond = ['-login_date', '-login_time']
-    seller_user = request.user
-    seller = seller_user.id
-    seller = Seller.objects.get(user=seller)
-    if PWG.objects.filter(transfer_to=seller_user).exists():
-        pwg = PWG.objects.filter(transfer_to=seller_user)
-        count = pwg.count()
+    u = request.user
+    u = User.objects.get(Q(username=u) | Q(email=u))
+    u_email = u.email
+    if u.is_authenticated and Seller.objects.filter(email=u_email).exists():
+        count = 0
+        user_online = 0
+        user_offline = 0
+        cond = ['-login_date', '-login_time']
+        seller_user = request.user
+        seller = seller_user.id
+        seller = Seller.objects.get(user=seller)
+        if PWG.objects.filter(transfer_to=seller_user).exists():
+            pwg = PWG.objects.filter(transfer_to=seller_user)
+            count = pwg.count()
 
-    history_count = WebAdminLoginHistory.objects.filter(user=request.user).count()
-    history = WebAdminLoginHistory.objects.filter(user=request.user).order_by(*cond)
+        history_count = WebAdminLoginHistory.objects.filter(user=request.user).count()
+        history = WebAdminLoginHistory.objects.filter(user=request.user).order_by(*cond)
 
-    param = {
-        "seller": seller,
-        "pwgs": count,
-        "pwg_online": get_current_users(PWG).count(),
-        "pwg_offline": count - get_current_users(PWG).count(),
-        "user_online": seller.user_count,
-        "user_offline": 0,
-        "history_count": history_count,
-        "history": history,
-        'password_history': PasswordHistory.objects.filter(user=request.user).order_by(*cond),
+        param = {
+            "seller": seller,
+            "pwgs": count,
+            "pwg_online": get_current_users(PWG).count(),
+            "pwg_offline": count - get_current_users(PWG).count(),
+            "user_online": seller.user_count,
+            "user_offline": 0,
+            "history_count": history_count,
+            "history": history,
+            'password_history': PasswordHistory.objects.filter(user=request.user).order_by(*cond),
 
-    }
-    return render(request, 'seller/seller-home.html', param)
+        }
+        return render(request, 'seller/seller-home.html', param)
+    messages.error(request, "Login first then try again!!")
+    return redirect("/")
 
 
+@login_required
 def seller_user(request):
-    seller = request.user
-    user = User.objects.get(email=seller)
-    seller = Seller.objects.get(user=user.id)
+    u = request.user
+    u = User.objects.get(Q(username=u) | Q(email=u))
+    u_email = u.email
+    if u.is_authenticated and Seller.objects.filter(email=u_email).exists():
+        seller = request.user
+        user = User.objects.get(email=seller)
+        seller = Seller.objects.get(user=user.id)
 
-    if WebUser.objects.filter(associated_with=seller.id).exists():
-        web_users = WebUser.objects.filter(associated_with=seller.id)
-    else:
-        web_users = None
-
-    param = {
-        "users": web_users,
-        "id": seller.id,
-        "unique_name": unique_name("S", '001'),
-    }
-    return render(request, 'seller/seller-user.html', param)
-
-
-def seller_pwg(request):
-    pwgserver = []
-    pwgserver1 = []
-    user = request.user
-    pwg = PWG.objects.filter(Q(transfer_to=user) | Q(sold_from=user))
-    for i in pwg:
-        if i.is_authorized or i.is_shared or i.sold_from:
-            pwgs = i.owned_by
-            try:
-                pwgserver.index(pwgs)
-
-            except ValueError as ve:
-                pwgserver.append(pwgs)
+        if WebUser.objects.filter(associated_with=seller.id).exists():
+            web_users = WebUser.objects.filter(associated_with=seller.id)
         else:
-            pwgs = i.owned_by
-            pwgserver1.append(pwgs)
-    param = {
-        "pwgserver_occupied": pwgserver,
-        "pwgserver_unoccupied": pwgserver1,
-        "pwg": pwg,
-        "num": num,
-    }
-    return render(request, 'seller/seller-pwg.html', param)
+            web_users = None
+
+        param = {
+            "users": web_users,
+            "id": seller.id,
+            "unique_name": unique_name("S", '001'),
+        }
+        return render(request, 'seller/seller-user.html', param)
+    messages.error(request, "Login first then try again!!")
+    return redirect("/")
+
+
+@login_required
+def seller_pwg(request):
+    u = request.user
+    u = User.objects.get(Q(username=u) | Q(email=u))
+    u_email = u.email
+    if u.is_authenticated and Seller.objects.filter(email=u_email).exists():
+        pwgserver = []
+        pwgserver1 = []
+        user = request.user
+        pwg = PWG.objects.filter(Q(transfer_to=user) | Q(sold_from=user))
+        for i in pwg:
+            if i.is_authorized or i.is_shared or i.sold_from:
+                pwgs = i.owned_by
+                try:
+                    pwgserver.index(pwgs)
+
+                except ValueError as ve:
+                    pwgserver.append(pwgs)
+            else:
+                pwgs = i.owned_by
+                pwgserver1.append(pwgs)
+        param = {
+            "pwgserver_occupied": pwgserver,
+            "pwgserver_unoccupied": pwgserver1,
+            "pwg": pwg,
+            "num": num,
+        }
+        return render(request, 'seller/seller-pwg.html', param)
+    messages.error(request, "Login first then try again!!")
+    return redirect("/")
 
 
 def transfer(request, id):
@@ -465,6 +514,7 @@ def transfer(request, id):
     return render(request, 'tesafe/transfer.html', param)
 
 
+@login_required
 def tester_getback(request, id):
     if User.objects.filter(id=id).exists():
         user = User.objects.get(id=id)
@@ -491,6 +541,7 @@ def tester_getback(request, id):
         return redirect('admin-tester')
 
 
+@login_required
 def tester_tested_pwg_list(request, id):
     user = User.objects.get(id=id)
     pwgserver = PWGServers.objects.all()
@@ -505,6 +556,7 @@ def tester_tested_pwg_list(request, id):
     return render(request, 'tesafe/tester-tested-pwg-list.html', param)
 
 
+@login_required
 def pwg_sublist(request, id):
     if PWG.objects.filter(owned_by=id).exists():
         pwg = PWG.objects.filter(owned_by=id)
@@ -520,6 +572,7 @@ def pwg_sublist(request, id):
         return redirect("admin-info-server")
 
 
+@login_required
 def transfer_seller(request, pk):
     user = User.objects.get(id=pk)
     pwgserver = PWGServers.objects.all()
@@ -538,6 +591,7 @@ def transfer_seller(request, pk):
     return render(request, 'tesafe/transfer.html', param)
 
 
+@login_required
 def transfer_seller_pwg(request):
     if request.method == "POST":
         ids = request.POST['pwg_ids']
@@ -572,6 +626,7 @@ def transfer_seller_pwg(request):
     return redirect('seller-pwg')
 
 
+@login_required
 def seller_authorized(request, pk):
     user = User.objects.get(id=pk)
     pwgserver = PWGServers.objects.all()
@@ -589,6 +644,7 @@ def seller_authorized(request, pk):
     return render(request, 'tesafe/transfer.html', param)
 
 
+@login_required
 def seller_authorized_pwg(request):
     if request.method == "POST":
         ids = request.POST['pwg_ids']
@@ -623,6 +679,7 @@ def seller_authorized_pwg(request):
     return render(request, 'seller/seller-pwg.html')
 
 
+@login_required
 def seller_shared_pwg(request):
     if request.method == "POST":
         ids = request.POST['pwg_ids']
@@ -659,6 +716,7 @@ def seller_shared_pwg(request):
     return render(request, 'seller/seller-pwg.html')
 
 
+@login_required
 def seller_shared(request,pk):
     user = User.objects.get(id=pk)
     pwgserver = PWGServers.objects.all()
@@ -677,6 +735,7 @@ def seller_shared(request,pk):
     return render(request, 'tesafe/transfer.html', param)
 
 
+@login_required
 def seller_deshared_pwg(request):
     if request.method == "POST":
         ids = request.POST['pwg_ids']
@@ -702,79 +761,106 @@ def seller_deshared_pwg(request):
             "form_action": "deshare_multiple_pwgs",
             "action": "De-share",
         }
-    return render(request, 'seller/seller-deshared-pwg.html', param)
+        return render(request, 'seller/seller-deshared-pwg.html', param)
 
 
+@login_required
 def tester_home(request):
-    pwgs_untested = []
-    pwgs_tested_good = []
-    pwgs_tested_faulty = []
-    user = request.user
-    if User.objects.filter(email=user).exists():
-        user = User.objects.get(email=user)
-        if PWG.objects.filter(transfer_to=user).exists():
-            pwg_obj = PWG.objects.filter(transfer_to=user)
-            for pwg in pwg_obj:
-                if pwg.is_tested:
-                    if pwg.is_tested_faulty:
-                        # checking if the server name is already available or not
+    u = request.user
+    u = User.objects.get(Q(username=u) | Q(email=u))
+    u_email = u.email
+    if u.is_authenticated and Tester.objects.filter(email=u_email).exists():
+        pwgs_untested = []
+        pwgs_tested_good = []
+        pwgs_tested_faulty = []
+        user = request.user
+        if User.objects.filter(email=user).exists():
+            user = User.objects.get(email=user)
+            if PWG.objects.filter(transfer_to=user).exists():
+                pwg_obj = PWG.objects.filter(transfer_to=user)
+                for pwg in pwg_obj:
+                    if pwg.is_tested:
+                        if pwg.is_tested_faulty:
+                            # checking if the server name is already available or not
+                            try:
+                                a = pwgs_tested_faulty.index(pwg.owned_by)
+                            except ValueError as ve:
+                                pwgs_tested_faulty.append(pwg.owned_by)
+
+                        if pwg.is_tested_good:
+                            # checking if the server name is already available or not
+                            try:
+                                a = pwgs_tested_good.index(pwg.owned_by)
+                            except ValueError as ve:
+                                pwgs_tested_good.append(pwg.owned_by)
+                    else:
                         try:
-                            a = pwgs_tested_faulty.index(pwg.owned_by)
+                            a = pwgs_untested.index(pwg.owned_by)
                         except ValueError as ve:
-                            pwgs_tested_faulty.append(pwg.owned_by)
+                            pwgs_untested.append(pwg.owned_by)
 
-                    if pwg.is_tested_good:
-                        # checking if the server name is already available or not
-                        try:
-                            a = pwgs_tested_good.index(pwg.owned_by)
-                        except ValueError as ve:
-                            pwgs_tested_good.append(pwg.owned_by)
-                else:
-                    try:
-                        a = pwgs_untested.index(pwg.owned_by)
-                    except ValueError as ve:
-                        pwgs_untested.append(pwg.owned_by)
+            else:
+                pwg_obj = None
 
-        else:
-            pwg_obj = None
+            param = {
+                'pwg_obj': pwg_obj,
+                'pwgs_untested': pwgs_untested,
+                'pwgs_tested_good': pwgs_tested_good,
+                'pwgs_tested_faulty': pwgs_tested_faulty,
+            }
+            return render(request, "tester/tester-home.html", param)
 
-        param = {
-            'pwg_obj': pwg_obj,
-            'pwgs_untested': pwgs_untested,
-            'pwgs_tested_good': pwgs_tested_good,
-            'pwgs_tested_faulty': pwgs_tested_faulty,
-        }
-        return render(request, "tester/tester-home.html", param)
-
-    messages.error(request, "User not available, please login first")
-    return render(request, "tester/tester-home.html")
+        messages.error(request, "User not available, please login first")
+        return render(request, "tester/tester-home.html")
+    messages.error(request, "please login first, then try again!!")
+    return redirect("/")
 
 
-
+@login_required
 def tester_test(request):
-    user = request.user
-    if User.objects.filter(email=user).exists():
-        untested_pwg = []
-        pwg_untested = PWG.objects.filter(transfer_to=user)
-        for pwg in pwg_untested:
-            if not pwg.is_tested:
-                untested_pwg.append(pwg)
+    u = request.user
+    u = User.objects.get(Q(username=u) | Q(email=u))
+    u_email = u.email
+    if u.is_authenticated and Tester.objects.filter(email=u_email).exists():
+        user = request.user
+        if User.objects.filter(email=user).exists():
+            untested_pwg = []
+            pwg_untested = PWG.objects.filter(transfer_to=user)
+            for pwg in pwg_untested:
+                if not pwg.is_tested:
+                    untested_pwg.append(pwg)
 
-        param = {
-            'pwg_untested': untested_pwg
-        }
-        return render(request, 'tester/tester-test.html', param)
-    else:
-        messages.error(request, "user not available, please login first!")
-        return render(request, 'tester/tester-test.html')
+            param = {
+                'pwg_untested': untested_pwg
+            }
+            return render(request, 'tester/tester-test.html', param)
+        else:
+            messages.error(request, "user not available, please login first!")
+            return render(request, 'tester/tester-test.html')
+    messages.error(request, "please login first, then try again!!")
+    return redirect("/")
 
 
+@login_required
 def user_user(request):
-    return render(request, 'user/user-user.html')
+    u = request.user
+    u = User.objects.get(Q(username=u) | Q(email=u))
+    u_email = u.email
+    if u.is_authenticated and Tester.objects.filter(email=u_email).exists():
+        return render(request, 'user/user-user.html')
+    messages.error(request, "please login first, then try again!!")
+    return redirect("/")
 
 
+@login_required
 def user_home(request):
-    return render(request, 'user/user-home.html')
+    u = request.user
+    u = User.objects.get(Q(username=u) | Q(email=u))
+    u_email = u.email
+    if u.is_authenticated and Tester.objects.filter(email=u_email).exists():
+        return render(request, 'user/user-home.html')
+    messages.error(request, "please login first, then try again!!")
+    return redirect("/")
 
 
 # TODOs
@@ -2153,6 +2239,6 @@ def destination(request):
             return redirect("tester-home")
         elif WebUser.objects.filter(email=user_email).exists():
             return redirect("user-home")
-    messages.error(request, "something went wrong! try again")
+    messages.error(request, "Login first then try again!!")
     return redirect("/")
 
