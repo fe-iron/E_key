@@ -140,6 +140,18 @@ def get_ip(request):
     return ip
 
 
+def login_history(request, user):
+    ip = get_ip(request)
+    if request.user_agent.device.family == "Other":
+        device_name = request.user_agent.os.family
+        device_name = device_name + " " + str(request.user_agent.os.version).replace(",", "")
+    else:
+        device_name = request.user_agent.device.family
+
+    history = WebAdminLoginHistory(user=user, login_IP=ip, device_name=device_name)
+    history.save()
+
+
 #  login
 def index(request):
     if request.method == 'POST':
@@ -147,52 +159,65 @@ def index(request):
         password = request.POST['password']
         uname = request.POST['uname']
 
-        user = auth.authenticate(username=uname, password=password)
+        if accType == 'admin':
+            user = auth.authenticate(username=uname, password=password)
 
-        if user is not None:
-            auth.login(request, user)
-            # saving history
-            ip = get_ip(request)
-            if request.user_agent.device.family == "Other":
-                device_name = request.user_agent.os.family
-                device_name = device_name + " " + str(request.user_agent.os.version).replace(",","")
-            else:
-                device_name = request.user_agent.device.family
-
-            history = WebAdminLoginHistory(user=user, login_IP=ip, device_name=device_name)
-            history.save()
-
-            if accType == 'admin':
+            if user is not None:
                 if WebAdmin.objects.filter(user=user).exists():
+                    auth.login(request, user)
+                    login_history(request, user)
                     return redirect("admin-home")
                 else:
                     messages.info(request, 'Invalid user id and password for Admin')
                     return redirect('/')
+            else:
+                messages.info(request, 'Invalid user id and password')
+                return redirect('/')
 
-            elif accType == 'seller':
+        elif accType == 'seller':
+            user = auth.authenticate(username=uname, password=password)
+
+            if user is not None:
                 if Seller.objects.filter(email=uname).exists():
+                    auth.login(request, user)
+                    login_history(request, user)
                     return redirect("seller-home")
                 else:
                     messages.info(request, 'Invalid user id and password for Seller')
                     return redirect('/')
+            else:
+                messages.info(request, 'Invalid user id and password')
+                return redirect('/')
 
-            elif accType == 'tester':
+        elif accType == 'tester':
+            user = auth.authenticate(username=uname, password=password)
+
+            if user is not None:
                 if Tester.objects.filter(email=uname).exists():
+                    auth.login(request, user)
+                    login_history(request, user)
                     return redirect('tester-home')
                 else:
                     messages.info(request, 'Invalid user id and password for Tester')
                     return redirect('/')
+            else:
+                messages.info(request, 'Invalid user id and password')
+                return redirect('/')
 
-            elif accType == 'user':
+        elif accType == 'user':
+            user = auth.authenticate(username=uname, password=password)
+
+            if user is not None:
                 if WebUser.objects.filter(email=uname).exists():
+                    auth.login(request, user)
+                    login_history(request, user)
                     return redirect("user-home")
                 else:
                     messages.info(request, 'Invalid user id and password for User')
                     return redirect('/')
-
-        else:
-            messages.info(request, 'Invalid user id and password')
-            return redirect('/')
+            else:
+                messages.info(request, 'Invalid user id and password')
+                return redirect('/')
 
     else:
         return render(request, 'tesafe/index.html')
@@ -847,7 +872,7 @@ def user_user(request):
     u = request.user
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
-    if u.is_authenticated and Tester.objects.filter(email=u_email).exists():
+    if u.is_authenticated and WebUser.objects.filter(email=u_email).exists():
         return render(request, 'user/user-user.html')
     messages.error(request, "please login first, then try again!!")
     return redirect("/")
@@ -858,7 +883,7 @@ def user_home(request):
     u = request.user
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
-    if u.is_authenticated and Tester.objects.filter(email=u_email).exists():
+    if u.is_authenticated and WebUser.objects.filter(email=u_email).exists():
         return render(request, 'user/user-home.html')
     messages.error(request, "please login first, then try again!!")
     return redirect("/")
