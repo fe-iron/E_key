@@ -69,7 +69,7 @@ function pop3(pk, accType){
     $.ajax({
             type: 'GET',
             url: "use_record",
-            data: {"pk": pk},
+            data: {"pk": pk, "accType": accType},
             success: function (response) {
                 // if not valid user, alert the user
 
@@ -82,12 +82,11 @@ function pop3(pk, accType){
                         for(i=0;i<response.length;i++){
                             var date = response[i]['fields']['login_date'];
                             var time = response[i]['fields']['login_time'];
-                            var IP = response[i]['fields']['login_IP'];
-                            var device_name = response[i]['fields']['device_name'];
+                            var my_password = response[i]['fields']['password'];
                             count = count + 1;
-                            text += '<tr><th scope="row">'+count+'</th><td>'+date+'</td><td>'+time.slice(0,-(time.length-5))+'</td><td>'+device_name+'</td><td>'+IP+'</td></tr>';
+                            text += '<tr><th scope="row">'+count+'</th><td>'+date+'</td><td>'+time.slice(0,-(time.length-5))+'</td><td>'+my_password+'</td></tr>';
                         }
-                        $('#modal-body-login-history').html('<div class="table-responsive"><table class="table"><thead><tr><th scope="col">Sr. No.</th><th scope="col">Date</th><th scope="col">Time</th><th scope="col">Device Name</th><th scope="col">Login IP Address</th></tr></thead><tbody>'+text+'</tbody></table></div>');
+                        $('#modal-body-login-history').html('<div class="table-responsive"><table class="table"><thead><tr><th scope="col">Sr. No.</th><th scope="col">Date</th><th scope="col">Time</th><th scope="col">Password</th></tr></thead><tbody>'+text+'</tbody></table></div>');
                         user_name(pk, accType);
                 }
 
@@ -239,9 +238,11 @@ function assign(pk){
         }
         $("#tester_values").attr('value', tester_pk);
         $("#pwg_pk").attr('value', pk);
+
         document.forms['assign_multiple'].submit();
 
 }
+
 
 //to tester list
 function tester_list(pk){
@@ -257,10 +258,10 @@ function tester_list(pk){
                     }else{
                     var text = '';
                         for(i=0;i<response.length;i++){
-                            text += "<label><b>"+response[i]['fields']['first_name']+" "+response[i]['fields']['last_name']+"</b></label> <input type='checkbox' value='' class='ml-5 "+pk+"' name="+response[i]['pk']+" /> <br>"
+                            text += "<tr><td>"+response[i]['fields']['first_name']+" "+response[i]['fields']['last_name']+"</td><td> <input type='checkbox' value='' class='ml-5 "+pk+"' name="+response[i]['pk']+" /> </td></tr>"
                         }
 
-                        $("#tester_modal").html(text);
+                        $("#tester_modal").html('<div class="table-responsive"><table class="table"><thead><tr><th scope="col">Tester Name</th><th scope="col">Select</th></tr><tbody>'+text+'</tbody></table></div>');
                         $("#confirm-modal-button").attr('onclick', 'assign('+pk+')');
                         $('.imagepreview').attr('src', $(this).find('img').attr('src'));
                         $('#imagemodalConfirm').modal('show');
@@ -277,6 +278,126 @@ function tester_list(pk){
                         });
                     }
 
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+
+
+}
+
+//to tester list
+function userToUser_list(pk, pwg_id, action){
+        // GET AJAX request
+        $.ajax({
+            type: 'GET',
+            url: "user_list",
+            data: {"pk": pk},
+            success: function (response) {
+                    if(response['data'] == false){
+                        $("#tester_modal").html("<h5>You have no users yet!</h5>");
+                        $("#tester_modal").css("color","red");
+                    }else{
+                        var sub_text = '';
+                        var text = '';
+                        var flag = true;
+                        for (var key in response) {
+                            // check if the property/key is defined in the object itself, not in parent
+                            if (response.hasOwnProperty(key)) {
+                                if(flag){
+                                    sub_text += "<tr><td>"+response[key]+"</td>";
+                                    flag = false;
+                                }else{
+                                    if(action == "transfer"){
+                                        sub_text += "<td> <input type='radio' value='' class='ml-5 "+pwg_id+"' name="+response[key]+" /> </td></tr>";
+                                    }else if(action == "transfer_multiple_pwg"){
+                                        sub_text += "<td> <input type='radio' value='' class='ml-5 "+pwg_id[0]+"' name="+response[key]+" /> </td></tr>";
+                                    }else if(action == "authorize_multiple" || action == "share_multiple_pwg"){
+                                        sub_text += "<td> <input type='checkbox' value='' class='ml-5 "+pwg_id[0]+"' name="+response[key]+" /> </td></tr>";
+                                    }else{
+                                        sub_text += "<td> <input type='checkbox' value='' class='ml-5 "+pwg_id+"' name="+response[key]+" /> </td></tr>";
+                                    }
+                                    flag = true;
+                                }
+                            }
+                            if(flag){
+                                text += sub_text;
+                                sub_text = '';
+                            }
+                        }
+
+                        $("#tester_modal").html('<div class="table-responsive"><table class="table"><thead><tr><th scope="col">My Users</th><th scope="col">Select</th></tr><tbody>'+text+'</tbody></table></div>');
+
+                        if(action == "authorize"){
+                            $("#confirm-modal-button").attr('onclick', 'assign('+pwg_id+')');
+                        }else if(action == "share"){
+                            $("#confirm-modal-button").attr('onclick', 'share('+pwg_id+')');
+                        }else if(action == "transfer"){
+                            $("#confirm-modal-button").attr('onclick', 'transfer('+pwg_id+')');
+                        }else if(action == "authorize_multiple"){
+                            $("#confirm-modal-button").attr('onclick', 'authorize_submit('+pwg_id[0]+')');
+                        }else if(action == "share_multiple_pwg"){
+                            $("#confirm-modal-button").attr('onclick', 'share_submit_pwg('+pwg_id[0]+')');
+                        }else if(action == "transfer_multiple_pwg"){
+                            $("#confirm-modal-button").attr('onclick', 'transfer_submit_pwg('+pwg_id[0]+')');
+                        }
+                        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                        $('#imagemodalConfirm').modal('show');
+
+                        // event listener on click on checkboxes
+                        if(action == "authorize" || action == "share"){
+                            $('.'+pwg_id).click(function() {
+                                if($(this).is(':checked')){
+                                    var name = $(this).attr('name');
+                                    $(this).val(name);
+                                }else{
+                                    $(this).val('');
+                                }
+                            });
+                        }else if(action == "authorize_multiple" || action == "share_multiple_pwg"){
+                            $('.'+pwg_id[0]).click(function() {
+                                if($(this).is(':checked')){
+                                    var name = $(this).attr('name');
+                                    $(this).val(name);
+                                }else{
+                                    $(this).val('');
+                                }
+                            });
+                        }else if(action == "transfer_multiple_pwg"){
+                            $('.'+pwg_id[0]).click(function() {
+                                names = $('.'+pwg_id);
+                                    for(i=0;i<names.length;i++){
+                                        value = names[i]['value'];
+                                        if(value != ''){
+                                            names[i]['value'] = '';
+                                        }
+                                    }
+                                    if($(this).is(':checked')){
+                                        var name = $(this).attr('name');
+                                        $(this).val(name);
+                                        $('input[type="radio"]').prop('checked', false);
+                                        $(this).prop('checked', true);
+                                    }
+                            });
+                        }else{
+                            $('.'+pwg_id).click(function() {
+                                names = $('.'+pwg_id);
+                                    for(i=0;i<names.length;i++){
+                                        value = names[i]['value'];
+                                        if(value != ''){
+                                            names[i]['value'] = '';
+                                        }
+                                    }
+                                    if($(this).is(':checked')){
+                                        var name = $(this).attr('name');
+                                        $(this).val(name);
+                                        $('input[type="radio"]').prop('checked', false);
+                                        $(this).prop('checked', true);
+                                    }
+                            });
+                        }
+                    }
             },
             error: function (response) {
                 console.log(response)
@@ -394,3 +515,29 @@ function deshare(pk, accType){
         })
 
 }
+
+//to delete a user temporarily
+function delete_temp_user(pk, accType){
+      	$.ajax({
+            type: 'GET',
+            url: "delete_temp",
+            data: {"pk": pk, "accType": accType},
+            success: function (response) {
+                    if(response['msg'] == false){
+                        $("#confirm-message").html(response['msg']);
+                        $("#confirm-message-color").css("color","red");
+                    }else{
+                        $("#confirm-message").html(response['msg']);
+                        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                        $('#confirm').modal('show');
+                    }
+                    window.setTimeout(function(){
+                        location.reload(true);
+                    }, 6000);
+
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+      }

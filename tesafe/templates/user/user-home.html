@@ -65,11 +65,15 @@
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">Authorize</a>
-						<a class="dropdown-item" href="#">Transfer</a>
-						<a class="dropdown-item" href="#">Share</a>
-						<a class="dropdown-item" href="#">Delete</a>
+						<a class="dropdown-item" href="#" onclick="authorize_multiple('authorize_multiple');">Authorize</a>
+						<a class="dropdown-item" href="#" onclick="authorize_multiple('transfer_multiple_pwg');">Transfer</a>
+						<a class="dropdown-item" href="#" onclick="authorize_multiple('share_multiple_pwg');">Share</a>
+						<a class="dropdown-item" href="#" onclick="delete_pwg();">Delete</a>
+						{% if user.is_authenticated %}
+						<a class="dropdown-item" href="logout">Log Out</a>
+						{%else%}
 						<a class="dropdown-item" href="/">Exit</a>
+						{% endif %}
 					</div>
 				</div>
 
@@ -81,6 +85,11 @@
 	<section class="bg-detail">
 		<div class="container-fluid">
 			<div class="row justify-content-center">
+
+				<!-- for showing error and messages-->
+				<div class="col-md-10 py-2 px-5 mt-3" id="msg">
+
+				</div>
 				<div class="col-md-10 py-5 px-5">
 					<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-1">
 							<div class="col-md-8 col-md-6">
@@ -92,10 +101,8 @@
 												<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
 												<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 											</div>
-
 										</form>
 										<button type="button" class="btn btn-primary pop my-2 my_mr-5 pop" disabled style="border-radius:20px;" id="tested-button"> Get Password </button>
-
 									</nav>
 								</header>
 								<div class="col-md" style="display: flex;">
@@ -134,194 +141,72 @@
 									<table class="table">
 										<thead>
 											<tr class="d-flex">
-												<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere" disabled=""> <i class="fas fa-sort-down"></i></th>
+												<th scope="col" style="position: relative;"><input type="checkbox" id="checkAll" disabled=""> <i class="fas fa-sort-down"></i></th>
 												<th class="col-5 text-center">Name</th>
 												<th class="col-3">Attribute</th>
 												<th class="col-2">Action</th>
 											</tr>
 										</thead>
 										<tbody id="myTable" class="table-borderless">
-											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi" class="d-flex align-items-center">
+										{% for pwg in pwg_obj %}
+											<tr class="d-flex align-items-center">
+												<th><input type="checkbox" value="{{pwg.id}}" name="floatingButtonHere" class="check" disabled=""></th>
+												{% if pwg.alias == '' %}
+													<td id="pwg{{forloop.counter0}}" class="cursor col-5 text-center" onclick="selected_pwg('{{pwg.system_name}}', {{pwg.id}});">{{pwg.system_name}}</td>
+												{% else %}
+												<td id="pwg{{forloop.counter0}}" class="cursor col-5 text-center" onclick="selected_pwg('{{pwg.alias}}', {{pwg.id}});">{{pwg.alias}}</td>
+												{% endif %}
 
-												<th><input type="checkbox" name="book" id="book1" value="floatingButtonHere" disabled=""></th>
-												<td id="pwg0" class="cursor col-5 text-center" onclick="selected_pwg('PWGS-A');">PWGS-A</td>
-												<td class="col-3"> A</td>
-
-												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
-													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-														<i class="fas fa-ellipsis-v"></i>
-													</button>
-													<div class="dropdown-menu">
-														<a class="dropdown-item pop1" id="0" href="#">Review Record</a>
-														<a class="dropdown-item" onclick="pop2('PWGS-A')" href="#" >Set Alias</a>
-													</div>
-												</div></td>
-											</tr>
-											<tr data-toggle="tooltip" class="d-flex align-items-center" data-placement="top" title="this PWG is assign to Faiz elahi">
-
-												<th><input type="checkbox" name="book" id="book2" value="floatingButtonHere" disabled=""></th>
-												<td class="cursor col-5 text-center" id="pwg1" onclick="selected_pwg('PWGS-B');">PWGS-B</td>
-												<td class="col-3">T</td>
-
-												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
-
-													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-														<i class="fas fa-ellipsis-v"></i>
-													</button>
-													<div class="dropdown-menu">
-														<a class="dropdown-item pop1" id="1" href="#">Review Record</a>
-														<a class="dropdown-item" href="#">Authorize</a>
-														<a class="dropdown-item" href="#">Transfer</a>
-								 						<a class="dropdown-item" href="#">Share</a>
-														<a class="dropdown-item" onclick="pop2('PWGS-B')" href="#" >Set Alias</a>
-														<a class="dropdown-item" href="#">Delete</a>
-													</div>
-												</div></td>
-											</tr>
-
-											<tr data-toggle="tooltip" class="d-flex align-items-center" data-placement="top" title="this PWG is assign to Faiz elahi">
-												<th><input type="checkbox" name="book" id="book3" value="floatingButtonHere" disabled=""></th>
-												<td class="cursor col-5 text-center" id="pwg2" onclick="selected_pwg('PWGS-C');">PWGS-C</td>
-												<td class="col-3">S</td>
-
-												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
-
-													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-														<i class="fas fa-ellipsis-v"></i>
-													</button>
-													<div class="dropdown-menu">
-														<a class="dropdown-item pop1" id="2" href="#">Review Record</a>
-														<a class="dropdown-item" onclick="pop2('PWGS-C')" href="#" >Set Alias</a>
-													</div>
-												</div></td>
-											</tr>
-
-											<tr data-toggle="tooltip" class="d-flex align-items-center" data-placement="top" title="this PWG is assign to Faiz elahi">
-												<th><input type="checkbox" name="book" id="book4" value="floatingButtonHere" disabled=""></th>
-												<td class="cursor col-5 text-center" id="pwg3" onclick="selected_pwg('PWGS-D');">PWGS-D</td>
-												<td class="col-3">DA</td>
-
-												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
-
-													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-														<i class="fas fa-ellipsis-v"></i>
-													</button>
-													<div class="dropdown-menu">
-														<a class="dropdown-item pop1" id="3" href="#">Review Record</a>
-														<a class="dropdown-item" href="#">De-authorize</a>
-														<a class="dropdown-item" onclick="pop2('PWGS-D')" href="#" >Set Alias</a>
-													</div>
-												</div></td>
-											</tr>
-
-											<tr data-toggle="tooltip" class="d-flex align-items-center" data-placement="top" title="this PWG is assign to Faiz elahi">
-												<th><input type="checkbox" name="book" id="book4" value="floatingButtonHere" disabled=""></th>
-												<td class="cursor col-5 text-center" id="pwg4" onclick="selected_pwg('PWGS-E');">PWGS-E</td>
-												<td class="col-3">DA</td>
-
-												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
-
-													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-														<i class="fas fa-ellipsis-v"></i>
-													</button>
-													<div class="dropdown-menu">
-														<a class="dropdown-item pop1" id="4" href="#">Review Record</a>
-														<a class="dropdown-item" href="#">De-authorize</a>
-														<a class="dropdown-item" onclick="pop2('PWGS-E')" href="#" >Set Alias</a>
-													</div>
-												</div></td>
-											</tr>
-											<tr data-toggle="tooltip" class="d-flex align-items-center" data-placement="top" title="this PWG is assign to Faiz elahi">
-												<th><input type="checkbox" name="book" id="book3" value="floatingButtonHere" disabled=""></th>
-												<td class="cursor col-5 text-center" id="pwg5" onclick="selected_pwg('PWGS-F');">PWGS-F</td>
-												<td class="col-3">S</td>
-
-												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
-
-													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-														<i class="fas fa-ellipsis-v"></i>
-													</button>
-													<div class="dropdown-menu">
-														<a class="dropdown-item pop1" id="5" href="#">Review Record</a>
-														<a class="dropdown-item" onclick="pop2('PWGS-F')" href="#" >Set Alias</a>
-													</div>
-												</div></td>
-											</tr>
-
-											<tr data-toggle="tooltip" class="d-flex align-items-center" data-placement="top" title="this PWG is assign to Faiz elahi">
-												<th><input type="checkbox" name="book" id="book4" value="floatingButtonHere" disabled=""></th>
-												<td class="cursor col-5 text-center" id="pwg6" onclick="selected_pwg('PWGS-G');">PWGS-G</td>
-												<td class="col-3">DA</td>
-
-												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
-
-													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-														<i class="fas fa-ellipsis-v"></i>
-													</button>
-													<div class="dropdown-menu">
-														<a class="dropdown-item pop1" id="6" href="#">Review Record</a>
-														<a class="dropdown-item" href="#">De-authorize</a>
-														<a class="dropdown-item" onclick="pop2('PWGS-G')" href="#" >Set Alias</a>
-													</div>
-												</div></td>
-											</tr>
-
-											<tr data-toggle="tooltip" class="d-flex align-items-center" data-placement="top" title="this PWG is assign to Faiz elahi">
-												<th><input type="checkbox" name="book" id="book4" value="floatingButtonHere" disabled=""></th>
-												<td class="cursor col-5 text-center" id="pwg7" onclick="selected_pwg('PWGS-H');">PWGS-H</td>
-												<td class="col-3">DA</td>
-
-												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
-
-													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-														<i class="fas fa-ellipsis-v"></i>
-													</button>
-													<div class="dropdown-menu">
-														<a class="dropdown-item pop1" id="7" href="#">Review Record</a>
-														<a class="dropdown-item" href="#">De-authorize</a>
-														<a class="dropdown-item" onclick="pop2('PWGS-I')" href="#" >Set Alias</a>
-													</div>
-												</div></td>
-											</tr>
-
-											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to Faiz elahi" class="d-flex align-items-center">
-
-												<th><input type="checkbox" name="book" id="book1" value="floatingButtonHere" disabled=""></th>
-												<td id="pwg8" class="cursor col-5 text-center" onclick="selected_pwg('PWGS-I');">PWGS-I</td>
-												<td class="col-3"> A</td>
+												<td class="col-3"> {{pwg.user_location}}</td>
 
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
 													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 														<i class="fas fa-ellipsis-v"></i>
 													</button>
 													<div class="dropdown-menu">
-														<a class="dropdown-item pop1" id="8" href="#">Review Record</a>
-														<a class="dropdown-item" onclick="pop2('PWGS-I')" href="#" >Set Alias</a>
+														{% if pwg.user_location == "T" %}
+															<a class="dropdown-item" href="#" onclick="userToUser_list({{pk}},{{pwg.id}}, 'authorize');">Authorize</a>
+															<a class="dropdown-item" href="#" onclick="delete_temp_user({{pwg.pk}}, 'user-home')">Delete</a>
+
+															<a class="dropdown-item" onclick="pop3({{pwg.id}}, 'pwg');" id="{{forloop.counter0}}" href="#">Review Record</a>
+															{% if pwg.alias == '' %}
+															<a class="dropdown-item" onclick="change_name('{{pwg.system_name}}',{{pwg.pk}});" href="#" >Set Alias</a>
+															{% else %}
+															<a class="dropdown-item" onclick="change_name('{{pwg.alias}}',{{pwg.pk}});" href="#" >Set Alias</a>
+															{% endif %}
+															<a class="dropdown-item" href="#" onclick="userToUser_list({{pk}},{{pwg.id}}, 'share');">Share</a>
+															<a class="dropdown-item" href="#" onclick="userToUser_list({{pk}},{{pwg.id}}, 'transfer');">Transfer</a>
+
+														{% elif pwg.user_location == "A" or pwg.user_location == "S" %}
+															<a class="dropdown-item" onclick="pop3({{pwg.id}}, 'pwg');" id="{{forloop.counter0}}" href="#">Review Record</a>
+															{% if pwg.alias == '' %}
+															<a class="dropdown-item" onclick="change_name('{{pwg.system_name}}',{{pwg.pk}});" href="#" >Set Alias</a>
+															{% else %}
+															<a class="dropdown-item" onclick="change_name('{{pwg.alias}}',{{pwg.pk}});" href="#" >Set Alias</a>
+															{% endif %}
+
+														{% elif pwg.user_location == "DA" %}
+															<a class="dropdown-item" href="#">De-authorize</a>
+															<a class="dropdown-item" onclick="pop3({{pwg.id}}, 'pwg');" id="{{forloop.counter0}}" href="#">Review Record</a>
+															{% if pwg.alias == '' %}
+															<a class="dropdown-item" onclick="change_name('{{pwg.system_name}}',{{pwg.pk}});" href="#" >Set Alias</a>
+															{% else %}
+															<a class="dropdown-item" onclick="change_name('{{pwg.alias}}',{{pwg.pk}});" href="#" >Set Alias</a>
+															{% endif %}
+
+														{% elif pwg.user_location == "DS" %}
+															<a class="dropdown-item" href="#">De-share</a>
+															<a class="dropdown-item" onclick="pop3({{pwg.id}}, 'pwg');" id="{{forloop.counter0}}" href="#">Review Record</a>
+															{% if pwg.alias == '' %}
+															<a class="dropdown-item" onclick="change_name('{{pwg.system_name}}',{{pwg.pk}});" href="#" >Set Alias</a>
+															{% else %}
+															<a class="dropdown-item" onclick="change_name('{{pwg.alias}}',{{pwg.pk}});" href="#" >Set Alias</a>
+															{% endif %}
+														{% endif %}
 													</div>
 												</div></td>
 											</tr>
-
-											<tr data-toggle="tooltip" class="d-flex align-items-center" data-placement="top" title="this PWG is assign to Faiz elahi">
-
-												<th><input type="checkbox" name="book" id="book2" value="floatingButtonHere" disabled=""></th>
-												<td class="cursor col-5 text-center" id="pwg9" onclick="selected_pwg('PWGS-J');">PWGS-J</td>
-												<td class="col-3">T</td>
-
-												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
-
-													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-														<i class="fas fa-ellipsis-v"></i>
-													</button>
-													<div class="dropdown-menu">
-														<a class="dropdown-item pop1" id="9" href="#">Review Record</a>
-														<a class="dropdown-item" href="#">Authorize</a>
-														<a class="dropdown-item" href="#">Transfer</a>
-								 						<a class="dropdown-item" onclick="pop2('PWGS-J')" href="#">Set Alias</a>
-														<a class="dropdown-item" href="#">Share</a>
-														<a class="dropdown-item" href="#">Delete</a>
-													</div>
-												</div></td>
-											</tr>
+										{% endfor %}
 										</tbody>
 									</table>
 									</div>
@@ -335,22 +220,15 @@
 
 
 <section class="floatingButtonHere" style="display: none;" id="floating-button">
-	<a href="" class=" btn btn-primary" >Confirm</a>
-	<a href="admin-seller" class=" btn btn-danger">Cancel</a>
+	<button class="btn btn-primary" id="proceed">Proceed</button>
+	<a href="user-home" class=" btn btn-danger">Cancel</a>
 </section>
 
-
-
-
-
-
-
 <!--modal for get password-->
-<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="imagemodal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 			</div>
 			<div class="modal-body">
@@ -364,16 +242,15 @@
 	</div>
 </div>
 
-
-<!--modal for review record-->
-<div class="modal fade" id="imagemodal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+<!--	to show login of history-->
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="max-width: 525px;">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title font-weight-bold" id="modal_title">Record of PWGs-1</h5>
+				<h5 class="modal-title font-weight-bold" id="modal-title-history">Login History of Seller ABC</h5>
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body" id="modal-body-login-history">
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
@@ -381,27 +258,17 @@
 								<th scope="col">Sr. No.</th>
 								<th scope="col">Date</th>
 								<th scope="col">Time</th>
-								<th scope="col">Password</th>
+								<th scope="col">Device Name</th>
+								<th scope="col">Login IP Address</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<th scope="row">1</th>
-								<td>20/06/20</td>
-								<td>5:30 pm</td>
-								<td>6kBuSpm&MO64y{q</td>
-							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>10/05/20</td>
-								<td>1:30 pm</td>
-								<td>{!ZAwaKYW-zm}$s</td>
-							</tr>
-							<tr>
-								<th scope="row">3</th>
-								<td>19/04/20</td>
-								<td>2:30 pm</td>
-								<td>ln19gUFU%-&&B[b</td>
+								<td>20/06/5</td>
+								<td>5:30pm</td>
+								<td>Samsung</td>
+								<td>10.2.0.10:8090</td>
 							</tr>
 						</tbody>
 					</table>
@@ -414,40 +281,126 @@
 	</div>
 </div>
 
-<!--modal for alias record-->
+<!--    for change alias-->
 <div class="modal fade" id="imagemodal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5>Set Alias</h5>
+					<h5 id="name-change">Change Name for </h5>
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 				</div>
 				<div class="modal-body" id="change-name">
-					<form>
+					<form action="change_alias" method="post" name="submit_alias_change">
+                        {% csrf_token %}
 						<div class="form-group">
-							<label id="alias_pwg"></label>
-							<input type="text" class="form-control" id="emp" value="">
+							<label>Alias</label>
+							<input type="text" class="form-control"  value="" name="alias" id="alias_value" required>
+							<input type="hidden" class="form-control"  id="alias_id" name="alias_id">
+							<input type="hidden" class="form-control"  value="pwg" name="accType">
 						</div>
-						<a  href="#" type="submit" id="bt" class="btn btn-primary" onclick="changeLabel()">Submit</a>
+						<button  type="submit" class="btn btn-primary" onclick="submit_alias();" id="btn-alias">Change</button>
+						<a  href="#" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</a>
 					</form>
-				</div>
-
-				<div class="modal-body text-center p-4" style="display: none;" id="successfully-changed">
-					<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-					<p class="pt-2 font-weight-bold">You've successfully set the Alias</p>
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Return</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
+<!--	to show confirmation popup of single delete-->
+<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Message</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+			</div>
+			<div class="modal-body text-center p-4">
+				<i class="fas fa-check-circle fa-3x" style="color: green;" id="confirm-message-color"></i>
+				<p class="pt-2 font-weight-bold" id="confirm-message"></p>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<!--	to show tester list-->
+<div class="modal fade" id="imagemodalConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Users List</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+			</div>
+			<div class="modal-body text-center p-4" id="tester_modal">
+			</div>
+			<div class="modal-footer justify-content-center">
+				<button type="button" class="btn btn-primary" id="confirm-modal-button">Confirm</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+		  	</div>
+		</div>
+	</div>
+</div>
+
+<!--	to show confirmation of delete and freeze-->
+<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+			</div>
+			<div class="modal-body text-center p-4">
+				<i class="fa fa-question-circle fa-3x" style="color: #bd2130;" id="confirm-message-color"></i>
+				<p class="pt-2 font-weight-bold" id="confirm-message-delete1"></p>
+
+			</div>
+			<div class="modal-footer justify-content-center">
+				<button type="button" class="btn btn-primary" onclick="deletePWG();">Confirm</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+		  	</div>
+		</div>
+	</div>
+</div>
+
+	<!--	to authorize PWG to user -->
+	<form action="assign" method="post" name="assign_multiple">
+		{% csrf_token %}
+		<input type="hidden" id="tester_values" name="tester_ids">
+		<input type="hidden" id="pwg_pk" name="pk">
+		<input type="hidden" value="user-home" name="accType">
+	</form>
+
+	<!--	to share PWG to user -->
+	<form action="share_transfer_multiple" method="post" name="share_multiple">
+		{% csrf_token %}
+		<input type="hidden" id="user_values" name="tester_ids">
+		<input type="hidden" id="pk" name="pk">
+		<input type="hidden" value="share" name="action">
+	</form>
+
+	<!--	to transfer PWG to user -->
+	<form action="share_transfer_multiple" method="post" name="transfer_multiple">
+		{% csrf_token %}
+		<input type="hidden" id="user_transfer_values" name="tester_ids">
+		<input type="hidden" id="pwg_pk_transfer" name="pk">
+		<input type="hidden" value="transfer" name="action">
+	</form>
+
+	<!--	to Delete multiple PWG  -->
+	<form action="delete_temp" method="post" name="delete_multiple">
+		{% csrf_token %}
+		<input type="hidden" id="pwg_pk_delete" name="pk">
+		<input type="hidden" value="multiple-pwg" name="accType">
+	</form>
+
+<script src="{% static 'tesafe/js/ajax.js' %}"></script>
+
+
 <script type="text/javascript">
-
+			// global declaration
 			var next_pass = 0;
-
+			var checkbox_values = [];
 
 			function randomText(length) {
 				   var result           = '';
@@ -459,51 +412,84 @@
 				   return result;
 				}
 
-			$(function(){
-				$('#yourButton').click(function(){
-					next_pass += 1
-					var btn = $(this);
-					btn.html("Next Password");
-					$('#randomText').html(randomText(15));
-
-					$('#randomText').css("display","inline-block");
-
-
-					//fetching search bar's value
-					pwg_name = $("#myInput").val();
-
-					//displaying password section and text on the top
-					$("#password").css("display","block");
-
-					if(next_pass == 1){
-						$("#tagline").html("The "+next_pass+"<sup>st</sup> Password is given below");
-					} else if(next_pass == 2){
-						$("#tagline").html("The "+next_pass+"<sup>nd</sup> Password is given below");
-					} else if (next_pass == 3){
-						$("#tagline").html("The "+next_pass+"<sup>rd</sup> Password is given below");
-					} else{
-						$("#tagline").html("The "+next_pass+"<sup>th</sup> Password is given below");
-					}
-
-
-
+	// search filter table
+		$(document).ready(function(){
+			$("#myInput").on("keyup", function() {
+				var value = $(this).val().toLowerCase();
+				$("#myTable tr").filter(function() {
+					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 				});
 			});
-
-
-
-
-
-// search filter table
-	$(document).ready(function(){
-		$("#myInput").on("keyup", function() {
-			var value = $(this).val().toLowerCase();
-			$("#myTable tr").filter(function() {
-				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-			});
 		});
-	});
 
+		// Shorthand for $( document ).ready()
+		$(function() {
+			setTimeout(function(){
+				$("#msg").removeClass('bg-light');
+				$("#msg").html('');
+			}, 4000);
+			{% if messages %}
+			$("#msg").addClass('bg-light');
+			{% endif %}
+			$("#msg").html('{% for msg in messages %}<h3 class="text-danger">{{msg}}</h3>{% endfor %}');
+		});
+
+
+
+	// to remove all occurrence of the element
+	function removeItemAll(value) {
+		  var i = 0;
+		  while (i < checkbox_values.length) {
+				if (checkbox_values[i] === value) {
+				  checkbox_values.splice(i, 1);
+				} else {
+				  ++i;
+				}
+		  }
+	}
+
+
+	// check all checkbox in one click
+
+		$('#checkAll').click(function () {
+
+			var ele = $(".check");
+			if ($("#checkAll").is(':checked')) {
+				$(".check").prop("checked", true);
+				for(i=0;i<ele.length;i++){
+					checkbox_values.push(ele[i].value);
+				}
+			}else{
+				$(".check").prop("checked", false);
+				for(i=0;i<ele.length;i++){
+					removeItemAll(ele[i].value);
+				}
+			}
+
+			if( checkbox_values.length == 0){
+				$("#proceed").attr('disabled', true);
+			}else{
+				$("#proceed").attr('disabled', false);
+			}
+		});
+
+
+
+	$('input[type="checkbox"]').click(function(){
+		if($(this).attr("name")=="floatingButtonHere"){
+			if($(this).is(':checked')){
+				checkbox_values.push($(this).val());
+			}else{
+				removeItemAll($(this).val());
+			}
+		}
+		if( checkbox_values.length == 0){
+			$("#proceed").attr('disabled', true);
+		}else{
+			$("#proceed").attr('disabled', false);
+		}
+		console.log(checkbox_values);
+	});
 
 
 // modal popup for get password
@@ -515,82 +501,16 @@
 			table = document.getElementById('myTable');
 			rows = table.rows;
 			$("#pwg_name_selected").html("The Password of "+pwg_name+" is:");
-
+			$('#randomText').html(randomText(16));
 			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-			$('#imagemodal').modal('show');
+			$('#imagemodal1').modal('show');
 			window.setTimeout(function(){
-				$('#imagemodal').modal('hide')
+				$('#imagemodal1').modal('hide')
 			},300000);
 		});
 	});
 
-
-// change name JS
-		function changeLabel() {
-		var empName = document.getElementById('emp').value;
-        pop_title = document.getElementById('alias_pwg').innerHTML;
-        elements = pop_title.split(" ");
-        len = elements.length;
-        pwg_name = elements[len-1];
-
-        table = document.getElementById('myTable');
-		rows = table.rows;
-		for(i=0;i<rows.length;i++){
-			if(pwg_name == rows[i].getElementsByTagName("td")[0].innerHTML){
-				console.log(pwg_name);
-				rows[i].getElementsByTagName("td")[0].innerHTML = empName;
-			}
-		}
-
-
-        document.getElementById("change-name").style.display="none";
-        document.getElementById("successfully-changed").style.display="block";
-
-    }
-
-
-
-// modal popup for review record
-	$(function() {
-		$('.pop1').on('click', function() {
-			pwg_id = $(this).attr("id");
-			table = document.getElementById('myTable');
-			rows = table.rows;
-			for(i=0;i<rows.length;i++){
-				if(pwg_id == i){
-					selected_pwg = rows[i].getElementsByTagName("td")[0].innerHTML;
-					$('#modal_title').html("Record of "+selected_pwg);
-					break;
-				}
-			}
-			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-			$('#imagemodal1').modal('show');
-		});
-	});
-
-
-
-
-
-	// check all checkbox in one click
-
-	$(document).ready(function() {
-
-		$('#checkAll').click(function () {
-			$('input:checkbox').not(this).prop('checked', this.checked);
-		});
-
-		$("[id*=book_]").change(function () {
-			if ($('input[type=checkbox]:checked').length == $('input[type=checkbox]').length) {
-				$('#checkAll').prop('checked', true);
-			} else {
-				$('#checkAll').prop('checked', false);
-			}
-		});
-
-	});
-
-	function selected_pwg(value){
+	function selected_pwg(value, pk){
 			//making selected PWG highlighted and de-highlighted
 			table = document.getElementById('myTable');
 			rows = table.rows;
@@ -598,7 +518,6 @@
 				if( value == rows[i].getElementsByTagName("td")[0].innerHTML){
 					pwg_name = rows[i].getElementsByTagName("td")[0].innerHTML;
 					id_name = rows[i].getElementsByTagName("td")[0].getAttribute('id');
-					console.log(id_name);
 					$('#'+id_name).addClass("selected_pwg");
 
 					//placing selected PWG to the input field
@@ -614,7 +533,7 @@
 	}
 
 	//show pop to set alias
-	function pop2(pwg_name) {
+	function pop2(pwg_name, pk) {
 		$("#successfully-changed").css("display","none");
 		$("#change-name").css("display","block");
 		$("#alias_pwg").html("Set alias for "+pwg_name);
@@ -622,7 +541,160 @@
 		$('#imagemodal2').modal('show');
 	}
 
+	// for alias change
+    function change_name(name, pk){
+		$("#name-change").html("Change Alias Name for <b>"+name+"</b>");
+		$("#alias_id").attr('value',pk);
 
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodal2').modal('show');
+    }
+
+    // to submit alias change form
+	function submit_alias(){
+		var value = $("#alias_value").val();
+		if(value != ""){
+			document.forms['submit_alias_change'].submit();
+		}
+	}
+
+	//to share pwg to user in user-home
+	function share(pk){
+			tester_pk = [];
+			$('#imagemodalConfirm').modal('hide');
+			// GET AJAX request
+			names = $('.'+pk);
+			for(i=0;i<names.length;i++){
+				name = names[i]['name']
+				value = names[i]['value']
+				if(value != ''){
+					tester_pk.push(value)
+				}
+			}
+			$("#user_values").attr('value', tester_pk);
+			$("#pk").attr('value', pk);
+
+			document.forms['share_multiple'].submit();
+	}
+
+	//to transfer pwg to user in user-home
+	function transfer(pk){
+			tester_pk = [];
+			$('#imagemodalConfirm').modal('hide');
+			// GET AJAX request
+			names = $('.'+pk);
+			for(i=0;i<names.length;i++){
+				name = names[i]['name']
+				value = names[i]['value']
+				if(value != ''){
+					tester_pk.push(value)
+				}
+			}
+			$("#user_transfer_values").attr('value', tester_pk);
+			$("#pwg_pk_transfer").attr('value', pk);
+
+			document.forms['transfer_multiple'].submit();
+
+	}
+
+	// for unoccupied authorization, share, and for return to admin
+	function authorize_multiple(action){
+		$("#checkAll").attr("disabled", false);
+		$(".check").attr("disabled", false);
+		$("#proceed").attr('onclick', "authorize_popup('"+action+"');");
+
+		$("#proceed").attr('disabled', true);
+		$(".floatingButtonHere").show(150);
+	}
+
+	//for authorization and share activation
+	function authorize_popup(action){
+		checkbox_values = [...new Set(checkbox_values)];
+		userToUser_list({{pk}}, checkbox_values, action);
+	}
+
+	//for multiple authorization submission
+	function authorize_submit(pk){
+		tester_pk = [];
+		$('#imagemodalConfirm').modal('hide');
+		// GET AJAX request
+		names = $('.'+pk);
+		for(i=0;i<names.length;i++){
+			name = names[i]['name']
+			value = names[i]['value']
+			if(value != ''){
+				tester_pk.push(value)
+			}
+		}
+		$("#tester_values").attr('value', tester_pk);
+		$("#pwg_pk").attr('value', checkbox_values);
+		document.forms['assign_multiple'].submit();
+	}
+
+	//for multiple sharification submission
+	function share_submit_pwg(pk){
+		tester_pk = [];
+		$('#imagemodalConfirm').modal('hide');
+
+		names = $('.'+pk);
+		for(i=0;i<names.length;i++){
+			name = names[i]['name']
+			value = names[i]['value']
+			if(value != ''){
+				tester_pk.push(value)
+			}
+		}
+		$("#user_values").attr('value', tester_pk);
+		$("#pk").attr('value', checkbox_values);
+
+		document.forms['share_multiple'].submit();
+	}
+
+	// to submit multiple PWG transfer
+	function transfer_submit_pwg(pk){
+		tester_pk = [];
+			$('#imagemodalConfirm').modal('hide');
+			// GET AJAX request
+			names = $('.'+pk);
+			for(i=0;i<names.length;i++){
+				name = names[i]['name']
+				value = names[i]['value']
+				if(value != ''){
+					tester_pk.push(value)
+				}
+			}
+			$("#user_transfer_values").attr('value', tester_pk);
+			$("#pwg_pk_transfer").attr('value', checkbox_values);
+
+			document.forms['transfer_multiple'].submit();
+	}
+
+	//to delete multiple pwg
+	function delete_pwg(){
+		$("#checkAll").attr("disabled", false);
+		$(".check").attr("disabled", false);
+		$("#proceed").attr('onclick', "delete_popup();");
+
+		$("#proceed").attr('disabled', true);
+		$(".floatingButtonHere").show(150);
+	}
+
+	function delete_popup(){
+		checkbox_values = [...new Set(checkbox_values)];
+		if( checkbox_values.length == 1 ){
+			$("#confirm-message-delete1").html("Delete the selected "+checkbox_values.length+" PWG");
+		}else{
+			$("#confirm-message-delete1").html("Delete the selected "+checkbox_values.length+"  PWGs");
+		}
+
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#confirmDelete').modal('show');
+	}
+	// to submit delete
+	function deletePWG(){
+		$("#pwg_pk_delete").attr('value', checkbox_values);
+		document.forms['delete_multiple'].submit();
+	}
 </script>
 </body>
 </html>

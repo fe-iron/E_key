@@ -35,10 +35,14 @@ urlpatterns = [
     path("fail", views.fail, name='fail'),
     # to make pwg pass
     path("pass_pwg", views.pass_pwg, name='pass_pwg'),
+
     # User Urls
     # path("user-home", views.user_home, name='user-home'),
     path("user-user", views.user_user, name='user-user'),
     path("user-home", views.user_home, name='user-home'),
+    path("user_list", views.user_list, name='user_list'),
+    path("share_transfer_multiple", views.share_transfer_multiple, name='share_transfer_multiple'),
+
 
     # delete
     path("delete", views.delete, name="delete"),
@@ -114,3 +118,8 @@ urlpatterns = [
     path('accounts/login/', views.index, name='login'),
 
 ]
+
+
+# 'transfer' pwg page for -
+# tranfer to seller in admin
+# tranfer to user in seller user and seller pwg

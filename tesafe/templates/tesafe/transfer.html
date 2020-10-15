@@ -200,10 +200,25 @@
 												<tbody>
 												{% for pw in  pwg %}
 													{% if pwgs.id == pw.owned_by.id %}
-														{% if pw.transfer_to.username == "elahi" %}
-													<tr>
-														<td><a href="#"><input type="checkbox" name="floatingButtonHere" class="pwg{{count}}" value="{{pw.id}}"> {{pw.alias}}</a></td>
-													</tr>
+														{% if for_Admin != "admin" %}
+
+															{% if not pw.is_shared and not pw.is_authorized and not pw.is_freeze %}
+																{% if pw.transfer_to == request.user %}
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="floatingButtonHere" class="pwg{{count}}" value="{{pw.id}}"> {{pw.alias}}</a></td>
+																</tr>
+																{% endif %}
+															{% else %}
+																<tr>
+																	<td>{{pw.alias}} is not available either because it is freeze or authorize or shared</td>
+																</tr>
+															{% endif %}
+														{% else %}
+															{% if not pw.is_shared and not pw.is_authorized and not pw.is_freeze  %}
+																<tr>
+																	<td><a href="#"><input type="checkbox" name="floatingButtonHere" class="pwg{{count}}" value="{{pw.id}}"> {{pw.alias}}</a></td>
+																</tr>
+															{% endif %}
 														{% endif %}
 													{% endif %}
 												{% endfor %}

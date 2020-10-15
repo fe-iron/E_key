@@ -1,5 +1,6 @@
 from .models import WebAdmin, Seller, Tester, WebUser, PWGServers, PWG, WebAdminLoginHistory, PasswordHistory, \
-    TransferPwgs, TransferPwg, PwgUseRecord, SystemName, Authorize, Share, PWGHistory, TesterPWGHistory
+    TransferPwgs, TransferPwg, PwgUseRecord, SystemName, Authorize, Share, PWGHistory, TesterPWGHistory, \
+    UserToUser
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
@@ -22,6 +23,7 @@ from django.db.models import Q
 from django.views import View
 import threading
 import datetime
+import json
 import random
 
 
@@ -511,6 +513,7 @@ def seller_pwg(request):
             else:
                 pwgs = i.owned_by
                 pwgserver1.append(pwgs)
+
         param = {
             "pwgserver_occupied": pwgserver,
             "pwgserver_unoccupied": pwgserver1,
@@ -524,8 +527,13 @@ def seller_pwg(request):
 
 def transfer(request, id):
     user = User.objects.get(id=id)
-    pwgserver = PWGServers.objects.all()
-    pwg = PWG.objects.all()
+    pwgserver = []
+    pwg = PWG.objects.filter(location="A")
+    for pwg_obj in pwg:
+        try:
+            pwgserver.index(pwg_obj.owned_by)
+        except ValueError as ve:
+            pwgserver.append(pwg_obj.owned_by)
     param = {
         "name": "Transfer PWG to Seller "+user.first_name + " " + user.last_name,
         "username": user.first_name + " " + user.last_name,
@@ -533,6 +541,7 @@ def transfer(request, id):
         "pwg": pwg,
         "num": num,
         "id": id,
+        "for_Admin": "admin",
         "accType": "admin",
         "target": "seller",
         "action": "Transfer",
@@ -600,9 +609,10 @@ def pwg_sublist(request, id):
 
 @login_required
 def transfer_seller(request, pk):
-    user = User.objects.get(id=pk)
-    pwgserver = PWGServers.objects.all()
     pwg = PWG.objects.all()
+    pwgserver = PWGServers.objects.all()
+
+    user = User.objects.get(id=pk)
     param = {
         "name": "Transfer PWG to User " + user.first_name + " " + user.last_name,
         "username": user.first_name + " " + user.last_name,
@@ -873,6 +883,14 @@ def user_user(request):
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     if u.is_authenticated and WebUser.objects.filter(email=u_email).exists():
+        user_obj = WebUser.objects.get(user=u)
+        if UserToUser.objects.filter(main_user=user_obj).exists():
+            user_obj = UserToUser.objects.filter(main_user=user_obj)
+            param = {
+                "user_obj": user_obj
+            }
+            return render(request, 'user/user-user.html', param)
+        messages.info(request, "You don't have any user, add first!")
         return render(request, 'user/user-user.html')
     messages.error(request, "please login first, then try again!!")
     return redirect("/")
@@ -884,7 +902,16 @@ def user_home(request):
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     if u.is_authenticated and WebUser.objects.filter(email=u_email).exists():
-        return render(request, 'user/user-home.html')
+        if PWG.objects.filter(sold_from=u).exists():
+            pwg_obj = PWG.objects.filter(sold_from=u)
+            u_obj = WebUser.objects.get(user=u)
+            param = {
+                "pwg_obj": pwg_obj,
+                "pk": u_obj.id,
+            }
+            return render(request, 'user/user-home.html', param)
+        messages.error(request, "You have no PWG, Buy one first!")
+        return render(request, "user/user-home.html")
     messages.error(request, "please login first, then try again!!")
     return redirect("/")
 
@@ -1308,24 +1335,45 @@ def transfer_pwgs(request):
                 pwgs_id = pwg_object.owned_by
 
                 if accType == "seller":
+                    if pwg_object.is_authorized or pwg_object.is_freeze or pwg_object.is_shared:
+                        messages.info(request,
+                                      " {} PWG is not transferred because either it is Authorized or Shared or Freezed".format(
+                                          pwg_object.alias))
+                        return redirect('admin-seller')
                     pwg_object.location = "S"
                     pwg_object.transfer_to = current_user
+                    pwg_object.save()
 
                 elif accType == "tester":
+                    if pwg_object.is_authorized or pwg_object.is_freeze or pwg_object.is_shared:
+                        messages.info(request,
+                                      " {} PWG is not transferred because either it is Authorized or Shared or Freezed".format(
+                                          pwg_object.alias))
+                        return redirect('admin-tester')
                     pwg_object.location = "T"
                     pwg_object.transfer_to = current_user
                     pwg_object.save()
                 elif accType == "user":
-                    pwg_object.location = "U"
-                    pwg_object.transfer_to = current_user
+                    pwg_object.sold_from = current_user
+                    pwg_object.user_location = "T"
+                    if pwg_object.is_authorized or pwg_object.is_freeze or pwg_object.is_shared:
+                        messages.info(request, " {} PWG is not transferred because either it is Authorized or Shared or Freezed".format(pwg_object.alias))
+                        return redirect('seller-user')
+
                     pwg_object.save()
+
                 elif accType == "admin-info-server":
-                    pwg_object.location = "S"
                     if Seller.objects.filter(id=pk).exists():
+                        if pwg_object.is_authorized or pwg_object.is_freeze or pwg_object.is_shared:
+                            messages.info(request,
+                                          " {} PWG is not transferred because either it is Authorized or Shared or Freezed".format(
+                                              pwg_object.alias))
+                            return redirect('admin-info-server')
                         seller_obj = Seller.objects.get(id=pk)
                         my_id = seller_obj.user.id
                         seller_obj = User.objects.get(id=my_id)
                         pwg_object.transfer_to = seller_obj
+                        pwg_object.location = "S"
                         pwg_object.save()
 
                         current_user = seller_obj
@@ -1333,13 +1381,18 @@ def transfer_pwgs(request):
                         messages.error(request, "something went wrong, try again!")
                         return redirect(accType)
 
-                # creating entry in PWG Transfer table
-                transfer = TransferPwg(pwg_owner=pwg_object, pwgs_owner=pwgs_id, user=current_user)
-                transfer.save()
-                # creating entry in PWG history table
-                pwg_his = PWGHistory(object=current_user, pwg=pwg_object, action="T")
-                pwg_his.save()
 
+                if accType != "user":
+                    # creating entry in PWG Transfer table
+                    transfer = TransferPwg(pwg_owner=pwg_object, pwgs_owner=pwgs_id, user=current_user)
+                    transfer.save()
+                    # creating entry in PWG history table
+                    pwg_his = PWGHistory(object=current_user, pwg=pwg_object, action="T")
+                    pwg_his.save()
+                else:
+                    # creating entry in PWG history table
+                    pwg_his = PWGHistory(object=current_user, pwg=pwg_object, action="T")
+                    pwg_his.save()
                 tester_his = TesterPWGHistory(pwg_name=pwg_object, got_on=datetime.datetime.now())
                 tester_his.save()
 
@@ -1634,17 +1687,26 @@ def change_alias(request):
 
                 return redirect("admin-info-server")
             else:
-                messages.error(request, "PWG Server Does not exists")
+                messages.error(request, "Something went wrong! try again")
                 return redirect("admin-info-server")
+        elif accType == "pwg":
+            if PWG.objects.filter(id=alias_id).exists():
+                pwgs = PWG.objects.get(id=alias_id)
+                pwgs.alias = alias
+                pwgs.save()
+                return redirect("user-home")
+            else:
+                messages.error(request, "Something went wrong! try again")
+                return redirect("user-home")
 
-        if accType == "seller":
+        elif accType == "seller":
             if alias_conf == alias:
                 if User.objects.filter(id=alias_id).exists():
                     user_obj = User.objects.get(id=alias_id)
                     print(user_obj)
                     return redirect("seller-home")
                 else:
-                    messages.error(request, "Seller does not exists")
+                    messages.error(request, "Something went wrong! try again")
                     return redirect("seller-home")
             else:
                 messages.error(request, "Alias name does not match! try again")
@@ -1692,26 +1754,99 @@ def assign(request):
     if request.method == "POST":
         pk = request.POST.get("pk", None)
         tester_ids = request.POST.get("tester_ids", None)
+        accType = request.POST.get("accType", None)
+
+        new_values = []
+        temp_list = ''
 
         for i in tester_ids:
             if i == ",":
+                new_values.append(int(temp_list))
+                temp_list = ''
+            elif i == " ":
                 pass
             else:
-                pwg = PWG.objects.get(id=pk)
-                pwgs = pwg.owned_by
-                tester = Tester.objects.get(id=i)
-                user = User.objects.get(email=tester.email)
-                transfer_pwg = TransferPwg(pwg_owner=pwg, pwgs_owner=pwgs, user=user)
-                transfer_pwg.save()
-                pwg.location = "T"
-                pwg.transfer_to = user
-                pwg.save()
+                temp_list += i
+        new_values.append(int(temp_list))
+        tester_ids = new_values
+        new_values = []
+        temp_list = ''
 
-                # creating entry in PWG History table
-                pwg_his = PWGHistory(object=user, pwg=pwg, action="T")
-                pwg_his.save()
+        for i in pk:
+            if i == ",":
+                new_values.append(int(temp_list))
+                temp_list = ''
+            elif i == " ":
+                pass
+            else:
+                temp_list += i
+        new_values.append(int(temp_list))
+        pk = new_values
 
-        return redirect("pwg-sublist", id=pwgs.id)
+        if accType == "admin-tester":
+            for i in tester_ids:
+                if i == ",":
+                    pass
+                else:
+                    pwg = PWG.objects.get(id=pk[0])
+                    pwgs = pwg.owned_by
+                    tester = Tester.objects.get(id=i)
+                    user = User.objects.get(email=tester.email)
+                    transfer_pwg = TransferPwg(pwg_owner=pwg, pwgs_owner=pwgs, user=user)
+                    transfer_pwg.save()
+                    pwg.location = "T"
+                    pwg.transfer_to = user
+                    pwg.save()
+
+                    # creating entry in PWG History table
+                    pwg_his = PWGHistory(object=user, pwg=pwg, action="T")
+                    pwg_his.save()
+
+            return redirect("pwg-sublist", id=pwgs.id)
+        elif accType == "user-home":
+            for pkid in pk:
+                if pkid == ",":
+                    pass
+                elif pkid == " ":
+                    pass
+                elif PWG.objects.filter(id=pkid).exists():
+                    pwg_obj = PWG.objects.get(id=pkid)
+                    pwgs = pwg_obj.owned_by
+
+                    for user_id in tester_ids:
+                        if user_id == ",":
+                            pass
+                        elif user_id == " ":
+                            pass
+                        elif WebUser.objects.filter(id=user_id).exists():
+                            user_obj = WebUser.objects.get(id=user_id)
+                            user_obj.is_authorized = True
+                            main_user = user_obj.user
+
+                            pwg_obj.user_location = "A"
+                            pwg_obj.is_authorized = True
+                            pwg_obj.save()
+                            user_obj.save()
+
+                            if Authorize.objects.filter(pwg=pwg_obj, authorize_to=main_user).exists():
+                                pass
+                            else:
+                                authr = Authorize(pwg=pwg_obj, authorize_to=main_user, pwgserver=pwgs)
+                                authr.save()
+
+                            if PWGHistory.objects.filter(object=main_user, pwg=pwg_obj, action="A").exists():
+                                pass
+                            else:
+                                pwg_his = PWGHistory(object=main_user, pwg=pwg_obj, action="A")
+                                pwg_his.save()
+                        else:
+                            messages.error(request, "User object not found!")
+                            return redirect("user-home")
+                else:
+                    messages.error(request, "PWG not found!")
+                    return redirect("user-home")
+
+            return redirect("user-home")
     else:
         return JsonResponse({}, status=200)
 
@@ -1767,6 +1902,28 @@ def seller_list(request):
         seller_json = serializers.serialize('json', seller)
 
         return HttpResponse(seller_json, content_type='application/json')
+    else:
+        return JsonResponse({"data": False}, status=200)
+
+
+def user_list(request):
+    # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        pk = request.GET.get("pk", None)
+        if UserToUser.objects.filter(main_user=pk).exists():
+            users = {}
+            i = 0
+            user_obj = UserToUser.objects.filter(main_user=pk)
+            for obj in user_obj:
+                u_id = obj.associated_user.id
+                users[i] = WebUser.objects.get(id=u_id).first_name
+                users[i+1] = WebUser.objects.get(id=u_id).id
+                i += 2
+
+            user_json = json.dumps(users)
+            return HttpResponse(user_json, content_type='application/json')
+
+        return JsonResponse({"data": False}, status=200)
     else:
         return JsonResponse({"data": False}, status=200)
 
@@ -1883,9 +2040,11 @@ def share_pwgs(request):
                 user_obj = WebUser.objects.get(user=pk)
                 user_obj.is_shared = True
                 user_obj.save()
-
-                share_obj = Share(pwg=pwg_object, share_to=current_user, pwgserver=pwgs_id)
-                share_obj.save()
+                if Share.objects.filter(share_to=current_user, pwg=pwg_object).exists():
+                    print("not saved")
+                else:
+                    share_obj = Share(pwg=pwg_object, share_to=current_user, pwgserver=pwgs_id)
+                    share_obj.save()
 
         if accType == "seller":
             return redirect('seller-user')
@@ -2077,12 +2236,19 @@ def delete_temp(request):
             # check for the pk in the database.
             if PWG.objects.filter(id=pk).exists():
                 my_object = PWG.objects.get(id=pk)
+                if my_object.is_shared or my_object.is_authorized:
+                    name = my_object.alias
+                    name = "Oops, {} is not deleted because either the {} is shared or Authorized".format(name, name)
+                    return JsonResponse({"msg": name}, status=200)
                 my_object.transfer_to = None
                 my_object.location = "A"
+                my_object.sold_from = None
                 name = my_object.alias
-                # s = name + " deleted"
-                # s = PWGHistory(object=u, pwg=my_object, action=s)
-                # s.save()
+                s = name + " deleted"
+                u = request.user
+                u = User.objects.filter(Q(email=u) | Q(username=u))
+                s = PWGHistory(object=u, pwg=my_object, action="D")
+                s.save()
 
                 name = "{} has been successfully deleted from your list".format(name)
                 my_object.save()
@@ -2092,7 +2258,75 @@ def delete_temp(request):
                 # if name not found, then return msg
                 return JsonResponse({"msg": False}, status=200)
 
-    return JsonResponse({}, status=400)
+        elif accType == "user-home":
+            # check for the pk in the database.
+            if PWG.objects.filter(id=pk).exists():
+                my_object = PWG.objects.get(id=pk)
+                if my_object.is_shared or my_object.is_authorized:
+                    name = my_object.alias
+                    name = "Oops, {} is not deleted because either the {} is shared or Authorized".format(name, name)
+                    return JsonResponse({"msg": name}, status=200)
+                my_object.user_location = None
+                my_object.sold_from = None
+                name = my_object.alias
+                s = name + " deleted"
+                u = request.user
+                u = User.objects.filter(Q(email=u) | Q(username=u))
+                s = PWGHistory(object=u[0], pwg=my_object, action="D")
+                s.save()
+
+                name = "{} has been successfully deleted from your list".format(name)
+                my_object.save()
+
+                return JsonResponse({"msg": name}, status=200)
+            else:
+                # if name not found, then return msg
+                return JsonResponse({"msg": False}, status=200)
+    elif request.method == "POST":
+        accType = request.POST.get("accType", None)
+        pk = request.POST.get("pk", None)
+        if accType == "multiple-pwg":
+            temp_list = ''
+            new_values = []
+            for i in pk:
+                if i == ",":
+                    new_values.append(int(temp_list))
+                    temp_list = ''
+                elif i == " ":
+                    pass
+                else:
+                    temp_list += i
+            new_values.append(int(temp_list))
+
+            for pwg_id in new_values:
+                # check for the pk in the database.
+                if PWG.objects.filter(id=pwg_id).exists():
+                    my_object = PWG.objects.get(id=pwg_id)
+                    if my_object.is_shared or my_object.is_authorized:
+                        name = my_object.alias
+                        messages.error(request, "Oops, {} is not deleted because either the {} is shared or Authorized".format(name, name))
+                        return redirect("user-home")
+                    my_object.user_location = None
+                    my_object.sold_from = None
+                    name = my_object.alias
+                    s = name + " deleted"
+                    u = request.user
+                    u = User.objects.filter(Q(email=u) | Q(username=u))
+                    s = PWGHistory(object=u[0], pwg=my_object, action="D")
+                    s.save()
+
+                    my_object.save()
+
+                else:
+                    # if name not found, then return msg
+                    messages.error(request, "PWG Not found!")
+                    return redirect("user-home")
+
+            messages.error(request, "PWG successfully deleted!")
+            return redirect("user-home")
+
+    else:
+        return JsonResponse({}, status=400)
 
 
 def return_pwg(request):
@@ -2159,11 +2393,13 @@ def transfer_pwg_multiple_users(request):
                     else:
                         user_obj = WebUser.objects.get(id=user_id)
                         u = user_obj.user
-
+                        if pwg_obj.is_authorized or pwg_obj.is_freeze or pwg_obj.is_shared:
+                            messages.info(request,
+                                          " {} PWG is not transferred because either it is Authorized or Shared or Freezed".format(
+                                              pwg_obj.alias))
+                            return redirect('seller-pwg')
                         pwg_obj.sold_from = u
-                        pwg_obj.is_authorized = False
-                        pwg_obj.is_freeze = False
-                        pwg_obj.is_shared = False
+                        pwg_obj.user_location = "T"
                         pwg_obj.save()
 
                         p = PWGHistory(object=u, pwg=pwg_obj, action="T")
@@ -2302,3 +2538,100 @@ def destination(request):
     messages.error(request, "Login first then try again!!")
     return redirect("/")
 
+
+def share_transfer_multiple(request):
+    if request.method == "POST":
+        user_ids = request.POST.get("tester_ids", None)
+        pk = request.POST.get("pk", None)
+        action = request.POST.get("action", None)
+        new_values = []
+        temp_list = ''
+
+        for i in user_ids:
+            if i == ",":
+                new_values.append(int(temp_list))
+                temp_list = ''
+            elif i == " ":
+                pass
+            else:
+                temp_list += i
+        new_values.append(int(temp_list))
+        user_ids = new_values
+        new_values = []
+        temp_list = ''
+
+        for i in pk:
+            if i == ",":
+                new_values.append(int(temp_list))
+                temp_list = ''
+            elif i == " ":
+                pass
+            else:
+                temp_list += i
+        new_values.append(int(temp_list))
+        pk = new_values
+
+        for id_pwg in pk:
+            if PWG.objects.filter(id=id_pwg).exists():
+                pwg_obj = PWG.objects.get(id=id_pwg)
+                pwgs = pwg_obj.owned_by
+                if action == "share":
+                    for user_id in user_ids:
+                        if user_id == ",":
+                            pass
+                        elif user_id == " ":
+                            pass
+                        elif WebUser.objects.filter(id=user_id).exists():
+                            user_obj = WebUser.objects.get(id=user_id)
+                            user_obj.is_shared = True
+                            main_user = user_obj.user
+
+                            pwg_obj.user_location = "S"
+                            pwg_obj.is_shared = True
+                            pwg_obj.save()
+                            user_obj.save()
+
+                            if Share.objects.filter(share_to=main_user, pwg=pwg_obj).exists():
+                                pass
+                            else:
+                                share_obj = Share(pwg=pwg_obj, share_to=main_user, pwgserver=pwgs)
+                                share_obj.save()
+
+                            pwg_his = PWGHistory(object=main_user, pwg=pwg_obj, action="S")
+                            pwg_his.save()
+                        else:
+                            messages.error(request, "User object not found!")
+                            return redirect("user-home")
+                elif action == "transfer":
+                    if pwg_obj.is_authorized or pwg_obj.is_freeze or pwg_obj.is_shared:
+                        messages.info(request,
+                                      " {} PWG is not transferred because either it is Authorized or Shared or Freezed".format(
+                                          pwg_obj.alias))
+                        return redirect('user-home')
+                    for user_id in user_ids:
+                        if user_id == ",":
+                            pass
+                        elif user_id == " ":
+                            pass
+                        elif WebUser.objects.filter(id=user_id).exists():
+                            user_obj = WebUser.objects.get(id=user_id)
+                            main_user = user_obj.user
+
+                            pwg_obj.user_location = "T"
+                            pwg_obj.sold_from = main_user
+                            pwg_obj.save()
+                            user_obj.save()
+
+                            pwg_his = PWGHistory(object=main_user, pwg=pwg_obj, action="T")
+                            pwg_his.save()
+
+                        else:
+                            messages.error(request, "User object not found!")
+                            return redirect("user-home")
+            else:
+                messages.error(request, "PWG not found!")
+                return redirect("user-home")
+
+        return redirect("user-home")
+    messages.error(request, "something went wrong, try again!")
+    return redirect("user-home")

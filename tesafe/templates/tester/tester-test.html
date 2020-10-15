@@ -68,6 +68,7 @@
 
 				</div>
 
+
 				<div class="col-md-10  py-5 px-5">
 					<div class="row justify-content-center bg-button-2 p-xl-4 mt-3" id="div-1" >
 						<div class="col-md-8">
@@ -203,20 +204,6 @@
 			var clicks = 0;
 			var next_pass = 0;
 
-				// Shorthand for $( document ).ready()
-				// for message showing
-					$(function() {
-						setTimeout(function(){
-							$("#msg").removeClass('bg-light');
-							$("#msg").html('');
-						}, 4000);
-						{% if messages %}
-						$("#msg").addClass('bg-light');
-						{% endif %}
-						$("#msg").html('{% for msg in messages %}<h3 class="text-danger">{{msg}}</h3>{% endfor %}');
-					});
-
-
 			function randomText(length) {
 				   var result           = '';
 				   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789(){}[]+-/*^_@#$%!&';
@@ -225,7 +212,20 @@
 					  result += characters.charAt(Math.floor(Math.random() * charactersLength));
 				   }
 				   return result;
-				}
+			}
+
+		// Shorthand for $( document ).ready()
+		$(function() {
+			setTimeout(function(){
+				$("#msg").removeClass('bg-light');
+				$("#msg").html('');
+			}, 4000);
+			{% if messages %}
+			$("#msg").addClass('bg-light');
+			{% endif %}
+			$("#msg").html('{% for msg in messages %}<h3 class="text-danger">{{msg}}</h3>{% endfor %}');
+		});
+
 
 			function setNextPassValue(pwg_name){
 					if(next_pass == 1){

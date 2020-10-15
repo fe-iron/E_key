@@ -3,8 +3,6 @@
 <html>
 <head>
 	<title>User | Users</title>
-
-
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -38,8 +36,6 @@
 </head>
 <body>
 
-
-
 	<section class="bg-light">
 		<div class="container-fluid">
 			<nav class="navbar navbar-expand-lg navbar-light ">
@@ -72,7 +68,6 @@
 						<a class="dropdown-item" href="user-home">Exit</a>
 					</div>
 				</div>
-
 			</nav>
 		</div>
 	</section>
@@ -80,6 +75,11 @@
 	<section class="bg-detail">
 		<div class="container-fluid">
 			<div class="row justify-content-center">
+
+				<!-- for showing error and messages-->
+				<div class="col-md-10 py-2 px-5 mt-3" id="msg">
+
+				</div>
 
 				<div class="col-md-10  py-5 px-5">
 
@@ -93,8 +93,7 @@
 									<form class="form-inline">
 										<div class="input-group-prepend mb-1 mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
-											<input type="text" class="form-control" placeholder="Username" aria-label="Username"
-												   aria-describedby="addon-wrapping" id="myInput">
+											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
 									</form>
 									<!-- Example split danger button -->
@@ -149,61 +148,13 @@
 									<div class="table-responsive">
 								<br>
 								<table class="table">
-
 									<tbody id="myTable" class="table-borderless">
+									{% for user in user_obj %}
 										<tr class="d-flex">
-											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td onclick="show_buttons('Faiz')" id="pwg-0" class="cursor col-5 text-center">Faiz</td>
+											<th class="col-3"><input type="checkbox" name="floatingButtonHere" disabled  value="{{user.id}}"></th>
+											<td onclick="show_buttons('{{user.associated_user}}')" id="pwg-{{forloop.counter0}}" class="cursor col-5 text-center">{{user.associated_user}}</td>
 										</tr>
-                                        <tr class="d-flex">
-											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td onclick="show_buttons('Frank')" id="pwg-1" class="cursor col-5 text-center">Frank</td>
-										</tr>
-                                        <tr class="d-flex">
-											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td onclick="show_buttons('Trump')" id="pwg-2"  class="cursor col-5 text-center">Trump</td>
-										</tr>
-                                        <tr class="d-flex">
-											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td onclick="show_buttons('Putin');" id="pwg-3" class="cursor col-5 text-center">Putin</td>
-										</tr>
-										<tr class="d-flex">
-											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td onclick="show_buttons('Jennifer');" id="pwg-4" class="cursor col-5 text-center">Jennifer</td>
-										</tr>
-										<tr class="d-flex">
-											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td onclick="show_buttons('Chris');" id="pwg-5" class="cursor col-5 text-center">Chris</td>
-										</tr>
-										<tr class="d-flex">
-											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td onclick="show_buttons('Naqui');" id="pwg-6" class="cursor col-5 text-center">Naqui</td>
-										</tr>
-										<tr class="d-flex">
-											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td onclick="show_buttons('John');" id="pwg-7" class="cursor col-5 text-center">John</td>
-										</tr>
-										<tr class="d-flex">
-											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td onclick="show_buttons('Scarlett');" id="pwg-8" class="cursor col-5 text-center">Scarlett</td>
-										</tr>
-										<tr class="d-flex">
-											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td onclick="show_buttons('Mark');" id="pwg-9" class="cursor col-5 text-center">Mark</td>
-										</tr>
-										<tr class="d-flex">
-											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td onclick="show_buttons('Tesafe');" id="pwg-10" class="cursor col-5 text-center">Tesafe</td>
-										</tr>
-										<tr class="d-flex">
-											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td onclick="show_buttons('Kristen');" id="pwg-11" class="cursor col-5 text-center">Kristen</td>
-										</tr>
-										<tr class="d-flex">
-											<th class="col-3"><input type="checkbox" name="book" value="floatingButtonHere" disabled  id="book1"></th>
-											<td onclick="show_buttons('Elizabeth');" id="pwg-12" class="cursor col-5 text-center">Elizabeth</td>
-										</tr>
-
+									{% endfor %}
 									</tbody>
 								</table>
 							</div>
@@ -227,12 +178,7 @@
 </section>
 
 
-
-
-
-
-
-//modal for review record
+<!--modal for review record-->
 <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -314,7 +260,7 @@
 
 <script type="text/javascript">
 
-// search filter table
+	// search filter table
 	$(document).ready(function(){
 		$("#myInput").on("keyup", function() {
 			var value = $(this).val().toLowerCase();
@@ -325,8 +271,7 @@
 	});
 
 
-
-// modal popup
+	// modal popup
 	$(function() {
 		$('.pop').on('click', function() {
 			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
@@ -334,32 +279,12 @@
 		});
 	});
 
-
-	// check all checkbox in one click
-
-	$(document).ready(function() {
-
-		$('#checkAll').click(function () {
-			$('input:checkbox').not(this).prop('checked', this.checked);
-		});
-
-		$("[id*=book_]").change(function () {
-			if ($('input[type=checkbox]:checked').length == $('input[type=checkbox]').length) {
-				$('#checkAll').prop('checked', true);
-			} else {
-				$('#checkAll').prop('checked', false);
-			}
-		});
-
-	});
-
-
 	function show_buttons(value){
-	//enabling top chat button and dropdown icon
+		//enabling top chat button and dropdown icon
 		$('#button-chat').prop("disabled",false);
 		$('#button-dropdown').prop("disabled",false);
 
-	//putting pwg name in input field
+		//putting pwg name in input field
 		$("#myInput").attr("value",value);
 		$('.modal-title').html("Record of "+value);
 		$('#alias_pwg').html("Set alias for "+value);
@@ -379,7 +304,7 @@
 
 
 		// change name JS
-		function changeLabel() {
+	function changeLabel() {
 		var empName = document.getElementById('emp').value;
         pop_title = document.getElementById('alias_pwg').innerHTML;
         elements = pop_title.split(" ");

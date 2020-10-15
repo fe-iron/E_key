@@ -66,6 +66,16 @@ class WebUser(models.Model):
         return self.first_name
 
 
+class UserToUser(models.Model):
+    main_user = models.ForeignKey(WebUser, on_delete=models.SET_NULL, null=True, default=None, related_name="main_user")
+    associated_user = models.ForeignKey(WebUser, on_delete=models.SET_NULL, null=True, default=None, related_name="associated_user")
+    date_time = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "User to User Association"
+        verbose_name_plural = "User to User Associations"
+
+
 # Login Activity model of Admin
 class WebAdminLoginHistory(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
@@ -123,6 +133,13 @@ class PWG(models.Model):
     transfer_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, default=1)
     is_tested = models.BooleanField(default=False)
     location = models.CharField(max_length=2, default='A')
+    # T = obtained by Transfer can do all operation
+    # A = means PWG is authorized by the other User or Seller can do get PW, rev record
+    # DA =  means the PWG has been authorized to the other User can do de-authorize
+    # s =  means the PWG is shared by the other User or Seller, only Get PW. and Review rec. are available
+    # DS = means the PWG has been share to the other User, Get PW. and Review rec. and De-share are available
+
+    user_location = models.CharField(max_length=2, null=True, default="T")
     is_freeze = models.BooleanField(default=False)
     is_authorized = models.BooleanField(default=False)
     is_shared = models.BooleanField(default=False)
@@ -166,6 +183,7 @@ class PwgUseRecord(models.Model):
     time = models.TimeField(auto_now=True)
     date = models.DateField(auto_now=True)
     password = models.CharField(max_length=255)
+    pwg = models.ForeignKey(PWG, on_delete=models.CASCADE, null=True, default=None)
 
     def __str__(self):
         return self.date
