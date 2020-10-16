@@ -105,7 +105,7 @@
 									  </button>
 									  <div class="dropdown-menu">
 										<a class="dropdown-item" href="#" onclick="delete_temp_user()" id="delete_button">Delete</a>
-										<a class="dropdown-item pop" href="#">Review Record</a>
+										<a class="dropdown-item" href="#">Review Record</a>
 										<a class="dropdown-item" onclick="change_name();" href="#" id="alias_button">Set Alias</a>
 									  </div>
 									</div>
@@ -198,56 +198,6 @@
 		</div>
 	</div>
 
-<!--modal for review record-->
-<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title font-weight-bold">Record of PWGs-1</h5>
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			</div>
-			<div class="modal-body">
-				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">Sr. No.</th>
-								<th scope="col">Date</th>
-								<th scope="col">Time</th>
-								<th scope="col">Password</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th scope="row">1</th>
-								<td>20/06/20</td>
-								<td>5:30 pm</td>
-								<td>6kBuSpm&MO64y{q</td>
-							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>10/05/20</td>
-								<td>1:30 pm</td>
-								<td>{!ZAwaKYW-zm}$s</td>
-							</tr>
-							<tr>
-								<th scope="row">3</th>
-								<td>19/04/20</td>
-								<td>2:30 pm</td>
-								<td>ln19gUFU%-&&B[b</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Return</button>
-      </div>
-		</div>
-	</div>
-</div>
-
-
 <!--    for change alias-->
 <div class="modal fade" id="imagemodal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -326,16 +276,6 @@
 			$("#msg").html('{% for msg in messages %}<h3 class="text-danger">{{msg}}</h3>{% endfor %}');
 		});
 
-
-
-	// modal popup
-	$(function() {
-		$('.pop').on('click', function() {
-			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-			$('#imagemodal').modal('show');
-		});
-	});
-
 	function show_buttons(value, pk){
 		//setting data-content value of delete button
 		$('#delete_button').attr("data-content",pk);
@@ -362,30 +302,6 @@
 			}
 		}
 	}
-
-
-
-		// change name JS
-	function changeLabel() {
-		var empName = document.getElementById('emp').value;
-        pop_title = document.getElementById('alias_pwg').innerHTML;
-        elements = pop_title.split(" ");
-        len = elements.length;
-        pwg_name = elements[len-1];
-
-        table = document.getElementById('myTable');
-		rows = table.rows;
-		for(i=0;i<rows.length;i++){
-			if(pwg_name == rows[i].getElementsByTagName("td")[0].innerHTML){
-				rows[i].getElementsByTagName("td")[0].innerHTML = empName;
-			}
-		}
-
-
-        document.getElementById("change-name").style.display="none";
-        document.getElementById("successfully-changed").style.display="block";
-
-    }
 
 
 	// to remove all occurrence of the element

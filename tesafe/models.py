@@ -179,7 +179,6 @@ class TransferPwgs(models.Model):
 
 # PWG Use record
 class PwgUseRecord(models.Model):
-    count = models.IntegerField()
     time = models.TimeField(auto_now=True)
     date = models.DateField(auto_now=True)
     password = models.CharField(max_length=255)
