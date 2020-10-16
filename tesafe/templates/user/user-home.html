@@ -224,8 +224,8 @@
 	<a href="user-home" class=" btn btn-danger">Cancel</a>
 </section>
 
-<!--modal for get password-->
-<div class="modal fade" id="imagemodal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<!--modal for get password-->
+	<div class="modal fade" id="imagemodal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -242,126 +242,127 @@
 	</div>
 </div>
 
-<!--	to show login of history-->
-<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="max-width: 525px;">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title font-weight-bold" id="modal-title-history">Login History of Seller ABC</h5>
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			</div>
-			<div class="modal-body" id="modal-body-login-history">
-				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">Sr. No.</th>
-								<th scope="col">Date</th>
-								<th scope="col">Time</th>
-								<th scope="col">Device Name</th>
-								<th scope="col">Login IP Address</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th scope="row">1</th>
-								<td>20/06/5</td>
-								<td>5:30pm</td>
-								<td>Samsung</td>
-								<td>10.2.0.10:8090</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Return</button>
-      </div>
-		</div>
-	</div>
-</div>
-
-<!--    for change alias-->
-<div class="modal fade" id="imagemodal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+	<!--	to show login of history-->
+	<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="max-width: 525px;">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 id="name-change">Change Name for </h5>
+					<h5 class="modal-title font-weight-bold" id="modal-title-history">Login History of Seller ABC</h5>
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 				</div>
-				<div class="modal-body" id="change-name">
-					<form action="change_alias" method="post" name="submit_alias_change">
-                        {% csrf_token %}
-						<div class="form-group">
-							<label>Alias</label>
-							<input type="text" class="form-control"  value="" name="alias" id="alias_value" required>
-							<input type="hidden" class="form-control"  id="alias_id" name="alias_id">
-							<input type="hidden" class="form-control"  value="pwg" name="accType">
-						</div>
-						<button  type="submit" class="btn btn-primary" onclick="submit_alias();" id="btn-alias">Change</button>
-						<a  href="#" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</a>
-					</form>
+				<div class="modal-body" id="modal-body-login-history">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Sr. No.</th>
+									<th scope="col">Date</th>
+									<th scope="col">Time</th>
+									<th scope="col">Device Name</th>
+									<th scope="col">Login IP Address</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">1</th>
+									<td>20/06/5</td>
+									<td>5:30pm</td>
+									<td>Samsung</td>
+									<td>10.2.0.10:8090</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+			<button type="button" class="btn btn-danger" data-dismiss="modal">Return</button>
+		  </div>
+			</div>
+		</div>
+	</div>
+
+	<!--    for change alias-->
+	<div class="modal fade" id="imagemodal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 id="name-change">Change Name for </h5>
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					</div>
+					<div class="modal-body" id="change-name">
+						<form action="change_alias" method="post" name="submit_alias_change">
+							{% csrf_token %}
+							<div class="form-group">
+								<label>Alias</label>
+								<input type="text" class="form-control"  value="" name="alias" id="alias_value" required>
+								<input type="hidden" class="form-control"  id="alias_id" name="alias_id">
+								<input type="hidden" class="form-control"  value="pwg" name="accType">
+							</div>
+							<button  type="submit" class="btn btn-primary" onclick="submit_alias();" id="btn-alias">Change</button>
+							<a  href="#" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</a>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<!--	to show confirmation popup of single delete-->
+	<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Message</h5>
+					<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+				</div>
+				<div class="modal-body text-center p-4">
+					<i class="fas fa-check-circle fa-3x" style="color: green;" id="confirm-message-color"></i>
+					<p class="pt-2 font-weight-bold" id="confirm-message"></p>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!--	to show tester list-->
+	<div class="modal fade" id="imagemodalConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Users List</h5>
+					<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+				</div>
+				<div class="modal-body text-center p-4" id="tester_modal">
+				</div>
+				<div class="modal-footer justify-content-center">
+					<button type="button" class="btn btn-primary" id="confirm-modal-button">Confirm</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-<!--	to show confirmation popup of single delete-->
-<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Message</h5>
-				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
-			</div>
-			<div class="modal-body text-center p-4">
-				<i class="fas fa-check-circle fa-3x" style="color: green;" id="confirm-message-color"></i>
-				<p class="pt-2 font-weight-bold" id="confirm-message"></p>
+	<!--	to show confirmation of delete and freeze-->
+	<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+					<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+				</div>
+				<div class="modal-body text-center p-4">
+					<i class="fa fa-question-circle fa-3x" style="color: #bd2130;" id="confirm-message-color"></i>
+					<p class="pt-2 font-weight-bold" id="confirm-message-delete1"></p>
 
+				</div>
+				<div class="modal-footer justify-content-center">
+					<button type="button" class="btn btn-primary" onclick="deletePWG();">Confirm</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+				</div>
 			</div>
-
 		</div>
 	</div>
-</div>
 
-<!--	to show tester list-->
-<div class="modal fade" id="imagemodalConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Users List</h5>
-				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
-			</div>
-			<div class="modal-body text-center p-4" id="tester_modal">
-			</div>
-			<div class="modal-footer justify-content-center">
-				<button type="button" class="btn btn-primary" id="confirm-modal-button">Confirm</button>
-				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-		  	</div>
-		</div>
-	</div>
-</div>
-
-<!--	to show confirmation of delete and freeze-->
-<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
-			</div>
-			<div class="modal-body text-center p-4">
-				<i class="fa fa-question-circle fa-3x" style="color: #bd2130;" id="confirm-message-color"></i>
-				<p class="pt-2 font-weight-bold" id="confirm-message-delete1"></p>
-
-			</div>
-			<div class="modal-footer justify-content-center">
-				<button type="button" class="btn btn-primary" onclick="deletePWG();">Confirm</button>
-				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-		  	</div>
-		</div>
-	</div>
-</div>
 
 	<!--	to authorize PWG to user -->
 	<form action="assign" method="post" name="assign_multiple">
@@ -492,7 +493,7 @@
 	});
 
 
-// modal popup for get password
+	// modal popup for get password
 	$(function() {
 		$('.pop').on('click', function() {
 			next_pass = 0
@@ -530,15 +531,6 @@
 
 			$('#tested-button').prop("disabled",false);
 			$('#tested-button').prop("value",value);
-	}
-
-	//show pop to set alias
-	function pop2(pwg_name, pk) {
-		$("#successfully-changed").css("display","none");
-		$("#change-name").css("display","block");
-		$("#alias_pwg").html("Set alias for "+pwg_name);
-		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-		$('#imagemodal2').modal('show');
 	}
 
 	// for alias change
@@ -594,10 +586,9 @@
 			$("#pwg_pk_transfer").attr('value', pk);
 
 			document.forms['transfer_multiple'].submit();
-
 	}
 
-	// for unoccupied authorization, share, and for return to admin
+	// for authorization, share, and for return to admin
 	function authorize_multiple(action){
 		$("#checkAll").attr("disabled", false);
 		$(".check").attr("disabled", false);

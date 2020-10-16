@@ -1689,6 +1689,7 @@ def change_alias(request):
             else:
                 messages.error(request, "Something went wrong! try again")
                 return redirect("admin-info-server")
+
         elif accType == "pwg":
             if PWG.objects.filter(id=alias_id).exists():
                 pwgs = PWG.objects.get(id=alias_id)
@@ -1703,8 +1704,14 @@ def change_alias(request):
             if alias_conf == alias:
                 if User.objects.filter(id=alias_id).exists():
                     user_obj = User.objects.get(id=alias_id)
-                    print(user_obj)
-                    return redirect("seller-home")
+                    if WebUser.objects.filter(user=user_obj.id).exists():
+                        user_obj = WebUser.objects.get(user=user_obj.id)
+                        user_obj.alias = alias
+                        user_obj.save()
+                        return redirect("seller-home")
+                    else:
+                        messages.error(request, "Something went wrong! try again")
+                        return redirect("seller-home")
                 else:
                     messages.error(request, "Something went wrong! try again")
                     return redirect("seller-home")
@@ -1712,6 +1719,15 @@ def change_alias(request):
                 messages.error(request, "Alias name does not match! try again")
                 return redirect("seller-home")
 
+        elif accType == "user-user":
+            if WebUser.objects.filter(id=alias_id).exists():
+                user_obj = WebUser.objects.get(id=alias_id)
+                user_obj.alias = alias
+                user_obj.save()
+                return redirect("user-user")
+            else:
+                messages.error(request, "Something went wrong! try again")
+                return redirect("user-user")
     else:
         messages.info(request, "Something went wrong! try again")
         return redirect("/")
@@ -2232,6 +2248,22 @@ def delete_temp(request):
                 # if name not found, then return msg
                 return JsonResponse({"msg": False}, status=200)
 
+        elif accType == "user-user":
+            # check for the pk in the database.
+            if WebUser.objects.filter(id=pk).exists():
+                my_object = WebUser.objects.get(id=pk)
+                name = my_object.first_name
+                if UserToUser.objects.filter(associated_user=pk).exists():
+                    u_obj = UserToUser.objects.get(associated_user=pk)
+                    u_obj.delete()
+
+                name = "{} has been successfully deleted from your list".format(name)
+                my_object.save()
+                return JsonResponse({"msg": name}, status=200)
+            else:
+                # if name not found, then return msg
+                return JsonResponse({"msg": False}, status=200)
+
         elif accType == "pwg":
             # check for the pk in the database.
             if PWG.objects.filter(id=pk).exists():
@@ -2283,6 +2315,8 @@ def delete_temp(request):
                 # if name not found, then return msg
                 return JsonResponse({"msg": False}, status=200)
     elif request.method == "POST":
+        u = request.user
+        u = User.objects.filter(Q(username=u) | Q(email=u))
         accType = request.POST.get("accType", None)
         pk = request.POST.get("pk", None)
         if accType == "multiple-pwg":
@@ -2324,6 +2358,41 @@ def delete_temp(request):
 
             messages.error(request, "PWG successfully deleted!")
             return redirect("user-home")
+        elif accType == "multiple-users":
+            temp_list = ''
+            new_values = []
+            for i in pk:
+                if i == ",":
+                    new_values.append(int(temp_list))
+                    temp_list = ''
+                elif i == " ":
+                    pass
+                else:
+                    temp_list += i
+            new_values.append(int(temp_list))
+
+            for user_id in new_values:
+                # check for the pk in the database.
+                if UserToUser.objects.filter(associated_user=user_id).exists():
+                    user_obj = UserToUser.objects.get(associated_user=user_id)
+                    my_object = WebUser.objects.get(id=user_id)
+                    if my_object.is_shared or my_object.is_authorized:
+                        name = my_object.alias
+                        messages.error(request, "Oops, {} is not deleted because either the {} is shared or Authorized".format(name, name))
+                        return redirect("user-user")
+
+                    user_obj.delete()
+                    my_object.associated_with = None
+                    my_object.save()
+                    print("deleted")
+
+                else:
+                    # if name not found, then return msg
+                    messages.error(request, "Something went wrong, try again!")
+                    return redirect("user-user")
+
+            messages.error(request, "User successfully deleted!")
+            return redirect("user-user")
 
     else:
         return JsonResponse({}, status=400)

@@ -63,7 +63,7 @@
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">Delete</a>
+						<a class="dropdown-item" href="#" onclick="delete_user();">Delete</a>
 						<a class="dropdown-item" href="#">Chat</a>
 						<a class="dropdown-item" href="user-home">Exit</a>
 					</div>
@@ -104,9 +104,9 @@
 										<i class="fas fa-caret-down"></i>
 									  </button>
 									  <div class="dropdown-menu">
-										<a class="dropdown-item" href="#">Delete</a>
+										<a class="dropdown-item" href="#" onclick="delete_temp_user()" id="delete_button">Delete</a>
 										<a class="dropdown-item pop" href="#">Review Record</a>
-										<a class="dropdown-item" onclick="pop2();" href="#" >Set Alias</a>
+										<a class="dropdown-item" onclick="change_name();" href="#" id="alias_button">Set Alias</a>
 									  </div>
 									</div>
 
@@ -151,15 +151,18 @@
 									<tbody id="myTable" class="table-borderless">
 									{% for user in user_obj %}
 										<tr class="d-flex">
-											<th class="col-3"><input type="checkbox" name="floatingButtonHere" disabled  value="{{user.id}}"></th>
-											<td onclick="show_buttons('{{user.associated_user}}')" id="pwg-{{forloop.counter0}}" class="cursor col-5 text-center">{{user.associated_user}}</td>
+											<th class="col-3"><input type="checkbox" name="floatingButtonHere" disabled  value="{{user.associated_user.id}}" class="check"></th>
+											{% if user.associated_user.alias != "none" %}
+											<td onclick="show_buttons('{{user.associated_user.alias}}', {{user.associated_user.id}})" id="pwg-{{forloop.counter0}}" class="cursor col-5 text-center">{{user.associated_user.alias}}</td>
+											{% else %}
+											<td onclick="show_buttons('{{user.associated_user.system_name}}', {{user.associated_user.id}})" id="pwg-{{forloop.counter0}}" class="cursor col-5 text-center">{{user.associated_user.system_name}}</td>
+											{% endif %}
 										</tr>
 									{% endfor %}
 									</tbody>
 								</table>
 							</div>
 							</div>
-
 							</div>
 						</div>
 
@@ -173,10 +176,27 @@
 
 
 <section class="floatingButtonHere" style="display: none;" id="floating-button">
-	<a href="" class=" btn btn-primary" >Confirm</a>
-	<a href="admin-seller" class=" btn btn-danger">Cancel</a>
+	<button class=" btn btn-primary" id="proceed">Proceed</button>
+	<a href="user-user" class=" btn btn-danger">Cancel</a>
 </section>
 
+<!--	to show confirmation popup of single delete-->
+<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Message</h5>
+					<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+				</div>
+				<div class="modal-body text-center p-4">
+					<i class="fas fa-check-circle fa-3x" style="color: green;" id="confirm-message-color"></i>
+					<p class="pt-2 font-weight-bold" id="confirm-message"></p>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
 
 <!--modal for review record-->
 <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -228,38 +248,62 @@
 </div>
 
 
-<!--modal for alias record-->
+<!--    for change alias-->
 <div class="modal fade" id="imagemodal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 id="name-change">Change Name for </h5>
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					</div>
+					<div class="modal-body" id="change-name">
+						<form action="change_alias" method="post" name="submit_alias_change">
+							{% csrf_token %}
+							<div class="form-group">
+								<label>Alias</label>
+								<input type="text" class="form-control"  value="" name="alias" id="alias_value" required>
+								<input type="hidden" class="form-control"  id="alias_id" name="alias_id">
+								<input type="hidden" class="form-control"  value="user-user" name="accType">
+							</div>
+							<button  type="submit" class="btn btn-primary" onclick="submit_alias();" id="btn-alias">Change</button>
+							<a  href="#" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</a>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<!--	to show confirmation of delete and freeze-->
+<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5>Set Alias</h5>
-					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+					<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
 				</div>
-				<div class="modal-body" id="change-name">
-					<form>
-						<div class="form-group">
-							<label id="alias_pwg"></label>
-							<input type="text" class="form-control" id="emp" value="">
-						</div>
-						<a  href="#" type="submit" id="bt" class="btn btn-primary" onclick="changeLabel()">Submit</a>
-					</form>
-				</div>
-
-				<div class="modal-body text-center p-4" id="successfully-changed">
-					<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-					<p class="pt-2 font-weight-bold">You've successfully set the Alias</p>
+				<div class="modal-body text-center p-4">
+					<i class="fa fa-question-circle fa-3x" style="color: #bd2130;" id="confirm-message-color"></i>
+					<p class="pt-2 font-weight-bold" id="confirm-message-delete1"></p>
 
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Return</button>
+				<div class="modal-footer justify-content-center">
+					<button type="button" class="btn btn-primary" onclick="deletePWG();">Confirm</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-<script type="text/javascript">
 
+	<!--	to Delete multiple PWG  -->
+	<form action="delete_temp" method="post" name="delete_multiple">
+		{% csrf_token %}
+		<input type="hidden" id="pwg_pk_delete" name="pk">
+		<input type="hidden" value="multiple-users" name="accType">
+	</form>
+
+<script type="text/javascript">
+	var checkbox_values = [];
 	// search filter table
 	$(document).ready(function(){
 		$("#myInput").on("keyup", function() {
@@ -270,6 +314,19 @@
 		});
 	});
 
+			// Shorthand for $( document ).ready()
+		$(function() {
+			setTimeout(function(){
+				$("#msg").removeClass('bg-light');
+				$("#msg").html('');
+			}, 4000);
+			{% if messages %}
+			$("#msg").addClass('bg-light');
+			{% endif %}
+			$("#msg").html('{% for msg in messages %}<h3 class="text-danger">{{msg}}</h3>{% endfor %}');
+		});
+
+
 
 	// modal popup
 	$(function() {
@@ -279,7 +336,12 @@
 		});
 	});
 
-	function show_buttons(value){
+	function show_buttons(value, pk){
+		//setting data-content value of delete button
+		$('#delete_button').attr("data-content",pk);
+		$('#alias_button').attr("data-content",pk);
+		$('#alias_button').attr("data-to",value);
+
 		//enabling top chat button and dropdown icon
 		$('#button-chat').prop("disabled",false);
 		$('#button-dropdown').prop("disabled",false);
@@ -325,14 +387,105 @@
 
     }
 
-	//show pop to set alias
-	function pop2(pwg_name) {
-		$("#successfully-changed").css("display","none");
-		$("#change-name").css("display","block");
+
+	// to remove all occurrence of the element
+	function removeItemAll(value) {
+		  var i = 0;
+		  while (i < checkbox_values.length) {
+				if (checkbox_values[i] === value) {
+				  checkbox_values.splice(i, 1);
+				} else {
+				  ++i;
+				}
+		  }
+	}
+
+	$('input[type="checkbox"]').click(function(){
+		if($(this).attr("name")=="floatingButtonHere"){
+			if($(this).is(':checked')){
+				checkbox_values.push($(this).val());
+			}else{
+				removeItemAll($(this).val());
+			}
+		}
+		if( checkbox_values.length == 0){
+			$("#proceed").attr('disabled', true);
+		}else{
+			$("#proceed").attr('disabled', false);
+		}
+		console.log(checkbox_values);
+	});
+
+	//to delete multiple users
+	function delete_user(){
+		$("#checkAll").attr("disabled", false);
+		$(".check").attr("disabled", false);
+		$("#proceed").attr('onclick', "delete_popup();");
+
+		$("#proceed").attr('disabled', true);
+		$(".floatingButtonHere").show(150);
+	}
+
+	function delete_popup(){
+		checkbox_values = [...new Set(checkbox_values)];
+		if( checkbox_values.length == 1 ){
+			$("#confirm-message-delete1").html("Delete the selected "+checkbox_values.length+" User");
+		}else{
+			$("#confirm-message-delete1").html("Delete the selected "+checkbox_values.length+"  Users");
+		}
+
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#confirmDelete').modal('show');
+	}
+	// to submit delete
+	function deletePWG(){
+		$("#pwg_pk_delete").attr('value', checkbox_values);
+		document.forms['delete_multiple'].submit();
+	}
+	// to delete single user
+	function delete_temp_user(){
+		var d_content = $('#delete_button').attr("data-content");
+
+		$.ajax({
+            type: 'GET',
+            url: "delete_temp",
+            data: {"pk": d_content, "accType": "user-user"},
+            success: function (response) {
+                    if(response['msg'] == false){
+                        $("#confirm-message").html(response['msg']);
+                        $("#confirm-message-color").css("color","red");
+                    }else{
+                        $("#confirm-message").html(response['msg']);
+                        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                        $('#confirm').modal('show');
+                    }
+                    window.setTimeout(function(){
+                        location.reload(true);
+                    }, 4000);
+
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+	}
+
+	function change_name(){
+		var name = $('#alias_button').attr("data-to");
+		var pk = $('#alias_button').attr("data-content");
+		$("#name-change").html("Change Alias Name for <b>"+name+"</b>");
+		$("#alias_id").attr('value',pk);
+
 		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
 		$('#imagemodal2').modal('show');
 	}
-
+	// to submit alias change form
+	function submit_alias(){
+		var value = $("#alias_value").val();
+		if(value != ""){
+			document.forms['submit_alias_change'].submit();
+		}
+	}
 </script>
 </body>
 </html>
