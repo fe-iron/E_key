@@ -79,15 +79,26 @@ function pop3(pk, accType){
                 }else{
                     var text = '';
                     var count = 0;
-                        for(i=0;i<response.length;i++){
-                            var date = response[i]['fields']['login_date'];
-                            var time = response[i]['fields']['login_time'];
+                    for(i=0;i<response.length;i++){
+                            var date = response[i]['fields']['date'];
+                            var time = response[i]['fields']['time'];
                             var my_password = response[i]['fields']['password'];
                             count = count + 1;
-                            text += '<tr><th scope="row">'+count+'</th><td>'+date+'</td><td>'+time.slice(0,-(time.length-5))+'</td><td>'+my_password+'</td></tr>';
+                            text += '<tr><th scope="row">'+count+'</th><td>'+date+'</td><td>'+time.slice(0,-(time.length-5))+'</td><td><input id="RevRec'+count+'" type="password" readonly value="'+my_password+'" style="background-color: white;border: none"><i class="far fa-eye togglePassword" data-to="'+count+'"></i></td></tr>';
                         }
-                        $('#modal-body-login-history').html('<div class="table-responsive"><table class="table"><thead><tr><th scope="col">Sr. No.</th><th scope="col">Date</th><th scope="col">Time</th><th scope="col">Password</th></tr></thead><tbody>'+text+'</tbody></table></div>');
-                        user_name(pk, accType);
+                    $('#modal-body-login-history').html('<div class="table-responsive"><table class="table"><thead><tr><th scope="col">Sr. No.</th><th scope="col">Date</th><th scope="col">Time</th><th scope="col">Password</th></tr></thead><tbody>'+text+'</tbody></table></div>');
+                    user_name(pk, accType);
+
+                    //togglePassword = document.querySelector('.togglePassword');
+
+                    $(".togglePassword").on('click', function (e) {
+                        // toggle the type attribute
+                        var pass_id = $(this).attr("data-to");
+                        var type = $("#RevRec"+pass_id).attr('type') === 'password' ? 'text' : 'password';
+                        $("#RevRec"+pass_id).attr('type', type);
+                        // toggle the eye slash icon
+                        this.classList.toggle('fa-eye-slash');
+                    });
                 }
 
                 $('.imagepreview').attr('src', $(this).find('img').attr('src'));

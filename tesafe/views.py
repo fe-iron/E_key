@@ -1754,6 +1754,16 @@ def use_record(request):
     # request should be ajax and method should be GET.
     if request.is_ajax and request.method == "GET":
         pk = request.GET.get("pk", None)
+        accType = request.GET.get("accType", None)
+        if accType == "pwg":
+            if PwgUseRecord.objects.filter(pwg=pk).exists():
+                use_record = PwgUseRecord.objects.filter(pwg=pk)
+                use_record_json = serializers.serialize('json', use_record)
+
+                return HttpResponse(use_record_json, content_type='application/json')
+            else:
+                return JsonResponse({'history': False}, status=200)
+
         if PwgUseRecord.objects.filter(id=pk).exists():
             use_record = PwgUseRecord.objects.filter(id=pk)
             use_record_json = serializers.serialize('json', use_record)
@@ -2704,3 +2714,15 @@ def share_transfer_multiple(request):
         return redirect("user-home")
     messages.error(request, "something went wrong, try again!")
     return redirect("user-home")
+
+
+def passtext(request):
+    if request.is_ajax and request.method == "GET":
+        passText = request.GET.get("passText", None)
+        pk = request.GET.get("pk", None)
+        if PWG.objects.filter(id=pk).exists():
+            pwg = PWG.objects.get(id=pk)
+            pwg_use_password = PwgUseRecord(password=passText, pwg=pwg)
+            pwg_use_password.save()
+            return JsonResponse({"msg": "Saved"}, status=200)
+    return JsonResponse({"msg": False}, status=200)

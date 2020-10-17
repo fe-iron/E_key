@@ -493,25 +493,55 @@
 	});
 
 
+	const uno = (passText)	=> {
+		$('#randomText').html(passText);
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodal1').modal('show');
+		window.setTimeout(function(){
+			$('#imagemodal1').modal('hide')
+		},300000);
+	};
+
+
 	// modal popup for get password
 	$(function() {
 		$('.pop').on('click', function() {
 			next_pass = 0
-			id = $(this).attr('id');
+			var id = $(this).attr('id');
+			var d_to = $(this).attr('data-to');
 			pwg_name = $(this).attr('value');
 			table = document.getElementById('myTable');
 			rows = table.rows;
 			$("#pwg_name_selected").html("The Password of "+pwg_name+" is:");
-			$('#randomText').html(randomText(16));
-			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-			$('#imagemodal1').modal('show');
-			window.setTimeout(function(){
-				$('#imagemodal1').modal('hide')
-			},300000);
+			var passText = randomText(16);
+
+			//making ajax request to save it in db
+			$.ajax({
+				type: 'GET',
+				url: "passText",
+				data: {"passText": passText, "pk":d_to},
+				success: function (response){
+					if(response['msg'] == false){
+						$("#confirm-message").html("Something went wrong try again");
+                        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                        $('#confirm').modal('show');
+					}
+					else{
+						console.log(response['msg']);
+						uno(passText);
+					}
+				},
+				error: function(response){
+					console.log(response);
+				}
+			})
 		});
 	});
 
 	function selected_pwg(value, pk){
+			//setting id of pwg in get password button
+			$('#tested-button').attr("data-to",pk);
+
 			//making selected PWG highlighted and de-highlighted
 			table = document.getElementById('myTable');
 			rows = table.rows;
@@ -554,7 +584,6 @@
 	function share(pk){
 			tester_pk = [];
 			$('#imagemodalConfirm').modal('hide');
-			// GET AJAX request
 			names = $('.'+pk);
 			for(i=0;i<names.length;i++){
 				name = names[i]['name']
@@ -686,6 +715,7 @@
 		$("#pwg_pk_delete").attr('value', checkbox_values);
 		document.forms['delete_multiple'].submit();
 	}
+
 </script>
 </body>
 </html>

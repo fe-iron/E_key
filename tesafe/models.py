@@ -185,7 +185,7 @@ class PwgUseRecord(models.Model):
     pwg = models.ForeignKey(PWG, on_delete=models.CASCADE, null=True, default=None)
 
     def __str__(self):
-        return self.date
+        return str(self.date)
 
     class Meta:
         verbose_name = "PWG Use Record"

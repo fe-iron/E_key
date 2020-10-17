@@ -4,7 +4,6 @@ from .models import WebAdmin, Seller, WebAdminLoginHistory, Tester, WebUser, PWG
     TransferPwg, TransferPwgs, PwgUseRecord, SystemName, Authorize, Share, PWGHistory, TesterPWGHistory, UserToUser
 
 
-
 # admin.site.register(User)
 admin.site.register(WebAdmin)
 admin.site.register(Seller)
@@ -37,7 +36,7 @@ class SystemName(admin.ModelAdmin):
 
 @admin.register(PwgUseRecord)
 class PwgUseRecord(admin.ModelAdmin):
-    list_display = ("date", "time", "count", "password")
+    list_display = ("date", "time", "password", "pwg")
 
 
 @admin.register(PWG)
