@@ -1381,18 +1381,23 @@ def transfer_pwgs(request):
                         messages.error(request, "something went wrong, try again!")
                         return redirect(accType)
 
-
                 if accType != "user":
                     # creating entry in PWG Transfer table
                     transfer = TransferPwg(pwg_owner=pwg_object, pwgs_owner=pwgs_id, user=current_user)
                     transfer.save()
                     # creating entry in PWG history table
-                    pwg_his = PWGHistory(object=current_user, pwg=pwg_object, action="T")
-                    pwg_his.save()
+                    if PWGHistory.objects.filter(object=current_user, pwg=pwg_object, action="T").exists():
+                        pass
+                    else:
+                        pwg_his = PWGHistory(object=current_user, pwg=pwg_object, action="T")
+                        pwg_his.save()
                 else:
                     # creating entry in PWG history table
-                    pwg_his = PWGHistory(object=current_user, pwg=pwg_object, action="T")
-                    pwg_his.save()
+                    if PWGHistory.objects.filter(object=current_user, pwg=pwg_object, action="T").exists():
+                        pass
+                    else:
+                        pwg_his = PWGHistory(object=current_user, pwg=pwg_object, action="T")
+                        pwg_his.save()
                 tester_his = TesterPWGHistory(pwg_name=pwg_object, got_on=datetime.datetime.now())
                 tester_his.save()
 
@@ -1501,7 +1506,6 @@ def getback_pwgs(request):
         if len(pwg) != 0:
             for i in pwg:
                 u = request.user
-                print(u)
                 u = User.objects.get(username='elahi')
                 temp_pwg = PWG.objects.get(id=i)
                 temp_pwg.location = "A"
@@ -1511,8 +1515,11 @@ def getback_pwgs(request):
                 trans_pwg = TransferPwg.objects.get(pwg_owner=i)
                 trans_pwg.delete()
 
-                pwg_his = PWGHistory(object=u, pwg=temp_pwg, action="RAD")
-                pwg_his.save()
+                if PWGHistory.objects.filter(object=u, pwg=temp_pwg, action="RAD").exists():
+                    pass
+                else:
+                    pwg_his = PWGHistory(object=u, pwg=temp_pwg, action="RAD")
+                    pwg_his.save()
 
         if accType == "tester-home":
             return redirect('tester-home')
@@ -1825,8 +1832,11 @@ def assign(request):
                     pwg.save()
 
                     # creating entry in PWG History table
-                    pwg_his = PWGHistory(object=user, pwg=pwg, action="T")
-                    pwg_his.save()
+                    if PWGHistory.objects.filter(object=user, pwg=pwg, action="T").exists():
+                        pass
+                    else:
+                        pwg_his = PWGHistory(object=user, pwg=pwg, action="T")
+                        pwg_his.save()
 
             return redirect("pwg-sublist", id=pwgs.id)
         elif accType == "user-home":
@@ -1902,8 +1912,11 @@ def assign_multiple(request):
                         pwg.save()
 
                         # creating entry in PWG histroy table
-                        pwg_his = PWGHistory(object=user, pwg=pwg, action="T")
-                        pwg_his.save()
+                        if PWGHistory.objects.filter(object=user, pwg=pwg, action="T").exists():
+                            pass
+                        else:
+                            pwg_his = PWGHistory(object=user, pwg=pwg, action="T")
+                            pwg_his.save()
 
         return redirect("pwg-sublist", id=pwgs.id)
     else:
@@ -1971,11 +1984,15 @@ def getback(request):
             pwg.transfer_to = usr
             pwg.save()
 
-            pwg_his = PWGHistory(object=usr, pwg=pwg, action="RAD")
-            pwg_his.save()
+            if PWGHistory.objects.filter(object=usr, pwg=pwg, action="RAD").exists():
+                pass
+            else:
+                pwg_his = PWGHistory(object=usr, pwg=pwg, action="RAD")
+                pwg_his.save()
 
-            pwg_trans = TransferPwg.objects.get(pwg_owner=pwg)
-            pwg_trans.delete()
+            if TransferPwg.objects.filter(pwg_owner=pwg).exists():
+                pwg_trans = TransferPwg.objects.get(pwg_owner=pwg)
+                pwg_trans.delete()
 
             return JsonResponse({"msg": name}, status=200)
         else:
@@ -2147,8 +2164,11 @@ def authorize_multiple_pwgs(request):
                             authrize_obj = Authorize(pwg=pwg_obj, authorize_to=u, pwgserver=pwgs)
                             authrize_obj.save()
 
-                        pwg_his = PWGHistory(object=u, pwg=pwg_obj, action="A")
-                        pwg_his.save()
+                        if PWGHistory.objects.filter(object=u, pwg=pwg_obj, action="A").exists():
+                            pass
+                        else:
+                            pwg_his = PWGHistory(object=u, pwg=pwg_obj, action="A")
+                            pwg_his.save()
 
         return redirect("seller-pwg")
 
@@ -2191,8 +2211,11 @@ def share_multiple_pwgs(request):
                             share_obj = Share(pwg=pwg_obj, share_to=u, pwgserver=pwgs)
                             share_obj.save()
 
-                        pwg_his = PWGHistory(object=u, pwg=pwg_obj, action="S")
-                        pwg_his.save()
+                        if PWGHistory.objects.filter(object=u, pwg=pwg_obj, action="S").exists():
+                            pass
+                        else:
+                            pwg_his = PWGHistory(object=u, pwg=pwg_obj, action="S")
+                            pwg_his.save()
 
         return redirect("seller-pwg")
 
@@ -2224,9 +2247,6 @@ def deshare_multiple_pwgs(request):
                         user_obj.is_shared = False
                         u = user_obj.user
                         user_obj.save()
-
-                        # saving history
-                        # pwg_his = PWGHistory(object=u, pwg=pwg_obj, action="De-shared")
 
                         if Share.objects.filter(share_to=u, pwg=pwg_obj).exists():
                             share_obj = Share.objects.filter(share_to=u, pwg=pwg_obj)
@@ -2289,8 +2309,11 @@ def delete_temp(request):
                 s = name + " deleted"
                 u = request.user
                 u = User.objects.filter(Q(email=u) | Q(username=u))
-                s = PWGHistory(object=u, pwg=my_object, action="D")
-                s.save()
+                if PWGHistory.objects.filter(object=u, pwg=my_object, action="D").exists():
+                    pass
+                else:
+                    s = PWGHistory(object=u, pwg=my_object, action="D")
+                    s.save()
 
                 name = "{} has been successfully deleted from your list".format(name)
                 my_object.save()
@@ -2314,11 +2337,14 @@ def delete_temp(request):
                 s = name + " deleted"
                 u = request.user
                 u = User.objects.filter(Q(email=u) | Q(username=u))
-                s = PWGHistory(object=u[0], pwg=my_object, action="D")
-                s.save()
+                if PWGHistory.objects.filter(object=u[0], pwg=my_object, action="D").exists():
+                    name = 'something went wrong try again!'
+                else:
+                    s = PWGHistory(object=u[0], pwg=my_object, action="D")
+                    s.save()
 
-                name = "{} has been successfully deleted from your list".format(name)
-                my_object.save()
+                    name = "{} has been successfully deleted from your list".format(name)
+                    my_object.save()
 
                 return JsonResponse({"msg": name}, status=200)
             else:
@@ -2356,8 +2382,11 @@ def delete_temp(request):
                     s = name + " deleted"
                     u = request.user
                     u = User.objects.filter(Q(email=u) | Q(username=u))
-                    s = PWGHistory(object=u[0], pwg=my_object, action="D")
-                    s.save()
+                    if PWGHistory.objects.filter(object=u[0], pwg=my_object, action="D").exists():
+                        pass
+                    else:
+                        s = PWGHistory(object=u[0], pwg=my_object, action="D")
+                        s.save()
 
                     my_object.save()
 
@@ -2440,8 +2469,11 @@ def return_pwg(request):
                         messages.info(request, "PWG Object not found!")
                         return redirect("seller-pwg")
 
-                    pwg_his = PWGHistory(object=user, pwg=pwg_obj, action="RAD")
-                    pwg_his.save()
+                    if PWGHistory.objects.filter(object=user, pwg=pwg_obj, action="RAD").exists():
+                        pass
+                    else:
+                        pwg_his = PWGHistory(object=user, pwg=pwg_obj, action="RAD")
+                        pwg_his.save()
             return redirect("seller-pwg")
 
     messages.error(request, 'Something went wrong')
@@ -2481,8 +2513,11 @@ def transfer_pwg_multiple_users(request):
                         pwg_obj.user_location = "T"
                         pwg_obj.save()
 
-                        p = PWGHistory(object=u, pwg=pwg_obj, action="T")
-                        p.save()
+                        if PWGHistory.objects.filter(object=u, pwg=pwg_obj, action="T").exists():
+                            pass
+                        else:
+                            p = PWGHistory(object=u, pwg=pwg_obj, action="T")
+                            p.save()
 
         return redirect("seller-pwg")
 
@@ -2529,8 +2564,11 @@ def retest(request):
                     pwg_obj.is_tested_good = False
                     pwg_obj.is_tested_faulty = False
                     pwg_obj.save()
-                    pwg_his = PWGHistory(object=user, pwg=pwg_obj, action="RT")
-                    pwg_his.save()
+                    if PWGHistory.objects.filter(object=user, pwg=pwg_obj, action="RT").exists():
+                        pass
+                    else:
+                        pwg_his = PWGHistory(object=user, pwg=pwg_obj, action="RT")
+                        pwg_his.save()
 
         if accType == "tester-home":
             return redirect("tester-home")
@@ -2562,8 +2600,11 @@ def fail(request):
             user = pwg_obj.transfer_to
             pwg_obj.save()
 
-            pwg_his = PWGHistory(object=user, pwg=pwg_obj, action="F")
-            pwg_his.save()
+            if PWGHistory.objects.filter(object=user, pwg=pwg_obj, action="F").exists():
+                pass
+            else:
+                pwg_his = PWGHistory(object=user, pwg=pwg_obj, action="F")
+                pwg_his.save()
 
             messages.info(request, "Successfully added the {} in failed list".format(pwg_alias))
             return redirect("tester-test")
@@ -2588,8 +2629,11 @@ def pass_pwg(request):
             user = pwg_obj.transfer_to
             pwg_obj.save()
 
-            pwg_his = PWGHistory(object=user, pwg=pwg_obj, action="P")
-            pwg_his.save()
+            if PWGHistory.objects.filter(object=user, pwg=pwg_obj, action="P").exists():
+                pass
+            else:
+                pwg_his = PWGHistory(object=user, pwg=pwg_obj, action="P")
+                pwg_his.save()
 
             messages.info(request, "Successfully added the {} in passed list".format(pwg_alias))
             return redirect("tester-test")
@@ -2676,8 +2720,11 @@ def share_transfer_multiple(request):
                                 share_obj = Share(pwg=pwg_obj, share_to=main_user, pwgserver=pwgs)
                                 share_obj.save()
 
-                            pwg_his = PWGHistory(object=main_user, pwg=pwg_obj, action="S")
-                            pwg_his.save()
+                            if PWGHistory.objects.filter(object=main_user, pwg=pwg_obj, action="S").exists():
+                                pass
+                            else:
+                                pwg_his = PWGHistory(object=main_user, pwg=pwg_obj, action="S")
+                                pwg_his.save()
                         else:
                             messages.error(request, "User object not found!")
                             return redirect("user-home")
@@ -2701,8 +2748,11 @@ def share_transfer_multiple(request):
                             pwg_obj.save()
                             user_obj.save()
 
-                            pwg_his = PWGHistory(object=main_user, pwg=pwg_obj, action="T")
-                            pwg_his.save()
+                            if PWGHistory.objects.filter(object=main_user, pwg=pwg_obj, action="T").exists():
+                                pass
+                            else:
+                                pwg_his = PWGHistory(object=main_user, pwg=pwg_obj, action="T")
+                                pwg_his.save()
 
                         else:
                             messages.error(request, "User object not found!")

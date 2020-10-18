@@ -128,7 +128,7 @@
 									<div class="card-header" id="headingOne">
 										<h2 class="mb-0">
 											<button class="btn" type="button" data-toggle="collapse">
-												<input type="checkbox" id="checkAll{{forloop.counter}}" name="floatingButtonHere" value="s{{pwgs.id}}" class="s{{pwgs.id}}"> <span class="pwg-list">{{pwgs.alias}}</span>
+												<input type="checkbox" id="checkAll{{forloop.counter}}" value="s{{pwgs.id}}" class="s{{pwgs.id}}"> <span class="pwg-list">{{pwgs.alias}}</span>
 											</button>
 											<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
 										</h2>
@@ -142,7 +142,7 @@
 									<div class="card-header" id="headingTwo">
 										<h2 class="mb-0">
 											<button class="btn" type="button" data-toggle="collapse">
-												<input type="checkbox" id="checkAll{{forloop.counter}}" name="floatingButtonHere" value="s{{pwgs.id}}" class="s{{pwgs.id}}"> <span class="pwg-list">{{pwgs.alias}}</span>
+												<input type="checkbox" id="checkAll{{forloop.counter}}" value="s{{pwgs.id}}" class="s{{pwgs.id}}"> <span class="pwg-list">{{pwgs.alias}}</span>
 											</button>
 											<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
 										</h2>
@@ -156,7 +156,7 @@
 										<div class="card-header" id="headingThree">
 											<h2 class="mb-0">
 												<button class="btn" type="button" data-toggle="collapse">
-													<input type="checkbox" id="checkAll{{forloop.counter}}" name="floatingButtonHere" value="s{{pwgs.id}}" class="s{{pwgs.id}}"> <span class="pwg-list">{{pwgs.alias}}</span>
+													<input type="checkbox" id="checkAll{{forloop.counter}}" value="s{{pwgs.id}}" class="s{{pwgs.id}}"> <span class="pwg-list">{{pwgs.alias}}</span>
 												</button>
 												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
 											</h2>
@@ -170,7 +170,7 @@
 										<div class="card-header" id="headingFour">
 											<h2 class="mb-0">
 												<button class="btn" type="button" data-toggle="collapse">
-													<input type="checkbox" id="checkAll{{forloop.counter}}" name="floatingButtonHere" value="s{{pwgs.id}}" class="s{{pwgs.id}}"> <span class="pwg-list">{{pwgs.alias}}</span>
+													<input type="checkbox" id="checkAll{{forloop.counter}}" value="s{{pwgs.id}}" class="s{{pwgs.id}}"> <span class="pwg-list">{{pwgs.alias}}</span>
 												</button>
 												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
 											</h2>
@@ -183,7 +183,7 @@
 										<div class="card-header" id="headingFive">
 											<h2 class="mb-0">
 												<button class="btn" type="button" data-toggle="collapse">
-													<input type="checkbox" id="checkAll{{forloop.counter}}" name="floatingButtonHere" value="s{{pwgs.id}}" class="s{{pwgs.id}}"> <span class="pwg-list">{{pwgs.alias}}</span>
+													<input type="checkbox" id="checkAll{{forloop.counter}}" value="s{{pwgs.id}}" class="s{{pwgs.id}}"> <span class="pwg-list">{{pwgs.alias}}</span>
 												</button>
 												<i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive" onclick="myFunction(this)" style="position: absolute; top: 31px;font-size: 18px;"></i>
 											</h2>
@@ -203,9 +203,13 @@
 														{% if for_Admin != "admin" %}
 
 															{% if not pw.is_shared and not pw.is_authorized and not pw.is_freeze %}
-																{% if pw.transfer_to == request.user %}
+																{% if pw.transfer_to == request.user and pw.sold_from == None %}
 																<tr>
 																	<td><a href="#"><input type="checkbox" name="floatingButtonHere" class="pwg{{count}}" value="{{pw.id}}"> {{pw.alias}}</a></td>
+																</tr>
+																{% elif pw.transfer_to == request.user and pw.sold_from != None %}
+																<tr>
+																	<td>{{pw.alias}} is already transferred</td>
 																</tr>
 																{% endif %}
 															{% else %}
@@ -340,7 +344,6 @@
 					for(i=0;i<ele.length;i++){
 						checkbox_values.push(ele[i].value);
 					}
-					console.log(checkbox_values);
 
 				} else {
 					$(".pwg{{forloop.counter}}").prop("checked", false);
@@ -358,8 +361,6 @@
 					if( index > -1 ){
 						checkbox_values.splice(index,1);
 					}
-					console.log(checkbox_values);
-
 				}
 				showHideButtons();
 			});
