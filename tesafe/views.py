@@ -2726,3 +2726,7 @@ def passtext(request):
             pwg_use_password.save()
             return JsonResponse({"msg": "Saved"}, status=200)
     return JsonResponse({"msg": False}, status=200)
+
+
+def simple_checkout(request):
+    return render(request, "payment/checkout.html")

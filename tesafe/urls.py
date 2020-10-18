@@ -28,7 +28,7 @@ urlpatterns = [
     path("seller-authorized<int:pk>", views.seller_authorized, name="seller-authorized"),
     path("seller-authorized-pwg", views.seller_authorized_pwg, name="seller-authorized-pwg"),
 
-    #tester URLs
+    # tester URLs
     path("tester-home", views.tester_home, name='tester-home'),
     path("tester-test", views.tester_test, name='tester-test'),
     # to make pwg fail
@@ -37,13 +37,17 @@ urlpatterns = [
     path("pass_pwg", views.pass_pwg, name='pass_pwg'),
 
     # User Urls
-    # path("user-home", views.user_home, name='user-home'),
     path("user-user", views.user_user, name='user-user'),
     path("user-home", views.user_home, name='user-home'),
     path("user_list", views.user_list, name='user_list'),
     path("share_transfer_multiple", views.share_transfer_multiple, name='share_transfer_multiple'),
 
+    # password reset functionality
+    path("request-reset-link", views.RequestPasswordResetEmail.as_view(), name="request-reset-link"),
+    path("set-new-password/<uidb64>/<token>", views.CompletePasswordReset.as_view(), name="reset-user-password"),
 
+    # Payment URLs
+    path("simple_checkout", views.simple_checkout, name="simple_checkout"),
     # delete
     path("delete", views.delete, name="delete"),
     # freeze
@@ -54,9 +58,6 @@ urlpatterns = [
     path("find_username", views.find_username, name="find_username"),
     # password change
     path("password_change",views.password_change, name="password_change"),
-    # password reset functionality
-    path("request-reset-link", views.RequestPasswordResetEmail.as_view(), name="request-reset-link"),
-    path("set-new-password/<uidb64>/<token>", views.CompletePasswordReset.as_view(), name="reset-user-password"),
     # ajax url
     path("validate_nickname", views.ajax_request, name="validate_nickname"),
     # transfer_pwg and pwgs
