@@ -68,10 +68,11 @@
 	</section>
 
 
-    <script>paypal.Buttons().render('#paypal-button-container');</script>
     <script
-        src="https://www.paypal.com/sdk/js?client-id=AcWPTI2XFIn4UBBdviW3GWsIX5w_LR_GhcV9FMejeq-FkTIt35GJRfCr2ui4nkXDcMCq_RjgjKZrQ1Bo&currency=USD">
+        src="https://www.paypal.com/sdk/js?client-id=AZrWlhD4rx2NV1yhTbCnH66G8FTSKHtL8yDK2p_z_TZpneUUWI2hQwF9PMkgl0lnUq2LN4eVFvknZdJe&currency=USD">
     </script>
+
+
     <script>
     	// Shorthand for $( document ).ready()
 		$(function() {
@@ -84,7 +85,6 @@
 			{% endif %}
 			$("#msg").html('{% for msg in messages %}<h3 class="text-danger">{{msg}}</h3>{% endfor %}');
 		});
-
     </script>
 
     <script>
