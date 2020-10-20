@@ -494,11 +494,11 @@
                         {% csrf_token %}
 						<div class="form-group">
 							<label>Alias</label>
-							<input type="text" class="form-control"  value="" name="alias" id="alias_value">
+							<input type="text" class="form-control"  value="" name="alias" id="alias_value" required>
 							<input type="hidden" class="form-control"  id="alias_id" name="alias_id">
 							<input type="hidden" class="form-control"  value="pwgs" name="accType">
 						</div>
-						<button  type="submit" class="btn btn-primary" onclick="submit_alias();" disabled id="btn-alias">Change</button>
+						<button  type="submit" class="btn btn-primary" id="btn-alias">Change</button>
 						<a  href="#" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</a>
 					</form>
 				</div>
@@ -770,11 +770,6 @@ function sendpwgspk(){
 
 	checkbox_values = [];
 
-}
-
-// to submit alias change form
-function submit_alias(){
-    document.forms['submit_alias_change'].submit();
 }
 
 // to add predefined password values

@@ -1093,7 +1093,6 @@ def delete(request):
             if PWGServers.objects.filter(id=pk).exists():
                 pwgs = PWGServers.objects.get(id=pk)
                 name = pwgs.alias
-                print(name)
                 name = "{} has been successfully deleted".format(name)
                 pwgs.delete()
 
@@ -1172,7 +1171,7 @@ def unfreeze(request):
         pk = request.GET.get("pk", None)
         user = request.GET.get("user", None)
         if user == "seller":
-        # check for the pk in the database.
+            # check for the pk in the database.
             if Seller.objects.filter(id=pk).exists():
                 my_object = Seller.objects.get(id=pk)
                 my_object.is_freeze = False
@@ -1666,50 +1665,75 @@ def freeze_multiple_user(request):
         accType = request.POST.get("accType", None)
         pk = request.POST.get("pk", None)
 
+        temp_list = ''
+        new_values = []
+        for i in values:
+            if i == ",":
+                new_values.append(int(temp_list))
+                temp_list = ''
+            elif i == " ":
+                pass
+            else:
+                temp_list += i
+        new_values.append(int(temp_list))
+        values = new_values
         # print(values)
         if accType == "seller":
             for i in values:
                 if i == ",":
                     pass
-                elif Seller.objects.filter(id=i).exists():
-                    seller = Seller.objects.get(id=i)
-                    seller.is_freeze = True
-                    seller.save()
-
+                else:
+                    if Seller.objects.filter(id=i).exists():
+                        seller = Seller.objects.get(id=i)
+                        seller.is_freeze = True
+                        seller.save()
+                    else:
+                        messages.error(request, "Some of the Seller(s) was not freezed!")
+                        return redirect("admin-seller")
             return redirect('admin-seller')
 
         elif accType == "tester":
             for i in values:
                 if i == ",":
                     pass
-                elif Tester.objects.filter(id=i).exists():
-                    tester = Tester.objects.get(id=i)
-                    tester.is_freeze = True
-                    tester.save()
-
+                else:
+                    if Tester.objects.filter(id=i).exists():
+                        tester = Tester.objects.get(id=i)
+                        tester.is_freeze = True
+                        tester.save()
+                    else:
+                        messages.error(request, "Some of the Tester(s) was not freezed!")
+                        return redirect('admin-tester')
             return redirect('admin-tester')
+
         elif accType == "pwg":
             for i in values:
                 if i == ",":
                     pass
-                elif PWG.objects.filter(id=i).exists():
-                    pwg = PWG.objects.get(id=i)
-                    pwg.is_freeze = True
-                    pwg.save()
-            if pk:
-                return redirect('pwg-sublist', id=int(pk))
-            else:
-                return redirect('admin-info-server')
+                else:
+                    if PWG.objects.filter(id=i).exists():
+                        pwg = PWG.objects.get(id=i)
+                        pwg.is_freeze = True
+                        pwg.save()
+                    else:
+                        messages.error(request, "Some of the PWG(s) was not freezed!")
+                        if pk:
+                            return redirect('pwg-sublist', id=int(pk))
+                        else:
+                            return redirect('admin-info-server')
 
         elif accType == "user":
             for i in values:
                 if i == ",":
                     pass
-                elif WebUser.objects.filter(id=i).exists():
-                    tester = WebUser.objects.get(id=i)
-                    tester.is_freeze = True
-                    tester.save()
-
+                else:
+                    if WebUser.objects.filter(id=i).exists():
+                        tester = WebUser.objects.get(id=i)
+                        tester.is_freeze = True
+                        tester.save()
+                    else:
+                        messages.error(request, "Some of the User(s) was not freezed!")
+                        return redirect('seller-user')
             return redirect('seller-user')
     return redirect('admin-home')
 

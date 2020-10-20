@@ -113,7 +113,11 @@
 									{% for tes in tester %}
 										<tr>
 											<th><input type="checkbox" name="floatingButtonHere" disabled class="check" value="{{tes.pk}}"></th>
-											<td><span><img src="{{tes.profile_pic.url}}" height="40" width="40" class="rounded-circle"></span> {{tes.first_name}} {{tes.last_name}}</td>
+											<td><span><img src="{{tes.profile_pic.url}}" title="Profile pic" height="40" width="40" class="rounded-circle"></span>{% if tes.alias == '' or tes.alias == None %} {{tes.system_name}} {% else %} {{tes.alias}} {% endif %}
+												{% if tes.is_freeze %}
+												<i class="fa fa-ban" aria-hidden="true" title="Freezed"></i>
+												{% endif %}
+											</td>
 											<td><a href="tester-tested-pwg-list{{tes.user.id}}" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>

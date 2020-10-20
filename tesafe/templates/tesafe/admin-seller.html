@@ -119,7 +119,11 @@
 									{% for sel in seller %}
 										<tr>
 											<th><input type="checkbox" name="floatingButtonHere" disabled  value="{{sel.pk}}" id="book1" class="check"></th>
-											<td><span><img src="{{sel.profile_pic.url}}" height="40" width="40" class="rounded-circle"></span> {{sel.first_name}} {{sel.last_name}}</td>
+											<td><span><img src="{{sel.profile_pic.url}}" height="40" width="40" class="rounded-circle" title="Profile Pic"></span>{% if sel.alias == '' or sel.alias == None %} {{sel.first_name}} {{sel.last_name}} {% else %} {{sel.alias}} {% endif %}
+												{% if sel.is_freeze %}
+												<i class="fa fa-ban" aria-hidden="true" title="Freezed"></i>
+												{% endif %}
+											</td>
 											<td><a href="transfer{{sel.user.pk}}" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
@@ -529,7 +533,7 @@
 <!--	to freeze sellers -->
 	<form action="freeze_multiple_user" method="post" name="freeze_multiple">
 		{% csrf_token %}
-		<input type="hidden" id="freeze_values" name="freeze_values">
+		<input type="hidden" id="freeze_values_seller" name="freeze_values">
 		<input type="hidden" value="seller" name="accType">
 	</form>
 
@@ -717,7 +721,7 @@ function sendsellerspk(){
 }
 
 function sendSellersPKFreeze(){
-		$("#freeze_values").attr('value', checkbox_values);
+		$("#freeze_values_seller").attr('value', checkbox_values);
 		document.forms['freeze_multiple'].submit();
 
 		checkbox_values = [];
