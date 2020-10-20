@@ -10,6 +10,7 @@ urlpatterns = [
     path("admin-home", views.admin_home, name="admin-home"),
     path("transfer<int:id>", views.transfer, name="transfer"),
     path("admin-seller", views.admin_seller, name="admin-seller"),
+    path("assist_admin", views.assist_admin, name="assist_admin"),
     path("admin-tester", views.admin_tester, name="admin-tester"),
     path("pwg-sublist<int:id>", views.pwg_sublist, name="pwg-sublist"),
     path("tester-getback<int:id>", views.tester_getback, name="tester-getback"),

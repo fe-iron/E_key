@@ -233,12 +233,15 @@ def register(request):
         uname = request.POST['uname']
         email = request.POST['email']
         phone = request.POST['phone']
+        system_name = request.POST.get('system_name', None)
         password1 = request.POST['password1']
         password2 = request.POST['password2']
         file = request.FILES.get('file', None)
 
-        # password checking
+        if system_name:
+            serial_no = system_name[-4:]
 
+        # password checking
         if password1 == password2:
             # conditions to see if it already exists
             if User.objects.filter(username=uname):
@@ -267,6 +270,9 @@ def register(request):
                     webAdmin = WebAdmin(user=user, first_name=fname, last_name=lname, email=email, phone=phone)
                     webAdmin.save()
 
+                    sys_name = SystemName(serial_no=serial_no, user=user, system_name=system_name, is_user=False,
+                                          is_seller=False, is_tester=False, is_pwgs=False, is_admin=True)
+                    sys_name.save()
                     return redirect("admin-home")
 
                 # if it is seller
@@ -280,6 +286,10 @@ def register(request):
 
                     seller = Seller(user=user, first_name=fname, last_name=lname, email=email, phone=phone, profile_pic=file, alias=uname)
                     seller.save()
+
+                    sys_name = SystemName(serial_no=serial_no, user=user, system_name=system_name, is_user=False,
+                                          is_seller=True, is_tester=False, is_pwgs=False, is_admin=False)
+                    sys_name.save()
 
                     return redirect('seller-home')
 
@@ -296,6 +306,10 @@ def register(request):
                     tester = Tester(user=user, first_name=fname, last_name=lname, email=email, phone=phone, profile_pic=file, alias=uname)
                     tester.save()
 
+                    sys_name = SystemName(serial_no=serial_no, user=user, system_name=system_name, is_user=False,
+                                          is_seller=False, is_tester=True, is_pwgs=False, is_admin=False)
+                    sys_name.save()
+
                     return redirect('tester-home')
 
                 # if it is user
@@ -310,6 +324,10 @@ def register(request):
 
                     webUser = WebUser(user=user, first_name=fname, last_name=lname, email=email, phone=phone, profile_pic=file, alias=uname)
                     webUser.save()
+
+                    sys_name = SystemName(serial_no=serial_no, user=user, system_name=system_name, is_user=True,
+                                          is_seller=False, is_tester=False, is_pwgs=False, is_admin=False)
+                    sys_name.save()
 
                     return redirect('user-home')
         else:
@@ -1536,7 +1554,7 @@ def add_new(request):
         fname = request.POST.get('fname', None)
         lname = request.POST.get('lname', None)
         name = str(request.POST.get('name', None))
-        alias = request.POST['alias']
+        alias = request.POST.get('alias', None)
         seller_id = request.POST.get('seller_id', None)
         email = request.POST['email']
         number = request.POST.get('number', None)
@@ -1556,6 +1574,8 @@ def add_new(request):
                 return redirect("admin-tester")
             elif accType == "user":
                 return redirect("seller-user")
+            elif accType == "admin":
+                return redirect("assist_admin")
 
         if accType != "pwgs":
             # creating user
@@ -1564,15 +1584,19 @@ def add_new(request):
             user.save()
             if accType == "seller":
                 sys_name = SystemName(serial_no=serial_no, user=user, system_name=system_name, is_user=False,
-                                      is_seller=True, is_tester=False, is_pwgs=False)
+                                      is_seller=True, is_tester=False, is_pwgs=False, is_admin=False)
                 sys_name.save()
             elif accType == "tester":
                 sys_name = SystemName(serial_no=serial_no, user=user, system_name=system_name, is_user=False,
-                                      is_seller=False, is_tester=True, is_pwgs=False)
+                                      is_seller=False, is_tester=True, is_pwgs=False, is_admin=False)
                 sys_name.save()
             elif accType == "user":
                 sys_name = SystemName(serial_no=serial_no, user=user, system_name=system_name, is_user=True,
-                                      is_seller=False, is_tester=False, is_pwgs=False)
+                                      is_seller=False, is_tester=False, is_pwgs=False, is_admin=False)
+                sys_name.save()
+            elif accType == "admin":
+                sys_name = SystemName(serial_no=serial_no, user=user, system_name=system_name, is_user=False,
+                                      is_seller=False, is_tester=False, is_pwgs=False, is_admin=True)
                 sys_name.save()
 
         # creating seller account
@@ -1618,6 +1642,17 @@ def add_new(request):
             else:
                 messages.info(request, "Something went wrong, try again")
                 return redirect("seller-user")
+
+        elif accType == "admin":
+            if user is not None:
+                user_obj = WebAdmin(user=user, first_name=fname, last_name=lname, email=email, phone=number, system_name=system_name, alias=alias)
+                user_obj.save()
+
+                messages.info(request, "Successfully Account Created!")
+                return redirect("admin-home")
+            else:
+                messages.info(request, "Something went wrong, try again")
+                return redirect("admin-home")
     else:
         return redirect("admin-home")
 
@@ -2780,3 +2815,7 @@ def passtext(request):
 
 def simple_checkout(request):
     return render(request, "payment/checkout.html")
+
+
+def assist_admin(request):
+    return render(request, "tesafe/new-admin.html")

@@ -6,9 +6,11 @@ from django.contrib.auth.models import User
 class WebAdmin(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100, null=True)
     email = models.CharField(max_length=150)
-    phone = models.CharField(max_length=15)
+    phone = models.CharField(max_length=15, null=True)
+    alias = models.CharField(max_length=100, default=None, null=True)
+    system_name = models.CharField(max_length=19, null=True, default="not assigned")
 
     def __str__(self):
         return self.first_name
@@ -20,7 +22,7 @@ class Seller(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100, default="none")
     system_name = models.CharField(max_length=19, null=True, default="not assigned")
-    alias = models.CharField(max_length=100, default="none")
+    alias = models.CharField(max_length=100, default=None, null=True)
     email = models.CharField(max_length=150)
     phone = models.CharField(max_length=15)
     profile_pic = models.ImageField(upload_to='seller/', default="none")
@@ -37,7 +39,7 @@ class Tester(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100, default="none")
     system_name = models.CharField(max_length=19, null=True, default="not assigned")
-    alias = models.CharField(max_length=100, default="none")
+    alias = models.CharField(max_length=100, default=None, null=True)
     email = models.CharField(max_length=150)
     phone = models.CharField(max_length=15)
     profile_pic = models.ImageField(upload_to='tester/', default="none")
@@ -55,7 +57,7 @@ class WebUser(models.Model):
     system_name = models.CharField(max_length=19, null=True, default="not assigned")
     email = models.CharField(max_length=150)
     phone = models.CharField(max_length=15)
-    alias = models.CharField(max_length=100, default="none", null=True)
+    alias = models.CharField(max_length=100, default=None, null=True)
     profile_pic = models.ImageField(upload_to='user/', default="none")
     associated_with = models.ForeignKey(Seller, on_delete=models.SET_NULL, null=True, default=None)
     is_freeze = models.BooleanField(default=False)
@@ -195,6 +197,7 @@ class PwgUseRecord(models.Model):
 # models for generating system name
 class SystemName(models.Model):
     is_user = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
     is_seller = models.BooleanField(default=False)
     is_tester = models.BooleanField(default=False)
     is_pwgs = models.BooleanField(default=False)

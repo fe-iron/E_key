@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Registration</title>
+	<title>Assistant Admin</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="{% static 'tesafe/bootstrap4/css/bootstrap.min.css' %}">
@@ -43,30 +43,21 @@
 				<div class="col-md-5">
 					<div class="padding-register">
 						<div class="card">
-							<h3 class="text-center pt-3">Registration</h3>
+							<h3 class="text-center pt-3">Add Assistant Admin</h3>
 
 							<div class="card-body">
-								<form action="register" method="post" enctype="multipart/form-data">
+								<form action="add-new" method="post" >
 									{% csrf_token %}
 
 <!--									error messages-->
-									<div class="form-group mb-4 text-danger" id="msg">
+									<div class="form-group mb-4 text-danger">
 										{% for msg in messages %}
 											<label class="font-weight-bold">{{msg}}</label>
 										{% endfor %}
 									</div>
 
-
-									<div class="form-group mb-4">
-										<label class="font-weight-bold">Account Type</label>
-										<select class="form-control" name="accType" id="accType">
-											<option value="seller" selected>Seller</option>
-											<option value="tester">Tester</option>
-											<option value="user">User</option>
-										</select>
-									</div>
 									<div class="form-group mb-4">*
-										<select name="unique_name" class="form-control" id="unique_name" required onchange="get_name();">
+										<select name="unique_name" class="form-control" id="unique_name" required onchange="get_name('A');">
 										  <!-- Countries often selected by users can be moved to the top of the list. -->
 										  <!-- Countries known to be subject to general US embargo are commented out by default. -->
 										  <!-- The data-countryCode attribute is populated with ISO country code, and value is int'l calling code. -->
@@ -299,31 +290,21 @@
 										<input type="text" class="form-control"  name="lname" placeholder="Enter Your last name">
 									</div>
 									<div class="form-group mb-4">
-										<input type="text" class="form-control"  name="uname" placeholder="Enter username ( includes @,#,!,_,-,etc )">
+										<input type="text" class="form-control"  name="alias" placeholder="Enter Alias name">
 									</div>
-
-                                    <div class="form-group mb-4">
-                                        <label for="exampleFormControlFile1">Profile Pic</label>
-                                        <input type="file" class="form-control-file" name="file">
-                                    </div>
-
+									<div id="upload"></div>
 									<div class="form-group mb-4">*
 										<input type="email" class="form-control"  name="email" placeholder="Enter Your email" required>
 									</div>
 									<div class="form-group mb-4">
-										<input type="tel" class="form-control"  name="phone" placeholder="Enter Your Phone Number" title="Invalid Phone Number" pattern="[1-9]{1}[0-9]{9}">
+										<input type="tel" class="form-control"  name="number" placeholder="Enter Your Phone Number" title="Invalid Phone Number" pattern="[1-9]{1}[0-9]{9}">
 									</div>
 									<div class="form-group mb-4">*
-										<input type="password" class="form-control" name="password1" placeholder="Enter Password" required autocomplete="on" id="p1">
+										<input type="password" class="form-control" name="password" placeholder="Enter Password" required autocomplete="on">
 									</div>
-									<div class="form-group mb-4">*
-										<input type="password" class="form-control"  name="password2" placeholder="Confirm Password" required autocomplete="on" id="p2">
-									</div>
+                                    <input type="hidden" name="accType" value="admin">
 									<div class="form-group">
-										<button type="submit" class="btn btn-primary btn-block" onclick="submit_button">Submit</button>
-									</div>
-									<div class="form-group">
-										<p class="text-center">Already Register?? <a href="/">  Login Here!!</a></p>
+										<button type="submit" class="btn btn-primary btn-block" >Submit</button>
 									</div>
 
 								</form>
@@ -337,17 +318,10 @@
 
 	<script>
 
-		function get_name(){
+		function get_name(accType){
 			// GET AJAX request
 			var nnn = $('#unique_name').val();
-			var account_type = $('#accType').val();
-			if(account_type == "seller"){
-				var accType = "S";
-			}else if(account_type == "tester"){
-				var accType = "T";
-			}else if(account_type == "user"){
-				var accType = "U";
-			}
+
 			$.ajax({
 				type: 'GET',
 				url: "unique_name",
@@ -366,14 +340,6 @@
 				}
 			})
 
-		}
-
-		function submit_button(){
-            var p1 = $("#p1").val();
-            var p2 = $("#p2").val();
-            if(p1 != p2){
-                $("#msg").html('<label class="font-weight-bold">Password do not match!</label>');
-            }
 		}
 	</script>
 </body>
