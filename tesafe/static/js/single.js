@@ -76,12 +76,12 @@ function disableInput() {
 
 $(document).ready(function () {
     updateUserList();
-
+    var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
 
 //    let socket = new WebSocket(`ws://127.0.0.1:8000/?session_key=${sessionKey}`);
     var socket = new WebSocket(
-        'ws://' + window.location.host +
-        '/ws?session_key=${sessionKey}')
+        ws_scheme+'://' + window.location.host +
+        '/'+ws_scheme+'?session_key=${sessionKey}')
 
     chatInput.keypress(function (e) {
         if (e.keyCode == 13)
