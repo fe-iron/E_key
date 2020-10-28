@@ -1,6 +1,13 @@
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, include
 from . import views
+from rest_framework.routers import DefaultRouter
+from .api import MessageModelViewSet, UserModelViewSet
+
+# for messages routing
+router = DefaultRouter()
+router.register(r'message', MessageModelViewSet, basename='message-api')
+router.register(r'user', UserModelViewSet, basename='user-api')
 
 urlpatterns = [
     # admin urls
@@ -121,6 +128,10 @@ urlpatterns = [
     path('destination', views.destination, name='destination'),
     path('accounts/login/', views.index, name='login'),
 
+    # Messages route to API
+    path(r'api/v1/', include(router.urls)),
+    path('custom_chat/<str:selected_user>', views.custom_chat, name='custom_chat'),
+    path('broadcast', views.broadcast, name='broadcast'),
 ]
 
 

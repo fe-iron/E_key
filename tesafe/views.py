@@ -128,6 +128,20 @@ class CompletePasswordReset(View):
             return redirect("/")
 
 
+def custom_chat(request, selected_user):
+    if User.objects.filter(email=selected_user).exists():
+        usr = User.objects.get(email=selected_user)
+        usr = usr.first_name
+    param = {
+        'selected_user': selected_user,
+        'name': usr,
+    }
+    return render(request, 'core/single-chat.html', param)
+
+
+def broadcast(request):
+    return render(request, 'core/chat.html')
+
 # Create your views here.
 def get_ip(request):
     try:

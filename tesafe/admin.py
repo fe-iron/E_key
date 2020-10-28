@@ -1,7 +1,8 @@
 # Register your models here.
 from django.contrib import admin
 from .models import WebAdmin, Seller, WebAdminLoginHistory, Tester, WebUser, PWGServers, PWG, PasswordHistory, \
-    TransferPwg, TransferPwgs, PwgUseRecord, SystemName, Authorize, Share, PWGHistory, TesterPWGHistory, UserToUser
+    TransferPwg, TransferPwgs, PwgUseRecord, SystemName, Authorize, Share, PWGHistory, TesterPWGHistory, UserToUser, \
+    MessageModel
 
 
 # admin.site.register(User)
@@ -63,3 +64,15 @@ class TransferPwgsAdmin(admin.ModelAdmin):
 @admin.register(UserToUser)
 class UserToUserAdmin(admin.ModelAdmin):
     list_display = ("date_time", "main_user", "associated_user")
+
+
+class MessageModelAdmin(admin.ModelAdmin):
+    readonly_fields = ('timestamp',)
+    search_fields = ('id', 'body', 'user__username', 'recipient__username')
+    list_display = ('id', 'user', 'recipient', 'timestamp', 'characters')
+    list_display_links = ('id',)
+    list_filter = ('user', 'recipient')
+    date_hierarchy = 'timestamp'
+
+
+admin.site.register(MessageModel, MessageModelAdmin)

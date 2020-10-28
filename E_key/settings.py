@@ -37,8 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Apps
     'tesafe',
-    # user agent to get users details
+
+    # 3rd party
+    'rest_framework',
+    'channels',
+    # 3rd party user agent to get users details
     'django_user_agents',
 ]
 
@@ -125,6 +130,23 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ],
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100
+}
+
+MESSAGES_TO_LOAD = 15
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgiref.inmemory.ChannelLayer",
+        "ROUTING": "tesafe.routing.channel_routing",
+    },
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -156,3 +178,21 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'differences690@gmail.com'
 EMAIL_HOST_PASSWORD = 'Differences@#$9091'
+
+# Import local_settings.py
+try:
+    from local_settings import *
+except ImportError:
+    pass
+
+
+ASGI_APPLICATION = 'E_key.routing.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}

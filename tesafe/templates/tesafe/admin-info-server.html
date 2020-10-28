@@ -158,7 +158,7 @@
 													</button>
 													<div class="dropdown-menu">
 														<a class="dropdown-item" href="#" onclick="change_name('{{pwg_server.alias}}',{{pwg_server.pk}});">Change Name</a>
-														<a class="dropdown-item" href="#">Chat</a>
+														<a class="dropdown-item" href="custom_chat/{{pwg_server.user.email}}">Chat</a>
 														<a class="dropdown-item" href="#" onclick="delete_user({{pwg_server.pk}}, 'pwgs')">Delete</a>
 														<a class="dropdown-item" href="#" onclick="pop({{pwg_server.user.pk}}, 'pwgs')"> Login Record </a>
 														<a class="dropdown-item" href="#" onclick="pwd_history({{pwg_server.user.id}})">Password History</a>
