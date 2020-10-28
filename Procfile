@@ -1,2 +1,2 @@
-web: daphne E_key.asgi:channel_layer --port $PORT --bind 0.0.0.0 -v2
+web: daphne E_key.settings:CHANNEL_LAYERS --port $PORT --bind 0.0.0.0 -v2
 worker: python manage.py runworker -v2
