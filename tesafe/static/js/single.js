@@ -59,7 +59,6 @@ function setCurrentRecipient(username) {
     currentRecipient = username;
     getConversation(currentRecipient);
     enableInput();
-    console.log("enabled")
 }
 
 
