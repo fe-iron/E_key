@@ -119,7 +119,7 @@
 														<a class="dropdown-item" href="seller-shared{{webuser.user.id}}" >Shared</a>
 													{% endif %}
 
-													<a class="dropdown-item" href="#">Chat History</a>
+													<a class="dropdown-item" href="#" onclick="chat_history('{{webuser.first_name}}', {{webuser.user.id}})">Chat History</a>
 													<a class="dropdown-item" href="#" onclick="delete_seller_user({{webuser.pk}});">Delete</a>
 
 													{% if webuser.is_freeze %}
@@ -460,6 +460,44 @@
 	</div>
 </div>
 
+	<!--	to show chat of history-->
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title font-weight-bold" id="modal-title-history">Login History of Seller ABC</h5>
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			</div>
+			<div class="modal-body" id="modal-body-login-history">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Sr. No.</th>
+								<th scope="col">Date</th>
+								<th scope="col">Time</th>
+								<th scope="col">Device Name</th>
+								<th scope="col">Login IP Address</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">1</th>
+								<td>20/06/5</td>
+								<td>5:30pm</td>
+								<td>Samsung</td>
+								<td>10.2.0.10:8090</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Return</button>
+      </div>
+		</div>
+	</div>
+</div>
 
 <section class="floatingButtonHere" style="display: none;" id="floating-button">
 	<button class="btn btn-primary" id="floating-confirm" onclick="delete_multiple_users();">Proceed</button>

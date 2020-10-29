@@ -1,6 +1,6 @@
 from .models import WebAdmin, Seller, Tester, WebUser, PWGServers, PWG, WebAdminLoginHistory, PasswordHistory, \
     TransferPwgs, TransferPwg, PwgUseRecord, SystemName, Authorize, Share, PWGHistory, TesterPWGHistory, \
-    UserToUser
+    UserToUser, MessageModel
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
@@ -1015,7 +1015,8 @@ def ajax_request(request):
         else:
             if WebAdminLoginHistory.objects.filter(user_id=pk).exists():
                 # if history found return history
-                history = WebAdminLoginHistory.objects.filter(user_id=pk)
+                cond = ['-login_date', '-login_time']
+                history = WebAdminLoginHistory.objects.filter(user_id=pk).order_by(*cond)
                 history_json = serializers.serialize('json', history)
 
                 return HttpResponse(history_json, content_type='application/json')
@@ -1064,7 +1065,23 @@ def find_username(request):
 
         elif accType == 'seller-history':
             pwg_name = []
-            print(pklist)
+            new_values = []
+            temp_list = ''
+
+            for i in pklist:
+                if i == ",":
+                    new_values.append(int(temp_list))
+                    temp_list = ''
+                elif i == " ":
+                    pass
+                elif i == "[":
+                    pass
+                elif i == "]":
+                    pass
+                else:
+                    temp_list += i
+            new_values.append(int(temp_list))
+            pklist = new_values
             for id in pklist:
                 if id == " ":
                     pass
@@ -2857,3 +2874,18 @@ def simple_checkout(request):
 
 def assist_admin(request):
     return render(request, "tesafe/new-admin.html")
+
+
+def chat_history(request):
+    usr = request.user
+    fk = request.GET.get('fk', None)
+    if User.objects.filter(Q(username=usr) | Q(email=usr)).exists():
+        usr = User.objects.get(Q(username=usr) | Q(email=usr))
+        if MessageModel.objects.filter(user=usr, recipient=fk).exists():
+            msgs = MessageModel.objects.filter(user=usr, recipient=fk)[:10]
+            msgs = serializers.serialize('json', msgs)
+            return HttpResponse(msgs, content_type="application/json")
+        else:
+            return JsonResponse({"history": False}, status=200)
+    return JsonResponse({"history": False}, status=200)
+
