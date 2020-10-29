@@ -60,7 +60,7 @@
 						<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
 						<a class="dropdown-item" href="#" onclick="myFunction()">Delete</a>
 						<a class="dropdown-item" href="#" onclick="freeze()"> Freeze </a>
-						<a class="dropdown-item" href="#">Chat</a>
+						<a class="dropdown-item" href="#" onclick="chat()">Chat</a>
 						<a class="dropdown-item" href="">Broadcast</a>
 						<a class="dropdown-item" href="admin-home" >Exit</a>
 					</div>
@@ -616,10 +616,9 @@ let checkbox_values = [];
 			}
 
 			if( checkbox_values.length == 0){
-				$(".floatingButtonHere").hide();
+				$("#floating-confirm").attr('disabled', true);
 			}else{
 				$("#floating-confirm").attr('disabled', false);
-				$(".floatingButtonHere").show(150);
 			}
 		});
 
@@ -634,10 +633,9 @@ let checkbox_values = [];
 			}
 		}
 		if( checkbox_values.length == 0){
-			$(".floatingButtonHere").hide();
+			$("#floating-confirm").attr('disabled', true);
 		}else{
 			$("#floating-confirm").attr('disabled', false);
-			$(".floatingButtonHere").show(150);
 		}
 		console.log(checkbox_values);
 	});
@@ -678,6 +676,16 @@ function freeze(){
 	$("#floating-confirm").attr('disabled', true);
 	$(".floatingButtonHere").show(150);
 }
+
+function chat(){
+	document.getElementById("checkAll").disabled = false;
+    $(".check").attr("disabled",false);
+
+	$("#floating-confirm").attr('onclick','chat_multiple()');
+	$("#floating-confirm").attr('disabled', true);
+	$(".floatingButtonHere").show(150);
+}
+
 
  // to show confirmation modal
 function delete_multiple_users(){
