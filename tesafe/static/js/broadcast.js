@@ -4,22 +4,6 @@ let chatButton = $('#btn-send');
 let userList = $('#user-list');
 let messageList = $('#messages');
 
-function updateUserList() {
-    $.getJSON('api/v1/user/', function (data) {
-        userList.children('.user').remove();
-        for (let i = 0; i < data.length; i++) {
-            const userItem = `<a class="list-group-item user">${data[i]['username']}</a>`;
-            $(userItem).appendTo('#user-list');
-        }
-        $('.user').click(function () {
-            userList.children('.active').removeClass('active');
-            let selected = event.target;
-            $(selected).addClass('active');
-            setCurrentRecipient(selected.text);
-        });
-    });
-}
-
 function drawMessage(message) {
     let position = 'left';
     const date = new Date(message.timestamp);
@@ -34,35 +18,31 @@ function drawMessage(message) {
                 </div>
             </li>`;
     $(messageItem).appendTo('#messages');
+    messageList.animate({scrollTop: messageList.prop('scrollHeight')});
 }
 
-function getConversation(recipient) {
+function getConversation(recipients) {
+    recipients.forEach(recipient =>
     $.getJSON(`/api/v1/message/?target=${recipient}`, function (data) {
-        messageList.children('.message').remove();
+
         for (let i = data['results'].length - 1; i >= 0; i--) {
             drawMessage(data['results'][i]);
         }
         messageList.animate({scrollTop: messageList.prop('scrollHeight')});
-    });
+    })
+    );
 
-}
-
-function getMessageById(message) {
-    id = JSON.parse(message).message
-    $.getJSON(`/api/v1/message/${id}/`, function (data) {
-        if (data.user === currentRecipient ||
-            (data.recipient === currentRecipient && data.user == currentUser)) {
-            drawMessage(data);
-        }
-        messageList.animate({scrollTop: messageList.prop('scrollHeight')});
-    });
 }
 
 function sendMessage(recipient, body) {
-    $.post('/api/v1/message/', {
+    $.get('broadcast', {
         recipient: recipient,
-        body: body
-    }).fail(function () {
+        body: body,
+
+    }).success(function (response) {
+        drawMessage(response[0]['fields']);
+    })
+    .fail(function () {
         alert('Error! Check console!');
     });
 }
@@ -72,7 +52,6 @@ function setCurrentRecipient(username) {
     getConversation(currentRecipient);
     enableInput();
 }
-
 
 function enableInput() {
     chatInput.prop('disabled', false);
@@ -86,8 +65,7 @@ function disableInput() {
 }
 
 $(document).ready(function () {
-    updateUserList();
-    disableInput();
+    setCurrentRecipient(recipient);
     var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
 
 //    let socket = new WebSocket(`ws://127.0.0.1:8000/?session_key=${sessionKey}`);
@@ -113,4 +91,6 @@ $(document).ready(function () {
 });
 
 
-
+function go_back() {
+    window.history.back();
+}

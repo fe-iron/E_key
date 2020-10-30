@@ -537,6 +537,11 @@
 		<input type="hidden" value="seller" name="accType">
 	</form>
 
+<!--	to start chat multiple -->
+	<form action="chat_multiple" method="post" name="chat_form">
+		{% csrf_token %}
+		<input type="hidden" id="user_values" name="users">
+	</form>
 
 <script src="{% static 'tesafe/js/ajax.js' %}"></script>
 <script type="text/javascript">
@@ -686,6 +691,12 @@ function chat(){
 	$(".floatingButtonHere").show(150);
 }
 
+
+function chat_multiple(){
+	checkbox_values = [...new Set(checkbox_values)];
+	$('#user_values').attr('value', checkbox_values);
+	document.forms['chat_form'].submit();
+}
 
  // to show confirmation modal
 function delete_multiple_users(){

@@ -40,6 +40,7 @@ class MessageModelViewSet(ModelViewSet):
         self.queryset = self.queryset.filter(Q(recipient=request.user) |
                                              Q(user=request.user))
         target = self.request.query_params.get('target', None)
+
         if target is not None:
             self.queryset = self.queryset.filter(
                 Q(recipient=request.user, user__username=target) |
@@ -65,5 +66,4 @@ class UserModelViewSet(ModelViewSet):
         # Get all users except yourself
         self.queryset = self.queryset.exclude(id=request.user.id)
         return super(UserModelViewSet, self).list(request, *args, **kwargs)
-
 

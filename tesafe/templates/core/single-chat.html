@@ -37,12 +37,10 @@
             </div>
         </div>
     </div>
-
     <script>
         let sessionKey = '{{ request.session.session_key }}';
         let currentUser = '{{ request.user.username }}';
         let recipient = '{{ selected_user }}';
-
     </script>
     <script src="{% static 'js/single.js' %}"></script>
 

@@ -1,4 +1,3 @@
-from django.conf.urls import url
 from django.urls import path, include
 from . import views
 from rest_framework.routers import DefaultRouter
@@ -134,11 +133,10 @@ urlpatterns = [
     path('custom_chat/<str:selected_user>', views.custom_chat, name='custom_chat'),
     # for multiple user chat
     path('broadcast', views.broadcast, name='broadcast'),
+    # chat multiple
+    path('chat_multiple', views.chat_multiple, name='chat_multiple'),
     # to get chat history
     path('chat_history', views.chat_history, name='chat_history'),
 ]
 
-
-# 'transfer' pwg page for -
-# tranfer to seller in admin
-# tranfer to user in seller user and seller pwg
+# How to get an array in Django posted via Ajax => see in broadcast view

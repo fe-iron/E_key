@@ -140,7 +140,22 @@ def custom_chat(request, selected_user):
 
 
 def broadcast(request):
-    return render(request, 'core/chat.html')
+    if request.is_ajax and request.method == "GET":
+        recipient = request.GET.getlist('recipient[]', None)
+        body = request.GET.get('body', None)
+        user = request.user
+        user = User.objects.get(Q(email=user) | Q(username=user))
+        for receiver in recipient:
+            if User.objects.filter(email=receiver).exists():
+                usr = User.objects.get(email=receiver)
+                msg = MessageModel(user=user, recipient=usr, body=body)
+                # msg.save()
+            else:
+                return JsonResponse({"result": False}, status=200)
+        msg = MessageModel.objects.filter(user=user)[:1]
+        msg = serializers.serialize('json', msg)
+        return HttpResponse(msg, content_type="application/json")
+
 
 # Create your views here.
 def get_ip(request):
@@ -2888,4 +2903,44 @@ def chat_history(request):
         else:
             return JsonResponse({"history": False}, status=200)
     return JsonResponse({"history": False}, status=200)
+
+
+def chat_multiple(request):
+    if request.method == "POST":
+        users = request.POST.get('users', None)
+        new_values = []
+        temp_list = ''
+
+        for i in users:
+            if i == ",":
+                new_values.append(int(temp_list))
+                temp_list = ''
+            elif i == " ":
+                pass
+            else:
+                temp_list += i
+        new_values.append(int(temp_list))
+        users = new_values
+        new_values = ''
+        temp_list = []
+        for i in users:
+            if Seller.objects.filter(id=i).exists():
+                new_values += Seller.objects.get(id=i).first_name
+                new_values += ', '
+                temp_list.append(Seller.objects.get(id=i).email)
+        # trying to put ' , and' at last place
+        new_values = new_values[:-2]
+        removal = ","
+        reverse_removal = removal[::-1]
+
+        replacement = ", and "
+        reverse_replacement = replacement[::-1]
+        new_values = new_values[::-1].replace(reverse_removal, reverse_replacement, 1)[::-1]
+
+        param = {
+            "name": new_values,
+            "selected_user": json.dumps(temp_list),
+        }
+        return render(request, 'core/chat.html', param)
+
 
