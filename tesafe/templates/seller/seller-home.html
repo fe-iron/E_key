@@ -53,7 +53,7 @@
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="#" onclick="myfun()">Broadcast</a>
 						<a class="dropdown-item" href="#change-passward" onclick="myfun3()">Change Password</a>
-						<a class="dropdown-item" href="custom_chat/joe@joe.com">Chat To Admin</a>
+						<a class="dropdown-item" href="#" onclick="custom_chat('max')">Chat To Admin</a>
 						<a class="dropdown-item" href="#login-history" onclick="myfun1()">Login History</a>
 						<a class="dropdown-item" href="#password-history" onclick="myfun2()">Password History</a>
 						<a class="dropdown-item" href="#" onclick="myfun4()">Set Alias</a>
@@ -292,6 +292,11 @@
 			</div>
 		</div>
 	</section>
+	<!--	to start chat to a single user -->
+	<form action="chat" method="post" name="single_chat">
+		{% csrf_token %}
+		<input type="hidden" id="chatting_to" name="email_user">
+	</form>
 
 	<script type="text/javascript">
 		// for change password input tag
@@ -476,6 +481,13 @@
 				$(".set_alias_error").addClass('text-danger');
 			}
 
+		}
+
+
+		//to chat a single user
+		function custom_chat(email){
+			$('#chatting_to').attr('value', email);
+			document.forms['single_chat'].submit();
 		}
 	</script>
 

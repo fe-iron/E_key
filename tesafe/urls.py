@@ -130,7 +130,7 @@ urlpatterns = [
     # Messages route to API
     path(r'api/v1/', include(router.urls)),
     # for single user chat
-    path('custom_chat/<str:selected_user>', views.custom_chat, name='custom_chat'),
+    path('chat', views.custom_chat, name='chat'),
     # for multiple user chat
     path('broadcast', views.broadcast, name='broadcast'),
     # chat multiple

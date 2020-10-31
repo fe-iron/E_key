@@ -14,7 +14,7 @@ function drawMessage(message) {
     if (message.user === currentUser) position = 'right';
     const messageItem = `
             <li class="message ${position}">
-                <div class="avatar">${message.user}</div>
+                <div class="avatar">${message.first_name}</div>
                     <div class="text_wrapper">
                         <div class="text">${message.body}<br>
                             <span class="small">${date}</span>

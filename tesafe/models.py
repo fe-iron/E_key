@@ -264,6 +264,7 @@ class MessageModel(models.Model):
     timestamp = models.DateTimeField('timestamp', auto_now_add=True, editable=False,
                               db_index=True)
     body = models.TextField('body')
+    first_name = models.CharField(max_length=100, null=True, default="No Name")
 
     def __str__(self):
         return str(self.id)
@@ -285,8 +286,8 @@ class MessageModel(models.Model):
         }
 
         channel_layer = get_channel_layer()
-        print("user.id {}".format(self.user.id))
-        print("user.id {}".format(self.recipient.id))
+        # print("user.id {}".format(self.user.id))
+        # print("user.id {}".format(self.recipient.id))
 
         async_to_sync(channel_layer.group_send)("{}".format(self.user.id), notification)
         async_to_sync(channel_layer.group_send)("{}".format(self.recipient.id), notification)

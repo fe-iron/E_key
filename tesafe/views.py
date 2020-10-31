@@ -24,7 +24,6 @@ from django.views import View
 import threading
 import datetime
 import json
-import random
 
 
 class EmailThread(threading.Thread):
@@ -128,15 +127,18 @@ class CompletePasswordReset(View):
             return redirect("/")
 
 
-def custom_chat(request, selected_user):
-    if User.objects.filter(email=selected_user).exists():
-        usr = User.objects.get(email=selected_user)
-        usr = usr.first_name
-    param = {
-        'selected_user': selected_user,
-        'name': usr,
-    }
-    return render(request, 'core/single-chat.html', param)
+def custom_chat(request):
+    if request.method == "POST":
+        selected_user = request.POST.get('email_user', None)
+        if User.objects.filter(Q(email=selected_user) | Q(username=selected_user)).exists():
+            usr = User.objects.get(Q(email=selected_user) | Q(username=selected_user))
+            usr = usr.first_name
+            param = {
+                'selected_user': selected_user,
+                'name': usr,
+            }
+            return render(request, 'core/single-chat.html', param)
+    return redirect("/")
 
 
 def broadcast(request):
@@ -148,8 +150,8 @@ def broadcast(request):
         for receiver in recipient:
             if User.objects.filter(email=receiver).exists():
                 usr = User.objects.get(email=receiver)
-                msg = MessageModel(user=user, recipient=usr, body=body)
-                # msg.save()
+                msg = MessageModel(user=user, recipient=usr, body=body, first_name=user.first_name)
+                msg.save()
             else:
                 return JsonResponse({"result": False}, status=200)
         msg = MessageModel.objects.filter(user=user)[:1]
@@ -2908,6 +2910,7 @@ def chat_history(request):
 def chat_multiple(request):
     if request.method == "POST":
         users = request.POST.get('users', None)
+        accType = request.POST.get('accType', None)
         new_values = []
         temp_list = ''
 
@@ -2923,17 +2926,31 @@ def chat_multiple(request):
         users = new_values
         new_values = ''
         temp_list = []
-        for i in users:
-            if Seller.objects.filter(id=i).exists():
-                new_values += Seller.objects.get(id=i).first_name
-                new_values += ', '
-                temp_list.append(Seller.objects.get(id=i).email)
+        count = 0
+        if accType == "seller":
+            for i in users:
+                if Seller.objects.filter(id=i).exists():
+                    count += 1
+                    new_values += Seller.objects.get(id=i).first_name
+                    new_values += ', '
+                    temp_list.append(Seller.objects.get(id=i).email)
+        elif accType == "tester":
+            for i in users:
+                if Tester.objects.filter(id=i).exists():
+                    count += 1
+                    new_values += Tester.objects.get(id=i).first_name
+                    new_values += ', '
+                    temp_list.append(Tester.objects.get(id=i).email)
+
         # trying to put ' , and' at last place
         new_values = new_values[:-2]
         removal = ","
         reverse_removal = removal[::-1]
 
-        replacement = ", and "
+        if count <= 2:
+            replacement = " and "
+        else:
+            replacement = ", and "
         reverse_replacement = replacement[::-1]
         new_values = new_values[::-1].replace(reverse_removal, reverse_replacement, 1)[::-1]
 

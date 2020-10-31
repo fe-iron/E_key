@@ -60,8 +60,8 @@
 					</button>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
-						<a class="dropdown-item" href="#" >Broadcast</a>
-						<a class="dropdown-item" href="#" >Chat</a>
+						<a class="dropdown-item" href="#" onclick="broadcast()">Broadcast</a>
+						<a class="dropdown-item" href="#" onclick="chat()">Chat</a>
 						<a class="dropdown-item" href="#" onclick="myFunction()">Delete</a>
 						<a class="dropdown-item" href="#" onclick="freeze()"> Freeze </a>
 						<a class="dropdown-item" href="admin-home">Exit</a>
@@ -123,7 +123,7 @@
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
 												<div class="dropdown-menu">
-													<a class="dropdown-item" href="custom_chat/{{tes.user.email}}">Chat</a>
+													<a class="dropdown-item" onclick="custom_chat('{{tes.user.email}}')">Chat</a>
 													<a class="dropdown-item" href="#">Payment</a>
 													<a class="dropdown-item" href="#" onclick="pop({{tes.user.pk}}, 'tester')"> Login History </a>
 													<a class="dropdown-item" href="#" onclick="chat_history('{{tes.first_name}}',{{tes.user.id}})">Chat History</a>
@@ -534,7 +534,18 @@
 	</form>
 
 
+	<!--	to start chat to a single user -->
+	<form action="chat" method="post" name="single_chat">
+		{% csrf_token %}
+		<input type="hidden" id="chatting_to" name="email_user">
+	</form>
 
+<!--	to start chat multiple -->
+	<form action="chat_multiple" method="post" name="chat_form">
+		{% csrf_token %}
+		<input type="hidden" id="user_values" name="users">
+		<input type="hidden" value="tester" name="accType">
+	</form>
 
 <script src="{% static 'tesafe/js/ajax.js' %}"></script>
 <script type="text/javascript">
@@ -752,6 +763,35 @@ let checkbox_values = [];
 		this.classList.toggle('fa-eye-slash');
 	});
 
+	//to chat a single user
+	function custom_chat(email){
+		$('#chatting_to').attr('value', email);
+		document.forms['single_chat'].submit();
+	}
+
+	function broadcast(){
+		document.getElementById("checkAll").disabled = false;
+		$(".check").attr("disabled",false);
+		$("#checkAll").click();
+		checkbox_values = [...new Set(checkbox_values)];
+		$('#user_values').attr('value', checkbox_values);
+		document.forms['chat_form'].submit();
+	}
+
+	function chat(){
+		document.getElementById("checkAll").disabled = false;
+		$(".check").attr("disabled",false);
+
+		$("#floating-confirm").attr('onclick','chat_multiple()');
+		$("#floating-confirm").attr('disabled', true);
+		$(".floatingButtonHere").show(150);
+	}
+
+	function chat_multiple(){
+		checkbox_values = [...new Set(checkbox_values)];
+		$('#user_values').attr('value', checkbox_values);
+		document.forms['chat_form'].submit();
+	}
 </script>
 </body>
 </html>

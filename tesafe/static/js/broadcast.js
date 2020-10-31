@@ -7,10 +7,10 @@ let messageList = $('#messages');
 function drawMessage(message) {
     let position = 'left';
     const date = new Date(message.timestamp);
-    if (message.user === currentUser) position = 'right';
+    if (message.user === currentUser || message.first_name === currentUser) position = 'right';
     const messageItem = `
             <li class="message ${position}">
-                <div class="avatar">${message.user}</div>
+                <div class="avatar">${message.first_name}</div>
                     <div class="text_wrapper">
                         <div class="text">${message.body}<br>
                             <span class="small">${date}</span>
@@ -18,32 +18,40 @@ function drawMessage(message) {
                 </div>
             </li>`;
     $(messageItem).appendTo('#messages');
-    messageList.animate({scrollTop: messageList.prop('scrollHeight')});
 }
 
 function getConversation(recipients) {
-    recipients.forEach(recipient =>
-    $.getJSON(`/api/v1/message/?target=${recipient}`, function (data) {
-
-        for (let i = data['results'].length - 1; i >= 0; i--) {
-            drawMessage(data['results'][i]);
-        }
-        messageList.animate({scrollTop: messageList.prop('scrollHeight')});
-    })
-    );
+    recipients.forEach(recipient => {
+        $.getJSON(`/api/v1/message/?target=${recipient}`, function (data) {
+            for (let i = data['results'].length - 1; i >= 0; i--) {
+                drawMessage(data['results'][i]);
+            }
+            messageList.animate({scrollTop: messageList.prop('scrollHeight')});
+        })
+    });
 
 }
 
-function sendMessage(recipient, body) {
-    $.get('broadcast', {
-        recipient: recipient,
-        body: body,
+function getMessageById(message) {
+    id = JSON.parse(message).message
+    console.log(id)
+    $.getJSON(`/api/v1/message/${id}/`, function (data) {
+        if (data.user === currentRecipient[0] ||
+            (data.recipient === currentRecipient[0] && data.user == currentUser)) {
+            drawMessage(data);
+        }
+        messageList.animate({scrollTop: messageList.prop('scrollHeight')});
+    });
+}
 
-    }).success(function (response) {
-        drawMessage(response[0]['fields']);
-    })
-    .fail(function () {
-        alert('Error! Check console!');
+function sendMessage(recipients, body) {
+    recipients.forEach(recipient => {
+        $.post('/api/v1/message/', {
+            recipient: recipient,
+            body: body
+        }).fail(function () {
+            alert('Error! Check console!');
+        })
     });
 }
 
@@ -52,6 +60,7 @@ function setCurrentRecipient(username) {
     getConversation(currentRecipient);
     enableInput();
 }
+
 
 function enableInput() {
     chatInput.prop('disabled', false);
@@ -68,7 +77,6 @@ $(document).ready(function () {
     setCurrentRecipient(recipient);
     var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
 
-//    let socket = new WebSocket(`ws://127.0.0.1:8000/?session_key=${sessionKey}`);
     var socket = new WebSocket(
         ws_scheme+'://' + window.location.host +
         '/'+ws_scheme+'?session_key=${sessionKey}')
