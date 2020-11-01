@@ -25,6 +25,13 @@ import threading
 import datetime
 import json
 
+# global vars
+webAdmin = 0
+webUser = 0
+seller = 0
+tester = 0
+webUser_email = []
+
 
 class EmailThread(threading.Thread):
     def __init__(self, email):
@@ -33,12 +40,6 @@ class EmailThread(threading.Thread):
 
     def run(self):
         self.email.send(fail_silently=False)
-
-
-# dictionary of num to text
-num = {
-    1:"One",2:"Two",3:"Three",4:"Four",5:"Five",6:"Six",7:"Seven",8:"Eight",9:"Nine",10:"Ten",11:"Eleven",12:"Twelve",13:"Thirteen",14:"Fourteen",15:"Fifteen",16:"Sixteen",17:"Seventeen",18:"Eighteen",19:"Nineteen",20:"Twenty"
-}
 
 
 # password reset views as class based views
@@ -199,6 +200,8 @@ def index(request):
                 if WebAdmin.objects.filter(user=user).exists():
                     auth.login(request, user)
                     login_history(request, user)
+                    global webAdmin
+                    webAdmin += 1
                     return redirect("admin-home")
                 else:
                     messages.info(request, 'Invalid user id and password for Admin')
@@ -214,6 +217,8 @@ def index(request):
                 if Seller.objects.filter(email=uname).exists():
                     auth.login(request, user)
                     login_history(request, user)
+                    global seller
+                    seller += 1
                     return redirect("seller-home")
                 else:
                     messages.info(request, 'Invalid user id and password for Seller')
@@ -229,6 +234,8 @@ def index(request):
                 if Tester.objects.filter(email=uname).exists():
                     auth.login(request, user)
                     login_history(request, user)
+                    global tester
+                    tester += 1
                     return redirect('tester-home')
                 else:
                     messages.info(request, 'Invalid user id and password for Tester')
@@ -244,6 +251,9 @@ def index(request):
                 if WebUser.objects.filter(email=uname).exists():
                     auth.login(request, user)
                     login_history(request, user)
+                    global webUser, webUser_email
+                    webUser += 1
+                    webUser_email.append(user)
                     return redirect("user-home")
                 else:
                     messages.info(request, 'Invalid user id and password for User')
@@ -369,6 +379,20 @@ def register(request):
 
 
 def logout(request):
+    u = request.user
+    if WebAdmin.objects.filter(email=u).exists():
+        global webAdmin
+        webAdmin -= 1
+    elif WebUser.objects.filter(email=u).exists():
+        global webUser, webUser_email
+        webUser -= 1
+        webUser_email = list(filter((u).__ne__, webUser_email))
+    elif Seller.objects.filter(email=u).exists():
+        global seller
+        seller -= 1
+    elif Tester.objects.filter(email=u).exists():
+        global tester
+        tester -= 1
     auth.logout(request)
     messages.info(request,"successfully logged out")
     return redirect("/")
@@ -387,6 +411,7 @@ def get_current_users(obj):
 
 def admin_home(request):
     u = request.user
+    global webUser, seller, tester
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
@@ -394,9 +419,9 @@ def admin_home(request):
         tester_count = Tester.objects.all().count()
         web_user_count = WebUser.objects.all().count()
         PWGS_count = PWGServers.objects.all().count()
-        queryset_seller = get_current_users(Seller)
-        queryset_tester = get_current_users(Tester)
-        queryset_web_user = get_current_users(WebUser)
+        # queryset_seller = get_current_users(Seller)
+        # queryset_tester = get_current_users(Tester)
+        # queryset_web_user = get_current_users(WebUser)
         queryset_PWGs = get_current_users(PWGServers)
         history_count = WebAdminLoginHistory.objects.filter(user=request.user).count()
         cond = ['-login_date', '-login_time']
@@ -405,13 +430,13 @@ def admin_home(request):
             'tester_count': tester_count,
             'web_user_count': web_user_count,
             'PWGs_count': PWGS_count,
-            'seller_online': queryset_seller.count(),
-            'seller_offline': seller_count - queryset_seller.count(),
-            'tester_online': queryset_tester.count(),
-            'tester_offline': tester_count - queryset_tester.count(),
-            'web_user_online': queryset_web_user.count(),
-            'web_user_offline': web_user_count - queryset_web_user.count(),
-            'PWGs_offline': PWGS_count - queryset_PWGs.count(),
+            'seller_online': seller,
+            'seller_offline': abs(seller_count - seller),
+            'tester_online': tester,
+            'tester_offline': abs(tester_count - tester),
+            'web_user_online': webUser,
+            'web_user_offline': abs(web_user_count - webUser),
+            'PWGs_offline': 0,
             'PWGs_online': queryset_PWGs.count(),
             'history': WebAdminLoginHistory.objects.filter(user=request.user).order_by(*cond),
             'history_count': history_count,
@@ -469,10 +494,10 @@ def admin_info_server(request):
             'pwg': pwg,
             'total_pwgs': count_pwgs,
             'total_pwgs_online': pwgs_active,
-            'total_pwgs_offline': count_pwgs - pwgs_active,
+            'total_pwgs_offline': 0,
             'total_pwg': count_pwg,
             'total_pwg_online': pwg_active,
-            'total_pwg_offline': count_pwg - pwg_active,
+            'total_pwg_offline': 0,
         }
         return render(request, 'tesafe/admin-info-server.html', param)
     messages.error(request, "Login first then try again!!")
@@ -486,6 +511,7 @@ def seller_home(request):
     u_email = u.email
     if u.is_authenticated and Seller.objects.filter(email=u_email).exists():
         count = 0
+        user_count = 0
         user_online = 0
         user_offline = 0
         cond = ['-login_date', '-login_time']
@@ -498,18 +524,22 @@ def seller_home(request):
 
         history_count = WebAdminLoginHistory.objects.filter(user=request.user).count()
         history = WebAdminLoginHistory.objects.filter(user=request.user).order_by(*cond)
-
+        global webUser_email
+        for email in webUser_email:
+            if WebUser.objects.filter(email=email).exists():
+                wuser = WebUser.objects.get(email=email)
+                if seller == wuser.associated_with:
+                    user_count += 1
         param = {
             "seller": seller,
             "pwgs": count,
             "pwg_online": get_current_users(PWG).count(),
             "pwg_offline": count - get_current_users(PWG).count(),
-            "user_online": seller.user_count,
-            "user_offline": 0,
+            "user_online": user_count,
+            "user_offline": seller.user_count - user_count,
             "history_count": history_count,
             "history": history,
             'password_history': PasswordHistory.objects.filter(user=request.user).order_by(*cond),
-
         }
         return render(request, 'seller/seller-home.html', param)
     messages.error(request, "Login first then try again!!")
