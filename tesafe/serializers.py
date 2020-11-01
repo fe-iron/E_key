@@ -27,7 +27,6 @@ class MessageModelSerializer(ModelSerializer):
     recipient = CharField(source='recipient.username')
 
     def create(self, validated_data):
-        print("data: ", validated_data)
         user = self.context['request'].user
         fname = User.objects.filter(Q(username=user) | Q(email=user))
         fname = fname[0].first_name

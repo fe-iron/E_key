@@ -81,7 +81,7 @@
             </button>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="#" onclick="return_pwg_untested();">Return PWG to Admin</a>
-              <a class="dropdown-item" href="custom_chat/joe@joe.com">Chat With Admin</a>
+              <a class="dropdown-item" href="#" onclick="custom_chat('joe@joe.com')">Chat With Admin</a>
               <a class="dropdown-item" href="#">Get Payment from Admin</a>
               {% if user.is_authenticated %}
               <a class="dropdown-item" href="logout">Logout</a>
@@ -524,6 +524,12 @@
 		<input type="hidden"  name="accType" value="tester-home">
 	</form>
 
+    	<!--	to start chat to a single user -->
+	<form action="chat" method="post" name="single_chat">
+		{% csrf_token %}
+		<input type="hidden" id="chatting_to" name="email_user">
+	</form>
+
 
     <script type="text/javascript">
       // global variable
@@ -867,7 +873,11 @@
 			$("#msg").html('{% for msg in messages %}<h3 class="text-danger">{{msg}}</h3>{% endfor %}');
 	    });
 
-
+        //to chat a single user
+		function custom_chat(email){
+			$('#chatting_to').attr('value', email);
+			document.forms['single_chat'].submit();
+		}
     </script>
   </body>
 </html>

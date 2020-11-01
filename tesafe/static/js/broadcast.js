@@ -94,6 +94,7 @@ $(document).ready(function () {
     });
 
     socket.onmessage = function (e) {
+        console.log("socket trggered");
         getMessageById(e.data);
     };
 });
