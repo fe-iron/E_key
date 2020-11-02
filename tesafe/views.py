@@ -430,7 +430,7 @@ def admin_home(request):
             'tester_count': tester_count,
             'web_user_count': web_user_count,
             'PWGs_count': PWGS_count,
-            'seller_online': seller,
+            'seller_online': abs(seller),
             'seller_offline': abs(seller_count - seller),
             'tester_online': tester,
             'tester_offline': abs(tester_count - tester),
@@ -597,7 +597,7 @@ def seller_pwg(request):
             "pwgserver_occupied": pwgserver,
             "pwgserver_unoccupied": pwgserver1,
             "pwg": pwg,
-            "num": num,
+            # "num": num,
         }
         return render(request, 'seller/seller-pwg.html', param)
     messages.error(request, "Login first then try again!!")
