@@ -122,7 +122,7 @@
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
-												<div class="dropdown-menu" x-placement="top-start">
+												<div class="dropdown-menu">
 													<a class="dropdown-item" onclick="custom_chat('{{tes.user.email}}')">Chat</a>
 													<a class="dropdown-item" href="#">Payment</a>
 													<a class="dropdown-item" href="#" onclick="pop({{tes.user.pk}}, 'tester')"> Login History </a>
@@ -548,6 +548,7 @@
 	</form>
 
 <script src="{% static 'tesafe/js/ajax.js' %}"></script>
+<script src="{% static 'js/dropdown.js' %}"></script>
 <script type="text/javascript">
 
 let checkbox_values = [];
@@ -792,6 +793,7 @@ let checkbox_values = [];
 		$('#user_values').attr('value', checkbox_values);
 		document.forms['chat_form'].submit();
 	}
+
 </script>
 </body>
 </html>
