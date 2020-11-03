@@ -158,7 +158,7 @@
 													</button>
 													<div class="dropdown-menu" id="dropdown_menu">
 														<a class="dropdown-item" href="#" onclick="change_name('{{pwg_server.alias}}',{{pwg_server.pk}});">Change Name</a>
-														<a class="dropdown-item" href="custom_chat/{{pwg_server.user.email}}">Chat</a>
+														<a class="dropdown-item" href="#" onclick="custom_chat('{{pwg_server.user.email}}')">Chat</a>
 														<a class="dropdown-item" href="#" onclick="delete_user({{pwg_server.pk}}, 'pwgs')">Delete</a>
 														<a class="dropdown-item" href="#" onclick="pop({{pwg_server.user.id}}, 'pwgs')"> Login Record </a>
 														<a class="dropdown-item" href="#" onclick="pwd_history({{pwg_server.user.id}})">Password History</a>
@@ -554,6 +554,11 @@
 
 	</form>
 
+	<!--	to start chat to a single user -->
+	<form action="chat" method="post" name="single_chat">
+		{% csrf_token %}
+		<input type="hidden" id="chatting_to" name="email_user">
+	</form>
 
 
 
@@ -820,6 +825,11 @@ function togglePassword1(pk){
     password1.setAttribute('type', type);
     // toggle the eye slash icon
     $("#toggle"+pk).toggleClass('fa-eye-slash');
+}
+//to chat a single user
+function custom_chat(email){
+	$('#chatting_to').attr('value', email);
+	document.forms['single_chat'].submit();
 }
 </script>
 </body>
