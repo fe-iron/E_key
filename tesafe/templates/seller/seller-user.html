@@ -105,7 +105,7 @@
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
-												<div class="dropdown-menu">
+												<div class="dropdown-menu" id="dropdown_menu">
 													<a class="dropdown-item" href="custom_chat/{{webuser.email}}">Chat</a>
 													{% if webuser.is_authorized %}
 														<a class="dropdown-item" href="#" onclick="deauthorize({{webuser.user.id}}, 'seller');">De-authorized</a>
