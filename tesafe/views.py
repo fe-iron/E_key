@@ -164,6 +164,13 @@ def broadcast_admin(request):
         new_values += ' + ' + str(count-15) + " others"
     else:
         new_values = new_values[:-2]
+        removal = ","
+        reverse_removal = removal[::-1]
+
+        replacement = ", and "
+        reverse_replacement = replacement[::-1]
+        new_values = new_values[::-1].replace(reverse_removal, reverse_replacement, 1)[::-1]
+
     param = {
         "name": new_values,
         "selected_user": json.dumps(temp_list),
