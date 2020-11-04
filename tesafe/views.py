@@ -159,7 +159,11 @@ def broadcast_admin(request):
                 new_values += ', '
         temp_list.append(usr.email)
 
-    new_values += ' + ' + str(count-15) + " others"
+    if count > 15:
+        new_values = new_values[:-2]
+        new_values += ' + ' + str(count-15) + " others"
+    else:
+        new_values = new_values[:-2]
     param = {
         "name": new_values,
         "selected_user": json.dumps(temp_list),
