@@ -545,6 +545,7 @@
 		{% csrf_token %}
 		<input type="hidden" id="user_values" name="users">
 		<input type="hidden" value="tester" name="accType">
+		<input type="hidden" id="broadcast_action" name="action">
 	</form>
 
 <script src="{% static 'tesafe/js/ajax.js' %}"></script>
@@ -776,6 +777,7 @@ let checkbox_values = [];
 		$("#checkAll").click();
 		checkbox_values = [...new Set(checkbox_values)];
 		$('#user_values').attr('value', checkbox_values);
+		$('#broadcast_action').attr('value', "Broadcasting");
 		document.forms['chat_form'].submit();
 	}
 
@@ -791,6 +793,7 @@ let checkbox_values = [];
 	function chat_multiple(){
 		checkbox_values = [...new Set(checkbox_values)];
 		$('#user_values').attr('value', checkbox_values);
+		$('#broadcast_action').attr('value', "Chatting");
 		document.forms['chat_form'].submit();
 	}
 

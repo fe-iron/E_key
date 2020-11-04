@@ -13,7 +13,7 @@
             <div class="col-md justify-content-center">
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        <h4 class="panel-title">Chatting to {{name}}</h4>
+                        <h4 class="panel-title">{{action}} to {{name}}</h4>
                     </div>
                     <div>
                         <ul id="messages" class="messages">
@@ -45,6 +45,10 @@
         let currentUser = '{{ request.user.username }}';
         let recipient = {{ selected_user | safe }};
     </script>
-    <script src="{% static 'js/broadcast.js' %}"></script>
+    {% if action == 'Broadcasting' %}
+        <script src="{% static 'js/broadcast.js' %}"></script>
+    {% else %}
+        <script src="{% static 'js/multiple.js' %}"></script>
+    {% endif %}
 
 {% endblock %}

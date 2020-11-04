@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Apps
     'tesafe',
-
     # 3rd party
     'rest_framework',
     'channels',
@@ -56,7 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #simplified static file serving
+    # simplified static file serving
     'whitenoise.middleware.WhiteNoiseMiddleware',
     # user agent middleware
     'django_user_agents.middleware.UserAgentMiddleware',

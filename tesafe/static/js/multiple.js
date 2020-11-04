@@ -20,6 +20,19 @@ function drawMessage(message) {
     $(messageItem).appendTo('#messages');
 }
 
+function getConversation(recipients) {
+    recipients.forEach(recipient => {
+        $.getJSON(`/api/v1/message/?target=${recipient}`, function (data) {
+            for (let i = data['results'].length - 1; i >= 0; i--) {
+                drawMessage(data['results'][i]);
+            }
+            messageList.animate({scrollTop: messageList.prop('scrollHeight')});
+        })
+    });
+
+
+}
+
 function getMessageById(message) {
     id = JSON.parse(message).message
     console.log(id)
@@ -31,19 +44,21 @@ function getMessageById(message) {
         messageList.animate({scrollTop: messageList.prop('scrollHeight')});
 
     });
+
 }
 
 function sendMessage(recipients, body) {
-    $.post('/api/v1/message/', {
+        $.post('/api/v1/message/', {
             recipient: JSON.stringify(recipients),
             body: body
         }).fail(function () {
-        alert('Error! Check console!');
-    });
+            alert('Error! Check console!');
+        });
 }
 
 function setCurrentRecipient(username) {
     currentRecipient = username;
+    getConversation(currentRecipient);
     enableInput();
 }
 

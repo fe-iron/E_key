@@ -542,6 +542,7 @@
 		{% csrf_token %}
 		<input type="hidden" id="user_values" name="users">
 		<input type="hidden" value="seller" name="accType">
+		<input type="hidden" value="" id="broadcast_action" name="action">
 	</form>
 	<!--	to start chat to a single user -->
 	<form action="chat" method="post" name="single_chat">
@@ -702,6 +703,7 @@ function chat(){
 function chat_multiple(){
 	checkbox_values = [...new Set(checkbox_values)];
 	$('#user_values').attr('value', checkbox_values);
+	$('#broadcast_action').attr('value', "Chatting");
 	document.forms['chat_form'].submit();
 }
 
@@ -711,6 +713,7 @@ function broadcast(){
 	$("#checkAll").click();
 	checkbox_values = [...new Set(checkbox_values)];
 	$('#user_values').attr('value', checkbox_values);
+	$('#broadcast_action').attr('value', "Broadcasting");
 	document.forms['chat_form'].submit();
 }
 

@@ -121,7 +121,7 @@ class CompletePasswordReset(View):
             pass_his = PasswordHistory(user=user, device_name=device_name, last_pass=pass1)
             pass_his.save()
 
-            messages.success(request, "Password reset successfull, now you can login with the new password")
+            messages.success(request, "Password reset successful, now you can login with the new password")
             return redirect("/")
         except Exception as e:
             messages.info(request, "Something went wrong, try again")
@@ -140,6 +140,32 @@ def custom_chat(request):
             }
             return render(request, 'core/single-chat.html', param)
     return redirect("/")
+
+
+def broadcast_admin(request):
+    user = User.objects.all()
+    count = 0
+    new_values = ''
+    temp_list = []
+    for usr in user:
+        count += 1
+        if count >= 15:
+            pass
+        else:
+            if usr.first_name == '':
+                pass
+            else:
+                new_values += usr.first_name
+                new_values += ', '
+        temp_list.append(usr.email)
+
+    new_values += ' + ' + str(count-15) + " others"
+    param = {
+        "name": new_values,
+        "selected_user": json.dumps(temp_list),
+        "action": "Broadcasting",
+    }
+    return render(request, "core/chat.html", param)
 
 
 def broadcast(request):
@@ -2941,6 +2967,7 @@ def chat_multiple(request):
     if request.method == "POST":
         users = request.POST.get('users', None)
         accType = request.POST.get('accType', None)
+        action = request.POST.get('action', None)
         new_values = []
         temp_list = ''
 
@@ -2987,6 +3014,7 @@ def chat_multiple(request):
         param = {
             "name": new_values,
             "selected_user": json.dumps(temp_list),
+            "action": action,
         }
         return render(request, 'core/chat.html', param)
 
