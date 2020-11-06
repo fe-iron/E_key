@@ -2,7 +2,7 @@
 from django.contrib import admin
 from .models import WebAdmin, Seller, WebAdminLoginHistory, Tester, WebUser, PWGServers, PWG, PasswordHistory, \
     TransferPwg, TransferPwgs, PwgUseRecord, SystemName, Authorize, Share, PWGHistory, TesterPWGHistory, UserToUser, \
-    MessageModel
+    MessageModel, UserLogin
 
 
 # admin.site.register(User)
@@ -23,6 +23,11 @@ class PwgAdmin(admin.ModelAdmin):
 @admin.register(Authorize)
 class Authorize(admin.ModelAdmin):
     list_display = ("pwg", "authorize_to", "pwgserver")
+
+
+@admin.register(UserLogin)
+class UserLogin(admin.ModelAdmin):
+    list_display = ("user", "session_key", "acctype", "timestamp")
 
 
 @admin.register(Share)

@@ -1,16 +1,16 @@
 from .models import WebAdmin, Seller, Tester, WebUser, PWGServers, PWG, WebAdminLoginHistory, PasswordHistory, \
     TransferPwgs, TransferPwg, PwgUseRecord, SystemName, Authorize, Share, PWGHistory, TesterPWGHistory, \
-    UserToUser, MessageModel
+    UserToUser, MessageModel, UserLogin
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.decorators import login_required
 from django.utils.encoding import force_bytes, force_text
+from django.contrib.sessions.models import Session
 from django.core.mail import send_mail, EmailMessage
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import auth, User
 from django.shortcuts import render, redirect
-from .utils import account_activation_token
 from django.http import JsonResponse
 from django.http import HttpResponse
 from django.core import serializers
@@ -235,8 +235,18 @@ def index(request):
 
             if user is not None:
                 if WebAdmin.objects.filter(user=user).exists():
+                    if UserLogin.objects.filter(user=user).exists():
+                        messages.info(request, "Admin is already logged in")
+                        return redirect("/")
+
                     auth.login(request, user)
                     login_history(request, user)
+
+                    # set new session_key for user instance
+                    session_key = request.session.session_key
+                    u_login = UserLogin(user=user, session_key=session_key, acctype='A')
+                    u_login.save()
+
                     global webAdmin
                     webAdmin += 1
                     return redirect("admin-home")
@@ -252,8 +262,22 @@ def index(request):
 
             if user is not None:
                 if Seller.objects.filter(email=uname).exists():
+                    if UserLogin.objects.filter(user=user).exists():
+                        messages.info(request, "Seller is already logged in")
+                        return redirect("/")
+
+                    sel = Seller.objects.get(email=uname)
+                    if sel.is_freeze:
+                        messages.info(request, "Sorry, this account has been freezed")
+                        return redirect("/")
                     auth.login(request, user)
                     login_history(request, user)
+
+                    # set new session_key for user instance
+                    session_key = request.session.session_key
+                    u_login = UserLogin(user=user, session_key=session_key, acctype='S')
+                    u_login.save()
+
                     global seller
                     seller += 1
                     return redirect("seller-home")
@@ -269,8 +293,22 @@ def index(request):
 
             if user is not None:
                 if Tester.objects.filter(email=uname).exists():
+                    if UserLogin.objects.filter(user=user).exists():
+                        messages.info(request, "Tester is already logged in")
+                        return redirect("/")
+
+                    tes = Tester.objects.get(email=uname)
+                    if tes.is_freeze:
+                        messages.info(request, "Sorry, this account has been freezed")
+                        return redirect("/")
                     auth.login(request, user)
                     login_history(request, user)
+
+                    # set new session_key for user instance
+                    session_key = request.session.session_key
+                    u_login = UserLogin(user=user, session_key=session_key, acctype='T')
+                    u_login.save()
+
                     global tester
                     tester += 1
                     return redirect('tester-home')
@@ -286,8 +324,22 @@ def index(request):
 
             if user is not None:
                 if WebUser.objects.filter(email=uname).exists():
+                    if UserLogin.objects.filter(user=user).exists():
+                        messages.info(request, "User is already logged in")
+                        return redirect("/")
+
+                    wuser = WebUser.objects.get(email=uname)
+                    if wuser.is_freeze:
+                        messages.info(request, "Sorry, this account has been freezed")
+                        return redirect("/")
                     auth.login(request, user)
                     login_history(request, user)
+
+                    # set new session_key for user instance
+                    session_key = request.session.session_key
+                    u_login = UserLogin(user=user, session_key=session_key, acctype='U')
+                    u_login.save()
+
                     global webUser, webUser_email
                     webUser += 1
                     webUser_email.append(user)
@@ -417,6 +469,7 @@ def register(request):
 
 def logout(request):
     u = request.user
+
     if WebAdmin.objects.filter(email=u).exists():
         global webAdmin
         webAdmin -= 1
@@ -431,6 +484,11 @@ def logout(request):
         global tester
         tester -= 1
     auth.logout(request)
+    if User.objects.filter(Q(email=u) | Q(username=u)).exists():
+        user = User.objects.get(Q(email=u) | Q(username=u))
+        if UserLogin.objects.filter(user=user).exists():
+            u_login = UserLogin.objects.get(user=user)
+            u_login.delete()
     messages.info(request,"successfully logged out")
     return redirect("/")
 
@@ -456,9 +514,7 @@ def admin_home(request):
         tester_count = Tester.objects.all().count()
         web_user_count = WebUser.objects.all().count()
         PWGS_count = PWGServers.objects.all().count()
-        # queryset_seller = get_current_users(Seller)
-        # queryset_tester = get_current_users(Tester)
-        # queryset_web_user = get_current_users(WebUser)
+
         queryset_PWGs = get_current_users(PWGServers)
         history_count = WebAdminLoginHistory.objects.filter(user=request.user).count()
         cond = ['-login_date', '-login_time']
@@ -489,7 +545,7 @@ def admin_seller(request):
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
-        seller = Seller.objects.all()
+        seller = Seller.objects.all().order_by('alias')
         param = {
             'seller': seller,
         }
@@ -504,7 +560,7 @@ def admin_tester(request):
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
-        tester = Tester.objects.all()
+        tester = Tester.objects.all().order_by('alias')
         param = {
             'tester': tester,
         }
@@ -520,8 +576,8 @@ def admin_info_server(request):
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
-        pwgs = PWGServers.objects.all()
-        pwg = PWG.objects.all()
+        pwgs = PWGServers.objects.all().order_by('alias')
+        pwg = PWG.objects.all().order_by('alias')
         count_pwgs = pwgs.count()
         count_pwg = pwg.count()
         pwgs_active = get_current_users(PWGServers).count()
@@ -594,7 +650,7 @@ def seller_user(request):
         seller = Seller.objects.get(user=user.id)
 
         if WebUser.objects.filter(associated_with=seller.id).exists():
-            web_users = WebUser.objects.filter(associated_with=seller.id)
+            web_users = WebUser.objects.filter(associated_with=seller.id).order_by('alias')
         else:
             web_users = None
 
@@ -617,7 +673,7 @@ def seller_pwg(request):
         pwgserver = []
         pwgserver1 = []
         user = request.user
-        pwg = PWG.objects.filter(Q(transfer_to=user) | Q(sold_from=user))
+        pwg = PWG.objects.filter(Q(transfer_to=user) | Q(sold_from=user)).order_by('alias')
         for i in pwg:
             if i.is_authorized or i.is_shared or i.sold_from:
                 pwgs = i.owned_by
@@ -1001,7 +1057,7 @@ def user_user(request):
     if u.is_authenticated and WebUser.objects.filter(email=u_email).exists():
         user_obj = WebUser.objects.get(user=u)
         if UserToUser.objects.filter(main_user=user_obj).exists():
-            user_obj = UserToUser.objects.filter(main_user=user_obj)
+            user_obj = UserToUser.objects.filter(main_user=user_obj).order_by('associated_user')
             param = {
                 "user_obj": user_obj
             }

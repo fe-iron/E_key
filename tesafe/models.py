@@ -309,3 +309,14 @@ class MessageModel(models.Model):
         verbose_name = 'message'
         verbose_name_plural = 'messages'
         ordering = ('-timestamp',)
+
+
+# for detecting that the user is already logged in or not
+class UserLogin(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    session_key = models.CharField(max_length=100, null=True)
+    acctype = models.CharField(max_length=3, null=True, default="A")
+    timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.acctype
