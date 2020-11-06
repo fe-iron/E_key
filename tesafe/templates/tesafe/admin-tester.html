@@ -113,7 +113,7 @@
 									{% for tes in tester %}
 										<tr>
 											<th><input type="checkbox" name="floatingButtonHere" disabled class="check" value="{{tes.pk}}"></th>
-											<td><span><img src="{{tes.profile_pic.url}}" title="Profile pic" height="40" width="40" class="rounded-circle"></span>{% if tes.alias == '' or tes.alias == None %} {{tes.system_name}} {% else %} {{tes.alias}} {% endif %}
+											<td><span><img src="{{tes.profile_pic.url}}" title="Profile pic" height="40" width="40" class="rounded-circle"></span>{% if tes.alias == '' or tes.alias == None %} {{tes.first_name}} {{tes.last_name}} {% else %} {{tes.alias}} {% endif %}
 												{% if tes.is_freeze %}
 												<i class="fa fa-ban" aria-hidden="true" title="Freezed"></i>
 												{% endif %}
