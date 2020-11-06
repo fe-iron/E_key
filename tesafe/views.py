@@ -560,7 +560,7 @@ def admin_tester(request):
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
-        tester = Tester.objects.all().order_by('alias')
+        tester = Tester.objects.all().order_by('alias','first_name')
         param = {
             'tester': tester,
         }
@@ -650,7 +650,7 @@ def seller_user(request):
         seller = Seller.objects.get(user=user.id)
 
         if WebUser.objects.filter(associated_with=seller.id).exists():
-            web_users = WebUser.objects.filter(associated_with=seller.id).order_by('alias')
+            web_users = WebUser.objects.filter(associated_with=seller.id).order_by('alias','first_name')
         else:
             web_users = None
 
@@ -1286,7 +1286,10 @@ def freeze(request):
             if Seller.objects.filter(id=pk).exists():
                 my_object = Seller.objects.get(id=pk)
                 my_object.is_freeze = True
-                name = my_object.alias
+                if my_object.alias == '' or my_object.alias == None:
+                    name = my_object.first_name
+                else:
+                    name = my_object.alias
                 my_object.save()
                 name = "{} has been successfully freezed".format(name)
                 return JsonResponse({"msg": name}, status=200)
@@ -1299,7 +1302,10 @@ def freeze(request):
             if Tester.objects.filter(id=pk).exists():
                 my_object = Tester.objects.get(id=pk)
                 my_object.is_freeze = True
-                name = my_object.alias
+                if my_object.alias == '' or my_object.alias == None:
+                    name = my_object.first_name
+                else:
+                    name = my_object.alias
                 my_object.save()
                 name = "{} has been successfully freezed".format(name)
                 return JsonResponse({"msg": name}, status=200)
@@ -1324,7 +1330,10 @@ def freeze(request):
             if WebUser.objects.filter(id=pk).exists():
                 my_object = WebUser.objects.get(id=pk)
                 my_object.is_freeze = True
-                name = my_object.alias
+                if my_object.alias == '' or my_object.alias == None:
+                    name = my_object.first_name
+                else:
+                    name = my_object.alias
                 my_object.save()
                 name = "{} has been successfully freezed".format(name)
                 return JsonResponse({"msg": name}, status=200)
@@ -1346,7 +1355,10 @@ def unfreeze(request):
             if Seller.objects.filter(id=pk).exists():
                 my_object = Seller.objects.get(id=pk)
                 my_object.is_freeze = False
-                name = my_object.alias
+                if my_object.alias == '' or my_object.alias == None:
+                    name = my_object.first_name
+                else:
+                    name = my_object.alias
                 my_object.save()
                 name = "{} has been successfully unfreezed".format(name)
                 return JsonResponse({"msg": name}, status=200)
@@ -1359,7 +1371,10 @@ def unfreeze(request):
             if Tester.objects.filter(id=pk).exists():
                 my_object = Tester.objects.get(id=pk)
                 my_object.is_freeze = False
-                name = my_object.alias
+                if my_object.alias == '' or my_object.alias == None:
+                    name = my_object.first_name
+                else:
+                    name = my_object.alias
                 my_object.save()
                 name = "{} has been successfully unfreezed".format(name)
                 return JsonResponse({"msg": name}, status=200)
@@ -1385,7 +1400,10 @@ def unfreeze(request):
             if WebUser.objects.filter(id=pk).exists():
                 my_object = WebUser.objects.get(id=pk)
                 my_object.is_freeze = False
-                name = my_object.alias
+                if my_object.alias == '' or my_object.alias == None:
+                    name = my_object.first_name
+                else:
+                    name = my_object.alias
                 my_object.save()
                 name = "{} has been successfully unfreezed".format(name)
                 return JsonResponse({"msg": name}, status=200)
