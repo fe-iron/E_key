@@ -545,7 +545,7 @@ def admin_seller(request):
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
-        seller = Seller.objects.all().order_by('alias')
+        seller = Seller.objects.all().order_by('alias','first_name')
         param = {
             'seller': seller,
         }
