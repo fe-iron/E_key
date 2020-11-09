@@ -1,6 +1,6 @@
 from .models import WebAdmin, Seller, Tester, WebUser, PWGServers, PWG, WebAdminLoginHistory, PasswordHistory, \
     TransferPwgs, TransferPwg, PwgUseRecord, SystemName, Authorize, Share, PWGHistory, TesterPWGHistory, \
-    UserToUser, MessageModel, UserLogin
+    UserToUser, MessageModel, UserLogin, Notification
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
@@ -11,6 +11,7 @@ from django.core.mail import send_mail, EmailMessage
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import auth, User
 from django.shortcuts import render, redirect
+from django.dispatch import Signal, receiver
 from django.http import JsonResponse
 from django.http import HttpResponse
 from django.core import serializers
@@ -31,6 +32,8 @@ webUser = 0
 seller = 0
 tester = 0
 webUser_email = []
+
+login_signal = Signal(providing_args=['IP','timestamp'])
 
 
 class EmailThread(threading.Thread):
@@ -211,6 +214,16 @@ def get_ip(request):
     return ip
 
 
+@receiver(login_signal)
+def create_notification_login(sender, **kwargs):
+    u = User.objects.get(email='max@max.com')
+    Notification.objects.create(
+        receiver=u,
+        type=f"Someone tried to login with your Creds, the IP was {kwargs['ip']}",
+        ip=kwargs['ip']
+    )
+
+
 def login_history(request, user):
     ip = get_ip(request)
     if request.user_agent.device.family == "Other":
@@ -237,6 +250,7 @@ def index(request):
                 if WebAdmin.objects.filter(user=user).exists():
                     if UserLogin.objects.filter(user=user).exists():
                         messages.info(request, "Admin is already logged in")
+                        login_signal.send(sender=UserLogin, ip=get_ip(request))
                         return redirect("/")
 
                     auth.login(request, user)
@@ -264,6 +278,7 @@ def index(request):
                 if Seller.objects.filter(email=uname).exists():
                     if UserLogin.objects.filter(user=user).exists():
                         messages.info(request, "Seller is already logged in")
+                        login_signal.send(sender=UserLogin, ip=get_ip(request))
                         return redirect("/")
 
                     sel = Seller.objects.get(email=uname)
@@ -295,6 +310,7 @@ def index(request):
                 if Tester.objects.filter(email=uname).exists():
                     if UserLogin.objects.filter(user=user).exists():
                         messages.info(request, "Tester is already logged in")
+                        login_signal.send(sender=UserLogin, ip=get_ip(request))
                         return redirect("/")
 
                     tes = Tester.objects.get(email=uname)
@@ -326,6 +342,7 @@ def index(request):
                 if WebUser.objects.filter(email=uname).exists():
                     if UserLogin.objects.filter(user=user).exists():
                         messages.info(request, "User is already logged in")
+                        login_signal.send(sender=UserLogin, ip=get_ip(request))
                         return redirect("/")
 
                     wuser = WebUser.objects.get(email=uname)
@@ -510,6 +527,13 @@ def admin_home(request):
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
+        count_notif = 0
+        if Notification.objects.filter(receiver=u).exists():
+            notif = Notification.objects.filter(receiver=u)
+            for item in notif:
+                if not item.read:
+                    count_notif += 1
+
         seller_count = Seller.objects.all().count()
         tester_count = Tester.objects.all().count()
         web_user_count = WebUser.objects.all().count()
@@ -523,6 +547,8 @@ def admin_home(request):
             'tester_count': tester_count,
             'web_user_count': web_user_count,
             'PWGs_count': PWGS_count,
+            'notif': notif,
+            'count_notif': count_notif,
             'seller_online': abs(seller),
             'seller_offline': abs(seller_count - seller),
             'tester_online': tester,
@@ -545,9 +571,17 @@ def admin_seller(request):
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
+        count_notif = 0
         seller = Seller.objects.all().order_by('alias','first_name')
+        if Notification.objects.filter(receiver=u).exists():
+            notif = Notification.objects.filter(receiver=u)
+            for item in notif:
+                if not item.read:
+                    count_notif += 1
         param = {
             'seller': seller,
+            'notif': notif,
+            'count_notif': count_notif,
         }
         return render(request, 'tesafe/admin-seller.html', param)
     messages.error(request, "Login first then try again!!")
@@ -560,9 +594,17 @@ def admin_tester(request):
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
+        count_notif = 0
         tester = Tester.objects.all().order_by('alias','first_name')
+        if Notification.objects.filter(receiver=u).exists():
+            notif = Notification.objects.filter(receiver=u)
+            for item in notif:
+                if not item.read:
+                    count_notif += 1
         param = {
             'tester': tester,
+            'notif': notif,
+            'count_notif': count_notif,
         }
 
         return render(request, 'tesafe/admin-tester.html', param)
@@ -576,6 +618,12 @@ def admin_info_server(request):
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
+        count_notif = 0
+        if Notification.objects.filter(receiver=u).exists():
+            notif = Notification.objects.filter(receiver=u)
+            for item in notif:
+                if not item.read:
+                    count_notif += 1
         pwgs = PWGServers.objects.all().order_by('alias')
         pwg = PWG.objects.all().order_by('alias')
         count_pwgs = pwgs.count()
@@ -583,6 +631,8 @@ def admin_info_server(request):
         pwgs_active = get_current_users(PWGServers).count()
         pwg_active = get_current_users(PWG).count()
         param = {
+            'notif': notif,
+            'count_notif': count_notif,
             'pwgs': pwgs,
             'pwg': pwg,
             'total_pwgs': count_pwgs,
@@ -3104,3 +3154,15 @@ def chat_multiple(request):
         return render(request, 'core/chat.html', param)
 
 
+def mark_read(request):
+    if request.method == 'GET' and request.is_ajax:
+        passText = request.GET.get("email", None)
+        u = None
+        if User.objects.filter(Q(email=passText) | Q(username=passText)).exists():
+            u = User.objects.get(Q(email=passText) | Q(username=passText))
+            if Notification.objects.filter(receiver=u).exists():
+                notif = Notification.objects.filter(receiver=u)
+                for item in notif:
+                    item.read = True
+                    item.save()
+    return JsonResponse({"msg": True}, status=200)

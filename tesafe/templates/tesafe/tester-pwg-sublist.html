@@ -46,31 +46,10 @@
 						<li class="nav-item pl-3">
 							<a class="nav-link" href="admin-info-server">PWG Server</a>
 						</li>
-
-						<!-- <li class="nav-item pl-3">
-							<a class="nav-link" href="admin-info-server.html">Unread Messages <span><i class="fas fa-bell"></i></span></a>
-						</li> -->
 					</ul>
 
 				</div>
-				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;"><i class="fas fa-bell "></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
-
-				<!-- <div class="dropdown  dropleft float-xl-right mb-0" >
-					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-						<i class="fas fa-ellipsis-v"></i>
-					</button>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
-						<a class="dropdown-item" href="">Delete</a>
-						<a class="dropdown-item" href=""> Freeze </a>
-						<a class="dropdown-item" href="" >Chat</a>
-						<a class="dropdown-item" href="">Broadcaste</a>
-
-						<a class="dropdown-item" href="admin-home.html" >Exit</a>
-					</div>
-				</div> -->
-
-
+				{% include 'notification.html' %}
 			</nav>
 		</div>
 	</section>
@@ -216,36 +195,7 @@
 </section>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<script src="{% static 'js/mark_read.js' %}"></script>
 <script type="text/javascript">
 
 

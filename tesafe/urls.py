@@ -126,6 +126,8 @@ urlpatterns = [
     # to check if the user is laready exists
     path('destination', views.destination, name='destination'),
     path('accounts/login/', views.index, name='login'),
+    # to mark the notifications as read
+    path('mark_read', views.mark_read, name='mark_read'),
 
     # Messages route to API
     path(r'api/v1/', include(router.urls)),

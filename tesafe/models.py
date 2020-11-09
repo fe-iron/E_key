@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
+from django.db.models.signals import post_save
 
 
 # model of Admin
@@ -286,8 +287,9 @@ class MessageModel(models.Model):
         }
 
         channel_layer = get_channel_layer()
-        # print("user.id {}".format(self.user.id))
-        # print("user.id {}".format(self.recipient.id))
+        print("user.id {}".format(self.user.id))
+        print("recipient.id {}".format(self.recipient.id))
+        # print("msg {}".format(notification))
 
         async_to_sync(channel_layer.group_send)("{}".format(self.user.id), notification)
         async_to_sync(channel_layer.group_send)("{}".format(self.recipient.id), notification)
@@ -320,3 +322,26 @@ class UserLogin(models.Model):
 
     def __str__(self):
         return self.acctype
+
+
+class Notification(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="from_user_noti", null=True, default=None)
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="to_user_noti", null=True, default=None)
+    timestamp = models.DateTimeField(auto_now=True)
+    type = models.CharField(max_length=100, null=True)
+    ip = models.CharField(max_length=100, null=True)
+    read = models.BooleanField(default=False, null=True)
+
+    def __str__(self):
+        return self.type
+
+
+# creating signal for the Message modal
+def create_notification(sender, instance, **kwargs):
+    if kwargs['created']:
+        Notification.objects.create(sender=instance.user, receiver=instance.recipient, type="New Message")
+    else:
+        pass
+
+
+post_save.connect(create_notification, sender=MessageModel)

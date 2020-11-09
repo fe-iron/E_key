@@ -51,9 +51,7 @@
 
 				</div>
 
-                    <a class="navbar-brand pr-3" href="#" style="color: green; font-size: 30px; position: relative;">
-                        <i class="fas fa-bell"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left: 15px;">1</span>
-                    </a>
+                    {% include 'notification.html' %}
 
                     <div class="dropdown dropleft float-xl-right mb-0" id="untested-downlist">
                        <button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -130,7 +128,11 @@
                                                 {% endif %}
                                                 <td>{{p.alias}}</td>
                                                 <td id="assign-a">{{p.location}}</td>
-                                                <td>{{p.transfer_to.first_name}}</td>
+                                                <td>{{p.transfer_to.first_name}}
+                                                    {% if p.is_freeze %}
+                                                        <i class="fa fa-ban" aria-hidden="true" title="Freezed"></i>
+                                                    {% endif %}
+                                                </td>
                                                 <td><div class="dropleft  mb-0 ml-xl-3  ml-sm-2" >
                                                 <button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
                                                     <i class="fas fa-ellipsis-v"></i>
@@ -363,6 +365,7 @@
 	</form>
 
 <script src="{% static 'tesafe/js/ajax.js' %}"></script>
+<script src="{% static 'js/mark_read.js' %}"></script>
 
 
 <script type="text/javascript">

@@ -44,7 +44,7 @@
 					
 				</div>
 
-				<a class="navbar-brand pr-3" href="#" style="color: green; font-size: 20px; position: relative;"><i class="fas fa-bell fa-2x"></i><span class="badge badge-danger" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">1</span></a>
+				{% include 'notification.html' %}
 
 				<div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -53,7 +53,7 @@
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="#" onclick="myfun()">Broadcast</a>
 						<a class="dropdown-item" href="#change-passward" onclick="myfun3()">Change Password</a>
-						<a class="dropdown-item" href="#" onclick="custom_chat('joe@joe.com')">Chat To Admin</a>
+						<a class="dropdown-item" href="#" onclick="custom_chat('max')">Chat To Admin</a>
 						<a class="dropdown-item" href="#login-history" onclick="myfun1()">Login History</a>
 						<a class="dropdown-item" href="#password-history" onclick="myfun2()">Password History</a>
 						<a class="dropdown-item" href="#" onclick="myfun4()">Set Alias</a>

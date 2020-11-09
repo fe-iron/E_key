@@ -1,0 +1,68 @@
+<style>
+	.read{
+		background-color: #0000000d;
+	}
+	.read:hover{
+		background-color: #1e7e34!important;
+		color: #000000!important;
+	}
+	@media(min-width: 569.9px) and (max-width: 769px){
+	.extra{
+	  white-space: nowrap;
+	  overflow: hidden;
+	  text-overflow: ellipsis;
+	  max-width: 387px;
+    }
+  }
+  @media(max-width: 570px){
+	.extra{
+	  white-space: nowrap;
+	  overflow: hidden;
+	  text-overflow: ellipsis;
+	  max-width: 200px;
+    }
+  }
+</style>
+
+<div class="dropdown  pr-3" id="bell_notif">
+	<button class="btn btn-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-placement="right">
+		<i class="fas fa-bell fa-2x" style="color: green; font-size: 26px!important;"></i>
+	</button>
+	<div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuButton">
+		{% for i in notif %}
+		{% if not i.read %}
+			{% if i.sender %}
+				<a class="dropdown-item extra" href="#" onclick="custom_chat('{{i.sender.username}}')">
+			{% else %}
+				<a class="dropdown-item extra" href="#">
+			{% endif %}
+		{% else %}
+			{% if i.sender %}
+				<a class="dropdown-item extra read" href="#" onclick="custom_chat('{{i.sender.username}}')">
+			{% else %}
+				<a class="dropdown-item extra read" href="#">
+			{% endif %}
+		{% endif %}
+			{% if not i.sender %}
+			{{i.type}}
+			{% else %}
+			{{i.type}} from {{i.sender.first_name}}
+			{% endif %}
+			<small>at {{i.timestamp}}</small>
+		</a>
+
+		{% endfor %}
+
+
+		{% if notif.count > 0 %}
+		{% else %}
+		<a class="dropdown-item" href="#">No Notification</a>
+		{% endif %}
+	</div>
+	{% if count_notif > 0 %}
+	<span class="badge badge-danger" id="notification_number" style="position: absolute; top: -5px; font-size: 14px; left:15px; ">
+		{{count_notif}}
+	</span>
+	{% endif %}
+</div>
+
