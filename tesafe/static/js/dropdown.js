@@ -4,7 +4,7 @@
 
     // and when you show it, move it to the body
     $(window).on('show.bs.dropdown', function (e) {
-        console.log(e.target)
+        //console.log(e.target)
         // grab the menu
         dropdownMenu = $(e.target).find('#dropdown_menu');
 
