@@ -279,7 +279,7 @@ def index(request):
                 if Seller.objects.filter(email=uname).exists():
                     if UserLogin.objects.filter(user=user).exists():
                         messages.info(request, "Seller is already logged in")
-                        login_signal.send(sender=UserLogin, ip=get_ip(request))
+                        login_signal.send(sender=UserLogin, ip=get_ip(request), admin=uname)
                         return redirect("/")
 
                     sel = Seller.objects.get(email=uname)
@@ -311,7 +311,7 @@ def index(request):
                 if Tester.objects.filter(email=uname).exists():
                     if UserLogin.objects.filter(user=user).exists():
                         messages.info(request, "Tester is already logged in")
-                        login_signal.send(sender=UserLogin, ip=get_ip(request))
+                        login_signal.send(sender=UserLogin, ip=get_ip(request), admin=uname)
                         return redirect("/")
 
                     tes = Tester.objects.get(email=uname)
@@ -343,7 +343,7 @@ def index(request):
                 if WebUser.objects.filter(email=uname).exists():
                     if UserLogin.objects.filter(user=user).exists():
                         messages.info(request, "User is already logged in")
-                        login_signal.send(sender=UserLogin, ip=get_ip(request))
+                        login_signal.send(sender=UserLogin, ip=get_ip(request), admin=uname)
                         return redirect("/")
 
                     wuser = WebUser.objects.get(email=uname)
@@ -3236,7 +3236,7 @@ def chat_multiple(request):
 def mark_read(request):
     if request.method == 'GET' and request.is_ajax:
         passText = request.GET.get("email", None)
-        u = None
+
         if User.objects.filter(Q(email=passText) | Q(username=passText)).exists():
             u = User.objects.get(Q(email=passText) | Q(username=passText))
             if Notification.objects.filter(receiver=u).exists():
