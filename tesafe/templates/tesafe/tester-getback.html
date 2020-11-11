@@ -354,6 +354,13 @@
 		<input type="hidden"  name="user_pk" value="{{id}}">
 	</form>
 
+		<!--	to start chat to a single user -->
+	<form action="chat" method="post" name="single_chat">
+		{% csrf_token %}
+		<input type="hidden" id="chatting_to" name="email_user">
+	</form>
+
+
 <script src="{% static 'js/mark_read.js' %}"></script>
 <script type="text/javascript">
 
@@ -500,6 +507,11 @@ $(document).ready(function(){
 		$('#imagemodalConfirm').modal('show');
 	}
 
+	//to chat a single user
+	function custom_chat(email){
+		$('#chatting_to').attr('value', email);
+		document.forms['single_chat'].submit();
+	}
 </script>
 </body>
 </html>

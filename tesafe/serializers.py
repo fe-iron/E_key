@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from .models import MessageModel, Seller, Tester
+from .models import MessageModel
 from rest_framework.serializers import ModelSerializer, CharField
 from django.db.models import Q
 import json
@@ -14,6 +14,7 @@ def create_multiple(usernames, fname, user, body):
             msg.save()
     return msg
 
+
 class MessageModelSerializer(ModelSerializer):
     user = CharField(source='user.username', read_only=True)
     recipient = CharField(source='recipient.username')
@@ -21,10 +22,7 @@ class MessageModelSerializer(ModelSerializer):
     def create(self, validated_data):
         flag = False
         try:
-            # print("usernames: ",validated_data['recipient']['username'])
             usernames = json.loads(validated_data['recipient']['username'])
-            # print("body: ",validated_data['body'])
-            # print("emails: ",usernames)
             flag = True
         except json.JSONDecodeError as e:
             pass

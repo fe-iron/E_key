@@ -528,6 +528,7 @@ def admin_home(request):
     u_email = u.email
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
         count_notif = 0
+        notif = None
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
             for item in notif:
@@ -550,11 +551,11 @@ def admin_home(request):
             'notif': notif,
             'count_notif': count_notif,
             'seller_online': abs(seller),
-            'seller_offline': abs(seller_count - seller),
-            'tester_online': tester,
-            'tester_offline': abs(tester_count - tester),
-            'web_user_online': webUser,
-            'web_user_offline': abs(web_user_count - webUser),
+            'seller_offline': abs(seller_count - abs(seller)),
+            'tester_online': abs(tester),
+            'tester_offline': abs(tester_count - abs(tester)),
+            'web_user_online': abs(webUser),
+            'web_user_offline': abs(web_user_count - abs(webUser)),
             'PWGs_offline': 0,
             'PWGs_online': queryset_PWGs.count(),
             'history': WebAdminLoginHistory.objects.filter(user=request.user).order_by(*cond),
@@ -572,6 +573,7 @@ def admin_seller(request):
     u_email = u.email
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
         count_notif = 0
+        notif = None
         seller = Seller.objects.all().order_by('alias','first_name')
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
@@ -595,6 +597,7 @@ def admin_tester(request):
     u_email = u.email
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
         count_notif = 0
+        notif = None
         tester = Tester.objects.all().order_by('alias','first_name')
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
@@ -619,6 +622,7 @@ def admin_info_server(request):
     u_email = u.email
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
         count_notif = 0
+        notif = None
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
             for item in notif:
@@ -657,7 +661,15 @@ def seller_home(request):
         user_count = 0
         user_online = 0
         user_offline = 0
+        count_notif = 0
+        notif = None
         cond = ['-login_date', '-login_time']
+
+        if Notification.objects.filter(receiver=u).exists():
+            notif = Notification.objects.filter(receiver=u)
+            for item in notif:
+                if not item.read:
+                    count_notif += 1
         seller_user = request.user
         seller = seller_user.id
         seller = Seller.objects.get(user=seller)
@@ -675,6 +687,8 @@ def seller_home(request):
                     user_count += 1
         param = {
             "seller": seller,
+            "notif": notif,
+            "count_notif": count_notif,
             "pwgs": count,
             "pwg_online": get_current_users(PWG).count(),
             "pwg_offline": count - get_current_users(PWG).count(),
@@ -695,6 +709,13 @@ def seller_user(request):
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     if u.is_authenticated and Seller.objects.filter(email=u_email).exists():
+        count_notif = 0
+        notif = None
+        if Notification.objects.filter(receiver=u).exists():
+            notif = Notification.objects.filter(receiver=u)
+            for item in notif:
+                if not item.read:
+                    count_notif += 1
         seller = request.user
         user = User.objects.get(email=seller)
         seller = Seller.objects.get(user=user.id)
@@ -707,6 +728,8 @@ def seller_user(request):
         param = {
             "users": web_users,
             "id": seller.id,
+            "notif": notif,
+            "count_notif": count_notif,
             "unique_name": unique_name("S", '001'),
         }
         return render(request, 'seller/seller-user.html', param)
@@ -723,6 +746,15 @@ def seller_pwg(request):
         pwgserver = []
         pwgserver1 = []
         user = request.user
+        count_notif = 0
+        notif = None
+
+        if Notification.objects.filter(receiver=u).exists():
+            notif = Notification.objects.filter(receiver=u)
+            for item in notif:
+                if not item.read:
+                    count_notif += 1
+
         pwg = PWG.objects.filter(Q(transfer_to=user) | Q(sold_from=user)).order_by('alias')
         for i in pwg:
             if i.is_authorized or i.is_shared or i.sold_from:
@@ -740,7 +772,8 @@ def seller_pwg(request):
             "pwgserver_occupied": pwgserver,
             "pwgserver_unoccupied": pwgserver1,
             "pwg": pwg,
-            # "num": num,
+            "count_notif": count_notif,
+            "notif": notif,
         }
         return render(request, 'seller/seller-pwg.html', param)
     messages.error(request, "Login first then try again!!")
@@ -1028,6 +1061,13 @@ def tester_home(request):
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     if u.is_authenticated and Tester.objects.filter(email=u_email).exists():
+        count_notif = 0
+        notif = None
+        if Notification.objects.filter(receiver=u).exists():
+            notif = Notification.objects.filter(receiver=u)
+            for item in notif:
+                if not item.read:
+                    count_notif += 1
         pwgs_untested = []
         pwgs_tested_good = []
         pwgs_tested_faulty = []
@@ -1062,6 +1102,8 @@ def tester_home(request):
 
             param = {
                 'pwg_obj': pwg_obj,
+                'notif': notif,
+                'count_notif': count_notif,
                 'pwgs_untested': pwgs_untested,
                 'pwgs_tested_good': pwgs_tested_good,
                 'pwgs_tested_faulty': pwgs_tested_faulty,
@@ -1080,6 +1122,13 @@ def tester_test(request):
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     if u.is_authenticated and Tester.objects.filter(email=u_email).exists():
+        count_notif = 0
+        notif = None
+        if Notification.objects.filter(receiver=u).exists():
+            notif = Notification.objects.filter(receiver=u)
+            for item in notif:
+                if not item.read:
+                    count_notif += 1
         user = request.user
         if User.objects.filter(email=user).exists():
             untested_pwg = []
@@ -1089,7 +1138,9 @@ def tester_test(request):
                     untested_pwg.append(pwg)
 
             param = {
-                'pwg_untested': untested_pwg
+                'pwg_untested': untested_pwg,
+                "notif": notif,
+                "count_notif": count_notif,
             }
             return render(request, 'tester/tester-test.html', param)
         else:
@@ -1105,11 +1156,21 @@ def user_user(request):
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     if u.is_authenticated and WebUser.objects.filter(email=u_email).exists():
+        count_notif = 0
+        notif = None
+        if Notification.objects.filter(receiver=u).exists():
+            notif = Notification.objects.filter(receiver=u)
+            for item in notif:
+                if not item.read:
+                    count_notif += 1
+
         user_obj = WebUser.objects.get(user=u)
         if UserToUser.objects.filter(main_user=user_obj).exists():
             user_obj = UserToUser.objects.filter(main_user=user_obj).order_by('associated_user')
             param = {
-                "user_obj": user_obj
+                "user_obj": user_obj,
+                "notif": notif,
+                "count_notif": count_notif,
             }
             return render(request, 'user/user-user.html', param)
         messages.info(request, "You don't have any user, add first!")
@@ -1124,12 +1185,22 @@ def user_home(request):
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     if u.is_authenticated and WebUser.objects.filter(email=u_email).exists():
+        count_notif = 0
+        notif = None
+        if Notification.objects.filter(receiver=u).exists():
+            notif = Notification.objects.filter(receiver=u)
+            for item in notif:
+                if not item.read:
+                    count_notif += 1
+
         if PWG.objects.filter(sold_from=u).exists():
             pwg_obj = PWG.objects.filter(sold_from=u)
             u_obj = WebUser.objects.get(user=u)
             param = {
                 "pwg_obj": pwg_obj,
                 "pk": u_obj.id,
+                "notif": notif,
+                "count_notif": count_notif,
             }
             return render(request, 'user/user-home.html', param)
         messages.error(request, "You have no PWG, Buy one first!")
@@ -3133,6 +3204,13 @@ def chat_multiple(request):
                     new_values += Tester.objects.get(id=i).first_name
                     new_values += ', '
                     temp_list.append(Tester.objects.get(id=i).email)
+        elif accType == "user":
+            for i in users:
+                if WebUser.objects.filter(id=i).exists():
+                    count += 1
+                    new_values += WebUser.objects.get(id=i).first_name
+                    new_values += ', '
+                    temp_list.append(WebUser.objects.get(id=i).email)
 
         # trying to put ' , and' at last place
         new_values = new_values[:-2]

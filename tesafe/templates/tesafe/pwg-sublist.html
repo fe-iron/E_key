@@ -364,6 +364,13 @@
 		<input type="hidden" value="admin-info-server" name="accType">
 	</form>
 
+    	<!--	to start chat to a single user -->
+	<form action="chat" method="post" name="single_chat">
+		{% csrf_token %}
+		<input type="hidden" id="chatting_to" name="email_user">
+	</form>
+
+
 <script src="{% static 'tesafe/js/ajax.js' %}"></script>
 <script src="{% static 'js/mark_read.js' %}"></script>
 
@@ -827,6 +834,13 @@
         console.log("tester pk: "+seller_pk);
         document.forms['transfer_multiple'].submit();
 
+    }
+
+
+    //to chat a single user
+    function custom_chat(email){
+        $('#chatting_to').attr('value', email);
+        document.forms['single_chat'].submit();
     }
 </script>
     </body>

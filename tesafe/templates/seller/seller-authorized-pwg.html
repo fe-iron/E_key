@@ -142,6 +142,11 @@
 		<input type="hidden" value="{{id}}" name="pwg_values">
 	</form>
 
+		<!--	to start chat to a single user -->
+	<form action="chat" method="post" name="single_chat">
+		{% csrf_token %}
+		<input type="hidden" id="chatting_to" name="email_user">
+	</form>
 
 
 <script type="text/javascript">
@@ -243,6 +248,11 @@
 		console.log(checkbox_values);
 	});
 
+	//to chat a single user
+		function custom_chat(email){
+			$('#chatting_to').attr('value', email);
+			document.forms['single_chat'].submit();
+		}
 </script>
 </body>
 </html>

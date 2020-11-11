@@ -14,6 +14,7 @@ class WebAdmin(models.Model):
     phone = models.CharField(max_length=15, null=True)
     alias = models.CharField(max_length=100, default=None, null=True)
     system_name = models.CharField(max_length=19, null=True, default="not assigned")
+    is_online = models.BooleanField(default=False)
 
     def __str__(self):
         return self.first_name
@@ -339,7 +340,10 @@ class Notification(models.Model):
 # creating signal for the Message modal
 def create_notification(sender, instance, **kwargs):
     if kwargs['created']:
-        Notification.objects.create(sender=instance.user, receiver=instance.recipient, type="New Message")
+        if UserLogin.objects.filter(user=instance.recipient).exists():
+            pass
+        else:
+            Notification.objects.create(sender=instance.user, receiver=instance.recipient, type="New Message")
     else:
         pass
 

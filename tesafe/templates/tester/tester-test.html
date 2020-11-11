@@ -199,6 +199,12 @@
 			<input type="hidden" id="pass_pwg_value" name="pass_pwg_value">
 		</form>
 
+			<!--	to start chat to a single user -->
+	<form action="chat" method="post" name="single_chat">
+		{% csrf_token %}
+		<input type="hidden" id="chatting_to" name="email_user">
+	</form>
+
 
 		<script type="text/javascript">
 			var clicks = 0;
@@ -529,6 +535,12 @@
 						$('#'+id_name).removeClass("selected_pwg");
 					}
 				}
+		}
+
+		//to chat a single user
+		function custom_chat(email){
+			$('#chatting_to').attr('value', email);
+			document.forms['single_chat'].submit();
 		}
 	</script>
 </body>

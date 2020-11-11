@@ -265,6 +265,12 @@
 		<input type="hidden"  name="accType" value="tester">
 	</form>
 
+		<!--	to start chat to a single user -->
+	<form action="chat" method="post" name="single_chat">
+		{% csrf_token %}
+		<input type="hidden" id="chatting_to" name="email_user">
+	</form>
+
 <script src="{% static 'tesafe/js/transfer_ajax.js' %}"></script>
 <script src="{% static 'js/mark_read.js' %}"></script>
 <script type="text/javascript">
@@ -452,7 +458,11 @@ $(function() {
 		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
 		$('#imagemodalConfirm').modal('show');
 	}
-
+	//to chat a single user
+	function custom_chat(email){
+		$('#chatting_to').attr('value', email);
+		document.forms['single_chat'].submit();
+	}
 </script>
 </body>
 </html>
