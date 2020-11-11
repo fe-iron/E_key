@@ -216,7 +216,8 @@ def get_ip(request):
 
 @receiver(login_signal)
 def create_notification_login(sender, **kwargs):
-    u = User.objects.get(email='max@max.com')
+    email = kwargs['admin']
+    u = User.objects.get(email=email)
     Notification.objects.create(
         receiver=u,
         type=f"Someone tried to login with your Creds, the IP was {kwargs['ip']}",
@@ -250,7 +251,7 @@ def index(request):
                 if WebAdmin.objects.filter(user=user).exists():
                     if UserLogin.objects.filter(user=user).exists():
                         messages.info(request, "Admin is already logged in")
-                        login_signal.send(sender=User, ip=get_ip(request))
+                        login_signal.send(sender=User, ip=get_ip(request), admin=uname)
                         return redirect("/")
 
                     auth.login(request, user)
