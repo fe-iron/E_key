@@ -250,7 +250,7 @@ def index(request):
                 if WebAdmin.objects.filter(user=user).exists():
                     if UserLogin.objects.filter(user=user).exists():
                         messages.info(request, "Admin is already logged in")
-                        login_signal.send(sender=UserLogin, ip=get_ip(request))
+                        login_signal.send(sender=User, ip=get_ip(request))
                         return redirect("/")
 
                     auth.login(request, user)
