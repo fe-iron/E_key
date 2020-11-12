@@ -532,11 +532,19 @@ def admin_home(request):
         notif = None
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
-            for item in notif:
-                date = item.timestamp.date() - datetime.date.today()
+            # to get a week earlier date
+            some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
 
-                if not item.read:
-                    count_notif += 1
+            # monday_of_last_week = some_day_last_week - datetime.timedelta(
+            #     days=(some_day_last_week.isocalendar()[2] - 1))
+            # monday_of_this_week = monday_of_last_week + datetime.timedelta(days=7)
+
+            for item in notif:
+                if item.timestamp.date() == some_day_last_week:
+                    item.delete()
+                else:
+                    if not item.read:
+                        count_notif += 1
 
         seller_count = Seller.objects.all().count()
         tester_count = Tester.objects.all().count()
@@ -580,9 +588,14 @@ def admin_seller(request):
         seller = Seller.objects.all().order_by('alias','first_name')
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
+            some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
+
             for item in notif:
-                if not item.read:
-                    count_notif += 1
+                if item.timestamp.date() == some_day_last_week:
+                    item.delete()
+                else:
+                    if not item.read:
+                        count_notif += 1
         param = {
             'seller': seller,
             'notif': notif,
@@ -604,9 +617,14 @@ def admin_tester(request):
         tester = Tester.objects.all().order_by('alias','first_name')
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
+            some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
+
             for item in notif:
-                if not item.read:
-                    count_notif += 1
+                if item.timestamp.date() == some_day_last_week:
+                    item.delete()
+                else:
+                    if not item.read:
+                        count_notif += 1
         param = {
             'tester': tester,
             'notif': notif,
@@ -628,9 +646,15 @@ def admin_info_server(request):
         notif = None
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
+            some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
+
             for item in notif:
-                if not item.read:
-                    count_notif += 1
+                if item.timestamp.date() == some_day_last_week:
+                    item.delete()
+                else:
+                    if not item.read:
+                        count_notif += 1
+
         pwgs = PWGServers.objects.all().order_by('alias')
         pwg = PWG.objects.all().order_by('alias')
         count_pwgs = pwgs.count()
@@ -670,9 +694,14 @@ def seller_home(request):
 
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
+            some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
+
             for item in notif:
-                if not item.read:
-                    count_notif += 1
+                if item.timestamp.date() == some_day_last_week:
+                    item.delete()
+                else:
+                    if not item.read:
+                        count_notif += 1
         seller_user = request.user
         seller = seller_user.id
         seller = Seller.objects.get(user=seller)
@@ -716,9 +745,14 @@ def seller_user(request):
         notif = None
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
+            some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
+
             for item in notif:
-                if not item.read:
-                    count_notif += 1
+                if item.timestamp.date() == some_day_last_week:
+                    item.delete()
+                else:
+                    if not item.read:
+                        count_notif += 1
         seller = request.user
         user = User.objects.get(email=seller)
         seller = Seller.objects.get(user=user.id)
@@ -754,9 +788,14 @@ def seller_pwg(request):
 
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
+            some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
+
             for item in notif:
-                if not item.read:
-                    count_notif += 1
+                if item.timestamp.date() == some_day_last_week:
+                    item.delete()
+                else:
+                    if not item.read:
+                        count_notif += 1
 
         pwg = PWG.objects.filter(Q(transfer_to=user) | Q(sold_from=user)).order_by('alias')
         for i in pwg:
@@ -1068,9 +1107,15 @@ def tester_home(request):
         notif = None
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
+            some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
+
             for item in notif:
-                if not item.read:
-                    count_notif += 1
+                if item.timestamp.date() == some_day_last_week:
+                    item.delete()
+                else:
+                    if not item.read:
+                        count_notif += 1
+
         pwgs_untested = []
         pwgs_tested_good = []
         pwgs_tested_faulty = []
@@ -1129,9 +1174,15 @@ def tester_test(request):
         notif = None
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
+            some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
+
             for item in notif:
-                if not item.read:
-                    count_notif += 1
+                if item.timestamp.date() == some_day_last_week:
+                    item.delete()
+                else:
+                    if not item.read:
+                        count_notif += 1
+
         user = request.user
         if User.objects.filter(email=user).exists():
             untested_pwg = []
@@ -1163,9 +1214,14 @@ def user_user(request):
         notif = None
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
+            some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
+
             for item in notif:
-                if not item.read:
-                    count_notif += 1
+                if item.timestamp.date() == some_day_last_week:
+                    item.delete()
+                else:
+                    if not item.read:
+                        count_notif += 1
 
         user_obj = WebUser.objects.get(user=u)
         if UserToUser.objects.filter(main_user=user_obj).exists():
@@ -1192,9 +1248,14 @@ def user_home(request):
         notif = None
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
+            some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
+
             for item in notif:
-                if not item.read:
-                    count_notif += 1
+                if item.timestamp.date() == some_day_last_week:
+                    item.delete()
+                else:
+                    if not item.read:
+                        count_notif += 1
 
         if PWG.objects.filter(sold_from=u).exists():
             pwg_obj = PWG.objects.filter(sold_from=u)

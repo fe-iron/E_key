@@ -32,15 +32,15 @@
 		{% for i in notif %}
 		{% if not i.read %}
 			{% if i.sender %}
-				<a class="dropdown-item extra" href="#" onclick="custom_chat('{{i.sender.username}}')">
+				<a class="dropdown-item extra" href="#" onclick="custom_chat('{{i.sender.username}}')" title="This notification is only available for 7 days">
 			{% else %}
-				<a class="dropdown-item extra" href="#">
+				<a class="dropdown-item extra" href="#" title="This notification is only available for 7 days">
 			{% endif %}
 		{% else %}
 			{% if i.sender %}
-				<a class="dropdown-item extra read" href="#" onclick="custom_chat('{{i.sender.username}}')">
+				<a class="dropdown-item extra read" href="#" onclick="custom_chat('{{i.sender.username}}')" title="This notification is only available for 7 days">
 			{% else %}
-				<a class="dropdown-item extra read" href="#">
+				<a class="dropdown-item extra read" href="#" title="This notification is only available for 7 days">
 			{% endif %}
 		{% endif %}
 			{% if not i.sender %}
