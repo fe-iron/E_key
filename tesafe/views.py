@@ -533,6 +533,8 @@ def admin_home(request):
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
             for item in notif:
+                date = item.timestamp.date() - datetime.date.today()
+
                 if not item.read:
                     count_notif += 1
 
@@ -3242,6 +3244,7 @@ def mark_read(request):
             if Notification.objects.filter(receiver=u).exists():
                 notif = Notification.objects.filter(receiver=u)
                 for item in notif:
-                    item.read = True
-                    item.save()
+                    if not item.read:
+                        item.read = True
+                        item.save()
     return JsonResponse({"msg": True}, status=200)

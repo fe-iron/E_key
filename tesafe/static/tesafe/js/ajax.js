@@ -536,7 +536,6 @@ function deauthorize(pk, accType){
 
 }
 
-
 //to deauthorize the pwg from a user
 function deshare(pk, accType){
         // GET AJAX request

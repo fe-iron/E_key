@@ -336,6 +336,9 @@ class Notification(models.Model):
     def __str__(self):
         return self.type
 
+    class Meta:
+        ordering = ('-timestamp',)
+
 
 # creating signal for the Message modal
 def create_notification(sender, instance, **kwargs):
