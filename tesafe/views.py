@@ -16,6 +16,7 @@ from django.http import JsonResponse
 from django.http import HttpResponse
 from django.core import serializers
 from django.contrib import messages
+from django.core.cache import cache
 from django.utils import timezone
 # password resset email imports
 from django.urls import reverse
@@ -27,10 +28,6 @@ import datetime
 import json
 
 # global vars
-webAdmin = 0
-webUser = 0
-seller = 0
-tester = 0
 webUser_email = []
 
 login_signal = Signal(providing_args=['IP','timestamp'])
@@ -262,8 +259,10 @@ def index(request):
                     u_login = UserLogin(user=user, session_key=session_key, acctype='A')
                     u_login.save()
 
-                    global webAdmin
-                    webAdmin += 1
+                    # global webAdmin
+                    ct = cache.get('webAdmin', 0)
+                    new_count = ct + 1
+                    cache.set('webAdmin', new_count, 60*60*24*7)
                     return redirect("admin-home")
                 else:
                     messages.info(request, 'Invalid user id and password for Admin')
@@ -294,8 +293,11 @@ def index(request):
                     u_login = UserLogin(user=user, session_key=session_key, acctype='S')
                     u_login.save()
 
-                    global seller
-                    seller += 1
+                    # global seller
+                    ct = cache.get('seller', 0)
+                    new_count = ct + 1
+                    cache.set('seller', new_count, 60*60*24*7)
+
                     return redirect("seller-home")
                 else:
                     messages.info(request, 'Invalid user id and password for Seller')
@@ -326,8 +328,11 @@ def index(request):
                     u_login = UserLogin(user=user, session_key=session_key, acctype='T')
                     u_login.save()
 
-                    global tester
-                    tester += 1
+                    # global tester
+                    ct = cache.get('tester', 0)
+                    new_count = ct + 1
+                    cache.set('tester', new_count, 60 * 60 * 24 * 7)
+
                     return redirect('tester-home')
                 else:
                     messages.info(request, 'Invalid user id and password for Tester')
@@ -358,9 +363,12 @@ def index(request):
                     u_login = UserLogin(user=user, session_key=session_key, acctype='U')
                     u_login.save()
 
-                    global webUser, webUser_email
-                    webUser += 1
-                    webUser_email.append(user)
+                    global webUser_email
+                    ct = cache.get('webUser', 0)
+                    new_count = ct + 1
+                    cache.set('webUser', new_count, 60 * 60 * 24 * 7)
+
+                    webUser_email.append(uname)
                     return redirect("user-home")
                 else:
                     messages.info(request, 'Invalid user id and password for User')
@@ -489,18 +497,45 @@ def logout(request):
     u = request.user
 
     if WebAdmin.objects.filter(email=u).exists():
-        global webAdmin
-        webAdmin -= 1
+        # global webAdmin
+        ct = cache.get('webAdmin', 0)
+        if ct <= 0:
+            pass
+        else:
+            ct = ct - 1
+            cache.set('webAdmin', ct, 60*60*24*7)
+
     elif WebUser.objects.filter(email=u).exists():
-        global webUser, webUser_email
-        webUser -= 1
-        webUser_email = list(filter((u).__ne__, webUser_email))
+        usr = WebUser.objects.get(email=u)
+        usr = usr.email
+        global webUser_email
+        ct = cache.get('webUser', 0)
+        if ct <= 0:
+            pass
+        else:
+            ct = ct - 1
+            cache.set('webUser', ct, 60*60*24*7)
+
+        webUser_email = webUser_email.remove(usr)
+        print("email: ",webUser_email)
     elif Seller.objects.filter(email=u).exists():
-        global seller
-        seller -= 1
+        # global seller
+        ct = cache.get('seller', 0)
+        if ct <= 0:
+            pass
+        else:
+            ct = ct - 1
+            cache.set('seller', ct, 60*60*24*7)
+
     elif Tester.objects.filter(email=u).exists():
-        global tester
-        tester -= 1
+        # global tester
+        ct = cache.get('tester', 0)
+        if ct <= 0:
+            pass
+        else:
+            ct = ct - 1
+            cache.set('tester', ct, 60*60*24*7)
+
     auth.logout(request)
     if User.objects.filter(Q(email=u) | Q(username=u)).exists():
         user = User.objects.get(Q(email=u) | Q(username=u))
@@ -524,7 +559,10 @@ def get_current_users(obj):
 
 def admin_home(request):
     u = request.user
-    global webUser, seller, tester
+    # global webUser, seller, tester
+    webUser = cache.get('webUser', 0)
+    seller = cache.get('seller', 0)
+    tester = cache.get('tester', 0)
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
@@ -712,11 +750,12 @@ def seller_home(request):
         history_count = WebAdminLoginHistory.objects.filter(user=request.user).count()
         history = WebAdminLoginHistory.objects.filter(user=request.user).order_by(*cond)
         global webUser_email
-        for email in webUser_email:
-            if WebUser.objects.filter(email=email).exists():
-                wuser = WebUser.objects.get(email=email)
-                if seller == wuser.associated_with:
-                    user_count += 1
+        if webUser_email:
+            for email in webUser_email:
+                if WebUser.objects.filter(email=email).exists():
+                    wuser = WebUser.objects.get(email=email)
+                    if seller == wuser.associated_with:
+                        user_count += 1
         param = {
             "seller": seller,
             "notif": notif,
@@ -2702,6 +2741,14 @@ def delete_temp(request):
             # check for the pk in the database.
             if WebUser.objects.filter(id=pk).exists():
                 my_object = WebUser.objects.get(id=pk)
+                seller = my_object.associated_with
+                if Seller.objects.filter(id=seller.id).exists():
+                    sel = Seller.objects.get(id=seller.id)
+                    u_count = sel.user_count
+                    if u_count > 0:
+                        u_count -= 1
+                    sel.user_count = u_count
+                    sel.save()
                 my_object.associated_with = None
                 name = my_object.first_name
                 name = "{} has been successfully deleted from your list".format(name)
