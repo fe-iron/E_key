@@ -1,6 +1,6 @@
 from .models import WebAdmin, Seller, Tester, WebUser, PWGServers, PWG, WebAdminLoginHistory, PasswordHistory, \
     TransferPwgs, TransferPwg, PwgUseRecord, SystemName, Authorize, Share, PWGHistory, TesterPWGHistory, \
-    UserToUser, MessageModel, UserLogin, Notification
+    UserToUser, MessageModel, UserLogin, Notification, TestedPWGHistory
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
@@ -864,18 +864,19 @@ def seller_pwg(request):
 def transfer(request, id):
     user = User.objects.get(id=id)
     pwgserver = []
-    pwg = PWG.objects.filter(location="A")
-    for pwg_obj in pwg:
-        try:
-            pwgserver.index(pwg_obj.owned_by)
-        except ValueError as ve:
-            pwgserver.append(pwg_obj.owned_by)
+    pwg = None
+    if PWG.objects.filter(is_tested=True, is_tested_good=True).exists():
+        pwg = PWG.objects.filter(is_tested=True, is_tested_good=True)
+        for pwg_obj in pwg:
+            try:
+                pwgserver.index(pwg_obj.owned_by)
+            except ValueError as ve:
+                pwgserver.append(pwg_obj.owned_by)
     param = {
         "name": "Transfer PWG to Seller "+user.first_name + " " + user.last_name,
         "username": user.first_name + " " + user.last_name,
         "pwgserver": pwgserver,
         "pwg": pwg,
-        "num": num,
         "id": id,
         "for_Admin": "admin",
         "accType": "admin",
@@ -889,20 +890,28 @@ def transfer(request, id):
 def tester_getback(request, id):
     if User.objects.filter(id=id).exists():
         user = User.objects.get(id=id)
-        list1 = []
-        transferred_pwg = TransferPwg.objects.filter(user=id)
+        server_tested = []
+        server_untested = []
+        transferred_pwg = []
+        if TransferPwg.objects.filter(user=id).exists():
+            transferred_pwg = TransferPwg.objects.filter(user=id)
 
-        if transferred_pwg is None:
-            transferred_pwg = TransferPwg.objects.all()
-
-        for obj in transferred_pwg:
-            list1.append(obj.pwgs_owner)
-
-        list1 = set(list1)
+            for item in transferred_pwg:
+                if item.pwg_owner.is_tested:
+                    try:
+                        server_tested.index(item.pwgs_owner)
+                    except ValueError as ve:
+                        server_tested.append(item.pwgs_owner)
+                else:
+                    try:
+                        server_untested.index(item.pwgs_owner)
+                    except ValueError as ve:
+                        server_untested.append(item.pwgs_owner)
 
         param = {
             'trans_pwg': transferred_pwg,
-            'servers': list1,
+            'server_tested': server_tested,
+            'server_untested': server_untested,
             "name": user.first_name + " " + user.last_name,
             "id": id,
         }
@@ -915,13 +924,17 @@ def tester_getback(request, id):
 @login_required
 def tester_tested_pwg_list(request, id):
     user = User.objects.get(id=id)
-    pwgserver = PWGServers.objects.all()
-    pwg = PWG.objects.all()
+    pwg = PWG.objects.filter(location="A")
+    pwgserver = []
+    for pwg_obj in pwg:
+        try:
+            pwgserver.index(pwg_obj.owned_by)
+        except ValueError as ve:
+            pwgserver.append(pwg_obj.owned_by)
     param = {
         "name": "Transfer PWG to Tester " + user.first_name + " " + user.last_name,
         "pwgserver": pwgserver,
         "pwg": pwg,
-        "num": num,
         "id": id
     }
     return render(request, 'tesafe/tester-tested-pwg-list.html', param)
@@ -954,7 +967,6 @@ def transfer_seller(request, pk):
         "username": user.first_name + " " + user.last_name,
         "pwgserver": pwgserver,
         "pwg": pwg,
-        "num": num,
         "id": pk,
         "accType": "seller",
         "target": "user",
@@ -1007,7 +1019,6 @@ def seller_authorized(request, pk):
         "name": "Authorize PWG to User " + user.first_name + " " + user.last_name,
         "pwgserver": pwgserver,
         "pwg": pwg,
-        "num": num,
         "id": pk,
         "accType": "seller",
         "target": "user",
@@ -1098,7 +1109,6 @@ def seller_shared(request,pk):
         "username": user.first_name + " " + user.last_name,
         "pwgserver": pwgserver,
         "pwg": pwg,
-        "num": num,
         "id": pk,
         "accType": "seller",
         "target": "user",
@@ -3013,12 +3023,18 @@ def testing_history(request):
         pk = request.GET.get("pk", None)
         # check for the pk in the database.
 
-        if TesterPWGHistory.objects.filter(pwg_name=pk).exists():
-                testing_his = TesterPWGHistory.objects.filter(pwg_name=pk)
+        if TestedPWGHistory.objects.filter(pwg_name=pk).exists():
+                testing_his = TestedPWGHistory.objects.filter(pwg_name=pk)
                 testing_his_json = serializers.serialize('json', testing_his)
                 return HttpResponse(testing_his_json, content_type="application/json")
         else:
-            return JsonResponse({"history": False}, status=200)
+            if PWG.objects.filter(id=pk).exists():
+                pwg = PWG.objects.get(id=pk)
+                if pwg.alias:
+                    name = pwg.alias
+                else:
+                    name = pwg.name
+            return JsonResponse({"history": False, "name": name}, status=200)
 
     return JsonResponse({}, status=400)
 
@@ -3067,6 +3083,7 @@ def custom_reset(request):
     return HttpResponse("successfully changed!")
 
 
+# to mark PWG as fail
 def fail(request):
     if request.method == "POST":
         pwg_id = request.POST.get('fail_pwg_value')
@@ -3085,6 +3102,9 @@ def fail(request):
             else:
                 pwg_his = PWGHistory(object=user, pwg=pwg_obj, action="F")
                 pwg_his.save()
+
+            tested_his = TestedPWGHistory(pwg_name=pwg_obj, tester=user)
+            tested_his.save()
 
             messages.info(request, "Successfully added the {} in failed list".format(pwg_alias))
             return redirect("tester-test")
@@ -3114,6 +3134,9 @@ def pass_pwg(request):
             else:
                 pwg_his = PWGHistory(object=user, pwg=pwg_obj, action="P")
                 pwg_his.save()
+
+            tested_his = TestedPWGHistory(pwg_name=pwg_obj, tester=user)
+            tested_his.save()
 
             messages.info(request, "Successfully added the {} in passed list".format(pwg_alias))
             return redirect("tester-test")
@@ -3356,3 +3379,19 @@ def mark_read(request):
                         item.read = True
                         item.save()
     return JsonResponse({"msg": True}, status=200)
+
+
+def get_from(request):
+    if request.method == 'GET' and request.is_ajax:
+        # get the history from the database
+        pk = request.GET.get("pk", None)
+        # check for the pk in the database.
+
+        if TesterPWGHistory.objects.filter(pwg_name=pk).exists():
+            testing_his = TesterPWGHistory.objects.filter(pwg_name=pk)
+            testing_his_json = serializers.serialize('json', testing_his)
+            return HttpResponse(testing_his_json, content_type="application/json")
+        else:
+            return JsonResponse({"history": False}, status=200)
+
+    return JsonResponse({}, status=400)

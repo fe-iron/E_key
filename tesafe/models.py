@@ -248,8 +248,22 @@ class TesterPWGHistory(models.Model):
         return str(self.date)
 
     class Meta:
-        verbose_name = "Tester PWG Testing History"
-        verbose_name_plural = "Tester PWG Testing Histories"
+        verbose_name = "Tester PWG History"
+        verbose_name_plural = "Tester PWG Histories"
+
+
+class TestedPWGHistory(models.Model):
+    date = models.DateField(auto_now=True)
+    time = models.TimeField(auto_now=True)
+    pwg_name = models.ForeignKey(PWG, on_delete=models.SET_NULL, null=True, default=None, related_name="pwg_name")
+    tester = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None, related_name="pwg_tester")
+
+    def __str__(self):
+        return str(self.date)
+
+    class Meta:
+        verbose_name = "Tested PWG History"
+        verbose_name_plural = "Tested PWG Histories"
 
 
 # Message Model

@@ -116,7 +116,7 @@
 									</div>
 								 	</div>
 
-									{% for server in servers %}
+									{% for server in server_untested %}
 									{% with count=forloop.counter%}
 									{% if forloop.counter == 1%}
 									<div class="card">
@@ -219,7 +219,7 @@
 									</div>
 								 	</div>
 
-									{% for server in servers %}
+									{% for server in server_tested %}
 									{% with count=forloop.counter%}
 
 									{% if forloop.counter == 1%}

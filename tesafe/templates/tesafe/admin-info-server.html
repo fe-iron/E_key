@@ -180,7 +180,7 @@
 								<h5 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Add PWG Account</h5>
 								<div class="row">
 									<div class="col-md-8 py-3">
-									<form method="post" action="add-new" autocomplete="off">
+									<form method="post" action="add-new" autocomplete="off" id="add_new_form">
                                         {% csrf_token %}
 									  <div class="form-group"><div class="row"><div class="col-md-7">
 										  <select name="unique_name" class="form-control" id="unique_name" onchange="get_name('P');">
@@ -724,6 +724,7 @@
 
 	// add new pwgs
 	function myfun5(){
+		document.getElementById('add_new_form').reset();
 		document.getElementById("floating-button").style.display = "none";
 		document.getElementById("div-1").style.display = "none";
 		document.getElementById("div-2").style.display = "none";

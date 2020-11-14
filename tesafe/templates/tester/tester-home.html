@@ -216,7 +216,7 @@
                                 {% if pwg.is_tested_good %}
                               <tr>
                                 <td>
-                                  <input type="checkbox" class="pwg_tested{{count}}"  name="floatingButtonHere" disabled=""  value="{{pwg.id}}"/> {{pwg.alias}}
+                                  <input type="checkbox" class="pwg_tested{{count}}"  name="floatingButtonHere" disabled=""  value="{{pwg.id}}"/> {% if pwg.alias %} {{pwg.alias}} {% else %} {{pwg.name}} {% endif %}
                                 </td>
 
                                 <td>
@@ -320,7 +320,7 @@
                                 {% if pwg.is_tested_faulty %}
                               <tr>
                                 <td>
-                                  <input type="checkbox" class="pwg_faulty{{count}}" name="floatingButtonHere" value="{{pwg.id}}" disabled="" /> {{pwg.alias}}
+                                  <input type="checkbox" class="pwg_faulty{{count}}" name="floatingButtonHere" value="{{pwg.id}}" disabled="" /> {% if pwg.alias %} {{pwg.alias}} {% else %} {{pwg.name}} {% endif %}
                                 </td>
 
                                 <td>
@@ -407,7 +407,38 @@
                       </div>
 
                       <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                    {% endif %}
+
+
+                      {% elif count == 4 %}
+                    <div class="card">
+                      <div class="card-header" id="headingFour">
+                        <h2 class="mb-0">
+                          <button class="btn" type="button" data-toggle="collapse">
+                            <input type="checkbox" id="checkAllUntested{{count}}" disabled="" />
+                            <span class="pwg-list">{{pwgs.alias}}</span>
+                          </button>
+                          <i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" onclick="myFunction(this)" style="position: absolute; top: 31px; font-size: 18px; cursor:pointer;"></i>
+                        </h2>
+                      </div>
+
+                      <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+
+
+                      {% elif count == 5 %}
+                    <div class="card">
+                      <div class="card-header" id="headingFive">
+                        <h2 class="mb-0">
+                          <button class="btn" type="button" data-toggle="collapse">
+                            <input type="checkbox" id="checkAllUntested{{count}}" disabled="" />
+                            <span class="pwg-list">{{pwgs.alias}}</span>
+                          </button>
+                          <i class="fas fa-sort-up" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive" onclick="myFunction(this)" style="position: absolute; top: 31px; font-size: 18px; cursor:pointer;"></i>
+                        </h2>
+                      </div>
+
+                      <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+
+                      {% endif %}
                         <div class="card-body px-xl-5">
                           <table class="table table-borderless">
                             <tbody>
@@ -416,7 +447,7 @@
                                 {% if not pwg.is_tested %}
                               <tr>
                                 <td>
-                                  <input type="checkbox" class="pwg_untested{{count}}" name="floatingButtonHere" disabled="" value="{{pwg.id}}"/> {{pwg.alias}}
+                                  <input type="checkbox" class="pwg_untested{{count}}" name="floatingButtonHere" disabled="" value="{{pwg.id}}"/> {% if pwg.alias %} {{pwg.alias}} {% else %} {{pwg.name}} {% endif %}
                                 </td>
                                 <td>
                                   <div class="dropup mb-0 ml-xl-3 ml-sm-2">
@@ -803,28 +834,25 @@
                 data: {"pk": pk},
                 success: function (response) {
                     // if not valid user, alert the user
-                    $('#modal_title').html("Testing History of PWG");
 
                     if(response["history"] == false){
+                        var name = response["name"]
+                        $('#modal_title').html("Testing History of PWG "+name);
                         $('#modal_body_history').html('<div class="h4">No testing history to show</div>');
                     }else{
                         var text = '';
                         var count = 0;
-
+                        $('#modal_title').html("Testing History of PWG "+response[0]['fields']['pwg_name']);
                         for(i=0;i<response.length;i++){
                             var date = response[i]['fields']['date'];
                             var time = response[i]['fields']['time'];
-                            var got_on = response[i]['fields']['got_on'];
-                            got_on = got_on.replace("T", " at ");
-                            got_on = got_on.replace("Z", " ");
-                            got_on = got_on.slice(0,-4);
-                            count = count + 1;
-                            $("#tested_on").html("on "+date+" at "+time.slice(0,-(time.length-5)));
-                            $("#get_from_admin").html("on "+got_on);
+                            var tester = response[i]['fields']['tester'];
 
+                            count = count + 1;
+                            $("#tested_on").html("on "+date+" at "+time.slice(0,-7));
                         }
                         $("#tested_count").html(count+" times");
-
+                        var got_on = get_from_admin(pk);
                     }
 
                 $('.imagepreview').attr('src', $(this).find('img').attr('src'));
@@ -836,6 +864,33 @@
             })
     }
 
+    // to get the date of PWG from admin
+    function get_from_admin(pk){
+        $.ajax({
+                type: 'GET',
+                url: "get_from",
+                data: {"pk": pk},
+                success: function (response) {
+                    // if not valid user, alert the user
+
+                    if(response["history"] == false){
+
+                        return 0;
+                    }else{
+                        for(i=0;i<1;i++){
+                            var date = response[i]['fields']['date'];
+                            var time = response[i]['fields']['time'];
+                        }
+
+                        $("#get_from_admin").html("on "+date+" at "+time.slice(0,-7));
+                        return 1;
+                    }
+                },
+                error: function (response) {
+                    console.log(response)
+                }
+        })
+    }
     //to return pwq to admin
     function return_pwg(pk, pwg_name){
        $('#assign_values').attr('value', pk);

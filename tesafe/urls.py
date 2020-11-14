@@ -128,6 +128,8 @@ urlpatterns = [
     path('accounts/login/', views.index, name='login'),
     # to mark the notifications as read
     path('mark_read', views.mark_read, name='mark_read'),
+    # to get PWG date when it was get from admin
+    path('get_from', views.get_from, name='get_from'),
 
     # Messages route to API
     path(r'api/v1/', include(router.urls)),

@@ -155,7 +155,7 @@
 							<div class="row">
 								<div class="col-md-8 py-3">
 
-									<form action="add-new" method="post" autocomplete="off">
+									<form action="add-new" method="post" autocomplete="off" id="add_new_form">
 										{% csrf_token %}
 									  <div class="form-group"><div class="row"><div class="col-md-7">
 										  <select name="unique_name" class="form-control" id="unique_name" onchange="get_name('T');">
@@ -655,6 +655,7 @@ let checkbox_values = [];
 
 // for adding new tester account
 	function myfun1(){
+		document.getElementById('add_new_form').reset();
 		document.getElementById("div-1").style.display = "none";
 		document.getElementById("div-2").style.display = "block";
 

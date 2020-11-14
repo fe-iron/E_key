@@ -2,7 +2,7 @@
 from django.contrib import admin
 from .models import WebAdmin, Seller, WebAdminLoginHistory, Tester, WebUser, PWGServers, PWG, PasswordHistory, \
     TransferPwg, TransferPwgs, PwgUseRecord, SystemName, Authorize, Share, PWGHistory, TesterPWGHistory, UserToUser, \
-    MessageModel, UserLogin, Notification
+    MessageModel, UserLogin, Notification, TestedPWGHistory
 
 
 # admin.site.register(User)
@@ -18,6 +18,11 @@ admin.site.register(TesterPWGHistory)
 @admin.register(PWGHistory)
 class PwgAdmin(admin.ModelAdmin):
     list_display = ("pwg", "action", "object", "time", "date")
+
+
+@admin.register(TestedPWGHistory)
+class TestedPWGHistoryAdmin(admin.ModelAdmin):
+    list_display = ("pwg_name", "tester", "date", "time")
 
 
 @admin.register(Notification)
