@@ -303,6 +303,38 @@
 		</div>
 	</section>
 
+
+	<!--Modal: Login with Avatar Form-->
+<div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header justify-content-center">
+		  <i class="fa-3x fas fa-key key-icon"></i>
+	  </div>
+      <!--Body-->
+      <div class="modal-body text-center mb-1">
+
+        <h5 class="my-2 mb-3">Hi, {{admin_name}}</h5>
+
+        <div class="md-form ml-0 mr-0">
+			<label for="password_to_show" id="password_label">Enter Current Password to see</label>
+          <input type="password" id="password_to_show" class="form-control form-control-sm validate ml-0" placeholder="Enter Current Password to see">
+        </div>
+
+        <div class="text-center mt-4">
+          <button class="btn btn-primary mt-1" onclick="send_request();">Show </button>
+        </div>
+      </div>
+
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+{% csrf_token %}
+
 		<!--	to start chat to a single user -->
 	<form action="chat" method="post" name="single_chat">
 		{% csrf_token %}
@@ -422,8 +454,41 @@
 
 		// for last password toggle
 		function show_password(id){
-			$("#"+id).attr("type", "text");
-			$("#fa"+id).html('<i class="fa fa-eye-slash" aria-hidden="true"></i>');
+			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+			$('#modalLoginAvatar').modal('show');
+			$("#password_label").removeClass("text-danger");
+			$('#password_label').html('Enter Current Password to see');
+			$('#password_to_show').val('');
+
+
+			$("#password_to_show").attr("data-content", id);
+		}
+
+		function send_request(){
+
+			var data = $("#password_to_show").val();
+			const csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+			// GET AJAX request
+			$.ajax({
+				type: 'POST',
+				url: "check_password",
+				data: {'text': data, csrfmiddlewaretoken: csrftoken},
+				success: function (response) {
+					if(response['msg'] == false){
+						$("#password_label").attr("class", "text-danger");
+						$("#password_label").html("Wrong Password");
+					}else{
+						$('#modalLoginAvatar').modal('hide');
+						var data_id = $("#password_to_show").attr("data-content");
+						$("#"+data_id).attr("type", "text");
+						$("#fa"+data_id).html('<i class="fa fa-eye-slash" aria-hidden="true"></i>');
+					}
+				},
+				error: function (response) {
+					console.log(response)
+				}
+			})
+
 		}
 
 		function hide_password(id){

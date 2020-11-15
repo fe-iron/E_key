@@ -32,6 +32,7 @@ urlpatterns = [
     path("transfer-seller<int:pk>", views.transfer_seller, name="transfer-seller"),
     path("transfer-seller-pwg", views.transfer_seller_pwg, name="transfer-seller-pwg"),
     path("seller-deshared-pwg", views.seller_deshared_pwg, name="seller-deshared-pwg"),
+    path("seller-deauthorize-pwg", views.seller_deauthorize_pwg, name="seller-deauthorize-pwg"),
     path("seller-authorized<int:pk>", views.seller_authorized, name="seller-authorized"),
     path("seller-authorized-pwg", views.seller_authorized_pwg, name="seller-authorized-pwg"),
 
@@ -48,6 +49,8 @@ urlpatterns = [
     path("user-home", views.user_home, name='user-home'),
     path("user_list", views.user_list, name='user_list'),
     path("share_transfer_multiple", views.share_transfer_multiple, name='share_transfer_multiple'),
+    path("user_deauthorize_pwg", views.user_deauthorize_pwg, name='user_deauthorize_pwg'),
+    path("user-deshared-pwg", views.user_deshared_pwg, name='user-deshared-pwg'),
 
     # password reset functionality
     path("request-reset-link", views.RequestPasswordResetEmail.as_view(), name="request-reset-link"),
@@ -81,8 +84,10 @@ urlpatterns = [
     path("share_multiple_pwgs", views.share_multiple_pwgs, name="share_multiple_pwgs"),
     # De-authorize pwgs
     path("deshare", views.deshare, name="deshare"),
-    # De-authorize multiple pwgs
+    # De-share multiple pwgs
     path("deshare_multiple_pwgs", views.deshare_multiple_pwgs, name="deshare_multiple_pwgs"),
+    # De-authorize multiple pwgs
+    path("deauthorize_multiple_pwgs", views.deauthorize_multiple_pwgs, name="deauthorize_multiple_pwgs"),
     # transfer_pwg and pwgs
     path("getback_pwgs", views.getback_pwgs, name="getback_pwgs"),
     # transfer_pwg and pwgs
@@ -130,6 +135,8 @@ urlpatterns = [
     path('mark_read', views.mark_read, name='mark_read'),
     # to get PWG date when it was get from admin
     path('get_from', views.get_from, name='get_from'),
+    # to check password
+    path('check_password', views.check_password, name='check_password'),
 
     # Messages route to API
     path(r'api/v1/', include(router.urls)),

@@ -241,14 +241,20 @@
 																	</button>
 																	<div class="dropdown-menu menu-left-align">
 																		{% if item.sold_from == None %}
+																		{% if item.is_authorized %}
+																		<a class="dropdown-item" href="#" onclick="send_deauthorize({{item.id}});">De-authorize</a>
+																		{% else %}
 																		<a class="dropdown-item" href="#" onclick="send_authorize({{item.id}});">Authorize</a>
+																		{% endif %}
 																		{% if item.is_shared %}
 																		<a class="dropdown-item" href="#" onclick="send_deshare({{item.id}});">De-Share</a>
 																		{% else %}
 																		<a class="dropdown-item" href="#" onclick="send_share({{item.id}});">Share</a>
 																		{% endif %}
+
 																		<a class="dropdown-item" href="#" onclick="pop1({{item.id}}, '{{item.alias}}')">History</a>
 																		<a class="dropdown-item" href="#" onclick="delete_seller_user({{item.pk}});">Delete</a>
+
 																		{% else %}
 																		<a class="dropdown-item" href="#" onclick="pop1({{item.pk}}, '{{item.alias}}');">History</a>
 																		{% endif %}
@@ -533,6 +539,12 @@
 		<input type="hidden" id="deshare_pwg" name="pwg_ids">
 	</form>
 
+	<!--	for de-authorize-->
+	<form action="seller-deauthorize-pwg" method="post" name="send-deauthorize-pwg-ids">
+		{% csrf_token %}
+		<input type="hidden" id="deauthorize_pwg" name="pwg_ids">
+	</form>
+
 	<!--	for returning PWG to Admin-->
 	<form action="return-pwg" method="post" name="return-pwg-ids">
 		{% csrf_token %}
@@ -572,6 +584,12 @@
 	function send_deshare(id){
 		$("#deshare_pwg").attr('value',id);
 		document.forms['send-deshare-pwg-ids'].submit();
+	}
+
+	// to send primary key of single PWG to deauthorize
+	function send_deauthorize(id){
+		$("#deauthorize_pwg").attr('value',id);
+		document.forms['send-deauthorize-pwg-ids'].submit();
 	}
 
 	// to send primary key of single PWG to transfer to user

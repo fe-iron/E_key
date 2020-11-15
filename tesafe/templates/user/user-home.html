@@ -154,15 +154,30 @@
 												<td id="pwg{{forloop.counter0}}" class="cursor col-5 text-center" onclick="selected_pwg('{{pwg.alias}}', {{pwg.id}});">{{pwg.alias}}</td>
 												{% endif %}
 
-												<td class="col-3"> {{pwg.user_location}}</td>
+												<td class="col-3">
+													{% if pwg.t %}
+													T
+													{% elif pwg.is_authorized %}
+													A
+													{% elif pwg.is_shared %}
+													S
+													{% elif pwg.da %}
+													DA
+													{% elif pwg.ds %}
+													DS
+													{% endif %}
+												</td>
 
 												<td><div class="dropup  mb-0 ml-xl-3  ml-sm-2">
 													<button class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 														<i class="fas fa-ellipsis-v"></i>
 													</button>
 													<div class="dropdown-menu">
-														{% if pwg.user_location == "T" %}
+														{% if pwg.t %}
 															<a class="dropdown-item" href="#" onclick="userToUser_list({{pk}},{{pwg.id}}, 'authorize');">Authorize</a>
+															{% if pwg.da %}
+															<a class="dropdown-item" href="#" onclick="deauthorize({{pwg.id}})">De-authorize</a>
+															{% endif %}
 															<a class="dropdown-item" href="#" onclick="delete_temp_user({{pwg.pk}}, 'user-home')">Delete</a>
 
 															<a class="dropdown-item" onclick="pop3({{pwg.id}}, 'pwg');" id="{{forloop.counter0}}" href="#">Review Record</a>
@@ -172,9 +187,13 @@
 															<a class="dropdown-item" onclick="change_name('{{pwg.alias}}',{{pwg.pk}});" href="#" >Set Alias</a>
 															{% endif %}
 															<a class="dropdown-item" href="#" onclick="userToUser_list({{pk}},{{pwg.id}}, 'share');">Share</a>
+
+															{% if pwg.ds %}
+															<a class="dropdown-item" href="#" onclick="deshare({{pwg.id}})">De-share</a>
+															{% endif %}
 															<a class="dropdown-item" href="#" onclick="userToUser_list({{pk}},{{pwg.id}}, 'transfer');">Transfer</a>
 
-														{% elif pwg.user_location == "A" or pwg.user_location == "S" %}
+														{% elif pwg.is_authorized or pwg.is_shared %}
 															<a class="dropdown-item" onclick="pop3({{pwg.id}}, 'pwg');" id="{{forloop.counter0}}" href="#">Review Record</a>
 															{% if pwg.alias == '' %}
 															<a class="dropdown-item" onclick="change_name('{{pwg.system_name}}',{{pwg.pk}});" href="#" >Set Alias</a>
@@ -182,8 +201,8 @@
 															<a class="dropdown-item" onclick="change_name('{{pwg.alias}}',{{pwg.pk}});" href="#" >Set Alias</a>
 															{% endif %}
 
-														{% elif pwg.user_location == "DA" %}
-															<a class="dropdown-item" href="#">De-authorize</a>
+														{% elif pwg.da %}
+															<a class="dropdown-item" href="#" onclick="deauthorize({{pwg.id}})">De-authorize</a>
 															<a class="dropdown-item" onclick="pop3({{pwg.id}}, 'pwg');" id="{{forloop.counter0}}" href="#">Review Record</a>
 															{% if pwg.alias == '' %}
 															<a class="dropdown-item" onclick="change_name('{{pwg.system_name}}',{{pwg.pk}});" href="#" >Set Alias</a>
@@ -191,7 +210,7 @@
 															<a class="dropdown-item" onclick="change_name('{{pwg.alias}}',{{pwg.pk}});" href="#" >Set Alias</a>
 															{% endif %}
 
-														{% elif pwg.user_location == "DS" %}
+														{% elif pwg.ds %}
 															<a class="dropdown-item" href="#">De-share</a>
 															<a class="dropdown-item" onclick="pop3({{pwg.id}}, 'pwg');" id="{{forloop.counter0}}" href="#">Review Record</a>
 															{% if pwg.alias == '' %}
@@ -392,10 +411,16 @@
 		<input type="hidden" value="multiple-pwg" name="accType">
 	</form>
 
-	    	<!--	to start chat to a single user -->
-	<form action="chat" method="post" name="single_chat">
+	<!--	for de-share-->
+	<form action="user-deshared-pwg" method="post" name="send-deshare-pwg-id">
 		{% csrf_token %}
-		<input type="hidden" id="chatting_to" name="email_user">
+		<input type="hidden" id="deshare_pwg" name="pwg_ids">
+	</form>
+
+	<!--	for de-authorize-->
+	<form action="user_deauthorize_pwg" method="post" name="send-deauthorize-pwg-id">
+		{% csrf_token %}
+		<input type="hidden" id="deauthorize_pwg" name="pwg_ids">
 	</form>
 
 
@@ -718,6 +743,16 @@
 	function deletePWG(){
 		$("#pwg_pk_delete").attr('value', checkbox_values);
 		document.forms['delete_multiple'].submit();
+	}
+
+	function deauthorize(id){
+		$('#deauthorize_pwg').attr('value', id);
+		document.forms['send-deauthorize-pwg-id'].submit();
+	}
+
+	function deshare(id){
+		$('#deshare_pwg').attr('value', id);
+		document.forms['send-deshare-pwg-id'].submit();
 	}
 
 	//to chat a single user

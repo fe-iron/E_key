@@ -516,8 +516,8 @@ def logout(request):
             ct = ct - 1
             cache.set('webUser', ct, 60*60*24*7)
 
-        webUser_email = webUser_email.remove(usr)
-        print("email: ",webUser_email)
+        # webUser_email.remove(usr)
+
     elif Seller.objects.filter(email=u).exists():
         # global seller
         ct = cache.get('seller', 0)
@@ -565,6 +565,7 @@ def admin_home(request):
     tester = cache.get('tester', 0)
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
+    admin_name = u.first_name
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
         count_notif = 0
         notif = None
@@ -598,6 +599,7 @@ def admin_home(request):
             'web_user_count': web_user_count,
             'PWGs_count': PWGS_count,
             'notif': notif,
+            'admin_name': admin_name,
             'count_notif': count_notif,
             'seller_online': abs(seller),
             'seller_offline': abs(seller_count - abs(seller)),
@@ -620,6 +622,7 @@ def admin_seller(request):
     u = request.user
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
+
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
         count_notif = 0
         notif = None
@@ -721,6 +724,7 @@ def seller_home(request):
     u = request.user
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
+    admin_name = u.first_name
     if u.is_authenticated and Seller.objects.filter(email=u_email).exists():
         count = 0
         user_count = 0
@@ -761,6 +765,7 @@ def seller_home(request):
             "notif": notif,
             "count_notif": count_notif,
             "pwgs": count,
+            'admin_name': admin_name,
             "pwg_online": get_current_users(PWG).count(),
             "pwg_offline": count - get_current_users(PWG).count(),
             "user_online": user_count,
@@ -1147,6 +1152,109 @@ def seller_deshared_pwg(request):
 
 
 @login_required
+def seller_deauthorize_pwg(request):
+    if request.method == "POST":
+        ids = request.POST['pwg_ids']
+        if PWG.objects.filter(id=ids).exists():
+            pwg = PWG.objects.get(id=ids)
+            name = pwg.alias
+
+            # seller = request.user
+            # user = User.objects.get(email=seller)
+            # seller = Seller.objects.get(user=user.id)
+            web_usrs = []
+            if Authorize.objects.filter(pwg=pwg).exists():
+                web_users = Authorize.objects.filter(pwg=pwg)
+                for usr in web_users:
+                    web_user = WebUser.objects.get(user=usr.authorize_to.id)
+                    web_usrs.append(web_user)
+            else:
+                web_users = None
+
+            param = {
+                "users": web_usrs,
+                "id": ids,
+                "name": name + ", De-Authorized to Users below",
+                "form_action": "deauthorize_multiple_pwgs",
+                "action": "De-authorize",
+            }
+            return render(request, 'seller/seller-deshared-pwg.html', param)
+        else:
+            messages.info(request, "Something went wrong! try again")
+            return redirect('seller_pwg')
+
+
+def user_deshared_pwg(request):
+    if request.method == "POST":
+        ids = request.POST['pwg_ids']
+        if PWG.objects.filter(id=ids).exists():
+            pwg = PWG.objects.get(id=ids)
+            name = pwg.alias
+
+            web_usrs = []
+            wuser = None
+
+            u = request.user
+            if User.objects.filter(Q(username=u) | Q(email=u)).exists():
+                u = User.objects.get(Q(username=u) | Q(email=u))
+                if WebUser.objects.filter(user=u).exists():
+                    wuser = WebUser.objects.get(user=u)
+
+            if Authorize.objects.filter(pwg=pwg).exists():
+                web_users = Authorize.objects.filter(pwg=pwg)
+                for usr in web_users:
+                    web_user = WebUser.objects.get(user=usr.authorize_to.id)
+                    if UserToUser.objects.filter(associated_user=web_user, main_user=wuser).exists():
+                        web_usrs.append(web_user)
+
+            param = {
+                "users": web_usrs,
+                "id": ids,
+                "name": name + ", De-Shared to Users below",
+                "form_action": "deshared_multiple_pwgs",
+                "action": "De-share",
+            }
+            return render(request, 'user/seller-deshared-pwg.html', param)
+    messages.info(request, "Something went wrong! try again")
+    return redirect('user-home')
+
+
+def user_deauthorize_pwg(request):
+    if request.method == "POST":
+        ids = request.POST['pwg_ids']
+        if PWG.objects.filter(id=ids).exists():
+            pwg = PWG.objects.get(id=ids)
+            name = pwg.alias
+
+            web_usrs = []
+            wuser = None
+
+            u = request.user
+            if User.objects.filter(Q(username=u) | Q(email=u)).exists():
+                u = User.objects.get(Q(username=u) | Q(email=u))
+                if WebUser.objects.filter(user=u).exists():
+                    wuser = WebUser.objects.get(user=u)
+
+            if Authorize.objects.filter(pwg=pwg).exists():
+                web_users = Authorize.objects.filter(pwg=pwg)
+                for usr in web_users:
+                    web_user = WebUser.objects.get(user=usr.authorize_to.id)
+                    if UserToUser.objects.filter(associated_user=web_user, main_user=wuser).exists():
+                        web_usrs.append(web_user)
+
+            param = {
+                "users": web_usrs,
+                "id": ids,
+                "name": name + ", De-Authorized to Users below",
+                "form_action": "deauthorize_multiple_pwgs",
+                "action": "De-authorize",
+            }
+            return render(request, 'user/seller-deshared-pwg.html', param)
+    messages.info(request, "Something went wrong! try again")
+    return redirect('user-home')
+
+
+@login_required
 def tester_home(request):
     u = request.user
     u = User.objects.get(Q(username=u) | Q(email=u))
@@ -1295,6 +1403,8 @@ def user_home(request):
     if u.is_authenticated and WebUser.objects.filter(email=u_email).exists():
         count_notif = 0
         notif = None
+        flag = False
+        pwg_obj = []
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
             some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
@@ -1307,14 +1417,40 @@ def user_home(request):
                         count_notif += 1
 
         if PWG.objects.filter(sold_from=u).exists():
-            pwg_obj = PWG.objects.filter(sold_from=u)
-            u_obj = WebUser.objects.get(user=u)
-            param = {
-                "pwg_obj": pwg_obj,
-                "pk": u_obj.id,
-                "notif": notif,
-                "count_notif": count_notif,
-            }
+            pwg_obj1 = PWG.objects.filter(sold_from=u)
+            flag = True
+            for pwg_item in pwg_obj1:
+                try:
+                    pwg_obj.index(pwg_item.pwg)
+                except ValueError as ve:
+                    pwg_obj.append(pwg_item.pwg)
+
+        if Share.objects.filter(share_to=u).exists():
+            pwg_shared = Share.objects.filter(share_to=u)
+            flag = True
+            for pwg_item in pwg_shared:
+                try:
+                    pwg_obj.index(pwg_item.pwg)
+                except ValueError as ve:
+                    pwg_obj.append(pwg_item.pwg)
+
+        if Authorize.objects.filter(authorize_to=u).exists():
+            pwg_authorized = Authorize.objects.filter(authorize_to=u)
+            flag = True
+            for pwg_item in pwg_authorized:
+                try:
+                    pwg_obj.index(pwg_item.pwg)
+                except ValueError as ve:
+                    pwg_obj.append(pwg_item.pwg)
+
+        u_obj = WebUser.objects.get(user=u)
+        param = {
+            "pwg_obj": pwg_obj,
+            "pk": u_obj.id,
+            "notif": notif,
+            "count_notif": count_notif,
+        }
+        if flag:
             return render(request, 'user/user-home.html', param)
         messages.error(request, "You have no PWG, Buy one first!")
         return render(request, "user/user-home.html")
@@ -2341,8 +2477,7 @@ def assign(request):
                             user_obj.is_authorized = True
                             main_user = user_obj.user
 
-                            pwg_obj.user_location = "A"
-                            pwg_obj.is_authorized = True
+                            pwg_obj.da = True
                             pwg_obj.save()
                             user_obj.save()
 
@@ -2431,6 +2566,7 @@ def user_list(request):
     # request should be ajax and method should be GET.
     if request.is_ajax and request.method == "GET":
         pk = request.GET.get("pk", None)
+        print("pk: ",pk)
         if UserToUser.objects.filter(main_user=pk).exists():
             users = {}
             i = 0
@@ -2506,21 +2642,27 @@ def deauthorize(request):
 
         if User.objects.filter(id=pk).exists():
             user_obj = User.objects.get(id=pk)
-            authorize_obj = Authorize.objects.filter(authorize_to=user_obj.id)
-            for item in authorize_obj:
-                pwg_obj = item.pwg
-                pwg_obj.is_authorized = False
-                pwg_obj.save()
+            if Authorize.objects.filter(authorize_to=user_obj.id).exists():
+                authorize_obj = Authorize.objects.filter(authorize_to=user_obj.id)
 
-                item.delete()
+                for item in authorize_obj:
+                    pwg_obj = item.pwg
+                    item.delete()
 
-            web_user = WebUser.objects.get(user=pk)
-            web_user.is_authorized = False
-            name = "{} has been successfully de-authorized from User {}".format(authorize_obj[0].pwg, web_user.first_name)
-            web_user.save()
-            return JsonResponse({"msg": name}, status=200)
-        else:
-            return JsonResponse({"msg": False}, status=200)
+                    if Authorize.objects.filter(pwg=pwg_obj).exists():
+                        pwg_obj.is_authorized = True
+                    else:
+                        pwg_obj.is_authorized = False
+                    pwg_obj.save()
+
+                if WebUser.objects.filter(user=pk).exists():
+                    web_user = WebUser.objects.get(user=pk)
+                    web_user.is_authorized = False
+                    name = "{} has been successfully de-authorized from User {}".format(authorize_obj[0].pwg, web_user.first_name)
+                    web_user.save()
+                    return JsonResponse({"msg": name}, status=200)
+
+        return JsonResponse({"msg": False}, status=200)
     else:
         return JsonResponse({}, status=200)
 
@@ -2615,7 +2757,7 @@ def authorize_multiple_pwgs(request):
         pwg_values = request.POST['pwg_values']
 
         for pwg_id in pwg_values:
-            print(pwg_id)
+
             if pwg_id == ",":
                 pass
             elif pwg_id == "[":
@@ -2700,7 +2842,6 @@ def share_multiple_pwgs(request):
                             pwg_his.save()
 
         return redirect("seller-pwg")
-
     else:
         return render(request, "seller/seller-pwg.html")
 
@@ -2718,9 +2859,7 @@ def deshare_multiple_pwgs(request):
                 pass
             else:
                 pwg_obj = PWG.objects.get(id=pwg_id)
-                pwg_obj.is_shared = False
-                pwgs = pwg_obj.owned_by
-                pwg_obj.save()
+
                 for user_id in authorize_values:
                     if user_id == ",":
                         pass
@@ -2733,6 +2872,54 @@ def deshare_multiple_pwgs(request):
                         if Share.objects.filter(share_to=u, pwg=pwg_obj).exists():
                             share_obj = Share.objects.filter(share_to=u, pwg=pwg_obj)
                             share_obj.delete()
+                if Share.objects.filter(pwg=pwg_obj).exists():
+                    pwg_obj.is_shared = True
+                    pwg_obj.ds = True
+                else:
+                    pwg_obj.is_shared = False
+                    pwg_obj.ds = False
+                pwgs = pwg_obj.owned_by
+                pwg_obj.save()
+
+        return redirect("seller-pwg")
+    else:
+        return render(request, "seller/seller-pwg.html")
+
+
+def deauthorize_multiple_pwgs(request):
+    if request.method == "POST":
+        authorize_values = request.POST['share_values']
+        pwg_values = request.POST['pwg_values']
+        for pwg_id in pwg_values:
+            if pwg_id == ",":
+                pass
+            elif pwg_id == "[":
+                pass
+            elif pwg_id == "]":
+                pass
+            else:
+                pwg_obj = PWG.objects.get(id=pwg_id)
+                for user_id in authorize_values:
+                    if user_id == ",":
+                        pass
+                    else:
+                        user_obj = WebUser.objects.get(id=user_id)
+                        user_obj.is_authorized = False
+                        u = user_obj.user
+                        user_obj.save()
+
+                        if Authorize.objects.filter(authorize_to=u, pwg=pwg_obj).exists():
+                            share_obj = Authorize.objects.filter(authorize_to=u, pwg=pwg_obj)
+                            share_obj.delete()
+
+                if Authorize.objects.filter(pwg=pwg_obj).exists():
+                    pwg_obj.is_authorized = True
+                    pwg_obj.da = True
+                else:
+                    pwg_obj.is_authorized = False
+                    pwg_obj.da = False
+                pwgs = pwg_obj.owned_by
+                pwg_obj.save()
 
         return redirect("seller-pwg")
     else:
@@ -3212,8 +3399,7 @@ def share_transfer_multiple(request):
                             user_obj.is_shared = True
                             main_user = user_obj.user
 
-                            pwg_obj.user_location = "S"
-                            pwg_obj.is_shared = True
+                            pwg_obj.ds = True
                             pwg_obj.save()
                             user_obj.save()
 
@@ -3247,6 +3433,7 @@ def share_transfer_multiple(request):
                             main_user = user_obj.user
 
                             pwg_obj.user_location = "T"
+                            pwg_obj.t = True
                             pwg_obj.sold_from = main_user
                             pwg_obj.save()
                             user_obj.save()
@@ -3273,11 +3460,14 @@ def passtext(request):
     if request.is_ajax and request.method == "GET":
         passText = request.GET.get("passText", None)
         pk = request.GET.get("pk", None)
-        if PWG.objects.filter(id=pk).exists():
-            pwg = PWG.objects.get(id=pk)
-            pwg_use_password = PwgUseRecord(password=passText, pwg=pwg)
-            pwg_use_password.save()
-            return JsonResponse({"msg": "Saved"}, status=200)
+        u = request.user
+        if User.objects.filter(Q(username=u) | Q(email=u)).exists():
+            u = User.objects.get(Q(username=u) | Q(email=u))
+            if PWG.objects.filter(id=pk).exists():
+                pwg = PWG.objects.get(id=pk)
+                pwg_use_password = PwgUseRecord(password=passText, pwg=pwg, user=u)
+                pwg_use_password.save()
+                return JsonResponse({"msg": "Saved"}, status=200)
     return JsonResponse({"msg": False}, status=200)
 
 
@@ -3395,3 +3585,18 @@ def get_from(request):
             return JsonResponse({"history": False}, status=200)
 
     return JsonResponse({}, status=400)
+
+
+@login_required
+def check_password(request):
+    if request.method == 'POST' and request.is_ajax:
+        u = request.user
+        if User.objects.filter(Q(username=u) | Q(email=u)).exists():
+            u = User.objects.get(Q(username=u) | Q(email=u))
+            passw = request.POST.get('text', None)
+            if passw:
+                val = u.check_password(passw)
+                return JsonResponse({"msg": val}, status=200)
+
+    return JsonResponse({"msg": False}, status=200)
+

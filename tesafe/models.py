@@ -150,6 +150,14 @@ class PWG(models.Model):
     is_authorized = models.BooleanField(default=False)
     is_shared = models.BooleanField(default=False)
     is_tested_good = models.BooleanField(default=False)
+
+    # for transfer
+    t = models.BooleanField(default=False)
+
+    # for de share
+    ds = models.BooleanField(default=False)
+    # for de authorize
+    da = models.BooleanField(default=False)
     # if failed comes here
     is_tested_faulty = models.BooleanField(default=False)
     # it will get active when a seller transfer to user
@@ -189,6 +197,7 @@ class PwgUseRecord(models.Model):
     date = models.DateField(auto_now=True)
     password = models.CharField(max_length=255)
     pwg = models.ForeignKey(PWG, on_delete=models.CASCADE, null=True, default=None)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="used_by", null=True, default=None)
 
     def __str__(self):
         return str(self.date)

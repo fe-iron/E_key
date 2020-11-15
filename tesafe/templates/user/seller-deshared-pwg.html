@@ -1,0 +1,240 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User | Pwg | De-Share</title>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+
+	<!-- fontawesome cdn -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'seller/css/seller-user.css' %}">
+</head>
+<body>
+	<section class="bg-light">
+		<div class="container-fluid">
+			<nav class="navbar navbar-expand-lg navbar-light ">
+
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse justify-content" id="navbarSupportedContent">
+					<ul class="navbar-nav">
+						<li class="nav-item pl-3">
+							<a class="nav-link active"  href="user-home">PWGs <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item pl-3">
+							<a class="nav-link" href="user-user">User</a>
+						</li>
+					</ul>
+
+				</div>
+
+
+				<div class="dropdown  dropleft float-xl-right mb-0" >
+					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+						<i class="fas fa-ellipsis-v"></i>
+					</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="user-home">Exit</a>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</section>
+
+	<section class="bg-detail">
+		<div class="container-fluid">
+			<div class="row justify-content-center">
+				<div class="col-md-10  py-5">
+					<div class="row justify-content-center bg-button-2 p-2 mt-3" id="div-1" >
+
+						<div class="col-md">
+							<header>
+								<nav class="navbar navbar-light  venue-registration">
+									<a class="h4 text-dark font-weight-bold pt-2">{{name}}</a>
+									<form class="form-inline">
+										<div class="input-group-prepend mr-2">
+											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
+											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
+										</div>
+										<a href="user-home" class="btn btn-secondary">Back</a>
+									</form>
+								</nav>
+							</header>
+
+							<div class="table-responsive">
+								<br>
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col" style="position: relative;"><input type="checkbox" name="checkAll" id="checkAll" value="floatingButtonHere" > <i class="fas fa-sort-down"></i></th>
+											<th scope="col">Name</th>
+										</tr>
+									</thead>
+									<tbody id="myTable">
+										{% for user in users %}
+										<tr>
+											<th><input type="checkbox" value="{{user.id}}" name="floatingButtonHere" class="check"></th>
+											<td><span><img src="{{user.profile_pic.url}}" height="40" width="40" class="rounded-circle"></span> {{user.first_name}} {{user.last_name}}</td>
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Confirmation of PWG</h5>
+				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+			</div>
+			<div class="modal-body text-center p-4">
+				<i class="fa fa-question-circle fa-3x" style="color: #bd2130;" id="confirm-message-color"></i>
+				<p class="pt-2 font-weight-bold" id="confirm-message-delete"></p>
+
+			</div>
+			<div class="modal-footer justify-content-center">
+				<button type="button" class="btn btn-primary" id="confirm-modal-button">Confirm</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+		  	</div>
+		</div>
+	</div>
+</div>
+
+
+<section class="floatingButtonHere" style="display: none;" id="floating-button">
+	<a href="#" class="btn btn-primary" onclick="send_pk_users();">Proceed</a>
+	<a href="#" class=" btn btn-secondary" onclick="cancel();">Cancel</a>
+</section>
+
+
+<!--	to authorize users pk -->
+	<form action="{{form_action}}" method="post" name="deshare_multiple">
+		{% csrf_token %}
+		<input type="hidden" id="deshare_values" name="share_values">
+		<input type="hidden" value="{{id}}" name="pwg_values">
+	</form>
+
+
+<script type="text/javascript">
+	//global variables
+	checkbox_values = [];
+	function cancel(){
+		window.location.reload();
+	}
+	// search filter table
+	$(document).ready(function(){
+		$("#myInput").on("keyup", function() {
+			var value = $(this).val().toLowerCase();
+			$("#myTable tr").filter(function() {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
+	});
+
+
+
+// modal popup
+	function send_pk_users() {
+		if(checkbox_values.length == 1){
+			$("#confirm-message-delete").html("{{action}} the PWG to "+checkbox_values.length+" User");
+		}else{
+			$("#confirm-message-delete").html("{{action}} the PWG to "+checkbox_values.length+" Users");
+		}
+		$("#confirm-modal-button").attr('onclick','send_pk_db();');
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodal').modal('show');
+	}
+
+	// to send pk of users to backend
+	function send_pk_db(){
+		$("#deshare_values").attr('value', checkbox_values);
+		document.forms['deshare_multiple'].submit();
+	}
+
+
+
+	// to remove all occurrence of the element
+	function removeItemAll(value) {
+		  var i = 0;
+		  while (i < checkbox_values.length) {
+				if (checkbox_values[i] === value) {
+				  checkbox_values.splice(i, 1);
+				} else {
+				  ++i;
+				}
+		  }
+	}
+
+
+	// check all checkbox in one click
+
+		$('#checkAll').click(function () {
+
+			var ele = $(".check");
+			if ($("#checkAll").is(':checked')) {
+				$(".check").prop("checked", true);
+				for(i=0;i<ele.length;i++){
+					checkbox_values.push(ele[i].value);
+				}
+			}else{
+				$(".check").prop("checked", false);
+				for(i=0;i<ele.length;i++){
+					removeItemAll(ele[i].value);
+				}
+			}
+
+			if( checkbox_values.length == 0){
+				$(".floatingButtonHere").hide();
+			}else{
+				$(".floatingButtonHere").show(150);
+			}
+		});
+
+
+
+	$('input[type="checkbox"]').click(function(){
+		if($(this).attr("name")=="floatingButtonHere"){
+			if($(this).is(':checked')){
+				checkbox_values.push($(this).val());
+			}else{
+				removeItemAll($(this).val());
+			}
+		}
+		if( checkbox_values.length == 0){
+			$(".floatingButtonHere").hide();
+		}else{
+			$(".floatingButtonHere").show(150);
+		}
+		console.log(checkbox_values);
+	});
+
+	//to chat a single user
+		function custom_chat(email){
+			$('#chatting_to').attr('value', email);
+			document.forms['single_chat'].submit();
+		}
+</script>
+</body>
+</html>

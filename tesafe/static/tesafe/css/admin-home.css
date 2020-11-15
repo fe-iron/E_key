@@ -4,6 +4,12 @@
     
 }
 
+.key-icon{
+    display: inline-block;
+    box-shadow: 1px 5px 4px #888;
+    padding: 0.5em 0.6em;
+    border-radius: 60px;
+}
 
 .navbar .nav-link{
     font-family: 'sen' ,sans-serif;

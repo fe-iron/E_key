@@ -103,7 +103,6 @@ function user_name(pk, accType){
 
 // show use record
 function pop3(pk, accType){
-
     $.ajax({
             type: 'GET',
             url: "use_record",
@@ -347,6 +346,9 @@ function userToUser_list(pk, pwg_id, action){
                     if(response['data'] == false){
                         $("#tester_modal").html("<h5>You have no users yet!</h5>");
                         $("#tester_modal").css("color","red");
+                        $("#confirm-modal-button").attr("disabled",true);
+                        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                        $('#imagemodalConfirm').modal('show');
                     }else{
                         var sub_text = '';
                         var text = '';
