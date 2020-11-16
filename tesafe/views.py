@@ -27,8 +27,6 @@ import threading
 import datetime
 import json
 
-# global vars
-webUser_email = []
 
 login_signal = Signal(providing_args=['IP','timestamp'])
 
@@ -154,7 +152,7 @@ def activate_account(request, user):
     token = account_activation_token.make_token(user)
     link = reverse('activate', kwargs={'uidb64': uidb64, "token": token})
     activate_url = 'http://'+domain+link
-    email_body = 'Hi, '+user.first_name+ '\nPleae click the below link to activate your account\n'+activate_url
+    email_body = 'Hi, '+user.first_name+ '\nPlease click the below link to activate your account\n'+activate_url
     email_subject = 'Activate your account'
 
     email = EmailMessage(
@@ -302,7 +300,7 @@ def index(request):
                     # global webAdmin
                     ct = cache.get('webAdmin', 0)
                     new_count = ct + 1
-                    cache.set('webAdmin', new_count, 60*60*24*7)
+                    cache.set('webAdmin', new_count, 60*60*24)
                     return redirect("admin-home")
                 else:
                     messages.info(request, 'Invalid user id and password for Admin')
@@ -336,7 +334,7 @@ def index(request):
                     # global seller
                     ct = cache.get('seller', 0)
                     new_count = ct + 1
-                    cache.set('seller', new_count, 60*60*24*7)
+                    cache.set('seller', new_count, 60*60*24)
 
                     return redirect("seller-home")
                 else:
@@ -371,7 +369,7 @@ def index(request):
                     # global tester
                     ct = cache.get('tester', 0)
                     new_count = ct + 1
-                    cache.set('tester', new_count, 60 * 60 * 24 * 7)
+                    cache.set('tester', new_count, 60 * 60 * 24)
 
                     return redirect('tester-home')
                 else:
@@ -403,12 +401,10 @@ def index(request):
                     u_login = UserLogin(user=user, session_key=session_key, acctype='U')
                     u_login.save()
 
-                    global webUser_email
                     ct = cache.get('webUser', 0)
                     new_count = ct + 1
-                    cache.set('webUser', new_count, 60 * 60 * 24 * 7)
+                    cache.set('webUser', new_count, 60 * 60 * 24)
 
-                    webUser_email.append(uname)
                     return redirect("user-home")
                 else:
                     messages.info(request, 'Invalid user id and password for User')
@@ -552,20 +548,17 @@ def logout(request):
             pass
         else:
             ct = ct - 1
-            cache.set('webAdmin', ct, 60*60*24*7)
+            cache.set('webAdmin', ct, 60*60*24)
 
     elif WebUser.objects.filter(email=u).exists():
         usr = WebUser.objects.get(email=u)
         usr = usr.email
-        global webUser_email
         ct = cache.get('webUser', 0)
         if ct <= 0:
             pass
         else:
             ct = ct - 1
-            cache.set('webUser', ct, 60*60*24*7)
-
-        # webUser_email.remove(usr)
+            cache.set('webUser', ct, 60*60*24)
 
     elif Seller.objects.filter(email=u).exists():
         # global seller
@@ -574,7 +567,7 @@ def logout(request):
             pass
         else:
             ct = ct - 1
-            cache.set('seller', ct, 60*60*24*7)
+            cache.set('seller', ct, 60*60*24)
 
     elif Tester.objects.filter(email=u).exists():
         # global tester
@@ -583,7 +576,7 @@ def logout(request):
             pass
         else:
             ct = ct - 1
-            cache.set('tester', ct, 60*60*24*7)
+            cache.set('tester', ct, 60*60*24)
 
     auth.logout(request)
     if User.objects.filter(Q(email=u) | Q(username=u)).exists():
@@ -802,13 +795,15 @@ def seller_home(request):
 
         history_count = WebAdminLoginHistory.objects.filter(user=request.user).count()
         history = WebAdminLoginHistory.objects.filter(user=request.user).order_by(*cond)
-        global webUser_email
-        if webUser_email:
-            for email in webUser_email:
-                if WebUser.objects.filter(email=email).exists():
-                    wuser = WebUser.objects.get(email=email)
-                    if seller == wuser.associated_with:
+
+        if UserLogin.objects.filter(acctype="U").exists():
+            active_users = UserLogin.objects.filter(acctype="U")
+            for wuser in active_users:
+                if WebUser.objects.filter(user=wuser.user).exists():
+                    sel = WebUser.objects.get(user=wuser.user).associated_with
+                    if seller == sel:
                         user_count += 1
+
         param = {
             "seller": seller,
             "notif": notif,
