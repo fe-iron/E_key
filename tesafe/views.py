@@ -948,7 +948,7 @@ def tester_tested_pwg_list(request, id):
 @login_required
 def pwg_sublist(request, id):
     if PWG.objects.filter(owned_by=id).exists():
-        pwg = PWG.objects.filter(owned_by=id)
+        pwg = PWG.objects.filter(owned_by=id).order_by('alias', 'name')
         name = pwg[0].owned_by
         param = {
             'pwg': pwg,

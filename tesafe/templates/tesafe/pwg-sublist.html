@@ -126,7 +126,7 @@
                                                 {% else %}
                                                 <th><input type="checkbox" name="floatingButtonHere" disabled value="{{p.id}}" class="check_tester"></th>
                                                 {% endif %}
-                                                <td>{{p.alias}}</td>
+                                                <td>{% if p.alias %} {{p.alias}} {% else %} {{p.name}} {% endif %}</td>
                                                 <td id="assign-a">{{p.location}}</td>
                                                 <td>{{p.transfer_to.first_name}}
                                                     {% if p.is_freeze %}
