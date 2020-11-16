@@ -5,7 +5,8 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.decorators import login_required
-from django.utils.encoding import force_bytes, force_text
+from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+from .utils import unique_name, account_activation_token
 from django.contrib.sessions.models import Session
 from django.core.mail import send_mail, EmailMessage
 from django.contrib.sessions.models import Session
@@ -20,7 +21,6 @@ from django.core.cache import cache
 from django.utils import timezone
 # password resset email imports
 from django.urls import reverse
-from .utils import unique_name
 from django.db.models import Q
 from django.views import View
 import threading
@@ -126,6 +126,46 @@ class CompletePasswordReset(View):
         except Exception as e:
             messages.info(request, "Something went wrong, try again")
             return redirect("/")
+
+
+class Verification(View):
+    def get(self, request, uidb64, token):
+        try:
+            id = force_text(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=id)
+            if not account_activation_token.check_token(user, token):
+                messages.error(request, "Account is already activated!")
+                return redirect("/")
+            if user.is_active:
+                return redirect("/")
+            user.is_active = True
+            user.save()
+            messages.info(request, "Account activated successfully")
+            return redirect("/")
+        except Exception as e:
+            pass
+        return redirect("/")
+
+
+def activate_account(request, user):
+    domain = get_current_site(request).domain
+    email1 = user.username
+    uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+    token = account_activation_token.make_token(user)
+    link = reverse('activate', kwargs={'uidb64': uidb64, "token": token})
+    activate_url = 'http://'+domain+link
+    email_body = 'Hi, '+user.first_name+ '\nPleae click the below link to activate your account\n'+activate_url
+    email_subject = 'Activate your account'
+
+    email = EmailMessage(
+        email_subject,
+        email_body,
+        'noreply@tesafe.com',
+        [email1]
+    )
+    # EmailThread(email).start()
+    email.send(fail_silently=False)
+    messages.success(request, "We have sent an email to activate your account")
 
 
 def custom_chat(request):
@@ -417,6 +457,7 @@ def register(request):
                 # if it is admin
                 if accType == 'admin':
                     user = User.objects.create_user(username=email, first_name=fname, last_name=lname, email=email, password=password1)
+                    user.is_active = False
                     user.save()
 
                     # creating password history
@@ -429,11 +470,14 @@ def register(request):
                     sys_name = SystemName(serial_no=serial_no, user=user, system_name=system_name, is_user=False,
                                           is_seller=False, is_tester=False, is_pwgs=False, is_admin=True)
                     sys_name.save()
-                    return redirect("admin-home")
+
+                    activate_account(request, user)
+                    return redirect("/")
 
                 # if it is seller
                 elif accType == 'seller':
                     user = User.objects.create_user(username=email, first_name=fname, last_name=lname, email=email, password=password1)
+                    user.is_active = False
                     user.save()
 
                     # creating password history
@@ -447,12 +491,14 @@ def register(request):
                                           is_seller=True, is_tester=False, is_pwgs=False, is_admin=False)
                     sys_name.save()
 
-                    return redirect('seller-home')
+                    activate_account(request, user)
+                    return redirect('/')
 
                 # if it is tester
                 elif accType == 'tester':
                     user = User.objects.create_user(username=email, first_name=fname, last_name=lname, email=email,
                                                     password=password1)
+                    user.is_active = False
                     user.save()
 
                     # creating password history
@@ -466,12 +512,14 @@ def register(request):
                                           is_seller=False, is_tester=True, is_pwgs=False, is_admin=False)
                     sys_name.save()
 
-                    return redirect('tester-home')
+                    activate_account(request, user)
+                    return redirect('/')
 
                 # if it is user
                 elif accType == 'user':
                     user = User.objects.create_user(username=email, first_name=fname, last_name=lname, email=email,
                                                     password=password1)
+                    user.is_active = False
                     user.save()
 
                     # creating password history
@@ -485,7 +533,8 @@ def register(request):
                                           is_seller=False, is_tester=False, is_pwgs=False, is_admin=False)
                     sys_name.save()
 
-                    return redirect('user-home')
+                    activate_account(request, user)
+                    return redirect('/')
         else:
             messages.error(request, "Password do not match! try again")
             return redirect('register')
@@ -2139,6 +2188,7 @@ def add_new(request):
             # creating user
             user = User.objects.create_user(username=email, email=email, first_name=fname, last_name=lname,
                                             password=password)
+            user.is_active = False
             user.save()
             if accType == "seller":
                 sys_name = SystemName(serial_no=serial_no, user=user, system_name=system_name, is_user=False,
@@ -2162,6 +2212,7 @@ def add_new(request):
             seller = Seller(user=user, first_name=fname, last_name=lname, alias=alias, email=email, phone=number, system_name=system_name)
             seller.save()
             messages.info(request, "Successfully Account Created!")
+            activate_account(request, user)
             return redirect("admin-seller")
 
         # creating tester account
@@ -2169,6 +2220,7 @@ def add_new(request):
             tester = Tester(user=user, first_name=fname, last_name=lname, alias=alias, email=email, phone=number, system_name=system_name)
             tester.save()
             messages.info(request, "Successfully Account Created!")
+            activate_account(request, user)
             return redirect("admin-tester")
 
         # creating PWGS account
@@ -2177,6 +2229,7 @@ def add_new(request):
                 user = User.objects.create_user(username=email, email=email, password=password, first_name=alias)
             else:
                 user = User.objects.create_user(username=email, email=email, password=password, first_name=system_name)
+            user.is_active = False
             user.save()
             pwgs = PWGServers(alias=alias, email=email, password=password, pwg_count=0, user=user, system_name=system_name)
             pwgs.save()
@@ -2184,6 +2237,7 @@ def add_new(request):
                                   is_seller=False, is_tester=False, is_pwgs=True)
             sys_name.save()
             messages.info(request, "Successfully Account Created!")
+            activate_account(request, user)
             return redirect("admin-info-server")
 
         # creating PWGS account
@@ -2196,6 +2250,7 @@ def add_new(request):
                 user_obj.save()
                 seller_id.save()
                 messages.info(request, "Successfully Account Created!")
+                activate_account(request, user)
                 return redirect("seller-user")
             else:
                 messages.info(request, "Something went wrong, try again")
@@ -2207,6 +2262,7 @@ def add_new(request):
                 user_obj.save()
 
                 messages.info(request, "Successfully Account Created!")
+                activate_account(request, user)
                 return redirect("admin-home")
             else:
                 messages.info(request, "Something went wrong, try again")
@@ -2276,10 +2332,11 @@ def freeze_multiple_user(request):
                         pwg.save()
                     else:
                         messages.error(request, "Some of the PWG(s) was not freezed!")
-                        if pk:
-                            return redirect('pwg-sublist', id=int(pk))
-                        else:
-                            return redirect('admin-info-server')
+
+            if pk:
+                return redirect('pwg-sublist', id=int(pk))
+            else:
+                return redirect('admin-info-server')
 
         elif accType == "user":
             for i in values:

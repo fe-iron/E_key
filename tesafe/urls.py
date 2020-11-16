@@ -55,6 +55,7 @@ urlpatterns = [
     # password reset functionality
     path("request-reset-link", views.RequestPasswordResetEmail.as_view(), name="request-reset-link"),
     path("set-new-password/<uidb64>/<token>", views.CompletePasswordReset.as_view(), name="reset-user-password"),
+    path("activate/<uidb64>/<token>", views.Verification.as_view(), name="activate"),
 
     # Payment URLs
     path("simple_checkout", views.simple_checkout, name="simple_checkout"),

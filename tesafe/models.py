@@ -218,6 +218,9 @@ class SystemName(models.Model):
     system_name = models.CharField(max_length=19, null=True, default="not assigned")
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True)
 
+    def __str__(self):
+        return self.system_name
+
 
 # model for authorize
 class Authorize(models.Model):
