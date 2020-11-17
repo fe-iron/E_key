@@ -1616,26 +1616,24 @@ def find_username(request):
             else:
                 # if name not found, then return true
                 return JsonResponse({"name": False}, status=200)
-
         elif accType == 'seller-history':
             pwg_name = []
-            new_values = []
-            temp_list = ''
 
-            for i in pklist:
-                if i == ",":
-                    new_values.append(int(temp_list))
-                    temp_list = ''
-                elif i == " ":
-                    pass
-                elif i == "[":
-                    pass
-                elif i == "]":
-                    pass
-                else:
-                    temp_list += i
-            new_values.append(int(temp_list))
-            pklist = new_values
+            # for i in pklist:
+            #     if i == ",":
+            #         new_values.append(int(temp_list))
+            #         temp_list = ''
+            #     elif i == " ":
+            #         pass
+            #     elif i == "[":
+            #         pass
+            #     elif i == "]":
+            #         pass
+            #     else:
+            #         temp_list += i
+            # new_values.append(int(temp_list))
+            # pklist = new_values
+
             for id in pklist:
                 if id == " ":
                     pass
@@ -2076,6 +2074,12 @@ def authorize_pwgs(request):
 
                 authorize = Authorize(pwgserver=pwgs_id, authorize_to=current_user, pwg=pwg_object)
                 authorize.save()
+
+                if PWGHistory.objects.filter(object=current_user, pwg=pwg_object, action="A").exists():
+                    pass
+                else:
+                    pwg_his = PWGHistory(object=current_user, pwg=pwg_object, action="A")
+                    pwg_his.save()
 
         if accType == "seller":
             return redirect('seller-user')
@@ -2765,6 +2769,12 @@ def share_pwgs(request):
                     share_obj = Share(pwg=pwg_object, share_to=current_user, pwgserver=pwgs_id)
                     share_obj.save()
 
+                if PWGHistory.objects.filter(object=current_user, pwg=pwg_obj, action="S").exists():
+                    pass
+                else:
+                    pwg_his = PWGHistory(object=current_user, pwg=pwg_obj, action="S")
+                    pwg_his.save()
+
         if accType == "seller":
             return redirect('seller-user')
         elif accType == "tester":
@@ -2789,6 +2799,11 @@ def deshare(request):
                 pwg = PWG.objects.get(id=pwg_obj.id)
                 pwg.is_shared = False
                 pwg.save()
+                if PWGHistory.objects.filter(object=user_obj, pwg=pwg_obj, action="DS").exists():
+                    pass
+                else:
+                    pwg_his = PWGHistory.objects.filter(object=user_obj, pwg=pwg_obj, action="DS")
+                    pwg_his.save()
 
                 item.delete()
 
@@ -2924,12 +2939,19 @@ def deshare_multiple_pwgs(request):
                         if Share.objects.filter(share_to=u, pwg=pwg_obj).exists():
                             share_obj = Share.objects.filter(share_to=u, pwg=pwg_obj)
                             share_obj.delete()
+
+                            if PWGHistory.objects.filter(object=u, pwg=pwg_obj, action="DS").exists():
+                                pass
+                            else:
+                                pwg_his = PWGHistory(object=u, pwg=pwg_obj, action="DS")
+                                pwg_his.save()
                 if Share.objects.filter(pwg=pwg_obj).exists():
                     pwg_obj.is_shared = True
                     pwg_obj.ds = True
                 else:
                     pwg_obj.is_shared = False
                     pwg_obj.ds = False
+
                 pwgs = pwg_obj.owned_by
                 pwg_obj.save()
 
@@ -2963,6 +2985,12 @@ def deauthorize_multiple_pwgs(request):
                         if Authorize.objects.filter(authorize_to=u, pwg=pwg_obj).exists():
                             share_obj = Authorize.objects.filter(authorize_to=u, pwg=pwg_obj)
                             share_obj.delete()
+
+                            if PWGHistory.objects.filter(object=u, pwg=pwg_obj, action="DA").exists():
+                                pass
+                            else:
+                                pwg_his = PWGHistory(object=u, pwg=pwg_obj, action="DA")
+                                pwg_his.save()
 
                 if Authorize.objects.filter(pwg=pwg_obj).exists():
                     pwg_obj.is_authorized = True
@@ -3390,6 +3418,9 @@ def pass_pwg(request):
 def destination(request):
     user_obj = request.user
     user_obj = User.objects.get(Q(email=user_obj) | Q(username=user_obj))
+    if user_obj.is_superuser:
+        auth.logout(request)
+        return redirect("/")
     user_email = user_obj.email
     if user_obj.is_authenticated:
         if WebAdmin.objects.filter(email=user_email).exists():

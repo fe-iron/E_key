@@ -256,7 +256,7 @@
 																		<a class="dropdown-item" href="#" onclick="delete_seller_user({{item.pk}});">Delete</a>
 
 																		{% else %}
-																		<a class="dropdown-item" href="#" onclick="pop1({{item.pk}}, '{{item.alias}}');">History</a>
+																		<a class="dropdown-item" href="#" onclick="pop1({{item.id}}, '{{item.alias}}');">History</a>
 																		{% endif %}
 																	</div>
 																</div>
@@ -383,7 +383,7 @@
 																	<div class="dropdown-menu">
 																		<a class="dropdown-item" href="#" onclick="send_authorize({{item.id}});">Authorize</a>
 																		<a class="dropdown-item" href="#" onclick="send_share({{item.id}});">Share</a>
-																		<a class="dropdown-item pop1" href="#">History</a>
+																		<a class="dropdown-item" href="#" onclick="pop1({{item.id}}, '{{item.alias}}');">History</a>
 																		<a class="dropdown-item" href="#" onclick="delete_seller_user({{item.pk}});">Delete</a>
 																	</div>
 																</div>
@@ -850,6 +850,8 @@
                         	action = " Deleted";}
                         else if( action == "AD"){
                         	action = "Buy From Admin";}
+                        else if( action == "RAD"){
+                        	action = "Return to Admin";}
 
 						if(last_action.indexOf(action) == -1){
 							last_action.push(action);
@@ -904,7 +906,7 @@
                 				}
                 			}
                 		}
-                		console.log("i= "+i+" name = "+name+" text = "+text)
+
                 		if(text != ""){
 							$("#"+i).html(name+'<span><div class="dropdown"><button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="position: relative;"><i class="fas fa-sort-down" style="position: absolute;top: 0px; left: 0px;"></i></button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton">'+text+'</div></div></span>');
 							text = '';
