@@ -1,7 +1,7 @@
 function logout() {
   $.ajax({
       type: 'GET',
-      url: "logout",
+      url: "force_logout",
       data: {},
       success: function (response) {
            if(response['msg'] == false){
@@ -18,5 +18,5 @@ function logout() {
 
 window.addEventListener('beforeunload', function (e) {
     e.preventDefault();
-    logout();
+//    logout();
 });

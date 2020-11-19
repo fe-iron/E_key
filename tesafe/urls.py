@@ -129,7 +129,7 @@ urlpatterns = [
     path('custom_reset', views.custom_reset, name='custom_reset'),
     # to save pwg access password
     path('passText', views.passtext, name='passText'),
-    # to check if the user is laready exists
+    # to check if the user is already exists
     path('destination', views.destination, name='destination'),
     path('accounts/login/', views.index, name='login'),
     # to mark the notifications as read

@@ -540,7 +540,6 @@ def register(request):
 
 def logout(request):
     u = request.user
-    print("logout: ",u)
     if WebAdmin.objects.filter(email=u).exists():
         # global webAdmin
         ct = cache.get('webAdmin', 0)
@@ -588,6 +587,60 @@ def logout(request):
     return redirect("/")
 
 
+# def force_logout(request):
+#     u = request.user
+#     if request.is_ajax and request.method == "GET":
+#         passw = request.GET.get('text', None)
+#         if passw:
+#             print("logging out")
+#             if WebAdmin.objects.filter(email=u).exists():
+#                 # global webAdmin
+#                 ct = cache.get('webAdmin', 0)
+#                 if ct <= 0:
+#                     pass
+#                 else:
+#                     ct = ct - 1
+#                     cache.set('webAdmin', ct, 60*60*24)
+#
+#             elif WebUser.objects.filter(email=u).exists():
+#                 usr = WebUser.objects.get(email=u)
+#                 usr = usr.email
+#                 ct = cache.get('webUser', 0)
+#                 if ct <= 0:
+#                     pass
+#                 else:
+#                     ct = ct - 1
+#                     cache.set('webUser', ct, 60*60*24)
+#
+#             elif Seller.objects.filter(email=u).exists():
+#                 # global seller
+#                 ct = cache.get('seller', 0)
+#                 if ct <= 0:
+#                     pass
+#                 else:
+#                     ct = ct - 1
+#                     cache.set('seller', ct, 60*60*24)
+#
+#             elif Tester.objects.filter(email=u).exists():
+#                 # global tester
+#                 ct = cache.get('tester', 0)
+#                 if ct <= 0:
+#                     pass
+#                 else:
+#                     ct = ct - 1
+#                     cache.set('tester', ct, 60*60*24)
+#
+#             auth.logout(request)
+#             if User.objects.filter(Q(email=u) | Q(username=u)).exists():
+#                 user = User.objects.get(Q(email=u) | Q(username=u))
+#                 if UserLogin.objects.filter(user=user).exists():
+#                     u_login = UserLogin.objects.get(user=user)
+#                     u_login.delete()
+#             messages.info(request,"successfully logged out")
+#             return redirect("/")
+#         print("only inside ajax out")
+#     print("out")
+
 def get_current_users(obj):
     active_sessions = Session.objects.filter(expire_date__gte=timezone.now())
     user_id_list = []
@@ -599,6 +652,7 @@ def get_current_users(obj):
     return obj.objects.filter(id__in=user_id_list)
 
 
+@login_required
 def admin_home(request):
     u = request.user
     # global webUser, seller, tester

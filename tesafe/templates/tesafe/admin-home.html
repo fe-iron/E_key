@@ -465,7 +465,6 @@
 		}
 
 		function send_request(){
-
 			var data = $("#password_to_show").val();
 			const csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
 			// GET AJAX request
@@ -474,14 +473,14 @@
 				url: "check_password",
 				data: {'text': data, csrfmiddlewaretoken: csrftoken},
 				success: function (response) {
-					if(response['msg'] == false){
-						$("#password_label").attr("class", "text-danger");
-						$("#password_label").html("Wrong Password");
-					}else{
+					if(response['msg'] == true){
 						$('#modalLoginAvatar').modal('hide');
 						var data_id = $("#password_to_show").attr("data-content");
 						$("#"+data_id).attr("type", "text");
 						$("#fa"+data_id).html('<i class="fa fa-eye-slash" aria-hidden="true"></i>');
+					}else{
+						$("#password_label").attr("class", "text-danger");
+						$("#password_label").html("Wrong Password");
 					}
 				},
 				error: function (response) {
