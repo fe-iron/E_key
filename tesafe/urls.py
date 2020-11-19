@@ -131,7 +131,8 @@ urlpatterns = [
     path('passText', views.passtext, name='passText'),
     # to check if the user is already exists
     path('destination', views.destination, name='destination'),
-    path('accounts/login/', views.index, name='login'),
+    path('accounts/login/', views.logout, name='login'),
+    path('accounts/logout/', views.logout, name='logout'),
     # to mark the notifications as read
     path('mark_read', views.mark_read, name='mark_read'),
     # to get PWG date when it was get from admin

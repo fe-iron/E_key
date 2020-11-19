@@ -43,7 +43,7 @@
         let currentUser = '{{ request.user.username }}';
         let recipient = {{ selected_user | safe }};
     </script>
-    <script src="{% static 'js/detect_close.js' %}"></script>
+
     {% if action == 'Broadcasting' %}
         <script src="{% static 'js/broadcast.js' %}"></script>
     {% else %}

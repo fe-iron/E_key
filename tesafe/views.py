@@ -252,7 +252,7 @@ def get_ip(request):
 @receiver(login_signal)
 def create_notification_login(sender, **kwargs):
     email = kwargs['admin']
-    u = User.objects.get(email=email)
+    u = User.objects.get(Q(email=email) | Q(username=email))
     Notification.objects.create(
         receiver=u,
         type=f"Someone tried to login with your Creds, the IP was {kwargs['ip']}",
@@ -294,6 +294,7 @@ def index(request):
 
                     # set new session_key for user instance
                     session_key = request.session.session_key
+
                     u_login = UserLogin(user=user, session_key=session_key, acctype='A')
                     u_login.save()
 
@@ -306,7 +307,7 @@ def index(request):
                     messages.info(request, 'Invalid user id and password for Admin')
                     return redirect('/')
             else:
-                messages.info(request, 'Invalid user id and password')
+                messages.info(request, 'Wrong password')
                 return redirect('/')
 
         elif accType == 'seller':
@@ -328,6 +329,7 @@ def index(request):
 
                     # set new session_key for user instance
                     session_key = request.session.session_key
+
                     u_login = UserLogin(user=user, session_key=session_key, acctype='S')
                     u_login.save()
 
@@ -341,7 +343,7 @@ def index(request):
                     messages.info(request, 'Invalid user id and password for Seller')
                     return redirect('/')
             else:
-                messages.info(request, 'Invalid user id and password')
+                messages.info(request, 'Wrong password')
                 return redirect('/')
 
         elif accType == 'tester':
@@ -363,6 +365,7 @@ def index(request):
 
                     # set new session_key for user instance
                     session_key = request.session.session_key
+
                     u_login = UserLogin(user=user, session_key=session_key, acctype='T')
                     u_login.save()
 
@@ -376,7 +379,7 @@ def index(request):
                     messages.info(request, 'Invalid user id and password for Tester')
                     return redirect('/')
             else:
-                messages.info(request, 'Invalid user id and password')
+                messages.info(request, 'Wrong password')
                 return redirect('/')
 
         elif accType == 'user':
@@ -398,6 +401,7 @@ def index(request):
 
                     # set new session_key for user instance
                     session_key = request.session.session_key
+
                     u_login = UserLogin(user=user, session_key=session_key, acctype='U')
                     u_login.save()
 
@@ -410,7 +414,7 @@ def index(request):
                     messages.info(request, 'Invalid user id and password for User')
                     return redirect('/')
             else:
-                messages.info(request, 'Invalid user id and password')
+                messages.info(request, 'Wrong password')
                 return redirect('/')
 
     else:
