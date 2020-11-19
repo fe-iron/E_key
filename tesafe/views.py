@@ -540,7 +540,7 @@ def register(request):
 
 def logout(request):
     u = request.user
-
+    print("logout: ",u)
     if WebAdmin.objects.filter(email=u).exists():
         # global webAdmin
         ct = cache.get('webAdmin', 0)
