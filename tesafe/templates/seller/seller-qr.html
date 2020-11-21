@@ -43,7 +43,7 @@
 				<div class="col-md-5">
 					<div class="padding-register">
 						<div class="card">
-							<h3 class="text-center pt-3">Registration</h3>
+							<h3 class="text-center pt-3">User Registration</h3>
 
 							<div class="card-body">
 								<form action="register" method="post" enctype="multipart/form-data">
@@ -56,15 +56,6 @@
 										{% endfor %}
 									</div>
 
-
-									<div class="form-group mb-4">
-										<label class="font-weight-bold">Account Type</label>
-										<select class="form-control" name="accType" id="accType">
-											<option value="seller" selected>Seller</option>
-											<option value="tester">Tester</option>
-											<option value="user">User</option>
-										</select>
-									</div>
 									<div class="form-group mb-4">*
 										<select name="unique_name" class="form-control" id="unique_name" required onchange="get_name();">
 										  <!-- Countries often selected by users can be moved to the top of the list. -->
@@ -293,39 +284,48 @@
 										<input type="text" value="" id="unique_name_value" class="form-control" readonly placeholder="System Name" name="system_name">
 									</div>
 									<div class="form-group mb-4">*
-										<input type="text" class="form-control" id="formGroupExampleInput" name="fname" placeholder="Enter Your first name" required>
+										<input type="text" class="form-control" id="formGroupExampleInput" name="fname" placeholder="Enter Your first name" required value="{{fname}}">
 									</div>
 									<div class="form-group mb-4">
-										<input type="text" class="form-control"  name="lname" placeholder="Enter Your last name">
+										<input type="text" class="form-control"  name="lname" placeholder="Enter Your last name" value="{{lname}}">
 									</div>
 									<div class="form-group mb-4">
 										<input type="text" class="form-control"  name="uname" placeholder="Enter username ( includes @,#,!,_,-,etc )">
 									</div>
 
                                     <div class="form-group mb-4">
-                                        <label for="exampleFormControlFile1">Profile Pic</label>
+                                        <label for="file">Profile Pic</label>
                                         <input type="file" class="form-control-file" name="file">
                                     </div>
 
 									<div class="form-group mb-4">*
-										<input type="email" class="form-control"  name="email" placeholder="Enter Your email" required>
+										<input type="email" class="form-control"  name="email" placeholder="Enter Your email" required value="{{email}}">
 									</div>
 									<div class="form-group mb-4">
 										<input type="tel" class="form-control"  name="phone" placeholder="Enter Your Phone Number" title="Invalid Phone Number" pattern="[1-9]{1}[0-9]{9}">
 									</div>
+                                    {% if password %}
 									<div class="form-group mb-4">*
-										<input type="password" class="form-control" name="password1" placeholder="Enter Password" required autocomplete="on" id="p1">
-										<i class="far fa-eye mt-n4 mr-3" style="float:right;" id="togglePassword"></i>
+										<input type="password" class="form-control" name="password1" placeholder="Enter Password" required autocomplete="on" id="p1" value="{{password}}">
+                                        <i class="far fa-eye mt-n4 mr-3" style="float:right;" id="togglePassword"></i>
 									</div>
 									<div class="form-group mb-4">*
-										<input type="password" class="form-control"  name="password2" placeholder="Confirm Password" required autocomplete="on" id="p2">
-										<i class="far fa-eye mt-n4 mr-3" style="float:right;" id="togglePassword1"></i>
+										<input type="password" class="form-control"  name="password2" placeholder="Confirm Password" required autocomplete="on" id="p2" value="{{password}}">
+                                        <i class="far fa-eye mt-n4 mr-3" style="float:right;" id="togglePassword1"></i>
 									</div>
+                                    {% else %}
+                                    <div class="form-group mb-4">*
+										<input type="password" class="form-control" name="password1" placeholder="Enter Password" required autocomplete="on" id="p1" value="">
+                                        <i class="far fa-eye mt-n4 mr-3" style="float:right;" id="togglePassword"></i>
+									</div>
+									<div class="form-group mb-4">*
+										<input type="password" class="form-control"  name="password2" placeholder="Confirm Password" required autocomplete="on" id="p2" value="">
+                                        <i class="far fa-eye mt-n4 mr-3" style="float:right;" id="togglePassword1"></i>
+									</div>
+                                    {% endif %}
+                                    <input type="text"  hidden class="form-control"  name="accType" value="user">
 									<div class="form-group">
 										<button type="submit" class="btn btn-primary btn-block" onclick="submit_button">Submit</button>
-									</div>
-									<div class="form-group">
-										<p class="text-center">Already Register?? <a href="/">  Login Here!!</a></p>
 									</div>
 
 								</form>
@@ -342,18 +342,11 @@
 		function get_name(){
 			// GET AJAX request
 			var nnn = $('#unique_name').val();
-			var account_type = $('#accType').val();
-			if(account_type == "seller"){
-				var accType = "S";
-			}else if(account_type == "tester"){
-				var accType = "T";
-			}else if(account_type == "user"){
-				var accType = "U";
-			}
+
 			$.ajax({
 				type: 'GET',
 				url: "unique_name",
-				data: {"accType": accType, "nnn": nnn},
+				data: {"accType": "U", "nnn": nnn},
 				success: function (response) {
 						if(response['msg'] == false){
 							$("#confirm-message").html("Something went wrong, Try again");
@@ -377,8 +370,6 @@
                 $("#msg").html('<label class="font-weight-bold">Password do not match!</label>');
             }
 		}
-
-
 
 
 		const togglePassword = document.querySelector('#togglePassword');

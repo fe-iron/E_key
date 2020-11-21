@@ -1,5 +1,6 @@
 from django.urls import path, include
 from . import views
+from . import qr_code
 from rest_framework.routers import DefaultRouter
 from .api import MessageModelViewSet, UserModelViewSet
 
@@ -139,6 +140,10 @@ urlpatterns = [
     path('get_from', views.get_from, name='get_from'),
     # to check password
     path('check_password', views.check_password, name='check_password'),
+    # to show QR Code
+    path('qr', qr_code.generate_qr, name='qr'),
+    # to register user thorugh QR code
+    path('qr_view', views.qr_view, name='qr_view'),
 
     # Messages route to API
     path(r'api/v1/', include(router.urls)),

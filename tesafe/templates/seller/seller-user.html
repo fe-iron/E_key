@@ -377,14 +377,14 @@
 										  <input type="text" value="" id="unique_name_value" class="form-control" readonly placeholder="System Name" name="system_name">
 									  </div></div></div>
 									  <div class="form-group"><div class="row"><div class="col-md-7">
-										  <input type="text" class="form-control is-integer" id="acc-name"  placeholder="Enter First Name " onchange="display_qr()" name="fname" required></div>
+										  <input type="text" class="form-control is-integer" id="acc-fname"  placeholder="Enter First Name " onchange="display_qr()" name="fname" required></div>
 										  <div class="col-md-1 ml-n1" style="color: red;">*</div>
 									  </div></div>
 									  <div class="form-group"><div class="row"><div class="col-md-7">
-										  <input type="text" class="form-control is-integer"  placeholder="Enter Last Name " onchange="display_qr()" name="lname"></div>
+										  <input type="text" class="form-control is-integer"  placeholder="Enter Last Name " onchange="display_qr()" name="lname" id="acc-lname"></div>
 									  </div></div>
 									  <div class="form-group"><div class="row"><div class="col-md-7">
-										  <input type="email" class="form-control" placeholder="Enter Email " name="email" required></div>
+										  <input type="email" class="form-control" placeholder="Enter Email " id="acc-email" name="email" onchange="display_qr()" required></div>
 										  <div class="col-md-1 ml-n1" style="color: red;">*</div>
 									  </div></div>
 									  <div class="form-group"><div class="row"><div class="col-md-7">
@@ -409,7 +409,7 @@
 								</div>
 
 								<div class="col-md-4 text-center mr-5 ml-n5" id="qr-block" style="display:none">
-									<img src="{% static 'tesafe/images/qr-code.png' %}" class="img-fluid">
+									<img src="" class="img-fluid" id="qr">
 								</div>
 							</div>
 						</div>
@@ -619,14 +619,35 @@
 			$("#msg").html('{% for msg in messages %}<h3 class="text-danger">{{msg}}</h3>{% endfor %}');
 		});
 
-
+	var flag_qr = true
 	// to show QR block
 		function display_qr(){
-			var acc_name = document.getElementById("acc-name").value;
-			var password = document.getElementById("acc-password").value;
+			var acc_email = document.getElementById("acc-email").value;
+			var acc_password = document.getElementById("acc-password").value;
+			var acc_fname = document.getElementById("acc-fname").value;
+			var acc_lname = document.getElementById("acc-lname").value;
 
-			if(acc_name != "" && password != ""){
-				document.getElementById("qr-block").style.display = "block";
+			if(acc_email != "" && acc_password != ""){
+				const csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+
+				if(flag_qr){
+				$.ajax({
+					type: 'POST',
+					url: "qr",
+					data: {"email": acc_email, "password": acc_password, "fname": acc_fname, "lname": acc_lname, csrfmiddlewaretoken: csrftoken},
+					success: function (response) {
+						if(response['msg']){
+							var path = response['path'];
+							$("#qr").attr('src', path);
+							$("#qr-block").css('display', 'block');
+							flag_qr = false;
+						}
+					},
+					error: function (response) {
+						console.log(response)
+					}
+				})
+				}
 			}
 		}
 
@@ -644,6 +665,7 @@
 
 	// add new user
 	function myfun1(){
+		flag_qr = true;
 		document.getElementById("floating-button").style.display = "none";
 		document.getElementById("div-1").style.display = "none";
 		document.getElementById("div-2").style.display = "block";
@@ -744,6 +766,31 @@
 
 	const togglePassword = document.querySelector('#togglePassword');
 	const password = document.querySelector('#acc-password');
+
+	// to add predefined password values
+	$(function (){
+		var d = new Date();
+		var year = String(d.getFullYear());
+		var month = d.getMonth();
+		var day = d.getDate();
+		var hour = d.getHours();
+		if(month <= 9){
+			month = String(month);
+			month = '0' + month;
+		}
+		if(day <= 9){
+			day = String(day);
+			day = '0' + day;
+		}
+		if(hour <= 9){
+			hour = String(hour);
+			hour = '0' + hour;
+		}
+
+
+		var password = year + month + day + hour;
+		$("#acc-password").attr("value",password);
+	})
 
 	togglePassword.addEventListener('click', function (e) {
 		// toggle the type attribute

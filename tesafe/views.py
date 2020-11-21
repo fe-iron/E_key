@@ -5,7 +5,7 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.decorators import login_required
-from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+from django.utils.encoding import force_bytes, force_text
 from .utils import unique_name, account_activation_token
 from django.contrib.sessions.models import Session
 from django.core.mail import send_mail, EmailMessage
@@ -544,6 +544,7 @@ def register(request):
 
 def logout(request):
     u = request.user
+    dat = request.GET.get('data', None)
     if WebAdmin.objects.filter(email=u).exists():
         # global webAdmin
         ct = cache.get('webAdmin', 0)
@@ -587,63 +588,12 @@ def logout(request):
         if UserLogin.objects.filter(user=user).exists():
             u_login = UserLogin.objects.get(user=user)
             u_login.delete()
-    messages.info(request,"successfully logged out")
+    if dat:
+        messages.info(request,"Session Timeout! login again")
+    else:
+        messages.info(request,"successfully logged out")
     return redirect("/")
 
-
-# def force_logout(request):
-#     u = request.user
-#     if request.is_ajax and request.method == "GET":
-#         passw = request.GET.get('text', None)
-#         if passw:
-#             print("logging out")
-#             if WebAdmin.objects.filter(email=u).exists():
-#                 # global webAdmin
-#                 ct = cache.get('webAdmin', 0)
-#                 if ct <= 0:
-#                     pass
-#                 else:
-#                     ct = ct - 1
-#                     cache.set('webAdmin', ct, 60*60*24)
-#
-#             elif WebUser.objects.filter(email=u).exists():
-#                 usr = WebUser.objects.get(email=u)
-#                 usr = usr.email
-#                 ct = cache.get('webUser', 0)
-#                 if ct <= 0:
-#                     pass
-#                 else:
-#                     ct = ct - 1
-#                     cache.set('webUser', ct, 60*60*24)
-#
-#             elif Seller.objects.filter(email=u).exists():
-#                 # global seller
-#                 ct = cache.get('seller', 0)
-#                 if ct <= 0:
-#                     pass
-#                 else:
-#                     ct = ct - 1
-#                     cache.set('seller', ct, 60*60*24)
-#
-#             elif Tester.objects.filter(email=u).exists():
-#                 # global tester
-#                 ct = cache.get('tester', 0)
-#                 if ct <= 0:
-#                     pass
-#                 else:
-#                     ct = ct - 1
-#                     cache.set('tester', ct, 60*60*24)
-#
-#             auth.logout(request)
-#             if User.objects.filter(Q(email=u) | Q(username=u)).exists():
-#                 user = User.objects.get(Q(email=u) | Q(username=u))
-#                 if UserLogin.objects.filter(user=user).exists():
-#                     u_login = UserLogin.objects.get(user=user)
-#                     u_login.delete()
-#             messages.info(request,"successfully logged out")
-#             return redirect("/")
-#         print("only inside ajax out")
-#     print("out")
 
 def get_current_users(obj):
     active_sessions = Session.objects.filter(expire_date__gte=timezone.now())
@@ -3741,3 +3691,18 @@ def check_password(request):
 
     return JsonResponse({"msg": False}, status=200)
 
+
+def qr_view(request):
+    fname = request.GET.get('fname', None)
+    lname = request.GET.get('lname', None)
+    email = request.GET.get('email', None)
+    password = request.GET.get('password', None)
+
+    param = {
+        "lname": lname,
+        "fname": fname,
+        "email": email,
+        "password": password,
+    }
+
+    return render(request, "seller/seller-qr.html", param)
