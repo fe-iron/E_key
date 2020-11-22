@@ -207,9 +207,7 @@
 							<div class="row ">
 								<div class="col-md-10 py-3">
 									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change Your Current Password </h6>
-									{% for msg in messages %}
-									<label class="text-danger">{{msg}}</label>
-									{% endfor %}
+
 									<form action="password_change" method="post">
 										<label id="add-new-msg"></label>
 										{% csrf_token %}

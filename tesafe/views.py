@@ -546,7 +546,6 @@ def logout(request):
     u = request.user
     dat = request.GET.get('data', None)
     if WebAdmin.objects.filter(email=u).exists():
-        # global webAdmin
         ct = cache.get('webAdmin', 0)
         if ct <= 0:
             pass
@@ -1528,20 +1527,41 @@ def password_change(request):
         else:
             # creating password history
             u = User.objects.get(username=request.user)
-            # getting device info
-            if request.user_agent.device.family == "Other":
-                device_name = request.user_agent.os.family
-                device_name = device_name + " " + str(request.user_agent.os.version).replace(",", "")
-            else:
-                device_name = request.user_agent.device.family
 
             if u.check_password(old_email):
+                # getting device info
+                if request.user_agent.device.family == "Other":
+                    device_name = request.user_agent.os.family
+                    device_name = device_name + " " + str(request.user_agent.os.version).replace(",", "")
+                else:
+                    device_name = request.user_agent.device.family
+
                 passHistory = PasswordHistory(user=request.user, device_name=device_name, last_pass=old_email)
                 passHistory.save()
 
                 u.set_password(new_email)
                 u.save()
                 messages.info(request, "Successfully changed your password")
+                if UserLogin.objects.filter(user=u).exists():
+                    u_login = UserLogin.objects.get(user=u)
+                    accType_db = u_login.acctype
+                    u_login.delete()
+
+                    if accType_db == "A":
+                        ct = cache.get('webAdmin', 0)
+                        if ct <= 0:
+                            pass
+                        else:
+                            ct = ct - 1
+                            cache.set('webAdmin', ct, 60 * 60 * 24)
+                    elif accType_db == "S":
+                        ct = cache.get('seller', 0)
+                        if ct <= 0:
+                            pass
+                        else:
+                            ct = ct - 1
+                            cache.set('seller', ct, 60 * 60 * 24)
+
                 return redirect("/")
             else:
                 messages.info(request, "Wrong Old Password!")
