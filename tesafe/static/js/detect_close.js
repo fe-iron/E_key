@@ -15,7 +15,6 @@ $(document).ready(function () {
 
 function timerIncrement() {
     idleTime = idleTime + 1;
-    console.log(idleTime)
     if (idleTime > 10) { // 10 minutes
         window.location.replace("logout?data=ajax");
     }
