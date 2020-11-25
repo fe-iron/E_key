@@ -773,6 +773,9 @@ $(function (){
 	var month = d.getMonth();
 	var day = d.getDate();
 	var hour = d.getHours();
+	if(month < 12){
+		month += 1;
+	}
 	if(month <= 9){
 		month = String(month);
 		month = '0' + month;
