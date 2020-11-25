@@ -3716,7 +3716,7 @@ def qr_view(request):
     fname = request.GET.get('fname', None)
     lname = request.GET.get('lname', None)
     email = request.GET.get('email', None)
-    password = request.GET.get('password', None)
+    password = request.GET.get('pas', None)
 
     param = {
         "lname": lname,

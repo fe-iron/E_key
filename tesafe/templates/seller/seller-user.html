@@ -627,14 +627,14 @@
 			var acc_fname = document.getElementById("acc-fname").value;
 			var acc_lname = document.getElementById("acc-lname").value;
 
-			if(acc_email != "" && acc_password != ""){
+			if(acc_email != "" && acc_password != "" && acc_fname != ""){
 				const csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
 
 				if(flag_qr){
 				$.ajax({
 					type: 'POST',
 					url: "qr",
-					data: {"email": acc_email, "password": acc_password, "fname": acc_fname, "lname": acc_lname, csrfmiddlewaretoken: csrftoken},
+					data: {"email": acc_email, "password": acc_password, "fname": acc_fname, csrfmiddlewaretoken: csrftoken},
 					success: function (response) {
 						if(response['msg']){
 							var path = response['path'];
