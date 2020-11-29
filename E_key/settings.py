@@ -182,23 +182,15 @@ except ImportError:
 
 ASGI_APPLICATION = 'E_key.routing.application'
 
-# CHANNEL_LAYERS = {
-#     'default': {
-#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
-#         'CONFIG': {
-#             "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379'), ("redis", 6379)],
-#         },
-#     },
-# }
-
 CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": ["redis://h:954c886918c238905dc2c322c34546bd9dbc2738d32523b12bc36ed2d058c387ec@ec2-34-211-446-320.compute-1.amazonaws.com:7719"],
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379'), ("redis", 6379)],
         },
     },
 }
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
