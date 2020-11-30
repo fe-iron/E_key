@@ -307,7 +307,7 @@ def index(request):
                     messages.info(request, 'Invalid user id and password for Admin')
                     return redirect('/')
             else:
-                messages.info(request, 'This account is not activated yet, check your mailbox!')
+                messages.info(request, 'Invalid user id and password')
                 return redirect('/')
 
         elif accType == 'seller':
@@ -343,7 +343,7 @@ def index(request):
                     messages.info(request, 'Invalid user id and password for Seller')
                     return redirect('/')
             else:
-                messages.info(request, 'This account is not activated yet, check your mailbox!')
+                messages.info(request, 'Invalid user id and password')
                 return redirect('/')
 
         elif accType == 'tester':
@@ -379,7 +379,7 @@ def index(request):
                     messages.info(request, 'Invalid user id and password for Tester')
                     return redirect('/')
             else:
-                messages.info(request, 'This account is not activated yet, check your mailbox!')
+                messages.info(request, 'Invalid user id and password')
                 return redirect('/')
 
         elif accType == 'user':
@@ -414,7 +414,7 @@ def index(request):
                     messages.info(request, 'Invalid user id and password for User')
                     return redirect('/')
             else:
-                messages.info(request, 'This account is not activated yet, check your mailbox!')
+                messages.info(request, 'Invalid user id and password')
                 return redirect('/')
 
     else:
