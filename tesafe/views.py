@@ -2187,6 +2187,7 @@ def add_new(request):
     if request.method == 'POST':
         fname = request.POST.get('fname', None)
         lname = request.POST.get('lname', None)
+        file = request.FILES.get('file', None)
         name = str(request.POST.get('name', None))
         alias = request.POST.get('alias', None)
         seller_id = request.POST.get('seller_id', None)
@@ -2273,11 +2274,13 @@ def add_new(request):
                 seller_id = Seller.objects.get(id=seller_id)
                 user_count = seller_id.user_count
                 seller_id.user_count = int(user_count) + 1
-                user_obj = WebUser(user=user, first_name=fname, last_name=lname, email=email, phone=number, alias=alias, associated_with=seller_id, system_name=system_name)
+                user_obj = WebUser(user=user, first_name=fname, last_name=lname, email=email, phone=number, alias=alias, associated_with=seller_id, system_name=system_name, profile_pic=file)
                 user_obj.save()
                 seller_id.save()
                 messages.info(request, "Successfully Account Created!")
                 activate_account(request, user)
+                if file:
+                    return redirect("/")
                 return redirect("seller-user")
             else:
                 messages.info(request, "Something went wrong, try again")
@@ -3717,12 +3720,14 @@ def qr_view(request):
     lname = request.GET.get('lname', None)
     email = request.GET.get('email', None)
     password = request.GET.get('pas', None)
+    seller_pk = request.GET.get('id', None)
 
     param = {
         "lname": lname,
         "fname": fname,
         "email": email,
         "password": password,
+        "id": seller_pk,
     }
 
     return render(request, "seller/seller-qr.html", param)

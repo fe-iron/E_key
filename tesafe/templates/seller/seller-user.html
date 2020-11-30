@@ -533,6 +533,7 @@
 <script type="text/javascript">
 	// global variable
 	let checkbox_values = [];
+	let s_id = {{id}};
 
 	// to remove all occurrence of the element
 	function removeItemAll(value) {
@@ -634,7 +635,7 @@
 				$.ajax({
 					type: 'POST',
 					url: "qr",
-					data: {"email": acc_email, "password": acc_password, "fname": acc_fname, csrfmiddlewaretoken: csrftoken},
+					data: {"email": acc_email, "password": acc_password, "fname": acc_fname, "seller_id":s_id, csrfmiddlewaretoken: csrftoken},
 					success: function (response) {
 						if(response['msg']){
 							var path = response['path'];
