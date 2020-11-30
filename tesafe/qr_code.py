@@ -9,14 +9,14 @@ def generate_qr(request):
     password = request.POST.get('password', None)
     id = request.POST.get('seller_id', None)
     domain = get_current_site(request).domain
-    email = str(email).replace('.','e')
-    password = str(password).replace('.','p')
+    # email = str(email).replace('.','e')
+    # password = str(password).replace('.','p')
     # try:
     qr = qrcode.QRCode(version=1, box_size=10, border=4)
     data = 'http://' + domain + '/qr_view?fname=' + fname + '&email=' + email + '&pas=' + password + '&id=' + str(id)
     qr.add_data(data)
     qr.make(fit=True)
     img = qr.make_image(fill="black", back_color="white")
-    img.save('media/qr/' + str(email) + str(password) + ".png")
-    return JsonResponse({"path": 'http://' + domain + '/media/qr/'+str(email)+str(password)+".png", "msg": True}, status=200)
+    img.save('media/qr/' + str(email) + str(password) + "img" + ".png")
+    return JsonResponse({"path": 'http://' + domain + '/media/qr/'+str(email)+str(password)+"img.png", "msg": True}, status=200)
 
