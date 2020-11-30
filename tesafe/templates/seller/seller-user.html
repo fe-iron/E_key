@@ -100,7 +100,11 @@
 										{% for webuser in users %}
 										<tr>
 											<th><input type="checkbox" name="floatingButtonHere" disabled class="check" value="{{webuser.pk}}"></th>
-											<td><span><img src="{{webuser.profile_pic.url|default_if_none:'tesafe/images/default_profile_pic.png'}}" height="40" width="40" class="rounded-circle"></span> {{webuser.alias}}</td>
+											{% if webuser.profile_pic %}
+											<td><span><img src="{{webuser.profile_pic.url}}" height="40" width="40" class="rounded-circle"></span> {% if webuser.alias == '' or webuser.alias == None %} {{webuser.first_name}} {{webuser.last_name}} {% else %} {{webuser.alias}} {% endif %}</td>
+											{% else %}
+											<td><span><img src="{% static 'tesafe/images/default_profile_pic.png' %}" height="40" width="40" class="rounded-circle"></span> {% if webuser.alias == '' or webuser.alias == None %} {{webuser.first_name}} {{webuser.last_name}} {% else %} {{webuser.alias}} {% endif %}</td>
+											{% endif %}
 											<td><a href="transfer-seller{{webuser.user.id}}" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
