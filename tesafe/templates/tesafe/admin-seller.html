@@ -117,11 +117,19 @@
 									{% for sel in seller %}
 										<tr>
 											<th><input type="checkbox" name="floatingButtonHere" disabled  value="{{sel.pk}}" id="book1" class="check"></th>
+											{% if sel.profile_pic %}
 											<td><span><img src="{{sel.profile_pic.url}}" height="40" width="40" class="rounded-circle" title="Profile Pic"></span>{% if sel.alias == '' or sel.alias == None %} {{sel.first_name}} {{sel.last_name}} {% else %} {{sel.alias}} {% endif %}
 												{% if sel.is_freeze %}
 												<i class="fa fa-ban" aria-hidden="true" title="Freezed"></i>
 												{% endif %}
 											</td>
+											{% else %}
+											<td><span><img src="{% static 'tesafe/images/default_profile_pic.png' %}" height="40" width="40" class="rounded-circle" title="Profile Pic"></span>{% if sel.alias == '' or sel.alias == None %} {{sel.first_name}} {{sel.last_name}} {% else %} {{sel.alias}} {% endif %}
+												{% if sel.is_freeze %}
+												<i class="fa fa-ban" aria-hidden="true" title="Freezed"></i>
+												{% endif %}
+											</td>
+											{% endif %}
 											<td><a href="transfer{{sel.user.pk}}" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>

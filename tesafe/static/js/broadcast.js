@@ -65,7 +65,7 @@ $(document).ready(function () {
 
     var socket = new WebSocket(
         ws_scheme+'://' + window.location.host +
-        '/'+ws_scheme+'?session_key=${sessionKey}')
+        ':8001/'+ws_scheme+'?session_key=${sessionKey}')
 
     chatInput.keypress(function (e) {
         if (e.keyCode == 13)
