@@ -51,3 +51,4 @@ Werkzeug==0.16.0
 whitenoise==5.1.0
 wincertstore==0.2
 zope.interface==5.1.0
+psycopg2-binary==2.8.6
