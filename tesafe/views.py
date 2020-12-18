@@ -610,8 +610,11 @@ def admin_home(request):
     u = request.user
     # global webUser, seller, tester
     webUser = cache.get('webUser', 0)
+    webUser = 0 if webUser < 0 else webUser
     seller = cache.get('seller', 0)
+    seller = 0 if seller < 0 else seller
     tester = cache.get('tester', 0)
+    tester = 0 if tester < 0 else tester
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
     admin_name = u.first_name
