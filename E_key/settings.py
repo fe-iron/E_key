@@ -138,12 +138,7 @@ REST_FRAMEWORK = {
 }
 
 MESSAGES_TO_LOAD = 15
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "asgiref.inmemory.ChannelLayer",
-        "ROUTING": "tesafe.routing.channel_routing",
-    },
-}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -186,7 +181,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379'), ("redis", 6379)],
+            "hosts": [('127.0.0.1', '6379'), ("redis", 6379)],
         },
     },
 }
