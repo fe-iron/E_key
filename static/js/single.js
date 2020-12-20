@@ -77,7 +77,6 @@ $(document).ready(function () {
     updateUserList();
     var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
 
-//    let socket = new WebSocket(`ws://127.0.0.1:8000/?session_key=${sessionKey}`);
     var socket = new WebSocket(
         ws_scheme+'://' + window.location.host +
         ':8001/'+ws_scheme+'?session_key=${sessionKey}')
