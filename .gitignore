@@ -84,3 +84,4 @@ venv.bak/
 
 #config file
 *.ini
+settings.ini
