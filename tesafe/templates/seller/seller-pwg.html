@@ -854,26 +854,22 @@
                         	action = "Buy From Admin";}
                         else if( action == "RAD"){
                         	action = "Return to Admin";}
-
-						if(last_action.indexOf(action) == -1){
-							last_action.push(action);
-							obj.push(response[i]['fields']['object']);
-						}else{
-							//last_action.push(action);
-							//obj.push(response[i]['fields']['object']);
-							continue;
+						if(action != "P" || action != "RT" || action != "F"){
+							if(last_action.indexOf(action) == -1){
+								last_action.push(action);
+								obj.push(response[i]['fields']['object']);
+							}else{
+								last_action.push(action);
+								obj.push(response[i]['fields']['object']);
+								continue;
+							}
 						}
-
                         text += '<tr><td>'+action+'</td><td>'+date+' & '+time.slice(0,-(time.length-5))+'</td><td id="'+i+'"></td>';
-
                     }
                     $('#modal-body-history').html('<div class="table-responsive"><table class="table"><thead><tr><th scope="col">Action</th><th scope="col">Date & Time</th><th scope="col">Objects</th></tr></thead><tbody>'+text+'</tbody></table></div>');
 
                 	get_name(last_action, obj);
                 }
-
-			//$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-			//$('#imagemodal1').modal('show');
             },
             error: function (response) {
                 console.log(response)
