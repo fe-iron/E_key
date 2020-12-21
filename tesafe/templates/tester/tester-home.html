@@ -46,7 +46,7 @@
               <i class="fas fa-ellipsis-v"></i>
             </button>
             <div class="dropdown-menu" >
-              <a class="dropdown-item" href="#">Chat With Admin</a>
+              <a class="dropdown-item" href="#" onclick="custom_chat('fe.iron9091@gmail.com')" >Chat With Admin</a>
               <a class="dropdown-item" href="#">Get Payment from Admin</a>
               {% if user.is_authenticated %}
               <a class="dropdown-item" href="logout">Logout</a>
@@ -61,7 +61,7 @@
               <i class="fas fa-ellipsis-v"></i>
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Chat With Admin</a>
+              <a class="dropdown-item" href="#" onclick="custom_chat('fe.iron9091@gmail.com')">Chat With Admin</a>
               <a class="dropdown-item" href="#">Get Payment from Admin</a>
               <a class="dropdown-item" href="#" onclick="retest_pwg_multiple();">Retest</a>
               <a class="dropdown-item" href="#" onclick="return_pwg_tested();">Return PWG to Admin</a>
@@ -79,7 +79,7 @@
             </button>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="#" onclick="return_pwg_untested();">Return PWG to Admin</a>
-              <a class="dropdown-item" href="#" onclick="custom_chat('joe@joe.com')">Chat With Admin</a>
+              <a class="dropdown-item" href="#" onclick="custom_chat('fe.iron9091@gmail.com')">Chat With Admin</a>
               <a class="dropdown-item" href="#">Get Payment from Admin</a>
               {% if user.is_authenticated %}
               <a class="dropdown-item" href="logout">Logout</a>
