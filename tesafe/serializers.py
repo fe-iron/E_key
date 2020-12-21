@@ -9,7 +9,7 @@ import json
 def create_multiple(usernames, fname, user, body):
     for i in usernames:
         if User.objects.filter(Q(email=i) | Q(username=i)).exists():
-            reci = User.objects.get(email=i)
+            reci = User.objects.get(Q(email=i) | Q(username=i))
             msg = MessageModel(recipient=reci, body=body, user=user, first_name=fname)
             msg.save()
     return msg
