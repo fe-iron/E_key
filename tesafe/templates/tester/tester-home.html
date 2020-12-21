@@ -851,7 +851,7 @@
                             var tester = response[i]['fields']['tester'];
 
                             count = count + 1;
-                            var body_html += "on "+date+" at "+time.slice(0,-7)+"<br/>";
+                            var body_html = body_html + "on "+date+" at "+time.slice(0,-7)+"<br/>";
                         }
                         $("#tested_on").html(body_html);
                         $("#tested_count").html(count+" times");
