@@ -932,14 +932,13 @@ def transfer(request, id):
     if PWG.objects.filter(is_tested=True, is_tested_good=True).exists():
         pwg = PWG.objects.filter(is_tested=True, is_tested_good=True)
         for pwg_obj in pwg:
-            try:
-                pwgserver.index(pwg_obj.owned_by)
-            except ValueError as ve:
-                pwgserver.append(pwg_obj.owned_by)
-
             if TransferPwg.objects.filter(pwg_owner=pwg_obj).exists():
                 pass
             else:
+                try:
+                    pwgserver.index(pwg_obj.owned_by)
+                except ValueError as ve:
+                    pwgserver.append(pwg_obj.owned_by)
                 pwg_box.append(pwg_obj)
 
     param = {
