@@ -199,7 +199,11 @@ def broadcast_admin(request):
 
     if count > 15:
         new_values = new_values[:-2]
-        new_values += ' + ' + str(count-15) + " others"
+        count = count - 15
+        if count == 1:
+            new_values += ' + ' + str(abs(count)) + " other"
+        else:
+            new_values += ' + ' + str(abs(count)) + " others"
     else:
         new_values = new_values[:-2]
         removal = ","

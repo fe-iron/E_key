@@ -3,7 +3,7 @@ let chatInput = $('#chat-input');
 let chatButton = $('#btn-send');
 let userList = $('#user-list');
 let messageList = $('#messages');
-
+let only_once = true;
 function drawMessage(message) {
     let position = 'left';
     const date = new Date(message.timestamp);
@@ -22,18 +22,20 @@ function drawMessage(message) {
 
 function getMessageById(message) {
     id = JSON.parse(message).message
-    console.log(id)
-    $.getJSON(`/api/v1/message/${id}/`, function (data) {
-        if (data.user === currentRecipient[0] ||
-            (data.recipient === currentRecipient[0] && data.user == currentUser)) {
-            drawMessage(data);
-        }
-        messageList.animate({scrollTop: messageList.prop('scrollHeight')});
+    if(only_once){
+        $.getJSON(`/api/v1/message/${id}/`, function (data) {
+            if (data.user === currentRecipient[0] ||
+                (data.recipient === currentRecipient[0] && data.user == currentUser)) {
+                drawMessage(data);
+            }
+            messageList.animate({scrollTop: messageList.prop('scrollHeight')});
 
-    });
+        });
+    }
 }
 
 function sendMessage(recipients, body) {
+    only_once = true;
     $.post('/api/v1/message/', {
             recipient: JSON.stringify(recipients),
             body: body
@@ -80,7 +82,7 @@ $(document).ready(function () {
     });
 
     socket.onmessage = function (e) {
-        console.log("socket triggered");
+        only_once = false;
         getMessageById(e.data);
     };
 

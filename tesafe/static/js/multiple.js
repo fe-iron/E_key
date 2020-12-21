@@ -35,7 +35,6 @@ function getConversation(recipients) {
 
 function getMessageById(message) {
     id = JSON.parse(message).message
-    console.log(id)
     $.getJSON(`/api/v1/message/${id}/`, function (data) {
         if (data.user === currentRecipient[0] ||
             (data.recipient === currentRecipient[0] && data.user == currentUser)) {
@@ -95,7 +94,6 @@ $(document).ready(function () {
     });
 
     socket.onmessage = function (e) {
-        console.log("socket triggered");
         getMessageById(e.data);
     };
 
