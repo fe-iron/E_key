@@ -83,4 +83,4 @@ venv.bak/
 *.sublime-project 
 
 #config file
-.ini
+*.ini
