@@ -854,7 +854,9 @@
                         	action = "Buy From Admin";}
                         else if( action == "RAD"){
                         	action = "Return to Admin";}
-						if(action != "P" || action != "RT" || action != "F"){
+
+						if(action == "P" || action == "RT" || action == "F"){
+						}else{
 							if(last_action.indexOf(action) == -1){
 								last_action.push(action);
 								obj.push(response[i]['fields']['object']);
