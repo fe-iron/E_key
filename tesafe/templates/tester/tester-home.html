@@ -843,6 +843,7 @@
                     }else{
                         var text = '';
                         var count = 0;
+                        var body_html = "";
                         $('#modal_title').html("Testing History of PWG "+response[0]['fields']['pwg_name']);
                         for(i=0;i<response.length;i++){
                             var date = response[i]['fields']['date'];
@@ -850,8 +851,9 @@
                             var tester = response[i]['fields']['tester'];
 
                             count = count + 1;
-                            $("#tested_on").html("on "+date+" at "+time.slice(0,-7));
+                            var body_html += "on "+date+" at "+time.slice(0,-7)+"<br/>";
                         }
+                        $("#tested_on").html(body_html);
                         $("#tested_count").html(count+" times");
                         var got_on = get_from_admin(pk);
                     }
