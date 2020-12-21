@@ -91,7 +91,15 @@
 										{% for user in users %}
 										<tr>
 											<th><input type="checkbox" name="floatingButtonHere" value="{{user.id}}" class="check"></th>
-											<td><span><img src="{{user.profile_pic.url}}" height="40" width="40" class="rounded-circle"></span> {{user.first_name}} {{user.last_name}}</td>
+											<td>
+												<span>
+												{% if user.profile_pic %}
+												<img src="{{user.profile_pic.url}}" height="40" width="40" class="rounded-circle">
+												{% else %}
+												<img src="{% static 'tesafe/images/default_profile_pic.png' %}" height="40" width="40" class="rounded-circle">
+												{% endif %}
+												</span> {{user.first_name}} {{user.last_name}}
+											</td>
 										</tr>
 										{% endfor %}
 									</tbody>

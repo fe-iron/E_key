@@ -1032,7 +1032,7 @@ def transfer_seller(request, pk):
     if User.objects.filter(email=request.user).exists():
         logged_seller = User.objects.get(email=request.user)
         if TransferPwg.objects.filter(user=logged_seller).exists():
-            trans_pwg = TransferPwg.objects.filter(user=logged_seller)
+            trans_pwg = TransferPwg.objects.filter(user=logged_seller).order_by('pwg_owner')
             for pwg_obj in trans_pwg:
                 try:
                     pwg.index(pwg_obj.pwg_owner)
@@ -1095,8 +1095,23 @@ def transfer_seller_pwg(request):
 @login_required
 def seller_authorized(request, pk):
     user = User.objects.get(id=pk)
-    pwgserver = PWGServers.objects.all()
-    pwg = PWG.objects.all()
+
+    pwg = []
+    pwgserver = []
+    if User.objects.filter(email=request.user).exists():
+        logged_seller = User.objects.get(email=request.user)
+        if TransferPwg.objects.filter(user=logged_seller).exists():
+            trans_pwg = TransferPwg.objects.filter(user=logged_seller).order_by('pwg_owner')
+            for pwg_obj in trans_pwg:
+                try:
+                    pwg.index(pwg_obj.pwg_owner)
+                except ValueError as ve:
+                    pwg.append(pwg_obj.pwg_owner)
+                try:
+                    pwgserver.index(pwg_obj.pwgs_owner)
+                except ValueError as ve:
+                    pwgserver.append(pwg_obj.pwgs_owner)
+
     param = {
         "name": "Authorize PWG to User " + user.first_name + " " + user.last_name,
         "pwgserver": pwgserver,
@@ -1236,9 +1251,6 @@ def seller_deauthorize_pwg(request):
             pwg = PWG.objects.get(id=ids)
             name = pwg.alias
 
-            # seller = request.user
-            # user = User.objects.get(email=seller)
-            # seller = Seller.objects.get(user=user.id)
             web_usrs = []
             if Authorize.objects.filter(pwg=pwg).exists():
                 web_users = Authorize.objects.filter(pwg=pwg)

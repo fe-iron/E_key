@@ -809,11 +809,13 @@
 		$("#authorize_pwg").attr("value", checkbox_values);
 		document.forms['send-authorize-pwg-ids'].submit();
 	}
+
 	// function to return PWG to Admin
 	function return_pwg_pk(){
 		$("#return_pwg").attr("value", checkbox_values);
 		document.forms['return-pwg-ids'].submit();
 	}
+
 	//for history
 	function pop1(pk, name){
 		$("#pwg-history-title").html("History of PWG "+name);
@@ -825,7 +827,7 @@
                 // if not valid user, alert the user
 
                 if(response["history"] == false){
-                    $('#modal-body-history').html('<div class="h4">No login history to show</div>');
+                    $('#modal-body-history').html('<div class="h4">No history to show</div>');
                 }else{
                 var obj = []
                 var text = '';
@@ -835,7 +837,6 @@
                         var date = response[i]['fields']['date'];
                         var time = response[i]['fields']['time'];
                         var action = response[i]['fields']['action'];
-
 
                         if( action == "A"){
                         	action = "Authorize";}
@@ -858,8 +859,8 @@
 							last_action.push(action);
 							obj.push(response[i]['fields']['object']);
 						}else{
-							last_action.push(action);
-							obj.push(response[i]['fields']['object']);
+							//last_action.push(action);
+							//obj.push(response[i]['fields']['object']);
 							continue;
 						}
 
