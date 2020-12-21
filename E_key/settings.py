@@ -26,7 +26,6 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
-# ALLOWED_HOSTS = ["*"]
 # change deploy
 
 DEBUG = config('DEBUG', default=False, cast=bool)
@@ -92,7 +91,6 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'E_key.wsgi.application'
 
 USER_AGENTS_CACHE = 'default'
 
@@ -175,13 +173,11 @@ except ImportError:
     pass
 
 
-# ASGI_APPLICATION = 'E_key.routing.application'
-
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', '6379'), ("redis", 6379)],
+            "hosts": [('127.0.0.1', '6379')],
         },
     },
 }
