@@ -857,7 +857,6 @@
 
 						if(action == "P" || action == "RT" || action == "F"){
 						}else{
-							text += '<tr><td>'+action+'</td><td>'+date+' & '+time.slice(0,-(time.length-5))+'</td><td id="'+i+'"></td>';
 							if(last_action.indexOf(action) == -1){
 								last_action.push(action);
 								obj.push(response[i]['fields']['object']);
@@ -866,6 +865,7 @@
 								obj.push(response[i]['fields']['object']);
 								continue;
 							}
+							text += '<tr><td>'+action+'</td><td>'+date+' & '+time.slice(0,-(time.length-5))+'</td><td id="'+i+'"></td>';
 						}
 
                     }
