@@ -928,6 +928,7 @@ def transfer(request, id):
     user = User.objects.get(id=id)
     pwgserver = []
     pwg = None
+    pwg_box = []
     if PWG.objects.filter(is_tested=True, is_tested_good=True).exists():
         pwg = PWG.objects.filter(is_tested=True, is_tested_good=True)
         for pwg_obj in pwg:
@@ -935,11 +936,17 @@ def transfer(request, id):
                 pwgserver.index(pwg_obj.owned_by)
             except ValueError as ve:
                 pwgserver.append(pwg_obj.owned_by)
+
+            if TransferPwg.objects.filter(pwg_owner=pwg_obj).exists():
+                pass
+            else:
+                pwg_box.append(pwg_obj)
+
     param = {
         "name": "Transfer PWG to Seller "+user.first_name + " " + user.last_name,
         "username": user.first_name + " " + user.last_name,
         "pwgserver": pwgserver,
-        "pwg": pwg,
+        "pwg": pwg_box,
         "id": id,
         "for_Admin": "admin",
         "accType": "admin",
