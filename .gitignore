@@ -81,3 +81,6 @@ venv.bak/
 *.stTheme.cache 
 *.sublime-workspace 
 *.sublime-project 
+
+#config file
+.ini
