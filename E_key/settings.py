@@ -75,8 +75,6 @@ MIDDLEWARE = [
     'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
-# ROOT_URLCONF = 'E_key.urls'
-
 
 TEMPLATES = [
     {
@@ -101,27 +99,12 @@ USER_AGENTS_CACHE = 'default'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': 'tesafe_E_key',
-#        'USER': 'postgres',
-#        'PASSWORD': '12345',
-#        'HOST': 'localhost'
-#    }
-# }
-
 DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.postgresql',
-         # 'NAME': 'dsufdihdl8ohm',
-         'NAME': 'django_db',
-         # 'USER': 'qhuozylilutvvo',
-         'USER': 'django',
-         # 'PASSWORD': '82789103a196fb9a8b03da3a36794a9b88cd011ada31505fa7d4780bbd662fde',
-         'PASSWORD': 'password',
-         # 'HOST': 'ec2-34-197-141-7.compute-1.amazonaws.com'
+         'NAME': config('DB_NAME'),
+         'USER': config('DB_USER'),
+         'PASSWORD': config('DB_PASSWORD'),
          'HOST': 'localhost'
      }
 }
@@ -156,10 +139,6 @@ REST_FRAMEWORK = {
 }
 
 MESSAGES_TO_LOAD = 15
-<<<<<<< HEAD
-
-=======
->>>>>>> da784bab723b29ac1ea14af09a0deacfbca790b0
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -202,11 +181,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-<<<<<<< HEAD
             "hosts": [('127.0.0.1', '6379'), ("redis", 6379)],
-=======
-            "hosts": [('127.0.0.1',6379)],
->>>>>>> da784bab723b29ac1ea14af09a0deacfbca790b0
         },
     },
 }
