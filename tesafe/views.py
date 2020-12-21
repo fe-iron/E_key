@@ -2429,10 +2429,11 @@ def change_alias(request):
             if alias_conf == alias:
                 if User.objects.filter(id=alias_id).exists():
                     user_obj = User.objects.get(id=alias_id)
-                    if WebUser.objects.filter(user=user_obj.id).exists():
-                        user_obj = WebUser.objects.get(user=user_obj.id)
+                    if Seller.objects.filter(user=user_obj.id).exists():
+                        user_obj = Seller.objects.get(user=user_obj.id)
                         user_obj.alias = alias
                         user_obj.save()
+                        messages.info(request, "Your Alias changed to {}".format(alias))
                         return redirect("seller-home")
                     else:
                         messages.error(request, "Something went wrong! try again")

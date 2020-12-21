@@ -544,8 +544,13 @@
 		function check_alias(){
 			var name_conf = $("#alias_name_conf").val();
 			var name = $("#alias_name").val();
-			if( name == name_conf ){
-				document.forms['alias_form'].submit();
+			if( name == name_conf){
+				if(name == "" || name_conf == ""){
+					$(".set_alias_error").html("Alias can't be empty!");
+					$(".set_alias_error").addClass('text-danger');
+				}else{
+					document.forms['alias_form'].submit();
+				}
 			}else{
 				$(".set_alias_error").html("Alias name does not match, try again!");
 				$(".set_alias_error").addClass('text-danger');
