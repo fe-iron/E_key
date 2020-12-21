@@ -1027,8 +1027,21 @@ def pwg_sublist(request, id):
 
 @login_required
 def transfer_seller(request, pk):
-    pwg = PWG.objects.all()
-    pwgserver = PWGServers.objects.all()
+    pwg = []
+    pwgserver = []
+    if User.objects.filter(email=request.user).exists():
+        logged_seller = User.objects.get(email=request.user)
+        if TransferPwg.objects.filter(user=logged_seller).exists():
+            trans_pwg = TransferPwg.objects.filter(user=logged_seller)
+            for pwg_obj in trans_pwg:
+                try:
+                    pwg.index(pwg_obj.pwg_owner)
+                except ValueError as ve:
+                    pwg.append(pwg_obj.pwg_owner)
+                try:
+                    pwgserver.index(pwg_obj.pwgs_owner)
+                except ValueError as ve:
+                    pwgserver.append(pwg_obj.pwgs_owner)
 
     user = User.objects.get(id=pk)
     param = {
