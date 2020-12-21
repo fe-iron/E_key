@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
+from pathlib import Path
+from decouple import config
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,12 +21,25 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ibn1t#uwskj+h$-l6cr2c05$77x@1y=a7(_=x@01(1rf0p8ryz'
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+# ALLOWED_HOSTS = ["*"]
+# change deploy
+
+DEBUG = config('DEBUG', default=False, cast=bool)
+
+ALLOWED_HOSTS = ["173.231.198.13","www.tesafe.org","tesafe.org"]
+
+ROOT_URLCONF = f'{config("PROJECT_NAME")}.urls'
+
+WSGI_APPLICATION = f'{config("PROJECT_NAME")}.wsgi.application'
+
+ASGI_APPLICATION = f'{config("PROJECT_NAME")}.routing.application'
+
+
 
 
 # Application definition
@@ -61,7 +75,7 @@ MIDDLEWARE = [
     'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
-ROOT_URLCONF = 'E_key.urls'
+# ROOT_URLCONF = 'E_key.urls'
 
 
 TEMPLATES = [
@@ -80,7 +94,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'E_key.wsgi.application'
+# WSGI_APPLICATION = 'E_key.wsgi.application'
 
 USER_AGENTS_CACHE = 'default'
 
@@ -101,10 +115,14 @@ USER_AGENTS_CACHE = 'default'
 DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.postgresql',
-         'NAME': 'dsufdihdl8ohm',
-         'USER': 'qhuozylilutvvo',
-         'PASSWORD': '82789103a196fb9a8b03da3a36794a9b88cd011ada31505fa7d4780bbd662fde',
-         'HOST': 'ec2-34-197-141-7.compute-1.amazonaws.com'
+         # 'NAME': 'dsufdihdl8ohm',
+         'NAME': 'django_db',
+         # 'USER': 'qhuozylilutvvo',
+         'USER': 'django',
+         # 'PASSWORD': '82789103a196fb9a8b03da3a36794a9b88cd011ada31505fa7d4780bbd662fde',
+         'PASSWORD': 'password',
+         # 'HOST': 'ec2-34-197-141-7.compute-1.amazonaws.com'
+         'HOST': 'localhost'
      }
 }
 
@@ -138,7 +156,10 @@ REST_FRAMEWORK = {
 }
 
 MESSAGES_TO_LOAD = 15
+<<<<<<< HEAD
 
+=======
+>>>>>>> da784bab723b29ac1ea14af09a0deacfbca790b0
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -155,7 +176,7 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -165,8 +186,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'differences690@gmail.com'
-EMAIL_HOST_PASSWORD = 'Differences@#$9091'
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 # Import local_settings.py
 try:
@@ -175,13 +196,17 @@ except ImportError:
     pass
 
 
-ASGI_APPLICATION = 'E_key.routing.application'
+# ASGI_APPLICATION = 'E_key.routing.application'
 
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
+<<<<<<< HEAD
             "hosts": [('127.0.0.1', '6379'), ("redis", 6379)],
+=======
+            "hosts": [('127.0.0.1',6379)],
+>>>>>>> da784bab723b29ac1ea14af09a0deacfbca790b0
         },
     },
 }
@@ -193,3 +218,4 @@ CACHES = {
     }
 }
 
+BASE_URL = 'http://173.231.198.13'

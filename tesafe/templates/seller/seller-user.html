@@ -52,8 +52,8 @@
 					</button>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
-						<a class="dropdown-item" href="#">Broadcast</a>
-						<a class="dropdown-item" href="#">Chat</a>
+						<a class="dropdown-item" href="#" onclick="broadcast()">Broadcast</a>
+						<a class="dropdown-item" href="#" onclick="chat()">Chat</a>
 						<a class="dropdown-item" href="#" onclick="myFunction()">Delete</a>
 						<a class="dropdown-item" href="#" onclick="myFunction1()"> Freeze </a>
 						<a class="dropdown-item" href="seller-home">Exit</a>
@@ -101,16 +101,24 @@
 										<tr>
 											<th><input type="checkbox" name="floatingButtonHere" disabled class="check" value="{{webuser.pk}}"></th>
 											{% if webuser.profile_pic %}
-											<td><span><img src="{{webuser.profile_pic.url}}" height="40" width="40" class="rounded-circle"></span> {% if webuser.alias == '' or webuser.alias == None %} {{webuser.first_name}} {{webuser.last_name}} {% else %} {{webuser.alias}} {% endif %}</td>
+											<td><span><img src="{{webuser.profile_pic.url}}" height="40" width="40" class="rounded-circle"></span> {% if webuser.alias == '' or webuser.alias == None %} {{webuser.first_name}} {{webuser.last_name}} {% else %} {{webuser.alias}} {% endif %}
+												{% if webuser.is_freeze %}
+												<i class="fa fa-ban" aria-hidden="true" title="Freezed"></i>
+												{% endif %}
+											</td>
 											{% else %}
-											<td><span><img src="{% static 'tesafe/images/default_profile_pic.png' %}" height="40" width="40" class="rounded-circle"></span> {% if webuser.alias == '' or webuser.alias == None %} {{webuser.first_name}} {{webuser.last_name}} {% else %} {{webuser.alias}} {% endif %}</td>
+											<td><span><img src="{% static 'tesafe/images/default_profile_pic.png' %}" height="40" width="40" class="rounded-circle"></span> {% if webuser.alias == '' or webuser.alias == None %} {{webuser.first_name}} {{webuser.last_name}} {% else %} {{webuser.alias}} {% endif %}
+												{% if webuser.is_freeze %}
+												<i class="fa fa-ban" aria-hidden="true" title="Freezed"></i>
+												{% endif %}
+											</td>
 											{% endif %}
 											<td><a href="transfer-seller{{webuser.user.id}}" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
 												<div class="dropdown-menu" id="dropdown_menu">
-													<a class="dropdown-item" href="custom_chat/{{webuser.email}}">Chat</a>
+													<a class="dropdown-item" onclick="custom_chat('{{webuser.user.email}}')">Chat</a>
 													{% if webuser.is_authorized %}
 														<a class="dropdown-item" href="#" onclick="deauthorize({{webuser.user.id}}, 'seller');">De-authorized</a>
 													{% else %}
@@ -530,6 +538,14 @@
 		<input type="hidden" id="chatting_to" name="email_user">
 	</form>
 
+	<!--	to start chat multiple -->
+	<form action="chat_multiple" method="post" name="chat_form">
+		{% csrf_token %}
+		<input type="hidden" id="user_values" name="users">
+		<input type="hidden" value="user" name="accType">
+		<input type="hidden" value="" id="broadcast_action" name="action">
+	</form>
+
 <script src="{% static 'tesafe/js/ajax.js' %}"></script>
 <script src="{% static 'js/dropdown.js' %}"></script>
 <script src="{% static 'js/mark_read.js' %}"></script>
@@ -813,6 +829,33 @@
 			$('#chatting_to').attr('value', email);
 			document.forms['single_chat'].submit();
 		}
+
+	function broadcast(){
+		document.getElementById("checkAll").disabled = false;
+		$(".check").attr("disabled",false);
+		$("#checkAll").click();
+		checkbox_values = [...new Set(checkbox_values)];
+		$('#user_values').attr('value', checkbox_values);
+		$('#broadcast_action').attr('value', "Broadcasting");
+		document.forms['chat_form'].submit();
+	}
+
+	function chat_multiple(){
+		checkbox_values = [...new Set(checkbox_values)];
+		$('#user_values').attr('value', checkbox_values);
+		$('#broadcast_action').attr('value', "Chatting");
+		document.forms['chat_form'].submit();
+	}
+
+	function chat(){
+		document.getElementById("checkAll").disabled = false;
+		$(".check").attr("disabled",false);
+
+		$("#floating-confirm").attr('onclick','chat_multiple()');
+		$("#floating-confirm").attr('disabled', true);
+		$(".floatingButtonHere").show(150);
+	}
+
 </script>
 </body>
 </html>

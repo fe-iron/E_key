@@ -1,0 +1,288 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+
+.key-icon{
+    display: inline-block;
+    box-shadow: 1px 5px 4px #888;
+    padding: 0.5em 0.6em;
+    border-radius: 60px;
+}
+
+.navbar .nav-link{
+    font-family: 'sen' ,sans-serif;
+}
+
+
+h1,h2,h3,h4,h5,h6,p,a,.table, .table td{
+    font-family: 'Lato', sans-serif;
+    font-weight: 560;
+}
+
+
+/*.bg-light {
+    background-color: #3844b5!important;
+}
+*/.bg-light {
+    background-color: #ffffff!important;
+   -webkit-box-shadow: -1px 2px 46px -10px rgba(0,0,0,0.75);
+-moz-box-shadow: -1px 2px 46px -10px rgba(0,0,0,0.75);
+box-shadow: -1px 2px 46px -10px rgba(0,0,0,0.75);
+border-bottom: 1px solid #e2e2e2;
+}
+
+.bg-detail {
+    background-color: #efeff1!important;
+}
+
+
+.navbar-light .navbar-brand {
+    color: rgb(21, 47, 105);
+}
+
+.navbar .nav-item .nav-link {
+    font-size: 20px;
+    color: #0c0f6b;
+    border-bottom: 2px solid white;
+}
+
+
+.navbar .nav-item .nav-link:hover{
+     border-bottom: 2px solid red;
+     transition: 2s;
+}
+
+.navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+
+.active{
+    /*border-radius: 10px;*/
+    color: red!important;
+}
+
+
+
+
+.bg-user{
+    background-color: white;
+}
+
+.navbar {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    color: white;
+}
+
+/*
+.navbar-light .navbar-brand {
+    color: rgba(247, 247, 247, 0.9);
+}
+*/
+
+
+.fa-1x {
+    color: #0de60d;
+    font-size: 12px;
+}
+
+.bg-detail p{
+	font-size: 14px;
+}
+
+.bg-detail a{
+	text-decoration: none;
+	
+}
+
+
+svg{
+	position: relative;
+	height: 130px;
+	width: 150px;
+	z-index: 1000;
+}
+
+svg circle {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: #e2d9d9;
+    stroke-width: 10;
+    stroke-linecap: round;
+    transform: translate(26px, 20px);
+}
+
+svg circle:nth-child(2)
+{
+	stroke-dasharray: 220;
+	stroke-dashoffset:200;	
+}
+
+.card:nth-child(1) svg circle:nth-child(2) {
+    stroke: #5d00ff;
+}
+
+
+
+.card:nth-child(2) svg circle:nth-child(2){
+	stroke: green!important;
+}
+
+
+
+.card:nth-child(3) svg circle:nth-child(2){
+	stroke: #00ff43;
+}
+
+.card:nth-child(4) svg circle:nth-child(2){
+	stroke: #00ff43;
+}
+
+
+.card{
+    margin: 0 1rem;
+    position: relative;
+    cursor: pointer;
+}
+
+.card h5 {
+  
+    position: absolute;
+    top: 52px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    font-size: 32px;
+}
+
+.box p{
+    font-size: 20px;
+}
+
+.bg-button-1{
+    background-color: white;
+    border-radius: 5px;
+}
+
+.bg-button-1 .btn-primary{
+    border-radius:0;
+    padding: 0.5rem 2rem;
+}
+
+
+ .bg-button-1 h4 {
+    color: #333;
+    text-transform: uppercase;
+    font-weight: bold;
+    position: relative;
+    margin: 0px 0 20px;
+}
+
+
+
+
+
+.dropdown-item:hover, .dropdown-item:focus {
+    color: #fcfdff;
+    text-decoration: none;
+    background-color: #1e7e34;
+}
+
+
+ .fa-2x{
+    font-size: 30px!important;
+}
+
+.dropleft .dropdown-toggle::before {
+    vertical-align: 0;
+    display: none;
+}
+
+
+.dropdown, .dropleft, .dropright, .dropup {
+    position: relative;
+    display: inline;
+}
+
+.table .dropdown-toggle::after {
+    display: none;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+
+
+header .dropdown-toggle::after {
+    display: none;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+
+
+.fa-ellipsis-v {
+    font-size: 20px;
+}
+
+
+
+.btn-danger {
+    position: fixed;
+    bottom: 100px;
+    left:48%;
+}
+
+
+@media (min-width: 778px) and (max-width: 930px){
+.btn-danger {
+    position: fixed;
+   bottom:20px;
+    left:42%;
+}
+}
+
+
+
+@media (min-width:570px ) and (max-width:778px){
+.btn-danger {
+    position: fixed;
+   bottom:20px;
+    left:45%;
+}
+}
+
+
+
+@media(max-width: 570px){
+    h4{
+        font-size: 1rem;
+    }
+
+
+.btn-danger {
+    position: fixed;
+   bottom:20px;
+    left:45%;
+}
+}
+
