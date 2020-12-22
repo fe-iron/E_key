@@ -1507,8 +1507,8 @@ def user_home(request):
     u = request.user
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
-    pk = u.id
     if u.is_authenticated and WebUser.objects.filter(email=u_email).exists():
+        user_id = u.id
         count_notif = 0
         notif = None
         flag = False
@@ -1557,7 +1557,7 @@ def user_home(request):
             "pk": u_obj.id,
             "notif": notif,
             "count_notif": count_notif,
-            "pk": pk,
+            "pk": user_id,
         }
         if flag:
             return render(request, 'user/user-home.html', param)
@@ -3189,7 +3189,7 @@ def delete_temp(request):
                     name = my_object.alias
                     name = "Oops, {} is not deleted because either the {} is shared or Authorized".format(name, name)
                     return JsonResponse({"msg": name}, status=200)
-                my_object.user_location = None
+                my_object.user_location = "T"
                 my_object.sold_from = None
                 my_object.t = False
                 my_object.ds = False
@@ -3199,7 +3199,7 @@ def delete_temp(request):
                 u = request.user
                 u = User.objects.filter(Q(email=u) | Q(username=u))
                 if PWGHistory.objects.filter(object=u[0], pwg=my_object, action="D").exists():
-                    name = 'something went wrong try again!'
+                    pass
                 else:
                     s = PWGHistory(object=u[0], pwg=my_object, action="D")
                     s.save()
@@ -3237,7 +3237,7 @@ def delete_temp(request):
                         name = my_object.alias
                         messages.error(request, "Oops, {} is not deleted because either the {} is shared or Authorized".format(name, name))
                         return redirect("user-home")
-                    my_object.user_location = None
+                    my_object.user_location = "T"
                     my_object.sold_from = None
                     my_object.t = False
                     my_object.da = False

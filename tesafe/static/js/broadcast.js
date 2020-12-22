@@ -82,8 +82,8 @@ $(document).ready(function () {
     });
 
     socket.onmessage = function (e) {
-        only_once = false;
         getMessageById(e.data);
+        only_once = false;
     };
 
 });
