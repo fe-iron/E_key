@@ -3357,6 +3357,7 @@ def transfer_pwg_multiple_users(request):
                                               pwg_obj.alias))
                             return redirect('seller-pwg')
                         pwg_obj.sold_from = u
+                        pwg_obj.t = True
                         pwg_obj.user_location = "T"
                         pwg_obj.save()
 
