@@ -1503,6 +1503,7 @@ def user_home(request):
     u = request.user
     u = User.objects.get(Q(username=u) | Q(email=u))
     u_email = u.email
+    pk = u.id
     if u.is_authenticated and WebUser.objects.filter(email=u_email).exists():
         count_notif = 0
         notif = None
@@ -1552,6 +1553,7 @@ def user_home(request):
             "pk": u_obj.id,
             "notif": notif,
             "count_notif": count_notif,
+            "pk": pk,
         }
         if flag:
             return render(request, 'user/user-home.html', param)
@@ -2706,7 +2708,7 @@ def user_list(request):
     # request should be ajax and method should be GET.
     if request.is_ajax and request.method == "GET":
         pk = request.GET.get("pk", None)
-        print("pk: ",pk)
+        # print("pk: ",pk)
         if UserToUser.objects.filter(main_user=pk).exists():
             users = {}
             i = 0
@@ -3180,6 +3182,9 @@ def delete_temp(request):
                     return JsonResponse({"msg": name}, status=200)
                 my_object.user_location = None
                 my_object.sold_from = None
+                my_object.t = False
+                my_object.ds = False
+                my_object.da = False
                 name = my_object.alias
                 s = name + " deleted"
                 u = request.user
@@ -3225,6 +3230,9 @@ def delete_temp(request):
                         return redirect("user-home")
                     my_object.user_location = None
                     my_object.sold_from = None
+                    my_object.t = False
+                    my_object.da = False
+                    my_object.ds = False
                     name = my_object.alias
                     s = name + " deleted"
                     u = request.user
