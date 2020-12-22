@@ -1524,9 +1524,9 @@ def user_home(request):
             flag = True
             for pwg_item in pwg_obj1:
                 try:
-                    pwg_obj.index(pwg_item.pwg)
+                    pwg_obj.index(pwg_item)
                 except ValueError as ve:
-                    pwg_obj.append(pwg_item.pwg)
+                    pwg_obj.append(pwg_item)
 
         if Share.objects.filter(share_to=u).exists():
             pwg_shared = Share.objects.filter(share_to=u)
