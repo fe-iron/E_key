@@ -64,7 +64,7 @@ class RequestPasswordResetEmail(View):
                 'token': email_contents['token']
             })
             email_subject = 'Password Reset Instructions'
-            reset_url = 'http://'+email_contents['domain'] + link
+            reset_url = 'https://'+email_contents['domain'] + link
 
             email = EmailMessage(
                 email_subject,
@@ -151,7 +151,7 @@ def activate_account(request, user):
     uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
     token = account_activation_token.make_token(user)
     link = reverse('activate', kwargs={'uidb64': uidb64, "token": token})
-    activate_url = 'http://'+domain+link
+    activate_url = 'https://'+domain+link
     email_body = 'Hi, '+user.first_name+ '\nPlease click the below link to activate your account\n'+activate_url
     email_subject = 'Activate your account'
 
@@ -1095,7 +1095,6 @@ def transfer_seller_pwg(request):
 @login_required
 def seller_authorized(request, pk):
     user = User.objects.get(id=pk)
-
     pwg = []
     pwgserver = []
     if User.objects.filter(email=request.user).exists():
@@ -1199,8 +1198,23 @@ def seller_shared_pwg(request):
 @login_required
 def seller_shared(request,pk):
     user = User.objects.get(id=pk)
-    pwgserver = PWGServers.objects.all()
-    pwg = PWG.objects.all()
+
+    pwg = []
+    pwgserver = []
+    if User.objects.filter(email=request.user).exists():
+        logged_seller = User.objects.get(email=request.user)
+        if TransferPwg.objects.filter(user=logged_seller).exists():
+            trans_pwg = TransferPwg.objects.filter(user=logged_seller).order_by('pwg_owner')
+            for pwg_obj in trans_pwg:
+                try:
+                    pwg.index(pwg_obj.pwg_owner)
+                except ValueError as ve:
+                    pwg.append(pwg_obj.pwg_owner)
+                try:
+                    pwgserver.index(pwg_obj.pwgs_owner)
+                except ValueError as ve:
+                    pwgserver.append(pwg_obj.pwgs_owner)
+
     param = {
         "name": "Share PWG to User " + user.first_name + " " + user.last_name,
         "username": user.first_name + " " + user.last_name,
@@ -2781,6 +2795,12 @@ def deauthorize(request):
                         pwg_obj.is_authorized = False
                     pwg_obj.save()
 
+                    if PWGHistory.objects.filter(object=user_obj, pwg=pwg_obj, action="DA").exists():
+                        pass
+                    else:
+                        pwg_his = PWGHistory(object=user_obj, pwg=pwg_obj, action="DA")
+                        pwg_his.save()
+
                 if WebUser.objects.filter(user=pk).exists():
                     web_user = WebUser.objects.get(user=pk)
                     web_user.is_authorized = False
@@ -2872,7 +2892,7 @@ def deshare(request):
                 if PWGHistory.objects.filter(object=user_obj, pwg=pwg_obj, action="DS").exists():
                     pass
                 else:
-                    pwg_his = PWGHistory.objects.filter(object=user_obj, pwg=pwg_obj, action="DS")
+                    pwg_his = PWGHistory(object=user_obj, pwg=pwg_obj, action="DS")
                     pwg_his.save()
 
                 item.delete()

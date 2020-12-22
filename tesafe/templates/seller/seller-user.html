@@ -120,15 +120,15 @@
 												<div class="dropdown-menu" id="dropdown_menu">
 													<a class="dropdown-item" onclick="custom_chat('{{webuser.user.email}}')">Chat</a>
 													{% if webuser.is_authorized %}
-														<a class="dropdown-item" href="#" onclick="deauthorize({{webuser.user.id}}, 'seller');">De-authorized</a>
+														<a class="dropdown-item" href="#" onclick="deauthorize({{webuser.user.id}}, 'seller');">De-authorize</a>
 													{% else %}
 														<a class="dropdown-item" href="seller-authorized{{webuser.user.id}}">Authorize</a>
 													{% endif %}
 
 													{% if webuser.is_shared %}
-														<a class="dropdown-item" href="#" onclick="deshare({{webuser.user.id}}, 'seller');">De-shared</a>
+														<a class="dropdown-item" href="#" onclick="deshare({{webuser.user.id}}, 'seller');">De-share</a>
 													{% else %}
-														<a class="dropdown-item" href="seller-shared{{webuser.user.id}}" >Shared</a>
+														<a class="dropdown-item" href="seller-shared{{webuser.user.id}}" >Share</a>
 													{% endif %}
 
 													<a class="dropdown-item" href="#" onclick="chat_history('{{webuser.first_name}}', {{webuser.user.id}})">Chat History</a>
