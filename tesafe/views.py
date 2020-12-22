@@ -3158,10 +3158,10 @@ def delete_temp(request):
                 s = name + " deleted"
                 u = request.user
                 u = User.objects.filter(Q(email=u) | Q(username=u))
-                if PWGHistory.objects.filter(object=u, pwg=my_object, action="D").exists():
+                if PWGHistory.objects.filter(object=u[0], pwg=my_object, action="D").exists():
                     pass
                 else:
-                    s = PWGHistory(object=u, pwg=my_object, action="D")
+                    s = PWGHistory(object=u[0], pwg=my_object, action="D")
                     s.save()
 
                 name = "{} has been successfully deleted from your list".format(name)
