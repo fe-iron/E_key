@@ -902,12 +902,15 @@ def seller_pwg(request):
         pwg = PWG.objects.filter(Q(transfer_to=user) | Q(sold_from=user)).order_by('alias')
         for i in pwg:
             if i.is_authorized or i.is_shared or i.sold_from:
-                pwgs = i.owned_by
-                try:
-                    pwgserver.index(pwgs)
+                if i.sold_from.id == 1:
+                    pass
+                else:
+                    pwgs = i.owned_by
+                    try:
+                        pwgserver.index(pwgs)
 
-                except ValueError as ve:
-                    pwgserver.append(pwgs)
+                    except ValueError as ve:
+                        pwgserver.append(pwgs)
             else:
                 pwgs = i.owned_by
                 pwgserver1.append(pwgs)
