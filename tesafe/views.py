@@ -3795,6 +3795,8 @@ def qr_view(request):
 def broadcast_seller(request):
     logged_seller = request.user
     count = 0
+    new_values = ''
+    temp_list = []
     if User.objects.filter(email=logged_seller).exists():
         user_obj = User.objects.get(email=logged_seller)
         if Seller.objects.filter(user=user_obj).exists():
