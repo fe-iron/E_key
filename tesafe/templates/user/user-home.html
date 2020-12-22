@@ -424,6 +424,14 @@
 	</form>
 
 
+	<!--	to start chat to a single user -->
+	<form action="chat" method="post" name="single_chat">
+		{% csrf_token %}
+		<input type="hidden" id="chatting_to" name="email_user">
+	</form>
+
+
+
 <script src="{% static 'tesafe/js/ajax.js' %}"></script>
 <script src="{% static 'js/mark_read.js' %}"></script>
 <script src="{% static 'js/detect_close.js' %}"></script>
