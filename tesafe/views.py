@@ -3155,13 +3155,19 @@ def delete_temp(request):
                     name = my_object.alias
                     name = "Oops, {} is not deleted because either the {} is shared or Authorized".format(name, name)
                     return JsonResponse({"msg": name}, status=200)
-                my_object.transfer_to = None
+                u = request.user
+                u = User.objects.filter(Q(email=u) | Q(username=u))
+                if TransferPwg.objects.filter(pwg_owner=my_object, user=u[0]).exists():
+                    trans_pwg = TransferPwg.objects.get(pwg_owner=my_object, user=u[0])
+                    trans_pwg.delete()
+
+                my_object.transfer_to = User.objects.get(id=1)
                 my_object.location = "A"
                 my_object.sold_from = None
                 name = my_object.alias
+                my_object.save()
                 s = name + " deleted"
-                u = request.user
-                u = User.objects.filter(Q(email=u) | Q(username=u))
+
                 if PWGHistory.objects.filter(object=u[0], pwg=my_object, action="D").exists():
                     pass
                 else:
@@ -3169,7 +3175,6 @@ def delete_temp(request):
                     s.save()
 
                 name = "{} has been successfully deleted from your list".format(name)
-                my_object.save()
 
                 return JsonResponse({"msg": name}, status=200)
             else:
@@ -3316,7 +3321,7 @@ def return_pwg(request):
                     if PWG.objects.filter(id=id).exists():
                         pwg_obj = PWG.objects.get(id=id)
                         pwg_obj.transfer_to = u
-                        pwg_obj.sold_from = u
+                        pwg_obj.sold_from = None
                         pwg_obj.location = "A"
                         pwg_obj.save()
 
