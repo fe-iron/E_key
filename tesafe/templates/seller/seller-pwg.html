@@ -67,7 +67,7 @@
 					</button>
 
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#" onclick="">Transfer</a>
+						<a class="dropdown-item" href="#" onclick="unoccupied_authorize('transfer()');">Transfer</a>
 						<a class="dropdown-item" href="#" onclick="unoccupied_authorize('authorize()');"> Authorize </a>
 						<a class="dropdown-item" href="#" onclick="unoccupied_authorize('share()');">Share</a>
 						<a class="dropdown-item" href="#" onclick="unoccupied_authorize('return_pwg()');">Return to Admin</a>
@@ -533,6 +533,12 @@
 		<input type="hidden" id="share_pwg" name="pwg_ids">
 	</form>
 
+	<!--	for multiple transfer-->
+	<form action="transfer-seller-pwg" method="post" name="send-transfer-multiple-pwg-ids">
+		{% csrf_token %}
+		<input type="hidden" id="transfer_multiple_pwg" name="pwg_ids">
+	</form>
+
 	<!--	for de-share-->
 	<form action="seller-deshared-pwg" method="post" name="send-deshare-pwg-ids">
 		{% csrf_token %}
@@ -796,6 +802,25 @@
 		$("#confirm-modal-button").attr('onclick','return_pwg_pk();');
 		$(".imagepreview").attr("src", $(this).find("img").attr("src"));
         $("#imagemodal").modal("show");
+	}
+
+	// function to transfer pwgs
+	function transfer(){
+		checkbox_values = [...new Set(checkbox_values)];
+		if(checkbox_values.length == 1){
+			$("#confirm-message-delete").html("Transfer the selected "+checkbox_values.length+" PWG");
+		}else{
+			$("#confirm-message-delete").html("Transfer the selected "+checkbox_values.length+" PWGs");
+		}
+		$("#confirm-modal-button").attr('onclick','send_pwg_pk_transfer();');
+		$(".imagepreview").attr("src", $(this).find("img").attr("src"));
+        $("#imagemodal").modal("show");
+	}
+
+	// function to send pk to transfer multiple pwg
+	function send_pwg_pk_transfer(){
+		$("#transfer_multiple_pwg").attr("value", checkbox_values);
+		document.forms['send-transfer-multiple-pwg-ids'].submit();
 	}
 
 	// function to send pk to share pwg
