@@ -903,7 +903,8 @@ def seller_pwg(request):
         for i in pwg:
             if i.is_authorized or i.is_shared or i.sold_from:
                 if i.sold_from.id == 1:
-                    pass
+                    pwgs = i.owned_by
+                    pwgserver1.append(pwgs)
                 else:
                     pwgs = i.owned_by
                     try:
