@@ -3790,3 +3790,51 @@ def qr_view(request):
     }
 
     return render(request, "seller/seller-qr.html", param)
+
+
+def broadcast_seller(request):
+    logged_seller = request.user
+    count = 0
+    if User.objects.filter(email=logged_seller).exists():
+        user_obj = User.objects.get(email=logged_seller)
+        if Seller.objects.filter(user=user_obj).exists():
+            sel_obj = Seller.objects.get(user=user_obj)
+            if WebUser.objects.filter(associated_with=sel_obj).exists():
+                web_obj = WebUser.objects.filter(associated_with=sel_obj)
+                for usr in web_obj:
+                    count += 1
+                    if count >= 15:
+                        pass
+                    else:
+                        if usr.first_name == '':
+                            pass
+                        else:
+                            new_values += usr.first_name
+                            new_values += ', '
+                    temp_list.append(usr.email)
+
+                if count > 15:
+                    new_values = new_values[:-2]
+                    count = count - 15
+                    if count == 1:
+                        new_values += ' + ' + str(abs(count)) + " other"
+                    else:
+                        new_values += ' + ' + str(abs(count)) + " others"
+                else:
+                    new_values = new_values[:-2]
+                    removal = ","
+                    reverse_removal = removal[::-1]
+
+                    replacement = ", and "
+                    reverse_replacement = replacement[::-1]
+                    new_values = new_values[::-1].replace(reverse_removal, reverse_replacement, 1)[::-1]
+
+                param = {
+                    "name": new_values,
+                    "selected_user": json.dumps(temp_list),
+                    "action": "Broadcasting",
+                }
+                return render(request, "core/chat.html", param)
+
+    messages.info(request, "Something went wrong, try again!")
+    redirect("seller-home")

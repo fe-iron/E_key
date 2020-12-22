@@ -29,6 +29,7 @@ urlpatterns = [
     path("seller-home", views.seller_home, name="seller-home"),
     path("seller-user", views.seller_user, name="seller-user"),
     path("seller-shared<int:pk>", views.seller_shared, name="seller-shared"),
+    path("broadcast_seller", views.broadcast_seller, name="broadcast_seller"),
     path("seller-shared-pwg", views.seller_shared_pwg, name="seller-shared-pwg"),
     path("transfer-seller<int:pk>", views.transfer_seller, name="transfer-seller"),
     path("transfer-seller-pwg", views.transfer_seller_pwg, name="transfer-seller-pwg"),
