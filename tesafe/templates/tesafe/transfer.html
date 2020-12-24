@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,31 +36,31 @@
 				<div class="collapse navbar-collapse justify-content" id="navbarSupportedContent">
 					<ul class="navbar-nav">
 						<li class="nav-item pl-3">
-							<a class="nav-link "  href="admin-home">Home <span class="sr-only">(current)</span></a>
+							<a class="nav-link "  href="{% trans 'admin-home' %}">{% trans 'Home' %} <span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link active" href="admin-seller">Seller</a>
+							<a class="nav-link active" href="{% trans 'admin-seller' %}">{% trans 'Seller' %}</a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link " href="admin-tester">Tester</a>
+							<a class="nav-link" href="{% trans 'admin-tester' %}">{% trans 'Tester' %}</a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link" href="admin-info-server">PWG Server</a>
+							<a class="nav-link" href="{% trans 'admin-info-server' %}">{% trans 'PWG Server' %}</a>
 						</li>
 					</ul>
-					
+
 				</div>
 				{% else %}
 				<div class="collapse navbar-collapse justify-content" id="navbarSupportedContent">
 					<ul class="navbar-nav">
 						<li class="nav-item pl-3">
-							<a class="nav-link "  href="seller-home">Home <span class="sr-only">(current)</span></a>
+							<a class="nav-link "  href="{% trans 'seller-home' %}">{% trans 'Home' %} <span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link active" href="seller-user">User</a>
+							<a class="nav-link active" href="{% trans 'seller-user' %}">{% trans 'User' %}</a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link " href="seller-pwg">PWG</a>
+							<a class="nav-link " href="{% trans 'seller-pwg' %}">{% trans 'PWG' %}</a>
 						</li>
 					</ul>
 
@@ -73,9 +74,9 @@
 					<div class="dropdown-menu">
 
 						{% if accType == "admin" %}
-						<a class="dropdown-item" href="admin-home" >Exit</a>
+						<a class="dropdown-item" href="{% trans 'admin-home' %}" >{% trans 'Exit' %}</a>
 						{% else %}
-						<a class="dropdown-item" href="seller-home" >Exit</a>
+						<a class="dropdown-item" href="{% trans 'seller-home' %}" >{% trans 'Exit' %}</a>
 						{% endif %}
 					</div>
 				</div>
@@ -98,12 +99,12 @@
 									<form class="form-inline">
 										<div class="input-group-prepend  mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
-											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
+											<input type="text" class="form-control" placeholder="{% trans 'Username' %}" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
 										{% if accType == "admin" %}
-										<a href="admin-seller" class="btn btn-danger text-white">Back</a>
+										<a href="{% trans 'admin-seller' %}" class="btn btn-danger text-white">{% trans 'Back' %}</a>
 										{% else %}
-										<a href="seller-user" class="btn btn-danger text-white">Back</a>
+										<a href="{% trans 'seller-user' %}" class="btn btn-danger text-white">{% trans 'Back' %}</a>
 										{% endif %}
 									</form>
 								</nav>
@@ -113,10 +114,10 @@
 							<div class="accordion" id="accordionExample">
 								<div class="row px-5">
 									<div class="col-2">
-										<h5>Select</h5>
+										<h5>{% trans 'Select' %}</h5>
 									</div>
 									<div class="col-7 pl-2">
-										<h5 class="pl-3">Name</h5>
+										<h5 class="pl-3">{% trans 'Name' %}</h5>
 									</div>
 								</div>
 								{% for pwgs in pwgserver %}
@@ -207,12 +208,12 @@
 																</tr>
 																{% elif pw.transfer_to == request.user and pw.sold_from != None %}
 																<tr>
-																	<td>{{pw.alias}} is already transferred</td>
+																	<td>{{pw.alias}} {% trans 'is already transferred' %}</td>
 																</tr>
 																{% endif %}
 															{% else %}
 																<tr>
-																	<td>{{pw.alias}} is not available either because it is freeze or authorize or shared</td>
+																	<td>{{pw.alias}} {% trans 'is not available either because it is freeze or authorize or shared' %}</td>
 																</tr>
 															{% endif %}
 														{% else %}
@@ -246,29 +247,29 @@
 		<div class="modal-content">
 			<div class="modal-header">
                 {% if action == "Transfer" %}
-				<h5 class="modal-title" id="exampleModalLabel">Transferred PWG</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{% trans 'Transferred PWG' %}</h5>
 				{% elif action == "share" %}
-				<h5 class="modal-title" id="exampleModalLabel">Share PWG</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{% trans 'Share PWG' %}</h5>
 				{% else %}
-                <h5 class="modal-title" id="exampleModalLabel">Authorize PWG</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{% trans 'Authorize PWG' %}</h5>
                 {% endif %}
 				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
 			</div>
 			<div class="modal-body text-center p-4">
 				<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-				<p class="pt-2 font-weight-bold">Are you sure you want to {{action}} PWG to {{target}} {{username}}</p>
+				<p class="pt-2 font-weight-bold">{% trans 'Are you sure you want to ' %}{{action}} {% trans 'PWG to' %} {{target}} {{username}}</p>
 			</div>
 			<div class="modal-footer justify-content-center">
-				<button type="button" class="btn btn-primary" id="confirm-modal-button" onclick="confirm_transfer();">Confirm</button>
-				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-primary" id="confirm-modal-button" onclick="confirm_transfer();">{% trans 'Confirm' %}</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">{% trans 'Cancel' %}</button>
 		  	</div>
 		</div>
 	</div>
 </div>
 
 <section class="floatingButtonHere" style="display: none;">
-	<a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Proceed</a>
-	<a href="" class="btn btn-danger" onclick="reload_page()">Cancel</a>
+	<a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">{% trans 'Proceed' %}</a>
+	<a href="" class="btn btn-danger" onclick="reload_page()">{% trans 'Cancel' %}</a>
 
 </section>
 

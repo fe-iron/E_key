@@ -1,8 +1,9 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Admin | Home</title>
+	<title>{% trans 'Admin | Home' %}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -40,16 +41,16 @@
 				<div class="collapse navbar-collapse justify-content" id="navbarSupportedContent">
 					<ul class="navbar-nav">
 						<li class="nav-item pl-3">
-							<a class="nav-link active"  href="admin-home">Home <span class="sr-only">(current)</span></a>
+							<a class="nav-link active"  href="{% trans 'admin-home' %}">Home <span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link " href="admin-seller">Seller</a>
+							<a class="nav-link " href="{% trans 'admin-seller' %}">Seller</a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link" href="admin-tester">Tester</a>
+							<a class="nav-link" href="{% trans 'admin-tester' %}">Tester</a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link" href="admin-info-server">PWG Server</a>
+							<a class="nav-link" href="{% trans 'admin-info-server' %}">PWG Server</a>
 						</li>
 					</ul>
 					
@@ -57,22 +58,23 @@
 
 				{% include 'notification.html' %}
 
+
 				<div class="dropdown  dropleft float-xl-right mb-0" >
 					<button  class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="assist_admin">Add Admin</a>
-						<a class="dropdown-item" href="broadcast-admin">Broadcast</a>
-						<a class="dropdown-item" href="#change-passward" onclick="myfun3()">Change Password</a>
-						<a class="dropdown-item" href="#login-history" onclick="myfun1()">Login History</a>
+						<a class="dropdown-item" href="{% trans 'assist_admin' %}">{% trans 'Add Admin' %}</a>
+						<a class="dropdown-item" href="{% trans 'broadcast-admin' %}">{% trans 'Broadcast' %}</a>
+						<a class="dropdown-item" href="#change-passward" onclick="myfun3()">{% trans 'Change Password' %}</a>
+						<a class="dropdown-item" href="#login-history" onclick="myfun1()">{% trans 'Login History' %}</a>
 
-						<a class="dropdown-item" href="#password-history" onclick="myfun2()">Password History</a>
-						<a class="dropdown-item" href="#Statics" onclick="myfun()">Statistics</a>
+						<a class="dropdown-item" href="#password-history" onclick="myfun2()">{% trans 'Password History' %}</a>
+						<a class="dropdown-item" href="#Statics" onclick="myfun()">{% trans 'Statistics' %}</a>
 						{% if user.is_authenticated %}
-						<a class="dropdown-item" href="logout">Log Out</a>
+						<a class="dropdown-item" href="{% trans 'logout' %}">{% trans 'Log Out' %}</a>
 						{%else%}
-						<a class="dropdown-item" href="/">Exit</a>
+						<a class="dropdown-item" href="/">{% trans 'Exit' %}</a>
 						{% endif %}
 
 					</div>
@@ -92,23 +94,22 @@
 				<div class="col-md-10 py-2 px-5">
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="Statics">
 						<div class="col-md">
-							<h4 class="">statistics</h4>
+							<h4 class="">{% trans 'statistics' %}</h4>
 							<div class="row">
 								<div class="col-md">
 									<div class="table-responsive">
 										<table class="table">
 											<thead>
 												<tr>
-													<th scope="col">Account Name</th>
-													<th scope="col">Total Number</th>
-													<th scope="col">Online Number</th>
-													<th scope="col">Offline Number</th>
-
+													<th scope="col">{% trans 'Account Name' %}</th>
+													<th scope="col">{% trans 'Total Number' %}</th>
+													<th scope="col">{% trans 'Online Number' %}</th>
+													<th scope="col">{% trans 'Offline Number' %}</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr>
-													<th scope="row">Seller</th>
+													<th scope="row">{% trans 'Seller' %}</th>
 													<td>{{seller_count}}</td>
 													<td>{{seller_online}}</td>
 													<td>{{seller_offline}}</td>
@@ -117,7 +118,7 @@
 												</tr>
 
 												<tr>
-													<th scope="row">Tester</th>
+													<th scope="row">{% trans 'Tester' %}</th>
 													<td>{{tester_count}}</td>
 													<td>{{tester_online}}</td>
 													<td>{{tester_offline}}</td>
@@ -125,7 +126,7 @@
 												</tr>
 
 												<tr>
-													<th scope="row">User</th>
+													<th scope="row">{% trans 'User' %}</th>
 													<td>{{web_user_count}}</td>
 													<td>{{web_user_online}}</td>
 													<td>{{web_user_offline}}</td>
@@ -133,7 +134,7 @@
 												</tr>
 												<tr>
 
-													<th scope="row">PWGs</th>
+													<th scope="row">{% trans 'PWGs' %}</th>
 													<td>{{PWGs_count}}</td>
 													<td>{{PWGs_count}}</td>
 													<td>{{PWGs_offline}}</td>
@@ -143,8 +144,6 @@
 									</div>
 								</div>
 							</div>
-
-							
 						</div>
 
 					</div>
@@ -152,15 +151,15 @@
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="login-history" style="display: none;">
 						
 						<div class="col-md">
-							<h4>Login History</h4>
+							<h4>{% trans 'Login History' %}</h4>
 							<div class="row">
 								<div class="col-md-6 py-3">
-									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> You have Logged in {{history_count}} times! </h6>
+									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> {% trans 'You have Logged in' %} {{history_count}} {% trans 'times!' %} </h6>
 
 								</div>
 								<div class="col-md-6 ">
 									<div class="float-right">
-										<a href="admin-home"><button type="button" class="btn btn-info">Return</button></a>
+										<a href="{% trans 'admin-home' %}"><button type="button" class="btn btn-info">{% trans 'Return' %}</button></a>
 									</div>
 								</div>
 							</div>
@@ -168,16 +167,16 @@
 
 							<div class="row">
 								<div class="col-md">
-									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Login History</h6>
+									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> {% trans 'Login History' %}</h6>
 									<div class="table-responsive">
 										<table class="table">
 											<thead>
 												<tr>
-													<th scope="col">Sr. No.</th>
-													<th scope="col">Date</th>
-													<th scope="col">Time</th>
-													<th scope="col">Device Name</th>
-													<th scope="col">Login IP Address</th>
+													<th scope="col">{% trans 'Sr. No.' %}</th>
+													<th scope="col">{% trans 'Date' %}</th>
+													<th scope="col">{% trans 'Time' %}</th>
+													<th scope="col">{% trans 'Device Name' %}</th>
+													<th scope="col">{% trans 'Login IP Address' %}</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -203,25 +202,25 @@
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="change-passward" style="display: none;">
 						
 						<div class="col-md">
-							<h4 class="">Change Password<span class="float-right"></span></h4>
+							<h4 class="">{% trans 'Change Password' %}<span class="float-right"></span></h4>
 							<div class="row ">
 								<div class="col-md-10 py-3">
-									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change Your Current Password </h6>
+									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> {% trans 'Change Your Current Password' %} </h6>
 
-									<form action="password_change" method="post">
+									<form action="{% trans 'password_change' %}" method="post">
 										<label id="add-new-msg"></label>
 										{% csrf_token %}
 									  <div class="form-group"><div class="row">
 										  <div class="col-md-6">
-									   		 <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter your old Password" name="old_password" required id="old-password">
+									   		 <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="{% trans 'Enter your old Password' %}" name="old_password" required id="old-password">
 										  </div>
 									  </div></div>
 									  <div class="form-group"><div class="row">
 										  <div class="col-md-6">
-									     	<input type="password" class="form-control"  placeholder="Enter New Password " name="new_password" required id="new-password" value="" title="Password should include One Capital letter, any character from it ! @ # $ % ^ & * ( ) _ - = { } < > ? and atleast 8 characters">
+									     	<input type="password" class="form-control"  placeholder="{% trans 'Enter New Password' %} " name="new_password" required id="new-password" value="" title="Password should include One Capital letter, any character from it ! @ # $ % ^ & * ( ) _ - = { } < > ? and atleast 8 characters">
 										  </div>
 										  <div class="col-md-2 mt-2 ml-n3">
-										  <span data-toggle="tooltip" data-placement="right" title="Password should include One Capital letter, any character from this ! @ # $ % ^ & * ( ) _ - = { } < > ? and at least 8 characters">
+										  <span data-toggle="tooltip" data-placement="right" title="{% trans 'Password should include One Capital letter, any character from this ! @ # $ % ^ & * ( ) _ - = { } < > ? and at least 8 characters' %}">
 											  <i class="fa fa-question danger" aria-hidden="true" style="color:red;"></i>
 										  </span>
 										  </div>
@@ -233,7 +232,7 @@
 
 									  <div class="form-group"><div class="row">
 										  <div class="col-md-6">
-									     <input type="password" class="form-control"  placeholder="Confirm New Password " name="new_conf_password" required id="conf-password" value="" title="Password should include One Capital letter, any character from it ! @ # $ % ^ & * ( ) _ - = { } < > ? and atleast 8 characters">
+									     <input type="password" class="form-control"  placeholder="{% trans 'Confirm New Password' %} " name="new_conf_password" required id="conf-password" value="" title="{% trans 'Password should include One Capital letter, any character from it ! @ # $ % ^ & * ( ) _ - = { } < > ? and atleast 8 characters' %}">
 										  </div>
 										  <div class="col-md-2 ml-n3 mt-2"></div>
 										  <div class="col-md-2 mt-2 ml-n5">
@@ -241,8 +240,8 @@
 										  </div>
 									  </div></div>
 										<input type="hidden" name="accType" value="admin">
-										<button class="btn btn-success" type="submit" disabled id="add-new-submit-button">Proceed</button>
-                                        <a href="admin-home"><button class="btn btn-secondary" type="button" onclick="cancel()">Cancel</button></a>
+										<button class="btn btn-success" type="submit" disabled id="add-new-submit-button">{% trans 'Proceed' %}</button>
+                                        <a href="{% trans 'admin-home' %}"><button class="btn btn-secondary" type="button" onclick="cancel()">{% trans 'Cancel' %}</button></a>
 									</form>
 								</div>
 							</div>
@@ -255,11 +254,11 @@
 						<div class="col-md">
 							<div class="row">
 								<div class="col-md-6">
-									<h4>Password HISTORY</h4>
+									<h4>{% trans 'Password HISTORY' %}</h4>
 								</div>
 								<div class="col-md-6">
 									<div class="float-right">
-										<a href="admin-home"><button type="button" class="btn btn-info">Return</button></a>
+										<a href="{% trans 'admin-home' %}"><button type="button" class="btn btn-info">{% trans 'Return' %}</button></a>
 									</div>
 								</div>
 							</div>
@@ -268,11 +267,11 @@
 								<table class="table">
 									<thead>
 										<tr>
-											<th scope="col">Sr. No.</th>
-											<th scope="col">Date</th>
-											<th scope="col">Time</th>
-											<th scope="col">Device Name</th>
-											<th scope="col">Last Password</th>
+											<th scope="col">{% trans 'Sr. No.' %}</th>
+											<th scope="col">{% trans 'Date' %}</th>
+											<th scope="col">{% trans 'Time' %}</th>
+											<th scope="col">{% trans 'Device Name' %}</th>
+											<th scope="col">{% trans 'Last Password' %}</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -314,18 +313,17 @@
       <!--Body-->
       <div class="modal-body text-center mb-1">
 
-        <h5 class="my-2 mb-3">Hi, {{admin_name}}</h5>
+        <h5 class="my-2 mb-3">{% trans 'Hi,' %} {{admin_name}}</h5>
 
         <div class="md-form ml-0 mr-0">
-			<label for="password_to_show" id="password_label">Enter Current Password to see</label>
-          <input type="password" id="password_to_show" class="form-control form-control-sm validate ml-0" placeholder="Enter Current Password to see">
+			<label for="password_to_show" id="password_label">{% trans 'Enter Current Password to see' %}</label>
+          <input type="password" id="password_to_show" class="form-control form-control-sm validate ml-0" placeholder="{% trans 'Enter Current Password to see' %}">
         </div>
 
         <div class="text-center mt-4">
-          <button class="btn btn-primary mt-1" onclick="send_request();">Show </button>
+          <button class="btn btn-primary mt-1" onclick="send_request();">{% trans 'Show' %} </button>
         </div>
       </div>
-
     </div>
     <!--/.Content-->
   </div>
@@ -333,7 +331,7 @@
 {% csrf_token %}
 
 		<!--	to start chat to a single user -->
-	<form action="chat" method="post" name="single_chat">
+	<form action="{% trans 'chat' %}" method="post" name="single_chat">
 		{% csrf_token %}
 		<input type="hidden" id="chatting_to" name="email_user">
 	</form>
@@ -455,7 +453,7 @@
 			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
 			$('#modalLoginAvatar').modal('show');
 			$("#password_label").removeClass("text-danger");
-			$('#password_label').html('Enter Current Password to see');
+			$('#password_label').html("{% trans 'Enter Current Password to see' %}");
 			$('#password_to_show').val('');
 
 
@@ -468,7 +466,7 @@
 			// GET AJAX request
 			$.ajax({
 				type: 'POST',
-				url: "check_password",
+				url: "{% trans 'check_password' %}",
 				data: {'text': data, csrfmiddlewaretoken: csrftoken},
 				success: function (response) {
 					if(response['msg'] == true){
@@ -478,7 +476,7 @@
 						$("#fa"+data_id).html('<i class="fa fa-eye-slash" aria-hidden="true"></i>');
 					}else{
 						$("#password_label").attr("class", "text-danger");
-						$("#password_label").html("Wrong Password");
+						$("#password_label").html("{% trans 'Wrong Password' %}");
 					}
 				},
 				error: function (response) {

@@ -3,6 +3,7 @@ from . import views
 from . import qr_code
 from rest_framework.routers import DefaultRouter
 from .api import MessageModelViewSet, UserModelViewSet
+from django.utils.translation import ugettext_lazy as _
 
 # for messages routing
 router = DefaultRouter()
@@ -12,17 +13,17 @@ router.register(r'user', UserModelViewSet, basename='user-api')
 urlpatterns = [
     # admin urls
     path("", views.index, name="index"),
-    path("logout", views.logout, name="logout"),
-    path("register", views.register, name="register"),
-    path("admin-home", views.admin_home, name="admin-home"),
-    path("transfer<int:id>", views.transfer, name="transfer"),
-    path("admin-seller", views.admin_seller, name="admin-seller"),
-    path("assist_admin", views.assist_admin, name="assist_admin"),
-    path("admin-tester", views.admin_tester, name="admin-tester"),
-    path("pwg-sublist<int:id>", views.pwg_sublist, name="pwg-sublist"),
-    path("tester-getback<int:id>", views.tester_getback, name="tester-getback"),
-    path("admin-info-server", views.admin_info_server, name="admin-info-server"),
-    path("tester-tested-pwg-list<int:id>", views.tester_tested_pwg_list, name="tester-tested-pwg-list"),
+    path(_("logout"), views.logout, name="logout"),
+    path(_("register"), views.register, name="register"),
+    path(_("admin-home"), views.admin_home, name="admin-home"),
+    path(_("transfer<int:id>"), views.transfer, name="transfer"),
+    path(_("admin-seller"), views.admin_seller, name="admin-seller"),
+    path(_("assist_admin"), views.assist_admin, name="assist_admin"),
+    path(_("admin-tester"), views.admin_tester, name="admin-tester"),
+    path(_("pwg-sublist<int:id>"), views.pwg_sublist, name="pwg-sublist"),
+    path(_("tester-getback<int:id>"), views.tester_getback, name="tester-getback"),
+    path(_("admin-info-server"), views.admin_info_server, name="admin-info-server"),
+    path(_("tester-tested-pwg-list<int:id>"), views.tester_tested_pwg_list, name="tester-tested-pwg-list"),
 
     # seller PWG
     path("seller-pwg", views.seller_pwg, name="seller-pwg"),
@@ -70,7 +71,7 @@ urlpatterns = [
     # to find username of Users
     path("find_username", views.find_username, name="find_username"),
     # password change
-    path("password_change",views.password_change, name="password_change"),
+    path(_("password_change"),views.password_change, name="password_change"),
     # ajax url
     path("validate_nickname", views.ajax_request, name="validate_nickname"),
     # transfer_pwg and pwgs
@@ -94,11 +95,11 @@ urlpatterns = [
     # transfer_pwg and pwgs
     path("getback_pwgs", views.getback_pwgs, name="getback_pwgs"),
     # transfer_pwg and pwgs
-    path("add-new", views.add_new, name="add-new"),
+    path(_("add-new"), views.add_new, name="add-new"),
     # transfer_pwg and pwgs
-    path("delete_multiple_user", views.delete_multiple_user, name="delete_multiple_user"),
+    path(_("delete_multiple_user"), views.delete_multiple_user, name="delete_multiple_user"),
     # transfer_pwg and pwgs
-    path("freeze_multiple_user", views.freeze_multiple_user, name="freeze_multiple_user"),
+    path(_("freeze_multiple_user"), views.freeze_multiple_user, name="freeze_multiple_user"),
     # change alias
     path("change_alias", views.change_alias, name="change_alias"),
     # get password history
@@ -140,7 +141,7 @@ urlpatterns = [
     # to get PWG date when it was get from admin
     path('get_from', views.get_from, name='get_from'),
     # to check password
-    path('check_password', views.check_password, name='check_password'),
+    path(_('check_password'), views.check_password, name='check_password'),
     # to show QR Code
     path('qr', qr_code.generate_qr, name='qr'),
     # to register user thorugh QR code
@@ -149,13 +150,13 @@ urlpatterns = [
     # Messages route to API
     path(r'api/v1/', include(router.urls)),
     # for single user chat
-    path('chat', views.custom_chat, name='chat'),
+    path(_('chat'), views.custom_chat, name='chat'),
     # for multiple user chat
     path('broadcast', views.broadcast, name='broadcast'),
     # for broadcast from admin account
     path('broadcast-admin', views.broadcast_admin, name='broadcast-admin'),
     # chat multiple
-    path('chat_multiple', views.chat_multiple, name='chat_multiple'),
+    path(_('chat_multiple'), views.chat_multiple, name='chat_multiple'),
     # to get chat history
     path('chat_history', views.chat_history, name='chat_history'),
 ]

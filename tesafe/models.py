@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 from django.db.models.signals import post_save
+from django.utils.translation import ugettext_lazy as _
 
 
 # model of Admin
@@ -19,14 +20,17 @@ class WebAdmin(models.Model):
     def __str__(self):
         return self.first_name
 
+    # class TranslatableMeta:
+    #     fields = ['first_name', 'last_name', 'alias']
+
 
 # model of Seller
 class Seller(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100, default=None, null=True)
+    first_name = models.CharField(_('first_name'), max_length=100, help_text=_('First Name of the Seller'))
+    last_name = models.CharField(_('last_name'), max_length=100, default=None, null=True, help_text=_('Last Name of the Seller'))
     system_name = models.CharField(max_length=19, null=True, default="not assigned")
-    alias = models.CharField(max_length=100, default=None, null=True)
+    alias = models.CharField('alias', max_length=100, default=None, null=True, help_text=_('Alias Name of the Seller'))
     email = models.CharField(max_length=150)
     phone = models.CharField(max_length=15, default=None, null=True)
     profile_pic = models.ImageField(upload_to='seller/', default=None, null=True)
@@ -35,6 +39,9 @@ class Seller(models.Model):
 
     def __str__(self):
         return self.first_name
+
+    # class TranslatableMeta:
+    #     fields = ['first_name', 'last_name', 'alias']
 
 
 # model of Tester
@@ -51,6 +58,9 @@ class Tester(models.Model):
 
     def __str__(self):
         return self.first_name
+
+    # class TranslatableMeta:
+    #     fields = ['first_name', 'last_name', 'alias']
 
 
 #  model of WebUser
@@ -70,6 +80,9 @@ class WebUser(models.Model):
 
     def __str__(self):
         return self.first_name
+
+    # class TranslatableMeta:
+    #     fields = ['first_name', 'last_name', 'alias']
 
 
 class UserToUser(models.Model):

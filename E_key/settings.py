@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from pathlib import Path
+from django.utils.translation import ugettext_lazy as _
 from decouple import config
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -30,7 +31,7 @@ SECRET_KEY = config("SECRET_KEY")
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ["173.231.198.13","www.tesafe.org","tesafe.org"]
+ALLOWED_HOSTS = ["173.231.198.13","www.tesafe.org","tesafe.org", "127.0.0.1"]
 
 ROOT_URLCONF = f'{config("PROJECT_NAME")}.urls'
 
@@ -44,6 +45,8 @@ ASGI_APPLICATION = f'{config("PROJECT_NAME")}.routing.application'
 # Application definition
 
 INSTALLED_APPS = [
+    # external app for the modal translation
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -63,6 +66,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # for Internationalization
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -86,6 +91,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
             ],
         },
     },
@@ -106,6 +112,16 @@ DATABASES = {
          'HOST': 'localhost'
      }
 }
+
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'tesafe_E_key',
+#        'USER': 'postgres',
+#        'PASSWORD': '12345',
+#        'HOST': 'localhost'
+#    }
+# }
 
 
 # Password validation
@@ -141,7 +157,18 @@ MESSAGES_TO_LOAD = 15
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
+# fallback language
 LANGUAGE_CODE = 'en-us'
+
+# supported language
+LANGUAGES = (
+    ('en-us', _('English')),
+    ('es-cl', _('Spanish Chile')),
+    ('zn-ch', _('Simplified Chinese')),
+)
+
+# settings for modaltranslation for external app
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -190,3 +217,7 @@ CACHES = {
 }
 
 BASE_URL = 'http://173.231.198.13'
+# contain the path where django will look for the language translation files
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)

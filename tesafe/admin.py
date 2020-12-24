@@ -1,5 +1,6 @@
 # Register your models here.
 from django.contrib import admin
+
 from .models import WebAdmin, Seller, WebAdminLoginHistory, Tester, WebUser, PWGServers, PWG, PasswordHistory, \
     TransferPwg, TransferPwgs, PwgUseRecord, SystemName, Authorize, Share, PWGHistory, TesterPWGHistory, UserToUser, \
     MessageModel, UserLogin, Notification, TestedPWGHistory
@@ -7,6 +8,7 @@ from .models import WebAdmin, Seller, WebAdminLoginHistory, Tester, WebUser, PWG
 
 # admin.site.register(User)
 admin.site.register(WebAdmin)
+
 admin.site.register(Seller)
 admin.site.register(Tester)
 admin.site.register(WebUser)

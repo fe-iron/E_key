@@ -1,8 +1,9 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Admin | Tester</title>
+	<title>{% trans 'Admin | Tester' %}</title>
 
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,16 +36,16 @@
 				<div class="collapse navbar-collapse justify-content" id="navbarSupportedContent">
 					<ul class="navbar-nav">
 						<li class="nav-item pl-3">
-							<a class="nav-link "  href="admin-home">Home <span class="sr-only">(current)</span></a>
+							<a class="nav-link "  href="{% trans 'admin-home' %}">{% trans 'Home' %} <span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link " href="admin-seller">Seller</a>
+							<a class="nav-link " href="{% trans 'admin-seller' %}">{% trans 'Seller' %}</a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link active" href="admin-tester">Tester</a>
+							<a class="nav-link active" href="{% trans 'admin-tester' %}">{% trans 'Tester' %}</a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link" href="admin-info-server">PWG Server</a>
+							<a class="nav-link" href="{% trans 'admin-info-server' %}">{% trans 'PWG Server' %}</a>
 						</li>
 					</ul>
 
@@ -68,11 +69,11 @@
 						<div class="col-md" id="div-7">
 							<header>
 								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">PWGS-A</a>
+									<a class="h4 text-dark font-weight-bold pt-2">{% trans 'PWGS-A' %}</a>
 									<form class="form-inline">
 										<div class="input-group-prepend  mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
-											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
+											<input type="text" class="form-control" placeholder="{% trans 'Username' %}" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
 										<a href="tester-tested-pwg-list" class="btn btn-danger text-white">Back</a>
 

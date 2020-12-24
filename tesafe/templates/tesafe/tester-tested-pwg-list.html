@@ -1,8 +1,9 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Admin | Tester-Transfer</title>
+	<title>{% trans 'Admin | Tester-Transfer' %}</title>
 
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,16 +36,16 @@
 				<div class="collapse navbar-collapse justify-content" id="navbarSupportedContent">
 					<ul class="navbar-nav">
 						<li class="nav-item pl-3">
-							<a class="nav-link "  href="admin-home">Home <span class="sr-only">(current)</span></a>
+							<a class="nav-link "  href="{% trans 'admin-home' %}">{% trans 'Home' %} <span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link " href="admin-seller">Seller</a>
+							<a class="nav-link " href="{% trans 'admin-seller' %}">{% trans 'Seller' %}</a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link active" href="admin-tester">Tester</a>
+							<a class="nav-link active" href="{% trans 'admin-tester' %}">{% trans 'Tester' %}</a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link" href="admin-info-server">PWG Server</a>
+							<a class="nav-link" href="{% trans 'admin-info-server' %}">{% trans 'PWG Server' %}</a>
 						</li>
 					</ul>
 					
@@ -57,9 +58,9 @@
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">Broadcast</a>
+<!--						<a class="dropdown-item" href="#">Broadcast</a>-->
 
-						<a class="dropdown-item" href="admin-home">Exit</a>
+						<a class="dropdown-item" href="{% trans 'admin-home' %}">{% trans 'Exit' %}</a>
 					</div>
 				</div>
 			</nav>
@@ -82,9 +83,9 @@
 									<form class="form-inline">
 										<div class="input-group-prepend  mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
-											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
+											<input type="text" class="form-control" placeholder="{% trans 'Username' %}" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
-										<a href="admin-tester" class="btn btn-danger text-white">Back</a>
+										<a href="{% trans 'admin-tester' %}" class="btn btn-danger text-white">{% trans 'Back' %}</a>
 									</form>
 								</nav>
 							</header>
@@ -93,13 +94,13 @@
 							<div class="accordion" id="accordionExample">
 								<div class="row px-5">
 									<div class="col-2">
-										<h5>Select</h5>
+										<h5>{% trans 'Select' %}</h5>
 									</div>
 									<div class="col-7 pl-2">
-										<h5 class="pl-3">Name</h5>
+										<h5 class="pl-3">{% trans 'Name' %}</h5>
 									</div>
 									<div class="col-3">
-										<h5>Status</h5>
+										<h5>{% trans 'Status' %}</h5>
 									</div>
 								</div>
 								{% for pwgs in pwgserver %}
@@ -185,9 +186,9 @@
 													<tr>
 														<td><a href="#"><input type="checkbox" name="floatingButtonHere" class="pwg{{count}}" value="{{pw.id}}"> {{pw.alias}}</a></td>
 														{% if pw.is_tested %}
-														<td class="status">T</td>
+														<td class="status">{% trans 'T' %}</td>
 														{% else %}
-														<td class="status">U</td>
+														<td class="status">{% trans 'U' %}</td>
 														{% endif %}
 													</tr>
 													{% endif %}
@@ -214,12 +215,12 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Transferred PWG</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{% trans 'Transferred PWG' %}</h5>
 				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
 			</div>
 			<div class="modal-body text-center p-4">
 				<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-				<p class="pt-2 font-weight-bold">Your PWG has been successfully transfered to seller</p>
+				<p class="pt-2 font-weight-bold">{% trans 'Your PWG has been successfully transfered to seller' %}</p>
 
 			</div>
 
@@ -233,7 +234,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{% trans 'Confirmation' %}</h5>
 				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
 			</div>
 			<div class="modal-body text-center p-4">
@@ -242,8 +243,8 @@
 
 			</div>
 			<div class="modal-footer justify-content-center">
-				<button type="button" class="btn btn-primary" id="confirm-modal-button" onclick="confirm_transfer();">Confirm</button>
-				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-primary" id="confirm-modal-button" onclick="confirm_transfer();">{% trans 'Confirm' %}</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">{% trans 'Cancel' %}</button>
 		  	</div>
 		</div>
 	</div>
@@ -252,8 +253,8 @@
 
 
 <section class="floatingButtonHere" style="display: none;">
-	<a href="" class=" btn btn-primary" data-toggle="modal" data-target="imagemodalConfirm" onclick="assign_value();">Proceed</a>
-	<a href="tester-tested-pwg-list{{id}}" class=" btn btn-danger">Cancel</a>
+	<a href="" class=" btn btn-primary" data-toggle="modal" data-target="imagemodalConfirm" onclick="assign_value();">{% trans 'Proceed' %}</a>
+	<a href="{% trans 'tester-tested-pwg-list' %}{{id}}" class=" btn btn-danger">{% trans 'Cancel' %}</a>
 </section>
 
 
@@ -266,7 +267,7 @@
 	</form>
 
 		<!--	to start chat to a single user -->
-	<form action="chat" method="post" name="single_chat">
+	<form action="{% trans 'chat' %}" method="post" name="single_chat">
 		{% csrf_token %}
 		<input type="hidden" id="chatting_to" name="email_user">
 	</form>
@@ -452,9 +453,9 @@ $(function() {
 
 	function assign_value(){
 		if(checkbox_values.length == 1){
-			$("#confirm-message-transfer").html("Do you want to transfer this "+checkbox_values.length+" PWG");
+			$("#confirm-message-transfer").html("{% trans 'Do you want to transfer this "+checkbox_values.length+" PWG' %}");
 		} else{
-			$("#confirm-message-transfer").html("Do you want to transfer these "+checkbox_values.length+" PWGs");
+			$("#confirm-message-transfer").html("{% trans 'Do you want to transfer these "+checkbox_values.length+" PWGs' %}");
 		}
 		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
 		$('#imagemodalConfirm').modal('show');

@@ -26,6 +26,7 @@ from django.views import View
 import threading
 import datetime
 import json
+from django.utils.translation import ugettext_lazy as _
 
 
 login_signal = Signal(providing_args=['IP','timestamp'])
@@ -306,12 +307,12 @@ def index(request):
                     ct = cache.get('webAdmin', 0)
                     new_count = ct + 1
                     cache.set('webAdmin', new_count, 60*60*24)
-                    return redirect("admin-home")
+                    return redirect(_("admin-home"))
                 else:
-                    messages.info(request, 'Invalid user id and password for Admin')
+                    messages.info(request, _('Invalid user id and password for Admin'))
                     return redirect('/')
             else:
-                messages.info(request, 'Invalid user id and password')
+                messages.info(request, _('Invalid user id and password'))
                 return redirect('/')
 
         elif accType == 'seller':
@@ -670,7 +671,7 @@ def admin_home(request):
             'password_history': PasswordHistory.objects.filter(user=request.user).order_by(*cond)
         }
         return render(request, 'tesafe/admin-home.html', params)
-    messages.error(request, "Login first then try again!!")
+    messages.error(request, _("Login first then try again!!"))
     return redirect("/")
 
 
@@ -3524,22 +3525,22 @@ def pass_pwg(request):
 
 
 def destination(request):
-    user_obj = request.user
-    user_obj = User.objects.get(Q(email=user_obj) | Q(username=user_obj))
+    user_obj1 = request.user
+    user_obj = User.objects.get(Q(email=user_obj1) | Q(username=user_obj1))
     if user_obj.is_superuser:
         auth.logout(request)
         return redirect("/")
     user_email = user_obj.email
     if user_obj.is_authenticated:
         if WebAdmin.objects.filter(email=user_email).exists():
-            return redirect("admin-home")
+            return redirect(_("admin-home"))
         elif Seller.objects.filter(email=user_email).exists():
-            return redirect("seller-home")
+            return redirect(_("seller-home"))
         elif Tester.objects.filter(email=user_email).exists():
-            return redirect("tester-home")
+            return redirect(_("tester-home"))
         elif WebUser.objects.filter(email=user_email).exists():
-            return redirect("user-home")
-    messages.error(request, "Login first then try again!!")
+            return redirect(_("user-home"))
+    messages.error(request, _("Login first then try again!!"))
     return redirect("/")
 
 
