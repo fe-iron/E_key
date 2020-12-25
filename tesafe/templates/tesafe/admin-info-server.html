@@ -691,7 +691,7 @@
 
 // for change alias
     function change_name(name, pk){
-		$("#name-change").html("{% trans 'Change Name for <b>"+name+"</b>"' %});
+		$("#name-change").html("{% trans 'Change Name for' %} <b>"+name+"</b>");
 		$("#alias_id").attr('value',pk);
 
 		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
@@ -765,9 +765,9 @@ function delete_multiple_users(){
 	checkbox_values = [...new Set(checkbox_values)];
 
 	if ( checkbox_values.length == 1 ){
-		$("#confirm-message-delete").html("{% trans 'Delete the selected "+checkbox_values.length+" Seller' %}");
+		$("#confirm-message-delete").html("{% trans 'Delete the selected' %} "+checkbox_values.length+" {% trans 'Seller' %}");
 	}else{
-		$("#confirm-message-delete").html("{% trans 'Delete the selected "+checkbox_values.length+" Sellers' %}");
+		$("#confirm-message-delete").html("{% trans 'Delete the selected' %} "+checkbox_values.length+" {% trans 'Sellers' %}");
 	}
 
 	$("#confirm-modal-button").attr('onclick','sendpwgspk();');

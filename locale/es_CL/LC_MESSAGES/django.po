@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-24 20:00+0530\n"
+"POT-Creation-Date: 2020-12-25 12:03+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,13 +87,26 @@ msgstr "Admin | Vendedor"
 #: .\tesafe\templates\tesafe\tester-tested-pwg-list.html:63
 #: .\tesafe\templates\tesafe\transfer.html:39
 #: .\tesafe\templates\tesafe\transfer.html:77 .\tesafe\urls.py:18
-#: .\tesafe\views.py:310 .\tesafe\views.py:3536
 msgid "admin-home"
 msgstr "admin-inicio"
+
+#: .\tesafe\templates\tesafe\admin-home.html:44
+#: .\tesafe\templates\tesafe\admin-info-server.html:42
+#: .\tesafe\templates\tesafe\admin-seller.html:40
+#: .\tesafe\templates\tesafe\admin-tester.html:42
+#: .\tesafe\templates\tesafe\pwg-sublist.html:39
+#: .\tesafe\templates\tesafe\tester-getback.html:39
+#: .\tesafe\templates\tesafe\tester-pwg-sublist.html:39
+#: .\tesafe\templates\tesafe\tester-tested-pwg-list.html:39
+#: .\tesafe\templates\tesafe\transfer.html:39
+#: .\tesafe\templates\tesafe\transfer.html:57
+msgid "Home"
+msgstr "Casa"
 
 #: .\tesafe\templates\tesafe\admin-home.html:47
 #: .\tesafe\templates\tesafe\admin-info-server.html:45
 #: .\tesafe\templates\tesafe\admin-seller.html:43
+#: .\tesafe\templates\tesafe\admin-seller.html:438
 #: .\tesafe\templates\tesafe\admin-tester.html:45
 #: .\tesafe\templates\tesafe\pwg-sublist.html:42
 #: .\tesafe\templates\tesafe\tester-getback.html:42
@@ -103,6 +116,26 @@ msgstr "admin-inicio"
 #: .\tesafe\templates\tesafe\transfer.html:105 .\tesafe\urls.py:20
 msgid "admin-seller"
 msgstr "administrador-vendedor"
+
+#: .\tesafe\templates\tesafe\admin-home.html:47
+#: .\tesafe\templates\tesafe\admin-home.html:112
+#: .\tesafe\templates\tesafe\admin-info-server.html:45
+#: .\tesafe\templates\tesafe\admin-info-server.html:768
+#: .\tesafe\templates\tesafe\admin-seller.html:43
+#: .\tesafe\templates\tesafe\admin-seller.html:725
+#: .\tesafe\templates\tesafe\admin-seller.html:741
+#: .\tesafe\templates\tesafe\admin-tester.html:45
+#: .\tesafe\templates\tesafe\admin-tester.html:692
+#: .\tesafe\templates\tesafe\admin-tester.html:723
+#: .\tesafe\templates\tesafe\index.html:59
+#: .\tesafe\templates\tesafe\pwg-sublist.html:42
+#: .\tesafe\templates\tesafe\register.html:64
+#: .\tesafe\templates\tesafe\tester-getback.html:42
+#: .\tesafe\templates\tesafe\tester-pwg-sublist.html:42
+#: .\tesafe\templates\tesafe\tester-tested-pwg-list.html:42
+#: .\tesafe\templates\tesafe\transfer.html:42
+msgid "Seller"
+msgstr "Vendedora"
 
 #: .\tesafe\templates\tesafe\admin-home.html:50
 #: .\tesafe\templates\tesafe\admin-info-server.html:48
@@ -114,11 +147,27 @@ msgstr "administrador-vendedor"
 #: .\tesafe\templates\tesafe\tester-getback.html:86
 #: .\tesafe\templates\tesafe\tester-pwg-sublist.html:45
 #: .\tesafe\templates\tesafe\tester-tested-pwg-list.html:45
+#: .\tesafe\templates\tesafe\tester-tested-pwg-list.html:88
 #: .\tesafe\templates\tesafe\transfer.html:45 .\tesafe\urls.py:22
 #, fuzzy
 #| msgid "admin-seller"
 msgid "admin-tester"
 msgstr "administrador-vendedor"
+
+#: .\tesafe\templates\tesafe\admin-home.html:50
+#: .\tesafe\templates\tesafe\admin-home.html:121
+#: .\tesafe\templates\tesafe\admin-info-server.html:48
+#: .\tesafe\templates\tesafe\admin-seller.html:46
+#: .\tesafe\templates\tesafe\admin-tester.html:48
+#: .\tesafe\templates\tesafe\index.html:60
+#: .\tesafe\templates\tesafe\pwg-sublist.html:45
+#: .\tesafe\templates\tesafe\register.html:65
+#: .\tesafe\templates\tesafe\tester-getback.html:45
+#: .\tesafe\templates\tesafe\tester-pwg-sublist.html:45
+#: .\tesafe\templates\tesafe\tester-tested-pwg-list.html:45
+#: .\tesafe\templates\tesafe\transfer.html:45
+msgid "Tester"
+msgstr "Ensayadora"
 
 #: .\tesafe\templates\tesafe\admin-home.html:53
 #: .\tesafe\templates\tesafe\admin-info-server.html:51
@@ -137,6 +186,18 @@ msgstr "administrador-vendedor"
 #| msgid "admin-seller"
 msgid "admin-info-server"
 msgstr "administrador-vendedor"
+
+#: .\tesafe\templates\tesafe\admin-home.html:53
+#: .\tesafe\templates\tesafe\admin-info-server.html:51
+#: .\tesafe\templates\tesafe\admin-seller.html:49
+#: .\tesafe\templates\tesafe\admin-tester.html:51
+#: .\tesafe\templates\tesafe\pwg-sublist.html:48
+#: .\tesafe\templates\tesafe\tester-getback.html:48
+#: .\tesafe\templates\tesafe\tester-pwg-sublist.html:48
+#: .\tesafe\templates\tesafe\tester-tested-pwg-list.html:48
+#: .\tesafe\templates\tesafe\transfer.html:48
+msgid "PWG Server"
+msgstr "Servidor PWG"
 
 #: .\tesafe\templates\tesafe\admin-home.html:67 .\tesafe\urls.py:21
 msgid "assist_admin"
@@ -222,34 +283,6 @@ msgstr "Número en línea"
 msgid "Offline Number"
 msgstr "Número sin conexión"
 
-#: .\tesafe\templates\tesafe\admin-home.html:112
-#: .\tesafe\templates\tesafe\admin-info-server.html:45
-#: .\tesafe\templates\tesafe\admin-seller.html:43
-#: .\tesafe\templates\tesafe\admin-tester.html:45
-#: .\tesafe\templates\tesafe\index.html:59
-#: .\tesafe\templates\tesafe\pwg-sublist.html:42
-#: .\tesafe\templates\tesafe\register.html:64
-#: .\tesafe\templates\tesafe\tester-getback.html:42
-#: .\tesafe\templates\tesafe\tester-pwg-sublist.html:42
-#: .\tesafe\templates\tesafe\tester-tested-pwg-list.html:42
-#: .\tesafe\templates\tesafe\transfer.html:42
-msgid "Seller"
-msgstr "Vendedora"
-
-#: .\tesafe\templates\tesafe\admin-home.html:121
-#: .\tesafe\templates\tesafe\admin-info-server.html:48
-#: .\tesafe\templates\tesafe\admin-seller.html:46
-#: .\tesafe\templates\tesafe\admin-tester.html:48
-#: .\tesafe\templates\tesafe\index.html:60
-#: .\tesafe\templates\tesafe\pwg-sublist.html:45
-#: .\tesafe\templates\tesafe\register.html:65
-#: .\tesafe\templates\tesafe\tester-getback.html:45
-#: .\tesafe\templates\tesafe\tester-pwg-sublist.html:45
-#: .\tesafe\templates\tesafe\tester-tested-pwg-list.html:45
-#: .\tesafe\templates\tesafe\transfer.html:45
-msgid "Tester"
-msgstr "Ensayadora"
-
 #: .\tesafe\templates\tesafe\admin-home.html:129
 #: .\tesafe\templates\tesafe\index.html:61
 #: .\tesafe\templates\tesafe\register.html:66
@@ -260,6 +293,9 @@ msgid "User"
 msgstr "Ensayadora"
 
 #: .\tesafe\templates\tesafe\admin-home.html:137
+#: .\tesafe\templates\tesafe\pwg-sublist.html:555
+#: .\tesafe\templates\tesafe\pwg-sublist.html:615
+#: .\tesafe\templates\tesafe\tester-tested-pwg-list.html:458
 msgid "PWGs"
 msgstr "PWGs"
 
@@ -349,7 +385,9 @@ msgstr "Introduzca nueva contraseña"
 msgid ""
 "Password should include One Capital letter, any character from this ! @ # $ %"
 "% ^ & * ( ) _ - = { } < > ? and at least 8 characters"
-msgstr "La contraseña debe incluir una letra mayúscula, ¡cualquier carácter de esta! @ # $%% ^ & * () _ - = {} <>? y al menos 8 caracteres"
+msgstr ""
+"La contraseña debe incluir una letra mayúscula, ¡cualquier carácter de esta! "
+"@ # $%% ^ & * () _ - = {} <>? y al menos 8 caracteres"
 
 #: .\tesafe\templates\tesafe\admin-home.html:235
 msgid "Confirm New Password"
@@ -360,7 +398,9 @@ msgstr "Confirmar nueva contraseña"
 msgid ""
 "Password should include One Capital letter, any character from it ! @ # $ %% "
 "^ & * ( ) _ - = { } < > ? and atleast 8 characters"
-msgstr "La contraseña debe incluir una letra mayúscula, ¡cualquier carácter de ella! @ # $ %% ^ & * () _ - = {} <>? y al menos 8 caracteres "
+msgstr ""
+"La contraseña debe incluir una letra mayúscula, ¡cualquier carácter de ella! "
+"@ # $ %% ^ & * () _ - = {} <>? y al menos 8 caracteres "
 
 #: .\tesafe\templates\tesafe\admin-home.html:243
 #: .\tesafe\templates\tesafe\admin-info-server.html:568
@@ -444,29 +484,6 @@ msgstr "Contraseña incorrecta"
 msgid "Admin | PWG Server"
 msgstr "Admin | Vendedor"
 
-#: .\tesafe\templates\tesafe\admin-info-server.html:42
-#: .\tesafe\templates\tesafe\admin-seller.html:40
-#: .\tesafe\templates\tesafe\admin-tester.html:42
-#: .\tesafe\templates\tesafe\pwg-sublist.html:39
-#: .\tesafe\templates\tesafe\tester-getback.html:39
-#: .\tesafe\templates\tesafe\tester-pwg-sublist.html:39
-#: .\tesafe\templates\tesafe\tester-tested-pwg-list.html:39
-#: .\tesafe\templates\tesafe\transfer.html:39
-#: .\tesafe\templates\tesafe\transfer.html:57
-msgid "Home"
-msgstr "Casa"
-
-#: .\tesafe\templates\tesafe\admin-info-server.html:51
-#: .\tesafe\templates\tesafe\admin-seller.html:49
-#: .\tesafe\templates\tesafe\admin-tester.html:51
-#: .\tesafe\templates\tesafe\pwg-sublist.html:48
-#: .\tesafe\templates\tesafe\tester-getback.html:48
-#: .\tesafe\templates\tesafe\tester-pwg-sublist.html:48
-#: .\tesafe\templates\tesafe\tester-tested-pwg-list.html:48
-#: .\tesafe\templates\tesafe\transfer.html:48
-msgid "PWG Server"
-msgstr "Servidor PWG"
-
 #: .\tesafe\templates\tesafe\admin-info-server.html:64
 #: .\tesafe\templates\tesafe\admin-seller.html:62
 #: .\tesafe\templates\tesafe\admin-tester.html:64
@@ -501,6 +518,9 @@ msgstr "PWGS"
 
 #: .\tesafe\templates\tesafe\admin-info-server.html:110
 #: .\tesafe\templates\tesafe\admin-info-server.html:165
+#: .\tesafe\templates\tesafe\pwg-sublist.html:553
+#: .\tesafe\templates\tesafe\pwg-sublist.html:613
+#: .\tesafe\templates\tesafe\tester-tested-pwg-list.html:456
 #: .\tesafe\templates\tesafe\transfer.html:63
 msgid "PWG"
 msgstr "PWG"
@@ -2311,6 +2331,7 @@ msgid "Login History of Seller ABC"
 msgstr "Historial de inicio de sesión del vendedor ABC"
 
 #: .\tesafe\templates\tesafe\admin-info-server.html:491
+#: .\tesafe\templates\tesafe\admin-info-server.html:694
 msgid "Change Name for"
 msgstr "Cambiar nombre para"
 
@@ -2361,21 +2382,24 @@ msgstr "Mensaje"
 msgid "delete_multiple_user"
 msgstr "delete_multiple_user"
 
-#: .\tesafe\templates\tesafe\admin-info-server.html:694
-msgid "Change Name for <b>\"+name+\"</b>\""
-msgstr ""
-
 #: .\tesafe\templates\tesafe\admin-info-server.html:768
+#: .\tesafe\templates\tesafe\admin-info-server.html:770
 #: .\tesafe\templates\tesafe\admin-seller.html:725
+#: .\tesafe\templates\tesafe\admin-seller.html:727
 #: .\tesafe\templates\tesafe\admin-tester.html:692
-msgid "Delete the selected \"+checkbox_values.length+\" Seller"
-msgstr ""
+#: .\tesafe\templates\tesafe\admin-tester.html:694
+msgid "Delete the selected"
+msgstr "Eliminar el seleccionado"
 
 #: .\tesafe\templates\tesafe\admin-info-server.html:770
 #: .\tesafe\templates\tesafe\admin-seller.html:727
+#: .\tesafe\templates\tesafe\admin-seller.html:743
 #: .\tesafe\templates\tesafe\admin-tester.html:694
-msgid "Delete the selected \"+checkbox_values.length+\" Sellers"
-msgstr ""
+#: .\tesafe\templates\tesafe\admin-tester.html:725
+#, fuzzy
+#| msgid "Seller"
+msgid "Sellers"
+msgstr "Vendedora"
 
 #: .\tesafe\templates\tesafe\admin-seller.html:7
 msgid "Admin | Seller"
@@ -2405,10 +2429,6 @@ msgid "Username"
 msgstr "Nombre de usuario"
 
 #: .\tesafe\templates\tesafe\admin-seller.html:129
-msgid "transfer"
-msgstr "transferir"
-
-#: .\tesafe\templates\tesafe\admin-seller.html:129
 #: .\tesafe\templates\tesafe\admin-tester.html:129
 msgid "Transfer"
 msgstr "Transferir"
@@ -2417,6 +2437,11 @@ msgstr "Transferir"
 #: .\tesafe\templates\tesafe\admin-tester.html:135
 msgid "Payment"
 msgstr "Pago"
+
+#: .\tesafe\templates\tesafe\admin-seller.html:137
+#: .\tesafe\templates\tesafe\admin-tester.html:137
+msgid "Chat History"
+msgstr "Historial de chat"
 
 #: .\tesafe\templates\tesafe\admin-seller.html:140
 #: .\tesafe\templates\tesafe\admin-tester.html:140
@@ -2458,14 +2483,13 @@ msgid "chat_multiple"
 msgstr "chat_multiple"
 
 #: .\tesafe\templates\tesafe\admin-seller.html:741
-#: .\tesafe\templates\tesafe\admin-tester.html:723
-msgid "Freeze the selected \"+checkbox_values.length+\" Seller"
-msgstr ""
-
 #: .\tesafe\templates\tesafe\admin-seller.html:743
+#: .\tesafe\templates\tesafe\admin-tester.html:723
 #: .\tesafe\templates\tesafe\admin-tester.html:725
-msgid "Freeze the selected \"+checkbox_values.length+\" Sellers"
-msgstr ""
+#: .\tesafe\templates\tesafe\pwg-sublist.html:613
+#: .\tesafe\templates\tesafe\pwg-sublist.html:615
+msgid "Freeze the selected"
+msgstr "Congelar lo seleccionado"
 
 #: .\tesafe\templates\tesafe\admin-tester.html:6
 #: .\tesafe\templates\tesafe\tester-pwg-sublist.html:6
@@ -2477,15 +2501,6 @@ msgstr "Admin | Vendedor"
 #: .\tesafe\templates\tesafe\admin-tester.html:92
 msgid "TESTER ACCOUNTS"
 msgstr "CUENTAS DE PRUEBA"
-
-#: .\tesafe\templates\tesafe\admin-tester.html:129
-#: .\tesafe\templates\tesafe\tester-tested-pwg-list.html:257
-msgid "tester-tested-pwg-list"
-msgstr "tester-tested-pwg-list"
-
-#: .\tesafe\templates\tesafe\admin-tester.html:137
-msgid "Chat History"
-msgstr "Historial de chat"
 
 #: .\tesafe\templates\tesafe\admin-tester.html:144
 msgid "tester-getback"
@@ -2676,34 +2691,46 @@ msgid "Tester List"
 msgstr "Ensayadora"
 
 #: .\tesafe\templates\tesafe\pwg-sublist.html:553
-msgid "Get Back the selected \"+checkbox_values.length+\" PWG"
-msgstr ""
-
 #: .\tesafe\templates\tesafe\pwg-sublist.html:555
-msgid "Get Back the selected \"+checkbox_values.length+\" PWGs"
-msgstr ""
-
-#: .\tesafe\templates\tesafe\pwg-sublist.html:613
-#: .\tesafe\templates\tesafe\pwg-sublist.html:615
-msgid "Freeze the selected \"+checkbox_values.length+\" PWG"
-msgstr ""
+msgid "Get Back the selected"
+msgstr "Recuperar el seleccionado"
 
 #: .\tesafe\templates\tesafe\pwg-sublist.html:653
 #: .\tesafe\templates\tesafe\pwg-sublist.html:655
-msgid "Assign the selected \"+checkbox_values.length+\" PWG to Tester"
-msgstr ""
+#, fuzzy
+#| msgid "Assign To Tester"
+msgid "Assign the selected"
+msgstr "Asignar a la probadora"
+
+#: .\tesafe\templates\tesafe\pwg-sublist.html:653
+#: .\tesafe\templates\tesafe\pwg-sublist.html:655
+#, fuzzy
+#| msgid "GetBack PWG From Tester"
+msgid "PWG to Tester"
+msgstr "Obtener PWG del probador"
 
 #: .\tesafe\templates\tesafe\pwg-sublist.html:679
 msgid "<h5>Something went wrong, Try again</h5>"
 msgstr "<h5>Algo salió mal, intenta de nuevo</h5>"
 
 #: .\tesafe\templates\tesafe\pwg-sublist.html:753
-msgid "Transfer the selected \"+checkbox_values.length+\" PWG to Seller"
-msgstr ""
+#: .\tesafe\templates\tesafe\pwg-sublist.html:755
+#, fuzzy
+#| msgid "Transfer To Seller"
+msgid "Transfer the selected"
+msgstr "Transferencia a la vendedora"
+
+#: .\tesafe\templates\tesafe\pwg-sublist.html:753
+#, fuzzy
+#| msgid "PWG Server"
+msgid "PWG to Seller"
+msgstr "Servidor PWG"
 
 #: .\tesafe\templates\tesafe\pwg-sublist.html:755
-msgid "Transfer the selected \"+checkbox_values.length+\" PWGs to Seller"
-msgstr ""
+#, fuzzy
+#| msgid "PWG Server"
+msgid "PWGs to Seller"
+msgstr "Servidor PWG"
 
 #: .\tesafe\templates\tesafe\register.html:6
 #: .\tesafe\templates\tesafe\register.html:47
@@ -2785,26 +2812,34 @@ msgid "Transferred PWG"
 msgstr "PWG transferido"
 
 #: .\tesafe\templates\tesafe\tester-tested-pwg-list.html:223
-msgid "Your PWG has been successfully transfered to seller"
-msgstr ""
+msgid "Your PWG has been successfully transferred to seller"
+msgstr "Su PWG ha sido transferido con éxito a la vendedora"
+
+#: .\tesafe\templates\tesafe\tester-tested-pwg-list.html:257
+msgid "tester-tested-pwg-list"
+msgstr "tester-tested-pwg-list"
 
 #: .\tesafe\templates\tesafe\tester-tested-pwg-list.html:456
-msgid "Do you want to transfer this \"+checkbox_values.length+\" PWG"
-msgstr ""
+#, fuzzy
+#| msgid "Do you want to get back this"
+msgid "Do you want to transfer this"
+msgstr "¿Quieres recuperar esto?"
 
 #: .\tesafe\templates\tesafe\tester-tested-pwg-list.html:458
-msgid "Do you want to transfer these \"+checkbox_values.length+\" PWGs"
-msgstr ""
+#, fuzzy
+#| msgid "Do you want to get back these "
+msgid "Do you want to transfer these"
+msgstr "¿Quieres recuperar estos"
 
 #: .\tesafe\templates\tesafe\transfer.html:57
-#: .\tesafe\templates\tesafe\transfer.html:79 .\tesafe\views.py:3538
+#: .\tesafe\templates\tesafe\transfer.html:79
 msgid "seller-home"
-msgstr ""
+msgstr "vendedor-casa"
 
 #: .\tesafe\templates\tesafe\transfer.html:60
 #: .\tesafe\templates\tesafe\transfer.html:107
 msgid "seller-user"
-msgstr ""
+msgstr "Vendedora-usuaria"
 
 #: .\tesafe\templates\tesafe\transfer.html:63
 #, fuzzy
@@ -2814,27 +2849,27 @@ msgstr "Vendedora"
 
 #: .\tesafe\templates\tesafe\transfer.html:211
 msgid "is already transferred"
-msgstr ""
+msgstr "ya esta transferido"
 
 #: .\tesafe\templates\tesafe\transfer.html:216
 msgid "is not available either because it is freeze or authorize or shared"
-msgstr ""
+msgstr "no está disponible porque está congelado o autorizado o compartido"
 
 #: .\tesafe\templates\tesafe\transfer.html:252
 msgid "Share PWG"
-msgstr ""
+msgstr "Comparte PWG"
 
 #: .\tesafe\templates\tesafe\transfer.html:254
 msgid "Authorize PWG"
-msgstr ""
+msgstr "Autorizar PWG"
 
 #: .\tesafe\templates\tesafe\transfer.html:260
 msgid "Are you sure you want to "
-msgstr ""
+msgstr "Estás seguro que quieres"
 
 #: .\tesafe\templates\tesafe\transfer.html:260
 msgid "PWG to"
-msgstr ""
+msgstr "PWG a"
 
 #: .\tesafe\urls.py:19
 msgid "transfer<int:id>"
@@ -2852,22 +2887,77 @@ msgstr ""
 msgid "tester-tested-pwg-list<int:id>"
 msgstr ""
 
+#: .\tesafe\views.py:293
+msgid "Admin is already logged in"
+msgstr "El administrador ya está conectado"
+
 #: .\tesafe\views.py:312
 msgid "Invalid user id and password for Admin"
 msgstr "ID de usuario y contraseña para administrador no válidos"
 
-#: .\tesafe\views.py:315
+#: .\tesafe\views.py:315 .\tesafe\views.py:351 .\tesafe\views.py:387
+#: .\tesafe\views.py:422
 msgid "Invalid user id and password"
 msgstr "ID de usuario y contraseña no válidos"
 
-#: .\tesafe\views.py:674 .\tesafe\views.py:3543
+#: .\tesafe\views.py:324
+msgid "Seller is already logged in"
+msgstr "La vendedora ya ha iniciado sesión"
+
+#: .\tesafe\views.py:330 .\tesafe\views.py:366 .\tesafe\views.py:402
+msgid "Sorry, this account has been freezed"
+msgstr "Lo sentimos, esta cuenta ha sido congelada"
+
+#: .\tesafe\views.py:348
+#, fuzzy
+#| msgid "Invalid user id and password for Admin"
+msgid "Invalid user id and password for Seller"
+msgstr "ID de usuario y contraseña para administrador no válidos"
+
+#: .\tesafe\views.py:360
+msgid "Tester is already logged in"
+msgstr "La probadora ya está conectada"
+
+#: .\tesafe\views.py:384
+#, fuzzy
+#| msgid "Invalid user id and password for Admin"
+msgid "Invalid user id and password for Tester"
+msgstr "ID de usuario y contraseña para administrador no válidos"
+
+#: .\tesafe\views.py:396
+msgid "User is already logged in"
+msgstr "El usuario ya ha iniciado sesión"
+
+#: .\tesafe\views.py:419
+#, fuzzy
+#| msgid "Invalid user id and password for Admin"
+msgid "Invalid user id and password for User"
+msgstr "ID de usuario y contraseña para administrador no válidos"
+
+#: .\tesafe\views.py:596
+msgid "Session Timeout! login again"
+msgstr "¡Hora de término de la sesión! ingresar de nuevo"
+
+#: .\tesafe\views.py:598
+msgid "successfully logged out"
+msgstr "cerrar sesión correctamente"
+
+#: .\tesafe\views.py:674 .\tesafe\views.py:703 .\tesafe\views.py:733
+#: .\tesafe\views.py:775 .\tesafe\views.py:3543
 msgid "Login first then try again!!"
 msgstr "¡Inicie sesión primero y luego vuelva a intentarlo!"
 
-#: .\tesafe\views.py:3540
-msgid "tester-home"
-msgstr "probador-hogar"
+#: .\tesafe\views.py:950
+#, fuzzy
+#| msgid "Transfer To Seller"
+msgid "Transfer PWG to Seller "
+msgstr "Transferencia a la vendedora"
 
-#: .\tesafe\views.py:3542
-msgid "user-home"
-msgstr "usuario-inicio"
+#~ msgid "transfer"
+#~ msgstr "transferir"
+
+#~ msgid "tester-home"
+#~ msgstr "probador-hogar"
+
+#~ msgid "user-home"
+#~ msgstr "usuario-inicio"

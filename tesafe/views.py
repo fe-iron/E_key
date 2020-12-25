@@ -290,7 +290,7 @@ def index(request):
             if user is not None:
                 if WebAdmin.objects.filter(user=user).exists():
                     if UserLogin.objects.filter(user=user).exists():
-                        messages.info(request, "Admin is already logged in")
+                        messages.info(request, _("Admin is already logged in"))
                         login_signal.send(sender=User, ip=get_ip(request), admin=uname)
                         return redirect("/")
 
@@ -307,7 +307,7 @@ def index(request):
                     ct = cache.get('webAdmin', 0)
                     new_count = ct + 1
                     cache.set('webAdmin', new_count, 60*60*24)
-                    return redirect(_("admin-home"))
+                    return redirect("admin-home")
                 else:
                     messages.info(request, _('Invalid user id and password for Admin'))
                     return redirect('/')
@@ -321,13 +321,13 @@ def index(request):
             if user is not None:
                 if Seller.objects.filter(email=uname).exists():
                     if UserLogin.objects.filter(user=user).exists():
-                        messages.info(request, "Seller is already logged in")
+                        messages.info(request, _("Seller is already logged in"))
                         login_signal.send(sender=UserLogin, ip=get_ip(request), admin=uname)
                         return redirect("/")
 
                     sel = Seller.objects.get(email=uname)
                     if sel.is_freeze:
-                        messages.info(request, "Sorry, this account has been freezed")
+                        messages.info(request, _("Sorry, this account has been freezed"))
                         return redirect("/")
                     auth.login(request, user)
                     login_history(request, user)
@@ -345,10 +345,10 @@ def index(request):
 
                     return redirect("seller-home")
                 else:
-                    messages.info(request, 'Invalid user id and password for Seller')
+                    messages.info(request, _('Invalid user id and password for Seller'))
                     return redirect('/')
             else:
-                messages.info(request, 'Invalid user id and password')
+                messages.info(request, _('Invalid user id and password'))
                 return redirect('/')
 
         elif accType == 'tester':
@@ -357,13 +357,13 @@ def index(request):
             if user is not None:
                 if Tester.objects.filter(email=uname).exists():
                     if UserLogin.objects.filter(user=user).exists():
-                        messages.info(request, "Tester is already logged in")
+                        messages.info(request, _("Tester is already logged in"))
                         login_signal.send(sender=UserLogin, ip=get_ip(request), admin=uname)
                         return redirect("/")
 
                     tes = Tester.objects.get(email=uname)
                     if tes.is_freeze:
-                        messages.info(request, "Sorry, this account has been freezed")
+                        messages.info(request, _("Sorry, this account has been freezed"))
                         return redirect("/")
                     auth.login(request, user)
                     login_history(request, user)
@@ -381,10 +381,10 @@ def index(request):
 
                     return redirect('tester-home')
                 else:
-                    messages.info(request, 'Invalid user id and password for Tester')
+                    messages.info(request, _('Invalid user id and password for Tester'))
                     return redirect('/')
             else:
-                messages.info(request, 'Invalid user id and password')
+                messages.info(request, _('Invalid user id and password'))
                 return redirect('/')
 
         elif accType == 'user':
@@ -393,13 +393,13 @@ def index(request):
             if user is not None:
                 if WebUser.objects.filter(email=uname).exists():
                     if UserLogin.objects.filter(user=user).exists():
-                        messages.info(request, "User is already logged in")
+                        messages.info(request, _("User is already logged in"))
                         login_signal.send(sender=UserLogin, ip=get_ip(request), admin=uname)
                         return redirect("/")
 
                     wuser = WebUser.objects.get(email=uname)
                     if wuser.is_freeze:
-                        messages.info(request, "Sorry, this account has been freezed")
+                        messages.info(request, _("Sorry, this account has been freezed"))
                         return redirect("/")
                     auth.login(request, user)
                     login_history(request, user)
@@ -416,10 +416,10 @@ def index(request):
 
                     return redirect("user-home")
                 else:
-                    messages.info(request, 'Invalid user id and password for User')
+                    messages.info(request, _('Invalid user id and password for User'))
                     return redirect('/')
             else:
-                messages.info(request, 'Invalid user id and password')
+                messages.info(request, _('Invalid user id and password'))
                 return redirect('/')
 
     else:
@@ -593,9 +593,9 @@ def logout(request):
             u_login = UserLogin.objects.get(user=user)
             u_login.delete()
     if dat:
-        messages.info(request,"Session Timeout! login again")
+        messages.info(request, _("Session Timeout! login again"))
     else:
-        messages.info(request,"successfully logged out")
+        messages.info(request, _("successfully logged out"))
     return redirect("/")
 
 
@@ -700,7 +700,7 @@ def admin_seller(request):
             'count_notif': count_notif,
         }
         return render(request, 'tesafe/admin-seller.html', param)
-    messages.error(request, "Login first then try again!!")
+    messages.error(request, _("Login first then try again!!"))
     return redirect("/")
 
 
@@ -730,7 +730,7 @@ def admin_tester(request):
         }
 
         return render(request, 'tesafe/admin-tester.html', param)
-    messages.error(request, "Login first then try again!!")
+    messages.error(request, _("Login first then try again!!"))
     return redirect("/")
 
 
@@ -772,7 +772,7 @@ def admin_info_server(request):
             'total_pwg_offline': 0,
         }
         return render(request, 'tesafe/admin-info-server.html', param)
-    messages.error(request, "Login first then try again!!")
+    messages.error(request, _("Login first then try again!!"))
     return redirect("/")
 
 
@@ -947,7 +947,7 @@ def transfer(request, id):
                 pwg_box.append(pwg_obj)
 
     param = {
-        "name": "Transfer PWG to Seller "+user.first_name + " " + user.last_name,
+        "name": _("Transfer PWG to Seller ") +user.first_name + " " + user.last_name,
         "username": user.first_name + " " + user.last_name,
         "pwgserver": pwgserver,
         "pwg": pwg_box,
@@ -3533,13 +3533,13 @@ def destination(request):
     user_email = user_obj.email
     if user_obj.is_authenticated:
         if WebAdmin.objects.filter(email=user_email).exists():
-            return redirect(_("admin-home"))
+            return redirect("admin-home")
         elif Seller.objects.filter(email=user_email).exists():
-            return redirect(_("seller-home"))
+            return redirect("seller-home")
         elif Tester.objects.filter(email=user_email).exists():
-            return redirect(_("tester-home"))
+            return redirect("tester-home")
         elif WebUser.objects.filter(email=user_email).exists():
-            return redirect(_("user-home"))
+            return redirect("user-home")
     messages.error(request, _("Login first then try again!!"))
     return redirect("/")
 

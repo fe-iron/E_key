@@ -126,7 +126,7 @@
 												{% endif %}
 											</td>
 											{% endif %}
-											<td><a href="{% trans 'tester-tested-pwg-list' %}{{tes.user.id}}" class="btn btn-primary btn-light btn-sm">{% trans 'Transfer' %}</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+											<td><a href="tester-tested-pwg-list{{tes.user.id}}" class="btn btn-primary btn-light btn-sm">{% trans 'Transfer' %}</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
@@ -689,9 +689,9 @@ let checkbox_values = [];
 		checkbox_values = [...new Set(checkbox_values)];
 
 		if ( checkbox_values.length == 1 ){
-			$("#confirm-message-delete").html("{% trans 'Delete the selected "+checkbox_values.length+" Seller' %}");
+			$("#confirm-message-delete").html("{% trans 'Delete the selected' %} "+checkbox_values.length+" {% trans 'Seller' %}");
 		}else{
-			$("#confirm-message-delete").html("{% trans 'Delete the selected "+checkbox_values.length+" Sellers' %}");
+			$("#confirm-message-delete").html("{% trans 'Delete the selected' %} "+checkbox_values.length+" {% trans 'Sellers' %}");
 		}
 
 		$("#confirm-modal-button").attr('onclick','sendtesterspk();');
@@ -720,9 +720,9 @@ let checkbox_values = [];
 		checkbox_values = [...new Set(checkbox_values)];
 
 		if ( checkbox_values.length == 1 ){
-			$("#confirm-message-delete").html("{% trans 'Freeze the selected "+checkbox_values.length+" Seller' %}");
+			$("#confirm-message-delete").html("{% trans 'Freeze the selected' %} "+checkbox_values.length+" {% trans 'Seller' %}");
 		}else{
-			$("#confirm-message-delete").html("{% trans 'Freeze the selected "+checkbox_values.length+" Sellers' %}");
+			$("#confirm-message-delete").html("{% trans 'Freeze the selected' %} "+checkbox_values.length+" {% trans 'Sellers' %}");
 		}
 
 		$("#confirm-modal-button").attr('onclick','sendTestersPKFreeze();');

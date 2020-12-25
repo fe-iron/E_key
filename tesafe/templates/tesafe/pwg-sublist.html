@@ -550,9 +550,9 @@
         checkbox_values = [...new Set(checkbox_values)];
 
         if ( checkbox_values.length == 1 ){
-            $("#confirm-message-delete-freeze").html("{% trans 'Get Back the selected "+checkbox_values.length+" PWG' %}");
+            $("#confirm-message-delete-freeze").html("{% trans 'Get Back the selected' %} "+checkbox_values.length+" {% trans 'PWG' %}");
         }else{
-            $("#confirm-message-delete-freeze").html("{% trans 'Get Back the selected "+checkbox_values.length+" PWGs' %}");
+            $("#confirm-message-delete-freeze").html("{% trans 'Get Back the selected' %} "+checkbox_values.length+" {% trans 'PWGs' %}");
         }
 
         $("#confirm-modal-button-freeze").attr('onclick','getbackPWGPK();');
@@ -610,9 +610,9 @@
     function freeze_multiple_users(){
         checkbox_values = [...new Set(checkbox_values)];
         if ( checkbox_values.length == 1 ){
-            $("#confirm-message-delete-freeze").html("{% trans 'Freeze the selected "+checkbox_values.length+" PWG' %}");
+            $("#confirm-message-delete-freeze").html("{% trans 'Freeze the selected' %} "+checkbox_values.length+" {% trans 'PWG' %}");
         }else{
-            $("#confirm-message-delete-freeze").html("{% trans 'Freeze the selected "+checkbox_values.length+" PWG' %}");
+            $("#confirm-message-delete-freeze").html("{% trans 'Freeze the selected' %} "+checkbox_values.length+" {% trans 'PWGs' %}");
         }
 
         $("#confirm-modal-button-freeze").attr('onclick','sendPWGPKFreeze();');
@@ -650,9 +650,9 @@
     function assign_multiple_users(){
         checkbox_values = [...new Set(checkbox_values)];
         if ( checkbox_values.length == 1 ){
-            $("#confirm-message-delete-freeze").html("{% trans 'Assign the selected "+checkbox_values.length+" PWG to Tester' %}");
+            $("#confirm-message-delete-freeze").html("{% trans 'Assign the selected' %} "+checkbox_values.length+" {% trans 'PWG to Tester' %}");
         }else{
-            $("#confirm-message-delete-freeze").html("{% trans 'Assign the selected "+checkbox_values.length+" PWG to Tester' %}");
+            $("#confirm-message-delete-freeze").html("{% trans 'Assign the selected' %} "+checkbox_values.length+" {% trans 'PWG to Tester' %}");
         }
 
         $("#confirm-modal-button-freeze").attr('onclick','sendPWGPKAssign();');
@@ -750,9 +750,9 @@
         checkbox_values = [...new Set(checkbox_values)];
 
         if ( checkbox_values.length == 1 ){
-            $("#confirm-message-delete-freeze").html("{% trans 'Transfer the selected "+checkbox_values.length+" PWG to Seller' %}");
+            $("#confirm-message-delete-freeze").html("{% trans 'Transfer the selected' %} "+checkbox_values.length+" {% trans 'PWG to Seller' %}");
         }else{
-            $("#confirm-message-delete-freeze").html("{% trans 'Transfer the selected "+checkbox_values.length+" PWGs to Seller' %}");
+            $("#confirm-message-delete-freeze").html("{% trans 'Transfer the selected' %} "+checkbox_values.length+" {% trans 'PWGs to Seller' %}");
         }
 
         $("#confirm-modal-button-freeze").attr('onclick','transfer_multiple_users();');

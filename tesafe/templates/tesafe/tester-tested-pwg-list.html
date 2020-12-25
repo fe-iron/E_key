@@ -220,7 +220,7 @@
 			</div>
 			<div class="modal-body text-center p-4">
 				<i class="fas fa-check-circle fa-3x" style="color: green;"></i>
-				<p class="pt-2 font-weight-bold">{% trans 'Your PWG has been successfully transfered to seller' %}</p>
+				<p class="pt-2 font-weight-bold">{% trans 'Your PWG has been successfully transferred to seller' %}</p>
 
 			</div>
 
@@ -453,9 +453,9 @@ $(function() {
 
 	function assign_value(){
 		if(checkbox_values.length == 1){
-			$("#confirm-message-transfer").html("{% trans 'Do you want to transfer this "+checkbox_values.length+" PWG' %}");
+			$("#confirm-message-transfer").html("{% trans 'Do you want to transfer this' %} "+checkbox_values.length+" {% trans 'PWG' %}");
 		} else{
-			$("#confirm-message-transfer").html("{% trans 'Do you want to transfer these "+checkbox_values.length+" PWGs' %}");
+			$("#confirm-message-transfer").html("{% trans 'Do you want to transfer these' %} "+checkbox_values.length+" {% trans 'PWGs' %}");
 		}
 		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
 		$('#imagemodalConfirm').modal('show');

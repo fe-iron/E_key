@@ -126,7 +126,7 @@
 												{% endif %}
 											</td>
 											{% endif %}
-											<td><a href="{% trans 'transfer' %}{{sel.user.pk}}" class="btn btn-primary btn-light btn-sm">{% trans 'Transfer' %}</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+											<td><a href="transfer{{sel.user.pk}}" class="btn btn-primary btn-light btn-sm">{% trans 'Transfer' %}</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
@@ -134,7 +134,7 @@
 													<a class="dropdown-item" onclick="custom_chat('{{sel.user.email}}')">{% trans 'Chat' %}</a>
 													<a class="dropdown-item" href="#">{% trans 'Payment' %}</a>
 													<a class="dropdown-item" onclick="pop({{sel.user.pk}}, 'seller');" href="#" > {% trans 'Login History' %} </a>
-													<a class="dropdown-item" href="#" onclick="chat_history('{{sel.first_name}}',{{sel.user.id}})" >Chat History' %}</a>
+													<a class="dropdown-item" href="#" onclick="chat_history('{{sel.first_name}}',{{sel.user.id}})" >{% trans 'Chat History' %}</a>
 													<a class="dropdown-item" onclick="delete_user({{sel.user.pk}},'seller');" href="#" >{% trans 'Delete' %}</a>
 													{% if sel.is_freeze %}
 													<a class="dropdown-item" onclick="unfreeze_user({{sel.id}}, 'seller');">{% trans 'Unfreeze' %}</a>
@@ -435,7 +435,7 @@
 
 <section class="floatingButtonHere" style="display: none;" id="floating-button">
 	<button class="btn btn-primary" id="floating-confirm" onclick="delete_multiple_users();">{% trans 'Proceed' %}</button>
-	<a href="admin-seller" class=" btn btn-danger">{% trans 'Cancel' %}</a>
+	<a href="{% trans 'admin-seller' %}" class=" btn btn-danger">{% trans 'Cancel' %}</a>
 </section>
 
 
@@ -722,9 +722,9 @@ function delete_multiple_users(){
 	checkbox_values = [...new Set(checkbox_values)];
 
 	if( checkbox_values.length == 1 ){
-		$("#confirm-message-delete").html("{% trans 'Delete the selected "+checkbox_values.length+" Seller' %}");
+		$("#confirm-message-delete").html("{% trans 'Delete the selected' %} "+checkbox_values.length+" {% trans 'Seller' %}");
 	}else{
-		$("#confirm-message-delete").html("{% trans 'Delete the selected "+checkbox_values.length+" Sellers' %}");
+		$("#confirm-message-delete").html("{% trans 'Delete the selected' %}"+checkbox_values.length+" {% trans 'Sellers' %}");
 	}
 
 	$("#confirm-modal-button").attr('onclick','sendsellerspk();');
@@ -738,9 +738,9 @@ function freeze_multiple_users(){
 	checkbox_values = [...new Set(checkbox_values)];
 
 	if ( checkbox_values.length == 1 ){
-		$("#confirm-message-delete").html("{% trans 'Freeze the selected "+checkbox_values.length+" Seller' %}");
+		$("#confirm-message-delete").html("{% trans 'Freeze the selected' %} "+checkbox_values.length+" {% trans 'Seller' %}");
 	}else{
-		$("#confirm-message-delete").html("{% trans 'Freeze the selected "+checkbox_values.length+" Sellers' %}");
+		$("#confirm-message-delete").html("{% trans 'Freeze the selected' %} "+checkbox_values.length+" {% trans 'Sellers' %}");
 	}
 
 	$("#confirm-modal-button").attr('onclick','sendSellersPKFreeze();');
