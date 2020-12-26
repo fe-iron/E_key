@@ -36,7 +36,7 @@ function getMessageById(message) {
 
 function sendMessage(recipients, body) {
     only_once = true;
-    $.post('/api/v1/message/', {
+    $.post('/en-us/api/v1/message/', {
             recipient: JSON.stringify(recipients),
             body: body
         }).fail(function () {
