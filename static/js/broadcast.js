@@ -22,7 +22,6 @@ function drawMessage(message) {
 
 function getMessageById(message) {
     id = JSON.parse(message).message
-<<<<<<< HEAD
     if(only_once){
         $.getJSON(`/api/v1/message/${id}/`, function (data) {
             if (data.user === currentRecipient[0] ||
@@ -33,16 +32,6 @@ function getMessageById(message) {
 
         });
     }
-=======
-    $.getJSON(`/api/v1/message/${id}/`, function (data) {
-        if (data.user === currentRecipient[0] ||
-            (data.recipient === currentRecipient[0] && data.user == currentUser)) {
-            drawMessage(data);
-        }
-        messageList.animate({scrollTop: messageList.prop('scrollHeight')});
-
-    });
->>>>>>> 2ff158a61a5ee690761feb0066d0266705661809
 }
 
 function sendMessage(recipients, body) {
