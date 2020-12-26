@@ -31,7 +31,7 @@ SECRET_KEY = config("SECRET_KEY")
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ["173.231.198.13","www.tesafe.org","tesafe.org", "127.0.0.1"]
+ALLOWED_HOSTS = ["173.231.198.13","www.tesafe.org","tesafe.org"]
 
 ROOT_URLCONF = f'{config("PROJECT_NAME")}.urls'
 
