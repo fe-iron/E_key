@@ -583,7 +583,7 @@ function delete_temp_user(pk, accType){
                     }
                     window.setTimeout(function(){
                         location.reload(true);
-                    }, 6000);
+                    }, 5000);
 
             },
             error: function (response) {
