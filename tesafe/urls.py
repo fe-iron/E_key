@@ -154,7 +154,7 @@ urlpatterns = [
     # for multiple user chat
     path('broadcast', views.broadcast, name='broadcast'),
     # for broadcast from admin account
-    path('broadcast-admin', views.broadcast_admin, name='broadcast-admin'),
+    path(_('broadcast-admin'), views.broadcast_admin, name='broadcast-admin'),
     # chat multiple
     path(_('chat_multiple'), views.chat_multiple, name='chat_multiple'),
     # to get chat history

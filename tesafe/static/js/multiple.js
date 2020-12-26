@@ -47,7 +47,7 @@ function getMessageById(message) {
 }
 
 function sendMessage(recipients, body) {
-        $.post('/api/v1/message/', {
+        $.post('/en-us/api/v1/message/', {
             recipient: JSON.stringify(recipients),
             body: body
         }).fail(function () {

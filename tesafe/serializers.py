@@ -1,15 +1,15 @@
+import json
+from django.db.models import Q
+from .models import MessageModel
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from .models import MessageModel
 from rest_framework.serializers import ModelSerializer, CharField
-from django.db.models import Q
-import json
 
 
 def create_multiple(usernames, fname, user, body):
     for i in usernames:
-        if User.objects.filter(Q(email=i) | Q(username=i)).exists():
-            reci = User.objects.get(Q(email=i) | Q(username=i))
+        if User.objects.filter(email=i).exists():
+            reci = User.objects.get(email=i)
             msg = MessageModel(recipient=reci, body=body, user=user, first_name=fname)
             msg.save()
     return msg
@@ -28,7 +28,7 @@ class MessageModelSerializer(ModelSerializer):
             pass
 
         user = self.context['request'].user
-        fname = User.objects.filter(Q(username=user) | Q(email=user))
+        fname = User.objects.filter(Q(email=user) | Q(username=user))
         fname = fname[0].first_name
 
         if flag:
