@@ -22,7 +22,6 @@ function drawMessage(message) {
 
 function getMessageById(message) {
     id = JSON.parse(message).message
-    console.log(id)
     $.getJSON(`/api/v1/message/${id}/`, function (data) {
         if (data.user === currentRecipient[0] ||
             (data.recipient === currentRecipient[0] && data.user == currentUser)) {

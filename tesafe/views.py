@@ -671,7 +671,7 @@ def admin_home(request):
             'password_history': PasswordHistory.objects.filter(user=request.user).order_by(*cond)
         }
         return render(request, 'tesafe/admin-home.html', params)
-    messages.error(request, "Login first then try again, admin home!!")
+    messages.error(request, _("Login first then try again!!"))
     return redirect("/")
 
 
@@ -3540,7 +3540,7 @@ def destination(request):
             return redirect("tester-home")
         elif WebUser.objects.filter(email=user_email).exists():
             return redirect("user-home")
-    messages.error(request, "Login first then try again!! destination")
+    messages.error(request, _("Login first then try again!!"))
     return redirect("/")
 
 
