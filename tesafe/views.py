@@ -1748,12 +1748,16 @@ def delete(request):
         accType = request.GET.get("accType", None)
 
         if accType == "seller" or accType == "tester" or accType == "user":
+            pk = ' '.join(pk.split())
+            pk = int(pk)
+
             # check for the pk in the database.
             if User.objects.filter(id=pk).exists():
                 my_object = User.objects.get(id=pk)
                 name = my_object.first_name
-                name = "{} has been successfully deleted".format(name)
                 my_object.delete()
+                name = "{} has been successfully deleted".format(name)
+
                 return JsonResponse({"msg": name}, status=200)
             else:
                 # if name not found, then return msg

@@ -73,7 +73,7 @@ class WebUser(models.Model):
     phone = models.CharField(max_length=15, default=None, null=True)
     alias = models.CharField(max_length=100, default=None, null=True)
     profile_pic = models.ImageField(upload_to='user/', default=None, null=True)
-    associated_with = models.ForeignKey(Seller, on_delete=models.SET_NULL, null=True, default=None)
+    associated_with = models.ForeignKey(Seller, on_delete=models.SET_DEFAULT, null=True, default=None)
     is_freeze = models.BooleanField(default=False)
     is_authorized = models.BooleanField(default=False)
     is_shared = models.BooleanField(default=False)
@@ -86,8 +86,8 @@ class WebUser(models.Model):
 
 
 class UserToUser(models.Model):
-    main_user = models.ForeignKey(WebUser, on_delete=models.SET_NULL, null=True, default=None, related_name="main_user")
-    associated_user = models.ForeignKey(WebUser, on_delete=models.SET_NULL, null=True, default=None, related_name="associated_user")
+    main_user = models.ForeignKey(WebUser, on_delete=models.SET_DEFAULT, null=True, default=None, related_name="main_user")
+    associated_user = models.ForeignKey(WebUser, on_delete=models.SET_DEFAULT, null=True, default=None, related_name="associated_user")
     date_time = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -134,7 +134,7 @@ class PWGServers(models.Model):
     email = models.CharField(max_length=255, default=None, null=True)
     password = models.CharField(max_length=255, default=None, null=True)
     pwg_count = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, default=None)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None)
     system_name = models.CharField(max_length=19, null=True, default="not assigned")
 
     class Meta:
@@ -149,7 +149,7 @@ class PWG(models.Model):
     name = models.CharField(max_length=255)
     alias = models.CharField(max_length=255)
     owned_by = models.ForeignKey(PWGServers, verbose_name="PWGServers", on_delete=models.CASCADE, null=True)
-    transfer_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, default=1)
+    transfer_to = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=1)
     is_tested = models.BooleanField(default=False)
     location = models.CharField(max_length=2, default='A')
     # T = obtained by Transfer can do all operation
@@ -210,7 +210,7 @@ class PwgUseRecord(models.Model):
     date = models.DateField(auto_now=True)
     password = models.CharField(max_length=255)
     pwg = models.ForeignKey(PWG, on_delete=models.CASCADE, null=True, default=None)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="used_by", null=True, default=None)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="used_by", null=True, default=None)
 
     def __str__(self):
         return str(self.date)
@@ -252,8 +252,8 @@ class Share(models.Model):
 class PWGHistory(models.Model):
     date = models.DateField(auto_now=True)
     time = models.TimeField(auto_now=True)
-    object = models.ForeignKey(User, on_delete=models.SET("object Deleted"), null=True, default=None, related_name="authorize_to")
-    pwg = models.ForeignKey(PWG, on_delete=models.SET("object Deleted"), null=True, default=None, related_name="pwg")
+    object = models.ForeignKey(User, on_delete=models.SET_DEFAULT, null=True, default=None, related_name="authorize_to")
+    pwg = models.ForeignKey(PWG, on_delete=models.SET_DEFAULT, null=True, default=None, related_name="pwg")
     # N = None, A = Authorize, S = Share, T = Transfer, DA = De-authorize, DS = De-share, D = Deleted,
     # AD = buy from admin, RAD = Return to Admin, RT = Return to Testing again, P = Pass, F = Fail
     action = models.CharField(default="N", max_length=3)
@@ -266,7 +266,7 @@ class PWGHistory(models.Model):
 class TesterPWGHistory(models.Model):
     date = models.DateField(auto_now=True)
     time = models.TimeField(auto_now=True)
-    pwg_name = models.ForeignKey(PWG, on_delete=models.SET_NULL, null=True)
+    pwg_name = models.ForeignKey(PWG, on_delete=models.SET_DEFAULT, null=True, default=None)
     got_on = models.DateTimeField(null=True, default=None)
 
     def __str__(self):
@@ -280,7 +280,7 @@ class TesterPWGHistory(models.Model):
 class TestedPWGHistory(models.Model):
     date = models.DateField(auto_now=True)
     time = models.TimeField(auto_now=True)
-    pwg_name = models.ForeignKey(PWG, on_delete=models.SET_NULL, null=True, default=None, related_name="pwg_name")
+    pwg_name = models.ForeignKey(PWG, on_delete=models.SET_DEFAULT, null=True, default=None, related_name="pwg_name")
     tester = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None, related_name="pwg_tester")
 
     def __str__(self):
