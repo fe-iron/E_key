@@ -1,9 +1,10 @@
 {% extends "rest_framework/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block branding %}
     <a class='navbar-brand' rel="nofollow" href='/'>
-        CHAT - REST API
+        {% trans 'CHAT - REST API' %}
     </a>
 {% endblock %}
 

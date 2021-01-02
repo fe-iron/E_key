@@ -26,11 +26,11 @@ urlpatterns = [
     path(_("tester-tested-pwg-list<int:id>"), views.tester_tested_pwg_list, name="tester-tested-pwg-list"),
 
     # seller PWG
-    path("seller-pwg", views.seller_pwg, name="seller-pwg"),
-    path("seller-home", views.seller_home, name="seller-home"),
-    path("seller-user", views.seller_user, name="seller-user"),
+    path(_("seller-pwg"), views.seller_pwg, name="seller-pwg"),
+    path(_("seller-home"), views.seller_home, name="seller-home"),
+    path(_("seller-user"), views.seller_user, name="seller-user"),
     path("seller-shared<int:pk>", views.seller_shared, name="seller-shared"),
-    path("broadcast_seller", views.broadcast_seller, name="broadcast_seller"),
+    path(_("broadcast_seller"), views.broadcast_seller, name="broadcast_seller"),
     path("seller-shared-pwg", views.seller_shared_pwg, name="seller-shared-pwg"),
     path("transfer-seller<int:pk>", views.transfer_seller, name="transfer-seller"),
     path("transfer-seller-pwg", views.transfer_seller_pwg, name="transfer-seller-pwg"),
@@ -40,16 +40,16 @@ urlpatterns = [
     path("seller-authorized-pwg", views.seller_authorized_pwg, name="seller-authorized-pwg"),
 
     # tester URLs
-    path("tester-home", views.tester_home, name='tester-home'),
-    path("tester-test", views.tester_test, name='tester-test'),
+    path(_("tester-home"), views.tester_home, name='tester-home'),
+    path(_("tester-test"), views.tester_test, name='tester-test'),
     # to make pwg fail
     path("fail", views.fail, name='fail'),
     # to make pwg pass
     path("pass_pwg", views.pass_pwg, name='pass_pwg'),
 
     # User Urls
-    path("user-user", views.user_user, name='user-user'),
-    path("user-home", views.user_home, name='user-home'),
+    path(_("user-user"), views.user_user, name='user-user'),
+    path(_("user-home"), views.user_home, name='user-home'),
     path("user_list", views.user_list, name='user_list'),
     path("share_transfer_multiple", views.share_transfer_multiple, name='share_transfer_multiple'),
     path("user_deauthorize_pwg", views.user_deauthorize_pwg, name='user_deauthorize_pwg'),

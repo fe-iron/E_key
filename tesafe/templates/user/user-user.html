@@ -1,8 +1,9 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
-	<title>User | Users</title>
+	<title>{% trans 'User | Users' %}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -47,10 +48,10 @@
 				<div class="collapse navbar-collapse justify-content" id="navbarSupportedContent">
 					<ul class="navbar-nav">
 						<li class="nav-item pl-3">
-							<a class="nav-link"  href="user-home">PWGs <span class="sr-only">(current)</span></a>
+							<a class="nav-link"  href="{% trans 'user-home' %}">{% trans 'PWGs' %} <span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link active" href="user-user">User</a>
+							<a class="nav-link active" href="{% trans 'user-user' %}">{% trans 'User' %}</a>
 						</li>
 					</ul>
 
@@ -63,9 +64,9 @@
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#" onclick="delete_user();">Delete</a>
-						<a class="dropdown-item" href="#" onclick="chat()">Chat</a>
-						<a class="dropdown-item" href="user-home">Exit</a>
+						<a class="dropdown-item" href="#" onclick="delete_user();">{% trans 'Delete' %}</a>
+						<a class="dropdown-item" href="#" onclick="chat()">{% trans 'Chat' %}</a>
+						<a class="dropdown-item" href="{% trans 'user-home' %}">{% trans 'Exit' %}</a>
 					</div>
 				</div>
 			</nav>
@@ -93,20 +94,20 @@
 									<form class="form-inline">
 										<div class="input-group-prepend mb-1 mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
-											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
+											<input type="text" class="form-control" placeholder="{% trans 'Username' %}" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
 									</form>
 									<!-- Example split danger button -->
 									<div class="btn-group mb-1">
-									  <button type="button" class="btn btn-primary" id="button-chat" disabled>Chat</button>
+									  <button type="button" class="btn btn-primary" id="button-chat" disabled>{% trans 'Chat' %}</button>
 									  <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
 											  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled id="button-dropdown">
 										<i class="fas fa-caret-down"></i>
 									  </button>
 									  <div class="dropdown-menu">
-										<a class="dropdown-item" href="#" onclick="delete_temp_user()" id="delete_button">Delete</a>
-										<a class="dropdown-item" href="#">Review Record</a>
-										<a class="dropdown-item" onclick="change_name();" href="#" id="alias_button">Set Alias</a>
+										<a class="dropdown-item" href="#" onclick="delete_temp_user()" id="delete_button">{% trans 'Delete' %}</a>
+										<a class="dropdown-item" href="#">{% trans 'Review Record' %}</a>
+										<a class="dropdown-item" onclick="change_name();" href="#" id="alias_button">{% trans 'Set Alias' %}</a>
 									  </div>
 									</div>
 
@@ -176,8 +177,8 @@
 
 
 <section class="floatingButtonHere" style="display: none;" id="floating-button">
-	<button class=" btn btn-primary" id="proceed">Proceed</button>
-	<a href="user-user" class=" btn btn-danger">Cancel</a>
+	<button class=" btn btn-primary" id="proceed">{% trans 'Proceed' %}</button>
+	<a href="{% trans 'user-user' %}" class=" btn btn-danger">{% trans 'Cancel' %}</a>
 </section>
 
 <!--	to show confirmation popup of single delete-->
@@ -185,7 +186,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Message</h5>
+					<h5 class="modal-title" id="exampleModalLabel">{% trans 'Message' %}</h5>
 					<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
 				</div>
 				<div class="modal-body text-center p-4">
@@ -203,20 +204,20 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 id="name-change">Change Name for </h5>
-						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h5 id="name-change">{% trans 'Change Name for' %}</h5>
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans 'Close' %}</span></button>
 					</div>
 					<div class="modal-body" id="change-name">
 						<form action="change_alias" method="post" name="submit_alias_change">
 							{% csrf_token %}
 							<div class="form-group">
-								<label>Alias</label>
+								<label>{% trans 'Alias' %}</label>
 								<input type="text" class="form-control"  value="" name="alias" id="alias_value" required>
 								<input type="hidden" class="form-control"  id="alias_id" name="alias_id">
 								<input type="hidden" class="form-control"  value="user-user" name="accType">
 							</div>
-							<button  type="submit" class="btn btn-primary" onclick="submit_alias();" id="btn-alias">Change</button>
-							<a  href="#" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</a>
+							<button  type="submit" class="btn btn-primary" onclick="submit_alias();" id="btn-alias">{% trans 'Change' %}</button>
+							<a  href="#" type="button" class="btn btn-danger" data-dismiss="modal">{% trans 'Cancel' %}</a>
 						</form>
 					</div>
 				</div>
@@ -228,7 +229,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+					<h5 class="modal-title" id="exampleModalLabel">{% trans 'Confirmation' %}</h5>
 					<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
 				</div>
 				<div class="modal-body text-center p-4">
@@ -237,8 +238,8 @@
 
 				</div>
 				<div class="modal-footer justify-content-center">
-					<button type="button" class="btn btn-primary" onclick="deletePWG();">Confirm</button>
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary" onclick="deletePWG();">{% trans 'Confirm' %}</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">{% trans 'Cancel' %}</button>
 				</div>
 			</div>
 		</div>
@@ -253,13 +254,13 @@
 	</form>
 
 	    	<!--	to start chat to a single user -->
-	<form action="chat" method="post" name="single_chat">
+	<form action="{% trans 'chat' %}" method="post" name="single_chat">
 		{% csrf_token %}
 		<input type="hidden" id="chatting_to" name="email_user">
 	</form>
 
 	<!--	to start chat multiple -->
-	<form action="chat_multiple" method="post" name="chat_form">
+	<form action="{% trans 'chat_multiple' %}" method="post" name="chat_form">
 		{% csrf_token %}
 		<input type="hidden" id="user_values" name="users">
 		<input type="hidden" value="user" name="accType">
@@ -360,9 +361,9 @@
 	function delete_popup(){
 		checkbox_values = [...new Set(checkbox_values)];
 		if( checkbox_values.length == 1 ){
-			$("#confirm-message-delete1").html("Delete the selected "+checkbox_values.length+" User");
+			$("#confirm-message-delete1").html("{% trans 'Delete the selected ' %}"+checkbox_values.length+" {% trans 'User' %}");
 		}else{
-			$("#confirm-message-delete1").html("Delete the selected "+checkbox_values.length+"  Users");
+			$("#confirm-message-delete1").html("{% trans 'Delete the selected ' %}"+checkbox_values.length+"  {% trans 'Users' %}");
 		}
 
 		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
@@ -404,7 +405,7 @@
 	function change_name(){
 		var name = $('#alias_button').attr("data-to");
 		var pk = $('#alias_button').attr("data-content");
-		$("#name-change").html("Change Alias Name for <b>"+name+"</b>");
+		$("#name-change").html("{% trans 'Change Alias Name for' %} <b>"+name+"</b>");
 		$("#alias_id").attr('value',pk);
 
 		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
