@@ -50,7 +50,7 @@ class RequestPasswordResetEmail(View):
         email = request.POST['email']
 
         if not User.objects.filter(email=email).exists():
-            messages.error(request, "Email does not exists! try again")
+            messages.error(request, _("Email does not exists! try again"))
             return render(request, "authentication/reset-password.html")
         else:
             user_obj = User.objects.filter(email=email)
@@ -76,7 +76,7 @@ class RequestPasswordResetEmail(View):
             # email.send(fail_silently=False)
             EmailThread(email).start()
 
-            messages.success(request, "We have sent an email to reset the password")
+            messages.success(request, _("We have sent an email to reset the password"))
             return render(request, "authentication/reset-password.html")
 
 
@@ -91,7 +91,7 @@ class CompletePasswordReset(View):
 
             user = User.objects.get(pk = user_id)
             if not PasswordResetTokenGenerator().check_token(user, token):
-                messages.info(request, "Link is already used, please generate a new one")
+                messages.info(request, _("Link is already used, please generate a new one"))
                 return render(request, "authentication/reset-password.html")
         except:
             pass
@@ -120,10 +120,10 @@ class CompletePasswordReset(View):
             pass_his = PasswordHistory(user=user, device_name=device_name, last_pass=pass1)
             pass_his.save()
 
-            messages.success(request, "Password reset successful, now you can login with the new password")
+            messages.success(request, _("Password reset successful, now you can login with the new password"))
             return redirect("/")
         except Exception as e:
-            messages.info(request, "Something went wrong, try again")
+            messages.info(request, _("Something went wrong, try again"))
             return redirect("/")
 
 
@@ -133,13 +133,13 @@ class Verification(View):
             id = force_text(urlsafe_base64_decode(uidb64))
             user = User.objects.get(pk=id)
             if not account_activation_token.check_token(user, token):
-                messages.error(request, "Account is already activated!")
+                messages.error(request, _("Account is already activated!"))
                 return redirect("/")
             if user.is_active:
                 return redirect("/")
             user.is_active = True
             user.save()
-            messages.info(request, "Account activated successfully")
+            messages.info(request, _("Account activated successfully"))
             return redirect("/")
         except Exception as e:
             pass
@@ -164,7 +164,7 @@ def activate_account(request, user):
     )
     # EmailThread(email).start()
     email.send(fail_silently=False)
-    messages.success(request, "We have sent an email to activate your account")
+    messages.success(request, _("We have sent an email to activate your account"))
 
 
 def custom_chat(request):
@@ -446,10 +446,10 @@ def register(request):
         if password1 == password2:
             # conditions to see if it already exists
             if User.objects.filter(username=uname):
-                messages.error(request, "Username already exists! try again")
+                messages.error(request, _("Username already exists! try again"))
                 return redirect('register')
             elif User.objects.filter(email=email):
-                messages.error(request, "Email already exists! try again")
+                messages.error(request, _("Email already exists! try again"))
                 return redirect('register')
             else:
                 # fetching device info
@@ -541,7 +541,7 @@ def register(request):
                     activate_account(request, user)
                     return redirect('/')
         else:
-            messages.error(request, "Password do not match! try again")
+            messages.error(request, _("Password do not match! try again"))
             return redirect('register')
 
     return render(request, 'tesafe/register.html')
@@ -834,7 +834,7 @@ def seller_home(request):
             'password_history': PasswordHistory.objects.filter(user=request.user).order_by(*cond),
         }
         return render(request, 'seller/seller-home.html', param)
-    messages.error(request, "Login first then try again!!")
+    messages.error(request, _("Login first then try again!!"))
     return redirect("/")
 
 
@@ -873,7 +873,7 @@ def seller_user(request):
             "unique_name": unique_name("S", '001'),
         }
         return render(request, 'seller/seller-user.html', param)
-    messages.error(request, "Login first then try again!!")
+    messages.error(request, _("Login first then try again!!"))
     return redirect("/")
 
 
@@ -901,21 +901,22 @@ def seller_pwg(request):
                         count_notif += 1
 
         pwg = PWG.objects.filter(Q(transfer_to=user) | Q(sold_from=user)).order_by('alias')
-        for i in pwg:
-            if i.is_authorized or i.is_shared or i.sold_from:
-                if i.sold_from.id == 1:
-                    pwgs = i.owned_by
-                    pwgserver1.append(pwgs)
+        if pwg is not None:
+            for i in pwg:
+                if i.is_authorized or i.is_shared or i.sold_from:
+                    if i.sold_from.id == 1:
+                        pwgs = i.owned_by
+                        pwgserver1.append(pwgs)
+                    else:
+                        pwgs = i.owned_by
+                        try:
+                            pwgserver.index(pwgs)
+
+                        except ValueError as ve:
+                            pwgserver.append(pwgs)
                 else:
                     pwgs = i.owned_by
-                    try:
-                        pwgserver.index(pwgs)
-
-                    except ValueError as ve:
-                        pwgserver.append(pwgs)
-            else:
-                pwgs = i.owned_by
-                pwgserver1.append(pwgs)
+                    pwgserver1.append(pwgs)
 
         param = {
             "pwgserver_occupied": pwgserver,
@@ -925,7 +926,7 @@ def seller_pwg(request):
             "notif": notif,
         }
         return render(request, 'seller/seller-pwg.html', param)
-    messages.error(request, "Login first then try again!!")
+    messages.error(request, _("Login first then try again!!"))
     return redirect("/")
 
 
@@ -991,7 +992,7 @@ def tester_getback(request, id):
         }
         return render(request, 'tesafe/tester-getback.html', param)
     else:
-        messages.error(request, "This Tester has no PWG")
+        messages.error(request, _("This Tester has no PWG"))
         return redirect('admin-tester')
 
 
@@ -1026,7 +1027,7 @@ def pwg_sublist(request, id):
         }
         return render(request, 'tesafe/pwg-sublist.html', param)
     else:
-        messages.error(request, "This PWG Server has no PWG")
+        messages.error(request, _("This PWG Server has no PWG"))
         return redirect("admin-info-server")
 
 
@@ -1288,7 +1289,7 @@ def seller_deauthorize_pwg(request):
             }
             return render(request, 'seller/seller-deshared-pwg.html', param)
         else:
-            messages.info(request, "Something went wrong! try again")
+            messages.info(request, _("Something went wrong! try again"))
             return redirect('seller_pwg')
 
 
@@ -1323,7 +1324,7 @@ def user_deshared_pwg(request):
                 "action": "De-share",
             }
             return render(request, 'user/seller-deshared-pwg.html', param)
-    messages.info(request, "Something went wrong! try again")
+    messages.info(request, _("Something went wrong! try again"))
     return redirect('user-home')
 
 
@@ -1358,7 +1359,7 @@ def user_deauthorize_pwg(request):
                 "action": "De-authorize",
             }
             return render(request, 'user/seller-deshared-pwg.html', param)
-    messages.info(request, "Something went wrong! try again")
+    messages.info(request, _("Something went wrong! try again"))
     return redirect('user-home')
 
 
@@ -1423,9 +1424,9 @@ def tester_home(request):
             }
             return render(request, "tester/tester-home.html", param)
 
-        messages.error(request, "User not available, please login first")
+        messages.error(request, _("User not available, please login first"))
         return render(request, "tester/tester-home.html")
-    messages.error(request, "please login first, then try again!!")
+    messages.error(request, _("please login first, then try again!!"))
     return redirect("/")
 
 
@@ -1463,9 +1464,9 @@ def tester_test(request):
             }
             return render(request, 'tester/tester-test.html', param)
         else:
-            messages.error(request, "user not available, please login first!")
+            messages.error(request, _("user not available, please login first!"))
             return render(request, 'tester/tester-test.html')
-    messages.error(request, "please login first, then try again!!")
+    messages.error(request, _("please login first, then try again!!"))
     return redirect("/")
 
 
@@ -1497,9 +1498,9 @@ def user_user(request):
                 "count_notif": count_notif,
             }
             return render(request, 'user/user-user.html', param)
-        messages.info(request, "You don't have any user, add first!")
+        messages.info(request, _("You don't have any user, add first!"))
         return render(request, 'user/user-user.html')
-    messages.error(request, "please login first, then try again!!")
+    messages.error(request, _("please login first, then try again!!"))
     return redirect("/")
 
 
@@ -1562,9 +1563,9 @@ def user_home(request):
         }
         if flag:
             return render(request, 'user/user-home.html', param)
-        messages.error(request, "You have no PWG, Buy one first!")
+        messages.error(request, _("You have no PWG, Buy one first!"))
         return render(request, "user/user-home.html")
-    messages.error(request, "please login first, then try again!!")
+    messages.error(request, _("please login first, then try again!!"))
     return redirect("/")
 
 
@@ -1577,7 +1578,7 @@ def password_change(request):
         accType = request.POST['accType']
 
         if old_email == new_conf_email or old_email == new_email:
-            messages.info(request, "Old and new Password are Same, use different!")
+            messages.info(request, _("Old and new Password are Same, use different!"))
             if accType == "seller":
                 return redirect("seller-home")
             elif accType == "admin":
@@ -1600,7 +1601,7 @@ def password_change(request):
 
                 u.set_password(new_email)
                 u.save()
-                messages.info(request, "Successfully changed your password")
+                messages.info(request, _("Successfully changed your password"))
                 if UserLogin.objects.filter(user=u).exists():
                     u_login = UserLogin.objects.get(user=u)
                     accType_db = u_login.acctype
@@ -1623,7 +1624,7 @@ def password_change(request):
 
                 return redirect("/")
             else:
-                messages.info(request, "Wrong Old Password!")
+                messages.info(request, _("Wrong Old Password!"))
                 if accType == "seller":
                     return redirect("seller-home")
                 elif accType == "admin":
@@ -1950,9 +1951,11 @@ def delete_multiple_user(request):
                         tester = User.objects.get(id=id_user)
                         name = tester.first_name
                         tester.delete()
-                        messages.info(request, "{} Seller successfully deleted!".format(name))
+                        ret_text = _("Seller successfully deleted!")
+                        name = _("{} "+ret_text.format(name))
+                        messages.info(request, name)
                     else:
-                        messages.info(request, "Seller is not deleted!")
+                        messages.info(request, _("Seller is not deleted!"))
                         return redirect("admin-seller")
             return redirect('admin-seller')
 
@@ -1966,9 +1969,11 @@ def delete_multiple_user(request):
                     tester = User.objects.get(id=id_user)
                     name = tester.first_name
                     tester.delete()
-                    messages.info(request, "{} Tester successfully deleted!".format(name))
+                    ret_text = _("Tester successfully deleted!")
+                    name = "{} "+ret_text.format(name)
+                    messages.info(request, name)
                 else:
-                    messages.info(request, "Tester is not deleted!")
+                    messages.info(request, _("Tester is not deleted!"))
                     return redirect("admin-tester")
             return redirect('admin-tester')
         elif accType == "pwgs":
@@ -1981,9 +1986,11 @@ def delete_multiple_user(request):
                     if not name:
                         name = pwgs.system_name
                     pwgs.delete()
-                    messages.info(request, "{} PWG Server successfully deleted!".format(name))
+                    ret_text = _("PWG Server successfully deleted!")
+                    name = "{} "+ret_text.format(name)
+                    messages.info(request, name)
                 else:
-                    messages.info(request, "PWG Server is not deleted!")
+                    messages.info(request, _("PWG Server is not deleted!"))
                     return redirect("admin-info-server")
 
             return redirect('admin-info-server')
@@ -1997,13 +2004,15 @@ def delete_multiple_user(request):
                     tester = User.objects.get(id=user_fk.id)
                     name = tester.first_name
                     tester.delete()
-                    messages.info(request, "{} PWG Server successfully deleted!".format(name))
+                    ret_text = _("PWG Server successfully deleted!")
+                    name = "{} "+ret_text.format(name)
+                    messages.info(request, name)
                 else:
-                    messages.info(request, "User is not deleted!")
+                    messages.info(request, _("User is not deleted!"))
                     return redirect("seller-user")
             return redirect('seller-user')
 
-    messages.info(request, "Something went wrong, try again!")
+    messages.info(request, _("Something went wrong, try again!"))
     return redirect('admin-home')
 
 
@@ -2045,9 +2054,9 @@ def transfer_pwgs(request):
 
                 if accType == "seller":
                     if pwg_object.is_authorized or pwg_object.is_freeze or pwg_object.is_shared:
+                        ret_text = _("PWG is not transferred because either it is Authorized or Shared or Freezed")
                         messages.info(request,
-                                      " {} PWG is not transferred because either it is Authorized or Shared or Freezed".format(
-                                          pwg_object.alias))
+                                      " {} "+ret_text.format(pwg_object.alias))
                         return redirect('admin-seller')
                     pwg_object.location = "S"
                     pwg_object.transfer_to = current_user
@@ -2055,9 +2064,9 @@ def transfer_pwgs(request):
 
                 elif accType == "tester":
                     if pwg_object.is_authorized or pwg_object.is_freeze or pwg_object.is_shared:
+                        ret_text = _("PWG is not transferred because either it is Authorized or Shared or Freezed")
                         messages.info(request,
-                                      " {} PWG is not transferred because either it is Authorized or Shared or Freezed".format(
-                                          pwg_object.alias))
+                                      " {} "+ret_text.format(pwg_object.alias))
                         return redirect('admin-tester')
                     pwg_object.location = "T"
                     pwg_object.transfer_to = current_user
@@ -2066,7 +2075,8 @@ def transfer_pwgs(request):
                     pwg_object.sold_from = current_user
                     pwg_object.user_location = "T"
                     if pwg_object.is_authorized or pwg_object.is_freeze or pwg_object.is_shared:
-                        messages.info(request, " {} PWG is not transferred because either it is Authorized or Shared or Freezed".format(pwg_object.alias))
+                        ret_text = _("PWG is not transferred because either it is Authorized or Shared or Freezed")
+                        messages.info(request, " {} "+ret_text.format(pwg_object.alias))
                         return redirect('seller-user')
 
                     pwg_object.save()
@@ -2074,9 +2084,9 @@ def transfer_pwgs(request):
                 elif accType == "admin-info-server":
                     if Seller.objects.filter(id=pk).exists():
                         if pwg_object.is_authorized or pwg_object.is_freeze or pwg_object.is_shared:
+                            ret_text = _("PWG is not transferred because either it is Authorized or Shared or Freezed")
                             messages.info(request,
-                                          " {} PWG is not transferred because either it is Authorized or Shared or Freezed".format(
-                                              pwg_object.alias))
+                                          " {} "+ret_text.format(pwg_object.alias))
                             return redirect('admin-info-server')
                         seller_obj = Seller.objects.get(id=pk)
                         my_id = seller_obj.user.id
@@ -2087,7 +2097,7 @@ def transfer_pwgs(request):
 
                         current_user = seller_obj
                     else:
-                        messages.error(request, "something went wrong, try again!")
+                        messages.error(request, _("something went wrong, try again!"))
                         return redirect(accType)
 
                 if accType != "user":
@@ -2263,7 +2273,7 @@ def add_new(request):
             serial_no = system_name[-4:]
 
         if User.objects.filter(email=email).exists():
-            messages.info(request, "Email already exists, try again!")
+            messages.info(request, _("Email already exists, try again!"))
             if accType == "pwgs":
                 return redirect("admin-info-server")
             elif accType == "seller":
@@ -2302,7 +2312,7 @@ def add_new(request):
         if accType == "seller":
             seller = Seller(user=user, first_name=fname, last_name=lname, alias=alias, email=email, phone=number, system_name=system_name)
             seller.save()
-            messages.info(request, "Successfully Account Created!")
+            messages.info(request, _("Successfully Account Created!"))
             activate_account(request, user)
             return redirect("admin-seller")
 
@@ -2310,7 +2320,7 @@ def add_new(request):
         elif accType == "tester":
             tester = Tester(user=user, first_name=fname, last_name=lname, alias=alias, email=email, phone=number, system_name=system_name)
             tester.save()
-            messages.info(request, "Successfully Account Created!")
+            messages.info(request, _("Successfully Account Created!"))
             activate_account(request, user)
             return redirect("admin-tester")
 
@@ -2327,7 +2337,7 @@ def add_new(request):
             sys_name = SystemName(serial_no=serial_no, user=user, system_name=system_name, is_user=False,
                                   is_seller=False, is_tester=False, is_pwgs=True)
             sys_name.save()
-            messages.info(request, "Successfully Account Created!")
+            messages.info(request, _("Successfully Account Created!"))
             activate_account(request, user)
             return redirect("admin-info-server")
 
@@ -2340,13 +2350,13 @@ def add_new(request):
                 user_obj = WebUser(user=user, first_name=fname, last_name=lname, email=email, phone=number, alias=alias, associated_with=seller_id, system_name=system_name, profile_pic=file)
                 user_obj.save()
                 seller_id.save()
-                messages.info(request, "Successfully Account Created!")
+                messages.info(request, _("Successfully Account Created!"))
                 activate_account(request, user)
                 if file:
                     return redirect("/")
                 return redirect("seller-user")
             else:
-                messages.info(request, "Something went wrong, try again")
+                messages.info(request, _("Something went wrong, try again"))
                 return redirect("seller-user")
 
         elif accType == "admin":
@@ -2354,11 +2364,11 @@ def add_new(request):
                 user_obj = WebAdmin(user=user, first_name=fname, last_name=lname, email=email, phone=number, system_name=system_name, alias=alias)
                 user_obj.save()
 
-                messages.info(request, "Successfully Account Created!")
+                messages.info(request, _("Successfully Account Created!"))
                 activate_account(request, user)
                 return redirect("admin-home")
             else:
-                messages.info(request, "Something went wrong, try again")
+                messages.info(request, _("Something went wrong, try again"))
                 return redirect("admin-home")
     else:
         return redirect("admin-home")
@@ -2396,7 +2406,7 @@ def freeze_multiple_user(request):
                         seller.is_freeze = True
                         seller.save()
                     else:
-                        messages.error(request, "Some of the Seller(s) was not freezed!")
+                        messages.error(request, _("Some of the Seller(s) was not freezed!"))
                         return redirect("admin-seller")
             return redirect('admin-seller')
 
@@ -2410,7 +2420,7 @@ def freeze_multiple_user(request):
                         tester.is_freeze = True
                         tester.save()
                     else:
-                        messages.error(request, "Some of the Tester(s) was not freezed!")
+                        messages.error(request, _("Some of the Tester(s) was not freezed!"))
                         return redirect('admin-tester')
             return redirect('admin-tester')
 
@@ -2424,7 +2434,7 @@ def freeze_multiple_user(request):
                         pwg.is_freeze = True
                         pwg.save()
                     else:
-                        messages.error(request, "Some of the PWG(s) was not freezed!")
+                        messages.error(request, _("Some of the PWG(s) was not freezed!"))
 
             if pk:
                 return redirect('pwg-sublist', id=int(pk))
@@ -2441,7 +2451,7 @@ def freeze_multiple_user(request):
                         tester.is_freeze = True
                         tester.save()
                     else:
-                        messages.error(request, "Some of the User(s) was not freezed!")
+                        messages.error(request, _("Some of the User(s) was not freezed!"))
                         return redirect('seller-user')
             return redirect('seller-user')
     return redirect('admin-home')
@@ -2462,7 +2472,7 @@ def change_alias(request):
 
                 return redirect("admin-info-server")
             else:
-                messages.error(request, "Something went wrong! try again")
+                messages.error(request, _("Something went wrong! try again"))
                 return redirect("admin-info-server")
 
         elif accType == "pwg":
@@ -2472,7 +2482,7 @@ def change_alias(request):
                 pwgs.save()
                 return redirect("user-home")
             else:
-                messages.error(request, "Something went wrong! try again")
+                messages.error(request, _("Something went wrong! try again"))
                 return redirect("user-home")
 
         elif accType == "seller":
@@ -2483,16 +2493,16 @@ def change_alias(request):
                         user_obj = Seller.objects.get(user=user_obj.id)
                         user_obj.alias = alias
                         user_obj.save()
-                        messages.info(request, "Your Alias changed to {}".format(alias))
+                        messages.info(request, _("Your Alias changed to").join("{)".format(alias)))
                         return redirect("seller-home")
                     else:
-                        messages.error(request, "Something went wrong! try again")
+                        messages.error(request, _("Something went wrong! try again"))
                         return redirect("seller-home")
                 else:
-                    messages.error(request, "Something went wrong! try again")
+                    messages.error(request, _("Something went wrong! try again"))
                     return redirect("seller-home")
             else:
-                messages.error(request, "Alias name does not match! try again")
+                messages.error(request, _("Alias name does not match! try again"))
                 return redirect("seller-home")
 
         elif accType == "user-user":
@@ -2502,10 +2512,10 @@ def change_alias(request):
                 user_obj.save()
                 return redirect("user-user")
             else:
-                messages.error(request, "Something went wrong! try again")
+                messages.error(request, _("Something went wrong! try again"))
                 return redirect("user-user")
     else:
-        messages.info(request, "Something went wrong! try again")
+        messages.info(request, _("Something went wrong! try again"))
         return redirect("/")
 
 
@@ -2644,10 +2654,10 @@ def assign(request):
                                 pwg_his = PWGHistory(object=main_user, pwg=pwg_obj, action="A")
                                 pwg_his.save()
                         else:
-                            messages.error(request, "User object not found!")
+                            messages.error(request, _("User object not found!"))
                             return redirect("user-home")
                 else:
-                    messages.error(request, "PWG not found!")
+                    messages.error(request, _("PWG not found!"))
                     return redirect("user-home")
 
             return redirect("user-home")
@@ -3240,7 +3250,8 @@ def delete_temp(request):
                     my_object = PWG.objects.get(id=pwg_id)
                     if my_object.is_shared or my_object.is_authorized:
                         name = my_object.alias
-                        messages.error(request, "Oops, {} is not deleted because either the {} is shared or Authorized".format(name, name))
+                        ret_text = _("is not deleted because either the {} is shared or Authorized")
+                        messages.error(request, "Oops, {} "+ret_text.format(name, name))
                         return redirect("user-home")
                     my_object.user_location = "T"
                     my_object.sold_from = None
@@ -3261,10 +3272,10 @@ def delete_temp(request):
 
                 else:
                     # if name not found, then return msg
-                    messages.error(request, "PWG Not found!")
+                    messages.error(request, _("PWG Not found!"))
                     return redirect("user-home")
 
-            messages.error(request, "PWG successfully deleted!")
+            messages.error(request, _("PWG successfully deleted!"))
             return redirect("user-home")
         elif accType == "multiple-users":
             temp_list = ''
@@ -3286,20 +3297,21 @@ def delete_temp(request):
                     my_object = WebUser.objects.get(id=user_id)
                     if my_object.is_shared or my_object.is_authorized:
                         name = my_object.alias
-                        messages.error(request, "Oops, {} is not deleted because either the {} is shared or Authorized".format(name, name))
+                        ret_text = _("is not deleted because either the {} is shared or Authorized")
+                        messages.error(request, "Oops, {} "+ret_text.format(name, name))
                         return redirect("user-user")
 
                     user_obj.delete()
                     my_object.associated_with = None
                     my_object.save()
-                    print("deleted")
+
 
                 else:
                     # if name not found, then return msg
-                    messages.error(request, "Something went wrong, try again!")
+                    messages.error(request, _("Something went wrong, try again!"))
                     return redirect("user-user")
 
-            messages.error(request, "User successfully deleted!")
+            messages.error(request, _("User successfully deleted!"))
             return redirect("user-user")
 
     else:
@@ -3335,7 +3347,7 @@ def return_pwg(request):
                             trans_pwg.delete()
 
                     else:
-                        messages.info(request, "PWG Object not found!")
+                        messages.info(request, _("PWG Object not found!"))
                         return redirect("seller-pwg")
 
                     if PWGHistory.objects.filter(object=user, pwg=pwg_obj, action="RAD").exists():
@@ -3345,7 +3357,7 @@ def return_pwg(request):
                         pwg_his.save()
             return redirect("seller-pwg")
 
-    messages.error(request, 'Something went wrong')
+    messages.error(request, _('Something went wrong'))
     return redirect("/")
 
 
@@ -3374,9 +3386,9 @@ def transfer_pwg_multiple_users(request):
                         user_obj = WebUser.objects.get(id=user_id)
                         u = user_obj.user
                         if pwg_obj.is_authorized or pwg_obj.is_freeze or pwg_obj.is_shared:
+                            ret_text = _("PWG is not transferred because either it is Authorized or Shared or Freezed")
                             messages.info(request,
-                                          " {} PWG is not transferred because either it is Authorized or Shared or Freezed".format(
-                                              pwg_obj.alias))
+                                          " {} "+ret_text.format(pwg_obj.alias))
                             return redirect('seller-pwg')
                         pwg_obj.sold_from = u
                         pwg_obj.t = True
@@ -3392,7 +3404,7 @@ def transfer_pwg_multiple_users(request):
         return redirect("seller-pwg")
 
     else:
-        messages.info(request, "something went wrong try again!")
+        messages.info(request, _("something went wrong try again!"))
         return redirect("/")
 
 
@@ -3450,7 +3462,7 @@ def retest(request):
             return redirect("tester-home")
 
     else:
-        messages.info(request, "something went wrong, Try again!")
+        messages.info(request, _("something went wrong, Try again!"))
         return redirect("/")
 
 
@@ -3489,10 +3501,10 @@ def fail(request):
             messages.info(request, "Successfully added the {} in failed list".format(pwg_alias))
             return redirect("tester-test")
         else:
-            messages.error(request, "PWG object is not available")
+            messages.error(request, _("PWG object is not available"))
             return redirect("tester-test")
 
-    messages.error(request, "something went wrong! try again")
+    messages.error(request, _("something went wrong! try again"))
     return redirect("/")
 
 
@@ -3521,10 +3533,10 @@ def pass_pwg(request):
             messages.info(request, "Successfully added the {} in passed list".format(pwg_alias))
             return redirect("tester-test")
         else:
-            messages.error(request, "PWG object is not available")
+            messages.error(request, _("PWG object is not available"))
             return redirect("tester-test")
 
-    messages.error(request, "something went wrong! try again")
+    messages.error(request, _("something went wrong! try again"))
     return redirect("/")
 
 
@@ -3611,13 +3623,13 @@ def share_transfer_multiple(request):
                                 pwg_his = PWGHistory(object=main_user, pwg=pwg_obj, action="S")
                                 pwg_his.save()
                         else:
-                            messages.error(request, "User object not found!")
+                            messages.error(request, _("User object not found!"))
                             return redirect("user-home")
                 elif action == "transfer":
                     if pwg_obj.is_authorized or pwg_obj.is_freeze or pwg_obj.is_shared:
+                        ret_text = _("PWG is not transferred because either it is Authorized or Shared or Freezed")
                         messages.info(request,
-                                      " {} PWG is not transferred because either it is Authorized or Shared or Freezed".format(
-                                          pwg_obj.alias))
+                                      " {} "+ret_text.format(pwg_obj.alias))
                         return redirect('user-home')
                     for user_id in user_ids:
                         if user_id == ",":
@@ -3641,14 +3653,14 @@ def share_transfer_multiple(request):
                                 pwg_his.save()
 
                         else:
-                            messages.error(request, "User object not found!")
+                            messages.error(request, _("User object not found!"))
                             return redirect("user-home")
             else:
-                messages.error(request, "PWG not found!")
+                messages.error(request, _("PWG not found!"))
                 return redirect("user-home")
 
         return redirect("user-home")
-    messages.error(request, "something went wrong, try again!")
+    messages.error(request, _("something went wrong, try again!"))
     return redirect("user-home")
 
 
@@ -3861,5 +3873,5 @@ def broadcast_seller(request):
                 }
                 return render(request, "core/chat.html", param)
 
-    messages.info(request, "Something went wrong, try again!")
+    messages.info(request, _("Something went wrong, try again!"))
     redirect("seller-home")

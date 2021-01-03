@@ -41,6 +41,7 @@
 						<div class="card" style="box-shadow: 5px 10px 18px #000000;">
 
 							<h3 class="text-center pt-3">{% trans 'LOGIN' %}</h3>
+							<p>{% include 'language_selector.html' %}</p>
 							<div class="card-body">
 								<form method="post" action="">
 									{% csrf_token %}

@@ -1,8 +1,9 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Checkout</title>
+	<title>{% trans 'Checkout' %}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Ensures optimal rendering on mobile devices. -->
@@ -40,12 +41,10 @@
 				<div class="collapse navbar-collapse justify-content" id="navbarSupportedContent">
 					<ul class="navbar-nav">
 						<li class="nav-item pl-3">
-							<a class="nav-link active"  href="/">Exit <span class="sr-only">(current)</span></a>
+							<a class="nav-link active"  href="/">{% trans 'Exit' %} <span class="sr-only">(current)</span></a>
 						</li>
 					</ul>
-
 				</div>
-
 			</nav>
 		</div>
 	</section>
@@ -60,7 +59,7 @@
 
 
 				<div class="col-md-5">
-                    <label for="" class="h1 my-5 text-center text-primary">Pay using below Methods</label>
+                    <label for="" class="h1 my-5 text-center text-primary">{% trans 'Pay using below Methods' %}</label>
                     <div id="paypal-button-container"></div>
                 </div>
 			</div>

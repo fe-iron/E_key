@@ -1,19 +1,20 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block main %}
 
     <div class="container">
         <div class="page-header">
-            <h1>Welcome to ChatApp
-                <small>start chatting!</small>
+            <h1>{% trans 'Welcome to ChatApp' %}
+                <small>{% trans 'start chatting!' %}</small>
             </h1>
         </div>
         <div class="row-fluid">
             <div class="col-md">
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        <h4 class="panel-title">Chatting to {{name}}</h4>
+                        <h4 class="panel-title">{% trans 'Chatting to' %} {{name}}</h4>
                     </div>
                     <div>
                         <ul id="messages" class="messages">
@@ -24,12 +25,12 @@
                         <div class="input-group">
                             <input id="chat-input" type="text"
                                    class="form-control input"
-                                   placeholder="Type your message here ..."
+                                   placeholder="{% trans 'Type your message here ...' %}"
                                    maxlength="500">
                             <span class="input-group-btn">
                             <button class="btn btn-info btn"
                                     id="btn-send">
-                                Send</button>
+                                {% trans 'Send' %}</button>
                         </span>
                         </div>
                     </div>

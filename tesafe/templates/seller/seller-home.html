@@ -1,8 +1,9 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Seller | Home</title>
+	<title>{% trans 'Seller | Home' %}</title>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -32,13 +33,13 @@
 				<div class="collapse navbar-collapse justify-content" id="navbarSupportedContent">
 					<ul class="navbar-nav">
 						<li class="nav-item pl-3">
-							<a class="nav-link active"  href="seller-home">Home <span class="sr-only">(current)</span></a>
+							<a class="nav-link active"  href="{% trans 'seller-home' %}">{% trans 'Home' %}<span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link " href="seller-user">User</a>
+							<a class="nav-link " href="{% trans 'seller-user' %}">{% trans 'User' %}</a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link" href="seller-pwg">PWG</a>
+							<a class="nav-link" href="{% trans 'seller-pwg' %}">{% trans 'PWG' %}</a>
 						</li>
 					</ul>
 					
@@ -51,17 +52,17 @@
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="broadcast_seller">Broadcast</a>
-						<a class="dropdown-item" href="#change-passward" onclick="myfun3()">Change Password</a>
-						<a class="dropdown-item" href="#" onclick="custom_chat('fe.iron9091@gmail.com')">Chat With Admin</a>
-						<a class="dropdown-item" href="#login-history" onclick="myfun1()">Login History</a>
-						<a class="dropdown-item" href="#password-history" onclick="myfun2()">Password History</a>
-						<a class="dropdown-item" href="#" onclick="myfun4()">Set Alias</a>
-						<a class="dropdown-item" href="#Statics" onclick="myfun()">Statistics</a>
+						<a class="dropdown-item" href="{% trans 'broadcast_seller' %}">{% trans 'Broadcast' %}</a>
+						<a class="dropdown-item" href="#change-passward" onclick="myfun3()">{% trans 'Change Password' %}</a>
+						<a class="dropdown-item" href="#" onclick="custom_chat('fe.iron9091@gmail.com')">{% trans 'Chat With Admin' %}</a>
+						<a class="dropdown-item" href="#login-history" onclick="myfun1()">{% trans 'Login History' %}</a>
+						<a class="dropdown-item" href="#password-history" onclick="myfun2()">{% trans 'Password History' %}</a>
+						<a class="dropdown-item" href="#" onclick="myfun4()">{% trans 'Set Alias' %}</a>
+						<a class="dropdown-item" href="#Statics" onclick="myfun()">{% trans 'Statistics' %}</a>
 						{% if user.is_authenticated %}
-						<a class="dropdown-item" href="logout">Log Out</a>
+						<a class="dropdown-item" href="{% trans 'logout' %}">{% trans 'Log Out' %}</a>
 						{%else%}
-						<a class="dropdown-item" href="/">Exit</a>
+						<a class="dropdown-item" href="/">{% trans 'Exit' %}</a>
 						{% endif %}
 					</div>
 				</div>
@@ -79,29 +80,29 @@
 				<div class="col-md-10 py-2 px-5">
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="Statics">
 						<div class="col-md">
-							<h4 class="">statistics</h4>
+							<h4 class="">{% trans 'statistics' %}</h4>
 							<div class="row">
 								<div class="col-md">
 									<div class="table-responsive">
 										<table class="table">
 											<thead>
 												<tr>
-													<th scope="col">Account Name</th>
-													<th scope="col">Total Number</th>
-													<th scope="col">Online Number</th>
-													<th scope="col">Offline Number</th>
+													<th scope="col">{% trans 'Account Name' %}</th>
+													<th scope="col">{% trans 'Total Number' %}</th>
+													<th scope="col">{% trans 'Online Number' %}</th>
+													<th scope="col">{% trans 'Offline Number' %}</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr>
-													<th scope="row">PWGs</th>
+													<th scope="row">{% trans 'PWGs' %}</th>
 													<td>{{pwgs}}</td>
 													<td>{{pwgs}}</td>
 													<td>0</td>
 												</tr>
 
 												<tr>
-													<th scope="row">User</th>
+													<th scope="row">{% trans 'User' %}</th>
 													<td>{{seller.user_count}}</td>
 													<td>{{user_online}}</td>
 													<td>{{user_offline}}</td>
@@ -117,31 +118,31 @@
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="login-history" style="display: none;">
 
 						<div class="col-md">
-							<h4 class="">Login History</h4>
+							<h4 class="">{% trans 'Login History' %}</h4>
 							<div class="row">
 								<div class="col-md-6 py-3">
-									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> Number Of times Admin Been Logged in </h6>
-									<p>{{history_count}} times</p>
+									<h6 class="font-weight-bold"><span><i class="fas fa-caret-right"></i></span> {% trans 'Number Of times Admin Been Logged in' %} </h6>
+									<p>{{history_count}} {% trans 'times' %}</p>
 								</div>
 								<div class="col-md-6 ">
 									<div class="float-right">
-										<a href="seller-home"><button type="button" class="btn btn-secondary">Return</button></a>
+										<a href="{% trans 'seller-home' %}"><button type="button" class="btn btn-secondary">{% trans 'Return' %}</button></a>
 									</div>
 								</div>
 							</div>
 
 							<div class="row">
 								<div class="col-md">
-									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Login History</h6>
+									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> {% trans 'Login History' %}</h6>
 									<div class="table-responsive">
 										<table class="table">
 											<thead>
 												<tr>
-													<th scope="col">Sr. No.</th>
-													<th scope="col">Date</th>
-													<th scope="col">Time</th>
-													<th scope="col">Device Name</th>
-													<th scope="col">Login IP Address</th>
+													<th scope="col">{% trans 'Sr. No.' %}</th>
+													<th scope="col">{% trans 'Date' %}</th>
+													<th scope="col">{% trans 'Time' %}</th>
+													<th scope="col">{% trans 'Device Name' %}</th>
+													<th scope="col">{% trans 'Login IP Address' %}</th>
 
 												</tr>
 											</thead>
@@ -168,22 +169,22 @@
 
 					<div class="row justify-content-center bg-button-1 p-4 mt-3 mb-3" id="alias" style="display: none;">
 						<div class="col-md">
-							<h4 class="font-weight-bold"> Set Alias</h4>
+							<h4 class="font-weight-bold"> {% trans 'Set Alias' %}</h4>
 							<div class="row">
 								<div class="col-md-6 py-3">
 									<form action="change_alias" method="post" name="alias_form">
 										{% csrf_token %}
 										<label for="" class="set_alias_error"></label>
 									  <div class="form-group">
-									    <input type="text" class="form-control" placeholder="Enter Alias " id="alias_name" required name="alias">
+									    <input type="text" class="form-control" placeholder="{% trans 'Enter Alias' %}" id="alias_name" required name="alias">
 									  </div>
 									  <div class="form-group">
-									     <input type="text" class="form-control" placeholder="Confirm Alias " id="alias_name_conf" required name="alias_conf">
+									     <input type="text" class="form-control" placeholder="{% trans 'Confirm Alias' %}" id="alias_name_conf" required name="alias_conf">
 									  </div>
 										<input type="hidden" name="alias_id" value="{{request.user.id}}">
 										<input type="hidden" name="accType" value="seller">
-									<button class="btn btn-success" type="button" onclick="check_alias()">Submit</button>
-									<a href="seller-home" class="btn btn-secondary">Cancel</a>
+									<button class="btn btn-success" type="button" onclick="check_alias()">{% trans 'Submit' %}</button>
+									<a href="{% trans 'seller-home' %}" class="btn btn-secondary">{% trans 'Cancel' %}</a>
 									</form>
 								</div>
 
@@ -196,25 +197,25 @@
 					<div class="row justify-content-center bg-button-1 p-4 my-5" id="change-passward" style="display: none;">
 
 						<div class="col-md">
-							<h4 class="">Change Password<span class="float-right"></span></h4>
+							<h4 class="">{% trans 'Change Password' %}<span class="float-right"></span></h4>
 							<div class="row ">
 								<div class="col-md-8 py-3">
-									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> Change Your Current Password </h6>
+									<h6 class="font-weight-bold"> <span><i class="fas fa-caret-right"></i></span> {% trans 'Change Your Current Password' %} </h6>
 									<form action="password_change" method="post">
 										{% csrf_token %}
 										<label id="add-new-msg"></label>
 
 										<div class="form-group"><div class="row">
 										  <div class="col-md-6">
-									   		 <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter your old Password" name="old_password" required id="old-password">
+									   		 <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="{% trans 'Enter your old Password' %}" name="old_password" required id="old-password">
 										  </div>
 									  </div></div>
 									  <div class="form-group"><div class="row">
 										  <div class="col-md-6">
-									     	<input type="password" class="form-control"  placeholder="Enter New Password " name="new_password" required id="new-password" value="" title="Password should include One Capital letter, any character from it ! @ # $ % ^ & * ( ) _ - = { } < > ? and atleast 8 characters">
+									     	<input type="password" class="form-control"  placeholder="{% trans 'Enter New Password' %}" name="new_password" required id="new-password" value="" title="Password should include One Capital letter, any character from it ! @ # $ % ^ & * ( ) _ - = { } < > ? and atleast 8 characters">
 										  </div>
 										  <div class="col-md-2 mt-2 ml-n3">
-										  <span data-toggle="tooltip" data-placement="right" title="Password should include One Capital letter, any character from this ! @ # $ % ^ & * ( ) _ - = { } < > ? and at least 8 characters">
+										  <span data-toggle="tooltip" data-placement="right" title="{% trans 'Password should include One Capital letter, any character from this ! @ # $ % ^ & * ( ) _ - = { } < > ? and at least 8 characters' %}">
 											  <i class="fa fa-question danger" aria-hidden="true" style="color:red;"></i>
 										  </span>
 										  </div>
@@ -225,7 +226,7 @@
 
 									  <div class="form-group"><div class="row">
 										  <div class="col-md-6">
-									     <input type="password" class="form-control"  placeholder="Confirm New Password " name="new_conf_password" required id="conf-password" value="" title="Password should include One Capital letter, any character from it ! @ # $ % ^ & * ( ) _ - = { } < > ? and atleast 8 characters">
+									     <input type="password" class="form-control"  placeholder="{% trans 'Confirm New Password' %}" name="new_conf_password" required id="conf-password" value="" title="{% trans 'Password should include One Capital letter, any character from it ! @ # $ % ^ & * ( ) _ - = { } < > ? and atleast 8 characters' %}">
 										  </div>
 										  <div class="col-md-2 ml-n3 mt-2"></div>
 										  <div class="col-md-2 mt-2 ml-n5">
@@ -234,8 +235,8 @@
 									  </div></div>
 
 										<input type="hidden" name="accType" value="seller">
-									<button class="btn btn-success" type="submit" disabled id="add-new-submit-button">Proceed</button>
-									<a href="seller-home" class="btn-secondary btn " type="button">Cancel</a>
+									<button class="btn btn-success" type="submit" disabled id="add-new-submit-button">{% trans 'Proceed' %}</button>
+									<a href="{% trans 'seller-home' %}" class="btn-secondary btn " type="button">{% trans 'Cancel' %}</a>
 									</form>
 								</div>
 							</div>
@@ -248,11 +249,11 @@
 						<div class="col-md">
 							<div class="row">
 								<div class="col-md-6">
-									<h4 class=""> Password HISTORY</h4>
+									<h4 class=""> {% trans 'Password HISTORY' %}</h4>
 								</div>
 								<div class="col-md-6">
 										<div class="float-right">
-											<a href="seller-home"><button type="button" class="btn btn-secondary">Return</button></a>
+											<a href="{% trans 'seller-home' %}"><button type="button" class="btn btn-secondary">{% trans 'Return' %}</button></a>
 										</div>
 								</div>
 							</div>
@@ -260,11 +261,11 @@
 								<table class="table">
 									<thead>
 										<tr>
-											<th scope="col">Sr. No.</th>
-											<th scope="col">Date</th>
-											<th scope="col">Time</th>
-											<th scope="col">Device Name</th>
-											<th scope="col">Last Password</th>
+											<th scope="col">{% trans 'Sr. No.' %}</th>
+											<th scope="col">{% trans 'Date' %}</th>
+											<th scope="col">{% trans 'Time' %}</th>
+											<th scope="col">{% trans 'Device Name' %}</th>
+											<th scope="col">{% trans 'Last Password' %}</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -307,15 +308,15 @@
       <!--Body-->
       <div class="modal-body text-center mb-1">
 
-        <h5 class="my-2 mb-3">Hi, {{admin_name}}</h5>
+        <h5 class="my-2 mb-3">{% trans 'Hi' %}, {{admin_name}}</h5>
 
         <div class="md-form ml-0 mr-0">
-			<label for="password_to_show" id="password_label">Enter Current Password to see</label>
-          <input type="password" id="password_to_show" class="form-control form-control-sm validate ml-0" placeholder="Enter Current Password to see">
+			<label for="password_to_show" id="password_label">{% trans 'Enter Current Password to see' %}</label>
+          <input type="password" id="password_to_show" class="form-control form-control-sm validate ml-0" placeholder="{% trans 'Enter Current Password to see' %}">
         </div>
 
         <div class="text-center mt-4">
-          <button class="btn btn-primary mt-1" onclick="send_request();">Show </button>
+          <button class="btn btn-primary mt-1" onclick="send_request();">{% trans 'Show' %}</button>
         </div>
       </div>
 
@@ -327,7 +328,7 @@
 
 
 	<!--	to start chat to a single user -->
-	<form action="chat" method="post" name="single_chat">
+	<form action="{% trans 'chat' %}" method="post" name="single_chat">
 		{% csrf_token %}
 		<input type="hidden" id="chatting_to" name="email_user">
 	</form>
@@ -520,7 +521,7 @@
 				success: function (response) {
 					if(response['msg'] == false){
 						$("#password_label").attr("class", "text-danger");
-						$("#password_label").html("Wrong Password");
+						$("#password_label").html("{% trans 'Wrong Password' %}");
 					}else{
 						$('#modalLoginAvatar').modal('hide');
 						var data_id = $("#password_to_show").attr("data-content");
@@ -546,16 +547,15 @@
 			var name = $("#alias_name").val();
 			if( name == name_conf){
 				if(name == "" || name_conf == ""){
-					$(".set_alias_error").html("Alias can't be empty!");
+					$(".set_alias_error").html("{% trans 'Alias can not be empty!' %}");
 					$(".set_alias_error").addClass('text-danger');
 				}else{
 					document.forms['alias_form'].submit();
 				}
 			}else{
-				$(".set_alias_error").html("Alias name does not match, try again!");
+				$(".set_alias_error").html("{% trans 'Alias name does not match, try again!' %}");
 				$(".set_alias_error").addClass('text-danger');
 			}
-
 		}
 
 
@@ -566,7 +566,6 @@
 		}
 
 	</script>
-
 
 </body>
 </html>

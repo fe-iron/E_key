@@ -55,7 +55,7 @@ function chat_history(user_name, fk){
                         var timestamp = response[i]['fields']['timestamp'];
                         var msg = response[i]['fields']['body'];
                         var date = timestamp.slice(0,10)
-                        var time = timestamp.slice(12,17)
+                        var time = timestamp.slice(12,16)
 
                         count = count + 1;
                         text += '<tr><th scope="row">'+count+'</th><td>'+msg+'</td><td>'+time+' & '+date+'</td></tr>';

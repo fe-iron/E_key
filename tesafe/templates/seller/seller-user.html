@@ -1,8 +1,9 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Seller | Users</title>
+	<title>{% trans 'Seller | Users' %}</title>
 
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,13 +33,13 @@
 				<div class="collapse navbar-collapse justify-content" id="navbarSupportedContent">
 					<ul class="navbar-nav">
 						<li class="nav-item pl-3">
-							<a class="nav-link "  href="seller-home">Home <span class="sr-only">(current)</span></a>
+							<a class="nav-link "  href="{% trans 'seller-home' %}">{% trans 'Home' %} <span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link active" href="seller-user">User</a>
+							<a class="nav-link active" href="{% trans 'seller-user' %}">{% trans 'User' %}</a>
 						</li>
 						<li class="nav-item pl-3">
-							<a class="nav-link" href="seller-pwg">PWG</a>
+							<a class="nav-link" href="{% trans 'seller-pwg' %}">{% trans 'PWG' %}</a>
 						</li>
 					</ul>
 				</div>
@@ -51,12 +52,12 @@
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#" onclick="myfun1()">Add New</a>
-						<a class="dropdown-item" href="#" onclick="broadcast()">Broadcast</a>
-						<a class="dropdown-item" href="#" onclick="chat()">Chat</a>
-						<a class="dropdown-item" href="#" onclick="myFunction()">Delete</a>
-						<a class="dropdown-item" href="#" onclick="myFunction1()"> Freeze </a>
-						<a class="dropdown-item" href="seller-home">Exit</a>
+						<a class="dropdown-item" href="#" onclick="myfun1()">{% trans 'Add New' %}</a>
+						<a class="dropdown-item" href="#" onclick="broadcast()">{% trans 'Broadcast' %}</a>
+						<a class="dropdown-item" href="#" onclick="chat()">{% trans 'Chat' %}</a>
+						<a class="dropdown-item" href="#" onclick="myFunction()">{% trans 'Delete' %}</a>
+						<a class="dropdown-item" href="#" onclick="myFunction1()"> {% trans 'Freeze' %} </a>
+						<a class="dropdown-item" href="{% trans 'seller-home' %}">{% trans 'Exit' %}</a>
 					</div>
 				</div>
 			</nav>
@@ -76,11 +77,11 @@
 						<div class="col-md">
 							<header>
 								<nav class="navbar navbar-light  venue-registration">
-									<a class="h4 text-dark font-weight-bold pt-2">User Account list</a>
+									<a class="h4 text-dark font-weight-bold pt-2">{% trans 'User Account list' %}</a>
 									<form class="form-inline">
 										<div class="input-group-prepend mb-1 mr-2">
 											<span class="input-group-text" id="addon-wrapping"><i class="fas fa-search fa-1x"></i></span>
-											<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
+											<input type="text" class="form-control" placeholder="{% trans 'Username' %}" aria-label="Username" aria-describedby="addon-wrapping" id="myInput">
 										</div>
 									</form>
 								</nav>
@@ -92,8 +93,8 @@
 									<thead>
 										<tr>
 											<th scope="col" style="position: relative;"><input type="checkbox" id="checkAll" disabled> <i class="fas fa-sort-down"></i></th>
-											<th scope="col">Name</th>
-											<th scope="col">Action</th>
+											<th scope="col">{% trans 'Name' %}</th>
+											<th scope="col">{% trans 'Action' %}</th>
 										</tr>
 									</thead>
 									<tbody id="myTable">
@@ -113,31 +114,31 @@
 												{% endif %}
 											</td>
 											{% endif %}
-											<td><a href="transfer-seller{{webuser.user.id}}" class="btn btn-primary btn-light btn-sm">Transfer</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
+											<td><a href="transfer-seller{{webuser.user.id}}" class="btn btn-primary btn-light btn-sm">{% trans 'Transfer' %}</a> <div class="dropup  mb-0 ml-xl-3  ml-sm-2" >
 												<button  class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
 												<div class="dropdown-menu" id="dropdown_menu">
-													<a class="dropdown-item" onclick="custom_chat('{{webuser.user.email}}')">Chat</a>
+													<a class="dropdown-item" onclick="custom_chat('{{webuser.user.email}}')">{% trans 'Chat' %}</a>
 													{% if webuser.is_authorized %}
-														<a class="dropdown-item" href="#" onclick="deauthorize({{webuser.user.id}}, 'seller');">De-authorize</a>
+														<a class="dropdown-item" href="#" onclick="deauthorize({{webuser.user.id}}, 'seller');">{% trans 'De-authorize' %}</a>
 													{% else %}
-														<a class="dropdown-item" href="seller-authorized{{webuser.user.id}}">Authorize</a>
+														<a class="dropdown-item" href="seller-authorized{{webuser.user.id}}">{% trans 'Authorize' %}</a>
 													{% endif %}
 
 													{% if webuser.is_shared %}
-														<a class="dropdown-item" href="#" onclick="deshare({{webuser.user.id}}, 'seller');">De-share</a>
+														<a class="dropdown-item" href="#" onclick="deshare({{webuser.user.id}}, 'seller');">{% trans 'De-share' %}</a>
 													{% else %}
-														<a class="dropdown-item" href="seller-shared{{webuser.user.id}}" >Share</a>
+														<a class="dropdown-item" href="seller-shared{{webuser.user.id}}" >{% trans 'Share' %}</a>
 													{% endif %}
 
-													<a class="dropdown-item" href="#" onclick="chat_history('{{webuser.first_name}}', {{webuser.user.id}})">Chat History</a>
-													<a class="dropdown-item" href="#" onclick="delete_seller_user({{webuser.pk}});">Delete</a>
+													<a class="dropdown-item" href="#" onclick="chat_history('{{webuser.first_name}}', {{webuser.user.id}})">{% trans 'Chat History' %}</a>
+													<a class="dropdown-item" href="#" onclick="delete_seller_user({{webuser.pk}});">{% trans 'Delete' %}</a>
 
 													{% if webuser.is_freeze %}
-														<a class="dropdown-item" href="#" onclick="unfreeze_user({{webuser.id}}, 'user');">Unfreeze</a>
+														<a class="dropdown-item" href="#" onclick="unfreeze_user({{webuser.id}}, 'user');">{% trans 'Unfreeze' %}</a>
 													{% else %}
-														<a class="dropdown-item" href="#" onclick="freeze_user({{webuser.id}}, 'user');">Freeze</a>
+														<a class="dropdown-item" href="#" onclick="freeze_user({{webuser.id}}, 'user');">{% trans 'Freeze' %}</a>
 													{% endif %}
 												</div>
 											</div></td>
@@ -154,10 +155,10 @@
 					<div class="row justify-content-center bg-button-2 p-2 mt-3" id="div-2" style="display: none;">
 
 						<div class="col-md m-5">
-							<h4 class="font-weight-bold"><span><i class="fas fa-caret-right"></i>	 Add User Account</h4>
+							<h4 class="font-weight-bold"><span><i class="fas fa-caret-right"></i>{% trans 'Add User Account' %}</h4>
 							<div class="row">
 								<div class="col-md-8 py-3">
-									<form action="add-new" method="post">
+									<form action="{% trans 'add-new' %}" method="post">
 										{% csrf_token %}
 									  <div class="form-group"><div class="row"><div class="col-md-7">
 										  <select name="unique_name" class="form-control" id="unique_name" onchange="get_name('U');">
@@ -165,258 +166,258 @@
 										  <!-- Countries known to be subject to general US embargo are commented out by default. -->
 										  <!-- The data-countryCode attribute is populated with ISO country code, and value is int'l calling code. -->
 
-										  <option selected>National Name</option>
-										  <option data-countryCode="GS" value="0001">US (+1)</option>
-										  <option data-countryCode="GB" value="0044">UK (+44)</option>
-										  <option disabled="disabled">Other Countries</option>
-										  <option data-countryCode="DZ" value="0213">Algeria (+213)</option>
-										  <option data-countryCode="AD" value="0376">Andorra (+376)</option>
-										  <option data-countryCode="AO" value="0244">Angola (+244)</option>
-										  <option data-countryCode="AI" value="1264">Anguilla (+1264)</option>
-										  <option data-countryCode="AG" value="1268">Antigua &amp; Barbuda (+1268)</option>
-										  <option data-countryCode="AR" value="0054">Argentina (+54)</option>
-										  <option data-countryCode="AM" value="0374">Armenia (+374)</option>
-										  <option data-countryCode="AW" value="0297">Aruba (+297)</option>
-										  <option data-countryCode="AU" value="0061">Australia (+61)</option>
-										  <option data-countryCode="AT" value="0043">Austria (+43)</option>
-										  <option data-countryCode="AZ" value="0994">Azerbaijan (+994)</option>
-										  <option data-countryCode="BS" value="1242">Bahamas (+1242)</option>
-										  <option data-countryCode="BH" value="0973">Bahrain (+973)</option>
-										  <option data-countryCode="BD" value="0880">Bangladesh (+880)</option>
-										  <option data-countryCode="BB" value="1246">Barbados (+1246)</option>
-										  <option data-countryCode="BY" value="0375">Belarus (+375)</option>
-										  <option data-countryCode="BE" value="0032">Belgium (+32)</option>
-										  <option data-countryCode="BZ" value="0501">Belize (+501)</option>
-										  <option data-countryCode="BJ" value="0229">Benin (+229)</option>
-										  <option data-countryCode="BM" value="1441">Bermuda (+1441)</option>
-										  <option data-countryCode="BT" value="0975">Bhutan (+975)</option>
-										  <option data-countryCode="BO" value="0591">Bolivia (+591)</option>
-										  <option data-countryCode="BA" value="0387">Bosnia Herzegovina (+387)</option>
-										  <option data-countryCode="BW" value="0267">Botswana (+267)</option>
-										  <option data-countryCode="BR" value="0055">Brazil (+55)</option>
-										  <option data-countryCode="BN" value="0673">Brunei (+673)</option>
-										  <option data-countryCode="BG" value="0359">Bulgaria (+359)</option>
-										  <option data-countryCode="BF" value="0226">Burkina Faso (+226)</option>
-										  <option data-countryCode="BI" value="0257">Burundi (+257)</option>
-										  <option data-countryCode="KH" value="0855">Cambodia (+855)</option>
-										  <option data-countryCode="CM" value="0237">Cameroon (+237)</option>
-										  <option data-countryCode="CA" value="0001">Canada (+1)</option>
-										  <option data-countryCode="CV" value="0238">Cape Verde Islands (+238)</option>
-										  <option data-countryCode="KY" value="1345">Cayman Islands (+1345)</option>
-										  <option data-countryCode="CF" value="0236">Central African Republic (+236)</option>
-										  <option data-countryCode="CL" value="0056">Chile (+56)</option>
-										  <option data-countryCode="CN" value="0086">China (+86)</option>
-										  <option data-countryCode="CO" value="0057">Colombia (+57)</option>
-										  <option data-countryCode="KM" value="0269">Comoros (+269)</option>
-										  <option data-countryCode="CG" value="0242">Congo (+242)</option>
-										  <option data-countryCode="CK" value="0682">Cook Islands (+682)</option>
-										  <option data-countryCode="CR" value="0506">Costa Rica (+506)</option>
-										  <option data-countryCode="HR" value="0385">Croatia (+385)</option>
-										  <option data-countryCode="CU" value="0053">Cuba (+53)</option>
-										  <option data-countryCode="CY" value="0090">Cyprus - North (+90)</option>
-										  <option data-countryCode="CY" value="0357">Cyprus - South (+357)</option>
-										  <option data-countryCode="CZ" value="0420">Czech Republic (+420)</option>
-										  <option data-countryCode="DK" value="0045">Denmark (+45)</option>
-										  <option data-countryCode="DJ" value="0253">Djibouti (+253)</option>
-										  <option data-countryCode="DM" value="1809">Dominica (+1809)</option>
-										  <option data-countryCode="DO" value="1809">Dominican Republic (+1809)</option>
-										  <option data-countryCode="EC" value="0593">Ecuador (+593)</option>
-										  <option data-countryCode="EG" value="0020">Egypt (+20)</option>
-										  <option data-countryCode="SV" value="0503">El Salvador (+503)</option>
-										  <option data-countryCode="GQ" value="0240">Equatorial Guinea (+240)</option>
-										  <option data-countryCode="ER" value="0291">Eritrea (+291)</option>
-										  <option data-countryCode="EE" value="0372">Estonia (+372)</option>
-										  <option data-countryCode="ET" value="0251">Ethiopia (+251)</option>
-										  <option data-countryCode="FK" value="0500">Falkland Islands (+500)</option>
-										  <option data-countryCode="FO" value="0298">Faroe Islands (+298)</option>
-										  <option data-countryCode="FJ" value="0679">Fiji (+679)</option>
-										  <option data-countryCode="FI" value="0358">Finland (+358)</option>
-										  <option data-countryCode="FR" value="0033">France (+33)</option>
-										  <option data-countryCode="GF" value="0594">French Guiana (+594)</option>
-										  <option data-countryCode="PF" value="0689">French Polynesia (+689)</option>
-										  <option data-countryCode="GA" value="0241">Gabon (+241)</option>
-										  <option data-countryCode="GM" value="0220">Gambia (+220)</option>
-										  <option data-countryCode="GE" value="7880">Georgia (+7880)</option>
-										  <option data-countryCode="DE" value="0049">Germany (+49)</option>
-										  <option data-countryCode="GH" value="0233">Ghana (+233)</option>
-										  <option data-countryCode="GI" value="0350">Gibraltar (+350)</option>
-										  <option data-countryCode="GR" value="0030">Greece (+30)</option>
-										  <option data-countryCode="GL" value="0299">Greenland (+299)</option>
-										  <option data-countryCode="GD" value="1473">Grenada (+1473)</option>
-										  <option data-countryCode="GP" value="0590">Guadeloupe (+590)</option>
-										  <option data-countryCode="GU" value="0671">Guam (+671)</option>
-										  <option data-countryCode="GT" value="0502">Guatemala (+502)</option>
-										  <option data-countryCode="GN" value="0224">Guinea (+224)</option>
-										  <option data-countryCode="GW" value="0245">Guinea - Bissau (+245)</option>
-										  <option data-countryCode="GY" value="0592">Guyana (+592)</option>
-										  <option data-countryCode="HT" value="0509">Haiti (+509)</option>
-										  <option data-countryCode="HN" value="0504">Honduras (+504)</option>
-										  <option data-countryCode="HK" value="0852">Hong Kong (+852)</option>
-										  <option data-countryCode="HU" value="0036">Hungary (+36)</option>
-										  <option data-countryCode="IS" value="0354">Iceland (+354)</option>
-										  <option data-countryCode="IN" value="0091">India (+91)</option>
-										  <option data-countryCode="ID" value="0062">Indonesia (+62)</option>
-										  <option data-countryCode="IQ" value="0964">Iraq (+964)</option>
-										  <option data-countryCode="IR" value="0098">Iran (+98)</option>
-										  <option data-countryCode="IE" value="0353">Ireland (+353)</option>
-										  <option data-countryCode="IL" value="0972">Israel (+972)</option>
-										  <option data-countryCode="IT" value="0039">Italy (+39)</option>
-										  <option data-countryCode="JM" value="1876">Jamaica (+1876)</option>
-										  <option data-countryCode="JP" value="0081">Japan (+81)</option>
-										  <option data-countryCode="JO" value="0962">Jordan (+962)</option>
-										  <option data-countryCode="KZ" value="0007">Kazakhstan (+7)</option>
-										  <option data-countryCode="KE" value="0254">Kenya (+254)</option>
-										  <option data-countryCode="KI" value="0686">Kiribati (+686)</option>
-										  <option data-countryCode="KP" value="0850">Korea - North (+850)</option>
-										  <option data-countryCode="KR" value="0082">Korea - South (+82)</option>
-										  <option data-countryCode="KW" value="0965">Kuwait (+965)</option>
-										  <option data-countryCode="KG" value="0996">Kyrgyzstan (+996)</option>
-										  <option data-countryCode="LA" value="0856">Laos (+856)</option>
-										  <option data-countryCode="LV" value="0371">Latvia (+371)</option>
-										  <option data-countryCode="LB" value="0961">Lebanon (+961)</option>
-										  <option data-countryCode="LS" value="0266">Lesotho (+266)</option>
-										  <option data-countryCode="LR" value="0231">Liberia (+231)</option>
-										  <option data-countryCode="LY" value="0218">Libya (+218)</option>
-										  <option data-countryCode="LI" value="0417">Liechtenstein (+417)</option>
-										  <option data-countryCode="LT" value="0370">Lithuania (+370)</option>
-										  <option data-countryCode="LU" value="0352">Luxembourg (+352)</option>
-										  <option data-countryCode="MO" value="0853">Macao (+853)</option>
-										  <option data-countryCode="MK" value="0389">Macedonia (+389)</option>
-										  <option data-countryCode="MG" value="0261">Madagascar (+261)</option>
-										  <option data-countryCode="MW" value="0265">Malawi (+265)</option>
-										  <option data-countryCode="MY" value="0060">Malaysia (+60)</option>
-										  <option data-countryCode="MV" value="0960">Maldives (+960)</option>
-										  <option data-countryCode="ML" value="0223">Mali (+223)</option>
-										  <option data-countryCode="MT" value="0356">Malta (+356)</option>
-										  <option data-countryCode="MH" value="0692">Marshall Islands (+692)</option>
-										  <option data-countryCode="MQ" value="0596">Martinique (+596)</option>
-										  <option data-countryCode="MR" value="0222">Mauritania (+222)</option>
-										  <option data-countryCode="YT" value="0269">Mayotte (+269)</option>
-										  <option data-countryCode="MX" value="0052">Mexico (+52)</option>
-										  <option data-countryCode="FM" value="0691">Micronesia (+691)</option>
-										  <option data-countryCode="MD" value="0373">Moldova (+373)</option>
-										  <option data-countryCode="MC" value="0377">Monaco (+377)</option>
-										  <option data-countryCode="MN" value="0976">Mongolia (+976)</option>
-										  <option data-countryCode="MS" value="1664">Montserrat (+1664)</option>
-										  <option data-countryCode="MA" value="0212">Morocco (+212)</option>
-										  <option data-countryCode="MZ" value="0258">Mozambique (+258)</option>
-										  <option data-countryCode="MN" value="0095">Myanmar (+95)</option>
-										  <option data-countryCode="NA" value="0264">Namibia (+264)</option>
-										  <option data-countryCode="NR" value="0674">Nauru (+674)</option>
-										  <option data-countryCode="NP" value="0977">Nepal (+977)</option>
-										  <option data-countryCode="NL" value="0031">Netherlands (+31)</option>
-										  <option data-countryCode="NC" value="0687">New Caledonia (+687)</option>
-										  <option data-countryCode="NZ" value="0064">New Zealand (+64)</option>
-										  <option data-countryCode="NI" value="0505">Nicaragua (+505)</option>
-										  <option data-countryCode="NE" value="0227">Niger (+227)</option>
-										  <option data-countryCode="NG" value="0234">Nigeria (+234)</option>
-										  <option data-countryCode="NU" value="0683">Niue (+683)</option>
-										  <option data-countryCode="NF" value="0672">Norfolk Islands (+672)</option>
-										  <option data-countryCode="NP" value="0670">Northern Marianas (+670)</option>
-										  <option data-countryCode="NO" value="0047">Norway (+47)</option>
-										  <option data-countryCode="OM" value="0968">Oman (+968)</option>
-										  <option data-countryCode="PK" value="0092">Pakistan (+92)</option>
-										  <option data-countryCode="PW" value="0680">Palau (+680)</option>
-										  <option data-countryCode="PA" value="0507">Panama (+507)</option>
-										  <option data-countryCode="PG" value="0675">Papua New Guinea (+675)</option>
-										  <option data-countryCode="PY" value="0595">Paraguay (+595)</option>
-										  <option data-countryCode="PE" value="0051">Peru (+51)</option>
-										  <option data-countryCode="PH" value="0063">Philippines (+63)</option>
-										  <option data-countryCode="PL" value="0048">Poland (+48)</option>
-										  <option data-countryCode="PT" value="0351">Portugal (+351)</option>
-										  <option data-countryCode="PR" value="1787">Puerto Rico (+1787)</option>
-										  <option data-countryCode="QA" value="0974">Qatar (+974)</option>
-										  <option data-countryCode="RE" value="0262">Reunion (+262)</option>
-										  <option data-countryCode="RO" value="0040">Romania (+40)</option>
-										  <option data-countryCode="RU" value="0007">Russia (+7)</option>
-										  <option data-countryCode="RW" value="0250">Rwanda (+250)</option>
-										  <option data-countryCode="SM" value="0378">San Marino (+378)</option>
-										  <option data-countryCode="ST" value="0239">Sao Tome &amp; Principe (+239)</option>
-										  <option data-countryCode="SA" value="0966">Saudi Arabia (+966)</option>
-										  <option data-countryCode="SN" value="0221">Senegal (+221)</option>
-										  <option data-countryCode="CS" value="0381">Serbia (+381)</option>
-										  <option data-countryCode="SC" value="0248">Seychelles (+248)</option>
-										  <option data-countryCode="SL" value="0232">Sierra Leone (+232)</option>
-										  <option data-countryCode="SG" value="0065">Singapore (+65)</option>
-										  <option data-countryCode="SK" value="0421">Slovak Republic (+421)</option>
-										  <option data-countryCode="SI" value="0386">Slovenia (+386)</option>
-										  <option data-countryCode="SB" value="0677">Solomon Islands (+677)</option>
-										  <option data-countryCode="SO" value="0252">Somalia (+252)</option>
-										  <option data-countryCode="ZA" value="0027">South Africa (+27)</option>
-										  <option data-countryCode="ES" value="0034">Spain (+34)</option>
-										  <option data-countryCode="LK" value="0094">Sri Lanka (+94)</option>
-										  <option data-countryCode="SH" value="0290">St. Helena (+290)</option>
-										  <option data-countryCode="KN" value="1869">St. Kitts (+1869)</option>
-										  <option data-countryCode="SC" value="1758">St. Lucia (+1758)</option>
-										  <option data-countryCode="SR" value="0597">Suriname (+597)</option>
-										  <option data-countryCode="SD" value="0249">Sudan (+249)</option>
-										  <option data-countryCode="SZ" value="0268">Swaziland (+268)</option>
-										  <option data-countryCode="SE" value="0046">Sweden (+46)</option>
-										  <option data-countryCode="CH" value="0041">Switzerland (+41)</option>
-										  <option data-countryCode="SY" value="0963">Syria (+963)</option>
-										  <option data-countryCode="TW" value="0886">Taiwan (+886)</option>
-										  <option data-countryCode="TJ" value="0992">Tajikistan (+992)</option>
-										  <option data-countryCode="TH" value="0066">Thailand (+66)</option>
-										  <option data-countryCode="TG" value="0228">Togo (+228)</option>
-										  <option data-countryCode="TO" value="0676">Tonga (+676)</option>
-										  <option data-countryCode="TT" value="1868">Trinidad &amp; Tobago (+1868)</option>
-										  <option data-countryCode="TN" value="0216">Tunisia (+216)</option>
-										  <option data-countryCode="TR" value="0090">Turkey (+90)</option>
-										  <option data-countryCode="TM" value="0993">Turkmenistan (+993)</option>
-										  <option data-countryCode="TC" value="1649">Turks &amp; Caicos Islands (+1649)</option>
-										  <option data-countryCode="TV" value="0688">Tuvalu (+688)</option>
-										  <option data-countryCode="UG" value="0256">Uganda (+256)</option>
-										  <option data-countryCode="UA" value="0380">Ukraine (+380)</option>
-										  <option data-countryCode="AE" value="0971">United Arab Emirates (+971)</option>
-										  <option data-countryCode="UY" value="0598">Uruguay (+598)</option>
-										  <option data-countryCode="UZ" value="0998">Uzbekistan (+998)</option>
-										  <option data-countryCode="VU" value="0678">Vanuatu (+678)</option>
-										  <option data-countryCode="VA" value="0379">Vatican City (+379)</option>
-										  <option data-countryCode="VE" value="0058">Venezuela (+58)</option>
-										  <option data-countryCode="VN" value="0084">Vietnam (+84)</option>
-										  <option data-countryCode="VG" value="0001">Virgin Islands - British (+1)</option>
-										  <option data-countryCode="VI" value="0001">Virgin Islands - US (+1)</option>
-										  <option data-countryCode="WF" value="0681">Wallis &amp; Futuna (+681)</option>
-										  <option data-countryCode="YE" value="0969">Yemen (North)(+969)</option>
-										  <option data-countryCode="YE" value="0967">Yemen (South)(+967)</option>
-										  <option data-countryCode="ZM" value="0260">Zambia (+260)</option>
-										  <option data-countryCode="ZW" value="0263">Zimbabwe (+263)</option>
-										  </select></div>
+										  <option selected disabled>{% trans 'National Name' %}</option>
+										  <option data-countryCode="GS" value="0001">{% trans 'US (+1)' %}</option>
+										  <option data-countryCode="GB" value="0044">{% trans 'UK (+44)' %}</option>
+										  <option disabled="disabled">{% trans 'Other Countries' %}</option>
+										  <option data-countryCode="DZ" value="0213">{% trans 'Algeria (+213)' %}</option>
+										  <option data-countryCode="AD" value="0376">{% trans 'Andorra (+376)' %}</option>
+										  <option data-countryCode="AO" value="0244">{% trans 'Angola (+244)' %}</option>
+										  <option data-countryCode="AI" value="1264">{% trans 'Anguilla (+1264)' %}</option>
+										  <option data-countryCode="AG" value="1268">{% trans 'Antigua &amp; Barbuda (+1268)' %}</option>
+										  <option data-countryCode="AR" value="0054">{% trans 'Argentina (+54)' %}</option>
+										  <option data-countryCode="AM" value="0374">{% trans 'Armenia (+374)' %}</option>
+										  <option data-countryCode="AW" value="0297">{% trans 'Aruba (+297)' %}</option>
+										  <option data-countryCode="AU" value="0061">{% trans 'Australia (+61)' %}</option>
+										  <option data-countryCode="AT" value="0043">{% trans 'Austria (+43)' %}</option>
+										  <option data-countryCode="AZ" value="0994">{% trans 'Azerbaijan (+994)' %}</option>
+										  <option data-countryCode="BS" value="1242">{% trans 'Bahamas (+1242)' %}</option>
+										  <option data-countryCode="BH" value="0973">{% trans 'Bahrain (+973)' %}</option>
+										  <option data-countryCode="BD" value="0880">{% trans 'Bangladesh (+880)' %}</option>
+										  <option data-countryCode="BB" value="1246">{% trans 'Barbados (+1246)' %}</option>
+										  <option data-countryCode="BY" value="0375">{% trans 'Belarus (+375)' %}</option>
+										  <option data-countryCode="BE" value="0032">{% trans 'Belgium (+32)' %}</option>
+										  <option data-countryCode="BZ" value="0501">{% trans 'Belize (+501)' %}</option>
+										  <option data-countryCode="BJ" value="0229">{% trans 'Benin (+229)' %}</option>
+										  <option data-countryCode="BM" value="1441">{% trans 'Bermuda (+1441)' %}</option>
+										  <option data-countryCode="BT" value="0975">{% trans 'Bhutan (+975)' %}</option>
+										  <option data-countryCode="BO" value="0591">{% trans 'Bolivia (+591)' %}</option>
+										  <option data-countryCode="BA" value="0387">{% trans 'Bosnia Herzegovina (+387)' %}</option>
+										  <option data-countryCode="BW" value="0267">{% trans 'Botswana (+267)' %}</option>
+										  <option data-countryCode="BR" value="0055">{% trans 'Brazil (+55)' %}</option>
+										  <option data-countryCode="BN" value="0673">{% trans 'Brunei (+673)' %}</option>
+										  <option data-countryCode="BG" value="0359">{% trans 'Bulgaria (+359)' %}</option>
+										  <option data-countryCode="BF" value="0226">{% trans 'Burkina Faso (+226)' %}</option>
+										  <option data-countryCode="BI" value="0257">{% trans 'Burundi (+257)' %}</option>
+										  <option data-countryCode="KH" value="0855">{% trans 'Cambodia (+855)' %}</option>
+										  <option data-countryCode="CM" value="0237">{% trans 'Cameroon (+237)' %}</option>
+										  <option data-countryCode="CA" value="0001">{% trans 'Canada (+1)' %}</option>
+										  <option data-countryCode="CV" value="0238">{% trans 'Cape Verde Islands (+238)' %}</option>
+										  <option data-countryCode="KY" value="1345">{% trans 'Cayman Islands (+1345)' %}</option>
+										  <option data-countryCode="CF" value="0236">{% trans 'Central African Republic (+236)' %}</option>
+										  <option data-countryCode="CL" value="0056">{% trans 'Chile (+56)' %}</option>
+										  <option data-countryCode="CN" value="0086">{% trans 'China (+86)' %}</option>
+										  <option data-countryCode="CO" value="0057">{% trans 'Colombia (+57)' %}</option>
+										  <option data-countryCode="KM" value="0269">{% trans 'Comoros (+269)' %}</option>
+										  <option data-countryCode="CG" value="0242">{% trans 'Congo (+242)' %}</option>
+										  <option data-countryCode="CK" value="0682">{% trans 'Cook Islands (+682)' %}</option>
+										  <option data-countryCode="CR" value="0506">{% trans 'Costa Rica (+506)' %}</option>
+										  <option data-countryCode="HR" value="0385">{% trans 'Croatia (+385)' %}</option>
+										  <option data-countryCode="CU" value="0053">{% trans 'Cuba (+53)' %}</option>
+										  <option data-countryCode="CY" value="0090">{% trans 'Cyprus - North (+90)' %}</option>
+										  <option data-countryCode="CY" value="0357">{% trans 'Cyprus - South (+357)' %}</option>
+										  <option data-countryCode="CZ" value="0420">{% trans 'Czech Republic (+420)' %}</option>
+										  <option data-countryCode="DK" value="0045">{% trans 'Denmark (+45)' %}</option>
+										  <option data-countryCode="DJ" value="0253">{% trans 'Djibouti (+253)' %}</option>
+										  <option data-countryCode="DM" value="1809">{% trans 'Dominica (+1809)' %}</option>
+										  <option data-countryCode="DO" value="1809">{% trans 'Dominican Republic (+1809)' %}</option>
+										  <option data-countryCode="EC" value="0593">{% trans 'Ecuador (+593)' %}</option>
+										  <option data-countryCode="EG" value="0020">{% trans 'Egypt (+20)' %}</option>
+										  <option data-countryCode="SV" value="0503">{% trans 'El Salvador (+503)</option>
+										  <option data-countryCode="GQ" value="0240">{% trans 'Equatorial Guinea (+240)' %}</option>
+										  <option data-countryCode="ER" value="0291">{% trans 'Eritrea (+291)' %}</option>
+										  <option data-countryCode="EE" value="0372">{% trans 'Estonia (+372)' %}</option>
+										  <option data-countryCode="ET" value="0251">{% trans 'Ethiopia (+251)' %}</option>
+										  <option data-countryCode="FK" value="0500">{% trans 'Falkland Islands (+500)' %}</option>
+										  <option data-countryCode="FO" value="0298">{% trans 'Faroe Islands (+298)' %}</option>
+										  <option data-countryCode="FJ" value="0679">{% trans 'Fiji (+679)' %}</option>
+										  <option data-countryCode="FI" value="0358">{% trans 'Finland (+358)' %}</option>
+										  <option data-countryCode="FR" value="0033">{% trans 'France (+33)' %}</option>
+										  <option data-countryCode="GF" value="0594">{% trans 'French Guiana (+594)' %}</option>
+										  <option data-countryCode="PF" value="0689">{% trans 'French Polynesia (+689)' %}</option>
+										  <option data-countryCode="GA" value="0241">{% trans 'Gabon (+241)' %}</option>
+										  <option data-countryCode="GM" value="0220">{% trans 'Gambia (+220)' %}</option>
+										  <option data-countryCode="GE" value="7880">{% trans 'Georgia (+7880)' %}</option>
+										  <option data-countryCode="DE" value="0049">{% trans 'Germany (+49)' %}</option>
+										  <option data-countryCode="GH" value="0233">{% trans 'Ghana (+233)' %}</option>
+										  <option data-countryCode="GI" value="0350">{% trans 'Gibraltar (+350)' %}</option>
+										  <option data-countryCode="GR" value="0030">{% trans 'Greece (+30)' %}</option>
+										  <option data-countryCode="GL" value="0299">{% trans 'Greenland (+299)' %}</option>
+										  <option data-countryCode="GD" value="1473">{% trans 'Grenada (+1473)' %}</option>
+										  <option data-countryCode="GP" value="0590">{% trans 'Guadeloupe (+590)' %}</option>
+										  <option data-countryCode="GU" value="0671">{% trans 'Guam (+671)' %}</option>
+										  <option data-countryCode="GT" value="0502">{% trans 'Guatemala (+502)' %}</option>
+										  <option data-countryCode="GN" value="0224">{% trans 'Guinea (+224)' %}</option>
+										  <option data-countryCode="GW" value="0245">{% trans 'Guinea - Bissau (+245)' %}</option>
+										  <option data-countryCode="GY" value="0592">{% trans 'Guyana (+592)' %}</option>
+										  <option data-countryCode="HT" value="0509">{% trans 'Haiti (+509)' %}</option>
+										  <option data-countryCode="HN" value="0504">{% trans 'Honduras (+504)' %}</option>
+										  <option data-countryCode="HK" value="0852">{% trans 'Hong Kong (+852)' %}</option>
+										  <option data-countryCode="HU" value="0036">{% trans 'Hungary (+36)' %}</option>
+										  <option data-countryCode="IS" value="0354">{% trans 'Iceland (+354)' %}</option>
+										  <option data-countryCode="IN" value="0091">{% trans 'India (+91)' %}</option>
+										  <option data-countryCode="ID" value="0062">{% trans 'Indonesia (+62)' %}</option>
+										  <option data-countryCode="IQ" value="0964">{% trans 'Iraq (+964)' %}</option>
+										  <option data-countryCode="IR" value="0098">{% trans 'Iran (+98)' %}</option>
+										  <option data-countryCode="IE" value="0353">{% trans 'Ireland (+353)' %}</option>
+										  <option data-countryCode="IL" value="0972">{% trans 'Israel (+972)' %}</option>
+										  <option data-countryCode="IT" value="0039">{% trans 'Italy (+39)' %}</option>
+										  <option data-countryCode="JM" value="1876">{% trans 'Jamaica (+1876)' %}</option>
+										  <option data-countryCode="JP" value="0081">{% trans 'Japan (+81)' %}</option>
+										  <option data-countryCode="JO" value="0962">{% trans 'Jordan (+962)' %}</option>
+										  <option data-countryCode="KZ" value="0007">{% trans 'Kazakhstan (+7)' %}</option>
+										  <option data-countryCode="KE" value="0254">{% trans 'Kenya (+254)</option>
+										  <option data-countryCode="KI" value="0686">{% trans 'Kiribati (+686)' %}</option>
+										  <option data-countryCode="KP" value="0850">{% trans 'Korea - North (+850)' %}</option>
+										  <option data-countryCode="KR" value="0082">{% trans 'Korea - South (+82)' %}</option>
+										  <option data-countryCode="KW" value="0965">{% trans 'Kuwait (+965)' %}</option>
+										  <option data-countryCode="KG" value="0996">{% trans 'Kyrgyzstan (+996)' %}</option>
+										  <option data-countryCode="LA" value="0856">{% trans 'Laos (+856)' %}</option>
+										  <option data-countryCode="LV" value="0371">{% trans 'Latvia (+371)' %}</option>
+										  <option data-countryCode="LB" value="0961">{% trans 'Lebanon (+961)' %}</option>
+										  <option data-countryCode="LS" value="0266">{% trans 'Lesotho (+266)' %}</option>
+										  <option data-countryCode="LR" value="0231">{% trans 'Liberia (+231)' %}</option>
+										  <option data-countryCode="LY" value="0218">{% trans 'Libya (+218)' %}</option>
+										  <option data-countryCode="LI" value="0417">{% trans 'Liechtenstein (+417)' %}</option>
+										  <option data-countryCode="LT" value="0370">{% trans 'Lithuania (+370)' %}</option>
+										  <option data-countryCode="LU" value="0352">{% trans 'Luxembourg (+352)' %}</option>
+										  <option data-countryCode="MO" value="0853">{% trans 'Macao (+853)' %}</option>
+										  <option data-countryCode="MK" value="0389">{% trans 'Macedonia (+389)' %}</option>
+										  <option data-countryCode="MG" value="0261">{% trans 'Madagascar (+261)' %}</option>
+										  <option data-countryCode="MW" value="0265">{% trans 'Malawi (+265)' %}</option>
+										  <option data-countryCode="MY" value="0060">{% trans 'Malaysia (+60)' %}</option>
+										  <option data-countryCode="MV" value="0960">{% trans 'Maldives (+960)' %}</option>
+										  <option data-countryCode="ML" value="0223">{% trans 'Mali (+223)' %}</option>
+										  <option data-countryCode="MT" value="0356">{% trans 'Malta (+356)' %}</option>
+										  <option data-countryCode="MH" value="0692">{% trans 'Marshall Islands (+692)' %}</option>
+										  <option data-countryCode="MQ" value="0596">{% trans 'Martinique (+596)' %}</option>
+										  <option data-countryCode="MR" value="0222">{% trans 'Mauritania (+222)' %}</option>
+										  <option data-countryCode="YT" value="0269">{% trans 'Mayotte (+269)' %}</option>
+										  <option data-countryCode="MX" value="0052">{% trans 'Mexico (+52)' %}</option>
+										  <option data-countryCode="FM" value="0691">{% trans 'Micronesia (+691)' %}</option>
+										  <option data-countryCode="MD" value="0373">{% trans 'Moldova (+373)' %}</option>
+										  <option data-countryCode="MC" value="0377">{% trans 'Monaco (+377)' %}</option>
+										  <option data-countryCode="MN" value="0976">{% trans 'Mongolia (+976)' %}</option>
+										  <option data-countryCode="MS" value="1664">{% trans 'Montserrat (+1664)' %}</option>
+										  <option data-countryCode="MA" value="0212">{% trans 'Morocco (+212)' %}</option>
+										  <option data-countryCode="MZ" value="0258">{% trans 'Mozambique (+258)' %}</option>
+										  <option data-countryCode="MN" value="0095">{% trans 'Myanmar (+95)' %}</option>
+										  <option data-countryCode="NA" value="0264">{% trans 'Namibia (+264)' %}</option>
+										  <option data-countryCode="NR" value="0674">{% trans 'Nauru (+674)' %}</option>
+										  <option data-countryCode="NP" value="0977">{% trans 'Nepal (+977)' %}</option>
+										  <option data-countryCode="NL" value="0031">{% trans 'Netherlands (+31)' %}</option>
+										  <option data-countryCode="NC" value="0687">{% trans 'New Caledonia (+687)' %}</option>
+										  <option data-countryCode="NZ" value="0064">{% trans 'New Zealand (+64)' %}</option>
+										  <option data-countryCode="NI" value="0505">{% trans 'Nicaragua (+505)' %}</option>
+										  <option data-countryCode="NE" value="0227">{% trans 'Niger (+227)' %}</option>
+										  <option data-countryCode="NG" value="0234">{% trans 'Nigeria (+234)' %}</option>
+										  <option data-countryCode="NU" value="0683">{% trans 'Niue (+683)' %}</option>
+										  <option data-countryCode="NF" value="0672">{% trans 'Norfolk Islands (+672)' %}</option>
+										  <option data-countryCode="NP" value="0670">{% trans 'Northern Marianas (+670)' %}</option>
+										  <option data-countryCode="NO" value="0047">{% trans 'Norway (+47)' %}</option>
+										  <option data-countryCode="OM" value="0968">{% trans 'Oman (+968)' %}</option>
+										  <option data-countryCode="PK" value="0092">{% trans 'Pakistan (+92)' %}</option>
+										  <option data-countryCode="PW" value="0680">{% trans 'Palau (+680)' %}</option>
+										  <option data-countryCode="PA" value="0507">{% trans 'Panama (+507)' %}</option>
+										  <option data-countryCode="PG" value="0675">{% trans 'Papua New Guinea (+675)' %}</option>
+										  <option data-countryCode="PY" value="0595">{% trans 'Paraguay (+595)' %}</option>
+										  <option data-countryCode="PE" value="0051">{% trans 'Peru (+51)' %}</option>
+										  <option data-countryCode="PH" value="0063">{% trans 'Philippines (+63)' %}</option>
+										  <option data-countryCode="PL" value="0048">{% trans 'Poland (+48)' %}</option>
+										  <option data-countryCode="PT" value="0351">{% trans 'Portugal (+351)' %}</option>
+										  <option data-countryCode="PR" value="1787">{% trans 'Puerto Rico (+1787)' %}</option>
+										  <option data-countryCode="QA" value="0974">{% trans 'Qatar (+974)' %}</option>
+										  <option data-countryCode="RE" value="0262">{% trans 'Reunion (+262)' %}</option>
+										  <option data-countryCode="RO" value="0040">{% trans 'Romania (+40)' %}</option>
+										  <option data-countryCode="RU" value="0007">{% trans 'Russia (+7)' %}</option>
+										  <option data-countryCode="RW" value="0250">{% trans 'Rwanda (+250)' %}</option>
+										  <option data-countryCode="SM" value="0378">{% trans 'San Marino (+378)' %}</option>
+										  <option data-countryCode="ST" value="0239">{% trans 'Sao Tome &amp; Principe (+239)' %}</option>
+										  <option data-countryCode="SA" value="0966">{% trans 'Saudi Arabia (+966)' %}</option>
+										  <option data-countryCode="SN" value="0221">{% trans 'Senegal (+221)' %}</option>
+										  <option data-countryCode="CS" value="0381">{% trans 'Serbia (+381)' %}</option>
+										  <option data-countryCode="SC" value="0248">{% trans 'Seychelles (+248)' %}</option>
+										  <option data-countryCode="SL" value="0232">{% trans 'Sierra Leone (+232)' %}</option>
+										  <option data-countryCode="SG" value="0065">{% trans 'Singapore (+65)' %}</option>
+										  <option data-countryCode="SK" value="0421">{% trans 'Slovak Republic (+421)' %}</option>
+										  <option data-countryCode="SI" value="0386">{% trans 'Slovenia (+386)' %}</option>
+										  <option data-countryCode="SB" value="0677">{% trans 'Solomon Islands (+677)' %}</option>
+										  <option data-countryCode="SO" value="0252">{% trans 'Somalia (+252)' %}</option>
+										  <option data-countryCode="ZA" value="0027">{% trans 'South Africa (+27)' %}</option>
+										  <option data-countryCode="ES" value="0034">{% trans 'Spain (+34)' %}</option>
+										  <option data-countryCode="LK" value="0094">{% trans 'Sri Lanka (+94)' %}</option>
+										  <option data-countryCode="SH" value="0290">{% trans 'St. Helena (+290)' %}</option>
+										  <option data-countryCode="KN" value="1869">{% trans 'St. Kitts (+1869)' %}</option>
+										  <option data-countryCode="SC" value="1758">{% trans 'St. Lucia (+1758)' %}</option>
+										  <option data-countryCode="SR" value="0597">{% trans 'Suriname (+597)' %}</option>
+										  <option data-countryCode="SD" value="0249">{% trans 'Sudan (+249)' %}</option>
+										  <option data-countryCode="SZ" value="0268">{% trans 'Swaziland (+268)' %}</option>
+										  <option data-countryCode="SE" value="0046">{% trans 'Sweden (+46)' %}</option>
+										  <option data-countryCode="CH" value="0041">{% trans 'Switzerland (+41)' %}</option>
+										  <option data-countryCode="SY" value="0963">{% trans 'Syria (+963)' %}</option>
+										  <option data-countryCode="TW" value="0886">{% trans 'Taiwan (+886)' %}</option>
+										  <option data-countryCode="TJ" value="0992">{% trans 'Tajikistan (+992)' %}</option>
+										  <option data-countryCode="TH" value="0066">{% trans 'Thailand (+66)' %}</option>
+										  <option data-countryCode="TG" value="0228">{% trans 'Togo (+228)' %}</option>
+										  <option data-countryCode="TO" value="0676">{% trans 'Tonga (+676)' %}</option>
+										  <option data-countryCode="TT" value="1868">{% trans 'Trinidad &amp; Tobago (+1868)' %}</option>
+										  <option data-countryCode="TN" value="0216">{% trans 'Tunisia (+216)' %}</option>
+										  <option data-countryCode="TR" value="0090">{% trans 'Turkey (+90)' %}</option>
+										  <option data-countryCode="TM" value="0993">{% trans 'Turkmenistan (+993)' %}</option>
+										  <option data-countryCode="TC" value="1649">{% trans 'Turks &amp; Caicos Islands (+1649)' %}</option>
+										  <option data-countryCode="TV" value="0688">{% trans 'Tuvalu (+688)' %}</option>
+										  <option data-countryCode="UG" value="0256">{% trans 'Uganda (+256)' %}</option>
+										  <option data-countryCode="UA" value="0380">{% trans 'Ukraine (+380)' %}</option>
+										  <option data-countryCode="AE" value="0971">{% trans 'United Arab Emirates (+971)' %}</option>
+										  <option data-countryCode="UY" value="0598">{% trans 'Uruguay (+598)' %}</option>
+										  <option data-countryCode="UZ" value="0998">{% trans 'Uzbekistan (+998)' %}</option>
+										  <option data-countryCode="VU" value="0678">{% trans 'Vanuatu (+678)' %}</option>
+										  <option data-countryCode="VA" value="0379">{% trans 'Vatican City (+379)' %}</option>
+										  <option data-countryCode="VE" value="0058">{% trans 'Venezuela (+58)' %}</option>
+										  <option data-countryCode="VN" value="0084">{% trans 'Vietnam (+84)' %}</option>
+										  <option data-countryCode="VG" value="0001">{% trans 'Virgin Islands - British (+1)' %}</option>
+										  <option data-countryCode="VI" value="0001">{% trans 'Virgin Islands - US (+1)' %}</option>
+										  <option data-countryCode="WF" value="0681">{% trans 'Wallis &amp; Futuna (+681)' %}</option>
+										  <option data-countryCode="YE" value="0969">{% trans 'Yemen (North)(+969)' %}</option>
+										  <option data-countryCode="YE" value="0967">{% trans 'Yemen (South)(+967)' %}</option>
+										  <option data-countryCode="ZM" value="0260">{% trans 'Zambia (+260)' %}</option>
+										  <option data-countryCode="ZW" value="0263">{% trans 'Zimbabwe (+263)' %}</option>
+										</select>
 										  <div class="col-md-1 ml-n1" style="color: red;">*</div
 									      </div></div>
 									  </div>
 									  <div class="form-group"><div class="row"><div class="col-md-7">
-										  <input type="text" value="" id="unique_name_value" class="form-control" readonly placeholder="System Name" name="system_name">
+										  <input type="text" value="" id="unique_name_value" class="form-control" readonly placeholder="{% trans 'System Name' %}" name="system_name">
 									  </div></div></div>
 									  <div class="form-group"><div class="row"><div class="col-md-7">
-										  <input type="text" class="form-control is-integer" id="acc-fname"  placeholder="Enter First Name " onchange="display_qr()" name="fname" required></div>
+										  <input type="text" class="form-control is-integer" id="acc-fname"  placeholder="{% trans 'Enter First Name' %} " onchange="display_qr()" name="fname" required></div>
 										  <div class="col-md-1 ml-n1" style="color: red;">*</div>
 									  </div></div>
 									  <div class="form-group"><div class="row"><div class="col-md-7">
-										  <input type="text" class="form-control is-integer"  placeholder="Enter Last Name " onchange="display_qr()" name="lname" id="acc-lname"></div>
+										  <input type="text" class="form-control is-integer"  placeholder="{% trans 'Enter Last Name' %} " onchange="display_qr()" name="lname" id="acc-lname"></div>
 									  </div></div>
 									  <div class="form-group"><div class="row"><div class="col-md-7">
-										  <input type="email" class="form-control" placeholder="Enter Email " id="acc-email" name="email" onchange="display_qr()" required></div>
+										  <input type="email" class="form-control" placeholder="{% trans 'Enter Email' %} " id="acc-email" name="email" onchange="display_qr()" required></div>
 										  <div class="col-md-1 ml-n1" style="color: red;">*</div>
 									  </div></div>
 									  <div class="form-group"><div class="row"><div class="col-md-7">
-										  <input type="password" class="form-control" id="acc-password"  placeholder="Enter Password " value="" onchange="display_qr()" name="password" required autocomplete="true"></div>
+										  <input type="password" class="form-control" id="acc-password"  placeholder="{% trans 'Enter Password' %} " value="" onchange="display_qr()" name="password" required autocomplete="true"></div>
 										  <div class="col-md-1  ml-n5 mt-2 pl-1"><i class="far fa-eye" id="togglePassword"></i></div>
 										  <div class="col-md-1 ml-n3" style="color: red;">*</div>
 									  </div></div>
 
 									  <div class="form-group"><div class="row"><div class="col-md-7">
-									     <input type="tel" class="form-control" placeholder="Enter Contact Number " name="number">
+									     <input type="tel" class="form-control" placeholder="{% trans 'Enter Contact Number' %} " name="number">
 									  </div></div></div>
 
 									  <div class="form-group"><div class="row"><div class="col-md-7">
-										  <input type="text" class="form-control is-integer" placeholder="Enter Alias Name " name="alias">
+										  <input type="text" class="form-control is-integer" placeholder="{% trans 'Enter Alias Name' %} " name="alias">
 									  </div></div></div>
 										<input type="hidden" name="accType" value="user">
 										<input type="hidden" name="seller_id" value="{{id}}">
 
-									<button class="btn btn-primary mt-3" type="submit" id="add-new-button" disabled>Submit</button>
-									<a href="seller-user" class="btn btn-secondary mt-3" type="button">Cancel</a>
+									<button class="btn btn-primary mt-3" type="submit" id="add-new-button" disabled>{% trans 'Submit' %}</button>
+									<a href="{% trans 'seller-user' %}" class="btn btn-secondary mt-3" type="button">{% trans 'Cancel' %}</a>
 									</form>
 								</div>
 
@@ -437,7 +438,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Message</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{% trans 'Message' %}</h5>
 				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
 			</div>
 			<div class="modal-body text-center p-4">
@@ -455,7 +456,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{% trans 'Confirmation' %}</h5>
 				<a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
 			</div>
 			<div class="modal-body text-center p-4">
@@ -464,8 +465,8 @@
 
 			</div>
 			<div class="modal-footer justify-content-center">
-				<button type="button" class="btn btn-primary" id="confirm-modal-button" onclick="sendsellerspk();">Confirm</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-primary" id="confirm-modal-button" onclick="sendsellerspk();">{% trans 'Confirm' %}</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans 'Cancel' %}</button>
 		  	</div>
 		</div>
 	</div>
@@ -477,18 +478,18 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title font-weight-bold" id="modal-title-history">Login History of Seller ABC</h5>
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans 'Close' %}</span></button>
 			</div>
 			<div class="modal-body" id="modal-body-login-history">
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
 							<tr>
-								<th scope="col">Sr. No.</th>
-								<th scope="col">Date</th>
-								<th scope="col">Time</th>
-								<th scope="col">Device Name</th>
-								<th scope="col">Login IP Address</th>
+								<th scope="col">{% trans 'Sr. No.' %}</th>
+								<th scope="col">{% trans 'Date' %}</th>
+								<th scope="col">{% trans 'Time' %}</th>
+								<th scope="col">{% trans 'Device Name' %}</th>
+								<th scope="col">{% trans 'Login IP Address' %}</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -504,15 +505,15 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Return</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans 'Return' %}</button>
       </div>
 		</div>
 	</div>
 </div>
 
 <section class="floatingButtonHere" style="display: none;" id="floating-button">
-	<button class="btn btn-primary" id="floating-confirm" onclick="delete_multiple_users();">Proceed</button>
-	<a href="seller-user" class=" btn btn-secondary">Cancel</a>
+	<button class="btn btn-primary" id="floating-confirm" onclick="delete_multiple_users();">{% trans 'Proceed' %}</button>
+	<a href="{% trans 'seller-user' %}" class=" btn btn-secondary">{% trans 'Cancel' %}</a>
 </section>
 
 
@@ -533,13 +534,13 @@
 	</form>
 
 	<!--	to start chat to a single user -->
-	<form action="chat" method="post" name="single_chat">
+	<form action="{% trans 'chat' %}" method="post" name="single_chat">
 		{% csrf_token %}
 		<input type="hidden" id="chatting_to" name="email_user">
 	</form>
 
 	<!--	to start chat multiple -->
-	<form action="chat_multiple" method="post" name="chat_form">
+	<form action="{% trans 'chat_multiple' %}" method="post" name="chat_form">
 		{% csrf_token %}
 		<input type="hidden" id="user_values" name="users">
 		<input type="hidden" value="user" name="accType">
@@ -717,9 +718,9 @@
 	function delete_multiple_users(){
 		checkbox_values = [...new Set(checkbox_values)];
 		if ( checkbox_values.length == 1 ){
-			$("#confirm-message-delete").html("Delete the selected "+checkbox_values.length+" User");
+			$("#confirm-message-delete").html("{% trans 'Delete the selected ' %}"+checkbox_values.length+" {% trans 'User' %}");
 		}else{
-			$("#confirm-message-delete").html("Delete the selected "+checkbox_values.length+" Users");
+			$("#confirm-message-delete").html("{% trans 'Delete the selected ' %}"+checkbox_values.length+" {% trans 'Users' %}");
 		}
 
 		$("#confirm-modal-button").attr('onclick','sendsellerspk();');
@@ -731,9 +732,9 @@
 	function freeze_multiple_users(){
 		checkbox_values = [...new Set(checkbox_values)];
 		if ( checkbox_values.length == 1 ){
-			$("#confirm-message-delete").html("Freeze the selected "+checkbox_values.length+" User");
+			$("#confirm-message-delete").html("{% trans 'Freeze the selected ' %}"+checkbox_values.length+" {% trans 'User' %}");
 		}else{
-			$("#confirm-message-delete").html("Freeze the selected "+checkbox_values.length+" Users");
+			$("#confirm-message-delete").html("{% trans 'Freeze the selected ' %}"+checkbox_values.length+" {% trans 'Users' %}");
 		}
 
 		$("#confirm-modal-button").attr('onclick','sendSellersPKFreeze();');
@@ -767,7 +768,7 @@
             data: {"pk": pk, "accType": "user"},
             success: function (response) {
                     if(response['msg'] == false){
-                        $("#confirm-message").html("Something went wrong, Try again");
+                        $("#confirm-message").html("{% trans 'Something went wrong, Try again' %}");
                         $("#confirm-message-color").css("color","red");
                     }else{
                         $("#confirm-message").html(response['msg']);
