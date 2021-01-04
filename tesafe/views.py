@@ -11,6 +11,7 @@ from django.contrib.sessions.models import Session
 from django.core.mail import send_mail, EmailMessage
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import auth, User
+from django.utils.translation import activate
 from django.shortcuts import render, redirect
 from django.dispatch import Signal, receiver
 from django.http import JsonResponse
@@ -3875,3 +3876,13 @@ def broadcast_seller(request):
 
     messages.info(request, _("Something went wrong, try again!"))
     redirect("seller-home")
+
+
+def spanish(request):
+    activate("es-cl")
+    return redirect("/es-cl")
+
+
+def chinese(request):
+    activate("zn-ch")
+    return redirect("/zn-ch")

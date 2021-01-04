@@ -146,6 +146,10 @@ urlpatterns = [
     path('qr', qr_code.generate_qr, name='qr'),
     # to register user thorugh QR code
     path('qr_view', views.qr_view, name='qr_view'),
+    # for spanish language
+    path('spanish', views.spanish, name='spanish'),
+    # for Chinese language
+    path('chinese', views.chinese, name='chinese'),
 
     # Messages route to API
     path(r'api/v1/', include(router.urls)),
