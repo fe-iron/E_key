@@ -44,9 +44,9 @@
 			{% endif %}
 		{% endif %}
 			{% if not i.sender %}
-			{{i.type}}
+				{{i.type}}
 			{% else %}
-			{{i.type}} from {{i.sender.first_name}}
+				you have {{i.qty}} unread messages from {{i.sender.first_name}}
 			{% endif %}
 			<small>at {{i.timestamp}}</small>
 		</a>

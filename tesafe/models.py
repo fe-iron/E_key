@@ -371,6 +371,7 @@ class Notification(models.Model):
     type = models.CharField(max_length=100, null=True)
     ip = models.CharField(max_length=100, null=True)
     read = models.BooleanField(default=False, null=True)
+    qty = models.IntegerField(default=1)
 
     def __str__(self):
         return self.type
@@ -385,7 +386,14 @@ def create_notification(sender, instance, **kwargs):
         if UserLogin.objects.filter(user=instance.recipient).exists():
             pass
         else:
-            Notification.objects.create(sender=instance.user, receiver=instance.recipient, type="New Message")
+            if Notification.objects.filter(sender=instance.user, receiver=instance.recipient, read=False).exists():
+                notif = Notification.objects.get(sender=instance.user, receiver=instance.recipient, read=False)
+                quantity = notif.qty
+                notif.qty = int(quantity) + 1
+                notif.save()
+
+            else:
+                Notification.objects.create(sender=instance.user, receiver=instance.recipient, type="New Message")
     else:
         pass
 

@@ -632,10 +632,6 @@ def admin_home(request):
             # to get a week earlier date
             some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
 
-            # monday_of_last_week = some_day_last_week - datetime.timedelta(
-            #     days=(some_day_last_week.isocalendar()[2] - 1))
-            # monday_of_this_week = monday_of_last_week + datetime.timedelta(days=7)
-
             for item in notif:
                 if item.timestamp.date() == some_day_last_week:
                     item.delete()
