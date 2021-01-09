@@ -387,7 +387,7 @@ def create_notification(sender, instance, **kwargs):
             pass
         else:
             if Notification.objects.filter(sender=instance.user, receiver=instance.recipient, read=False).exists():
-                notif = Notification.objects.get(sender=instance.user, receiver=instance.recipient, read=False)
+                notif = Notification.objects.filter(sender=instance.user, receiver=instance.recipient, read=False).order_by('-timestamp')[0]
                 quantity = notif.qty
                 notif.qty = int(quantity) + 1
                 notif.save()
