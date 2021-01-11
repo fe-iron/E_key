@@ -8,14 +8,14 @@ from django.utils.translation import ugettext_lazy as _
 
 # model of Admin
 class WebAdmin(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100, null=True, default=None)
-    email = models.CharField(max_length=150)
-    phone = models.CharField(max_length=15, null=True, default=None)
-    alias = models.CharField(max_length=100, default=None, null=True)
     system_name = models.CharField(max_length=19, null=True, default="not assigned")
+    last_name = models.CharField(max_length=100, null=True, default=None)
+    alias = models.CharField(max_length=100, default=None, null=True)
+    phone = models.CharField(max_length=15, null=True, default=None)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_online = models.BooleanField(default=False)
+    first_name = models.CharField(max_length=100)
+    email = models.CharField(max_length=150)
 
     def __str__(self):
         return self.first_name
@@ -26,57 +26,51 @@ class WebAdmin(models.Model):
 
 # model of Seller
 class Seller(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(_('first_name'), max_length=100, help_text=_('First Name of the Seller'))
     last_name = models.CharField(_('last_name'), max_length=100, default=None, null=True, help_text=_('Last Name of the Seller'))
-    system_name = models.CharField(max_length=19, null=True, default="not assigned")
     alias = models.CharField('alias', max_length=100, default=None, null=True, help_text=_('Alias Name of the Seller'))
-    email = models.CharField(max_length=150)
-    phone = models.CharField(max_length=15, default=None, null=True)
+    system_name = models.CharField(max_length=19, null=True, default="not assigned")
     profile_pic = models.ImageField(upload_to='seller/', default=None, null=True)
+    phone = models.CharField(max_length=15, default=None, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_freeze = models.BooleanField(default=False)
     user_count = models.IntegerField(default=0)
+    email = models.CharField(max_length=150)
 
     def __str__(self):
         return self.first_name
-
-    # class TranslatableMeta:
-    #     fields = ['first_name', 'last_name', 'alias']
 
 
 # model of Tester
 class Tester(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100, default=None, null=True)
     system_name = models.CharField(max_length=19, null=True, default="not assigned")
-    alias = models.CharField(max_length=100, default=None, null=True)
-    email = models.CharField(max_length=150)
-    phone = models.CharField(max_length=15, default=None, null=True)
     profile_pic = models.ImageField(upload_to='tester/', default=None, null=True)
+    last_name = models.CharField(max_length=100, default=None, null=True)
+    alias = models.CharField(max_length=100, default=None, null=True)
+    phone = models.CharField(max_length=15, default=None, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_freeze = models.BooleanField(default=False)
+    first_name = models.CharField(max_length=100)
+    email = models.CharField(max_length=150)
 
     def __str__(self):
         return self.first_name
 
-    # class TranslatableMeta:
-    #     fields = ['first_name', 'last_name', 'alias']
-
 
 #  model of WebUser
 class WebUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100, default=None, null=True)
-    system_name = models.CharField(max_length=19, null=True, default="not assigned")
-    email = models.CharField(max_length=150)
-    phone = models.CharField(max_length=15, default=None, null=True)
-    alias = models.CharField(max_length=100, default=None, null=True)
-    profile_pic = models.ImageField(upload_to='user/', default=None, null=True)
     associated_with = models.ForeignKey(Seller, on_delete=models.SET_DEFAULT, null=True, default=None)
-    is_freeze = models.BooleanField(default=False)
+    system_name = models.CharField(max_length=19, null=True, default="not assigned")
+    profile_pic = models.ImageField(upload_to='user/', default=None, null=True)
+    last_name = models.CharField(max_length=100, default=None, null=True)
+    alias = models.CharField(max_length=100, default=None, null=True)
+    phone = models.CharField(max_length=15, default=None, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_authorized = models.BooleanField(default=False)
+    is_freeze = models.BooleanField(default=False)
     is_shared = models.BooleanField(default=False)
+    first_name = models.CharField(max_length=100)
+    email = models.CharField(max_length=150)
 
     def __str__(self):
         return self.first_name
@@ -98,11 +92,11 @@ class UserToUser(models.Model):
 # Login Activity model of Admin
 class WebAdminLoginHistory(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    duration = models.CharField(max_length=50, default="0 minutes")
     login_IP = models.GenericIPAddressField(null=True, blank=True)
+    device_name = models.CharField(max_length=255, null=True)
     login_time = models.TimeField(auto_now=True)
     login_date = models.DateField(auto_now=True)
-    duration = models.CharField(max_length=50, default="0 minutes")
-    device_name = models.CharField(max_length=255, null=True)
 
     def __str__(self):
         return self.user.first_name
@@ -115,9 +109,9 @@ class WebAdminLoginHistory(models.Model):
 # Login Activity model of Admin
 class PasswordHistory(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    device_name = models.CharField(max_length=255, null=True)
     login_time = models.TimeField(auto_now=True)
     login_date = models.DateField(auto_now=True)
-    device_name = models.CharField(max_length=255, null=True)
     last_pass = models.CharField(max_length=255)
 
     def __str__(self):
@@ -130,12 +124,12 @@ class PasswordHistory(models.Model):
 
 # PWG Server
 class PWGServers(models.Model):
-    alias = models.CharField(max_length=255)
-    email = models.CharField(max_length=255, default=None, null=True)
-    password = models.CharField(max_length=255, default=None, null=True)
-    pwg_count = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None)
     system_name = models.CharField(max_length=19, null=True, default="not assigned")
+    password = models.CharField(max_length=255, default=None, null=True)
+    email = models.CharField(max_length=255, default=None, null=True)
+    alias = models.CharField(max_length=255)
+    pwg_count = models.IntegerField()
 
     class Meta:
         verbose_name_plural = "PWG Servers"
@@ -146,12 +140,12 @@ class PWGServers(models.Model):
 
 # PWGs modal
 class PWG(models.Model):
-    name = models.CharField(max_length=255)
-    alias = models.CharField(max_length=255)
     owned_by = models.ForeignKey(PWGServers, verbose_name="PWGServers", on_delete=models.CASCADE, null=True)
     transfer_to = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=1)
-    is_tested = models.BooleanField(default=False)
     location = models.CharField(max_length=2, default='A')
+    is_tested = models.BooleanField(default=False)
+    name = models.CharField(max_length=255)
+    alias = models.CharField(max_length=255)
     # T = obtained by Transfer can do all operation
     # A = means PWG is authorized by the other User or Seller can do get PW, rev record
     # DA =  means the PWG has been authorized to the other User can do de-authorize
@@ -159,10 +153,10 @@ class PWG(models.Model):
     # DS = means the PWG has been share to the other User, Get PW. and Review rec. and De-share are available
 
     user_location = models.CharField(max_length=2, null=True, default="T")
-    is_freeze = models.BooleanField(default=False)
-    is_authorized = models.BooleanField(default=False)
-    is_shared = models.BooleanField(default=False)
     is_tested_good = models.BooleanField(default=False)
+    is_authorized = models.BooleanField(default=False)
+    is_freeze = models.BooleanField(default=False)
+    is_shared = models.BooleanField(default=False)
 
     # for transfer
     t = models.BooleanField(default=False)
@@ -185,8 +179,8 @@ class PWG(models.Model):
 
 # model for Transfer PWG management
 class TransferPwg(models.Model):
-    pwg_owner = models.OneToOneField(PWG, on_delete=models.CASCADE, null=True, blank=True)
     pwgs_owner = models.ForeignKey(PWGServers, on_delete=models.CASCADE, null=True, blank=True)
+    pwg_owner = models.OneToOneField(PWG, on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
@@ -206,11 +200,11 @@ class TransferPwgs(models.Model):
 
 # PWG Use record
 class PwgUseRecord(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="used_by", null=True, default=None)
+    pwg = models.ForeignKey(PWG, on_delete=models.CASCADE, null=True, default=None)
+    password = models.CharField(max_length=255)
     time = models.TimeField(auto_now=True)
     date = models.DateField(auto_now=True)
-    password = models.CharField(max_length=255)
-    pwg = models.ForeignKey(PWG, on_delete=models.CASCADE, null=True, default=None)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="used_by", null=True, default=None)
 
     def __str__(self):
         return str(self.date)
@@ -222,14 +216,14 @@ class PwgUseRecord(models.Model):
 
 # models for generating system name
 class SystemName(models.Model):
-    is_user = models.BooleanField(default=False)
-    is_admin = models.BooleanField(default=False)
-    is_seller = models.BooleanField(default=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True)
+    system_name = models.CharField(max_length=19, null=True, default="not assigned")
     is_tester = models.BooleanField(default=False)
+    is_seller = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
+    is_user = models.BooleanField(default=False)
     is_pwgs = models.BooleanField(default=False)
     serial_no = models.CharField(max_length=4)
-    system_name = models.CharField(max_length=19, null=True, default="not assigned")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True)
 
     def __str__(self):
         return self.system_name
@@ -237,23 +231,23 @@ class SystemName(models.Model):
 
 # model for authorize
 class Authorize(models.Model):
-    pwg = models.ForeignKey(PWG, on_delete=models.CASCADE, default=None)
-    authorize_to = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     pwgserver = models.ForeignKey(PWGServers, on_delete=models.CASCADE, default=None)
+    authorize_to = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    pwg = models.ForeignKey(PWG, on_delete=models.CASCADE, default=None)
 
 
 # model for authorize
 class Share(models.Model):
-    pwg = models.ForeignKey(PWG, on_delete=models.CASCADE, default=None)
-    share_to = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     pwgserver = models.ForeignKey(PWGServers, on_delete=models.CASCADE, default=None)
+    share_to = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    pwg = models.ForeignKey(PWG, on_delete=models.CASCADE, default=None)
 
 
 class PWGHistory(models.Model):
+    pwg = models.ForeignKey(PWG, on_delete=models.SET_DEFAULT, null=True, default=None, related_name="pwg")
+    object = models.ForeignKey(User, on_delete=models.SET_DEFAULT, null=True, default=None, related_name="authorize_to")
     date = models.DateField(auto_now=True)
     time = models.TimeField(auto_now=True)
-    object = models.ForeignKey(User, on_delete=models.SET_DEFAULT, null=True, default=None, related_name="authorize_to")
-    pwg = models.ForeignKey(PWG, on_delete=models.SET_DEFAULT, null=True, default=None, related_name="pwg")
     # N = None, A = Authorize, S = Share, T = Transfer, DA = De-authorize, DS = De-share, D = Deleted,
     # AD = buy from admin, RAD = Return to Admin, RT = Return to Testing again, P = Pass, F = Fail
     action = models.CharField(default="N", max_length=3)
@@ -264,10 +258,10 @@ class PWGHistory(models.Model):
 
 
 class TesterPWGHistory(models.Model):
-    date = models.DateField(auto_now=True)
-    time = models.TimeField(auto_now=True)
     pwg_name = models.ForeignKey(PWG, on_delete=models.SET_DEFAULT, null=True, default=None)
     got_on = models.DateTimeField(null=True, default=None)
+    date = models.DateField(auto_now=True)
+    time = models.TimeField(auto_now=True)
 
     def __str__(self):
         return str(self.date)
@@ -278,10 +272,10 @@ class TesterPWGHistory(models.Model):
 
 
 class TestedPWGHistory(models.Model):
-    date = models.DateField(auto_now=True)
-    time = models.TimeField(auto_now=True)
     pwg_name = models.ForeignKey(PWG, on_delete=models.SET_DEFAULT, null=True, default=None, related_name="pwg_name")
     tester = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None, related_name="pwg_tester")
+    date = models.DateField(auto_now=True)
+    time = models.TimeField(auto_now=True)
 
     def __str__(self):
         return str(self.date)
@@ -356,8 +350,9 @@ class MessageModel(models.Model):
 # for detecting that the user is already logged in or not
 class UserLogin(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    session_key = models.CharField(max_length=100, null=True)
+    give_notification = models.BooleanField(default=False, null=True)
     acctype = models.CharField(max_length=3, null=True, default="A")
+    session_key = models.CharField(max_length=100, null=True)
     timestamp = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -384,7 +379,18 @@ class Notification(models.Model):
 def create_notification(sender, instance, **kwargs):
     if kwargs['created']:
         if UserLogin.objects.filter(user=instance.recipient).exists():
-            pass
+            u_login = UserLogin.objects.get(user=instance.recipient)
+            if u_login.give_notification:
+                if Notification.objects.filter(sender=instance.user, receiver=instance.recipient, read=False).exists():
+                    notif = \
+                    Notification.objects.filter(sender=instance.user, receiver=instance.recipient, read=False).order_by(
+                        '-timestamp')[0]
+                    quantity = notif.qty
+                    notif.qty = int(quantity) + 1
+                    notif.save()
+
+                else:
+                    Notification.objects.create(sender=instance.user, receiver=instance.recipient, type="New Message")
         else:
             if Notification.objects.filter(sender=instance.user, receiver=instance.recipient, read=False).exists():
                 notif = Notification.objects.filter(sender=instance.user, receiver=instance.recipient, read=False).order_by('-timestamp')[0]

@@ -170,10 +170,20 @@ def activate_account(request, user):
 
 def custom_chat(request):
     if request.method == "POST":
+        if User.objects.filter(Q(email=request.user) | Q(username=request.user)).exists():
+            u = User.objects.get(Q(email=request.user) | Q(username=request.user))
+
+            # making this user able to not receive msg notification
+            if UserLogin.objects.filter(user=u).exists():
+                give_notif = UserLogin.objects.get(user=u)
+                give_notif.give_notification = False
+                give_notif.save()
+
         selected_user = request.POST.get('email_user', None)
         if User.objects.filter(Q(email=selected_user) | Q(username=selected_user)).exists():
             usr = User.objects.get(Q(email=selected_user) | Q(username=selected_user))
             usr = usr.first_name
+
             param = {
                 'selected_user': selected_user,
                 'name': usr,
@@ -187,6 +197,16 @@ def broadcast_admin(request):
     count = 0
     new_values = ''
     temp_list = []
+
+    if User.objects.filter(Q(email=request.user) | Q(username=request.user)).exists():
+        u = User.objects.get(Q(email=request.user) | Q(username=request.user))
+
+        # making this user able to not receive msg notification
+        if UserLogin.objects.filter(user=u).exists():
+            give_notif = UserLogin.objects.get(user=u)
+            give_notif.give_notification = False
+            give_notif.save()
+
     for usr in user:
         count += 1
         if count >= 15:
@@ -229,6 +249,7 @@ def broadcast(request):
         body = request.GET.get('body', None)
         user = request.user
         user = User.objects.get(Q(email=user) | Q(username=user))
+
         for receiver in recipient:
             if User.objects.filter(email=receiver).exists():
                 usr = User.objects.get(email=receiver)
@@ -627,6 +648,13 @@ def admin_home(request):
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
         count_notif = 0
         notif = None
+
+        # making this user able to receive msg notification
+        if UserLogin.objects.filter(user=u).exists():
+            give_notif = UserLogin.objects.get(user=u)
+            give_notif.give_notification = True
+            give_notif.save()
+
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
             # to get a week earlier date
@@ -787,6 +815,12 @@ def seller_home(request):
         count_notif = 0
         notif = None
         cond = ['-login_date', '-login_time']
+
+        # making this user able to receive msg notification
+        if UserLogin.objects.filter(user=u).exists():
+            give_notif = UserLogin.objects.get(user=u)
+            give_notif.give_notification = True
+            give_notif.save()
 
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
@@ -1368,6 +1402,13 @@ def tester_home(request):
     if u.is_authenticated and Tester.objects.filter(email=u_email).exists():
         count_notif = 0
         notif = None
+
+        # making this user able to receive msg notification
+        if UserLogin.objects.filter(user=u).exists():
+            give_notif = UserLogin.objects.get(user=u)
+            give_notif.give_notification = True
+            give_notif.save()
+
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
             some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
@@ -1512,6 +1553,13 @@ def user_home(request):
         notif = None
         flag = False
         pwg_obj = []
+
+        # making this user able to receive msg notification
+        if UserLogin.objects.filter(user=u).exists():
+            give_notif = UserLogin.objects.get(user=u)
+            give_notif.give_notification = True
+            give_notif.save()
+
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
             some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
@@ -3689,8 +3737,8 @@ def chat_history(request):
     fk = request.GET.get('fk', None)
     if User.objects.filter(Q(username=usr) | Q(email=usr)).exists():
         usr = User.objects.get(Q(username=usr) | Q(email=usr))
-        if MessageModel.objects.filter(user=usr, recipient=fk).exists():
-            msgs = MessageModel.objects.filter(user=usr, recipient=fk)[:10]
+        if MessageModel.objects.filter(Q(recipient=fk) | Q(user=fk)).exists():
+            msgs = MessageModel.objects.filter(Q(recipient=fk) | Q(user=fk))
             msgs = serializers.serialize('json', msgs)
             return HttpResponse(msgs, content_type="application/json")
         else:
@@ -3705,6 +3753,15 @@ def chat_multiple(request):
         action = request.POST.get('action', None)
         new_values = []
         temp_list = ''
+        # Letting the sender to not receive notification
+        if User.objects.filter(Q(email=request.user) | Q(username=request.user)).exists():
+            u = User.objects.get(Q(email=request.user) | Q(username=request.user))
+
+            # making this user able to not receive msg notification
+            if UserLogin.objects.filter(user=u).exists():
+                give_notif = UserLogin.objects.get(user=u)
+                give_notif.give_notification = False
+                give_notif.save()
 
         for i in users:
             if i == ",":
@@ -3740,6 +3797,21 @@ def chat_multiple(request):
                     new_values += WebUser.objects.get(id=i).first_name
                     new_values += ', '
                     temp_list.append(WebUser.objects.get(id=i).email)
+        elif accType == "pwg":
+            if action == "Chatting":
+                for i in users:
+                    if PWGServers.objects.filter(id=i).exists():
+                        count += 1
+                        new_values += PWGServers.objects.get(id=i).alias
+                        new_values += ', '
+                        temp_list.append(PWGServers.objects.get(id=i).email)
+            else:
+                pwgs_object = PWGServers.objects.all()
+                for i in pwgs_object:
+                    count += 1
+                    new_values += i.alias
+                    new_values += ', '
+                    temp_list.append(i.email)
 
         # trying to put ' , and' at last place
         new_values = new_values[:-2]
@@ -3831,6 +3903,13 @@ def broadcast_seller(request):
     temp_list = []
     if User.objects.filter(email=logged_seller).exists():
         user_obj = User.objects.get(email=logged_seller)
+
+        # making this user able to not receive msg notification
+        if UserLogin.objects.filter(user=user_obj).exists():
+            give_notif = UserLogin.objects.get(user=user_obj)
+            give_notif.give_notification = False
+            give_notif.save()
+
         if Seller.objects.filter(user=user_obj).exists():
             sel_obj = Seller.objects.get(user=user_obj)
             if WebUser.objects.filter(associated_with=sel_obj).exists():

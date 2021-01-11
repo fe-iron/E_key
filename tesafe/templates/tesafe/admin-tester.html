@@ -134,7 +134,7 @@
 													<a class="dropdown-item" onclick="custom_chat('{{tes.user.email}}')">{% trans 'Chat' %}</a>
 													<a class="dropdown-item" href="#">{% trans 'Payment' %}</a>
 													<a class="dropdown-item" href="#" onclick="pop({{tes.user.pk}}, 'tester')"> {% trans 'Login History' %} </a>
-													<a class="dropdown-item" href="#" onclick="chat_history('{{tes.first_name}}',{{tes.user.id}})">{% trans 'Chat History' %}</a>
+													<a class="dropdown-item" href="#" onclick="chat_history('{{tes.first_name}}',{{tes.user.id}}, {{request.user.id}})">{% trans 'Chat History' %}</a>
 													<a class="dropdown-item" href="#" onclick="delete_user({{tes.user.pk}}, 'tester');">{% trans 'Delete' %}</a>
 													{% if tes.is_freeze %}
 													<a class="dropdown-item" href="#" onclick="unfreeze_user({{tes.id}}, 'tester');">{% trans 'Unfreeze' %}</a>

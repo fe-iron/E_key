@@ -132,7 +132,7 @@
 														<a class="dropdown-item" href="seller-shared{{webuser.user.id}}" >{% trans 'Share' %}</a>
 													{% endif %}
 
-													<a class="dropdown-item" href="#" onclick="chat_history('{{webuser.first_name}}', {{webuser.user.id}})">{% trans 'Chat History' %}</a>
+													<a class="dropdown-item" href="#" onclick="chat_history('{{webuser.first_name}}', {{webuser.user.id}}, {{request.user.id}})">{% trans 'Chat History' %}</a>
 													<a class="dropdown-item" href="#" onclick="delete_seller_user({{webuser.pk}});">{% trans 'Delete' %}</a>
 
 													{% if webuser.is_freeze %}

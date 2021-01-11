@@ -62,8 +62,8 @@
 					</button>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="#" onclick="myfun5()">{% trans 'Add New' %}</a>
-						<a class="dropdown-item" href="#">{% trans 'Broadcast' %}</a>
-						<a class="dropdown-item" href="#" onclick="">{% trans 'Chat' %}</a>
+						<a class="dropdown-item" href="#" onclick="broadcast()">{% trans 'Broadcast' %}</a>
+						<a class="dropdown-item" href="#" onclick="chat()">{% trans 'Chat' %}</a>
 						<a class="dropdown-item" href="#" onclick="myFunction()">{% trans 'Delete' %}</a>
 <!--						<a class="dropdown-item" href="#" onclick="freeze()"> Freeze </a>-->
 						<a class="dropdown-item" href="#div-2" onclick="myfun4()">{% trans 'Summary PWG' %}</a>
@@ -145,7 +145,10 @@
 										</thead>
 										<tbody id="myTable">
 										{% for pwg_server in pwgs %}
-											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to {{pwg_server.transfer_to}}"><th><input type="checkbox" name="floatingButtonHere" disabled value="{{pwg_server.pk}}" class="check"></th>
+											<tr data-toggle="tooltip" data-placement="top" title="this PWG is assign to {{pwg_server.transfer_to}}">
+												<th>
+													<input type="checkbox" name="floatingButtonHere" disabled value="{{pwg_server.pk}}" class="check">
+												</th>
 												<td>{% if pwg_server.alias == "" %}
 													{{pwg_server.system_name}}
 													{% else %}
@@ -544,8 +547,9 @@
 			</div>
 
 		</div>
-	</di{% trans 'v>
-</div>
+	</div>
+	</div>
+
 
 
 <!--	to delete sellers names-->
@@ -562,6 +566,14 @@
 		<input type="hidden" id="chatting_to" name="email_user">
 	</form>
 
+	<!--	to start chat multiple -->
+	<form action="{% trans 'chat_multiple' %}" method="post" name="chat_form">
+		{% csrf_token %}
+		<input type="hidden" id="user_values" name="users">
+		<input type="hidden" value="pwg" name="accType">
+		<input type="hidden" value="" id="broadcast_action" name="action">
+	</form>
+
 
 
 <section class="floatingButtonHere" id="floating-button" style="display:none;">
@@ -576,24 +588,6 @@
 
 	<script type="text/javascript">
         let checkbox_values = [];
-
-
-		// function to check is contains integer or not
-		//$('.is-integer').on('change', function(){
-		//	var value = $(this).val();
-		//	isnum = /^\d/.test(value)   // to check if it is starting with num
-		//	// isnum = /^\d+$/.test(value);   to check if it is only containing num
-		//	if( isnum ){
-		//		$("#add-new-button").attr("disabled", true);
-		//	}else{
-		//		if(value == ""){
-		//			$("#add-new-button").attr("disabled", true);
-		//		}else{
-		//			$("#add-new-button").attr("disabled", false);
-		//		}
-		//	}
-		//});
-
 
 		// Shorthand for $( document ).ready()
 		$(function() {
@@ -748,13 +742,14 @@
 
 
 	// to delete pwgs
-	function myFunction() {
+	function myFunction(){
 		document.getElementById("checkAll").disabled = false;
 		$(".check").attr('disabled', false);
 
+		$("#floating-confirm").attr('onclick','delete_multiple_users()');
 		$("#floating-confirm").attr('disabled', true);
 		$(".floatingButtonHere").show(150);
-}
+	}
 
 function cancel(){
     location.reload();
@@ -834,6 +829,33 @@ function togglePassword1(pk){
     // toggle the eye slash icon
     $("#toggle"+pk).toggleClass('fa-eye-slash');
 }
+
+function chat_multiple(){
+	checkbox_values = [...new Set(checkbox_values)];
+	$('#user_values').attr('value', checkbox_values);
+	$('#broadcast_action').attr('value', "Chatting");
+	document.forms['chat_form'].submit();
+}
+
+function chat(){
+	document.getElementById("checkAll").disabled = false;
+    $(".check").attr("disabled",false);
+
+	$("#floating-confirm").attr('onclick','chat_multiple()');
+	$("#floating-confirm").attr('disabled', true);
+	$(".floatingButtonHere").show(150);
+}
+
+function broadcast(){
+	document.getElementById("checkAll").disabled = false;
+    $(".check").attr("disabled",false);
+	$("#checkAll").click();
+	checkbox_values = [...new Set(checkbox_values)];
+	$('#user_values').attr('value', checkbox_values);
+	$('#broadcast_action').attr('value', "Broadcasting");
+	document.forms['chat_form'].submit();
+}
+
 //to chat a single user
 function custom_chat(email){
 	$('#chatting_to').attr('value', email);
