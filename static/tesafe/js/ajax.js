@@ -36,7 +36,7 @@ function pop(pk, accType){
 }
 
 // to show chat history
-function chat_history(user_name, fk){
+function chat_history(user_name, fk, adminID){
         // GET AJAX request
         $.ajax({
             type: 'GET',
@@ -49,19 +49,37 @@ function chat_history(user_name, fk){
                     $("#modal-title-history").html("Chat History of "+user_name);
                     $('#modal-body-login-history').html('<div class="h4">No Chat history to show with '+user_name+'</div>');
                 }else{
-                var text = '';
-                var count = 0;
-                    for(i=0;i<response.length;i++){
+                    var text = '';
+                    var count = 0;
+                    var msg = '';
+                    var you = '';
+                    var length = response.length
+                    if(length <= 15){
+                    }else{
+                        length = 15;
+                    }
+                    for(i=0;i<length;i++){
                         var timestamp = response[i]['fields']['timestamp'];
-                        var msg = response[i]['fields']['body'];
-                        var date = timestamp.slice(0,10)
-                        var time = timestamp.slice(12,16)
+                        if(parseInt(response[i]['fields']['user']) == adminID){
+                            msg = response[i]['fields']['body'];
+                        }
+                        if(parseInt(response[i]['fields']['user']) == fk){
+                            you = response[i]['fields']['body'];
+                        }
 
-                        count = count + 1;
-                        text += '<tr><th scope="row">'+count+'</th><td>'+msg+'</td><td>'+time+' & '+date+'</td></tr>';
+                        var date = timestamp.slice(0,10);
+                        var time = timestamp.slice(12,16);
+
+                        if(msg == '' && you == ''){
+                        }else{
+                            count = count + 1;
+                            text += '<tr><th scope="row">'+count+'</th><td>'+msg+'</td><td>'+you+'</td><td>'+time+' & '+date+'</td></tr>';
+                            msg = '';
+                            you = '';
+                        }
                     }
                     $("#modal-title-history").html("Chat History of "+user_name);
-                    $('#modal-body-login-history').html('<div class="table-responsive"><table class="table"><thead><tr><th scope="col">Sr. No.</th><th scope="col">Message</th><th scope="col">Timestamp</th></tr></thead><tbody>'+text+'</tbody></table></div>');
+                    $('#modal-body-login-history').html('<div class="table-responsive"><table class="table"><thead><tr><th scope="col">Sr. No.</th><th scope="col">Me</th><th scope="col">'+user_name+'</th><th scope="col">Timestamp</th></tr></thead><tbody>'+text+'</tbody></table></div>');
                 }
 
 			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
