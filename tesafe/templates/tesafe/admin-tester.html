@@ -20,12 +20,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
-
-<!-- fontawesome cdn -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/admin-tester.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'tesafe/css/admin-tester.css' %}">
 </head>
 <body>
 	<section class="bg-light">
@@ -132,7 +127,7 @@
 												</button>
 												<div class="dropdown-menu" id="dropdown_menu">
 													<a class="dropdown-item" onclick="custom_chat('{{tes.user.email}}')">{% trans 'Chat' %}</a>
-													<a class="dropdown-item" href="#">{% trans 'Payment' %}</a>
+													<a class="dropdown-item" href="simple_checkout">{% trans 'Payment' %}</a>
 													<a class="dropdown-item" href="#" onclick="pop({{tes.user.pk}}, 'tester')"> {% trans 'Login History' %} </a>
 													<a class="dropdown-item" href="#" onclick="chat_history('{{tes.first_name}}',{{tes.user.id}}, {{request.user.id}})">{% trans 'Chat History' %}</a>
 													<a class="dropdown-item" href="#" onclick="delete_user({{tes.user.pk}}, 'tester');">{% trans 'Delete' %}</a>
@@ -447,7 +442,7 @@
 				<h5 class="modal-title font-weight-bold" id="modal-title-history">{% trans 'Login History of Seller ABC' %}</h5>
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 			</div>
-			<di{% trans 'v class="modal-body" id="modal-body-login-history">
+			<div class="modal-body" id="modal-body-login-history">
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
@@ -789,7 +784,9 @@ let checkbox_values = [];
 		checkbox_values = [...new Set(checkbox_values)];
 		$('#user_values').attr('value', checkbox_values);
 		$('#broadcast_action').attr('value', "Broadcasting");
-		document.forms['chat_form'].submit();
+		if(checkbox_values.length != 0){
+			document.forms['chat_form'].submit();
+		}
 	}
 
 	function chat(){

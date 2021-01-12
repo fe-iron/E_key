@@ -132,7 +132,7 @@
 												</button>
 												<div class="dropdown-menu" id="dropdown_menu">
 													<a class="dropdown-item" onclick="custom_chat('{{sel.user.email}}')">{% trans 'Chat' %}</a>
-													<a class="dropdown-item" href="#">{% trans 'Payment' %}</a>
+													<a class="dropdown-item" href="simple_checkout">{% trans 'Payment' %}</a>
 													<a class="dropdown-item" onclick="pop({{sel.user.pk}}, 'seller');" href="#" > {% trans 'Login History' %} </a>
 													<a class="dropdown-item" href="#" onclick="chat_history('{{sel.first_name}}',{{sel.user.id}}, {{request.user.id}})">{% trans 'Chat History' %}</a>
 													<a class="dropdown-item" onclick="delete_user('{{sel.user.id}}','seller');" href="#" >{% trans 'Delete' %}</a>
@@ -714,7 +714,9 @@ function broadcast(){
 	checkbox_values = [...new Set(checkbox_values)];
 	$('#user_values').attr('value', checkbox_values);
 	$('#broadcast_action').attr('value', "Broadcasting");
-	document.forms['chat_form'].submit();
+	if(checkbox_values.length != 0){
+		document.forms['chat_form'].submit();
+	}
 }
 
  // to show confirmation modal

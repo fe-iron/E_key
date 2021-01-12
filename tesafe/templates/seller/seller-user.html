@@ -838,7 +838,9 @@
 		checkbox_values = [...new Set(checkbox_values)];
 		$('#user_values').attr('value', checkbox_values);
 		$('#broadcast_action').attr('value', "Broadcasting");
-		document.forms['chat_form'].submit();
+		if(checkbox_values.length != 0){
+			document.forms['chat_form'].submit();
+		}
 	}
 
 	function chat_multiple(){
