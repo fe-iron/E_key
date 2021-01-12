@@ -529,6 +529,10 @@
     function getback_pwg() {
         document.getElementById("checkAll").disabled = false;
         $(".check_tester").attr("disabled",false);
+        //false checkboxes that are already assigned to tester
+        document.getElementById("checkAll").disabled = true;
+        $(".check").attr("disabled",true);
+
         check = "check_tester";
 
         $("#floating-confirm").attr('onclick','getback_multiple_users()');
@@ -631,6 +635,11 @@
     function assign_multiple_pwg(){
         document.getElementById("checkAll").disabled = false;
         $(".check").attr("disabled",false);
+
+        //false checkboxes that are already assigned to tester
+        document.getElementById("checkAll").disabled = true;
+        $(".check_tester").attr("disabled",true);
+
         check = "check";
 
         $("#floating-confirm").attr('onclick','assign_multiple_users()');
