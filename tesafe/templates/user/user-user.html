@@ -257,6 +257,7 @@
 	<form action="{% trans 'chat' %}" method="post" name="single_chat">
 		{% csrf_token %}
 		<input type="hidden" id="chatting_to" name="email_user">
+		<input type="hidden" value="user-user" name="back">
 	</form>
 
 	<!--	to start chat multiple -->
@@ -264,6 +265,7 @@
 		{% csrf_token %}
 		<input type="hidden" id="user_values" name="users">
 		<input type="hidden" value="user" name="accType">
+		<input type="hidden" value="user-user" name="back">
 		<input type="hidden" value="" id="broadcast_action" name="action">
 	</form>
 

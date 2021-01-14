@@ -180,6 +180,7 @@ def custom_chat(request):
                 give_notif.save()
 
         selected_user = request.POST.get('email_user', None)
+        back = request.POST.get('back', None)
         if User.objects.filter(Q(email=selected_user) | Q(username=selected_user)).exists():
             usr = User.objects.get(Q(email=selected_user) | Q(username=selected_user))
             usr = usr.first_name
@@ -187,6 +188,7 @@ def custom_chat(request):
             param = {
                 'selected_user': selected_user,
                 'name': usr,
+                'back_link': back,
             }
             return render(request, 'core/single-chat.html', param)
     return redirect("/")
@@ -239,6 +241,7 @@ def broadcast_admin(request):
         "name": new_values,
         "selected_user": json.dumps(temp_list),
         "action": "Broadcasting",
+        "back_link": _("admin-home")
     }
     return render(request, "core/chat.html", param)
 
@@ -709,6 +712,13 @@ def admin_seller(request):
         count_notif = 0
         notif = None
         seller = Seller.objects.all().order_by('alias','first_name')
+
+        # making this user able to receive msg notification
+        if UserLogin.objects.filter(user=u).exists():
+            give_notif = UserLogin.objects.get(user=u)
+            give_notif.give_notification = True
+            give_notif.save()
+
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
             some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
@@ -738,6 +748,13 @@ def admin_tester(request):
         count_notif = 0
         notif = None
         tester = Tester.objects.all().order_by('alias','first_name')
+
+        # making this user able to receive msg notification
+        if UserLogin.objects.filter(user=u).exists():
+            give_notif = UserLogin.objects.get(user=u)
+            give_notif.give_notification = True
+            give_notif.save()
+
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
             some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
@@ -767,6 +784,13 @@ def admin_info_server(request):
     if u.is_authenticated and WebAdmin.objects.filter(email=u_email).exists():
         count_notif = 0
         notif = None
+
+        # making this user able to receive msg notification
+        if UserLogin.objects.filter(user=u).exists():
+            give_notif = UserLogin.objects.get(user=u)
+            give_notif.give_notification = True
+            give_notif.save()
+
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
             some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
@@ -877,6 +901,13 @@ def seller_user(request):
     if u.is_authenticated and Seller.objects.filter(email=u_email).exists():
         count_notif = 0
         notif = None
+
+        # making this user able to receive msg notification
+        if UserLogin.objects.filter(user=u).exists():
+            give_notif = UserLogin.objects.get(user=u)
+            give_notif.give_notification = True
+            give_notif.save()
+
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
             some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
@@ -919,6 +950,12 @@ def seller_pwg(request):
         user = request.user
         count_notif = 0
         notif = None
+
+        # making this user able to receive msg notification
+        if UserLogin.objects.filter(user=u).exists():
+            give_notif = UserLogin.objects.get(user=u)
+            give_notif.give_notification = True
+            give_notif.save()
 
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
@@ -1476,6 +1513,13 @@ def tester_test(request):
     if u.is_authenticated and Tester.objects.filter(email=u_email).exists():
         count_notif = 0
         notif = None
+
+        # making this user able to receive msg notification
+        if UserLogin.objects.filter(user=u).exists():
+            give_notif = UserLogin.objects.get(user=u)
+            give_notif.give_notification = True
+            give_notif.save()
+
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
             some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
@@ -1516,6 +1560,13 @@ def user_user(request):
     if u.is_authenticated and WebUser.objects.filter(email=u_email).exists():
         count_notif = 0
         notif = None
+
+        # making this user able to receive msg notification
+        if UserLogin.objects.filter(user=u).exists():
+            give_notif = UserLogin.objects.get(user=u)
+            give_notif.give_notification = True
+            give_notif.save()
+
         if Notification.objects.filter(receiver=u).exists():
             notif = Notification.objects.filter(receiver=u)
             some_day_last_week = timezone.now().date() - datetime.timedelta(days=6)
@@ -3751,6 +3802,7 @@ def chat_multiple(request):
         users = request.POST.get('users', None)
         accType = request.POST.get('accType', None)
         action = request.POST.get('action', None)
+        back = request.POST.get('back', None)
         new_values = []
         temp_list = ''
         # Letting the sender to not receive notification
@@ -3829,6 +3881,7 @@ def chat_multiple(request):
             "name": new_values,
             "selected_user": json.dumps(temp_list),
             "action": action,
+            "back_link": back,
         }
         return render(request, 'core/chat.html', param)
 
@@ -3946,6 +3999,7 @@ def broadcast_seller(request):
                     "name": new_values,
                     "selected_user": json.dumps(temp_list),
                     "action": "Broadcasting",
+                    "back_link": _("seller-home"),
                 }
                 return render(request, "core/chat.html", param)
 

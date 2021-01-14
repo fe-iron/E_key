@@ -204,6 +204,7 @@
 	<form action="{% trans 'chat' %}" method="post" name="single_chat">
 		{% csrf_token %}
 		<input type="hidden" id="chatting_to" name="email_user">
+		<input type="hidden" value="tester-test" name="back">
 	</form>
 
 

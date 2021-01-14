@@ -331,6 +331,7 @@
 	<form action="{% trans 'chat' %}" method="post" name="single_chat">
 		{% csrf_token %}
 		<input type="hidden" id="chatting_to" name="email_user">
+		<input type="hidden" value="seller-home" name="back">
 	</form>
 
 <script src="{% static 'js/mark_read.js' %}"></script>
