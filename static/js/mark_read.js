@@ -9,7 +9,7 @@
 					$('#notification_number').html('');
 					window.setTimeout(function(){
                         $('.extra').addClass('read');
-                    }, 8000);
+                    }, 2000);
 				},
 				error: function(response){
 					console.log("error: "+response);
