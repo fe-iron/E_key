@@ -147,14 +147,14 @@ class Verification(View):
         return redirect("/")
 
 
-def activate_account(request, user):
+def activate_account(request, user, passw):
     domain = get_current_site(request).domain
     email1 = user.username
     uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
     token = account_activation_token.make_token(user)
     link = reverse('activate', kwargs={'uidb64': uidb64, "token": token})
     activate_url = 'https://'+domain+link
-    email_body = 'Hi, '+user.first_name+ '\nPlease click the below link to activate your account\n'+activate_url
+    email_body = 'Hi, '+user.first_name+ '\nYour email is '+email1+'\nYour Password is '+passw+'( Please change it later )\nPlease click the below link to activate your account\n'+activate_url
     email_subject = 'Activate your account'
 
     email = EmailMessage(
@@ -501,7 +501,7 @@ def register(request):
                                           is_seller=False, is_tester=False, is_pwgs=False, is_admin=True)
                     sys_name.save()
 
-                    activate_account(request, user)
+                    activate_account(request, user, password1)
                     return redirect("/")
 
                 # if it is seller
@@ -521,7 +521,7 @@ def register(request):
                                           is_seller=True, is_tester=False, is_pwgs=False, is_admin=False)
                     sys_name.save()
 
-                    activate_account(request, user)
+                    activate_account(request, user, password1)
                     return redirect('/')
 
                 # if it is tester
@@ -542,7 +542,7 @@ def register(request):
                                           is_seller=False, is_tester=True, is_pwgs=False, is_admin=False)
                     sys_name.save()
 
-                    activate_account(request, user)
+                    activate_account(request, user, password1)
                     return redirect('/')
 
                 # if it is user
@@ -563,7 +563,7 @@ def register(request):
                                           is_seller=False, is_tester=False, is_pwgs=False, is_admin=False)
                     sys_name.save()
 
-                    activate_account(request, user)
+                    activate_account(request, user, password1)
                     return redirect('/')
         else:
             messages.error(request, _("Password do not match! try again"))
@@ -2409,7 +2409,7 @@ def add_new(request):
             seller = Seller(user=user, first_name=fname, last_name=lname, alias=alias, email=email, phone=number, system_name=system_name)
             seller.save()
             messages.info(request, _("Successfully Account Created!"))
-            activate_account(request, user)
+            activate_account(request, user, password)
             return redirect("admin-seller")
 
         # creating tester account
@@ -2417,7 +2417,7 @@ def add_new(request):
             tester = Tester(user=user, first_name=fname, last_name=lname, alias=alias, email=email, phone=number, system_name=system_name)
             tester.save()
             messages.info(request, _("Successfully Account Created!"))
-            activate_account(request, user)
+            activate_account(request, user, password)
             return redirect("admin-tester")
 
         # creating PWGS account
@@ -2434,7 +2434,7 @@ def add_new(request):
                                   is_seller=False, is_tester=False, is_pwgs=True)
             sys_name.save()
             messages.info(request, _("Successfully Account Created!"))
-            activate_account(request, user)
+            activate_account(request, user, password)
             return redirect("admin-info-server")
 
         # creating PWGS account
@@ -2447,7 +2447,7 @@ def add_new(request):
                 user_obj.save()
                 seller_id.save()
                 messages.info(request, _("Successfully Account Created!"))
-                activate_account(request, user)
+                activate_account(request, user, password)
                 if file:
                     return redirect("/")
                 return redirect("seller-user")
@@ -2461,7 +2461,7 @@ def add_new(request):
                 user_obj.save()
 
                 messages.info(request, _("Successfully Account Created!"))
-                activate_account(request, user)
+                activate_account(request, user, password)
                 return redirect("admin-home")
             else:
                 messages.info(request, _("Something went wrong, try again"))
