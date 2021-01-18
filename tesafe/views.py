@@ -154,7 +154,7 @@ def activate_account(request, user, passw):
     token = account_activation_token.make_token(user)
     link = reverse('activate', kwargs={'uidb64': uidb64, "token": token})
     activate_url = 'https://'+domain+link
-    email_body = 'Hi, '+user.first_name+ '\nYour email is '+email1+'\nYour Password is '+passw+'( Please change it later )\nPlease click the below link to activate your account\n'+activate_url
+    email_body = 'Hi, '+user.first_name+ '\nYour email is '+email1+'\nYour Password is '+passw+' ( Please change it later )\nPlease click the below link to activate your account\n'+activate_url
     email_subject = 'Activate your account'
 
     email = EmailMessage(
