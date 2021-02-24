@@ -2048,7 +2048,7 @@ def delete_multiple_user(request):
                         name = tester.first_name
                         tester.delete()
                         ret_text = _("Seller successfully deleted!")
-                        name = _("{} "+ret_text.format(name))
+                        name = _(" "+ret_text.format(name))
                         messages.info(request, name)
                     else:
                         messages.info(request, _("Seller is not deleted!"))
@@ -2066,7 +2066,7 @@ def delete_multiple_user(request):
                     name = tester.first_name
                     tester.delete()
                     ret_text = _("Tester successfully deleted!")
-                    name = "{} "+ret_text.format(name)
+                    name = " "+ret_text.format(name)
                     messages.info(request, name)
                 else:
                     messages.info(request, _("Tester is not deleted!"))
@@ -2083,7 +2083,7 @@ def delete_multiple_user(request):
                         name = pwgs.system_name
                     pwgs.delete()
                     ret_text = _("PWG Server successfully deleted!")
-                    name = "{} "+ret_text.format(name)
+                    name = " "+ret_text.format(name)
                     messages.info(request, name)
                 else:
                     messages.info(request, _("PWG Server is not deleted!"))
@@ -2101,7 +2101,7 @@ def delete_multiple_user(request):
                     name = tester.first_name
                     tester.delete()
                     ret_text = _("PWG Server successfully deleted!")
-                    name = "{} "+ret_text.format(name)
+                    name = " "+ret_text.format(name)
                     messages.info(request, name)
                 else:
                     messages.info(request, _("User is not deleted!"))
