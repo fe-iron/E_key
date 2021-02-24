@@ -520,7 +520,7 @@
 
 
 <!--	to delete sellers names-->
-	<form action="{% trans 'delete_multiple_user' %}{% trans '" method="post" name="delete_multiple">
+	<form action="{% trans 'delete_multiple_user' %}" method="post" name="delete_multiple">
 		{% csrf_token %}
 		<input type="hidden" id="assign_values" name="values">
 		<input type="hidden" value="seller" name="accType">
