@@ -732,7 +732,7 @@ function delete_multiple_users(){
 		$("#confirm-message-delete").html("{% trans 'Delete the selected' %} "+checkbox_values.length+" {% trans 'Sellers' %}");
 	}
 
-	$("#confirm-modal-button").attr('onclick','sendsellerspk();');
+	$("#confirm-modal-button").attr('onclick','sendsellerspk()');
 	$('.imagepreview').attr('src', $(this).find('img').attr('src'));
 	$('#imagemodalConfirm').modal('show');
 
