@@ -634,6 +634,7 @@ let checkbox_values = [];
 			}else{
 				$("#floating-confirm").attr('disabled', false);
 			}
+			console.log("CheckAll: "+checkbox_values);
 		});
 
 
@@ -651,7 +652,7 @@ let checkbox_values = [];
 		}else{
 			$("#floating-confirm").attr('disabled', false);
 		}
-
+		console.log("Check Single: "+checkbox_values);
 	});
 
 
@@ -728,7 +729,7 @@ function delete_multiple_users(){
 	if( checkbox_values.length == 1 ){
 		$("#confirm-message-delete").html("{% trans 'Delete the selected' %} "+checkbox_values.length+" {% trans 'Seller' %}");
 	}else{
-		$("#confirm-message-delete").html("{% trans 'Delete the selected' %}"+checkbox_values.length+" {% trans 'Sellers' %}");
+		$("#confirm-message-delete").html("{% trans 'Delete the selected' %} "+checkbox_values.length+" {% trans 'Sellers' %}");
 	}
 
 	$("#confirm-modal-button").attr('onclick','sendsellerspk();');
