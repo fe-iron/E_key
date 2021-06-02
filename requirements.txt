@@ -45,7 +45,7 @@ service-identity==18.1.0
 sqlparse==0.3.1
 Twisted==20.3.0
 txaio==20.4.1
-urllib3==1.25.8
+urllib3==1.26.5
 Werkzeug==0.16.0
 whitenoise==5.1.0
 wincertstore==0.2
