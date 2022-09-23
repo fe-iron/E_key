@@ -32,7 +32,7 @@ Jinja2==2.11.1
 joblib==0.14.1
 msgpack==0.6.2
 pillow==6.2.1
-protobuf==3.10.0
+protobuf==3.18.3
 psycopg2==2.8.5
 public==2019.4.13
 pycparser==2.20
